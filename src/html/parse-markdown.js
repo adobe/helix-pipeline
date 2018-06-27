@@ -13,7 +13,7 @@ const unified = require('unified');
 const remark = require('remark-parse');
 const frontmatter = require('remark-frontmatter');
 
-module.exports = function ({ resource }) {
+module.exports = ({ resource }) => {
   const preprocessor = unified()
     .use(remark)
     .use(frontmatter);

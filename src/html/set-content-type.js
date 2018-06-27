@@ -11,9 +11,7 @@
  */
 module.exports = ({ response }) => {
   // somebody already set a content type, keep as is
-  if (response && response.headers && response.headers['Content-Type']) {
-
-  } else {
+  if (!(response && response.headers && response.headers['Content-Type'])) {
     return {
       response: {
         headers: {
@@ -22,4 +20,5 @@ module.exports = ({ response }) => {
       },
     };
   }
+  return {};
 };

@@ -13,7 +13,7 @@ const _ = require('lodash/fp');
 const Promise = require('bluebird');
 
 function attacher() {
-  const inner = function (args = {}) {
+  const inner = (args = {}) => {
     /*
         // run the functions inside inner.pres first
         const preval = inner.pres.reduce(inner.merge, _.merge({}, args));
@@ -36,23 +36,23 @@ function attacher() {
     return prom;
   };
 
-  inner.merge = function (accumulator, currentvalue) {
-    return Promise.resolve(currentvalue(_.merge({}, accumulator))).then(value => _.merge(accumulator, value));
-  };
+  inner.merge = (accumulator, currentvalue) =>
+    Promise.resolve(currentvalue(_.merge({}, accumulator)))
+      .then(value => _.merge(accumulator, value));
 
-  inner.pre = function (outer) {
+  inner.pre = (outer) => {
     inner.pres.push(outer);
     inner.last = inner.pres;
     return inner;
   };
 
-  inner.post = function (outer) {
+  inner.post = (outer) => {
     inner.posts.push(outer);
     inner.last = inner.post;
     return inner;
   };
 
-  inner.when = function (pred) {
+  inner.when = (pred) => {
     if (inner.last && inner.last.length > 0) {
       const lastfunc = inner.last.pop();
       const wrappedfunc = (args) => {
@@ -66,19 +66,15 @@ function attacher() {
     return inner;
   };
 
-  inner.unless = function (pred) {
-    inner.when(args => !pred(args));
-    return inner;
-  };
+  /* eslint no-unused-expressions: "off" */
+  inner.unless = pred => inner.when(args => !pred(args));
 
   inner.last;
   inner.pres = [];
   inner.posts = [];
-  inner.oncef = function (args) {
-    return args;
-  };
+  inner.oncef = args => args;
 
-  inner.once = function (outer) {
+  inner.once = (outer) => {
     inner.oncef = outer;
     return inner;
   };

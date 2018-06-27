@@ -9,33 +9,30 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+/* eslint-env mocha */
 const assert = require('assert');
+const pipeline = require('../index.js');
 
 describe('Testing Attacher', () => {
   it('Executes once', (done) => {
-    const pipeline = require('../index.js');
-
     pipeline().once(() => {
       done();
     })();
   });
 
   it('Executes pre', (done) => {
-    const pipeline = require('../index.js');
     pipeline().pre(() => {
       done();
     })();
   });
 
   it('Executes post', (done) => {
-    const pipeline = require('../index.js');
     pipeline().post(() => {
       done();
     })();
   });
 
   it('Executes promises', (done) => {
-    const pipeline = require('../index.js');
     const retval = pipeline()
       .post(() => Promise.resolve({ foo: 'bar' }))
       .post((v) => {

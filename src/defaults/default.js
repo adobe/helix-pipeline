@@ -20,11 +20,7 @@ const winston = require('winston');
  * @param {Object} params the OpenWhisk parameters
  * @returns {Function} a function to execute.
  */
-module.exports.pipe = function (cont, params) {
-  return function (params) {
-    return cont(params);
-  };
-};
+module.exports.pipe = cont => params => cont(params);
 
 /**
  *
@@ -32,18 +28,20 @@ module.exports.pipe = function (cont, params) {
  * @param {Object} params the OpenWhisk parameters
  * @returns {Function} the wrapped main function
  */
-module.exports.pre = function (cont, params) {
-  return cont;
-};
+module.exports.pre = cont => cont;
 
 /**
  * A standard cleanup function that takes OpenWhisk-style parameters and turns
  * them into an Express-style request object which is returned.
- * @param {Object} params Parameters following OpenWhisk convention, including __ow_method and __ow_headers for HTTP requests
- * @returns {Object} A req object that is equivalent to an Express request object, including a headers, method, and params field
+ * @param {Object} params Parameters following OpenWhisk convention, including
+ * __ow_method and __ow_headers for HTTP requests
+ * @returns {Object} A req object that is equivalent to an Express request object,
+ * including a headers, method, and params field
  */
-module.exports.before = function (params) {
+module.exports.before = (params) => {
   // use destructuring to drop __ow_headers and __ow_method from params
+  /* eslint camelcase: "off" */
+  /* eslint no-underscore-dangle: "off" */
   const { __ow_headers, __ow_method, ...newparams } = params;
 
   return {
@@ -55,8 +53,8 @@ module.exports.before = function (params) {
   };
 };
 
-module.exports.after = function (params) {
-  const { response, response: { status = 200, headers = { 'Content-Type': 'application/json' }, body = '' } } = params;
+module.exports.after = (params) => {
+  const { response: { status = 200, headers = { 'Content-Type': 'application/json' }, body = '' } } = params;
   return {
     statusCode: status,
     headers,

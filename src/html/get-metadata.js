@@ -9,13 +9,12 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const filter = require('unist-util-filter');
 const select = require('unist-util-select');
 const plain = require('mdast-util-to-string');
 const yaml = require('yaml');
 
 
-module.exports = function ({ resource: { mdast } }) {
+module.exports = ({ resource: { mdast } }) => {
   const resource = {};
 
   const yamls = select(mdast, 'yaml'); // select all YAML nodes

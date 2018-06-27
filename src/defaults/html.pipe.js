@@ -12,19 +12,27 @@
 const pipeline = require('../../index.js');
 const { before, after, log } = require('./default.js');
 
-module.exports.pipe = function (cont, params, secrets, logger = log) {
+const fetch = require('../html/fetch-markdown.js');
+const parse = require('../html/parse-markdown.js');
+const meta = require('../html/get-metadata.js');
+const html = require('../html/make-html.js');
+const responsive = require('../html/responsify-images.js');
+const emit = require('../html/emit-html.js');
+const type = require('../html/set-content-type.js');
+
+module.exports.pipe = (cont, params, secrets, logger = log) => {
   logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = pipeline()
     .pre(before)
-    .pre(require('../html/fetch-markdown.js')(secrets))
-    .pre(require('../html/parse-markdown.js'))
-    .pre(require('../html/get-metadata.js'))
-    .pre(require('../html/make-html.js'))
+    .pre(fetch(secrets))
+    .pre(parse)
+    .pre(meta)
+    .pre(html)
   // we could pass different resolutions here.
-    .pre(require('../html/responsify-images.js')())
-    .pre(require('../html/emit-html.js'))
+    .pre(responsive())
+    .pre(emit)
     .once(cont)
-    .post(require('../html/set-content-type.js'))
+    .post(type)
     .post(after);
 
   return pipe;

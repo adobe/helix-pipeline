@@ -9,7 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+/* eslint-env mocha */
 const assert = require('assert');
+const { pipe } = require('../src/defaults/html.pipe.js');
 
 const params = {
   path: '/hello.md',
@@ -59,14 +61,11 @@ const secrets = {
 
 describe('Testing HTML Pipeline', () => {
   it('html.pipe is a function', () => {
-    const { pipe } = require('../src/defaults/html.pipe.js');
-
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');
   });
 
   it('html.pipe makes HTTP requests', (done) => {
-    const { pipe } = require('../src/defaults/html.pipe.js');
     const result = pipe(
       ({ resource }) => {
         // this is the main function (normally it would be the template function)
@@ -84,11 +83,11 @@ describe('Testing HTML Pipeline', () => {
       secrets,
     )(params);
 
-    result.then((result) => {
-      assert.equal(201, result.statusCode);
-      assert.equal('text/html', result.headers['Content-Type']);
-      assert.equal('<', result.body[0]);
-      assert.ok(result.body.match(/srcset/));
+    result.then((res) => {
+      assert.equal(201, res.statusCode);
+      assert.equal('text/html', res.headers['Content-Type']);
+      assert.equal('<', res.body[0]);
+      assert.ok(res.body.match(/srcset/));
       done();
     });
   });

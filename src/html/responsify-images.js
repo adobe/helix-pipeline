@@ -9,7 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
+/* Parameter Reassignment is the standard design pattern for Unified */
+/* eslint no-param-reassign: "off" */
 module.exports = function attacher(RESOLUTION_SWITCHING = [
   {
     width: 480,
@@ -55,7 +56,6 @@ module.exports = function attacher(RESOLUTION_SWITCHING = [
 
   function transformer({ resource: { htast } }) {
     // the visit function is modifying its argument in place.
-    console.log('I am here');
     visit(htast);
 
     return { resource: { htast } };
