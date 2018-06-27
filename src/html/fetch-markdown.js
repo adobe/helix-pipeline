@@ -2,7 +2,7 @@ const client = require("request-promise");
 
 module.exports = function({
     REPO_RAW_ROOT = "https://raw.githubusercontent.com/"
-}) {
+} = {}) {
     return function({
         request,
         resource,
