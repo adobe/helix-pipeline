@@ -14,19 +14,9 @@ const Promise = require('bluebird');
 
 function attacher() {
   const inner = (args = {}) => {
-    /*
-        // run the functions inside inner.pres first
-        const preval = inner.pres.reduce(inner.merge, _.merge({}, args));
-
-        // then run the function inner.once
-        const onceval = _.merge(preval, inner.oncef(_.merge({}, preval)));
-
-        // then run each of the functions in inner.posts
-        const postval = inner.posts.reduce(inner.posts, _.merge({}, onceval));
-
-        // then return the accumulated value
-        return postval;
-        */
+    // go over inner.pres (those that run before), inner.oncef (the function that runs once)
+    // and inner.posts (those that run after) – reduce using the merge function and return
+    // the resolved value
     const prom = Promise.reduce(
       [...inner.pres, inner.oncef, ...inner.posts],
       inner.merge,
@@ -36,22 +26,42 @@ function attacher() {
     return prom;
   };
 
+  /**
+   * A reducer function that performs a deep merge of accumulator and
+   * currentvalue
+   * @param {Map} accumulator typically: the pipeline payload
+   * @param {Map} currentvalue typically: the last function's return value
+   */
   inner.merge = (accumulator, currentvalue) =>
     Promise.resolve(currentvalue(_.merge({}, accumulator)))
       .then(value => _.merge(accumulator, value));
 
+  /**
+   * Adds the function outer to the list of functions to be executed
+   * before the main function, and returns the attacher itself, for
+   * easy chaining
+   */
   inner.pre = (outer) => {
     inner.pres.push(outer);
     inner.last = inner.pres;
     return inner;
   };
 
+  /**
+   * Adds the function outer to the list of functions to be executed
+   * after the main function, and returns the attacher itself, for
+   * easy chaining
+   */
   inner.post = (outer) => {
     inner.posts.push(outer);
     inner.last = inner.post;
     return inner;
   };
 
+  /**
+   * Applies a condition pred (predicate function) to the last pre or post function added
+   * and returns the attacher itself, for easy chaining
+   */
   inner.when = (pred) => {
     if (inner.last && inner.last.length > 0) {
       const lastfunc = inner.last.pop();
@@ -66,7 +76,11 @@ function attacher() {
     return inner;
   };
 
-  /* eslint no-unused-expressions: "off" */
+  /* eslint-disable no-unused-expressions */
+  /**
+   * Works like inner.when, but with inverted predicates.
+   * @param {function} pred
+   */
   inner.unless = pred => inner.when(args => !pred(args));
 
   inner.last;
@@ -74,6 +88,11 @@ function attacher() {
   inner.posts = [];
   inner.oncef = args => args;
 
+  /**
+   * Sets the function outer to be the main function
+   * and returns the attacher itself, for easy chaining
+   * @param {function} outer
+   */
   inner.once = (outer) => {
     inner.oncef = outer;
     return inner;
