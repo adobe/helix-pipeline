@@ -36,7 +36,6 @@ jobs:
       - run:
           name: Running Tests
           command: npx mocha --reporter mocha-junit-reporter
-          working_directory: test/integration
           environment:
             MOCHA_FILE: junit/test-results.xml
           when: always
@@ -87,7 +86,7 @@ jobs:
 
       - run: 
           name: Publish Snapshot
-          command: npm publish --access public
+          command: exit 1 && npm publish --access public
 
       - store_test_results:
           path: junit
