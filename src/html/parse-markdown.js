@@ -13,11 +13,13 @@ const unified = require('unified');
 const remark = require('remark-parse');
 const frontmatter = require('remark-frontmatter');
 
+
 module.exports = ({ resource }) => {
   const preprocessor = unified()
     .use(remark)
     .use(frontmatter);
 
+  // see https://github.com/syntax-tree/mdast for documentation
   const mdast = preprocessor.parse(resource.body);
 
   return { resource: { mdast } };

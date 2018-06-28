@@ -9,9 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* Parameter Reassignment is the standard design pattern for Unified */
-/* eslint no-param-reassign: "off" */
-module.exports = function attacher(RESOLUTION_SWITCHING = [
+
+const RESOLUTION_SWITCHING = [
   {
     width: 480,
     maxWidth: 480,
@@ -27,7 +26,11 @@ module.exports = function attacher(RESOLUTION_SWITCHING = [
     maxWidth: null,
     size: 97,
   },
-]) {
+];
+
+/* Parameter Reassignment is the standard design pattern for Unified */
+/* eslint no-param-reassign: "off" */
+module.exports = function attacher(resolutions = RESOLUTION_SWITCHING) {
   function visit(node) {
     if (node.type === 'element' && node.tagName === 'img') {
       const src = String(node.properties.src);
@@ -37,7 +40,7 @@ module.exports = function attacher(RESOLUTION_SWITCHING = [
       const srcset = [];
       const sizes = [];
 
-      RESOLUTION_SWITCHING.forEach((e) => {
+      resolutions.forEach((e) => {
         srcset.push(`${src}?width=${e.width} ${e.width}w`);
         sizes.push(`${(e.maxWidth ? `(max-width: ${e.maxWidth}px) ` : '') +
                         e.size}vw`);
