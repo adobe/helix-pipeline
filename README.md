@@ -1,4 +1,4 @@
-# Hypiline: Hypermedia Pipeline
+# Hypermedia Pipeline
 
 This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines.
 
