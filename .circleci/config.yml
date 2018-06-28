@@ -35,7 +35,7 @@ jobs:
       # run tests!
       - run:
           name: Running Tests
-          command: npx mocha test --reporter mocha-junit-reporter
+          command: npx mocha --reporter mocha-junit-reporter
           working_directory: test/integration
           environment:
             MOCHA_FILE: junit/test-results.xml
