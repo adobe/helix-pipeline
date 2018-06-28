@@ -9,16 +9,19 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-module.exports = ({ response }) => {
+function type() {
+  return ({ response }) => {
   // somebody already set a content type, keep as is
-  if (!(response && response.headers && response.headers['Content-Type'])) {
-    return {
-      response: {
-        headers: {
-          'Content-Type': 'text/html',
+    if (!(response && response.headers && response.headers['Content-Type'])) {
+      return {
+        response: {
+          headers: {
+            'Content-Type': 'text/html',
+          },
         },
-      },
-    };
-  }
-  return {};
-};
+      };
+    }
+    return {};
+  };
+}
+module.exports = type;

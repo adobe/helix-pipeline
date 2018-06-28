@@ -11,8 +11,12 @@
  */
 const tohtast = require('mdast-util-to-hast');
 
-module.exports = ({ resource: { mdast } }) => {
-  const resource = {};
-  resource.htast = tohtast(mdast);
-  return { resource };
-};
+function html() {
+  return ({ resource: { mdast } }) => {
+    const resource = {};
+    resource.htast = tohtast(mdast);
+    return { resource };
+  };
+}
+
+module.exports = html;

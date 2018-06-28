@@ -23,17 +23,17 @@ const type = require('../html/set-content-type.js');
 const htmlpipe = (cont, params, secrets, logger = log) => {
   logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = pipeline()
-    .pre(adaptOWRequest)
+    .pre(adaptOWRequest())
     .pre(fetch(secrets))
-    .pre(parse)
-    .pre(meta)
-    .pre(html)
-  // we could pass different resolutions here.
+    .pre(parse())
+    .pre(meta())
+    .pre(html())
+    // we could pass different resolutions here.
     .pre(responsive())
-    .pre(emit)
+    .pre(emit())
     .once(cont)
-    .post(type)
-    .post(adaptOWResponse);
+    .post(type())
+    .post(adaptOWResponse());
 
   return pipe;
 };

@@ -37,29 +37,39 @@ const pre = cont => cont;
  * @returns {Object} A req object that is equivalent to an Express request object,
  * including a headers, method, and params field
  */
-const adaptOWRequest = (params) => {
-  // use destructuring to drop __ow_headers and __ow_method from params
-  /* eslint-disable camelcase, no-underscore-dangle */
-  const { __ow_headers, __ow_method, ...newparams } = params;
+function adaptOWRequest() {
+  return (params) => {
+    // use destructuring to drop __ow_headers and __ow_method from params
+    /* eslint-disable camelcase, no-underscore-dangle */
+    const { __ow_headers, __ow_method, ...newparams } = params;
 
-  return {
-    request: {
-      headers: params.__ow_headers,
-      params: newparams,
-      method: params.__ow_method,
-    },
+    return {
+      request: {
+        headers: params.__ow_headers,
+        params: newparams,
+        method: params.__ow_method,
+      },
+    };
+    /* eslint-enable: camelcase, no-underscore-dangle */
   };
-  /* eslint-enable: camelcase, no-underscore-dangle */
-};
+}
 
-const adaptOWResponse = (params) => {
-  const { response: { status = 200, headers = { 'Content-Type': 'application/json' }, body = '' } } = params;
-  return {
-    statusCode: status,
-    headers,
-    body,
+function adaptOWResponse() {
+  return (params) => {
+    const {
+      response: {
+        status = 200,
+        headers = { 'Content-Type': 'application/json' },
+        body = '',
+      },
+    } = params;
+    return {
+      statusCode: status,
+      headers,
+      body,
+    };
   };
-};
+}
 
 const log = winston.createLogger({
   level: 'debug',
