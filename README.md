@@ -4,6 +4,7 @@ This project provides helper functions and default implementations for creating 
 
 It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia.
 
+
 ## Anatomy of a Pipeline
 
 A pipeline consists of following main parts:
