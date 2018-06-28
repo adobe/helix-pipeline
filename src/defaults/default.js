@@ -20,15 +20,14 @@ const winston = require('winston');
  * @param {Object} params the OpenWhisk parameters
  * @returns {Function} a function to execute.
  */
-module.exports.pipe = cont => params => cont(params);
+const pipe = cont => params => cont(params);
 
 /**
  *
  * @param {Function} cont the continuation function
- * @param {Object} params the OpenWhisk parameters
  * @returns {Function} the wrapped main function
  */
-module.exports.pre = cont => cont;
+const pre = cont => cont;
 
 /**
  * A standard cleanup function that takes OpenWhisk-style parameters and turns
@@ -38,10 +37,9 @@ module.exports.pre = cont => cont;
  * @returns {Object} A req object that is equivalent to an Express request object,
  * including a headers, method, and params field
  */
-module.exports.before = (params) => {
+const adaptOWRequest = (params) => {
   // use destructuring to drop __ow_headers and __ow_method from params
-  /* eslint camelcase: "off" */
-  /* eslint no-underscore-dangle: "off" */
+  /* eslint-disable camelcase, no-underscore-dangle */
   const { __ow_headers, __ow_method, ...newparams } = params;
 
   return {
@@ -51,9 +49,10 @@ module.exports.before = (params) => {
       method: params.__ow_method,
     },
   };
+  /* eslint-enable: camelcase, no-underscore-dangle */
 };
 
-module.exports.after = (params) => {
+const adaptOWResponse = (params) => {
   const { response: { status = 200, headers = { 'Content-Type': 'application/json' }, body = '' } } = params;
   return {
     statusCode: status,
@@ -62,7 +61,7 @@ module.exports.after = (params) => {
   };
 };
 
-module.exports.log = winston.createLogger({
+const log = winston.createLogger({
   level: 'debug',
   format: winston.format.simple(),
   transports: [
@@ -70,3 +69,13 @@ module.exports.log = winston.createLogger({
     new winston.transports.File({ filename: 'pipeline.log' }),
   ],
 });
+
+const defaults = {
+  pipe,
+  pre,
+  adaptOWRequest,
+  adaptOWResponse,
+  log,
+};
+
+module.exports = defaults;

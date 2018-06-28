@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const pipeline = require('../../index.js');
-const { before, after, log } = require('./default.js');
+const { adaptOWRequest, adaptOWResponse, log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
@@ -23,7 +23,7 @@ const type = require('../html/set-content-type.js');
 module.exports.pipe = (cont, params, secrets, logger = log) => {
   logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = pipeline()
-    .pre(before)
+    .pre(adaptOWRequest)
     .pre(fetch(secrets))
     .pre(parse)
     .pre(meta)
@@ -33,7 +33,7 @@ module.exports.pipe = (cont, params, secrets, logger = log) => {
     .pre(emit)
     .once(cont)
     .post(type)
-    .post(after);
+    .post(adaptOWResponse);
 
   return pipe;
 };

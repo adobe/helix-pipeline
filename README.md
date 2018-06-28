@@ -37,15 +37,15 @@ This project's main entry provides a helper function for pipeline construction a
 // the pipeline itself
 const pipeline = require("@adobe/hypertext-pipeline");
 // helper functions and log
-const { before, after, log } = require('@adobe/hypertext-pipeline/src/defaults/default.js');
+const { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypertext-pipeline/src/defaults/default.js');
 
 module.exports.pipe = function(cont, params, secrets, logger = log) {
     logger.log("debug", "Constructing Custom Pipeline");
 
     return pipeline()
-        .pre(before) // optional: turns OpenWhisk-style arguments into a proper payload
-        .once(cont)  // required: execute the continuation function
-        .post(after) // optional: turns the Payload into an OpenWhisk-style response
+        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload
+        .once(cont)            // required: execute the continuation function
+        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response
 }
 ```
 
