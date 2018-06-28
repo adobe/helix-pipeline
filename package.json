@@ -18,7 +18,8 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.9.1",
     "mocha": "^5.2.0",
-    "mocha-junit-reporter": "^1.17.0"
+    "mocha-junit-reporter": "^1.17.0",
+    "npm-snapshot": "^1.0.3"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
