@@ -41,9 +41,9 @@ jobs:
           when: always
 
       - store_test_results:
-          path: test/integration/junit
+          path: junit
       - store_artifacts:
-          path: test/integration/junit 
+          path: junit 
 
   publish-snapshot:
     docker:
