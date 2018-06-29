@@ -36,9 +36,9 @@ This project's main entry provides a helper function for pipeline construction a
 
 ```javascript
 // the pipeline itself
-const pipeline = require("@adobe/hypertext-pipeline");
+const pipeline = require("@adobe/hypermedia-pipeline");
 // helper functions and log
-const { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypertext-pipeline/src/defaults/default.js');
+const { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');
 
 module.exports.pipe = function(cont, params, secrets, logger = log) {
     logger.log("debug", "Constructing Custom Pipeline");
