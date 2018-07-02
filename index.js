@@ -13,7 +13,11 @@ const _ = require('lodash/fp');
 const Promise = require('bluebird');
 
 function attacher() {
-  const inner = (args = {}) => {
+  const inner = (args = {}, constants, logger) => {
+    // save the second and third argument, they don't get modified
+    // over time
+    inner.constants = constants;
+    inner.logger = logger;
     // go over inner.pres (those that run before), inner.oncef (the function that runs once)
     // and inner.posts (those that run after) – reduce using the merge function and return
     // the resolved value
@@ -30,12 +34,28 @@ function attacher() {
    * A reducer function that performs a deep merge of accumulator and
    * currentvalue
    * @param {Map} accumulator typically: the pipeline payload
-   * @param {Map} currentvalue typically: the last function's return value
+   * @param {Map} currentfunction typically: the last function's return value
    */
-  inner.merge = (accumulator, currentvalue) =>
-    Promise.resolve(currentvalue(_.merge({}, accumulator)))
-      .then(value => _.merge(accumulator, value));
+  inner.merge = (accumulator, currentfunction) => {
+    // copy the pipeline payload into a new object
+    // to avoid modifications
+    const mergedargs = _.merge({}, accumulator);
 
+    // log the function that is being called
+    // and the parameters of the function
+    if (inner.logger) {
+      inner.logger.silly('processing ', { function: `${currentfunction}`, params: mergedargs });
+    }
+
+    return Promise.resolve(currentfunction(mergedargs, inner.constants, inner.logger))
+      .then((value) => {
+        const result = _.merge(accumulator, value);
+        if (inner.logger) {
+          inner.logger.silly('received ', { function: `${currentfunction}`, result });
+        }
+        return result;
+      });
+  };
   /**
    * Adds the function outer to the list of functions to be executed
    * before the main function, and returns the attacher itself, for
