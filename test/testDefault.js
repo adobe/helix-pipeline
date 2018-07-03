@@ -21,7 +21,7 @@ const {
   log,
 } = require('../index.js').defaults;
 
-describe('Testing Default Pipeline', () =>{
+describe('Testing Default Pipeline', () => {
   it('Default Pipeline can be loaded', () => {
     assert.ok(pipe, 'no default pipeline found');
     assert.ok(pre, 'no default pre.js found');
