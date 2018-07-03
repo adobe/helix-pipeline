@@ -17,14 +17,14 @@ const Pipeline = require('../../index');
  * - reading OpenWhisk parameters
  * - calling a continuation function
  * - wrapping the response in a friendly response format
- * @param {Function} cont the continuation function
+ * @param {Function} next the continuation function
  * @param {Object} params the OpenWhisk parameters
  * @param {Object} constants parameters that remain constant throughout the pipeline execution
  * @returns {Function} a function to execute.
  */
-function pipe(cont, params, constants, logger) {
+function pipe(next, params, constants, logger) {
   const mypipeline = new Pipeline(constants, logger);
-  mypipeline.once(cont);
+  mypipeline.once(next);
   return mypipeline.run(params);
 }
 
