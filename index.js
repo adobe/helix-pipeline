@@ -14,6 +14,9 @@ const Promise = require('bluebird');
 
 class Pipeline {
   constructor(constants = {}, logger) {
+    if (logger) {
+      logger.debug('Creating pipeline');
+    }
     this.constants = constants;
     this.logger = logger;
     this.last = [];
@@ -57,37 +60,38 @@ class Pipeline {
   }
 
   run(args = {}) {
+    const merge = (accumulator, currentfunction) => {
+      // copy the pipeline payload into a new object
+      // to avoid modifications
+      const mergedargs = _.merge({}, accumulator);
+
+      // log the function that is being called
+      // and the parameters of the function
+      if (this.logger) {
+        this.logger.silly('processing ', { function: `${currentfunction}`, params: mergedargs });
+      }
+
+      return Promise.resolve(currentfunction(mergedargs, this.constants, this.logger))
+        .then((value) => {
+          const result = _.merge(accumulator, value);
+          if (this.logger) {
+            this.logger.silly('received ', { function: `${currentfunction}`, result });
+          }
+          return result;
+        });
+    };
+
     // go over inner.pres (those that run before), inner.oncef (the function that runs once)
     // and inner.posts (those that run after) – reduce using the merge function and return
     // the resolved value
     const prom = Promise.reduce(
-      [...this.pres, this.oncef, ...this.posts],
-      this.merge,
+      [...this.pres, this.oncef, ...this.posts]
+        .filter(e => typeof e === 'function'),
+      merge,
       args,
     ).then(v => v);
 
     return prom;
-  }
-
-  merge(accumulator, currentfunction) {
-    // copy the pipeline payload into a new object
-    // to avoid modifications
-    const mergedargs = _.merge({}, accumulator);
-
-    // log the function that is being called
-    // and the parameters of the function
-    if (this.logger) {
-      this.logger.silly('processing ', { function: `${currentfunction}`, params: mergedargs });
-    }
-
-    return Promise.resolve(currentfunction(mergedargs, this.constants, this.logger))
-      .then((value) => {
-        const result = _.merge(accumulator, value);
-        if (this.logger) {
-          this.logger.silly('received ', { function: `${currentfunction}`, result });
-        }
-        return result;
-      });
   }
 }
 
