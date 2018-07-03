@@ -10,10 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const defaults = require('./src/defaults/default.js')
-const Pipeline = require('./src/pipeline.js')
+const defaults = require('./src/defaults/default.js');
+const Pipeline = require('./src/pipeline.js');
 
 module.exports = {
   Pipeline,
-  defaults
-}
+  defaults,
+};
