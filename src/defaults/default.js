@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const winston = require('winston');
-const Pipeline = require('../../index');
+const { Pipeline } = require('../../index');
 
 /**
  * Constructs a pipeline function that is capable of
