@@ -51,9 +51,9 @@ function adaptOWRequest() {
 
     return {
       request: {
-        headers: params.__ow_headers,
+        headers: __ow_headers,
         params: newparams,
-        method: params.__ow_method,
+        method: __ow_method,
       },
     };
     /* eslint-enable: camelcase, no-underscore-dangle */
