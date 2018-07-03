@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const Pipeline = require('../../index.js');
+const { Pipeline } = require('../../index.js');
 const { adaptOWRequest, adaptOWResponse, log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');

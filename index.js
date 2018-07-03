@@ -9,90 +9,11 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const _ = require('lodash/fp');
-const Promise = require('bluebird');
 
-class Pipeline {
-  constructor(constants = {}, logger) {
-    if (logger) {
-      logger.debug('Creating pipeline');
-    }
-    this.constants = constants;
-    this.logger = logger;
-    this.last = [];
-    this.pres = [];
-    this.posts = [];
-    this.oncef = null;
-  }
+const defaults = require('./src/defaults/default.js')
+const Pipeline = require('./src/pipeline.js')
 
-  pre(f) {
-    this.pres.push(f);
-    return this;
-  }
-
-  post(f) {
-    this.posts.push(f);
-    return this;
-  }
-
-  when(predicate) {
-    if (this.last && this.last.length > 0) {
-      const lastfunc = this.last.pop();
-      const wrappedfunc = (args) => {
-        if (predicate(args)) {
-          return lastfunc(args, this.constants, this.logger);
-        }
-        return args;
-      };
-      this.last.push(wrappedfunc);
-    }
-    return this;
-  }
-
-  unless(predicate) {
-    const inverse = args => !predicate(args);
-    return this.when(inverse);
-  }
-
-  once(f) {
-    this.oncef = f;
-    return this;
-  }
-
-  run(args = {}) {
-    const merge = (accumulator, currentfunction) => {
-      // copy the pipeline payload into a new object
-      // to avoid modifications
-      const mergedargs = _.merge({}, accumulator);
-
-      // log the function that is being called
-      // and the parameters of the function
-      if (this.logger) {
-        this.logger.silly('processing ', { function: `${currentfunction}`, params: mergedargs });
-      }
-
-      return Promise.resolve(currentfunction(mergedargs, this.constants, this.logger))
-        .then((value) => {
-          const result = _.merge(accumulator, value);
-          if (this.logger) {
-            this.logger.silly('received ', { function: `${currentfunction}`, result });
-          }
-          return result;
-        });
-    };
-
-    // go over inner.pres (those that run before), inner.oncef (the function that runs once)
-    // and inner.posts (those that run after) – reduce using the merge function and return
-    // the resolved value
-    const prom = Promise.reduce(
-      [...this.pres, this.oncef, ...this.posts]
-        .filter(e => typeof e === 'function'),
-      merge,
-      args,
-    ).then(v => v);
-
-    return prom;
-  }
+module.exports = {
+  Pipeline,
+  defaults
 }
-
-module.exports = Pipeline;
