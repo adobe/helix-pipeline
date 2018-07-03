@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const winston = require('winston');
+const Pipeline = require('../../index');
 
 /**
  * Constructs a pipeline function that is capable of
@@ -18,9 +19,14 @@ const winston = require('winston');
  * - wrapping the response in a friendly response format
  * @param {Function} cont the continuation function
  * @param {Object} params the OpenWhisk parameters
+ * @param {Object} constants parameters that remain constant throughout the pipeline execution
  * @returns {Function} a function to execute.
  */
-const pipe = cont => params => cont(params);
+function pipe(cont, params, constants, logger) {
+  const mypipeline = new Pipeline(constants, logger);
+  mypipeline.once(cont);
+  return mypipeline.run(params);
+}
 
 /**
  *

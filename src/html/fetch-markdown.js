@@ -13,18 +13,17 @@ const client = require('request-promise');
 
 const GH_RAW = 'https://raw.githubusercontent.com/';
 
-function fetch({ REPO_RAW_ROOT: rootPath = GH_RAW } = {}) {
-  return function fetchMarkdown({ request }) {
-    const {
-      owner, repo, ref, path,
-    } = request.params;
-    const options = {
-      uri: `${rootPath}${owner}/${repo}/${ref}/${path}`,
-      json: false,
-    };
-    return client(options)
-      .then(resp => ({ resource: { body: resp } }))
-      .catch(err => ({ error: err }));
+function fetch({ request }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
+  const {
+    owner, repo, ref, path,
+  } = request.params;
+  const options = {
+    uri: `${rootPath}${owner}/${repo}/${ref}/${path}`,
+    json: false,
   };
+  logger.debug(`fetching Markdown from ${options.uri}`);
+  return client(options)
+    .then(resp => ({ resource: { body: resp } }))
+    .catch(err => ({ error: err }));
 }
 module.exports = fetch;

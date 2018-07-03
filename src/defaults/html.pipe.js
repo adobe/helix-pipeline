@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const pipeline = require('../../index.js');
+const Pipeline = require('../../index.js');
 const { adaptOWRequest, adaptOWResponse, log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
@@ -22,20 +22,21 @@ const type = require('../html/set-content-type.js');
 
 const htmlpipe = (cont, params, secrets, logger = log) => {
   logger.log('debug', 'Constructing HTML Pipeline');
-  const pipe = pipeline()
-    .pre(adaptOWRequest())
-    .pre(fetch(secrets))
-    .pre(parse())
-    .pre(meta())
-    .pre(html())
-    // we could pass different resolutions here.
-    .pre(responsive())
-    .pre(emit())
+  const pipe = new Pipeline(secrets, logger);
+  pipe
+    .pre(adaptOWRequest)
+    .pre(fetch)
+    .pre(parse)
+    .pre(meta)
+    .pre(html)
+    .pre(responsive)
+    .pre(emit)
     .once(cont)
-    .post(type())
-    .post(adaptOWResponse());
+    .post(type)
+    .post(adaptOWResponse);
 
-  return pipe;
+  logger.log('debug', 'Running HTML pipeline');
+  return pipe.run(params);
 };
 
 module.exports.pipe = htmlpipe;
