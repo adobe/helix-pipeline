@@ -19,7 +19,13 @@ function bail(logger, message) {
 }
 
 function uri(rootPath, owner, repo, ref, path) {
-  return `${rootPath}/${owner}/${repo}/${ref}/${path}`;
+  const cleanroot = rootPath.replace(/\/$/, '');
+  const cleanpath = path.replace(/^\//, '');
+  const cleanref = ref.replace(/^\//, '').replace(/\/$/, '');
+  const cleanowner = owner.replace(/^\//, '').replace(/\/$/, '');
+  const cleanrepo = repo.replace(/^\//, '').replace(/\/$/, '');
+
+  return `${cleanroot}/${cleanowner}/${cleanrepo}/${cleanref}/${cleanpath}`;
 }
 
 function fetch({ request, error }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
