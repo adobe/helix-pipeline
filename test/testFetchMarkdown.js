@@ -13,37 +13,37 @@
 const assert = require('assert');
 const fetch = require('../src/html/fetch-markdown');
 
-describe("Test URI parsing and construction", () => {
-  it("fetch.uri is a function", () => {
+describe('Test URI parsing and construction', () => {
+  it('fetch.uri is a function', () => {
     assert.ok(fetch.uri);
     assert.equal(typeof fetch.uri, 'function');
   });
 
-  it("fetch.uri constructs URIs", () => {
+  it('fetch.uri constructs URIs', () => {
     assert.equal(fetch.uri('https://raw.githubusercontent.com', 'adobe', 'xdm', 'master', 'README.md'), 'https://raw.githubusercontent.com/adobe/xdm/master/README.md');
   });
 
-  it("fetch.uri deals with trailing slashes", () => {
+  it('fetch.uri deals with trailing slashes', () => {
     assert.equal(fetch.uri('https://raw.githubusercontent.com/', 'adobe', 'xdm', 'master', 'README.md'), 'https://raw.githubusercontent.com/adobe/xdm/master/README.md');
   });
 
-  it("fetch.uri deals with leading slashes", () => {
+  it('fetch.uri deals with leading slashes', () => {
     assert.equal(fetch.uri('https://raw.githubusercontent.com', 'adobe', 'xdm', 'master', '/README.md'), 'https://raw.githubusercontent.com/adobe/xdm/master/README.md');
   });
 
-  it("fetch.uri deals with slashes in refs", () => {
+  it('fetch.uri deals with slashes in refs', () => {
     assert.equal(fetch.uri('https://raw.githubusercontent.com', 'adobe', 'xdm', 'tags/release_1', '/README.md'), 'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md');
   });
 
-  it("fetch.uri deals with ugly slashes in refs", () => {
+  it('fetch.uri deals with ugly slashes in refs', () => {
     assert.equal(fetch.uri('https://raw.githubusercontent.com', 'adobe', 'xdm', '/tags/release_1/', '/README.md'), 'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md');
   });
 
-  it("fetch.uri deals with ugly slashes in owner", () => {
+  it('fetch.uri deals with ugly slashes in owner', () => {
     assert.equal(fetch.uri('https://raw.githubusercontent.com', '/adobe/', 'xdm', 'tags/release_1', '/README.md'), 'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md');
   });
 
-  it("fetch.uri deals with ugly slashes in repo", () => {
+  it('fetch.uri deals with ugly slashes in repo', () => {
     assert.equal(fetch.uri('https://raw.githubusercontent.com', 'adobe', '/xdm/', 'tags/release_1', '/README.md'), 'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md');
   });
-})
+});
