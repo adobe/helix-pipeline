@@ -6,8 +6,8 @@ It uses reducers and continuations to create a simple processing pipeline that c
 
 # Status
 
-[![codecov](https://codecov.io/gh/adobe/hypermedia-pipeline/branch/master/graph/badge.svg)](https://codecov.io/gh/adobe/hypermedia-pipeline)
-[![CircleCI](https://circleci.com/gh/adobe/parcel-plugin-htl.svg?style=svg)](https://circleci.com/gh/adobe/parcel-plugin-htl)
+[![codecov](https://img.shields.io/codecov/project/github/adobe/hypermedia-pipeline.svg?style=for-the-badge)](https://codecov.io/gh/adobe/hypermedia-pipeline)
+[![CircleCI](https://img.shields.io/circleci/project/github/adobe/hypermedia-pipeline.svg?style=for-the-badge)](https://circleci.com/gh/adobe/parcel-plugin-htl)
 
 ## Anatomy of a Pipeline
 
