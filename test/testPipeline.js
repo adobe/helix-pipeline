@@ -113,7 +113,7 @@ describe('Testing Pipeline', () => {
           assert.fail('when after once should fail.');
           done();
         });
-    } catch(err) {
+    } catch (err) {
       assert.equal(err.toString(), 'Error: when() needs function to operate on.');
       done();
     }
@@ -130,7 +130,7 @@ describe('Testing Pipeline', () => {
           assert.fail('when after once should fail.');
           done();
         });
-    } catch(err) {
+    } catch (err) {
       assert.equal(err.toString(), 'Error: when() needs function to operate on.');
       done();
     }
