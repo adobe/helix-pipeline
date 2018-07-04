@@ -131,6 +131,7 @@ Following main properties exist:
 - `resource`
 - `response`
 - `context`
+- `error`
 
 ### The `request` object
 
@@ -157,3 +158,13 @@ Following main properties exist:
 ### The `context` object
 
 TBD: used for stuff that is neither resource, request, or response
+
+### The `error` object
+
+This object is only set when there has been an error during pipeline processing. Any step in the pipeline may set the `error` object. Subsequent steps should simply skip any processing if they encounter an `error` object.
+
+Alternatively, steps can attempt to handle the `error` object, for instance by generating a formatted error message and leaving it in `response.body`.
+
+The only known property in `error` is
+
+- `message`: the error message
