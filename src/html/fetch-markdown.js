@@ -13,7 +13,11 @@ const client = require('request-promise');
 
 const GH_RAW = 'https://raw.githubusercontent.com/';
 
-function fetch({ request }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
+function fetch({ request, error }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
+  if (error) {
+    // don't do anything if there is an error
+    return {};
+  }
   const {
     owner, repo, ref, path,
   } = request.params;
