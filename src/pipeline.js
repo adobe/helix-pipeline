@@ -12,71 +12,155 @@
 const _ = require('lodash/fp');
 const Promise = require('bluebird');
 
+const nopLogger = {
+  error: () => {},
+  warn: () => {},
+  info: () => {},
+  verbose: () => {},
+  debug: () => {},
+  silly: () => {},
+};
+
+/**
+ * Pipeline function
+ *
+ * @typedef {function(context, _constants, logger)} pipelineFunction
+ * @callback pipelineFunction
+ * @param {Object} context Pipeline execution context that is passed along
+ * @param {Object} constants Pipeline constants define during construction
+ * @param {Winston.Logger} logger Logger
+ * @return {Promise} Promise which resolves to a parameters to be added to the context.
+*/
+
+/**
+ * Pipeline that allows to execute a list of functions in order. The pipeline consists of 3
+ * major function lists: `pre`, `once` and, `post`. the functions added to the `pre` list are
+ * processed first, then the `once` function and finally the `post` functions.
+ * Using `when` and `unless` allows to conditionally execute the previously define function.
+ * @class
+ */
 class Pipeline {
-  constructor(constants = {}, logger) {
-    if (logger) {
-      logger.debug('Creating pipeline');
-    }
-    this.constants = constants;
-    this.logger = logger;
-    this.last = [];
-    this.pres = [];
-    this.posts = [];
-    this.oncef = null;
+  /**
+   * Creates a new pipeline.
+   * @param {Object} constants Constant properties that are available to all pipeline functions.
+   * @param {Winston.Logger} logger Winston logger to use
+   */
+  constructor(constants = {}, logger = nopLogger) {
+    logger.debug('Creating pipeline');
+
+    this._constants = constants;
+    this._logger = logger;
+
+    // function chain that was defined last. used for `when` and `unless`
+    this._last = null;
+    // functions that are executed first
+    this._pres = [];
+    // function that is executed once
+    this._oncef = null;
+    // functions that are executed after
+    this._posts = [];
   }
 
+  /**
+   * Adds a processing function to the `pre` list to this pipeline.
+   * @param {pipelineFunction} f function to add to the `post` list
+   * @returns {Pipeline} this
+   */
   pre(f) {
-    this.pres.push(f);
+    this._pres.push(f);
+    this._last = this._pres;
     return this;
   }
 
+  /**
+   * Adds a processing function to the `pre` list to this pipeline.
+   * @param {pipelineFunction} f function to add to the `post` list
+   * @returns {Pipeline} this
+   */
   post(f) {
-    this.posts.push(f);
+    this._posts.push(f);
+    this._last = this._posts;
     return this;
   }
 
+  /**
+   * Adds a condition to the previously defined `pre` or `post` function. The previously defined
+   * function will only be executed if the predicate evaluates to something truthy or returns a
+   * Promise that resolves to something truthy.
+   * @param {function} predicate Predicate function.
+   * @returns {Pipeline} this
+   */
   when(predicate) {
-    if (this.last && this.last.length > 0) {
-      const lastfunc = this.last.pop();
+    if (this._last && this._last.length > 0) {
+      const lastfunc = this._last.pop();
       const wrappedfunc = (args) => {
-        if (predicate(args)) {
-          return lastfunc(args, this.constants, this.logger);
+        const result = predicate(args);
+        // check if predicate returns a promise like result
+        if (_.isFunction(result.then)) {
+          return result.then((predResult) => {
+            if (predResult) {
+              return lastfunc(args, this._constants, this._logger);
+            }
+            return args;
+          });
+        } else if (result) {
+          return lastfunc(args, this._constants, this._logger);
         }
         return args;
       };
-      this.last.push(wrappedfunc);
+      this._last.push(wrappedfunc);
+    } else {
+      throw new Error('when() needs function to operate on.');
     }
     return this;
   }
 
+  /**
+   * Adds a condition to the previously defined `pre` or `post` function. The previously defined
+   * function will only be executed if the predicate evaluates to something not-truthy or returns a
+   * Promise that resolves to something not-truthy.
+   * @param {function} predicate Predicate function.
+   * @returns {Pipeline} this
+   */
   unless(predicate) {
     const inverse = args => !predicate(args);
     return this.when(inverse);
   }
 
+  /**
+   * Sets the `once` processing function.
+   * @param {pipelineFunction} f the `once` function to set
+   * @returns {Pipeline} this
+   */
   once(f) {
-    this.oncef = f;
+    this._oncef = f;
+    this._last = null;
     return this;
   }
 
-  run(args = {}) {
-    const merge = (accumulator, currentfunction) => {
-      // copy the pipeline payload into a new object
-      // to avoid modifications
-      const mergedargs = _.merge({}, accumulator);
+  /**
+   * Runs the pipline processor be executing the `pre`, `once`, and `post` functions in order.
+   * @param context Pipeline context
+   * @returns {Promise} Promise that resolves to the final result of the accumulated context.
+   */
+  run(context = {}) {
+    /**
+     * Reduction function used to process the pipeline functions and merge the context parameters.
+     * @param {Object} currContext Accumulated context
+     * @param {pipelineFunction} currFunction Function that is currently "reduced"
+     * @returns {Promise} Promise resolving to the new value of the accumulator
+     */
+    const merge = (currContext, currFunction) => {
+      // copy the pipeline payload into a new object to avoid modifications
+      const mergedargs = _.merge({}, currContext);
 
-      // log the function that is being called
-      // and the parameters of the function
-      if (this.logger) {
-        this.logger.silly('processing ', { function: `${currentfunction}`, params: mergedargs });
-      }
+      // log the function that is being called and the parameters of the function
+      this._logger.silly('processing ', { function: `${currFunction}`, params: mergedargs });
 
-      return Promise.resolve(currentfunction(mergedargs, this.constants, this.logger))
+      return Promise.resolve(currFunction(mergedargs, this._constants, this._logger))
         .then((value) => {
-          const result = _.merge(accumulator, value);
-          if (this.logger) {
-            this.logger.silly('received ', { function: `${currentfunction}`, result });
-          }
+          const result = _.merge(currContext, value);
+          this._logger.silly('received ', { function: `${currFunction}`, result });
           return result;
         });
     };
@@ -84,14 +168,11 @@ class Pipeline {
     // go over inner.pres (those that run before), inner.oncef (the function that runs once)
     // and inner.posts (those that run after) – reduce using the merge function and return
     // the resolved value
-    const prom = Promise.reduce(
-      [...this.pres, this.oncef, ...this.posts]
-        .filter(e => typeof e === 'function'),
+    return Promise.reduce(
+      [...this._pres, this._oncef, ...this._posts].filter(e => typeof e === 'function'),
       merge,
-      args,
+      context,
     ).then(v => v);
-
-    return prom;
   }
 }
 
