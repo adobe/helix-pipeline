@@ -11,11 +11,10 @@
  */
 const tohtml = require('hast-util-to-html');
 
-function emit() {
-  return ({ resource: { htast } }) => {
-    const children = htast.children.map(tohtml);
-    return { resource: { html: children.join(''), children } };
-  };
+function emit({ resource: { htast } }, constants, logger) {
+  logger.debug(`Emitting HTML from ${typeof htast}`);
+  const children = htast.children.map(tohtml);
+  return { resource: { html: children.join(''), children } };
 }
 
 module.exports = emit;

@@ -9,21 +9,24 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const client = require('request-promise');
+/* eslint-env mocha */
 
-const GH_RAW = 'https://raw.githubusercontent.com/';
+const assert = require('assert');
 
-function fetch({ request }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
-  const {
-    owner, repo, ref, path,
-  } = request.params;
-  const options = {
-    uri: `${rootPath}${owner}/${repo}/${ref}/${path}`,
-    json: false,
-  };
-  logger.debug(`fetching Markdown from ${options.uri}`);
-  return client(options)
-    .then(resp => ({ resource: { body: resp } }))
-    .catch(err => ({ error: err }));
-}
-module.exports = fetch;
+const {
+  pipe,
+  pre,
+  adaptOWRequest,
+  adaptOWResponse,
+  log,
+} = require('../index.js').defaults;
+
+describe('Testing Default Pipeline', () => {
+  it('Default Pipeline can be loaded', () => {
+    assert.ok(pipe, 'no default pipeline found');
+    assert.ok(pre, 'no default pre.js found');
+    assert.ok(adaptOWRequest, 'no request wrapper found');
+    assert.ok(adaptOWResponse, 'no response wrapper found');
+    assert.ok(log, 'no logger found');
+  });
+});

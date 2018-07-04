@@ -30,20 +30,28 @@ const RESOLUTION_SWITCHING = [
 
 /* Parameter Reassignment is the standard design pattern for Unified */
 /* eslint no-param-reassign: "off" */
-module.exports = function attacher(resolutions = RESOLUTION_SWITCHING) {
+
+function transformer(
+  { resource: { htast } },
+  { RESOLUTIONS = RESOLUTION_SWITCHING },
+  logger,
+) {
+  logger.debug(`Making images responsive in ${typeof htast}`);
+
   function visit(node) {
     if (node.type === 'element' && node.tagName === 'img') {
       const src = String(node.properties.src);
+
+      logger.debug(`Making image ${src} responsive`);
 
       node.properties.src = `${src}?width=320`;
 
       const srcset = [];
       const sizes = [];
 
-      resolutions.forEach((e) => {
+      RESOLUTIONS.forEach((e) => {
         srcset.push(`${src}?width=${e.width} ${e.width}w`);
-        sizes.push(`${(e.maxWidth ? `(max-width: ${e.maxWidth}px) ` : '') +
-                        e.size}vw`);
+        sizes.push(`${(e.maxWidth ? `(max-width: ${e.maxWidth}px) ` : '') + e.size}vw`);
       });
 
       node.properties.srcset = srcset.join(', ');
@@ -57,12 +65,10 @@ module.exports = function attacher(resolutions = RESOLUTION_SWITCHING) {
     }
   }
 
-  function transformer({ resource: { htast } }) {
-    // the visit function is modifying its argument in place.
-    visit(htast);
+  // the visit function is modifying its argument in place.
+  visit(htast);
 
-    return { resource: { htast } };
-  }
+  return { resource: { htast } };
+}
 
-  return transformer;
-};
+module.exports = transformer;

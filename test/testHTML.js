@@ -12,6 +12,18 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { pipe } = require('../src/defaults/html.pipe.js');
+const winston = require('winston');
+
+const logger = winston.createLogger({
+  // tune this for debugging
+  level: 'debug',
+  // and turn this on if you want the output
+  silent: true,
+  format: winston.format.simple(),
+  transports: [
+    new winston.transports.Console(),
+  ],
+});
 
 const params = {
   path: '/hello.md',
@@ -81,7 +93,8 @@ describe('Testing HTML Pipeline', () => {
       },
       params,
       secrets,
-    )(params);
+      logger,
+    );
 
     result.then((res) => {
       assert.equal(201, res.statusCode);

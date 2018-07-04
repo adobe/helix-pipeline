@@ -4,6 +4,9 @@ This project provides helper functions and default implementations for creating 
 
 It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia.
 
+# Status
+
+[![codecov](https://codecov.io/gh/adobe/hypermedia-pipeline/branch/master/graph/badge.svg)](https://codecov.io/gh/adobe/hypermedia-pipeline)
 
 ## Anatomy of a Pipeline
 

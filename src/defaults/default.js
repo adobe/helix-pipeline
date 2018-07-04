@@ -10,17 +10,23 @@
  * governing permissions and limitations under the License.
  */
 const winston = require('winston');
+const { Pipeline } = require('../../index');
 
 /**
  * Constructs a pipeline function that is capable of
  * - reading OpenWhisk parameters
  * - calling a continuation function
  * - wrapping the response in a friendly response format
- * @param {Function} cont the continuation function
+ * @param {Function} next the continuation function
  * @param {Object} params the OpenWhisk parameters
+ * @param {Object} constants parameters that remain constant throughout the pipeline execution
  * @returns {Function} a function to execute.
  */
-const pipe = cont => params => cont(params);
+function pipe(next, params, constants, logger) {
+  const mypipeline = new Pipeline(constants, logger);
+  mypipeline.once(next);
+  return mypipeline.run(params);
+}
 
 /**
  *
@@ -37,37 +43,33 @@ const pre = cont => cont;
  * @returns {Object} A req object that is equivalent to an Express request object,
  * including a headers, method, and params field
  */
-function adaptOWRequest() {
-  return (params) => {
-    // use destructuring to drop __ow_headers and __ow_method from params
-    /* eslint-disable camelcase, no-underscore-dangle */
-    const { __ow_headers, __ow_method, ...newparams } = params;
+function adaptOWRequest(params) {
+  // use destructuring to drop __ow_headers and __ow_method from params
+  /* eslint-disable camelcase, no-underscore-dangle */
+  const { __ow_headers, __ow_method, ...newparams } = params;
 
-    return {
-      request: {
-        headers: params.__ow_headers,
-        params: newparams,
-        method: params.__ow_method,
-      },
-    };
-    /* eslint-enable: camelcase, no-underscore-dangle */
+  return {
+    request: {
+      headers: __ow_headers,
+      params: newparams,
+      method: __ow_method,
+    },
   };
+  /* eslint-enable: camelcase, no-underscore-dangle */
 }
 
-function adaptOWResponse() {
-  return (params) => {
-    const {
-      response: {
-        status = 200,
-        headers = { 'Content-Type': 'application/json' },
-        body = '',
-      },
-    } = params;
-    return {
-      statusCode: status,
-      headers,
-      body,
-    };
+function adaptOWResponse(params) {
+  const {
+    response: {
+      status = 200,
+      headers = { 'Content-Type': 'application/json' },
+      body = '',
+    },
+  } = params;
+  return {
+    statusCode: status,
+    headers,
+    body,
   };
 }
 

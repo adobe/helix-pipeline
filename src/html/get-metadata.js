@@ -13,32 +13,30 @@ const select = require('unist-util-select');
 const plain = require('mdast-util-to-string');
 const yaml = require('yaml');
 
+function getmetadata({ resource: { mdast } }, constants, logger) {
+  logger.debug(`Parsing Markdown Metadata from ${typeof mdast}`);
+  const retresource = {};
 
-function getmetadata() {
-  return ({ resource: { mdast } }) => {
-    const retresource = {};
+  const yamls = select(mdast, 'yaml'); // select all YAML nodes
+  const mapped = yamls.map(({ value }) => yaml.eval(value));
+  const meta = Object.assign(...mapped);
+  retresource.meta = meta;
 
-    const yamls = select(mdast, 'yaml'); // select all YAML nodes
-    const mapped = yamls.map(({ value }) => yaml.eval(value));
-    const meta = Object.assign(...mapped);
-    retresource.meta = meta;
+  const headers = select(mdast, 'heading');
+  if (headers[0]) {
+    retresource.title = plain(headers[0]);
+    retresource.intro = plain(headers[0]);
+  }
 
-    const headers = select(mdast, 'heading');
-    if (headers[0]) {
-      retresource.title = plain(headers[0]);
-      retresource.intro = plain(headers[0]);
+  const paragraphs = select(mdast, 'paragraph');
+  if (paragraphs[0]) {
+    if (!headers[0]) {
+      retresource.title = plain(paragraphs[0]);
     }
+    retresource.intro = plain(paragraphs[0]);
+  }
 
-    const paragraphs = select(mdast, 'paragraph');
-    if (paragraphs[0]) {
-      if (!headers[0]) {
-        retresource.title = plain(paragraphs[0]);
-      }
-      retresource.intro = plain(paragraphs[0]);
-    }
-
-    return { resource: retresource };
-  };
+  return { resource: retresource };
 }
 
 module.exports = getmetadata;

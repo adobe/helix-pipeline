@@ -13,18 +13,16 @@ const unified = require('unified');
 const remark = require('remark-parse');
 const frontmatter = require('remark-frontmatter');
 
+function parse({ resource: { body = '' } }, constants, logger) {
+  logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
+  const preprocessor = unified()
+    .use(remark)
+    .use(frontmatter);
 
-function parse() {
-  return ({ resource }) => {
-    const preprocessor = unified()
-      .use(remark)
-      .use(frontmatter);
+  // see https://github.com/syntax-tree/mdast for documentation
+  const mdast = preprocessor.parse(body);
 
-    // see https://github.com/syntax-tree/mdast for documentation
-    const mdast = preprocessor.parse(resource.body);
-
-    return { resource: { mdast } };
-  };
+  return { resource: { mdast } };
 }
 
 module.exports = parse;

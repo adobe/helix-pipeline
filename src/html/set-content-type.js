@@ -9,19 +9,19 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function type() {
-  return ({ response }) => {
+function type({ response }, constants, logger) {
   // somebody already set a content type, keep as is
-    if (!(response && response.headers && response.headers['Content-Type'])) {
-      return {
-        response: {
-          headers: {
-            'Content-Type': 'text/html',
-          },
+  if (!(response && response.headers && response.headers['Content-Type'])) {
+    logger.debug('Setting content type header');
+    return {
+      response: {
+        headers: {
+          'Content-Type': 'text/html',
         },
-      };
-    }
-    return {};
-  };
+      },
+    };
+  }
+  logger.debug('Keeping existing content type header');
+  return {};
 }
 module.exports = type;

@@ -21,7 +21,7 @@ jobs:
 
       - run: 
           name: Install Dependencies
-          command: npm install && npm install -D mocha-junit-reporter npm-snapshot
+          command: npm install
 
       - save_cache:
           paths:
@@ -39,6 +39,13 @@ jobs:
           environment:
             MOCHA_FILE: junit/test-results.xml
           when: always
+
+      # get code coverage
+      - run:
+          name: Getting Code Coverage
+          command: npx istanbul cover ./node_modules/mocha/bin/_mocha -- -R spec && npx codecov
+          when: always
+
 
       - store_test_results:
           path: junit
