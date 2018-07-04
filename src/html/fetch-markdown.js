@@ -13,21 +13,52 @@ const client = require('request-promise');
 
 const GH_RAW = 'https://raw.githubusercontent.com/';
 
+function bail(logger, message) {
+  logger.error(message);
+  return { error: { message } };
+}
+
+function uri(rootPath, owner, repo, ref, path) {
+  return `${rootPath}/${owner}/${repo}/${ref}/${path}`;
+}
+
 function fetch({ request, error }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
   if (error) {
     // don't do anything if there is an error
     return {};
   }
+
+  // get required request parameters
   const {
     owner, repo, ref, path,
   } = request.params;
+
+  // bail if a required parameter cannot be found
+  if (!owner) {
+    return bail(logger, 'Unknown owner, cannot fetch resource');
+  }
+  if (!repo) {
+    return bail(logger, 'Unknown repo, cannot fetch resource');
+  }
+  if (!ref) {
+    return bail(logger, 'Unknown ref, cannot fetch resource');
+  }
+  if (!path) {
+    return bail(logger, 'Unknown path, cannot fetch resource');
+  }
+
+  // everything looks good, make the HTTP request
   const options = {
-    uri: `${rootPath}${owner}/${repo}/${ref}/${path}`,
+    uri: uri(rootPath, owner, repo, ref, path),
     json: false,
   };
   logger.debug(`fetching Markdown from ${options.uri}`);
   return client(options)
     .then(resp => ({ resource: { body: resp } }))
-    .catch(err => ({ error: err }));
+    .catch((err) => {
+      logger.error(`Could not fetch Markdown from ${options.uri}`, err);
+      return { error: err };
+    });
 }
 module.exports = fetch;
+module.exports.uri = uri;
