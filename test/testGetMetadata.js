@@ -23,7 +23,7 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-describe.only('Test getMetadata', () => {
+describe('Test getMetadata', () => {
   it('getmetadata does not fail with "empty" mdast', () => {
     assert.deepEqual(
       getmetadata({
