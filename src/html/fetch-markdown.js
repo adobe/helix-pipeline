@@ -10,28 +10,39 @@
  * governing permissions and limitations under the License.
  */
 const client = require('request-promise');
+const URI = require('uri-js');
+const { bail } = require('../helper');
 
 const GH_RAW = 'https://raw.githubusercontent.com/';
 
-function bail(logger, message) {
-  logger.error(message);
-  return { error: { message } };
+function uri(root, owner, repo, ref, path) {
+  const rootURI = URI.parse(root);
+  const rootPath = rootURI.path;
+  // remove double slashes
+  const fullPath = `${rootPath}/${owner}/${repo}/${ref}/${path}`.replace(
+    /\/+/g,
+    '/',
+  );
+
+  return URI.serialize({
+    scheme: rootURI.scheme,
+    host: rootURI.host,
+    port: rootURI.port,
+    path: fullPath,
+  });
 }
 
-function uri(rootPath, owner, repo, ref, path) {
-  const cleanroot = rootPath.replace(/\/$/, '');
-  const cleanpath = path.replace(/^\//, '');
-  const cleanref = ref.replace(/^\//, '').replace(/\/$/, '');
-  const cleanowner = owner.replace(/^\//, '').replace(/\/$/, '');
-  const cleanrepo = repo.replace(/^\//, '').replace(/\/$/, '');
-
-  return `${cleanroot}/${cleanowner}/${cleanrepo}/${cleanref}/${cleanpath}`;
-}
-
-function fetch({ request, error }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
+function fetch(
+  { request, error },
+  { REPO_RAW_ROOT: rootPath = GH_RAW } = {},
+  logger,
+) {
   if (error) {
     // don't do anything if there is an error
     return {};
+  }
+  if (!request || !request.params) {
+    return bail(logger, 'Request parameters are missing');
   }
 
   // get required request parameters
@@ -61,10 +72,7 @@ function fetch({ request, error }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, lo
   logger.debug(`fetching Markdown from ${options.uri}`);
   return client(options)
     .then(resp => ({ resource: { body: resp } }))
-    .catch((err) => {
-      logger.error(`Could not fetch Markdown from ${options.uri}`, err);
-      return { error: err };
-    });
+    .catch(err => bail(logger, `Could not fetch Markdown from ${options.uri}`, err));
 }
 module.exports = fetch;
 module.exports.uri = uri;
