@@ -37,6 +37,7 @@
     "unified": "^7.0.0",
     "unist-util-filter": "^1.0.0",
     "unist-util-select": "^1.5.0",
+    "uri-js": "^4.2.2",
     "winston": "^3.0.0",
     "yaml": "^0.3.0"
   }

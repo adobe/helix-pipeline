@@ -10,20 +10,69 @@
  * governing permissions and limitations under the License.
  */
 const client = require('request-promise');
+const URI = require('uri-js');
+const { bail } = require('../helper');
 
 const GH_RAW = 'https://raw.githubusercontent.com/';
 
-function fetch({ request }, { REPO_RAW_ROOT: rootPath = GH_RAW } = {}, logger) {
+function uri(root, owner, repo, ref, path) {
+  const rootURI = URI.parse(root);
+  const rootPath = rootURI.path;
+  // remove double slashes
+  const fullPath = `${rootPath}/${owner}/${repo}/${ref}/${path}`.replace(
+    /\/+/g,
+    '/',
+  );
+
+  return URI.serialize({
+    scheme: rootURI.scheme,
+    host: rootURI.host,
+    port: rootURI.port,
+    path: fullPath,
+  });
+}
+
+function fetch(
+  { request, error },
+  { REPO_RAW_ROOT: rootPath = GH_RAW } = {},
+  logger,
+) {
+  if (error) {
+    // don't do anything if there is an error
+    return {};
+  }
+  if (!request || !request.params) {
+    return bail(logger, 'Request parameters are missing');
+  }
+
+  // get required request parameters
   const {
     owner, repo, ref, path,
   } = request.params;
+
+  // bail if a required parameter cannot be found
+  if (!owner) {
+    return bail(logger, 'Unknown owner, cannot fetch resource');
+  }
+  if (!repo) {
+    return bail(logger, 'Unknown repo, cannot fetch resource');
+  }
+  if (!ref) {
+    return bail(logger, 'Unknown ref, cannot fetch resource');
+  }
+  if (!path) {
+    return bail(logger, 'Unknown path, cannot fetch resource');
+  }
+
+  // everything looks good, make the HTTP request
   const options = {
-    uri: `${rootPath}${owner}/${repo}/${ref}/${path}`,
+    uri: uri(rootPath, owner, repo, ref, path),
     json: false,
   };
   logger.debug(`fetching Markdown from ${options.uri}`);
   return client(options)
     .then(resp => ({ resource: { body: resp } }))
-    .catch(err => ({ error: err }));
+    .catch(err => bail(logger, `Could not fetch Markdown from ${options.uri}`, err));
 }
 module.exports = fetch;
+module.exports.uri = uri;
