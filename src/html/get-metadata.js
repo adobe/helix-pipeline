@@ -19,8 +19,7 @@ function getmetadata({ resource: { mdast } }, constants, logger) {
 
   const yamls = select(mdast, 'yaml'); // select all YAML nodes
   const mapped = yamls.map(({ value }) => yaml.eval(value));
-  const meta = Object.assign(...mapped);
-  retresource.meta = meta;
+  retresource.meta = Object.assign({}, ...mapped);
 
   const headers = select(mdast, 'heading');
   if (headers[0]) {
