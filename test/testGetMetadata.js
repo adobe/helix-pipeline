@@ -36,7 +36,7 @@ describe('Test getMetadata', () => {
         },
       }, null, logger),
       {
-        resource: {},
+        resource: { meta: {} },
       },
     );
   });
