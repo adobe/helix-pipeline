@@ -178,6 +178,16 @@ describe('Test invalid input', () => {
       logger,
     ).error);
   });
+
+  it('Test for error pass-through', () => {
+    const err = { message: 'this error is mine.' };
+
+    assert.deepEqual(fetch(
+      { error: err },
+      {},
+      logger,
+    ), {});
+  });
 });
 
 describe('Test non-existing resource', () => {
