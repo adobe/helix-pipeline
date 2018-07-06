@@ -11,8 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const fetch = require('../src/html/fetch-markdown');
 const winston = require('winston');
+const fetch = require('../src/html/fetch-markdown');
 
 const logger = winston.createLogger({
   // tune this for debugging

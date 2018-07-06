@@ -11,8 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const getmetadata = require('../src/html/get-metadata');
 const winston = require('winston');
+const getmetadata = require('../src/html/get-metadata');
 
 const logger = winston.createLogger({
   // tune this for debugging

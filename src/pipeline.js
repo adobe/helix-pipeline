@@ -103,7 +103,7 @@ class Pipeline {
             }
             return args;
           });
-        } else if (result) {
+        } if (result) {
           return lastfunc(args, this._constants, this._logger);
         }
         return args;

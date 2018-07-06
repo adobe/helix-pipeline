@@ -11,9 +11,9 @@
  */
 /* eslint-env mocha */
 
-const helper = require('../src/helper');
 const assert = require('assert');
 const winston = require('winston');
+const helper = require('../src/helper');
 
 const logger = winston.createLogger({
   // tune this for debugging
