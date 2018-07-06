@@ -11,8 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Pipeline } = require('../index.js');
 const winston = require('winston');
+const { Pipeline } = require('../index.js');
 
 const logger = winston.createLogger({
   // tune this for debugging
