@@ -10,7 +10,7 @@ It uses reducers and continuations to create a simple processing pipeline that c
 [![CircleCI](https://img.shields.io/circleci/project/github/adobe/hypermedia-pipeline.svg)](https://circleci.com/gh/adobe/parcel-plugin-htl)
 [![GitHub license](https://img.shields.io/github/license/adobe/hypermedia-pipeline.svg)](https://github.com/adobe/hypermedia-pipeline/blob/master/LICENSE.txt)
 [![GitHub issues](https://img.shields.io/github/issues/adobe/hypermedia-pipeline.svg)](https://github.com/adobe/hypermedia-pipeline/issues)
-[![npm](https://img.shields.io/npm/dw/@adobe/hypermedia-pipeline.svg)](https://www.npmjs.com/package/@adobe/hypermedia-pipeline)
+[![npm](https://img.shields.io/npm/dw/@adobe/hypermedia-pipeline.svg)](https://www.npmjs.com/package/@adobe/hypermedia-pipeline) [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/hypermedia-pipeline.svg)](https://greenkeeper.io/)
 
 ## Anatomy of a Pipeline
 
