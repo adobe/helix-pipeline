@@ -6,14 +6,16 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "lint": "npx eslint ."
+    "lint": "npx eslint .",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
     "codecov": "^3.0.2",
-    "eslint": "^5.0.1",
-    "eslint-config-airbnb": "^17.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-header": "^1.2.0",
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
@@ -39,6 +41,8 @@
     "unist-util-select": "^1.5.0",
     "uri-js": "^4.2.2",
     "winston": "^3.0.0",
-    "yaml": "^0.3.0"
-  }
+    "yaml": "^0.3.0",
+    "snyk": "^1.88.1"
+  },
+  "snyk": true
 }
