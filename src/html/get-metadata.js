@@ -11,14 +11,14 @@
  */
 const select = require('unist-util-select');
 const plain = require('mdast-util-to-string');
-const yaml = require('yaml');
+const yaml = require('js-yaml');
 
 function getmetadata({ resource: { mdast } }, constants, logger) {
   logger.debug(`Parsing Markdown Metadata from ${typeof mdast}`);
   const retresource = {};
 
   const yamls = select(mdast, 'yaml'); // select all YAML nodes
-  const mapped = yamls.map(({ value }) => yaml.eval(value));
+  const mapped = yamls.map(({ value }) => yaml.safeLoad(value));
   retresource.meta = Object.assign({}, ...mapped);
 
   const headers = select(mdast, 'heading');
