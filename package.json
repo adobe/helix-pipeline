@@ -8,7 +8,10 @@
     "test": "mocha",
     "lint": "npx eslint .",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "preversion": "npm test",
+    "postversion": "git push origin master --follow-tags",
+    "delete-git-tag": "git tag -d v$npm_package_version && git push origin :v$npm_package_version",
   },
   "author": "",
   "license": "Apache-2.0",
@@ -22,8 +25,7 @@
     "eslint-plugin-react": "^7.11.0",
     "istanbul": "^1.0.0-alpha.2",
     "mocha": "^5.2.0",
-    "mocha-junit-reporter": "^1.17.0",
-    "npm-snapshot": "^1.0.3"
+    "mocha-junit-reporter": "^1.17.0"
   },
   "dependencies": {
     "bluebird": "^3.5.1",
