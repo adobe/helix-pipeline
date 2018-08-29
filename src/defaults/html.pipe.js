@@ -19,6 +19,7 @@ const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
 const emit = require('../html/emit-html.js');
 const type = require('../html/set-content-type.js');
+const debug = require('../html/output-debug.js');
 
 const htmlpipe = (cont, params, secrets, logger = log) => {
   logger.log('debug', 'Constructing HTML Pipeline');
@@ -33,6 +34,7 @@ const htmlpipe = (cont, params, secrets, logger = log) => {
     .pre(emit)
     .once(cont)
     .post(type)
+    .post(debug)
     .post(adaptOWResponse);
 
   logger.log('debug', 'Running HTML pipeline');
