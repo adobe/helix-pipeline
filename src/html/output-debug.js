@@ -21,7 +21,7 @@ function debug(payload, constants, logger) {
     delete p.response.body;
     const debugScript = `<script>console.group('payload');console.log(${JSON.stringify(p)});console.groupEnd();</script>`;
     // inject debug script before the closing body tag
-    p.response.body = body.replace('</body>', `${debugScript}</body>`);
+    p.response.body = body.replace(new RegExp('</body>', 'i'), `${debugScript}</body>`);
     return p;
   }
   return payload;
