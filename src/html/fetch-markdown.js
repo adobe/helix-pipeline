@@ -39,8 +39,8 @@ function fetch(
       REPO_RAW_ROOT: rootPath = GH_RAW,
     },
     request,
+    logger,
   } = {},
-  logger,
 ) {
   if (error) {
     // don't do anything if there is an error

@@ -28,8 +28,7 @@ const nopLogger = {
  * @callback pipelineFunction
  * @param {Object} context Pipeline execution context that is passed along
  * @param {Object} action Pipeline action define during construction
- * @param {Winston.Logger} logger Logger
- * @return {Promise} Promise which resolves to a parameters to be added to the context.
+  * @return {Promise} Promise which resolves to a parameters to be added to the context.
 */
 
 /**
@@ -48,8 +47,7 @@ class Pipeline {
   constructor(action = {}, logger = nopLogger) {
     logger.debug('Creating pipeline');
 
-    this._action = action;
-    this._logger = logger;
+    this._action = _.assign(action, { logger });
 
     // function chain that was defined last. used for `when` and `unless`
     this._last = null;
@@ -99,12 +97,12 @@ class Pipeline {
         if (_.isFunction(result.then)) {
           return result.then((predResult) => {
             if (predResult) {
-              return lastfunc(args, this._action, this._logger);
+              return lastfunc(args, this._action);
             }
             return args;
           });
         } if (result) {
-          return lastfunc(args, this._action, this._logger);
+          return lastfunc(args, this._action);
         }
         return args;
       };
@@ -155,12 +153,12 @@ class Pipeline {
       const mergedargs = _.merge({}, currContext);
 
       // log the function that is being called and the parameters of the function
-      this._logger.silly('processing ', { function: `${currFunction}`, params: mergedargs });
+      this._action.logger.silly('processing ', { function: `${currFunction}`, params: mergedargs });
 
-      return Promise.resolve(currFunction(mergedargs, this._action, this._logger))
+      return Promise.resolve(currFunction(mergedargs, this._action))
         .then((value) => {
           const result = _.merge(currContext, value);
-          this._logger.silly('received ', { function: `${currFunction}`, result });
+          this._action.logger.silly('received ', { function: `${currFunction}`, result });
           return result;
         });
     };

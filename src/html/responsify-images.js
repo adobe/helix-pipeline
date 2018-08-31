@@ -33,8 +33,10 @@ const RESOLUTION_SWITCHING = [
 
 function transformer(
   { resource: { htast } },
-  { RESOLUTIONS = RESOLUTION_SWITCHING },
-  logger,
+  {
+    RESOLUTIONS = RESOLUTION_SWITCHING,
+    logger,
+  },
 ) {
   logger.debug(`Making images responsive in ${typeof htast}`);
 

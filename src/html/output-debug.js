@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function debug(payload, action, logger) {
+function debug(payload, { logger }) {
   // TODO add debug query parameter check once available!
   if (payload.request.params
     && payload.request.params.debug

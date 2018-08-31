@@ -13,7 +13,7 @@ const unified = require('unified');
 const remark = require('remark-parse');
 const frontmatter = require('remark-frontmatter');
 
-function parse({ resource: { body = '' } }, action, logger) {
+function parse({ resource: { body = '' } }, { logger }) {
   logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
   const preprocessor = unified()
     .use(remark)
