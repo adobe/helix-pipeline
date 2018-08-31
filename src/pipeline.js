@@ -24,10 +24,10 @@ const nopLogger = {
 /**
  * Pipeline function
  *
- * @typedef {function(context, _constants, logger)} pipelineFunction
+ * @typedef {function(context, _action, logger)} pipelineFunction
  * @callback pipelineFunction
  * @param {Object} context Pipeline execution context that is passed along
- * @param {Object} constants Pipeline constants define during construction
+ * @param {Object} action Pipeline action define during construction
  * @param {Winston.Logger} logger Logger
  * @return {Promise} Promise which resolves to a parameters to be added to the context.
 */
@@ -42,13 +42,13 @@ const nopLogger = {
 class Pipeline {
   /**
    * Creates a new pipeline.
-   * @param {Object} constants Constant properties that are available to all pipeline functions.
+   * @param {Object} action Action properties that are available to all pipeline functions.
    * @param {Winston.Logger} logger Winston logger to use
    */
-  constructor(constants = {}, logger = nopLogger) {
+  constructor(action = {}, logger = nopLogger) {
     logger.debug('Creating pipeline');
 
-    this._constants = constants;
+    this._action = action;
     this._logger = logger;
 
     // function chain that was defined last. used for `when` and `unless`
@@ -99,12 +99,12 @@ class Pipeline {
         if (_.isFunction(result.then)) {
           return result.then((predResult) => {
             if (predResult) {
-              return lastfunc(args, this._constants, this._logger);
+              return lastfunc(args, this._action, this._logger);
             }
             return args;
           });
         } if (result) {
-          return lastfunc(args, this._constants, this._logger);
+          return lastfunc(args, this._action, this._logger);
         }
         return args;
       };
@@ -157,7 +157,7 @@ class Pipeline {
       // log the function that is being called and the parameters of the function
       this._logger.silly('processing ', { function: `${currFunction}`, params: mergedargs });
 
-      return Promise.resolve(currFunction(mergedargs, this._constants, this._logger))
+      return Promise.resolve(currFunction(mergedargs, this._action, this._logger))
         .then((value) => {
           const result = _.merge(currContext, value);
           this._logger.silly('received ', { function: `${currFunction}`, result });

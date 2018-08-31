@@ -1,0 +1,32 @@
+/*
+ * Copyright 2018 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
+function debug(payload, action, logger) {
+  // TODO add debug query parameter check once available!
+  if (payload.request.params
+    && payload.request.params.debug
+    && payload.response
+    && payload.response.body) {
+    logger.debug('Adding debug script');
+    const p = payload;
+    // backup body
+    const { body } = p.response;
+    // remove body because that would be the response content
+    // and causes rendering issues of the script
+    delete p.response.body;
+    const debugScript = `<script>console.group('payload');console.log(${JSON.stringify(p)});console.groupEnd();</script>`;
+    // inject debug script before the closing body tag
+    p.response.body = body.replace(new RegExp('</body>', 'i'), `${debugScript}</body>`);
+    return p;
+  }
+  return payload;
+}
+module.exports = debug;

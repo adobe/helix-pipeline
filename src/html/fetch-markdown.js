@@ -33,8 +33,13 @@ function uri(root, owner, repo, ref, path) {
 }
 
 function fetch(
-  { request, error },
-  { REPO_RAW_ROOT: rootPath = GH_RAW } = {},
+  { error },
+  {
+    secrets: {
+      REPO_RAW_ROOT: rootPath = GH_RAW,
+    },
+    request,
+  } = {},
   logger,
 ) {
   if (error) {

@@ -13,7 +13,7 @@ const select = require('unist-util-select');
 const plain = require('mdast-util-to-string');
 const yaml = require('js-yaml');
 
-function getmetadata({ resource: { mdast } }, constants, logger) {
+function getmetadata({ resource: { mdast } }, action, logger) {
   logger.debug(`Parsing Markdown Metadata from ${typeof mdast}`);
   const retresource = {};
 

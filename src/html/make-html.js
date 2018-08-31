@@ -11,7 +11,7 @@
  */
 const tohtast = require('mdast-util-to-hast');
 
-function html({ resource: { mdast } }, constants, logger) {
+function html({ resource: { mdast } }, action, logger) {
   logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
   const resource = {};
   resource.htast = tohtast(mdast);

@@ -18,14 +18,14 @@ const { Pipeline } = require('../../index');
  * - calling a continuation function
  * - wrapping the response in a friendly response format
  * @param {Function} next the continuation function
- * @param {Object} params the OpenWhisk parameters
- * @param {Object} constants parameters that remain constant throughout the pipeline execution
+ * @param {Object} payload the initial payload
+ * @param {Object} action the Openwhish action
  * @returns {Function} a function to execute.
  */
-function pipe(next, params, constants, logger) {
-  const mypipeline = new Pipeline(constants, logger);
+function pipe(next, payload, action, logger) {
+  const mypipeline = new Pipeline(action, logger);
   mypipeline.once(next);
-  return mypipeline.run(params);
+  return mypipeline.run(payload);
 }
 
 /**
@@ -36,36 +36,35 @@ function pipe(next, params, constants, logger) {
 const pre = cont => cont;
 
 /**
- * A standard cleanup function that takes OpenWhisk-style parameters and turns
- * them into an Express-style request object which is returned.
- * @param {Object} params Parameters following OpenWhisk convention, including
- * __ow_method and __ow_headers for HTTP requests
- * @returns {Object} A req object that is equivalent to an Express request object,
+ * A function that takes OpenWhisk-style req parameter and turns
+ * it into the original Express-style request object which is returned.
+ * @param {Object} payload Pipeline payload
+ * @param {Object} action Object representing the OpenWhisk action, including
+ * the request, __ow_method and __ow_headers for HTTP requests and secrets
+ * @returns {Object} The original req object that is equivalent to an Express request object,
  * including a headers, method, and params field
  */
-function adaptOWRequest(params) {
-  // use destructuring to drop __ow_headers and __ow_method from params
-  /* eslint-disable camelcase, no-underscore-dangle */
-  const { __ow_headers, __ow_method, ...newparams } = params;
-
-  return {
-    request: {
-      headers: __ow_headers,
-      params: newparams,
-      method: __ow_method,
-    },
-  };
-  /* eslint-enable: camelcase, no-underscore-dangle */
+function adaptOWRequest(payload, { request: { params: { req = '{}' } } }, logger) {
+  try {
+    return {
+      request: JSON.parse(req),
+    };
+  } catch (e) {
+    logger.error(`Cannot parse incoming request parameter ${e.stack}`);
+    return {
+      request: {},
+    };
+  }
 }
 
-function adaptOWResponse(params) {
+function adaptOWResponse(payload) {
   const {
     response: {
       status = 200,
       headers = { 'Content-Type': 'application/json' },
       body = '',
     },
-  } = params;
+  } = payload;
   return {
     statusCode: status,
     headers,
