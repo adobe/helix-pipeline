@@ -32,7 +32,7 @@ describe('Testing Pipeline', () => {
 
   it('Executes correct order', (done) => {
     const order = [];
-    new Pipeline(null, logger)
+    new Pipeline({ logger })
       .pre(() => { order.push('pre0'); })
       .post(() => { order.push('post0'); })
       .pre(() => { order.push('pre1'); })
@@ -48,7 +48,7 @@ describe('Testing Pipeline', () => {
 
   it('Disables pre before when', (done) => {
     const order = [];
-    new Pipeline(null, logger)
+    new Pipeline({ logger })
       .pre(() => { order.push('pre0'); })
       .pre(() => { order.push('disabled'); })
       .when(() => false)
@@ -66,7 +66,7 @@ describe('Testing Pipeline', () => {
 
   it('When works with promises pre before when', (done) => {
     const order = [];
-    new Pipeline(null, logger)
+    new Pipeline({ logger })
       .pre(() => { order.push('pre0'); })
       .pre(() => { order.push('disabled'); })
       .when(() => Promise.resolve(false))
@@ -84,7 +84,7 @@ describe('Testing Pipeline', () => {
 
   it('Disables post before when', (done) => {
     const order = [];
-    new Pipeline(null, logger)
+    new Pipeline({ logger })
       .pre(() => { order.push('pre0'); })
       .pre(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
@@ -103,7 +103,7 @@ describe('Testing Pipeline', () => {
   it('when after once throws error', (done) => {
     try {
       const order = [];
-      new Pipeline(null, logger)
+      new Pipeline({ logger })
         .pre(() => { order.push('pre0'); })
         .once(() => { order.push('once'); })
         .when(() => false)
@@ -122,7 +122,7 @@ describe('Testing Pipeline', () => {
   it('when before pre throws error', (done) => {
     try {
       const order = [];
-      new Pipeline(null, logger)
+      new Pipeline({ logger })
         .when(() => false)
         .post(() => { order.push('post1'); })
         .run()
@@ -138,7 +138,7 @@ describe('Testing Pipeline', () => {
 
   it('Disables pre before unless', (done) => {
     const order = [];
-    new Pipeline(null, logger)
+    new Pipeline({ logger })
       .pre(() => { order.push('pre0'); })
       .pre(() => { order.push('disabled'); })
       .unless(() => true)
@@ -156,7 +156,7 @@ describe('Testing Pipeline', () => {
 
   it('Enables pre before when', (done) => {
     const order = [];
-    new Pipeline(null, logger)
+    new Pipeline({ logger })
       .pre(() => { order.push('pre0'); })
       .pre(() => { order.push('enabled'); })
       .when(() => true)
@@ -174,7 +174,7 @@ describe('Testing Pipeline', () => {
 
   it('Enables pre before unless', (done) => {
     const order = [];
-    new Pipeline(null, logger)
+    new Pipeline({ logger })
       .pre(() => { order.push('pre0'); })
       .pre(() => { order.push('enabled'); })
       .unless(() => false)
@@ -191,7 +191,7 @@ describe('Testing Pipeline', () => {
   });
 
   it('Executes promises', (done) => {
-    const retval = new Pipeline(null, logger)
+    const retval = new Pipeline({ logger })
       .post(() => Promise.resolve({ foo: 'bar' }))
       .post((v) => {
         assert.equal(v.foo, 'bar');

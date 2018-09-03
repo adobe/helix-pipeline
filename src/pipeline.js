@@ -19,6 +19,7 @@ const nopLogger = {
   verbose: () => {},
   debug: () => {},
   silly: () => {},
+  log: () => {},
 };
 
 /**
@@ -44,10 +45,11 @@ class Pipeline {
    * @param {Object} action Action properties that are available to all pipeline functions.
    * @param {Winston.Logger} logger Winston logger to use
    */
-  constructor(action = {}, logger = nopLogger) {
-    logger.debug('Creating pipeline');
+  constructor(action = {}) {
+    this._action = action;
+    this._action.logger = action.logger || nopLogger;
 
-    this._action = _.assign(action, { logger });
+    this._action.logger.debug('Creating pipeline');
 
     // function chain that was defined last. used for `when` and `unless`
     this._last = null;

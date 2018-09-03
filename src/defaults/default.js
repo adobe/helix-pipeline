@@ -22,8 +22,8 @@ const { Pipeline } = require('../../index');
  * @param {Object} action the Openwhish action
  * @returns {Function} a function to execute.
  */
-function pipe(next, payload, action, logger) {
-  const mypipeline = new Pipeline(action, logger);
+function pipe(next, payload, action) {
+  const mypipeline = new Pipeline(action);
   mypipeline.once(next);
   return mypipeline.run(payload);
 }
@@ -44,7 +44,7 @@ const pre = cont => cont;
  * @returns {Object} The original req object that is equivalent to an Express request object,
  * including a headers, method, and params field
  */
-function adaptOWRequest(payload, { request: { params: { req = '{}' } } }, logger) {
+function adaptOWRequest(payload, { logger, request: { params: { req = '{}' } } }) {
   try {
     return {
       request: JSON.parse(req),

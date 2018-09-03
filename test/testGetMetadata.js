@@ -34,7 +34,7 @@ describe('Test getMetadata', () => {
             type: '',
           },
         },
-      }, null, logger),
+      }, { logger }),
       {
         resource: { meta: {} },
       },
