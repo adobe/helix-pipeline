@@ -29,4 +29,25 @@ describe('Testing Default Pipeline', () => {
     assert.ok(adaptOWResponse, 'no response wrapper found');
     assert.ok(log, 'no logger found');
   });
+
+  it('adaptOWRequest needs to parse req parameter', () => {
+    const testObject = {
+      url: 'url',
+      headers: {
+        h1: '1',
+        h2: '2',
+      },
+      params: {
+        p1: '1',
+        p2: true,
+        p3: ['a', 'b', 'c'],
+        p4: {
+          p41: '1',
+        },
+      },
+    };
+    const out = adaptOWRequest({}, { request: { params: { req: JSON.stringify(testObject) } } });
+    assert.ok(out.request, 'missing request object');
+    assert.deepEqual(testObject, out.request, 'request object does not match incoming req');
+  });
 });

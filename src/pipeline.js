@@ -25,7 +25,7 @@ const nopLogger = {
 /**
  * Pipeline function
  *
- * @typedef {function(context, _action, logger)} pipelineFunction
+ * @typedef {function(context, _action)} pipelineFunction
  * @callback pipelineFunction
  * @param {Object} context Pipeline execution context that is passed along
  * @param {Object} action Pipeline action define during construction
