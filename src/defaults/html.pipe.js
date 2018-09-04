@@ -20,13 +20,12 @@ const responsive = require('../html/responsify-images.js');
 const emit = require('../html/emit-html.js');
 const type = require('../html/set-content-type.js');
 
+/* eslint no-param-reassign: off */
+
 const htmlpipe = (cont, payload, action) => {
-  const a = action;
-  if (!a.logger) {
-    a.logger = log;
-  }
-  a.logger.log('debug', 'Constructing HTML Pipeline');
-  const pipe = new Pipeline(a);
+  action.logger = action.logger || log;
+  action.logger.log('debug', 'Constructing HTML Pipeline');
+  const pipe = new Pipeline(action);
   pipe
     .pre(adaptOWRequest)
     .pre(fetch)
@@ -39,7 +38,7 @@ const htmlpipe = (cont, payload, action) => {
     .post(type)
     .post(adaptOWResponse);
 
-  a.logger.log('debug', 'Running HTML pipeline');
+  action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);
 };
 
