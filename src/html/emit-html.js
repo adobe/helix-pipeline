@@ -11,7 +11,7 @@
  */
 const tohtml = require('hast-util-to-html');
 
-function emit({ resource: { htast } }, constants, logger) {
+function emit({ resource: { htast } }, { logger }) {
   logger.debug(`Emitting HTML from ${typeof htast}`);
   const children = htast.children.map(tohtml);
   return { resource: { html: children.join(''), children } };

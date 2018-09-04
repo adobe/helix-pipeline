@@ -21,9 +21,12 @@ const emit = require('../html/emit-html.js');
 const type = require('../html/set-content-type.js');
 const debug = require('../html/output-debug.js');
 
-const htmlpipe = (cont, params, secrets, logger = log) => {
-  logger.log('debug', 'Constructing HTML Pipeline');
-  const pipe = new Pipeline(secrets, logger);
+/* eslint no-param-reassign: off */
+
+const htmlpipe = (cont, payload, action) => {
+  action.logger = action.logger || log;
+  action.logger.log('debug', 'Constructing HTML Pipeline');
+  const pipe = new Pipeline(action);
   pipe
     .pre(adaptOWRequest)
     .pre(fetch)
@@ -37,8 +40,8 @@ const htmlpipe = (cont, params, secrets, logger = log) => {
     .post(debug)
     .post(adaptOWResponse);
 
-  logger.log('debug', 'Running HTML pipeline');
-  return pipe.run(params);
+  action.logger.log('debug', 'Running HTML pipeline');
+  return pipe.run(payload);
 };
 
 module.exports.pipe = htmlpipe;

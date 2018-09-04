@@ -91,9 +91,12 @@ describe('Testing HTML Pipeline', () => {
         // and return a different status code
         return { response: { status: 201, body: resource.html } };
       },
-      params,
-      secrets,
-      logger,
+      {},
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
     );
 
     result.then((res) => {

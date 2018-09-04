@@ -33,9 +33,12 @@ function uri(root, owner, repo, ref, path) {
 }
 
 function fetch(
-  { request, error },
-  { REPO_RAW_ROOT: rootPath = GH_RAW } = {},
-  logger,
+  { error },
+  {
+    secrets = {},
+    request,
+    logger,
+  } = {},
 ) {
   if (error) {
     // don't do anything if there is an error
@@ -63,6 +66,8 @@ function fetch(
   if (!path) {
     return bail(logger, 'Unknown path, cannot fetch resource');
   }
+
+  const { REPO_RAW_ROOT: rootPath = GH_RAW } = secrets;
 
   // everything looks good, make the HTTP request
   const options = {
