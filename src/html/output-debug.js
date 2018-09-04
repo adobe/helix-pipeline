@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function debug(payload, constants, logger) {
+function debug(payload, { logger }) {
   // TODO add debug query parameter check once available!
   if (payload.response && payload.response.body) {
     logger.debug('Adding debug script');
@@ -21,7 +21,7 @@ function debug(payload, constants, logger) {
     delete p.response.body;
     const debugScript = `<script>console.group('payload');console.log(${JSON.stringify(p)});console.groupEnd();</script>`;
     // inject debug script before the closing body tag
-    p.response.body = body.replace(new RegExp('</body>', 'i'), `${debugScript}</body>`);
+    p.response.body = body.replace(/<\/body>/i, `${debugScript}</body>`);
     return p;
   }
   return payload;
