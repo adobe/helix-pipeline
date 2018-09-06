@@ -44,7 +44,7 @@ const pre = cont => cont;
  * @returns {Object} The original req object that is equivalent to an Express request object,
  * including a headers, method, and params field
  */
-function adaptOWRequest(payload, { logger, request: { params: { req = '{}' } } }) {
+function adaptOWRequest(payload, { logger, request: { params: { req = '{}' } = {} } = {} }) {
   try {
     return {
       request: JSON.parse(req),

@@ -68,6 +68,10 @@ describe('Testing Default Pipeline', () => {
   it('adaptOWRequest acts reasonably on wrong req parameter', () => {
     const out = adaptOWRequest({}, { request: { params: { req: 'this is not json' } } });
     assert.ok(out.request, 'missing request object');
-    // assert.deepEqual(testObject, out.request, 'request object does not match incoming req');
+  });
+
+  it('adaptOWRequest acts reasonably with no request object', () => {
+    const out = adaptOWRequest({}, {});
+    assert.ok(out.request, 'missing request object');
   });
 });
