@@ -1,2 +1,3 @@
 node_modules/
 pipeline.log
+.nyc_output

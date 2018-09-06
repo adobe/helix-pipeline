@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const winston = require('winston');
-const { Pipeline } = require('../../index');
+const Pipeline = require('../pipeline.js');
 
 /**
  * Constructs a pipeline function that is capable of
@@ -50,7 +50,8 @@ function adaptOWRequest(payload, { logger, request: { params: { req = '{}' } } }
       request: JSON.parse(req),
     };
   } catch (e) {
-    logger.error(`Cannot parse incoming request parameter ${e.stack}`);
+    const out = logger || console;
+    out.error(`Cannot parse incoming request parameter: ${e.stack}`);
     return {
       request: {},
     };
