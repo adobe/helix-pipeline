@@ -1,11 +1,11 @@
 {
   "name": "@adobe/hypermedia-pipeline",
-  "version": "0.3.4-pre.0",
+  "version": "0.4.0-pre.0",
   "description": "",
   "repository": "https://github.com/adobe/hypermedia-pipeline",
   "main": "index.js",
   "scripts": {
-    "test": "mocha",
+    "test": "nyc mocha",
     "lint": "npx eslint .",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
@@ -25,7 +25,8 @@
     "eslint-plugin-react": "^7.11.0",
     "istanbul": "^1.0.0-alpha.2",
     "mocha": "^5.2.0",
-    "mocha-junit-reporter": "^1.17.0"
+    "mocha-junit-reporter": "^1.17.0",
+    "nyc": "^13.0.1"
   },
   "dependencies": {
     "bluebird": "^3.5.1",

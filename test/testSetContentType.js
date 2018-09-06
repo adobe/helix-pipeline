@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
-const getmetadata = require('../src/html/get-metadata');
+const setcontenttype = require('../src/html/set-content-type.js');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -23,21 +23,29 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-describe('Test getMetadata', () => {
-  it('getmetadata does not fail with "empty" mdast', () => {
+describe('Test set-content-type', () => {
+  it('sets a missing content type', () => {
     assert.deepEqual(
-      getmetadata({
-        resource: {
-          mdast: {
-            children: [],
-            position: {},
-            type: '',
+      setcontenttype({}, { logger }),
+      {
+        response: {
+          headers: {
+            'Content-Type': 'text/html',
+          },
+        },
+      },
+    );
+  });
+  it('sets keeps content type', () => {
+    assert.deepEqual(
+      setcontenttype({
+        response: {
+          headers: {
+            'Content-Type': 'text/plain',
           },
         },
       }, { logger }),
-      {
-        resource: { meta: {} },
-      },
+      {},
     );
   });
 });

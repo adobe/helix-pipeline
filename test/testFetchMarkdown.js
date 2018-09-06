@@ -123,59 +123,58 @@ describe('Test URI parsing and construction', () => {
 describe('Test invalid input', () => {
   it('Test for missing owner', () => {
     assert.ok(fetch(
+      {},
       {
         request: { params: { repo: 'xdm', ref: 'master', path: 'README.md' } },
+        logger,
       },
-      {},
-      logger,
     ).error);
   });
 
   it('Test for missing repo', () => {
     assert.ok(fetch(
-      {
-        request: {
-          params: { ref: 'master', path: 'README.md', owner: 'adobe' },
-        },
-      },
       {},
-      logger,
+      {
+        request: { params: { ref: 'master', path: 'README.md', owner: 'adobe' } },
+        logger,
+      },
     ).error);
   });
 
   it('Test for missing ref', () => {
     assert.ok(fetch(
-      {
-        request: {
-          params: { repo: 'xdm', path: 'README.md', owner: 'adobe' },
-        },
-      },
       {},
-      logger,
+      {
+        request: { params: { repo: 'xdm', path: 'README.md', owner: 'adobe' } },
+        logger,
+      },
     ).error);
   });
 
   it('Test for missing path', () => {
     assert.ok(fetch(
-      { request: { params: { repo: 'xdm', ref: 'master', owner: 'adobe' } } },
       {},
-      logger,
+      {
+        request: { params: { repo: 'xdm', ref: 'master', owner: 'adobe' } },
+        logger,
+      },
     ).error);
   });
 
   it('Test for missing params', () => {
     assert.ok(fetch(
-      { request: {} },
       {},
-      logger,
+      {
+        request: {},
+        logger,
+      },
     ).error);
   });
 
   it('Test for missing request', () => {
     assert.ok(fetch(
       {},
-      {},
-      logger,
+      { logger },
     ).error);
   });
 
@@ -184,8 +183,7 @@ describe('Test invalid input', () => {
 
     assert.deepEqual(fetch(
       { error: err },
-      {},
-      logger,
+      { logger },
     ), {});
   });
 });
@@ -193,15 +191,15 @@ describe('Test invalid input', () => {
 describe('Test non-existing resource', () => {
   it('Getting XDM README (from wrong URL)', () => {
     assert.ok(fetch(
+      {},
       {
         request: {
           params: {
             repo: 'xdm', ref: 'master', path: 'README.md', owner: 'nobody',
           },
         },
+        logger,
       },
-      {},
-      logger,
     ).error);
   });
 });
@@ -209,15 +207,15 @@ describe('Test non-existing resource', () => {
 describe('Test requests', () => {
   it('Getting XDM README', (done) => {
     const result = fetch(
+      {},
       {
         request: {
           params: {
             repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
           },
         },
+        logger,
       },
-      {},
-      logger,
     );
     result.then((res) => {
       assert.ok(res.resource.body);

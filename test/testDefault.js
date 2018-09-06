@@ -29,4 +29,45 @@ describe('Testing Default Pipeline', () => {
     assert.ok(adaptOWResponse, 'no response wrapper found');
     assert.ok(log, 'no logger found');
   });
+
+  it('creates a runs the default pipeline', async () => {
+    const out = await pipe((payload, action) => ({
+      body: `test. payload: ${payload.title} action: ${action.title}`,
+    }), {
+      title: 'my payload',
+    }, {
+      title: 'my action',
+    });
+    assert.deepStrictEqual(out, {
+      body: 'test. payload: my payload action: my action',
+      title: 'my payload',
+    });
+  });
+
+  it('adaptOWRequest needs to parse req parameter', () => {
+    const testObject = {
+      url: 'url',
+      headers: {
+        h1: '1',
+        h2: '2',
+      },
+      params: {
+        p1: '1',
+        p2: true,
+        p3: ['a', 'b', 'c'],
+        p4: {
+          p41: '1',
+        },
+      },
+    };
+    const out = adaptOWRequest({}, { request: { params: { req: JSON.stringify(testObject) } } });
+    assert.ok(out.request, 'missing request object');
+    assert.deepEqual(testObject, out.request, 'request object does not match incoming req');
+  });
+
+  it('adaptOWRequest acts reasonably on wrong req parameter', () => {
+    const out = adaptOWRequest({}, { request: { params: { req: 'this is not json' } } });
+    assert.ok(out.request, 'missing request object');
+    // assert.deepEqual(testObject, out.request, 'request object does not match incoming req');
+  });
 });
