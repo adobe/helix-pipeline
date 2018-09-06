@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const winston = require('winston');
-const { Pipeline } = require('../../index');
+const Pipeline = require('../pipeline.js');
 
 /**
  * Constructs a pipeline function that is capable of
@@ -44,13 +44,14 @@ const pre = cont => cont;
  * @returns {Object} The original req object that is equivalent to an Express request object,
  * including a headers, method, and params field
  */
-function adaptOWRequest(payload, { logger, request: { params: { req = '{}' } } }) {
+function adaptOWRequest(payload, { logger, request: { params: { req = '{}' } = {} } = {} }) {
   try {
     return {
       request: JSON.parse(req),
     };
   } catch (e) {
-    logger.error(`Cannot parse incoming request parameter ${e.stack}`);
+    const out = logger || console;
+    out.error(`Cannot parse incoming request parameter: ${e.stack}`);
     return {
       request: {},
     };

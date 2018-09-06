@@ -38,7 +38,7 @@ function fetch(
     secrets = {},
     request,
     logger,
-  } = {},
+  },
 ) {
   if (error) {
     // don't do anything if there is an error
