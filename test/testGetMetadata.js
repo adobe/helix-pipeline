@@ -27,7 +27,7 @@ describe('Test getMetadata', () => {
   it('getmetadata does not fail with "empty" mdast', () => {
     assert.deepEqual(
       getmetadata({
-        resource: {
+        content: {
           mdast: {
             children: [],
             position: {},
@@ -36,7 +36,7 @@ describe('Test getMetadata', () => {
         },
       }, { logger }),
       {
-        resource: { meta: {} },
+        content: { meta: {} },
       },
     );
   });

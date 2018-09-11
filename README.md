@@ -61,7 +61,7 @@ In a typical pipeline, you will add additional processing steps as `.pre(require
 
 ### The Main Function
 
-The main function is typically a pure function that converts the `request`, `context`, and `resource` properties of the payload into a `response` object.
+The main function is typically a pure function that converts the `request`, `context`, and `content` properties of the payload into a `response` object.
 
 In most scenarios, the main function is compiled from a template in a templating language like HTL, JST, or JSX.
 
@@ -79,7 +79,7 @@ Examples of possible template names include:
 
 Sometimes it is neccessary to pre-process the payload in a template-specific fashion. This wrapper function (often called "Pre-JS" for brevity sake) allows the full transformation of the pipeline's payload.
 
-Compared to the pipeline-specific pre-processing functions which handle the request, resource, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:
+Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:
 
 1. presentation (in the main function, often expressed in declarative templates)
 2. business logic (in the wrapper function, often expressed in imperative code)
@@ -93,11 +93,11 @@ A simple implementation of a wrapper function would look like this:
 // - `cont` (the continuation function, i.e. the main template function)
 // - `payload` (the payload of the pipeline)
 module.exports.pre = (cont, payload) => {
-    const {request, resource, context, response} = payload;
+    const {request, content, context, response} = payload;
     
-    // modifying the payload resource before invoking the main function
-    resource.hello = 'World';
-    const modifiedpayload = {request, resource, context, response};
+    // modifying the payload content before invoking the main function
+    content.hello = 'World';
+    const modifiedpayload = {request, content, context, response};
 
     // invoking the main function with the new payload. Capturing the response
     // payload for further modification
@@ -117,8 +117,8 @@ module.exports.pre = (cont, payload) => {
 Pre-Processing functions are meant to:
 
 - parse and process request parameters
-- fetch and parse the requested resource
-- transform the requested resource
+- fetch and parse the requested content
+- transform the requested content
 
 ### Post-Processing Functions
 
@@ -131,7 +131,7 @@ Post-Processing functions are meant to:
 Following main properties exist:
 
 - `request`
-- `resource`
+- `content`
 - `response`
 - `context`
 - `error`
@@ -141,16 +141,17 @@ Following main properties exist:
 - `params`: a map of request parameters
 - `headers`: a map of HTTP headers
 
-### The `resource` object
+### The `content` object
 
-- `body`: the unparsed resource body as a `string`
+- `body`: the unparsed content body as a `string`
 - `mdast`: the parsed [Markdown AST](https://github.com/syntax-tree/mdast)
 - `meta`: a map metadata properties, including
   - `title`: title of the document
   - `intro`: a plain-text introduction or description
   - `type`: the content type of the document
-- `html`: a string of the resource rendered as HTML
-- `children`: an array of top-level elements of the HTML-rendered resource
+- `htast`: the HTML AST
+- `html`: a string of the content rendered as HTML
+- `children`: an array of top-level elements of the HTML-rendered content
 
 ### The `response` object
 
@@ -160,7 +161,7 @@ Following main properties exist:
 
 ### The `context` object
 
-TBD: used for stuff that is neither resource, request, or response
+TBD: used for stuff that is neither content, request, or response
 
 ### The `error` object
 
