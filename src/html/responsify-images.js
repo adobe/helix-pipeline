@@ -32,7 +32,7 @@ const RESOLUTION_SWITCHING = [
 /* eslint no-param-reassign: "off" */
 
 function transformer(
-  { resource: { htast } },
+  { content: { htast } },
   {
     RESOLUTIONS = RESOLUTION_SWITCHING,
     logger,
@@ -70,7 +70,7 @@ function transformer(
   // the visit function is modifying its argument in place.
   visit(htast);
 
-  return { resource: { htast } };
+  return { content: { htast } };
 }
 
 module.exports = transformer;

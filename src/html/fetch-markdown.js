@@ -55,16 +55,16 @@ function fetch(
 
   // bail if a required parameter cannot be found
   if (!owner) {
-    return bail(logger, 'Unknown owner, cannot fetch resource');
+    return bail(logger, 'Unknown owner, cannot fetch content');
   }
   if (!repo) {
-    return bail(logger, 'Unknown repo, cannot fetch resource');
+    return bail(logger, 'Unknown repo, cannot fetch content');
   }
   if (!ref) {
-    return bail(logger, 'Unknown ref, cannot fetch resource');
+    return bail(logger, 'Unknown ref, cannot fetch content');
   }
   if (!path) {
-    return bail(logger, 'Unknown path, cannot fetch resource');
+    return bail(logger, 'Unknown path, cannot fetch content');
   }
 
   const { REPO_RAW_ROOT: rootPath = GH_RAW } = secrets;
@@ -76,7 +76,7 @@ function fetch(
   };
   logger.debug(`fetching Markdown from ${options.uri}`);
   return client(options)
-    .then(resp => ({ resource: { body: resp } }))
+    .then(resp => ({ content: { body: resp } }))
     .catch(err => bail(logger, `Could not fetch Markdown from ${options.uri}`, err));
 }
 module.exports = fetch;

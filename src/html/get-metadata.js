@@ -13,29 +13,29 @@ const select = require('unist-util-select');
 const plain = require('mdast-util-to-string');
 const yaml = require('js-yaml');
 
-function getmetadata({ resource: { mdast } }, { logger }) {
+function getmetadata({ content: { mdast } }, { logger }) {
   logger.debug(`Parsing Markdown Metadata from ${typeof mdast}`);
-  const retresource = {};
+  const retcontent = {};
 
   const yamls = select(mdast, 'yaml'); // select all YAML nodes
   const mapped = yamls.map(({ value }) => yaml.safeLoad(value));
-  retresource.meta = Object.assign({}, ...mapped);
+  retcontent.meta = Object.assign({}, ...mapped);
 
   const headers = select(mdast, 'heading');
   if (headers[0]) {
-    retresource.title = plain(headers[0]);
-    retresource.intro = plain(headers[0]);
+    retcontent.title = plain(headers[0]);
+    retcontent.intro = plain(headers[0]);
   }
 
   const paragraphs = select(mdast, 'paragraph');
   if (paragraphs[0]) {
     if (!headers[0]) {
-      retresource.title = plain(paragraphs[0]);
+      retcontent.title = plain(paragraphs[0]);
     }
-    retresource.intro = plain(paragraphs[0]);
+    retcontent.intro = plain(paragraphs[0]);
   }
 
-  return { resource: retresource };
+  return { content: retcontent };
 }
 
 module.exports = getmetadata;

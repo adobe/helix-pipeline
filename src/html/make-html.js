@@ -11,11 +11,11 @@
  */
 const tohtast = require('mdast-util-to-hast');
 
-function html({ resource: { mdast } }, { logger }) {
+function html({ content: { mdast } }, { logger }) {
   logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
-  const resource = {};
-  resource.htast = tohtast(mdast);
-  return { resource };
+  const content = {};
+  content.htast = tohtast(mdast);
+  return { content };
 }
 
 module.exports = html;
