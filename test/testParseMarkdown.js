@@ -10,11 +10,9 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
 const winston = require('winston');
-const fs = require('fs-extra');
-const path = require('path');
 const parse = require('../src/html/parse-markdown');
+const { assertMatch } = require('./markdown-utils');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -27,19 +25,6 @@ const logger = winston.createLogger({
 
 function callback(body) {
   return parse({ content: { body } }, { logger });
-}
-
-function assertMatch(name, cb) {
-  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', `${name}.md`)).toString();
-  const mdast = fs.readJsonSync(path.resolve(__dirname, 'fixtures', `${name}.json`));
-  const out = cb(mddoc);
-
-  try {
-    assert.deepEqual(out, mdast);
-  } catch (e) {
-    fs.writeJsonSync(`${name}.json`, out);
-    assert.deepEqual(out, mdast);
-  }
 }
 
 describe('Test Markdown Parsing', () => {
