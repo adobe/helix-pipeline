@@ -24,7 +24,7 @@ const logger = winston.createLogger({
 });
 
 function callback(body) {
-  return parse({ content: { body } }, { logger });
+  return parse({ content: { body } }, { logger }).content.mdast;
 }
 
 describe('Test Markdown Parsing', () => {
