@@ -19,6 +19,7 @@ const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
 const emit = require('../html/emit-html.js');
 const type = require('../html/set-content-type.js');
+const smartypants = require('../html/smartypants');
 
 /* eslint no-param-reassign: off */
 
@@ -31,6 +32,7 @@ const htmlpipe = (cont, payload, action) => {
     .pre(fetch)
     .pre(parse)
     .pre(meta)
+    .pre(smartypants)
     .pre(html)
     .pre(responsive)
     .pre(emit)
