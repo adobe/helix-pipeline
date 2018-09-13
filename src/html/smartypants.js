@@ -9,20 +9,21 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* eslint-env mocha */
-const assert = require('assert');
-const fs = require('fs-extra');
-const path = require('path');
+const retext = require('retext');
+const map = require('unist-util-map');
+const smartypants = require('retext-smartypants');
 
-module.exports.assertMatch = function assertMatch(name, cb) {
-  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', `${name}.md`)).toString();
-  const mdast = fs.readJsonSync(path.resolve(__dirname, 'fixtures', `${name}.json`));
-  const out = cb(mddoc);
+function reformat({ content: { mdast } }) {
+  const smart = retext().use(smartypants);
 
-  try {
-    return assert.deepEqual(out, mdast);
-  } catch (e) {
-    fs.writeJsonSync(`${name}.json`, out, { spaces: 2 });
-    return assert.deepEqual(out, mdast);
-  }
-};
+  map(mdast, (node) => {
+    if (node.type === 'text') {
+      // eslint-disable-next-line no-param-reassign
+      node.value = smart.processSync(node.value).contents;
+    }
+  });
+
+  return { content: { mdast } };
+}
+
+module.exports = reformat;
