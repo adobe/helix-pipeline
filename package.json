@@ -36,7 +36,7 @@
     "lodash": "^4.17.10",
     "mdast-util-to-hast": "^3.0.1",
     "mdast-util-to-string": "^1.0.4",
-    "remark-frontmatter": "^1.2.0",
+    "remark-frontmatter": "trieloff/remark-frontmatter",
     "remark-parse": "^5.0.0",
     "remark-rehype": "^3.0.0",
     "request": "^2.87.0",

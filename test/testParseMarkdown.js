@@ -35,4 +35,8 @@ describe('Test Markdown Parsing', () => {
   it('Parses example markdown', () => {
     assertMatch('example', callback);
   });
+
+  it('Parses frontmatter markdown', () => {
+    assertMatch('frontmatter', callback);
+  });
 });
