@@ -36,6 +36,39 @@ function image(section) {
   return img ? Object.assign({ image: img.url }, section) : section;
 }
 
+/**
+ * Sets the `types` attribute of the section, using following patterns:
+ * 1. has-<type> for every type of content found in the section
+ * 2. is-<type>-only for sections that have only content of type
+ * 3. is-<type1>-<type2>-<type3> ranks the top three most common types of content
+ * @param {*} section
+ */
+function sectiontype(section) {
+  const children = section.children || [];
+  const typecounter = children.reduce((counter, { type }) => {
+    if (type === 'yaml') {
+      return counter;
+    }
+    const mycounter = {};
+    const mycount = counter[type] || 0;
+    mycounter[type] = mycount + 1;
+    return Object.assign(counter, mycounter);
+  }, {});
+
+  const types = Object.keys(typecounter).map(type => `has-${type}`);
+  if (Object.keys(typecounter).length === 1) {
+    types.push(`is-${Object.keys(typecounter)[0]}-only`);
+  } else {
+    types.push(...Object.entries(typecounter) // get pairs of type, count
+      .sort((left, right) => left[1] < right[1]) // sort descending by count
+      .slice(0, 3) // take the top three
+      .map(([name]) => name) // keep only the type
+      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
+  }
+
+  return Object.assign({ types }, section);
+}
+
 function fallback(section) {
   if (section.intro && !section.title) {
     return Object.assign({ title: section.intro }, section);
@@ -45,7 +78,7 @@ function fallback(section) {
   return section;
 }
 
-function getmetadata({ content: { sections = []} }, { logger }) {
+function getmetadata({ content: { sections = [] } }, { logger }) {
   logger.debug(`Parsing Markdown Metadata from ${sections.length} sections`);
 
   const retsections = sections
@@ -53,6 +86,7 @@ function getmetadata({ content: { sections = []} }, { logger }) {
     .map(title)
     .map(intro)
     .map(image)
+    .map(sectiontype)
     .map(fallback);
   const img = retsections.filter(section => section.image)[0];
   if (retsections[0]) {

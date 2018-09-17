@@ -53,4 +53,47 @@ describe('Test getMetadata', () => {
       },
     );
   });
+
+  it('getmetadata does not fail with missing sections', () => {
+    assert.deepEqual(
+      getmetadata({
+        content: {
+          mdast: {
+            children: [],
+            position: {},
+            type: '',
+          },
+        },
+      }, { logger }),
+      {
+        content: { meta: {} },
+      },
+    );
+  });
+
+  it('getmetadata does not fail with empty sections', () => {
+    assert.deepEqual(
+      getmetadata({
+        content: {
+          sections: [{}],
+          mdast: {
+            children: [],
+            position: {},
+            type: '',
+          },
+        },
+      }, { logger }),
+
+      {
+        content:
+          {
+            sections: [{ meta: {}, types: [] }],
+            meta: {},
+            title: undefined,
+            intro: undefined,
+            image: undefined,
+          },
+      },
+    );
+  });
 });

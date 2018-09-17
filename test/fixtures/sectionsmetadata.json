@@ -1,5 +1,11 @@
 [
   {
+    "types": [
+      "has-heading",
+      "has-paragraph",
+      "is-paragraph-heading",
+      "is-paragraph"
+    ],
     "image": "https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg",
     "intro": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines.",
     "title": "Hypermedia Pipeline",
@@ -523,6 +529,14 @@
     ]
   },
   {
+    "types": [
+      "has-heading",
+      "has-paragraph",
+      "has-list",
+      "is-paragraph-heading-list",
+      "is-paragraph-heading",
+      "is-paragraph"
+    ],
     "intro": "A pipeline consists of following main parts:",
     "title": "Anatomy of a Pipeline",
     "meta": {
@@ -973,6 +987,10 @@
   },
   {
     "title": "This section has a paragraph, but no title.",
+    "types": [
+      "has-paragraph",
+      "is-paragraph-only"
+    ],
     "intro": "This section has a paragraph, but no title.",
     "meta": {},
     "type": "section",
@@ -1051,6 +1069,10 @@
   },
   {
     "intro": "This section has a title, but no paragraph",
+    "types": [
+      "has-heading",
+      "is-heading-only"
+    ],
     "title": "This section has a title, but no paragraph",
     "meta": {},
     "type": "section",
@@ -1095,6 +1117,12 @@
   },
   {
     "title": "See below for the anatomy of a payload.",
+    "types": [
+      "has-paragraph",
+      "has-list",
+      "is-paragraph-list",
+      "is-paragraph"
+    ],
     "intro": "See below for the anatomy of a payload.",
     "meta": {},
     "type": "section",
@@ -1407,6 +1435,15 @@
     ]
   },
   {
+    "types": [
+      "has-heading",
+      "has-paragraph",
+      "has-list",
+      "has-code",
+      "is-paragraph-heading-list",
+      "is-paragraph-heading",
+      "is-paragraph"
+    ],
     "intro": "A pipeline builder can be created by creating a CommonJS module that exports a function pipe which accepts following arguments and returns a Pipeline function.",
     "title": "Building a Pipeline",
     "meta": {
@@ -2114,6 +2151,15 @@
     ]
   },
   {
+    "types": [
+      "has-heading",
+      "has-paragraph",
+      "has-list",
+      "has-code",
+      "is-paragraph-heading-list",
+      "is-paragraph-heading",
+      "is-paragraph"
+    ],
     "intro": "The main function is typically a pure function that converts the request, context, and content properties of the payload into a response object.",
     "title": "The Main Function",
     "meta": {},
