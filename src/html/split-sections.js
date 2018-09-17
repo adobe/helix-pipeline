@@ -10,13 +10,37 @@
  * governing permissions and limitations under the License.
  */
 
-const inspect = require('unist-util-inspect');
+const between = require('unist-util-find-all-between');
+const _ = require('lodash/fp');
 
-function split({ content: { mdast = {}}}, { logger } ) {
-  console.log(inspect(mdast));
-  const sections = [];
+function section(children) {
+  return {
+    type: 'section',
+    children,
+  };
+}
 
-  return { content: { sections }};
+function split({ content: { mdast = { children: [] } } }) {
+  // filter all children that are either yaml or break blocks
+  const dividers = mdast.children.filter(node => node.type === 'yaml' || node.type === 'thematicBreak')
+  // then get their index in the list of children
+    .map(node => mdast.children.indexOf(node));
+
+  // find pairwise permutations of spaces between blocks
+  // include the very start and end of the document
+  const starts = [0, ...dividers];
+  const ends = [...dividers, mdast.children.length];
+  const sections = _.zip(starts, ends)
+  // but filter out empty section
+    .filter(([start, end]) => start !== end)
+  // then return all nodes that are in between
+    .map(([start, end]) => {
+    // skip 'thematicBreak' nodes
+      const index = mdast.children[start].type === 'thematicBreak' ? start + 1 : start;
+      return section(between(mdast, index, end));
+    });
+
+  return { content: { sections } };
 }
 
 module.exports = split;
