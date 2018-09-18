@@ -12,15 +12,56 @@
 const unified = require('unified');
 const remark = require('remark-parse');
 const frontmatter = require('remark-frontmatter');
+const map = require('unist-util-map');
+const { safeLoad } = require('js-yaml');
+
+/* eslint-disable no-param-reassign */
+
+/**
+ * Injects the `newkids` into the `parent`'s list of children
+ * in place of `node`
+ * @param {Node} parent the parent node
+ * @param {Node} node the child to be replaced
+ * @param {Node[]} newkids the new child nodes
+ */
+function inject(parent, node, newkids) {
+  const index = parent.children.indexOf(node);
+  const before = parent.children.slice(0, index);
+  const after = parent.children.slice(index + 1);
+
+  parent.children = [...before, ...newkids, ...after];
+}
+
+const thbreak = {
+  type: 'thematicBreak',
+};
 
 function parse({ content: { body = '' } = {} }, { logger }) {
   logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
+
+  // disable setext headings (=== and ---)
+  remark.Parser.prototype.blockTokenizers.setextHeading = () => {};
+
   const preprocessor = unified()
-    .use(remark)
+    .use(remark, { setext: false })
     .use(frontmatter, { type: 'yaml', marker: '-', anywhere: true });
 
   // see https://github.com/syntax-tree/mdast for documentation
   const mdast = preprocessor.parse(body);
+
+  map(mdast, (node, index, parent) => {
+    if (node.type === 'yaml') {
+      try {
+        const val = safeLoad(node.value);
+        if (typeof val !== 'object') {
+          throw Error('not an object');
+        }
+      } catch (e) {
+        const inner = preprocessor.parse(node.value);
+        inject(parent, node, [thbreak, ...inner.children, thbreak]);
+      }
+    }
+  });
 
   return { content: { mdast } };
 }

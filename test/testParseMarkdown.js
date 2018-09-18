@@ -39,4 +39,12 @@ describe('Test Markdown Parsing', () => {
   it('Parses frontmatter markdown', () => {
     assertMatch('frontmatter', callback);
   });
+
+  it('Does not get confused by thematic breaks', () => {
+    assertMatch('confusing', callback);
+  });
+
+  it('Does not get confused by grayscale', () => {
+    assertMatch('grayscale', callback);
+  });
 });
