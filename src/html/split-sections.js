@@ -15,7 +15,7 @@ const _ = require('lodash/fp');
 
 function section(children) {
   return {
-    type: 'section',
+    type: 'root',
     children,
   };
 }

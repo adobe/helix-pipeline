@@ -1,6 +1,6 @@
 [
   {
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "yaml",
@@ -517,7 +517,7 @@
     ]
   },
   {
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "yaml",
@@ -1266,7 +1266,7 @@
     ]
   },
   {
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "yaml",
@@ -1968,7 +1968,7 @@
     ]
   },
   {
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "heading",

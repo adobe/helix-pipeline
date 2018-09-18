@@ -12,7 +12,7 @@
     "meta": {
       "title": "foo"
     },
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "yaml",
@@ -542,7 +542,7 @@
     "meta": {
       "class": "section"
     },
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "yaml",
@@ -993,7 +993,7 @@
     ],
     "intro": "This section has a paragraph, but no title.",
     "meta": {},
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "paragraph",
@@ -1075,7 +1075,7 @@
     ],
     "title": "This section has a title, but no paragraph",
     "meta": {},
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "heading",
@@ -1125,7 +1125,7 @@
     ],
     "intro": "See below for the anatomy of a payload.",
     "meta": {},
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "paragraph",
@@ -1449,7 +1449,7 @@
     "meta": {
       "class": "code"
     },
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "yaml",
@@ -2163,7 +2163,7 @@
     "intro": "The main function is typically a pure function that converts the request, context, and content properties of the payload into a response object.",
     "title": "The Main Function",
     "meta": {},
-    "type": "section",
+    "type": "root",
     "children": [
       {
         "type": "heading",
