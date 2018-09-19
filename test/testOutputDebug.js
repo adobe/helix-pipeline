@@ -65,5 +65,4 @@ describe('Test outputDebug', () => {
     const expected = computeExpectedOutput(payload);
     assert.deepEqual(debug(payload, { logger }), expected);
   });
-
 });
