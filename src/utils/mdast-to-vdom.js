@@ -26,23 +26,24 @@ class VDOMTransformer {
     this._matchers = [];
     this._root = mdast;
     // go over all handlers that have been defined
-    this._handlers = Object.keys(handlers)
+
+    this._handlers = {};
+    const that = this;
+    Object.keys(handlers)
       // use our own handle function
       .map((type) => {
-        const obj = {};
-        obj[type] = this.handle;
-        return obj;
-      })
-      .reduce(Object.assign);
+        this._handlers[type] = (cb, node) => VDOMTransformer.handle(cb, node, that);
+        return true;
+      });
   }
 
-  handle(node) {
+  static handle(cb, node, that) {
     // get the function that handles this node type
     // this will fall back to the default if none matches
-    const handlefn = this.matches(node);
+    const handlefn = that.matches(node);
 
     // process the node
-    const result = handlefn(node);
+    const result = handlefn(cb, node);
 
     if (typeof result === 'string') {
       // we need to parse the string into HTAST
@@ -54,9 +55,9 @@ class VDOMTransformer {
     return result;
   }
 
-  static default({ type }) {
+  static default(node) {
     // use the default handler from mdast-util-to-hast
-    return handlers[type];
+    return handlers[node.type];
   }
 
   match(matcher, processor) {
