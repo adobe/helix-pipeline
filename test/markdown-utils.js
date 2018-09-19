@@ -9,13 +9,20 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const tohtast = require('mdast-util-to-hast');
+/* eslint-env mocha */
+const assert = require('assert');
+const fs = require('fs-extra');
+const path = require('path');
 
-function html({ content: { mdast } }, { logger }) {
-  logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
-  const content = {};
-  content.htast = tohtast(mdast);
-  return { content };
-}
+module.exports.assertMatch = function assertMatch(name, cb) {
+  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', `${name}.md`)).toString();
+  const mdast = fs.readJsonSync(path.resolve(__dirname, 'fixtures', `${name}.json`));
+  const out = cb(mddoc);
 
-module.exports = html;
+  try {
+    return assert.deepEqual(out, mdast);
+  } catch (e) {
+    fs.writeJsonSync(`${name}.json`, out, { spaces: 2 });
+    return assert.deepEqual(out, mdast);
+  }
+};

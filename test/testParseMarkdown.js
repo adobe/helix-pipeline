@@ -10,9 +10,9 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
 const winston = require('winston');
-const getmetadata = require('../src/html/get-metadata');
+const parse = require('../src/html/parse-markdown');
+const { assertMatch } = require('./markdown-utils');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -23,21 +23,16 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-describe('Test getMetadata', () => {
-  it('getmetadata does not fail with "empty" mdast', () => {
-    assert.deepEqual(
-      getmetadata({
-        content: {
-          mdast: {
-            children: [],
-            position: {},
-            type: '',
-          },
-        },
-      }, { logger }),
-      {
-        content: { meta: {} },
-      },
-    );
+function callback(body) {
+  return parse({ content: { body } }, { logger }).content.mdast;
+}
+
+describe('Test Markdown Parsing', () => {
+  it('Parses simple markdown', () => {
+    assertMatch('simple', callback);
+  });
+
+  it('Parses example markdown', () => {
+    assertMatch('example', callback);
   });
 });

@@ -10,9 +10,10 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
 const winston = require('winston');
-const getmetadata = require('../src/html/get-metadata');
+const parse = require('../src/html/parse-markdown');
+const smartypants = require('../src/html/smartypants');
+const { assertMatch } = require('./markdown-utils');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -23,21 +24,13 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-describe('Test getMetadata', () => {
-  it('getmetadata does not fail with "empty" mdast', () => {
-    assert.deepEqual(
-      getmetadata({
-        content: {
-          mdast: {
-            children: [],
-            position: {},
-            type: '',
-          },
-        },
-      }, { logger }),
-      {
-        content: { meta: {} },
-      },
-    );
+function callback(body) {
+  const parsed = parse({ content: { body } }, { logger });
+  return smartypants(parsed, { logger }).content.mdast;
+}
+
+describe('Test Smartypants Processing', () => {
+  it('Parses markdown with formatting', () => {
+    assertMatch('smartypants', callback);
   });
 });

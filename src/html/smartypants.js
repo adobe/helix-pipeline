@@ -9,13 +9,21 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const tohtast = require('mdast-util-to-hast');
+const retext = require('retext');
+const map = require('unist-util-map');
+const smartypants = require('retext-smartypants');
 
-function html({ content: { mdast } }, { logger }) {
-  logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
-  const content = {};
-  content.htast = tohtast(mdast);
-  return { content };
+function reformat({ content: { mdast } }) {
+  const smart = retext().use(smartypants);
+
+  map(mdast, (node) => {
+    if (node.type === 'text') {
+      // eslint-disable-next-line no-param-reassign
+      node.value = smart.processSync(node.value).contents;
+    }
+  });
+
+  return { content: { mdast } };
 }
 
-module.exports = html;
+module.exports = reformat;

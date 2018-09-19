@@ -188,7 +188,7 @@ describe('Test invalid input', () => {
   });
 });
 
-describe('Test non-existing resource', () => {
+describe('Test non-existing content', () => {
   it('Getting XDM README (from wrong URL)', () => {
     assert.ok(fetch(
       {},
@@ -218,7 +218,7 @@ describe('Test requests', () => {
       },
     );
     result.then((res) => {
-      assert.ok(res.resource.body);
+      assert.ok(res.content.body);
       done();
     });
   });

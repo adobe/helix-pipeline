@@ -79,17 +79,17 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe makes HTTP requests', (done) => {
     const result = pipe(
-      ({ resource }) => {
+      ({ content }) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        assert.ok(resource.body);
-        assert.ok(resource.mdast);
-        assert.ok(resource.meta);
-        assert.equal('Medium', resource.meta.template);
-        assert.equal('Project Helix', resource.intro);
-        assert.equal('Bill, Welcome to the future', resource.title);
+        assert.ok(content.body);
+        assert.ok(content.mdast);
+        assert.ok(content.meta);
+        assert.equal('Medium', content.meta.template);
+        assert.equal('Project Helix', content.intro);
+        assert.equal('Bill, Welcome to the future', content.title);
         // and return a different status code
-        return { response: { status: 201, body: resource.html } };
+        return { response: { status: 201, body: content.html } };
       },
       {},
       {

@@ -44,6 +44,21 @@ describe('Testing Default Pipeline', () => {
     });
   });
 
+  it('adaptOWRequest needs to parse params parameter', () => {
+    const testObject = {
+      foo: 'foo',
+      bar: 'bar',
+    };
+    const out = adaptOWRequest({}, { request: { params: { params: 'foo=foo&bar=bar' } } });
+    assert.ok(out.request, 'missing request object');
+    assert.deepEqual(testObject, out.request.params, 'request object does not match incoming req');
+  });
+
+  it('adaptOWRequest acts reasonably on wrong params parameter', () => {
+    const out = adaptOWRequest({}, { request: { params: { params: 'this is not url encoded' } } });
+    assert.ok(out.request, 'missing request object');
+  });
+
   it('adaptOWRequest needs to parse req parameter', () => {
     const testObject = {
       url: 'url',
