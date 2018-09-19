@@ -14,6 +14,8 @@ const handlers = require('mdast-util-to-hast/lib/handlers');
 const tohast = require('mdast-util-to-hast');
 const unified = require('unified');
 const parse = require('rehype-parse');
+const tohyper = require('hast-to-hyperscript');
+const h = require('hyperscript');
 
 /**
  *
@@ -87,7 +89,8 @@ class VDOMTransformer {
   }
 
   process() {
-    return tohast(this._root, { handlers: this._handlers });
+    // turn MDAST to HTAST and then HTAST to VDOM via Hyperscript
+    return tohyper(h, tohast(this._root, { handlers: this._handlers }));
   }
 }
 
