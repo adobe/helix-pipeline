@@ -11,17 +11,20 @@
  */
 
 function compile(pattern) {
-  // console.log(pattern);
   const expression = new RegExp(pattern
     .replace(/(\w+)/g, '($1·)') // always match whole words
     .replace(/ /g, '') // remove spaces
     .toString());
-  // console.log(expression);
+  // console.log('=> ' + expression);
   return expression;
 }
 
 function match(list, pattern) {
-  return compile(pattern).test(list.join('·'));
+  const str = `${list.join('·')}·`;
+  // console.log('-> ' + str);
+  const matches = !!compile(pattern).test(str);
+  // console.log(matches);
+  return matches;
 }
 
 module.exports = {
