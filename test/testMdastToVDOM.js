@@ -31,4 +31,12 @@ describe('Test MDAST to VDOM Transformation', () => {
     const node = transformer.process();
     assert.equal(node.outerHTML, '<h1>All Headings are the same to me</h1>');
   });
+
+  it('Custom Text Matcher with Multiple Elements', () => {
+    const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
+    const transformer = new VDOM(mdast);
+    transformer.match('heading', () => '<a name="h1"></a><h1>All Headings are the same to me</h1>');
+    const node = transformer.process();
+    assert.equal(node.outerHTML, '<div><a name="h1"></a><h1>All Headings are the same to me</h1></div>');
+  });
 });
