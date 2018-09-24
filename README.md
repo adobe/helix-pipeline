@@ -149,9 +149,32 @@ Following main properties exist:
   - `title`: title of the document
   - `intro`: a plain-text introduction or description
   - `type`: the content type of the document
+  - `image`: the URL of the first image in the document
 - `htast`: the HTML AST
+- `sections[]`: The main sections of the document, as an enhanced MDAST
 - `html`: a string of the content rendered as HTML
 - `children`: an array of top-level elements of the HTML-rendered content
+
+### `content.sections` in Detail
+
+The default pipeline extracts sections from a Markdown document, using both "thematic breaks" like `***` or `---` and embedded YAML blocks as section markers. If no sections can be found in the document, the entire `content.mdast` will be identically to `content.sections[0]`.
+
+`content.sections` is an Array of `section` nodes, with `type` (String) and `children` (array of Node) properties. In addition, each section has a `types` attribute, which is an array of derived content types. Project Helix (and Hypermedia Pipeline) uses implied typing over declared content typing, which means it is not the task of the author to explicitly declare the content type of a section or document, but rather have the template interpret the contents of a section to understand the type of content it is dealing with.
+
+The `types` property is an array of string values that describes the type of the section based on the occurence of child nodes. This makes it easy to copy the value of `types` into the `class` attribute of an HTML element, so that CSS expressions matching types of sections can be written with ease. Following patterns of `type` values can be found:
+
+- `has-<type>`: for each type of content that occurs at least once in the section, e.g. has-heading
+- `is-<type>-only`: for sections that only have content of a single type, e.g. is-image-only
+- `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-paragraph-heading`.
+
+Each section has additional content-derived metadata properties, in particular:
+
+- `title`: the value of the first headline in the section
+- `intro`: the value of the first paragraph in the section
+- `image`: the URL of the first image in the section
+- `meta`: the parsed YAML metadata of the section (as an object)
+
+
 
 ### The `response` object
 
