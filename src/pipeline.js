@@ -153,7 +153,8 @@ class Pipeline {
   /**
    * Runs the pipline processor be executing the `pre`, `once`, and `post` functions in order.
    * @param {Context} context Pipeline context
-   * @returns {Promise<Context>} Promise that resolves to the final result of the accumulated context.
+   * @returns {Promise<Context>} Promise that resolves to the final result of the accumulated
+   * context.
    */
   run(context = {}) {
     /**
