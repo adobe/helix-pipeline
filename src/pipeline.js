@@ -23,13 +23,22 @@ const nopLogger = {
 };
 
 /**
+ * @typedef {Object} Context
+ * @param {Winston.Logger} logger Winston logger to use
+ */
+
+/**
+ * @typedef {Object} Action
+ */
+
+/**
  * Pipeline function
  *
  * @typedef {function(context, _action)} pipelineFunction
  * @callback pipelineFunction
- * @param {Object} context Pipeline execution context that is passed along
- * @param {Object} action Pipeline action define during construction
-  * @return {Promise} Promise which resolves to a parameters to be added to the context.
+ * @param {Context} context Pipeline execution context that is passed along
+ * @param {Action} action Pipeline action define during construction
+ * @return {Promise<Context>} Promise which resolves to a parameters to be added to the context.
 */
 
 /**
@@ -42,8 +51,7 @@ const nopLogger = {
 class Pipeline {
   /**
    * Creates a new pipeline.
-   * @param {Object} action Action properties that are available to all pipeline functions.
-   * @param {Winston.Logger} logger Winston logger to use
+   * @param {Action} action Action properties that are available to all pipeline functions.
    */
   constructor(action = {}) {
     this._action = action;
@@ -87,7 +95,9 @@ class Pipeline {
    * Adds a condition to the previously defined `pre` or `post` function. The previously defined
    * function will only be executed if the predicate evaluates to something truthy or returns a
    * Promise that resolves to something truthy.
-   * @param {function} predicate Predicate function.
+   * @param {function(context)} predicate Predicate function.
+   * @callback predicate
+   * @param {Context} context
    * @returns {Pipeline} this
    */
   when(predicate) {
@@ -119,7 +129,9 @@ class Pipeline {
    * Adds a condition to the previously defined `pre` or `post` function. The previously defined
    * function will only be executed if the predicate evaluates to something not-truthy or returns a
    * Promise that resolves to something not-truthy.
-   * @param {function} predicate Predicate function.
+   * @param {function(context)} predicate Predicate function.
+   * @callback predicate
+   * @param {Context} context
    * @returns {Pipeline} this
    */
   unless(predicate) {
@@ -140,8 +152,8 @@ class Pipeline {
 
   /**
    * Runs the pipline processor be executing the `pre`, `once`, and `post` functions in order.
-   * @param context Pipeline context
-   * @returns {Promise} Promise that resolves to the final result of the accumulated context.
+   * @param {Context} context Pipeline context
+   * @returns {Promise<Context>} Promise that resolves to the final result of the accumulated context.
    */
   run(context = {}) {
     /**
