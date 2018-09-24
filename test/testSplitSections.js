@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const winston = require('winston');
 const parse = require('../src/html/parse-markdown');
+const split = require('../src/html/split-sections');
 const { assertMatch } = require('./markdown-utils');
 
 const logger = winston.createLogger({
@@ -24,27 +25,12 @@ const logger = winston.createLogger({
 });
 
 function callback(body) {
-  return parse({ content: { body } }, { logger }).content.mdast;
+  const parsed = parse({ content: { body } }, { logger });
+  return split(parsed, { logger }).content.sections;
 }
 
-describe('Test Markdown Parsing', () => {
-  it('Parses simple markdown', () => {
-    assertMatch('simple', callback);
-  });
-
-  it('Parses example markdown', () => {
-    assertMatch('example', callback);
-  });
-
-  it('Parses frontmatter markdown', () => {
-    assertMatch('frontmatter', callback);
-  });
-
-  it('Does not get confused by thematic breaks', () => {
-    assertMatch('confusing', callback);
-  });
-
-  it('Does not get confused by grayscale', () => {
-    assertMatch('grayscale', callback);
+describe('Test Section Splitting', () => {
+  it('Parses markdown with sections', () => {
+    assertMatch('sections', callback);
   });
 });
