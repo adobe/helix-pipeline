@@ -151,9 +151,14 @@ Following main properties exist:
   - `type`: the content type of the document
   - `image`: the URL of the first image in the document
 - `htast`: the HTML AST
-- `sections[]`: The main sections of the document, as an enhanced MDAST
+- `document`: a DOM-compatible [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) representation of the (HTML) document (see below)
+- `sections[]`: The main sections of the document, as an enhanced MDAST (see below)
 - `html`: a string of the content rendered as HTML
 - `children`: an array of top-level elements of the HTML-rendered content
+
+### `content.document` in Detail
+
+
 
 ### `content.sections` in Detail
 
