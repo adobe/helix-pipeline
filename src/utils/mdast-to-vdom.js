@@ -39,6 +39,17 @@ class VDOMTransformer {
       });
   }
 
+  static toHTAST(htmlstr, cb, node) {
+    // we parse the string to HTAST
+    const htast = unified().use(parse, { fragment: true }).parse(htmlstr);
+    /* h(node, tagName, props, children) */
+    if (htast.children.length === 1) {
+      const child = htast.children[0];
+      return cb(node, child.tagName, child.properties, child.children);
+    }
+    return cb(node, 'div', {}, htast.children);
+  }
+
   static handle(cb, node, parent, that) {
     // get the function that handles this node type
     // this will fall back to the default if none matches
@@ -48,14 +59,9 @@ class VDOMTransformer {
     const result = handlefn(cb, node, parent);
 
     if (typeof result === 'string') {
-      // we parse the string to HTAST
-      const htast = unified().use(parse, { fragment: true }).parse(result);
-      /* h(node, tagName, props, children) */
-      if (htast.children.length === 1) {
-        const child = htast.children[0];
-        return cb(node, child.tagName, child.properties, child.children);
-      }
-      return cb(node, 'div', {}, htast.children);
+      return VDOMTransformer.toHTAST(result, cb, node);
+    } if (typeof result === 'object' && result.outerHTML) {
+      return VDOMTransformer.toHTAST(result.outerHTML, cb, node);
     }
     return result;
   }
