@@ -10,11 +10,14 @@
  * governing permissions and limitations under the License.
  */
 const tohtast = require('mdast-util-to-hast');
+const VDOMTransformer = require('../utils/mdast-to-vdom');
 
 function html({ content: { mdast } }, { logger }) {
   logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
   const content = {};
+  // do we still need this?
   content.htast = tohtast(mdast);
+  content.document = new VDOMTransformer(mdast).getDocument();
   return { content };
 }
 

@@ -18,6 +18,7 @@ const unified = require('unified');
 const parse = require('rehype-parse');
 const tohyper = require('hast-to-hyperscript');
 const h = require('hyperscript');
+const { JSDOM } = require('jsdom');
 
 /**
  *
@@ -58,9 +59,9 @@ class VDOMTransformer {
     // process the node
     const result = handlefn(cb, node, parent);
 
-    if (typeof result === 'string') {
+    if (result && typeof result === 'string') {
       return VDOMTransformer.toHTAST(result, cb, node);
-    } if (typeof result === 'object' && result.outerHTML) {
+    } if (result && typeof result === 'object' && result.outerHTML) {
       return VDOMTransformer.toHTAST(result.outerHTML, cb, node);
     }
     return result;
@@ -105,6 +106,12 @@ class VDOMTransformer {
   process() {
     // turn MDAST to HTAST and then HTAST to VDOM via Hyperscript
     return tohyper(h, tohast(this._root, { handlers: this._handlers }));
+  }
+
+  getDocument() {
+    const document = new JSDOM(this.process().outerHTML).window.document;
+
+    return document;
   }
 }
 

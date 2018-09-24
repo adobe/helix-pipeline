@@ -15,7 +15,7 @@ const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
 const h = require('hyperscript');
-const VDOM = require('../src/utils/mdast-to-vdom');
+const VDOM = require('../').utils.vdom;
 
 describe('Test MDAST to VDOM Transformation', () => {
   it('Simple MDAST Conversion', () => {

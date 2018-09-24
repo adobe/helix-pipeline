@@ -85,6 +85,10 @@ describe('Testing HTML Pipeline', () => {
         assert.ok(content.body);
         assert.ok(content.mdast);
         assert.ok(content.meta);
+        assert.ok(content.document);
+        assert.equal(typeof content.document.getElementsByTagName, 'function');
+        assert.equal(content.document.getElementsByTagName('h1').length, 1);
+        assert.equal(content.document.getElementsByTagName('h1')[0].innerHTML, 'Bill, Welcome to the future');
         assert.equal('Medium', content.meta.template);
         assert.equal('Project Helix', content.intro);
         assert.equal('Bill, Welcome to the future', content.title);

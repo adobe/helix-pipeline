@@ -218,5 +218,104 @@ The only known property in `error` is
 
 ## Utilities
 
-## Generate a Virtual DOM with `utils.vdom`
+### Generate a Virtual DOM with `utils.vdom`
 
+`VDOM` is a helper class that transforms [MDAST](https://github.com/syntax-tree/mdast) Markdown into DOM nodes using customizable matcher functions or expressions. 
+
+It can be used in scenarios where:
+
+- you need to represent only a `section` of the document in HTML
+- you have made changes to `content.mdast` and want them reflected in HTML
+- you want to customize the HTML output for certain Markdown elements
+
+#### Getting Started
+
+Load the `VDOM` helper through:
+
+```javascript
+const VDOM = require('@adobe/hypermedia-pipeline').utils.vdom;
+```
+
+#### Simple Transformations
+
+```javascript
+content.document = new VDOM(content.mdast).getDocument();
+```
+
+This replaces `content.document` with a re-rendered representation of the Markdown AST. It can be used when changes to `content.mdast` have been made.
+
+```javascript
+content.document = new VDOM(content.sections[0].getDocument());
+```
+
+This uses only the content of the first section to render the document.
+
+#### Matching Nodes
+
+Nodes in the Markdown AST can be matched in two ways: either using a [select](https://www.npmjs.com/package/unist-util-select)-statement or using a predicate function.
+
+```javascript
+const vdom = new VDOM(content.mdast);
+vdom.match('heading', () => '<h1>This text replaces your heading</h1>');
+content.document = vdom.getDocument();
+```
+
+Every node with the type `heading` will be rendered as `<h1>This text replaces your heading</h1>`;
+
+```javascript
+const vdom = new VDOM(content.mdast);
+vdom.match(function test(node) {
+  return node.type === 'heading';
+}, () => '<h1>This text replaces your heading</h1>');
+content.document = vdom.getDocument();
+```
+
+Instead of the select-statement, you can also provide a function that returns `true` or `false`. The two examples above will have the same behavior.
+
+#### Creating DOM Nodes
+
+The second argument to `match` is a node-generating function that should return one of the following three options:
+
+1. an [HAST](https://github.com/syntax-tree/hast) (Hypertext Abstract Syntax Tree) node
+2. a DOM [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)
+3. a `String` containing HTML tags.
+
+```javascript
+vdom.match('link', (_, node) => {
+  return {
+    type: 'element',
+    tagName: 'a',
+    properties: {
+      href: node.url,
+      rel: 'nofollow'
+    },
+    children: [
+      {
+        type: 'text',
+        value: node.children.map(({ value }) => value)
+      }
+    ]
+  }
+}
+```
+
+Above: injecting `rel="nofollow"` using HTAST.
+
+```javascript
+const h = require('hyperscript');
+
+vdom.match('link', (_, node) => h(
+    'a',
+    { href: node.url, rel: 'nofollow' },
+    node.children.map(({ value }) => value),
+  );
+```
+
+Above: doing the same using [Hyperscript](https://github.com/hyperhype/hyperscript) (which creates DOM elements) is notably shorter.
+
+```javascript
+vdom.match('link', (_, node) => 
+  `<a href="${node.url}" rel="nofollow">$(node.children.map(({ value }) => value)).join('')</a>`;
+```
+
+Above: Plain `String`s can be constructed using String Templates in ES6 for the same result.
