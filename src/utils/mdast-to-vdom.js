@@ -109,9 +109,7 @@ class VDOMTransformer {
   }
 
   getDocument() {
-    const document = new JSDOM(this.process().outerHTML).window.document;
-
-    return document;
+    return new JSDOM(this.process().outerHTML).window.document;
   }
 }
 
