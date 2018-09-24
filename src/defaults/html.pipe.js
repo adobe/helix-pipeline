@@ -21,6 +21,7 @@ const emit = require('../html/emit-html.js');
 const type = require('../html/set-content-type.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
+const debug = require('../html/output-debug.js');
 
 /* eslint no-param-reassign: off */
 
@@ -40,6 +41,7 @@ const htmlpipe = (cont, payload, action) => {
     .pre(emit)
     .once(cont)
     .post(type)
+    .post(debug)
     .post(adaptOWResponse);
 
   action.logger.log('debug', 'Running HTML pipeline');
