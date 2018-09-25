@@ -245,7 +245,7 @@ content.document = new VDOM(content.mdast).getDocument();
 This replaces `content.document` with a re-rendered representation of the Markdown AST. It can be used when changes to `content.mdast` have been made.
 
 ```javascript
-content.document = new VDOM(content.sections[0].getDocument());
+content.document = new VDOM(content.sections[0]).getDocument();
 ```
 
 This uses only the content of the first section to render the document.
