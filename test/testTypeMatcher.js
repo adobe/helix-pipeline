@@ -27,13 +27,13 @@ describe('Test Type Matcher Util', () => {
 
   it('TypeMatcher returns empty array if no matchers are registered', () => {
     assert.deepEqual(new TypeMatcher(sections[0])
-      .process(), []);
+      .process().types, []);
   });
 
   it('TypeMatcher matches simple expressions', () => {
     assert.deepEqual(new TypeMatcher(sections[0])
       .match('heading', 'has-heading')
-      .process(), ['has-heading']);
+      .process().types, ['has-heading']);
   });
 
   it('TypeMatcher matches multiple expressions', () => {
@@ -41,7 +41,7 @@ describe('Test Type Matcher Util', () => {
       .match('heading', 'has-heading')
       .match('paragraph', 'has-paragraph')
       .match('impossible', 'has-impossible')
-      .process(), ['has-heading', 'has-paragraph']);
+      .process().types, ['has-heading', 'has-paragraph']);
   });
 
   it('TypeMatcher can match with functions', () => {
@@ -49,6 +49,19 @@ describe('Test Type Matcher Util', () => {
       .match('heading', 'has-heading')
       .match('paragraph', 'has-paragraph')
       .match(types => types.length >= 3, 'long')
-      .process(), ['has-heading', 'has-paragraph', 'long']);
+      .process().types, ['has-heading', 'has-paragraph', 'long']);
+  });
+
+  it('TypeMatcher can match with functions', () => {
+    const matchedsections = new TypeMatcher(sections)
+    .match('heading', 'has-heading')
+    .match('paragraph', 'has-paragraph')
+    .match(types => types.length >= 3, 'long')
+    .process();
+    assert.equal(matchedsections.length, 4);
+    assert.ok(matchedsections[0].types);
+    assert.ok(matchedsections[1].types);
+    assert.deepEqual(matchedsections[2].types, ['has-heading', 'has-paragraph', 'long']);
+    assert.deepEqual(matchedsections[3].types, ['has-heading', 'has-paragraph', 'long']);
   });
 });

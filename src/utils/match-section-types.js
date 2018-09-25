@@ -19,17 +19,18 @@ const { match } = require('./pattern-compiler');
 class TypeMatcher {
   /**
    * Creates a new type matcher for an MDAST node or list of MDAST nodes
-   * @param {(Node|Node[])} section the parent node or list of child nodes to evaluate
+   * @param {(Node|Node[])} section the section node or list of section nodes to evaluate
    * the registered content expressions against.
    */
   constructor(section = []) {
-    const mysection = section || [];
-    const children = Array.isArray(mysection) ? mysection : mysection.children;
-    this._section = mysection.children ? mysection : null;
+    if (Array.isArray(section)) {
+      this._sections = section;
+    } else if (section && section.children) {
+      this._sections = [section];
+    } else {
+      this._sections = [];
+    }
     this._matchers = [];
-    // get the type for each node, skip everything that's not a node or
-    // doesn't have a type
-    this._types = children.map(node => node.type).filter(type => !!type);
   }
 
   /**
@@ -84,12 +85,29 @@ class TypeMatcher {
   }
 
   /**
-   * Processes the registered matchers and returns a list of all
-   * matcher names that match the sequence provided in the constructor
-   * @returns {string[]} the list of matching type names
+   * Processes the registered matchers and returns the sections provided
+   * in the constructor with the matched types pushed to the types property.
+   * @returns {(Node|Node[])} the processed sections
    */
   process() {
-    return this.matches(this._types);
+    const mapped = this._sections.map(section => {
+      // get the type for each node, skip everything that's not a node or
+      // doesn't have a type
+      const childtypes = section.children ? 
+        section.children.map(node => node.type).filter(type => !!type) :
+        [];
+      const matchedtypes = this.matches(childtypes);
+      const oldtypes = section.types && Array.isArray(section.types) ? section.types : [];
+
+      return {
+        types: [...matchedtypes, ...oldtypes],
+        ...section
+      }
+    });
+    if (mapped.length===1) {
+      return mapped[0];
+    }
+    return mapped;
   }
 }
 
