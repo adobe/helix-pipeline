@@ -11,31 +11,95 @@
  */
 const select = require('unist-util-select');
 const plain = require('mdast-util-to-string');
-const yaml = require('js-yaml');
+const { safeLoad } = require('js-yaml');
 
-function getmetadata({ content: { mdast } }, { logger }) {
-  logger.debug(`Parsing Markdown Metadata from ${typeof mdast}`);
-  const retcontent = {};
+function yaml(section) {
+  const yamls = select(section, 'yaml'); // select all YAML nodes
+  const mapped = yamls.map(({ value }) => safeLoad(value));
+  return Object.assign({ meta: Object.assign({}, ...mapped) }, section);
+}
 
-  const yamls = select(mdast, 'yaml'); // select all YAML nodes
-  const mapped = yamls.map(({ value }) => yaml.safeLoad(value));
-  retcontent.meta = Object.assign({}, ...mapped);
+function title(section) {
+  const header = select(section, 'heading')[0];
+  return header ? Object.assign({ title: plain(header) }, section) : section;
+}
 
-  const headers = select(mdast, 'heading');
-  if (headers[0]) {
-    retcontent.title = plain(headers[0]);
-    retcontent.intro = plain(headers[0]);
-  }
+function intro(section) {
+  const para = select(section, 'paragraph')[0];
+  return para ? Object.assign({ intro: plain(para) }, section) : section;
+}
 
-  const paragraphs = select(mdast, 'paragraph');
-  if (paragraphs[0]) {
-    if (!headers[0]) {
-      retcontent.title = plain(paragraphs[0]);
+function image(section) {
+  // selects the most prominent image of the section
+  // TODO: get a better measure of prominence than "first"
+  const img = select(section, 'image')[0];
+  return img ? Object.assign({ image: img.url }, section) : section;
+}
+
+/**
+ * Sets the `types` attribute of the section, using following patterns:
+ * 1. has-<type> for every type of content found in the section
+ * 2. is-<type>-only for sections that have only content of type
+ * 3. is-<type1>-<type2>-<type3> ranks the top three most common types of content
+ * @param {*} section
+ */
+function sectiontype(section) {
+  const children = section.children || [];
+  const typecounter = children.reduce((counter, { type }) => {
+    if (type === 'yaml') {
+      return counter;
     }
-    retcontent.intro = plain(paragraphs[0]);
+    const mycounter = {};
+    const mycount = counter[type] || 0;
+    mycounter[type] = mycount + 1;
+    return Object.assign(counter, mycounter);
+  }, {});
+
+  const types = Object.keys(typecounter).map(type => `has-${type}`);
+  if (Object.keys(typecounter).length === 1) {
+    types.push(`is-${Object.keys(typecounter)[0]}-only`);
+  } else {
+    types.push(...Object.entries(typecounter) // get pairs of type, count
+      .sort((left, right) => left[1] < right[1]) // sort descending by count
+      .slice(0, 3) // take the top three
+      .map(([name]) => name) // keep only the type
+      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
   }
 
-  return { content: retcontent };
+  return Object.assign({ types }, section);
+}
+
+function fallback(section) {
+  if (section.intro && !section.title) {
+    return Object.assign({ title: section.intro }, section);
+  } if (section.title && !section.intro) {
+    return Object.assign({ intro: section.title }, section);
+  }
+  return section;
+}
+
+function getmetadata({ content: { sections = [] } }, { logger }) {
+  logger.debug(`Parsing Markdown Metadata from ${sections.length} sections`);
+
+  const retsections = sections
+    .map(yaml)
+    .map(title)
+    .map(intro)
+    .map(image)
+    .map(sectiontype)
+    .map(fallback);
+  const img = retsections.filter(section => section.image)[0];
+  if (retsections[0]) {
+    const retcontent = {
+      sections: retsections,
+      meta: retsections[0].meta,
+      title: retsections[0].title,
+      intro: retsections[0].intro,
+      image: img ? img.url : undefined,
+    };
+    return { content: retcontent };
+  }
+  return { content: { meta: {} } };
 }
 
 module.exports = getmetadata;

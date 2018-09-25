@@ -30,7 +30,7 @@ describe('Testing Default Pipeline', () => {
     assert.ok(log, 'no logger found');
   });
 
-  it('creates a runs the default pipeline', async () => {
+  it('creates and runs the default pipeline', async () => {
     const out = await pipe((payload, action) => ({
       body: `test. payload: ${payload.title} action: ${action.title}`,
     }), {
