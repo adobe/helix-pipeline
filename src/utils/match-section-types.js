@@ -10,8 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-const types = require('./match-section-types');
-
-module.exports = {
-  types,
-};
+class TypeMatcher {
+  constructor(section) {
+    const children = Array.isArray(section) ? section : section.children;
+  }
+}
