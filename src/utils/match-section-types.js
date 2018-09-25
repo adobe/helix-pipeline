@@ -22,9 +22,10 @@ class TypeMatcher {
    * @param {(Node|Node[])} section the parent node or list of child nodes to evaluate
    * the registered content expressions against.
    */
-  constructor(section) {
-    const children = Array.isArray(section) ? section : section.children;
-    this._section = section.children ? section : null;
+  constructor(section = []) {
+    const mysection = section || [];
+    const children = Array.isArray(mysection) ? mysection : mysection.children;
+    this._section = mysection.children ? mysection : null;
     this._matchers = [];
     // get the type for each node, skip everything that's not a node or
     // doesn't have a type
