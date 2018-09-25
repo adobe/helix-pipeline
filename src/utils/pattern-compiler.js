@@ -13,7 +13,7 @@
 /**
  * Turns a content-expression like "heading? (paragraph|image)+" into
  * a proper regular expression.
- * @param {string} pattern
+ * @param {string} pattern the content expression
  * @returns {RegExp} a regular expression that matches strings following
  * the high-level pattern.
  */
