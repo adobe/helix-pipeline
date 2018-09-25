@@ -54,10 +54,10 @@ describe('Test Type Matcher Util', () => {
 
   it('TypeMatcher can match with functions', () => {
     const matchedsections = new TypeMatcher(sections)
-    .match('heading', 'has-heading')
-    .match('paragraph', 'has-paragraph')
-    .match(types => types.length >= 3, 'long')
-    .process();
+      .match('heading', 'has-heading')
+      .match('paragraph', 'has-paragraph')
+      .match(types => types.length >= 3, 'long')
+      .process();
     assert.equal(matchedsections.length, 4);
     assert.ok(matchedsections[0].types);
     assert.ok(matchedsections[1].types);

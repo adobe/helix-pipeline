@@ -90,21 +90,21 @@ class TypeMatcher {
    * @returns {(Node|Node[])} the processed sections
    */
   process() {
-    const mapped = this._sections.map(section => {
+    const mapped = this._sections.map((section) => {
       // get the type for each node, skip everything that's not a node or
       // doesn't have a type
-      const childtypes = section.children ? 
-        section.children.map(node => node.type).filter(type => !!type) :
-        [];
+      const childtypes = section.children
+        ? section.children.map(node => node.type).filter(type => !!type)
+        : [];
       const matchedtypes = this.matches(childtypes);
       const oldtypes = section.types && Array.isArray(section.types) ? section.types : [];
 
-      return {
+      return Object.assign({
         types: [...matchedtypes, ...oldtypes],
-        ...section
-      }
+
+      }, section);
     });
-    if (mapped.length===1) {
+    if (mapped.length === 1) {
       return mapped[0];
     }
     return mapped;
