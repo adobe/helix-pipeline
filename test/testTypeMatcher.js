@@ -43,4 +43,12 @@ describe('Test Type Matcher Util', () => {
       .match('impossible', 'has-impossible')
       .process(), ['has-heading', 'has-paragraph']);
   });
+
+  it('TypeMatcher can match with functions', () => {
+    assert.deepEqual(new TypeMatcher(sections[0])
+      .match('heading', 'has-heading')
+      .match('paragraph', 'has-paragraph')
+      .match(types => types.length >= 3, 'long')
+      .process(), ['has-heading', 'has-paragraph', 'long']);
+  });
 });
