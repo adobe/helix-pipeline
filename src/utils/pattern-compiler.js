@@ -10,6 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
+/**
+ * Turns a content-expression like "heading? (paragraph|image)+" into
+ * a proper regular expression.
+ * @param {string} pattern 
+ * @returns {RegExp} a regular expression that matches strings following
+ * the high-level pattern.
+ */
 function compile(pattern) {
   const expression = new RegExp(pattern
     .replace(/(\w+)/g, '($1·)') // always match whole words
@@ -19,6 +26,13 @@ function compile(pattern) {
   return expression;
 }
 
+/**
+ * Determines if the provided list of child nodes matches the
+ * type expression
+ * @param {string[]} list a list of node types 
+ * @param {string} pattern a content-expression like "heading? (paragraph|image)+"
+ * @returns true if the list matches the pattern
+ */
 function match(list, pattern) {
   const str = `${list.join('·')}·`;
   // console.log('-> ' + str);
