@@ -9,9 +9,87 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
+/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
+const { match } = require('./pattern-compiler');
+/**
+ * This utility class allows the registration of type matchers. Type matchers
+ * are either content-expressions like `header? (image|paragraph)+` or predicate
+ * functions that operate on a list of child node types.
+ */
 class TypeMatcher {
+  /**
+   * Creates a new type matcher for an MDAST node or list of MDAST nodes
+   * @param {(Node|Node[])} section the parent node or list of child nodes to evaluate
+   * the registered content expressions against.
+   */
   constructor(section) {
     const children = Array.isArray(section) ? section : section.children;
+    this._section = section.children ? section : null;
+    this._matchers = [];
+    // get the type for each node, skip everything that's not a node or
+    // doesn't have a type
+    this._types = children.map(node => node.type).filter(type => !!type);
+  }
+
+  /**
+   * A predicate function that string lists
+   * @typedef {function(node)} matcherFunction
+   * @param {string[]} types a list of child types
+   * @returns {boolean} true for matching string arrays
+   */
+
+  /**
+   * Registers a type detector for nodes sequences that match either a content expression
+   * or a matcher predicate function. The `matcher` will be evaluated against every
+   * node in the MDAST. In cases where the `matcher` matches (returns true), the
+   * processor will be called with the current node.
+   * @param {(string|matcherFunction)} matcher either an unist-util-select expression
+   * or a predicate function
+   * @param {string} type the appropriate handler function to handle matching types.
+   * @returns {TypeMatcher} this, enabling chaining
+   */
+  match(matcher, type) {
+    const matchfn = typeof matcher === 'function' ? matcher : TypeMatcher.matchfn(matcher);
+
+    this._matchers.push([matchfn, type]);
+
+    return this;
+  }
+
+  /**
+   * Finds all matching types for a given sequence of content types
+   * @private
+   * @param {string[]} types an array of content types
+   * @returns {string[]} the array of matching types
+   */
+  matches(types) {
+    return this._matchers
+      .filter(([matchfn]) => matchfn(types))
+      .map(([_, type]) => type);
+  }
+
+
+  /**
+   * Turns a content expression into a matcher predicate function
+   * @private
+   * @param {string} pattern a regex-like content expression
+   * @returns {matcherFunction} a corresponding matcher function that returns true
+   * for sequences matching the pattern
+   */
+  static matchfn(pattern) {
+    return function matchtypes(types) {
+      return match(types, pattern);
+    };
+  }
+
+  /**
+   * Processes the registered matchers and returns a list of all
+   * matcher names that match the sequence provided in the constructor
+   * @returns {string[]} the list of matching type names
+   */
+  process() {
+    return this.matches(this._types);
   }
 }
+
+module.exports = TypeMatcher;

@@ -13,7 +13,7 @@
 /**
  * Turns a content-expression like "heading? (paragraph|image)+" into
  * a proper regular expression.
- * @param {string} pattern 
+ * @param {string} pattern
  * @returns {RegExp} a regular expression that matches strings following
  * the high-level pattern.
  */
@@ -29,7 +29,7 @@ function compile(pattern) {
 /**
  * Determines if the provided list of child nodes matches the
  * type expression
- * @param {string[]} list a list of node types 
+ * @param {string[]} list a list of node types
  * @param {string} pattern a content-expression like "heading? (paragraph|image)+"
  * @returns true if the list matches the pattern
  */
