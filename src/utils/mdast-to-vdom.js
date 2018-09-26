@@ -40,9 +40,7 @@ class VDOMTransformer {
    * @param {object} options options for custom transformers
    */
   constructor(mdast, options) {
-    this._matchers = [
-      ['image', image(options)],
-    ];
+    this._matchers = [];
     this._root = mdast;
     // go over all handlers that have been defined
 
@@ -54,6 +52,7 @@ class VDOMTransformer {
         this._handlers[type] = (cb, node, parent) => VDOMTransformer.handle(cb, node, parent, that);
         return true;
       });
+    this._matchers.image = image(options);
   }
 
   /**
