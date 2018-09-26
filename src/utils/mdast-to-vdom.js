@@ -28,7 +28,12 @@ const image = require('./image-handler');
  * @param attributes {object} HTML attributes as key-value pairs
  * @param children {Node[]} list of children
  */
-
+/**
+ * @typedef {object} srcsetspec
+ * @param {number} from smallest possible size
+ * @param {number} to largest possible size
+ * @param {number} steps number of steps
+ */
 /**
  * Utility class that transforms an MDAST (Markdown) node into a (virtual) DOM
  * representation of the same content.
@@ -38,6 +43,8 @@ class VDOMTransformer {
    * Initializes the transformer with a Markdown document or fragment of a document
    * @param {Node} mdast the markdown AST node to start the transformation from.
    * @param {object} options options for custom transformers
+   * @param {string[]} options.sizes a list of size media queries
+   * @param {(number[]|srcsetspec)} a list of image widths to generate
    */
   constructor(mdast, options) {
     this._matchers = [];

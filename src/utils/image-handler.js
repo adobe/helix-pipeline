@@ -47,7 +47,7 @@ function image({ widths, sizes = ['100vw'] } = { widths: { from: 480, to: 4096, 
 
 
     const props = {
-      src: normalize(node.url), alt: node.alt, srcset, sizes: sizes.join(),
+      src: normalize(node.url), alt: node.alt, srcset, sizes: sizes.join(', '),
     };
 
     if (node.title !== null && node.title !== undefined) {

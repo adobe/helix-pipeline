@@ -319,3 +319,49 @@ vdom.match('link', (_, node) =>
 ```
 
 Above: Plain `String`s can be constructed using String Templates in ES6 for the same result.
+
+#### Creating Responsive Images
+
+The VDOM Utility is prepared to create `srcset` and `sizes` attributes for responsive images. By default, five different resolutions ranging from `480w` to `4096w` will be generated. To create truly effective responsive images, some knowledge of the desired layout of the page, and hence some configuration is required.
+
+`utils.vdom` provides two configuration options:
+
+1. Define what physical image widths are made available with `widths`
+2. Define which images get loaded with `sizes`
+
+Both configuration options get passed to an optional `options` argument for the `VDOM` constructor:
+
+
+```javascript
+const widths;
+const sizes;
+content.document = new VDOM(content.mdast, {widths, sizes}).getDocument();
+```
+
+`widths` is either an array of possible image widths (positive integer values) or a `widthpec` that looks like this:
+
+```javascript
+const widths = {
+  from: 320,
+  to: 9600,
+  steps: 10
+};
+const sizes;
+content.document = new VDOM(content.mdast, {widths, sizes}).getDocument();
+```
+
+Responsive images will be generated on the fly and only when requested, so the only cost involved with increasing the number of `steps` is the length of the resultant `srcset` attribute.
+
+In order to define what images get loaded, the `sizes` attribute must be set. In HTML, sizes is a comma-separated list of pairs of media queries and length expressions. For `util.vdom`, the setting is an array of these pairs.
+
+```javascript
+const widths;
+const sizes = [
+  '(min-width: 36em) 33.3vw',
+  '(min-width: 48em) calc(.333 * (100vw - 12em))',
+  '100vw'
+];
+content.document = new VDOM(content.mdast, {widths, sizes}).getDocument();
+```
+
+This gives you fine-grained control over the image widths that are made available and will get loaded by browsers based on the width of the browser window. With `util.vdom` you can have different settings per page- or section-type.
