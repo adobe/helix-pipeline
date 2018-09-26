@@ -33,7 +33,7 @@ describe('Test Image Handler', () => {
       type: 'image',
       alt: 'Just an image',
       url: 'test.png',
-      title: 'Foo Bar'
+      title: 'Foo Bar',
     };
 
     image()((orignode, tagname, params, children) => {
