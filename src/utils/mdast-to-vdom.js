@@ -19,6 +19,7 @@ const parse = require('rehype-parse');
 const tohyper = require('hast-to-hyperscript');
 const h = require('hyperscript');
 const { JSDOM } = require('jsdom');
+const image = require('./image-handler');
 
 /**
  * @typedef {function(parent, tagname, attributes, children)} handlerFunction
@@ -36,9 +37,12 @@ class VDOMTransformer {
   /**
    * Initializes the transformer with a Markdown document or fragment of a document
    * @param {Node} mdast the markdown AST node to start the transformation from.
+   * @param {object} options options for custom transformers
    */
-  constructor(mdast) {
-    this._matchers = [];
+  constructor(mdast, options) {
+    this._matchers = [
+      ['image', image(options)],
+    ];
     this._root = mdast;
     // go over all handlers that have been defined
 
@@ -142,7 +146,8 @@ class VDOMTransformer {
    */
   matches(node) {
     // go through all matchers to find processors where matchfn matches
-    const processors = this._matchers
+    // start with most recently added processors
+    const processors = this._matchers.slice(0).reverse()
       .filter(([matchfn, processor]) => {
         if (matchfn(node)) {
           return processor;
