@@ -37,7 +37,8 @@ function uri(root, owner, repo, ref, path) {
  * the body of the Markdown document
  * @param {object} context pipeline context/payload
  * @param {object} context.content existing content (should be empty)
- * @param {string[]} context.content.sources list of URLs that have been retrieved for this piece of content
+ * @param {string[]} context.content.sources list of URLs that have been retrieved for
+ * this piece of content
  * @param {string} context.error pre-existing error message
  * @param {object} action the pipeline action
  * @param {object} action.request the HTTP request made to the runtime function
@@ -48,7 +49,7 @@ function uri(root, owner, repo, ref, path) {
  * @param {string} action.request.params.path path of the file to be requested
  */
 function fetch(
-  { error, content: { sources = []} = {}},
+  { error, content: { sources = [] } = {} },
   {
     secrets = {},
     request,
