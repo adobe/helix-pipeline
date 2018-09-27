@@ -103,8 +103,37 @@ describe('Testing HTML Pipeline', () => {
     result.then((res) => {
       assert.equal(201, res.statusCode);
       assert.equal('text/html', res.headers['Content-Type']);
+      assert.equal(res.headers['Surrogate-Key'], '87f5a156e8e5fa7e8a00dc18581e7b7e192f8dfcf30027926b00009ddcd674ad');
       assert.equal('<', res.body[0]);
       assert.ok(res.body.match(/srcset/));
+      done();
+    });
+  });
+
+  it('html.pipe keeps existing headers', (done) => {
+    const result = pipe(
+      ({ content }) => ({
+        response: {
+          status: 201,
+          body: content.html,
+          headers: {
+            'Content-Type': 'text/plain',
+            'Surrogate-Key': 'foobar',
+          },
+        },
+      }),
+      {},
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    result.then((res) => {
+      assert.equal(201, res.statusCode);
+      assert.equal('text/plain', res.headers['Content-Type']);
+      assert.equal(res.headers['Surrogate-Key'], 'foobar');
       done();
     });
   });
