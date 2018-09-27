@@ -88,6 +88,7 @@ describe('Testing HTML Pipeline', () => {
         assert.equal('Medium', content.meta.template);
         assert.equal('Project Helix', content.intro);
         assert.equal('Bill, Welcome to the future', content.title);
+        assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
         // and return a different status code
         return { response: { status: 201, body: content.html } };
       },
