@@ -64,6 +64,24 @@ describe('Testing Pipeline', () => {
       .catch(done);
   });
 
+  it('Disables pre before when conditionally', (done) => {
+    const order = [];
+    new Pipeline({ logger })
+      .pre(() => { order.push('pre0'); })
+      .pre(() => { order.push('enabled'); })
+      .when(() => true)
+      .pre(() => { order.push('pre1'); })
+      .once(() => { order.push('once'); })
+      .post(() => { order.push('post0'); })
+      .post(() => { order.push('post1'); })
+      .run()
+      .then(() => {
+        assert.deepEqual(order, ['pre0', 'enabled', 'pre1', 'once', 'post0', 'post1']);
+        done();
+      })
+      .catch(done);
+  });
+
   it('When works with promises pre before when', (done) => {
     const order = [];
     new Pipeline({ logger })
