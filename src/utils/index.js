@@ -10,12 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-const defaults = require('./src/defaults/default.js');
-const Pipeline = require('./src/pipeline.js');
-const utils = require('./src/utils');
+const types = require('./match-section-types');
 
 module.exports = {
-  Pipeline,
-  defaults,
-  utils,
+  types,
 };
