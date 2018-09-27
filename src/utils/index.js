@@ -11,7 +11,9 @@
  */
 
 const vdom = require('./mdast-to-vdom');
+const types = require('./match-section-types');
 
 module.exports = {
   vdom,
+  types,
 };

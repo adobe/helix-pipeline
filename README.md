@@ -185,7 +185,7 @@ The `types` property is an array of string values that describes the type of the
 
 - `has-<type>`: for each type of content that occurs at least once in the section, e.g. has-heading
 - `is-<type>-only`: for sections that only have content of a single type, e.g. is-image-only
-- `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-paragraph-heading`.
+- `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-paragraph-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
 
 Each section has additional content-derived metadata properties, in particular:
 
@@ -365,3 +365,28 @@ content.document = new VDOM(content.mdast, {widths, sizes}).getDocument();
 ```
 
 This gives you fine-grained control over the image widths that are made available and will get loaded by browsers based on the width of the browser window. With `util.vdom` you can have different settings per page- or section-type.
+
+### Infer Content Types with `utils.types`
+
+In addition to the automatically inferred content types for each section, `utils.types` provides a `TypeMatcher` utility class that allows matching section content against a simple expression language and thus enrich the `section[].types` values.
+
+
+```javascript
+const TypeMatcher = require('@adobe/hypermedia-pipeline').utils.types;
+
+const matcher = new TypeMatcher(content.sections);
+matcher.match('^heading', 'starts-with-heading');
+content.sections = matcher.process();
+```
+
+In the example above, all sections that have a `heading` as the first child will get the value `starts-with-heading` appended to the `types` array. `^heading` is an example of the content expression language, which allows matching content against a simple regular expression-like syntax.
+
+##### Content Expression Language
+
+* `^heading` – the first element is a `heading`
+* `paragraph$` – the last element is a `paragraph`
+* `heading image+` – a `heading` followed by one or more `image`s
+* `heading? image` – an optional `heading` followed by one `image`
+* `heading paragraph* image` – a `heading` followed by any number of `paragraph`s (also no paragraphs at all), followed by an `image`
+* `(paragraph|list)` – a `paragraph` or a `list`
+* `^heading (image paragraph)+$` – one `heading`, followed by pairs of `image` and `paragraph`, but at least one
