@@ -44,6 +44,51 @@ describe('Testing Default Pipeline', () => {
     });
   });
 
+  it('adaptOWResponse keeps response in tact', () => {
+    const inp = {
+      response: {
+        status: 301,
+        headers: {
+          Location: 'https://example.com',
+        },
+        body: null,
+      },
+    };
+    const out = adaptOWResponse(inp);
+    assert.equal(out.statusCode, 301);
+    assert.equal(out.headers.Location, 'https://example.com');
+    assert.equal(out.body, null);
+  });
+
+  it('adaptOWResponse provides reasonable defaults for JSON', () => {
+    const inp = {
+      response: {
+        foo: 'bar',
+      },
+    };
+    const out = adaptOWResponse(inp);
+    assert.equal(out.statusCode, 200);
+    assert.equal(out.headers.Location, undefined);
+    assert.equal(out.headers['Content-Type'], 'application/json');
+    assert.deepEqual(out.body, {});
+  });
+
+  it('adaptOWResponse provides reasonable defaults for plain text', () => {
+    const inp = {
+      response: {
+        foo: 'bar',
+        headers: {
+          'Content-Type': 'text/plain',
+        },
+      },
+    };
+    const out = adaptOWResponse(inp);
+    assert.equal(out.statusCode, 200);
+    assert.equal(out.headers.Location, undefined);
+    assert.equal(out.headers['Content-Type'], 'text/plain');
+    assert.deepEqual(out.body, '');
+  });
+
   it('adaptOWRequest needs to parse params parameter', () => {
     const testObject = {
       foo: 'foo',

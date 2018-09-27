@@ -73,7 +73,7 @@ function adaptOWResponse(payload) {
     response: {
       status = 200,
       headers = { 'Content-Type': 'application/json' },
-      body = '',
+      body = headers['Content-Type'] === 'application/json' ? {} : '',
     },
   } = payload;
   return {
