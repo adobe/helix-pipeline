@@ -88,7 +88,7 @@ const log = winston.createLogger({
   format: winston.format.simple(),
   transports: [
     new winston.transports.Console(),
-    new winston.transports.File({ filename: 'pipeline.log' }),
+    new winston.transports.File({ filename: 'logs/pipeline.log' }),
   ],
 });
 
