@@ -32,7 +32,7 @@ const htmlpipe = (cont, payload, action) => {
   const pipe = new Pipeline(action);
   pipe
     .pre(adaptOWRequest)
-    .pre(fetch)
+    .pre(fetch).when(({ content }) => !(content && content.body && content.body.length > 0))
     .pre(parse)
     .pre(smartypants)
     .pre(sections)

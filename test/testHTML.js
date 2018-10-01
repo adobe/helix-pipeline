@@ -77,6 +77,35 @@ describe('Testing HTML Pipeline', () => {
     assert.strictEqual(typeof pipe, 'function');
   });
 
+  it('html.pipe does not make HTTP requests if body is provided', (done) => {
+    const result = pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.equal(content.body, 'Hello World');
+        // and return a different status code
+        return { response: { status: 201, body: content.html } };
+      },
+      {
+        content: {
+          body: 'Hello World',
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    result.then((res) => {
+      assert.equal(201, res.statusCode);
+      assert.equal('text/html', res.headers['Content-Type']);
+      assert.equal('<p>Hello World</p>', res.body);
+      done();
+    });
+  });
+
   it('html.pipe makes HTTP requests', (done) => {
     const result = pipe(
       ({ content }) => {
