@@ -22,6 +22,13 @@ function debug(payload, { logger }) {
     // remove body because that would be the response content
     // and causes rendering issues of the script
     delete p.response.body;
+
+    if (p.content && p.content.document && p.content.document.innerHTML) {
+      // document is a 'live' document, so turn it into a nice HTML string
+      const html = p.content.document.innerHTML;
+      p.content.document = html;
+    }
+
     const debugScript = DEBUG_TEMPLATE.replace(/PAYLOAD_JSON/, JSON.stringify(p));
     // inject debug script before the closing body tag
     p.response.body = body.replace(/<\/body>/i, `${debugScript}</body>`);
