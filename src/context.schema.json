@@ -1,0 +1,23 @@
+{
+  "$id": "https://ns.adobe.com/helix/pipeline/context",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Context",
+  "type": "object",
+  "description": "The context thingie.",
+  "additionalProperties": false,
+  "properties": {
+    "content": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "array",
+          "items": {
+            "type":"string",
+            "format": "uri"
+          }
+        }
+      }
+    }
+  }
+}

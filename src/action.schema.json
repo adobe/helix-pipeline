@@ -1,0 +1,14 @@
+{
+  "$id": "https://ns.adobe.com/helix/pipeline/action",
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "title": "Action",
+  "type": "object",
+  "description": "Tracks the OpenWhisk action invocation",
+  "additionalProperties": false,
+  "properties": {
+    "repo": {
+      "type":"string",
+      "description": "The repository to retrieve content from"
+    }
+  }
+}
