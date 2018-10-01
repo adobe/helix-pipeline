@@ -33,6 +33,14 @@ function uri(root, owner, repo, ref, path) {
 }
 
 /**
+ * @param {import("../context").Context} ctx some param
+ * @param {import("../context").Action} action some other param
+ */
+function foo(ctx, action) {
+  ctx.
+}
+
+/**
  * Fetches the Markdown specified in the action and returns
  * the body of the Markdown document
  * @param {object} context pipeline context/payload
