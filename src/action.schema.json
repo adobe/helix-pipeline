@@ -6,9 +6,49 @@
   "description": "Tracks the OpenWhisk action invocation",
   "additionalProperties": false,
   "properties": {
-    "repo": {
-      "type":"string",
-      "description": "The repository to retrieve content from"
+    "request": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "params": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "properties": {
+            "owner": {
+              "type": "string",
+              "description": "Owner of the GitHub repository. This is the name of a user or organization."
+            },
+            "repo": {
+              "type":"string",
+              "description": "Repository where content originates"
+            },
+            "ref": {
+              "type": "string",
+              "description": "Name of the branch or tag or the SHA of the commit"
+            },
+            "path": {
+              "type": "string",
+              "description": "Path to the requested (Markdown) file"
+            }
+          }
+        }
+      }
+    },
+    "logger": {
+      "type": "object",
+      "description": "A Winston logger instance"
+    },
+    "secrets": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Secrets passed into the pipeline such as API Keys or configuration settings.",
+      "patternProperties": {
+        "[A-Z0-9_]+": {
+          "type": "string"
+        }
+      }
     }
   }
 }

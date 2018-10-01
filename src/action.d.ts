@@ -8,8 +8,41 @@
  * Tracks the OpenWhisk action invocation
  */
 export interface Action {
+  request?: {
+    params?: {
+      /**
+       * Owner of the GitHub repository. This is the name of a user or organization.
+       */
+      owner?: string;
+      /**
+       * Repository where content originates
+       */
+      repo?: string;
+      /**
+       * Name of the branch or tag or the SHA of the commit
+       */
+      ref?: string;
+      /**
+       * Path to the requested (Markdown) file
+       */
+      path?: string;
+      [k: string]: string;
+    };
+  };
   /**
-   * The repository to retrieve content from
+   * A Winston logger instance
    */
-  repo?: string;
+  logger?: {
+    [k: string]: any;
+  };
+  /**
+   * Secrets passed into the pipeline such as API Keys or configuration settings.
+   */
+  secrets?: {
+    /**
+     * This interface was referenced by `undefined`'s JSON-Schema definition
+     * via the `patternProperty` "[A-Z0-9_]+".
+     */
+    [k: string]: string;
+  };
 }

@@ -6,12 +6,17 @@
   "description": "The context thingie.",
   "additionalProperties": false,
   "properties": {
+    "error": {
+      "type": "string",
+      "description": "An error message that has been generated during pipeline processing"
+    },
     "content": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "sources": {
           "type": "array",
+          "description": "List of URIs that have been retrieved for this piece of content",
           "items": {
             "type":"string",
             "format": "uri"

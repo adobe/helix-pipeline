@@ -8,7 +8,14 @@
  * The context thingie.
  */
 export interface Context {
+  /**
+   * An error message that has been generated during pipeline processing
+   */
+  error?: string;
   content?: {
+    /**
+     * List of URIs that have been retrieved for this piece of content
+     */
     sources?: string[];
   };
 }
