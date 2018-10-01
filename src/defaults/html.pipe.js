@@ -22,6 +22,7 @@ const type = require('../html/set-content-type.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const debug = require('../html/output-debug.js');
+const key = require('../html/set-surrogate-key');
 
 /* eslint no-param-reassign: off */
 
@@ -41,6 +42,7 @@ const htmlpipe = (cont, payload, action) => {
     .pre(emit)
     .once(cont)
     .post(type)
+    .post(key)
     .post(debug)
     .post(adaptOWResponse);
 

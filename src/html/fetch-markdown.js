@@ -32,8 +32,24 @@ function uri(root, owner, repo, ref, path) {
   });
 }
 
+/**
+ * Fetches the Markdown specified in the action and returns
+ * the body of the Markdown document
+ * @param {object} context pipeline context/payload
+ * @param {object} context.content existing content (should be empty)
+ * @param {string[]} context.content.sources list of URLs that have been retrieved for
+ * this piece of content
+ * @param {string} context.error pre-existing error message
+ * @param {object} action the pipeline action
+ * @param {object} action.request the HTTP request made to the runtime function
+ * @param {object} action.request.params URL params of the runtime function
+ * @param {string} action.request.params.owner organization or username owning the repository
+ * @param {string} action.request.params.repo name of the repository
+ * @param {string} action.request.params.ref branch, tag or commit identifier
+ * @param {string} action.request.params.path path of the file to be requested
+ */
 function fetch(
-  { error },
+  { error, content: { sources = [] } = {} },
   {
     secrets = {},
     request,
@@ -76,7 +92,7 @@ function fetch(
   };
   logger.debug(`fetching Markdown from ${options.uri}`);
   return client(options)
-    .then(resp => ({ content: { body: resp } }))
+    .then(resp => ({ content: { body: resp, sources: [...sources, options.uri] } }))
     .catch(err => bail(logger, `Could not fetch Markdown from ${options.uri}`, err));
 }
 module.exports = fetch;
