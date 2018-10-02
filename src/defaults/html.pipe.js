@@ -35,7 +35,8 @@ const htmlpipe = (cont, payload, action) => {
   pipe
     .tap(dump).when(() => !production())
     .pre(adaptOWRequest)
-    .pre(fetch).when(({ content }) => !(content && content.body && content.body.length > 0))
+    .pre(fetch)
+    .when(({ content }) => !(content && content.body && content.body.length > 0))
     .pre(parse)
     .pre(smartypants)
     .pre(sections)

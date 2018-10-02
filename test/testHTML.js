@@ -199,7 +199,7 @@ describe('Testing HTML Pipeline', () => {
       assert.equal('text/plain', res.headers['Content-Type']);
       assert.equal(res.headers['Surrogate-Key'], 'foobar');
 
-      dump({}, {}, -1).then(dir => {
+      dump({}, {}, -1).then((dir) => {
         const outdir = path.resolve(dir, '..');
         const found = fs.readdirSync(outdir)
           .map(file => path.resolve(outdir, file))
@@ -210,5 +210,4 @@ describe('Testing HTML Pipeline', () => {
       });
     });
   });
-
 });
