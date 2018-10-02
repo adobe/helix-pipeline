@@ -219,4 +219,23 @@ describe('Testing Pipeline', () => {
       done();
     });
   });
+
+  it('Executes taps', (done) => {
+    new Pipeline({ logger })
+      .pre(() => ({ foo: 'bar' }))
+      .post(() => ({ bar: 'baz' }))
+      .tap((c, a, i) => { if (i === 1) { done(); } })
+      .run();
+  });
+
+  it('Does not executes taps when conditions fail', (done) => {
+    new Pipeline({ logger })
+      .pre(() => ({ foo: 'bar' }))
+      .post(() => ({ bar: 'baz' }))
+      .tap((c, a, i) => { if (i === 1) { done(new Error('this is a trap')); } })
+      .when(() => false)
+      .tap((c, a, i) => { if (i === 1) { done(); } })
+      .when(() => true)
+      .run();
+  });
 });
