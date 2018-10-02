@@ -127,18 +127,18 @@ class Pipeline {
   when(predicate) {
     if (this._last && this._last.length > 0) {
       const lastfunc = this._last.pop();
-      const wrappedfunc = (args) => {
-        const result = predicate(args);
+      const wrappedfunc = (...args) => {
+        const result = predicate(args[0]);
         // check if predicate returns a promise like result
         if (_.isFunction(result.then)) {
           return result.then((predResult) => {
             if (predResult) {
-              return lastfunc(args, this._action);
+              return lastfunc(...args);
             }
-            return args;
+            return args[0];
           });
         } if (result) {
-          return lastfunc(args, this._action);
+          return lastfunc(...args);
         }
         return args;
       };
