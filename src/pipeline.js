@@ -140,7 +140,7 @@ class Pipeline {
         } if (result) {
           return lastfunc(...args);
         }
-        return args;
+        return args[0];
       };
       this._last.push(wrappedfunc);
     } else {
