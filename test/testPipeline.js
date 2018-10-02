@@ -219,4 +219,12 @@ describe('Testing Pipeline', () => {
       done();
     });
   });
+
+  it('Executes taps', (done) => {
+    new Pipeline({ logger })
+      .pre(() => ({ foo: 'bar' }))
+      .post(() => ({ bar: 'baz' }))
+      .tap((c, a, i) => { if (i === 1) { done(); } })
+      .run();
+  });
 });
