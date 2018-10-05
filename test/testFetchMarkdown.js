@@ -205,8 +205,8 @@ describe('Test non-existing content', () => {
 });
 
 describe('Test requests', () => {
-  it('Getting XDM README', (done) => {
-    const result = fetch(
+  it('Getting XDM README', async () => {
+    const result = await fetch(
       {},
       {
         request: {
@@ -217,9 +217,6 @@ describe('Test requests', () => {
         logger,
       },
     );
-    result.then((res) => {
-      assert.ok(res.content.body);
-      done();
-    });
+    assert.ok(result.content.body);
   });
 });

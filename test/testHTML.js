@@ -77,8 +77,8 @@ describe('Testing HTML Pipeline', () => {
     assert.strictEqual(typeof pipe, 'function');
   });
 
-  it('html.pipe does not make HTTP requests if body is provided', (done) => {
-    const result = pipe(
+  it('html.pipe does not make HTTP requests if body is provided', async () => {
+    const result = await pipe(
       ({ content }) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
@@ -98,16 +98,13 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    result.then((res) => {
-      assert.equal(201, res.statusCode);
-      assert.equal('text/html', res.headers['Content-Type']);
-      assert.equal('<p>Hello World</p>', res.body);
-      done();
-    });
+    assert.equal(201, result.response.status);
+    assert.equal('text/html', result.response.headers['Content-Type']);
+    assert.equal('<p>Hello World</p>', result.response.body);
   });
 
-  it('html.pipe makes HTTP requests', (done) => {
-    const result = pipe(
+  it('html.pipe makes HTTP requests', async () => {
+    const result = await pipe(
       ({ content }) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
@@ -125,7 +122,12 @@ describe('Testing HTML Pipeline', () => {
         // and return a different status code
         return { response: { status: 201, body: content.html } };
       },
-      {},
+      {
+        request: {
+          params: {
+          },
+        },
+      },
       {
         request: { params },
         secrets,
@@ -133,18 +135,16 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    result.then((res) => {
-      assert.equal(201, res.statusCode);
-      assert.equal('text/html', res.headers['Content-Type']);
-      assert.equal(res.headers['Surrogate-Key'], '87f5a156e8e5fa7e8a00dc18581e7b7e192f8dfcf30027926b00009ddcd674ad');
-      assert.equal('<', res.body[0]);
-      assert.ok(res.body.match(/srcset/));
-      done();
-    });
+    const res = result.response;
+    assert.equal(201, res.status);
+    assert.equal('text/html', res.headers['Content-Type']);
+    assert.equal(res.headers['Surrogate-Key'], '87f5a156e8e5fa7e8a00dc18581e7b7e192f8dfcf30027926b00009ddcd674ad');
+    assert.equal('<', res.body[0]);
+    assert.ok(res.body.match(/srcset/));
   });
 
-  it('html.pipe keeps existing headers', (done) => {
-    const result = pipe(
+  it('html.pipe keeps existing headers', async () => {
+    const result = await pipe(
       ({ content }) => ({
         response: {
           status: 201,
@@ -163,11 +163,8 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    result.then((res) => {
-      assert.equal(201, res.statusCode);
-      assert.equal('text/plain', res.headers['Content-Type']);
-      assert.equal(res.headers['Surrogate-Key'], 'foobar');
-      done();
-    });
+    assert.equal(201, result.response.status);
+    assert.equal('text/plain', result.response.headers['Content-Type']);
+    assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
   });
 });
