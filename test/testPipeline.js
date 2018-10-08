@@ -224,7 +224,7 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .pre(() => ({ foo: 'bar' }))
       .post(() => ({ bar: 'baz' }))
-      .every((c, a, i) => { if (i === 1) { done(); } })
+      .every((c, a, i) => { if (i === 1) { done(); } return true; })
       .run();
   });
 
@@ -232,9 +232,9 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .pre(() => ({ foo: 'bar' }))
       .post(() => ({ bar: 'baz' }))
-      .every((c, a, i) => { if (i === 1) { done(new Error('this is a trap')); } })
+      .every((c, a, i) => { if (i === 1) { done(new Error('this is a trap')); } return true; })
       .when(() => false)
-      .every((c, a, i) => { if (i === 1) { done(); } })
+      .every((c, a, i) => { if (i === 1) { done(); } return true; })
       .when(() => true)
       .run();
   });

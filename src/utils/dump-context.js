@@ -20,18 +20,18 @@ const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd
 function tstamp() {
   const now = new Date();
   let retstr = '';
-  retstr += ('' + now.getFullYear()).padStart(4, '0');
-  retstr += ('' + now.getUTCMonth()).padStart(2, '0');
-  retstr += ('' + now.getUTCDate()).padStart(2, '0');
+  retstr += (`${now.getFullYear()}`).padStart(4, '0');
+  retstr += (`${now.getUTCMonth()}`).padStart(2, '0');
+  retstr += (`${now.getUTCDate()}`).padStart(2, '0');
   retstr += '-';
 
-  retstr += ('' + now.getUTCHours()).padStart(2, '0');
-  retstr += ('' + now.getUTCMinutes()).padStart(2, '0');
+  retstr += (`${now.getUTCHours()}`).padStart(2, '0');
+  retstr += (`${now.getUTCMinutes()}`).padStart(2, '0');
   retstr += '-';
 
-  retstr += ('' + now.getUTCSeconds()).padStart(2, '0');
+  retstr += (`${now.getUTCSeconds()}`).padStart(2, '0');
   retstr += '.';
-  retstr += ('' + now.getUTCMilliseconds()).padStart(4, '0');
+  retstr += (`${now.getUTCMilliseconds()}`).padStart(4, '0');
 
   return retstr;
 }
