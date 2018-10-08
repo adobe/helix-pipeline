@@ -14,7 +14,7 @@ const tmp = require('tmp-promise');
 const path = require('path');
 const fs = require('fs-extra');
 
-fs.mkdirpSync(path.resolve(process.cwd(), 'debug'));
+fs.mkdirpSync(path.resolve(process.cwd(), 'logs', 'debug'));
 const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'debug'), unsafeCleanup: true }).then(o => o.path);
 
 function tstamp() {
