@@ -5,10 +5,80 @@
   "type": "object",
   "description": "The context thingie.",
   "additionalProperties": false,
+  "definitions": {
+    "textcoordinates": {
+      "type": "object",
+      "description": "A position in a text document",
+      "additionalProperties": false,
+      "properties": {
+        "line": {
+          "type":"number",
+          "description": "Line number"
+        },
+        "column": {
+          "type":"number",
+          "description": "Column number"
+        },
+        "offset": {
+          "type":"number",
+          "description": "Character in the entire document"
+        }
+      }
+    },
+    "mdastposition": {
+      "type": "object",
+      "description": "Marks the position of the node in the original text flow",
+      "additionalProperties": false,
+      "properties": {
+        "start": {
+          "$ref": "#/definitions/textcoordinates"
+        },
+        "end": {
+          "$ref": "#/definitions/textcoordinates"
+        },
+        "indent": {
+          "type" :"array"
+        }
+      }
+    },
+    "mdastnode": {
+      "type": "object",
+      "description": "A node in the Markdown AST",
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "enum": [
+            "root",
+            "paragraph",
+            "text"
+          ],
+          "description": "The node type of the MDAST node"
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/mdastnode"
+          }
+        },
+        "position": {
+          "$ref": "#/definitions/mdastposition"
+        },
+        "value": {
+          "type":"string",
+          "description": "The string value of the node, if it is a terminal node."
+        }
+      }
+    }
+  },
   "properties": {
     "error": {
       "type": "string",
       "description": "An error message that has been generated during pipeline processing"
+    },
+    "request": {
+      "type": "object",
+      "description": "The HTTP Request",
+      "additionalProperties": false
     },
     "content": {
       "type": "object",
@@ -25,6 +95,9 @@
         "body": {
           "type": "string",
           "description": "The content body of the retrieved source document"
+        },
+        "mdast": {
+          "$ref": "#/definitions/mdastnode"
         }
       }
     }
