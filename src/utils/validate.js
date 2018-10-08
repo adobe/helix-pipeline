@@ -22,13 +22,13 @@ ajv.addSchema(fs.readJSONSync(path.resolve(__dirname, '..', 'context.schema.json
 function validate(context, action, index) {
   const cvalid = ajv.validate('https://ns.adobe.com/helix/pipeline/context', context);
   if (!cvalid) {
-    console.log(ajv.errorsText(), context);
+    action.logger.warn(`Invalid Context at step ${index}, ${ajv.errorsText()}`);
     throw new Error(`Invalid Context at step ${index}
 ${ajv.errorsText()}`);
   }
   const avalid = ajv.validate('https://ns.adobe.com/helix/pipeline/action', action);
   if (!avalid) {
-    console.log(ajv.errorsText(), action);
+    action.logger.warn(`Invalid Action at step ${index}, ${ajv.errorsText()}`);
     throw new Error(`Invalid Action at step ${index}
 ${ajv.errorsText()}`);
   }

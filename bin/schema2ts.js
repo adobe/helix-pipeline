@@ -18,7 +18,7 @@ const fs = require('fs-extra');
 const options = {
   $refOptions: {
     dereference: {
-      circular: true                 // Don't allow circular $refs
+      circular: true, // Don't allow circular $refs
     },
     resolve: {
       custom: {
