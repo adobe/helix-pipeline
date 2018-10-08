@@ -395,7 +395,7 @@ In the example above, all sections that have a `heading` as the first child will
 
 When run in non-production, i.e. outside an OpenWhisk action, for example in `hlx up`, Pipeline Dumping is enabled. Pipeline Dumping allows developers to easily inspect the `Context` object of each step of the pipeline and can be used to debug pipeline functions and to generate realistic test cases.
 
-Each stage of the pipeline processing will create a file like `$PWD/debug/context_dump_34161BE5KuR0nuFDp/context-2018-9-2-14-18-5.635-step-2.json` inside the `debug` directory. These dumps will be removed when the `node` process ends, so that after stopping `hlx up` the `debug` directory will be clean again. The `-step-n` in the filename indicates the step in the pipeline that has been logged.
+Each stage of the pipeline processing will create a file like `$PWD/debug/context_dump_34161BE5KuR0nuFDp/context-20180902-1418-05.0635-step-2.json` inside the `debug` directory. These dumps will be removed when the `node` process ends, so that after stopping `hlx up` the `debug` directory will be clean again. The `-step-n` in the filename indicates the step in the pipeline that has been logged.
 
 A simple example might look like this:
 

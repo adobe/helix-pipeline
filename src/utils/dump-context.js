@@ -17,10 +17,28 @@ const fs = require('fs-extra');
 fs.mkdirpSync(path.resolve(process.cwd(), 'debug'));
 const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'debug'), unsafeCleanup: true }).then(o => o.path);
 
+function tstamp() {
+  const now = new Date();
+  let retstr = '';
+  retstr += ('' + now.getFullYear()).padStart(4, '0');
+  retstr += ('' + now.getUTCMonth()).padStart(2, '0');
+  retstr += ('' + now.getUTCDate()).padStart(2, '0');
+  retstr += '-';
+
+  retstr += ('' + now.getUTCHours()).padStart(2, '0');
+  retstr += ('' + now.getUTCMinutes()).padStart(2, '0');
+  retstr += '-';
+
+  retstr += ('' + now.getUTCSeconds()).padStart(2, '0');
+  retstr += '.';
+  retstr += ('' + now.getUTCMilliseconds()).padStart(4, '0');
+
+  return retstr;
+}
+
 function dump(context, _, index) {
   return Promise.resolve(dumpdir).then((dir) => {
-    const now = new Date();
-    const dumppath = path.resolve(dir, `context-${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDay()}-${now.getUTCHours()}-${now.getUTCMinutes()}-${now.getUTCSeconds()}.${now.getUTCMilliseconds()}-step-${index}.json`);
+    const dumppath = path.resolve(dir, `context-${tstamp()}-step-${index}.json`);
     fs.writeJsonSync(dumppath, context, { spaces: 2 });
     return dumppath;
   });
