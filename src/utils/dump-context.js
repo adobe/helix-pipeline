@@ -36,12 +36,11 @@ function tstamp() {
   return retstr;
 }
 
-function dump(context, _, index) {
-  return Promise.resolve(dumpdir).then((dir) => {
-    const dumppath = path.resolve(dir, `context-${tstamp()}-step-${index}.json`);
-    fs.writeJsonSync(dumppath, context, { spaces: 2 });
-    return dumppath;
-  });
+async function dump(context, _, index) {
+  const dir = await dumpdir;
+  const dumppath = path.resolve(dir, `context-${tstamp()}-step-${index}.json`);
+  fs.writeJsonSync(dumppath, context, { spaces: 2 });
+  return dumppath;
 }
 
 module.exports = dump;
