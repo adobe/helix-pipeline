@@ -1,6 +1,6 @@
 {
   "$id": "https://ns.adobe.com/helix/pipeline/action",
-  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Action",
   "type": "object",
   "description": "Tracks the OpenWhisk action invocation",
@@ -31,6 +31,10 @@
             "path": {
               "type": "string",
               "description": "Path to the requested (Markdown) file"
+            },
+            "__ow_headers": {
+              "type": "object",
+              "description": "The original OpenWhisk request headers"
             }
           }
         }

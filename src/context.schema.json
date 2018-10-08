@@ -1,6 +1,6 @@
 {
   "$id": "https://ns.adobe.com/helix/pipeline/context",
-  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Context",
   "type": "object",
   "description": "The context thingie.",
@@ -21,6 +21,10 @@
             "type":"string",
             "format": "uri"
           }
+        },
+        "body": {
+          "type": "string",
+          "description": "The content body of the retrieved source document"
         }
       }
     }
