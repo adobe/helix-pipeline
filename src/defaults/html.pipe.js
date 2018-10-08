@@ -33,7 +33,7 @@ const htmlpipe = (cont, payload, action) => {
   action.logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = new Pipeline(action);
   pipe
-    .tap(dump).when(() => !production())
+    .every(dump).when(() => !production())
     .pre(adaptOWRequest)
     .pre(fetch)
     .when(({ content }) => !(content && content.body && content.body.length > 0))
