@@ -14,6 +14,7 @@ const tmp = require('tmp-promise');
 const path = require('path');
 const fs = require('fs-extra');
 
+<<<<<<< HEAD
 fs.mkdirpSync(path.resolve(process.cwd(), 'debug'));
 const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'debug'), unsafeCleanup: true }).then(o => o.path);
 
@@ -24,6 +25,35 @@ function dump(context, _, index) {
     fs.writeJsonSync(dumppath, context, { spaces: 2 });
     return dumppath;
   });
+=======
+fs.mkdirpSync(path.resolve(process.cwd(), 'logs', 'debug'));
+const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'logs', 'debug'), unsafeCleanup: true }).then(o => o.path);
+
+function tstamp() {
+  const now = new Date();
+  let retstr = '';
+  retstr += (`${now.getFullYear()}`).padStart(4, '0');
+  retstr += (`${now.getUTCMonth()}`).padStart(2, '0');
+  retstr += (`${now.getUTCDate()}`).padStart(2, '0');
+  retstr += '-';
+
+  retstr += (`${now.getUTCHours()}`).padStart(2, '0');
+  retstr += (`${now.getUTCMinutes()}`).padStart(2, '0');
+  retstr += '-';
+
+  retstr += (`${now.getUTCSeconds()}`).padStart(2, '0');
+  retstr += '.';
+  retstr += (`${now.getUTCMilliseconds()}`).padStart(4, '0');
+
+  return retstr;
+}
+
+async function dump(context, _, index) {
+  const dir = await dumpdir;
+  const dumppath = path.resolve(dir, `context-${tstamp()}-step-${index}.json`);
+  fs.writeJsonSync(dumppath, context, { spaces: 2 });
+  return dumppath;
+>>>>>>> master
 }
 
 module.exports = dump;

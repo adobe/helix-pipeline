@@ -224,7 +224,11 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .pre(() => ({ foo: 'bar' }))
       .post(() => ({ bar: 'baz' }))
+<<<<<<< HEAD
       .tap((c, a, i) => { if (i === 1) { done(); } })
+=======
+      .every((c, a, i) => { if (i === 1) { done(); } return true; })
+>>>>>>> master
       .run();
   });
 
@@ -232,9 +236,15 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .pre(() => ({ foo: 'bar' }))
       .post(() => ({ bar: 'baz' }))
+<<<<<<< HEAD
       .tap((c, a, i) => { if (i === 1) { done(new Error('this is a trap')); } })
       .when(() => false)
       .tap((c, a, i) => { if (i === 1) { done(); } })
+=======
+      .every((c, a, i) => { if (i === 1) { done(new Error('this is a trap')); } return true; })
+      .when(() => false)
+      .every((c, a, i) => { if (i === 1) { done(); } return true; })
+>>>>>>> master
       .when(() => true)
       .run();
   });

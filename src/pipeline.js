@@ -109,7 +109,11 @@ class Pipeline {
    * any effect, i.e. the return value of a tap function is ignored.
    * @param {pipelineFunction} f function to be executed in every step. Effects are ignored.
    */
+<<<<<<< HEAD
   tap(f) {
+=======
+  every(f) {
+>>>>>>> master
     this._taps.push(f);
     this._last = this._taps;
     return this;
