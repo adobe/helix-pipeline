@@ -28,11 +28,7 @@ const htmlpipe = (cont, payload, action) => {
   action.logger.log('debug', 'Constructing JSON Pipeline');
   const pipe = new Pipeline(action);
   pipe
-<<<<<<< HEAD
-    .tap(dump).when(() => !production())
-=======
     .every(dump).when(() => !production())
->>>>>>> master
     .pre(adaptOWRequest)
     .pre(fetch)
     .pre(parse)

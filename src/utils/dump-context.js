@@ -14,18 +14,6 @@ const tmp = require('tmp-promise');
 const path = require('path');
 const fs = require('fs-extra');
 
-<<<<<<< HEAD
-fs.mkdirpSync(path.resolve(process.cwd(), 'debug'));
-const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'debug'), unsafeCleanup: true }).then(o => o.path);
-
-function dump(context, _, index) {
-  return Promise.resolve(dumpdir).then((dir) => {
-    const now = new Date();
-    const dumppath = path.resolve(dir, `context-${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDay()}-${now.getUTCHours()}-${now.getUTCMinutes()}-${now.getUTCSeconds()}.${now.getUTCMilliseconds()}-step-${index}.json`);
-    fs.writeJsonSync(dumppath, context, { spaces: 2 });
-    return dumppath;
-  });
-=======
 fs.mkdirpSync(path.resolve(process.cwd(), 'logs', 'debug'));
 const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'logs', 'debug'), unsafeCleanup: true }).then(o => o.path);
 
@@ -53,7 +41,6 @@ async function dump(context, _, index) {
   const dumppath = path.resolve(dir, `context-${tstamp()}-step-${index}.json`);
   fs.writeJsonSync(dumppath, context, { spaces: 2 });
   return dumppath;
->>>>>>> master
 }
 
 module.exports = dump;
