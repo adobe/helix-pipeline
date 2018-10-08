@@ -14,18 +14,19 @@ const fs = require('fs-extra');
 const path = require('path');
 
 const ajv = new Ajv();
-ajv.addSchema(fs.readJSONSync(path.resolve(__dirname, '..', 'action.schema.json')), 'action.schema.json');
-ajv.addSchema(fs.readJSONSync(path.resolve(__dirname, '..', 'context.schema.json')), 'context.schema.json');
+ajv.addSchema(fs.readJSONSync(path.resolve(__dirname, '..', 'mdast.schema.json')));
+ajv.addSchema(fs.readJSONSync(path.resolve(__dirname, '..', 'action.schema.json')));
+ajv.addSchema(fs.readJSONSync(path.resolve(__dirname, '..', 'context.schema.json')));
 
 
 function validate(context, action, index) {
-  const cvalid = ajv.validate('context.schema.json', context);
+  const cvalid = ajv.validate('https://ns.adobe.com/helix/pipeline/context', context);
   if (!cvalid) {
     console.log(ajv.errorsText(), context);
     throw new Error(`Invalid Context at step ${index}
 ${ajv.errorsText()}`);
   }
-  const avalid = ajv.validate('action.schema.json', action);
+  const avalid = ajv.validate('https://ns.adobe.com/helix/pipeline/action', action);
   if (!avalid) {
     console.log(ajv.errorsText(), action);
     throw new Error(`Invalid Action at step ${index}

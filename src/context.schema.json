@@ -35,41 +35,6 @@
         }
       }
     },
-    "textcoordinates": {
-      "type": "object",
-      "description": "A position in a text document",
-      "additionalProperties": false,
-      "properties": {
-        "line": {
-          "type": "number",
-          "description": "Line number"
-        },
-        "column": {
-          "type": "number",
-          "description": "Column number"
-        },
-        "offset": {
-          "type": "number",
-          "description": "Character in the entire document"
-        }
-      }
-    },
-    "mdastposition": {
-      "type": "object",
-      "description": "Marks the position of the node in the original text flow",
-      "additionalProperties": false,
-      "properties": {
-        "start": {
-          "$ref": "#/definitions/textcoordinates"
-        },
-        "end": {
-          "$ref": "#/definitions/textcoordinates"
-        },
-        "indent": {
-          "type": "array"
-        }
-      }
-    },
     "mdastsection": {
       "properties": {
         "types": {
@@ -82,7 +47,7 @@
         "meta": { "$ref": "#/definitions/metadata/properties/meta" },
         "title": { "$ref": "#/definitions/metadata/properties/title" },
         "intro": { "$ref": "#/definitions/metadata/properties/intro" },
-        "image": { "$ref": "#/definitions/metadata/properties/meta" }
+        "image": { "$ref": "#/definitions/metadata/properties/image" }
       },
       "description": "A section in a markdown document",
       "additionalProperties": false
@@ -125,19 +90,19 @@
           "description": "The content body of the retrieved source document"
         },
         "mdast": {
-          "$ref": "#/definitions/mdastnode"
+          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode"
         },
         "sections": {
           "type": "array",
           "description": "The extracted sections of the document",
           "items": {
-            "$ref": "#/definitions/mdastnode"
+            "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode"
           }
         },
         "meta": { "$ref": "#/definitions/metadata/properties/meta" },
         "title": { "$ref": "#/definitions/metadata/properties/title" },
         "intro": { "$ref": "#/definitions/metadata/properties/intro" },
-        "image": { "$ref": "#/definitions/metadata/properties/meta" },
+        "image": { "$ref": "#/definitions/metadata/properties/image" },
         "document": {
           "type": "object",
           "description": "The DOM-compatible representation of the document's inner HTML"
@@ -156,29 +121,6 @@
         "html": {
           "type": "string",
           "description": "Deprecated: the main HTML of the document. Use `document.innerHTML` instead."
-        }
-      }
-    },
-    "mdastnode": {
-      "type": "object",
-      "description": "A node in the Markdown AST",
-      "properties": {
-        "type": {
-          "enum": ["root", "paragraph", "text"],
-          "description": "The node type of the MDAST node"
-        },
-        "children": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/mdastnode"
-          }
-        },
-        "position": {
-          "$ref": "#/definitions/mdastposition"
-        },
-        "value": {
-          "type": "string",
-          "description": "The string value of the node, if it is a terminal node."
         }
       }
     }

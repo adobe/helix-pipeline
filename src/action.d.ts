@@ -32,6 +32,12 @@ export interface Action {
        * Path to the requested (Markdown) file
        */
       path?: string;
+      /**
+       * The original OpenWhisk request headers
+       */
+      __ow_headers?: {
+        [k: string]: any;
+      };
       [k: string]: string;
     };
   };
