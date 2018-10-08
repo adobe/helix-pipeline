@@ -200,7 +200,7 @@ describe('Testing HTML Pipeline', () => {
       assert.equal(res.headers['Surrogate-Key'], 'foobar');
 
       dump({}, {}, -1).then((dir) => {
-        const outdir = path.resolve(dir, '..');
+        const outdir = path.dirname(dir);
         const found = fs.readdirSync(outdir)
           .map(file => path.resolve(outdir, file))
           .map(full => fs.existsSync(full))
