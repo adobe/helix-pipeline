@@ -12,7 +12,10 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
+const fs = require('fs-extra');
+const path = require('path');
 const { pipe } = require('../src/defaults/html.pipe.js');
+const dump = require('../src/utils/dump-context.js');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -168,6 +171,43 @@ describe('Testing HTML Pipeline', () => {
       assert.equal('text/plain', res.headers['Content-Type']);
       assert.equal(res.headers['Surrogate-Key'], 'foobar');
       done();
+    });
+  });
+
+  it('html.pipe produces debug dumps', (done) => {
+    const result = pipe(
+      ({ content }) => ({
+        response: {
+          status: 201,
+          body: content.html,
+          headers: {
+            'Content-Type': 'text/plain',
+            'Surrogate-Key': 'foobar',
+          },
+        },
+      }),
+      {},
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    result.then((res) => {
+      assert.equal(201, res.statusCode);
+      assert.equal('text/plain', res.headers['Content-Type']);
+      assert.equal(res.headers['Surrogate-Key'], 'foobar');
+
+      dump({}, {}, -1).then((dir) => {
+        const outdir = path.dirname(dir);
+        const found = fs.readdirSync(outdir)
+          .map(file => path.resolve(outdir, file))
+          .map(full => fs.existsSync(full))
+          .filter(e => !!e);
+        assert.notEqual(found.length, 0);
+        done();
+      });
     });
   });
 });
