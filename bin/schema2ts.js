@@ -15,24 +15,26 @@ const { writeFileSync } = require('fs-extra');
 const fs = require('fs-extra');
 
 
-
 const options = {
-  $refOptions: {resolve: {
-    custom: {
-      order: 1,
-      canRead: function({url}) {
-        console.log('Trying to resolve', url);
-        const basename = url.split('/').pop();
-        return fs.existsSync(`./src/${basename}.schema.json`);
+  $refOptions: {
+    dereference: {
+      circular: true                 // Don't allow circular $refs
+    },
+    resolve: {
+      custom: {
+        order: 1,
+        canRead({ url }) {
+          const basename = url.split('/').pop();
+          return fs.existsSync(`./src/${basename}.schema.json`);
+        },
+        read({ url }, callback) {
+          const basename = url.split('/').pop();
+          const schema = fs.readFileSync(`./src/${basename}.schema.json`);
+          callback(null, schema);
+        },
       },
-      read: function({ url }, callback) {
-        const basename = url.split('/').pop();
-        const schema = fs.readFileSync(`./src/${basename}.schema.json`);
-        console.log('returning', schema.toString());
-        callback(null, schema);
-      }
-    }
-  }},
+    },
+  },
   bannerComment: `/*
   * Copyright 2018 Adobe. All rights reserved.
   * This file is licensed to you under the Apache License, Version 2.0 (the "License");

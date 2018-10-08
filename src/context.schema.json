@@ -44,6 +44,9 @@
             "type": "string"
           }
         },
+        "type": { "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/type"},
+        "children": { "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/children"},
+        "position": { "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/position"},
         "meta": { "$ref": "#/definitions/metadata/properties/meta" },
         "title": { "$ref": "#/definitions/metadata/properties/title" },
         "intro": { "$ref": "#/definitions/metadata/properties/intro" },
@@ -90,13 +93,13 @@
           "description": "The content body of the retrieved source document"
         },
         "mdast": {
-          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode"
+          "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
         },
         "sections": {
           "type": "array",
           "description": "The extracted sections of the document",
           "items": {
-            "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode"
+            "$ref": "#/definitions/mdastsection"
           }
         },
         "meta": { "$ref": "#/definitions/metadata/properties/meta" },

@@ -37,118 +37,13 @@ export interface Content {
    * The content body of the retrieved source document
    */
   body?: string;
-  /**
-   * A node in the Markdown AST
-   */
   mdast?: {
-    /**
-     * The node type of the MDAST node
-     */
-    type?: "root" | "paragraph" | "text";
-    children?: {
-      [k: string]: any;
-    }[];
-    /**
-     * Marks the position of the node in the original text flow
-     */
-    position?: {
-      /**
-       * A position in a text document
-       */
-      start?: {
-        /**
-         * Line number
-         */
-        line?: number;
-        /**
-         * Column number
-         */
-        column?: number;
-        /**
-         * Character in the entire document
-         */
-        offset?: number;
-      };
-      /**
-       * A position in a text document
-       */
-      end?: {
-        /**
-         * Line number
-         */
-        line?: number;
-        /**
-         * Column number
-         */
-        column?: number;
-        /**
-         * Character in the entire document
-         */
-        offset?: number;
-      };
-      indent?: any[];
-    };
-    /**
-     * The string value of the node, if it is a terminal node.
-     */
-    value?: string;
     [k: string]: any;
   };
   /**
    * The extracted sections of the document
    */
   sections?: {
-    /**
-     * The node type of the MDAST node
-     */
-    type?: "root" | "paragraph" | "text";
-    children?: {
-      [k: string]: any;
-    }[];
-    /**
-     * Marks the position of the node in the original text flow
-     */
-    position?: {
-      /**
-       * A position in a text document
-       */
-      start?: {
-        /**
-         * Line number
-         */
-        line?: number;
-        /**
-         * Column number
-         */
-        column?: number;
-        /**
-         * Character in the entire document
-         */
-        offset?: number;
-      };
-      /**
-       * A position in a text document
-       */
-      end?: {
-        /**
-         * Line number
-         */
-        line?: number;
-        /**
-         * Column number
-         */
-        column?: number;
-        /**
-         * Character in the entire document
-         */
-        offset?: number;
-      };
-      indent?: any[];
-    };
-    /**
-     * The string value of the node, if it is a terminal node.
-     */
-    value?: string;
     [k: string]: any;
   }[];
   /**
