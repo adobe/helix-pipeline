@@ -1,0 +1,26 @@
+{
+    "$id": "https://ns.adobe.com/helix/pipeline/request",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "description": "The HTTP Request",
+    "additionalProperties": false,
+    "properties": {
+        "params": {
+            "type": "object",
+            "description": "The passed through (and filtered) URL parameters of the request",
+            "additionalProperties": {
+                "anyOf": [
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

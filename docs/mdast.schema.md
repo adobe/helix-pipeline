@@ -1,0 +1,436 @@
+
+#  Schema
+
+```
+https://ns.adobe.com/helix/pipeline/mdast
+```
+
+A node in the Markdown AST
+
+| Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
+|----------|------------|--------|--------------|-------------------|-----------------------|------------|
+| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [mdast.schema.json](mdast.schema.json) |
+## Schema Hierarchy
+
+*  `https://ns.adobe.com/helix/pipeline/mdast`
+  * [position.schema](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
+
+
+#  Properties
+
+| Property | Type | Required | Defined by |
+|----------|------|----------|------------|
+| [align](#align) | `enum[]` | Optional |  (this schema) |
+| [alt](#alt) | complex | Optional |  (this schema) |
+| [checked](#checked) | `boolean` | Optional |  (this schema) |
+| [children](#children) | mdast.schema | Optional |  (this schema) |
+| [depth](#depth) | `integer` | Optional |  (this schema) |
+| [identifier](#identifier) | `string` | Optional |  (this schema) |
+| [label](#label) | `string` | Optional |  (this schema) |
+| [lang](#lang) | `string` | Optional |  (this schema) |
+| [loose](#loose) | `boolean` | Optional |  (this schema) |
+| [meta](#meta) | `string` | Optional |  (this schema) |
+| [ordered](#ordered) | `boolean` | Optional |  (this schema) |
+| [position](#position) | position.schema | Optional |  (this schema) |
+| [start](#start) | `integer` | Optional |  (this schema) |
+| [title](#title) | complex | Optional |  (this schema) |
+| [type](#type) | `enum` | Optional |  (this schema) |
+| [url](#url) | `string` | Optional |  (this schema) |
+| [value](#value) | `string` | Optional |  (this schema) |
+
+## align
+
+For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.
+
+`align`
+* is optional
+* type: `enum[]`
+
+* defined in this schema
+
+### align Type
+
+
+Array type: `enum[]`
+
+All items must be of the type:
+Unknown type ``.
+
+```json
+{
+  "description": "For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.",
+  "type": "array",
+  "items": {
+    "enum": [
+      "left",
+      "right",
+      "center",
+      null
+    ],
+    "simpletype": "`enum`",
+    "meta:enum": {
+      "left": "",
+      "right": "",
+      "center": "",
+      "null": ""
+    }
+  },
+  "simpletype": "`enum[]`"
+}
+```
+
+
+
+
+
+
+
+
+## alt
+
+An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended.
+
+`alt`
+* is optional
+* type: complex
+* defined in this schema
+
+### alt Type
+
+Unknown type `string,null`.
+
+```json
+{
+  "type": [
+    "string",
+    "null"
+  ],
+  "description": "An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended.",
+  "simpletype": "complex"
+}
+```
+
+
+
+
+
+## checked
+
+A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present).
+
+`checked`
+* is optional
+* type: `boolean`
+* defined in this schema
+
+### checked Type
+
+
+`boolean`
+
+
+
+
+
+## children
+
+
+`children`
+* is optional
+* type: mdast.schema
+
+* defined in this schema
+
+### children Type
+
+
+Array type: mdast.schema
+
+All items must be of the type:
+* [mdast.schema](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
+
+
+
+
+
+
+
+
+## depth
+
+The heading level
+
+`depth`
+* is optional
+* type: `integer`
+* defined in this schema
+
+### depth Type
+
+
+`integer`
+* minimum value: `1`
+* maximum value: `6`
+
+
+
+
+
+## identifier
+
+For associations, an identifier field must be present. It can match an identifier field on another node.
+
+`identifier`
+* is optional
+* type: `string`
+* defined in this schema
+
+### identifier Type
+
+
+`string`
+
+
+
+
+
+
+## label
+
+For associations, a label field can be present. It represents the original value of the normalised identifier field.
+
+`label`
+* is optional
+* type: `string`
+* defined in this schema
+
+### label Type
+
+
+`string`
+
+
+
+
+
+
+## lang
+
+For code, a lang field can be present. It represents the language of computer code being marked up.
+
+`lang`
+* is optional
+* type: `string`
+* defined in this schema
+
+### lang Type
+
+
+`string`
+
+
+
+
+
+
+## loose
+
+A loose field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).
+
+`loose`
+* is optional
+* type: `boolean`
+* defined in this schema
+
+### loose Type
+
+
+`boolean`
+
+
+
+
+
+## meta
+
+For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
+
+`meta`
+* is optional
+* type: `string`
+* defined in this schema
+
+### meta Type
+
+
+`string`
+
+
+
+
+
+
+## ordered
+
+Is the list ordered
+
+`ordered`
+* is optional
+* type: `boolean`
+* defined in this schema
+
+### ordered Type
+
+
+`boolean`
+
+
+
+
+
+## position
+
+
+`position`
+* is optional
+* type: position.schema
+* defined in this schema
+
+### position Type
+
+
+* [position.schema](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
+
+
+
+
+
+## start
+
+Starting item of the list
+
+`start`
+* is optional
+* type: `integer`
+* defined in this schema
+
+### start Type
+
+
+`integer`
+
+
+
+
+
+
+## title
+
+For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip.
+
+`title`
+* is optional
+* type: complex
+* defined in this schema
+
+### title Type
+
+Unknown type `string,null`.
+
+```json
+{
+  "type": [
+    "string",
+    "null"
+  ],
+  "description": "For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip.",
+  "simpletype": "complex"
+}
+```
+
+
+
+
+
+## type
+
+The node type of the MDAST node
+
+`type`
+* is optional
+* type: `enum`
+* defined in this schema
+
+The value of this property **must** be equal to one of the [known values below](#type-known-values).
+
+### type Known Values
+| Value | Description |
+|-------|-------------|
+| `root` |  |
+| `paragraph` |  |
+| `text` |  |
+| `heading` |  |
+| `thematicBreak` |  |
+| `blockquote` |  |
+| `list` |  |
+| `table` |  |
+| `tableRow` |  |
+| `tableCell` |  |
+| `html` |  |
+| `code` |  |
+| `yaml` |  |
+| `definition` |  |
+| `footnoteDefinition` |  |
+| `emphasis` |  |
+| `strong` |  |
+| `delete` |  |
+| `inlineCode` |  |
+| `break` |  |
+| `link` |  |
+| `image` |  |
+| `linkReference` |  |
+| `imageReference` |  |
+| `footnote` |  |
+| `footnoteReference` |  |
+
+
+
+
+## url
+
+For resources, an url field must be present. It represents a URL to the referenced resource.
+
+`url`
+* is optional
+* type: `string`
+* defined in this schema
+
+### url Type
+
+
+`string`
+* format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
+
+
+
+
+
+
+## value
+
+The string value of the node, if it is a terminal node.
+
+`value`
+* is optional
+* type: `string`
+* defined in this schema
+
+### value Type
+
+
+`string`
+
+
+
+
+

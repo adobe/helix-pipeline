@@ -1,0 +1,18 @@
+{
+    "$id": "https://ns.adobe.com/helix/pipeline/position",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "description": "Marks the position of an AST node in the original text flow",
+    "additionalProperties": false,
+    "properties": {
+        "start": {
+            "$ref": "https://ns.adobe.com/helix/pipeline/textcoordinates"
+        },
+        "end": {
+            "$ref": "https://ns.adobe.com/helix/pipeline/textcoordinates"
+        },
+        "indent": {
+            "type": "array"
+        }
+    }
+}

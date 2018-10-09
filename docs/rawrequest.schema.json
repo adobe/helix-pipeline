@@ -1,0 +1,47 @@
+{
+    "$id": "https://ns.adobe.com/helix/pipeline/rawrequest",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Raw Request",
+    "type": "object",
+    "description": "The Request Object used for Invoking OpenWhisk",
+    "definitions": {
+        "rawrequest": {
+            "additionalProperties": false,
+            "properties": {
+                "params": {
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "properties": {
+                        "owner": {
+                            "type": "string",
+                            "description": "Owner of the GitHub repository. This is the name of a user or organization."
+                        },
+                        "repo": {
+                            "type": "string",
+                            "description": "Repository where content originates"
+                        },
+                        "ref": {
+                            "type": "string",
+                            "description": "Name of the branch or tag or the SHA of the commit"
+                        },
+                        "path": {
+                            "type": "string",
+                            "description": "Path to the requested (Markdown) file"
+                        },
+                        "__ow_headers": {
+                            "type": "object",
+                            "description": "Deprecated: The original OpenWhisk request headers"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/rawrequest"
+        }
+    ]
+}

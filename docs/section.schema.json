@@ -1,0 +1,53 @@
+{
+    "$id": "https://ns.adobe.com/helix/pipeline/section",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "description": "A section in a markdown document",
+    "definitions": {
+        "section": {
+            "additionalProperties": false,
+            "properties": {
+                "types": {
+                    "type": "array",
+                    "description": "The inferred class names for the section",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "type": {
+                    "const": "root",
+                    "description": "The MDAST node type. Each section can be treated as a standalone document."
+                },
+                "position": {
+                    "$ref": "https://ns.adobe.com/helix/pipeline/position"
+                },
+                "children": {
+                    "type": "array",
+                    "description": "The AST nodes making up the section. Section dividers are not included.",
+                    "items": {
+                        "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+                    }
+                },
+                "meta": {
+                    "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta"
+                },
+                "title": {
+                    "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title"
+                },
+                "intro": {
+                    "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro"
+                },
+                "image": {
+                    "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image"
+                }
+            }
+        }
+    },
+    "allOf": [
+        {
+            "$ref": "#/definitions/section"
+        },
+        {
+            "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"
+        }
+    ]
+}

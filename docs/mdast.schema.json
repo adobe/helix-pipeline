@@ -1,0 +1,122 @@
+{
+    "$id": "https://ns.adobe.com/helix/pipeline/mdast",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "description": "A node in the Markdown AST",
+    "additionalProperties": false,
+    "properties": {
+        "type": {
+            "enum": [
+                "root",
+                "paragraph",
+                "text",
+                "heading",
+                "thematicBreak",
+                "blockquote",
+                "list",
+                "table",
+                "tableRow",
+                "tableCell",
+                "html",
+                "code",
+                "yaml",
+                "definition",
+                "footnoteDefinition",
+                "emphasis",
+                "strong",
+                "delete",
+                "inlineCode",
+                "break",
+                "link",
+                "image",
+                "linkReference",
+                "imageReference",
+                "footnote",
+                "footnoteReference"
+            ],
+            "description": "The node type of the MDAST node"
+        },
+        "children": {
+            "type": "array",
+            "items": {
+                "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+            }
+        },
+        "position": {
+            "$ref": "https://ns.adobe.com/helix/pipeline/position"
+        },
+        "value": {
+            "type": "string",
+            "description": "The string value of the node, if it is a terminal node."
+        },
+        "depth": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6,
+            "description": "The heading level"
+        },
+        "ordered": {
+            "type": "boolean",
+            "description": "Is the list ordered"
+        },
+        "start": {
+            "type": "integer",
+            "description": "Starting item of the list"
+        },
+        "loose": {
+            "type": "boolean",
+            "description": "A loose field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present)."
+        },
+        "checked": {
+            "type": "boolean",
+            "description": "A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present)."
+        },
+        "align": {
+            "description": "For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.",
+            "type": "array",
+            "items": {
+                "enum": [
+                    "left",
+                    "right",
+                    "center",
+                    null
+                ]
+            }
+        },
+        "lang": {
+            "type": "string",
+            "description": "For code, a lang field can be present. It represents the language of computer code being marked up."
+        },
+        "meta": {
+            "type": "string",
+            "description": "For code, if lang is present, a meta field can be present. It represents custom information relating to the node."
+        },
+        "identifier": {
+            "type": "string",
+            "description": "For associations, an identifier field must be present. It can match an identifier field on another node."
+        },
+        "label": {
+            "type": "string",
+            "description": "For associations, a label field can be present. It represents the original value of the normalised identifier field."
+        },
+        "url": {
+            "type": "string",
+            "format": "uri-reference",
+            "description": "For resources, an url field must be present. It represents a URL to the referenced resource."
+        },
+        "title": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip."
+        },
+        "alt": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "description": "An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended."
+        }
+    }
+}
