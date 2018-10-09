@@ -88,6 +88,7 @@
             "description": "For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.",
             "type": "array",
             "items": {
+                "type": "string",
                 "enum": [
                     "left",
                     "right",
