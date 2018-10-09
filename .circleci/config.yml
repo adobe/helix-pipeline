@@ -118,6 +118,41 @@ jobs:
         name: publish pre-release
         command: npm publish --tag next --access public
 
+
+  generate-docs:
+    docker:
+      - image: circleci/node:8
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - restore_cache:
+          keys:
+            - v2-dependencies-{{ checksum "package-lock.json" }}
+
+      - add_ssh_keys:
+          fingerprints:
+            - "e2:da:a5:eb:5a:3c:69:a8:d7:1a:db:19:26:86:69:2b"
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v2-dependencies-{{ checksum "package-lock.json" }}
+
+      # generate markdowm
+      - run: npm run docs
+      - run: node bin/show-stablization-candidates.js > STABILIZING.md
+      - run: git config --global user.email "circleci@example.com" && git config --global user.name "CircleCi Build"
+
+      # send up-to-date markdown back to GitHub
+      - run:
+          name: Publish Markdown to GitHub
+          command: git add --force docs/* && git commit -m "[ci skip] updating documentation" && git push
+
 workflows:
   version: 2
   build:
@@ -127,6 +162,14 @@ workflows:
 
     # publish pre-releases on master
     - publish-pre-release:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master
+
+    # generate documentation on master
+    - generate-docs:
         requires:
         - build
         filters:
