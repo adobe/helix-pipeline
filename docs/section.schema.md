@@ -1,5 +1,5 @@
 
-#  Schema
+# Section Schema
 
 ```
 https://ns.adobe.com/helix/pipeline/section
@@ -12,23 +12,23 @@ A section in a markdown document
 | Can be instantiated | Yes | Experimental | No | Forbidden | Permitted | [section.schema.json](section.schema.json) |
 ## Schema Hierarchy
 
-*  `https://ns.adobe.com/helix/pipeline/section`
-  * [position.schema](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
+* Section `https://ns.adobe.com/helix/pipeline/section`
+  * [Position](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
   * [Meta](meta.schema.md) `https://ns.adobe.com/helix/pipeline/meta`
 
 
-#  Properties
+# Section Properties
 
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
-| [children](#children) | mdast.schema | Optional |  (this schema) |
+| [children](#children) | MDAST | Optional | Section (this schema) |
 | [image](#image) | `string` | Optional | [Meta](meta.schema.md#image) |
 | [intro](#intro) | `string` | Optional | [Meta](meta.schema.md#intro) |
 | [meta](#meta) | `object` | Optional | [Meta](meta.schema.md#meta) |
-| [position](#position) | position.schema | Optional |  (this schema) |
+| [position](#position) | Position | Optional | Section (this schema) |
 | [title](#title) | `string` | Optional | [Meta](meta.schema.md#title) |
-| [type](#type) | `const` | Optional |  (this schema) |
-| [types](#types) | `string[]` | Optional |  (this schema) |
+| [type](#type) | `const` | Optional | Section (this schema) |
+| [types](#types) | `string[]` | Optional | Section (this schema) |
 | `*` | any | Additional | this schema *allows* additional properties |
 
 ## children
@@ -37,17 +37,17 @@ The AST nodes making up the section. Section dividers are not included.
 
 `children`
 * is optional
-* type: mdast.schema
+* type: MDAST
 
 * defined in this schema
 
 ### children Type
 
 
-Array type: mdast.schema
+Array type: MDAST
 
 All items must be of the type:
-* [mdast.schema](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
+* [MDAST](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
 
 
 
@@ -123,13 +123,13 @@ Extracted metadata fron the frontmatter of the document
 
 `position`
 * is optional
-* type: position.schema
+* type: Position
 * defined in this schema
 
 ### position Type
 
 
-* [position.schema](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
+* [Position](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
 
 
 

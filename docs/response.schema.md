@@ -1,5 +1,5 @@
 
-#  Schema
+# Response Schema
 
 ```
 https://ns.adobe.com/helix/pipeline/response
@@ -9,15 +9,15 @@ The HTTP response object
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [response.schema.json](response.schema.json) |
+| Can be instantiated | No | Stabilizing | No | Forbidden | Forbidden | [response.schema.json](response.schema.json) |
 
-#  Properties
+# Response Properties
 
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
-| [body](#body) | complex | Optional |  (this schema) |
-| [headers](#headers) | complex | Optional |  (this schema) |
-| [status](#status) | `integer` | Optional |  (this schema) |
+| [body](#body) | complex | Optional | Response (this schema) |
+| [headers](#headers) | complex | Optional | Response (this schema) |
+| [status](#status) | `integer` | Optional | Response (this schema) |
 
 ## body
 

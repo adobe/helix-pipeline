@@ -1,5 +1,5 @@
 
-#  Schema
+# Request Schema
 
 ```
 https://ns.adobe.com/helix/pipeline/request
@@ -9,13 +9,13 @@ The HTTP Request
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [request.schema.json](request.schema.json) |
+| Can be instantiated | No | Stabilizing | No | Forbidden | Forbidden | [request.schema.json](request.schema.json) |
 
-#  Properties
+# Request Properties
 
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
-| [params](#params) | `object` | Optional |  (this schema) |
+| [params](#params) | `object` | Optional | Request (this schema) |
 
 ## params
 

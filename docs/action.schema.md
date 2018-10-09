@@ -9,7 +9,7 @@ Tracks the OpenWhisk action invocation
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [action.schema.json](action.schema.json) |
+| Can be instantiated | No | Stabilizing | No | Forbidden | Forbidden | [action.schema.json](action.schema.json) |
 ## Schema Hierarchy
 
 * Action `https://ns.adobe.com/helix/pipeline/action`

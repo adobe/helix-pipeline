@@ -13,6 +13,8 @@
     "$id": "https://ns.adobe.com/helix/pipeline/section",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "description": "A section in a markdown document",
+    "meta:status": "experimental",
+    "title": "Section",
     "definitions": {
         "section": {
             "additionalProperties": false,

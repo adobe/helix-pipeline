@@ -14,6 +14,7 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Context",
     "type": "object",
+    "meta:status": "stabilizing",
     "description": "The context thingie.",
     "additionalProperties": false,
     "properties": {

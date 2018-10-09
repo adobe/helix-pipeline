@@ -13,6 +13,8 @@
   "$id": "https://ns.adobe.com/helix/pipeline/response",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
+  "title": "Response",
+  "meta:status": "stabilizing",
   "description": "The HTTP response object",
   "additionalProperties": false,
   "properties": {

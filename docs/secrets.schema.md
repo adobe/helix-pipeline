@@ -9,7 +9,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [secrets.schema.json](secrets.schema.json) |
+| Can be instantiated | No | Stable | No | Forbidden | Forbidden | [secrets.schema.json](secrets.schema.json) |
 
 # Secrets Properties
 

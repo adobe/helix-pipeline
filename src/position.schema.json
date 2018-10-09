@@ -13,6 +13,8 @@
   "$id": "https://ns.adobe.com/helix/pipeline/position",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
+  "title": "Position",
+  "meta:status": "stable",
   "description": "Marks the position of an AST node in the original text flow",
   "additionalProperties": false,
   "properties": {

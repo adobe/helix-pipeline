@@ -1,5 +1,5 @@
 
-#  Schema
+# MDAST Schema
 
 ```
 https://ns.adobe.com/helix/pipeline/mdast
@@ -9,34 +9,34 @@ A node in the Markdown AST
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [mdast.schema.json](mdast.schema.json) |
+| Can be instantiated | No | Stable | No | Forbidden | Forbidden | [mdast.schema.json](mdast.schema.json) |
 ## Schema Hierarchy
 
-*  `https://ns.adobe.com/helix/pipeline/mdast`
-  * [position.schema](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
+* MDAST `https://ns.adobe.com/helix/pipeline/mdast`
+  * [Position](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
 
 
-#  Properties
+# MDAST Properties
 
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
-| [align](#align) | `enum[]` | Optional |  (this schema) |
-| [alt](#alt) | complex | Optional |  (this schema) |
-| [checked](#checked) | `boolean` | Optional |  (this schema) |
-| [children](#children) | mdast.schema | Optional |  (this schema) |
-| [depth](#depth) | `integer` | Optional |  (this schema) |
-| [identifier](#identifier) | `string` | Optional |  (this schema) |
-| [label](#label) | `string` | Optional |  (this schema) |
-| [lang](#lang) | `string` | Optional |  (this schema) |
-| [loose](#loose) | `boolean` | Optional |  (this schema) |
-| [meta](#meta) | `string` | Optional |  (this schema) |
-| [ordered](#ordered) | `boolean` | Optional |  (this schema) |
-| [position](#position) | position.schema | Optional |  (this schema) |
-| [start](#start) | `integer` | Optional |  (this schema) |
-| [title](#title) | complex | Optional |  (this schema) |
-| [type](#type) | `enum` | Optional |  (this schema) |
-| [url](#url) | `string` | Optional |  (this schema) |
-| [value](#value) | `string` | Optional |  (this schema) |
+| [align](#align) | `enum[]` | Optional | MDAST (this schema) |
+| [alt](#alt) | complex | Optional | MDAST (this schema) |
+| [checked](#checked) | `boolean` | Optional | MDAST (this schema) |
+| [children](#children) | MDAST | Optional | MDAST (this schema) |
+| [depth](#depth) | `integer` | Optional | MDAST (this schema) |
+| [identifier](#identifier) | `string` | Optional | MDAST (this schema) |
+| [label](#label) | `string` | Optional | MDAST (this schema) |
+| [lang](#lang) | `string` | Optional | MDAST (this schema) |
+| [loose](#loose) | `boolean` | Optional | MDAST (this schema) |
+| [meta](#meta) | `string` | Optional | MDAST (this schema) |
+| [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
+| [position](#position) | Position | Optional | MDAST (this schema) |
+| [start](#start) | `integer` | Optional | MDAST (this schema) |
+| [title](#title) | complex | Optional | MDAST (this schema) |
+| [type](#type) | `enum` | Optional | MDAST (this schema) |
+| [url](#url) | `string` | Optional | MDAST (this schema) |
+| [value](#value) | `string` | Optional | MDAST (this schema) |
 
 ## align
 
@@ -137,17 +137,17 @@ A checked field can be present. It represents whether the item is done (when tru
 
 `children`
 * is optional
-* type: mdast.schema
+* type: MDAST
 
 * defined in this schema
 
 ### children Type
 
 
-Array type: mdast.schema
+Array type: MDAST
 
 All items must be of the type:
-* [mdast.schema](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
+* [MDAST](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
 
 
 
@@ -293,13 +293,13 @@ Is the list ordered
 
 `position`
 * is optional
-* type: position.schema
+* type: Position
 * defined in this schema
 
 ### position Type
 
 
-* [position.schema](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
+* [Position](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
 
 
 

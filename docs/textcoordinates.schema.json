@@ -13,6 +13,8 @@
     "$id": "https://ns.adobe.com/helix/pipeline/textcoordinates",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "type": "object",
+    "title": "Text Coordinates",
+    "meta:status": "stabilizing",
     "description": "A position in a text document",
     "additionalProperties": false,
     "properties": {

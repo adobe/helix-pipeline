@@ -13,6 +13,7 @@
     "$id": "https://ns.adobe.com/helix/pipeline/meta",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "title": "Meta",
+    "meta:status": "stabilizing",
     "description": "Content and Section Metadata Properties",
     "definitions": {
         "meta": {

@@ -1,5 +1,5 @@
 
-#  Schema
+# Text Coordinates Schema
 
 ```
 https://ns.adobe.com/helix/pipeline/textcoordinates
@@ -9,15 +9,15 @@ A position in a text document
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [textcoordinates.schema.json](textcoordinates.schema.json) |
+| Can be instantiated | No | Stabilizing | No | Forbidden | Forbidden | [textcoordinates.schema.json](textcoordinates.schema.json) |
 
-#  Properties
+# Text Coordinates Properties
 
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
-| [column](#column) | `number` | Optional |  (this schema) |
-| [line](#line) | `number` | Optional |  (this schema) |
-| [offset](#offset) | `number` | Optional |  (this schema) |
+| [column](#column) | `number` | Optional | Text Coordinates (this schema) |
+| [line](#line) | `number` | Optional | Text Coordinates (this schema) |
+| [offset](#offset) | `number` | Optional | Text Coordinates (this schema) |
 
 ## column
 

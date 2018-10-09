@@ -9,11 +9,11 @@ The content as retrieved from the repository and enriched in the pipeline.
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [content.schema.json](content.schema.json) |
+| Can be instantiated | No | Stabilizing | No | Forbidden | Forbidden | [content.schema.json](content.schema.json) |
 ## Schema Hierarchy
 
 * Content `https://ns.adobe.com/helix/pipeline/content`
-  * [mdast.schema](mdast.schema.md) `https://ns.adobe.com/helix/pipeline/mdast`
+  * [MDAST](mdast.schema.md) `https://ns.adobe.com/helix/pipeline/mdast`
   * [Meta](meta.schema.md) `https://ns.adobe.com/helix/pipeline/meta`
 
 
@@ -28,9 +28,9 @@ The content as retrieved from the repository and enriched in the pipeline.
 | [html](#html) | `string` | Optional | Content (this schema) |
 | [image](#image) | `string` | Optional | Content (this schema) |
 | [intro](#intro) | `string` | Optional | Content (this schema) |
-| [mdast](#mdast) | mdast.schema | Optional | Content (this schema) |
+| [mdast](#mdast) | MDAST | Optional | Content (this schema) |
 | [meta](#meta) | `object` | Optional | Content (this schema) |
-| [sections](#sections) | section.schema | Optional | Content (this schema) |
+| [sections](#sections) | Section | Optional | Content (this schema) |
 | [sources](#sources) | `string[]` | Optional | Content (this schema) |
 | [title](#title) | `string` | Optional | Content (this schema) |
 
@@ -188,13 +188,13 @@ Extracted first paragraph of the document
 
 `mdast`
 * is optional
-* type: mdast.schema
+* type: MDAST
 * defined in this schema
 
 ### mdast Type
 
 
-* [mdast.schema](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
+* [MDAST](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
 
 
 
@@ -229,17 +229,17 @@ The extracted sections of the document
 
 `sections`
 * is optional
-* type: section.schema
+* type: Section
 
 * defined in this schema
 
 ### sections Type
 
 
-Array type: section.schema
+Array type: Section
 
 All items must be of the type:
-* [section.schema](section.schema.md) – `https://ns.adobe.com/helix/pipeline/section`
+* [Section](section.schema.md) – `https://ns.adobe.com/helix/pipeline/section`
 
 
 

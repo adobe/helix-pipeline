@@ -9,13 +9,13 @@ The context thingie.
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [context.schema.json](context.schema.json) |
+| Can be instantiated | No | Stabilizing | No | Forbidden | Forbidden | [context.schema.json](context.schema.json) |
 ## Schema Hierarchy
 
 * Context `https://ns.adobe.com/helix/pipeline/context`
-  * [request.schema](request.schema.md) `https://ns.adobe.com/helix/pipeline/request`
+  * [Request](request.schema.md) `https://ns.adobe.com/helix/pipeline/request`
   * [Content](content.schema.md) `https://ns.adobe.com/helix/pipeline/content`
-  * [response.schema](response.schema.md) `https://ns.adobe.com/helix/pipeline/response`
+  * [Response](response.schema.md) `https://ns.adobe.com/helix/pipeline/response`
 
 
 # Context Properties
@@ -24,8 +24,8 @@ The context thingie.
 |----------|------|----------|------------|
 | [content](#content) | Content | Optional | Context (this schema) |
 | [error](#error) | `string` | Optional | Context (this schema) |
-| [request](#request) | request.schema | Optional | Context (this schema) |
-| [response](#response) | response.schema | Optional | Context (this schema) |
+| [request](#request) | Request | Optional | Context (this schema) |
+| [response](#response) | Response | Optional | Context (this schema) |
 
 ## content
 
@@ -69,13 +69,13 @@ When this property is present, all other values can be ignored.
 
 `request`
 * is optional
-* type: request.schema
+* type: Request
 * defined in this schema
 
 ### request Type
 
 
-* [request.schema](request.schema.md) – `https://ns.adobe.com/helix/pipeline/request`
+* [Request](request.schema.md) – `https://ns.adobe.com/helix/pipeline/request`
 
 
 
@@ -86,13 +86,13 @@ When this property is present, all other values can be ignored.
 
 `response`
 * is optional
-* type: response.schema
+* type: Response
 * defined in this schema
 
 ### response Type
 
 
-* [response.schema](response.schema.md) – `https://ns.adobe.com/helix/pipeline/response`
+* [Response](response.schema.md) – `https://ns.adobe.com/helix/pipeline/response`
 
 
 

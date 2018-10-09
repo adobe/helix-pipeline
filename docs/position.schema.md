@@ -1,5 +1,5 @@
 
-#  Schema
+# Position Schema
 
 ```
 https://ns.adobe.com/helix/pipeline/position
@@ -9,33 +9,33 @@ Marks the position of an AST node in the original text flow
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [position.schema.json](position.schema.json) |
+| Can be instantiated | No | Stable | No | Forbidden | Forbidden | [position.schema.json](position.schema.json) |
 ## Schema Hierarchy
 
-*  `https://ns.adobe.com/helix/pipeline/position`
-  * [textcoordinates.schema](textcoordinates.schema.md) `https://ns.adobe.com/helix/pipeline/textcoordinates`
+* Position `https://ns.adobe.com/helix/pipeline/position`
+  * [Text Coordinates](textcoordinates.schema.md) `https://ns.adobe.com/helix/pipeline/textcoordinates`
 
 
-#  Properties
+# Position Properties
 
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
-| [end](#end) | textcoordinates.schema | Optional |  (this schema) |
-| [indent](#indent) | `array` | Optional |  (this schema) |
-| [start](#start) | textcoordinates.schema | Optional |  (this schema) |
+| [end](#end) | Text Coordinates | Optional | Position (this schema) |
+| [indent](#indent) | `array` | Optional | Position (this schema) |
+| [start](#start) | Text Coordinates | Optional | Position (this schema) |
 
 ## end
 
 
 `end`
 * is optional
-* type: textcoordinates.schema
+* type: Text Coordinates
 * defined in this schema
 
 ### end Type
 
 
-* [textcoordinates.schema](textcoordinates.schema.md) – `https://ns.adobe.com/helix/pipeline/textcoordinates`
+* [Text Coordinates](textcoordinates.schema.md) – `https://ns.adobe.com/helix/pipeline/textcoordinates`
 
 
 
@@ -65,13 +65,13 @@ Array type: `array`
 
 `start`
 * is optional
-* type: textcoordinates.schema
+* type: Text Coordinates
 * defined in this schema
 
 ### start Type
 
 
-* [textcoordinates.schema](textcoordinates.schema.md) – `https://ns.adobe.com/helix/pipeline/textcoordinates`
+* [Text Coordinates](textcoordinates.schema.md) – `https://ns.adobe.com/helix/pipeline/textcoordinates`
 
 
 

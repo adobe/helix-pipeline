@@ -9,7 +9,7 @@ Content and Section Metadata Properties
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Cannot be instantiated | Yes | Experimental | No | Forbidden | Permitted | [meta.schema.json](meta.schema.json) |
+| Cannot be instantiated | Yes | Stabilizing | No | Forbidden | Permitted | [meta.schema.json](meta.schema.json) |
 
 # Meta Definitions
 
