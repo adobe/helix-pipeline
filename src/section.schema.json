@@ -4,6 +4,7 @@
   "description": "A section in a markdown document",
   "definitions": {
     "section": {
+      "additionalProperties": false,
       "properties": {
         "types": {
           "type": "array",
@@ -25,11 +26,22 @@
           "items": {
             "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
           }
+        },
+        "meta": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta"
+        },
+        "title": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title"
+        },
+        "intro": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro"
+        },
+        "image": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image"
         }
       }
     }
   },
-  "additionalProperties": false,
   "allOf": [
     {"$ref": "#/definitions/section"},
     {"$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"}

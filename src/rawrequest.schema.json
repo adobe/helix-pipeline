@@ -4,9 +4,9 @@
   "title": "Raw Request",
   "type": "object",
   "description": "The Request Object used for Invoking OpenWhisk",
-  "additionalProperties": false,
   "definitions": {
     "rawrequest": {
+      "additionalProperties": false,
       "properties": {
         "params": {
           "type": "object",

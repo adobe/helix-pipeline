@@ -13,12 +13,11 @@ const Ajv = require('ajv');
 const fs = require('fs-extra');
 const path = require('path');
 
-const ajv = new Ajv();
+const ajv = new Ajv({allErrors: true, verbose: true});
 const schemadir = path.dirname(__dirname);
 fs.readdirSync(schemadir)
   .filter(file => file.match(/\.schema\.json$/))
   .map(file => {
-    console.log(file);
     ajv.addSchema(fs.readJSONSync(path.resolve(schemadir, file)));
   });
 

@@ -4,9 +4,9 @@
   "title": "Content",
   "type": "object",
   "description": "The content as retrieved from the repository and enriched in the pipeline.",
-  "additionalProperties": false,
   "definitions": {
     "content": {
+      "additionalProperties": false,
       "properties": {
         "sources": {
           "type": "array",
@@ -51,12 +51,24 @@
           "type": "string",
           "meta:status": "deprecated",
           "description": "Deprecated: the main HTML of the document. Use `document.innerHTML` instead."
+        },
+        "meta": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta"
+        },
+        "title": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title"
+        },
+        "intro": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro"
+        },
+        "image": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image"
         }
       }
     }
   },
   "allOf": [
     { "$ref": "#/definitions/content"},
-    { "$ref": "https://ns.adobe.com/helix/pipeline/meta"}
+    { "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"}
   ]
 }
