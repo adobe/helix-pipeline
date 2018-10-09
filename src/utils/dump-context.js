@@ -15,7 +15,7 @@ const path = require('path');
 const fs = require('fs-extra');
 
 fs.mkdirpSync(path.resolve(process.cwd(), 'logs', 'debug'));
-const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'logs', 'debug'), unsafeCleanup: false }).then(o => o.path);
+const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'logs', 'debug'), unsafeCleanup: true }).then(o => o.path);
 
 function tstamp() {
   const now = new Date();
