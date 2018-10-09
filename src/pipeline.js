@@ -13,13 +13,8 @@ const _ = require('lodash/fp');
 const Promise = require('bluebird');
 
 const nopLogger = {
-  error: () => {},
-  warn: () => {},
-  info: () => {},
-  verbose: () => {},
   debug: () => {},
   silly: () => {},
-  log: () => {},
 };
 
 /**
