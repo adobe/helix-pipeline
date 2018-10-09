@@ -21,7 +21,7 @@ module.exports = {
   'parserOptions': {
     'sourceType': 'script',
     // async/await support
-    'ecmaVersion': 8
+    'ecmaVersion': 2018,
   },
   'plugins': [
     'header',

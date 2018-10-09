@@ -16,8 +16,6 @@ const assert = require('assert');
 const {
   pipe,
   pre,
-  adaptOWRequest,
-  adaptOWResponse,
   log,
 } = require('../index.js').defaults;
 
@@ -25,8 +23,6 @@ describe('Testing Default Pipeline', () => {
   it('Default Pipeline can be loaded', () => {
     assert.ok(pipe, 'no default pipeline found');
     assert.ok(pre, 'no default pre.js found');
-    assert.ok(adaptOWRequest, 'no request wrapper found');
-    assert.ok(adaptOWResponse, 'no response wrapper found');
     assert.ok(log, 'no logger found');
   });
 
@@ -42,96 +38,5 @@ describe('Testing Default Pipeline', () => {
       body: 'test. payload: my payload action: my action',
       title: 'my payload',
     });
-  });
-
-  it('adaptOWResponse keeps response in tact', () => {
-    const inp = {
-      response: {
-        status: 301,
-        headers: {
-          Location: 'https://example.com',
-        },
-        body: null,
-      },
-    };
-    const out = adaptOWResponse(inp);
-    assert.equal(out.statusCode, 301);
-    assert.equal(out.headers.Location, 'https://example.com');
-    assert.equal(out.body, null);
-  });
-
-  it('adaptOWResponse provides reasonable defaults for JSON', () => {
-    const inp = {
-      response: {
-        foo: 'bar',
-      },
-    };
-    const out = adaptOWResponse(inp);
-    assert.equal(out.statusCode, 200);
-    assert.equal(out.headers.Location, undefined);
-    assert.equal(out.headers['Content-Type'], 'application/json');
-    assert.deepEqual(out.body, {});
-  });
-
-  it('adaptOWResponse provides reasonable defaults for plain text', () => {
-    const inp = {
-      response: {
-        foo: 'bar',
-        headers: {
-          'Content-Type': 'text/plain',
-        },
-      },
-    };
-    const out = adaptOWResponse(inp);
-    assert.equal(out.statusCode, 200);
-    assert.equal(out.headers.Location, undefined);
-    assert.equal(out.headers['Content-Type'], 'text/plain');
-    assert.deepEqual(out.body, '');
-  });
-
-  it('adaptOWRequest needs to parse params parameter', () => {
-    const testObject = {
-      foo: 'foo',
-      bar: 'bar',
-    };
-    const out = adaptOWRequest({}, { request: { params: { params: 'foo=foo&bar=bar' } } });
-    assert.ok(out.request, 'missing request object');
-    assert.deepEqual(testObject, out.request.params, 'request object does not match incoming req');
-  });
-
-  it('adaptOWRequest acts reasonably on wrong params parameter', () => {
-    const out = adaptOWRequest({}, { request: { params: { params: 'this is not url encoded' } } });
-    assert.ok(out.request, 'missing request object');
-  });
-
-  it('adaptOWRequest needs to parse req parameter', () => {
-    const testObject = {
-      url: 'url',
-      headers: {
-        h1: '1',
-        h2: '2',
-      },
-      params: {
-        p1: '1',
-        p2: true,
-        p3: ['a', 'b', 'c'],
-        p4: {
-          p41: '1',
-        },
-      },
-    };
-    const out = adaptOWRequest({}, { request: { params: { req: JSON.stringify(testObject) } } });
-    assert.ok(out.request, 'missing request object');
-    assert.deepEqual(testObject, out.request, 'request object does not match incoming req');
-  });
-
-  it('adaptOWRequest acts reasonably on wrong req parameter', () => {
-    const out = adaptOWRequest({}, { request: { params: { req: 'this is not json' } } });
-    assert.ok(out.request, 'missing request object');
-  });
-
-  it('adaptOWRequest acts reasonably with no request object', () => {
-    const out = adaptOWRequest({}, {});
-    assert.ok(out.request, 'missing request object');
   });
 });

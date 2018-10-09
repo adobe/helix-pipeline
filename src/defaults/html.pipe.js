@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const { Pipeline } = require('../../index.js');
-const { adaptOWRequest, adaptOWResponse, log } = require('./default.js');
+const { log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
@@ -34,7 +34,6 @@ const htmlpipe = (cont, payload, action) => {
   const pipe = new Pipeline(action);
   pipe
     .every(dump).when(() => !production())
-    .before(adaptOWRequest)
     .before(fetch)
     .when(({ content }) => !(content && content.body && content.body.length > 0))
     .before(parse)
@@ -47,8 +46,7 @@ const htmlpipe = (cont, payload, action) => {
     .once(cont)
     .after(type)
     .after(key)
-    .after(debug)
-    .after(adaptOWResponse);
+    .after(debug);
 
   action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);
