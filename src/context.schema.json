@@ -7,12 +7,12 @@
   "additionalProperties": false,
   "definitions": {
     "response": {
-      "type":"object",
+      "type": "object",
       "description": "The HTTP response object",
       "additionalProperties": false,
       "properties": {
         "status": {
-          "type":"integer",
+          "type": "integer",
           "description": "The HTTP status code"
         },
         "body": {
@@ -23,7 +23,7 @@
             },
             {
               "description": "The JSON object to represent the body of the response",
-              "type":"object"
+              "type": "object"
             }
           ]
         },
@@ -38,15 +38,21 @@
     "mdastsection": {
       "properties": {
         "types": {
-          "type":"array",
+          "type": "array",
           "description": "The inferred class names for the section",
           "items": {
             "type": "string"
           }
         },
-        "type": { "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/type"},
-        "children": { "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/children"},
-        "position": { "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/position"},
+        "type": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/type"
+        },
+        "children": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/children"
+        },
+        "position": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/position"
+        },
         "meta": { "$ref": "#/definitions/metadata/properties/meta" },
         "title": { "$ref": "#/definitions/metadata/properties/title" },
         "intro": { "$ref": "#/definitions/metadata/properties/intro" },
@@ -136,7 +142,19 @@
     "request": {
       "type": "object",
       "description": "The HTTP Request",
-      "additionalProperties": false
+      "additionalProperties": false,
+      "properties": {
+        "params": {
+          "type": "object",
+          "description": "The passed through (and filtered) URL parameters of the request",
+          "additionalProperties": {
+            "anyOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } }
+            ]
+          }
+        }
+      }
     },
     "content": {
       "$ref": "#/definitions/content"

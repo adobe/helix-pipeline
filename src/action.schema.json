@@ -34,7 +34,7 @@
             },
             "__ow_headers": {
               "type": "object",
-              "description": "The original OpenWhisk request headers"
+              "description": "Deprecated: The original OpenWhisk request headers"
             }
           }
         }
