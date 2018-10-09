@@ -12,7 +12,12 @@
 /* eslint-env mocha */
 
 const assert = require('assert');
-const { createActionResponse, extractClientRequest } = require('../src/utils/openwhisk.js');
+const {
+  createActionResponse,
+  extractClientRequest,
+  runPipeline,
+} = require('../src/utils/openwhisk.js');
+const { pipe, log } = require('../src/defaults/default.js');
 
 describe('Testing OpenWhisk adapter', () => {
   it('createActionResponse keeps response in tact', async () => {
@@ -107,5 +112,37 @@ describe('Testing OpenWhisk adapter', () => {
   it('extractClientRequest acts reasonably with no request object', () => {
     const out = extractClientRequest({});
     assert.ok(out, 'missing request object');
+  });
+
+  it('openwhisk parameters are properly adapted', async () => {
+    const params = {
+      __ow_headers: {
+        Host: 'example.com',
+      },
+      __ow_logger: log,
+      __ow_method: 'get',
+      path: '/test',
+      SECRET: '1234',
+    };
+    let action = {};
+    await runPipeline((p, a) => {
+      action = a;
+    }, pipe, params);
+
+    assert.deepEqual({
+      request: {
+        params: {
+          path: '/test',
+        },
+        headers: {
+          Host: 'example.com',
+        },
+        method: 'get',
+      },
+      logger: log,
+      secrets: {
+        SECRET: '1234',
+      },
+    }, action);
   });
 });

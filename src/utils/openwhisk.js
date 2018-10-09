@@ -55,7 +55,7 @@ async function createActionResponse(payload) {
       headers = { 'Content-Type': 'application/json' },
       body = headers['Content-Type'] === 'application/json' ? {} : '',
       error,
-    },
+    } = {},
   } = payload;
   return {
     statusCode: status,

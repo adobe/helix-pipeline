@@ -171,8 +171,8 @@ describe('Testing HTML Pipeline', () => {
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
   });
 
-  it('html.pipe produces debug dumps', (done) => {
-    const result = pipe(
+  it('html.pipe produces debug dumps', async () => {
+    const result = await pipe(
       ({ content }) => ({
         response: {
           status: 201,
@@ -191,20 +191,16 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    result.then((res) => {
-      assert.equal(201, res.statusCode);
-      assert.equal('text/plain', res.headers['Content-Type']);
-      assert.equal(res.headers['Surrogate-Key'], 'foobar');
+    assert.equal(201, result.response.status);
+    assert.equal('text/plain', result.response.headers['Content-Type']);
+    assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
 
-      dump({}, {}, -1).then((dir) => {
-        const outdir = path.dirname(dir);
-        const found = fs.readdirSync(outdir)
-          .map(file => path.resolve(outdir, file))
-          .map(full => fs.existsSync(full))
-          .filter(e => !!e);
-        assert.notEqual(found.length, 0);
-        done();
-      });
-    });
+    const dir = await dump({}, {}, -1);
+    const outdir = path.dirname(dir);
+    const found = fs.readdirSync(outdir)
+      .map(file => path.resolve(outdir, file))
+      .map(full => fs.existsSync(full))
+      .filter(e => !!e);
+    assert.notEqual(found.length, 0);
   });
 });
