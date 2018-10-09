@@ -14,8 +14,6 @@ const { compileFromFile } = require('json-schema-to-typescript');
 const { writeFileSync } = require('fs-extra');
 const fs = require('fs-extra');
 
-let counter = 0;
-
 const options = {
   $refOptions: {
     dereference: {
@@ -33,7 +31,7 @@ const options = {
           const basename = url.split('/').pop();
           let schema = fs.readFileSync(`./docs/${basename}.schema.json`);
           if (url === 'https://ns.adobe.com/helix/pipeline/mdast') {
-            schema = schema.toString().replace(`"$ref": "https://ns.adobe.com/helix/pipeline/mdast"`, `"type": "object"`);
+            schema = schema.toString().replace('"$ref": "https://ns.adobe.com/helix/pipeline/mdast"', '"type": "object"');
           }
           callback(null, schema);
         },
