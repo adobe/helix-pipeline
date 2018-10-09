@@ -8,7 +8,7 @@
   "scripts": {
     "test": "nyc mocha",
     "lint": "npx eslint . && npm run types",
-    "types": "node bin/schema2ts.js",
+    "types": "npm run docs && node bin/schema2ts.js",
     "docs": "npx jsonschema2md -d src -o docs",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",

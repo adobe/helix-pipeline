@@ -9,7 +9,7 @@ The content as retrieved from the repository and enriched in the pipeline.
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | Yes | Experimental | No | Forbidden | Permitted | [content.schema.json](content.schema.json) |
+| Can be instantiated | No | Experimental | No | Forbidden | Forbidden | [content.schema.json](content.schema.json) |
 ## Schema Hierarchy
 
 * Content `https://ns.adobe.com/helix/pipeline/content`
@@ -26,14 +26,13 @@ The content as retrieved from the repository and enriched in the pipeline.
 | [document](#document) | `object` | Optional | Content (this schema) |
 | [htast](#htast) | `object` | Optional | Content (this schema) |
 | [html](#html) | `string` | Optional | Content (this schema) |
-| [image](#image) | `string` | Optional | [Meta](meta.schema.md#image) |
-| [intro](#intro) | `string` | Optional | [Meta](meta.schema.md#intro) |
+| [image](#image) | `string` | Optional | Content (this schema) |
+| [intro](#intro) | `string` | Optional | Content (this schema) |
 | [mdast](#mdast) | mdast.schema | Optional | Content (this schema) |
-| [meta](#meta) | `object` | Optional | [Meta](meta.schema.md#meta) |
+| [meta](#meta) | `object` | Optional | Content (this schema) |
 | [sections](#sections) | section.schema | Optional | Content (this schema) |
 | [sources](#sources) | `string[]` | Optional | Content (this schema) |
-| [title](#title) | `string` | Optional | [Meta](meta.schema.md#title) |
-| `*` | any | Additional | this schema *allows* additional properties |
+| [title](#title) | `string` | Optional | Content (this schema) |
 
 ## body
 
@@ -152,7 +151,7 @@ Path (can be relative) to the first image in the document
 `image`
 * is optional
 * type: `string`
-* defined in [Meta](meta.schema.md#image)
+* defined in this schema
 
 ### image Type
 
@@ -172,7 +171,7 @@ Extracted first paragraph of the document
 `intro`
 * is optional
 * type: `string`
-* defined in [Meta](meta.schema.md#intro)
+* defined in this schema
 
 ### intro Type
 
@@ -208,7 +207,7 @@ Extracted metadata fron the frontmatter of the document
 `meta`
 * is optional
 * type: `object`
-* defined in [Meta](meta.schema.md#meta)
+* defined in this schema
 
 ### meta Type
 
@@ -282,7 +281,7 @@ Extracted title of the document
 `title`
 * is optional
 * type: `string`
-* defined in [Meta](meta.schema.md#title)
+* defined in this schema
 
 ### title Type
 

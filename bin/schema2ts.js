@@ -14,10 +14,12 @@ const { compileFromFile } = require('json-schema-to-typescript');
 const { writeFileSync } = require('fs-extra');
 const fs = require('fs-extra');
 
+let counter = 0;
 
 const options = {
   $refOptions: {
     dereference: {
+      declareExternallyReferenced: false,
       circular: true, // Don't allow circular $refs
     },
     resolve: {
@@ -25,11 +27,14 @@ const options = {
         order: 1,
         canRead({ url }) {
           const basename = url.split('/').pop();
-          return fs.existsSync(`./src/${basename}.schema.json`);
+          return fs.existsSync(`./docs/${basename}.schema.json`);
         },
         read({ url }, callback) {
           const basename = url.split('/').pop();
-          const schema = fs.readFileSync(`./src/${basename}.schema.json`);
+          let schema = fs.readFileSync(`./docs/${basename}.schema.json`);
+          if (url === 'https://ns.adobe.com/helix/pipeline/mdast') {
+            schema = schema.toString().replace(`"$ref": "https://ns.adobe.com/helix/pipeline/mdast"`, `"type": "object"`);
+          }
           callback(null, schema);
         },
       },
@@ -48,5 +53,5 @@ const options = {
   */`,
 };
 
-compileFromFile('src/context.schema.json', options).then(ts => writeFileSync('src/context.d.ts', ts));
-compileFromFile('src/action.schema.json', options).then(ts => writeFileSync('src/action.d.ts', ts));
+compileFromFile('docs/context.schema.json', options).then(ts => writeFileSync('src/context.d.ts', ts));
+compileFromFile('docs/action.schema.json', options).then(ts => writeFileSync('src/action.d.ts', ts));

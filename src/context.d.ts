@@ -15,15 +15,40 @@
  */
 export interface Context {
   /**
-   * An error message that has been generated during pipeline processing
+   * An error message that has been generated during pipeline processing.
+   * When this property is present, all other values can be ignored.
    */
   error?: string;
   /**
    * The HTTP Request
    */
-  request?: {};
+  request?: {
+    /**
+     * The passed through (and filtered) URL parameters of the request
+     */
+    params?: {
+      [k: string]: string | string[];
+    };
+  };
   content?: Content;
-  response?: Response;
+  /**
+   * The HTTP response object
+   */
+  response?: {
+    /**
+     * The HTTP status code
+     */
+    status?: number;
+    body?: {
+      [k: string]: any;
+    };
+    /**
+     * The HTTP headers of the response
+     */
+    headers?: {
+      [k: string]: string;
+    };
+  };
 }
 /**
  * The content as retrieved from the repository and enriched in the pipeline.
@@ -71,9 +96,11 @@ export interface Content {
       | "imageReference"
       | "footnote"
       | "footnoteReference";
-    children?: any[];
+    children?: {
+      [k: string]: any;
+    }[];
     /**
-     * Marks the position of the node in the original text flow
+     * Marks the position of an AST node in the original text flow
      */
     position?: {
       /**
@@ -172,25 +199,230 @@ export interface Content {
   /**
    * The extracted sections of the document
    */
-  sections?: Mdastsection[];
-  /**
-   * Extracted metadata fron the frontmatter of the document
-   */
-  meta?: {
+  sections?: ({
+    /**
+     * The inferred class names for the section
+     */
+    types?: string[];
+    /**
+     * The MDAST node type. Each section can be treated as a standalone document.
+     */
+    type?: {
+      [k: string]: any;
+    };
+    /**
+     * Marks the position of an AST node in the original text flow
+     */
+    position?: {
+      /**
+       * A position in a text document
+       */
+      start?: {
+        /**
+         * Line number
+         */
+        line?: number;
+        /**
+         * Column number
+         */
+        column?: number;
+        /**
+         * Character in the entire document
+         */
+        offset?: number;
+      };
+      /**
+       * A position in a text document
+       */
+      end?: {
+        /**
+         * Line number
+         */
+        line?: number;
+        /**
+         * Column number
+         */
+        column?: number;
+        /**
+         * Character in the entire document
+         */
+        offset?: number;
+      };
+      indent?: any[];
+    };
+    /**
+     * The AST nodes making up the section. Section dividers are not included.
+     */
+    children?: {
+      /**
+       * The node type of the MDAST node
+       */
+      type?:
+        | "root"
+        | "paragraph"
+        | "text"
+        | "heading"
+        | "thematicBreak"
+        | "blockquote"
+        | "list"
+        | "table"
+        | "tableRow"
+        | "tableCell"
+        | "html"
+        | "code"
+        | "yaml"
+        | "definition"
+        | "footnoteDefinition"
+        | "emphasis"
+        | "strong"
+        | "delete"
+        | "inlineCode"
+        | "break"
+        | "link"
+        | "image"
+        | "linkReference"
+        | "imageReference"
+        | "footnote"
+        | "footnoteReference";
+      children?: {
+        [k: string]: any;
+      }[];
+      /**
+       * Marks the position of an AST node in the original text flow
+       */
+      position?: {
+        /**
+         * A position in a text document
+         */
+        start?: {
+          /**
+           * Line number
+           */
+          line?: number;
+          /**
+           * Column number
+           */
+          column?: number;
+          /**
+           * Character in the entire document
+           */
+          offset?: number;
+        };
+        /**
+         * A position in a text document
+         */
+        end?: {
+          /**
+           * Line number
+           */
+          line?: number;
+          /**
+           * Column number
+           */
+          column?: number;
+          /**
+           * Character in the entire document
+           */
+          offset?: number;
+        };
+        indent?: any[];
+      };
+      /**
+       * The string value of the node, if it is a terminal node.
+       */
+      value?: string;
+      /**
+       * The heading level
+       */
+      depth?: number;
+      /**
+       * Is the list ordered
+       */
+      ordered?: boolean;
+      /**
+       * Starting item of the list
+       */
+      start?: number;
+      /**
+       * A loose field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).
+       */
+      loose?: boolean;
+      /**
+       * A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present).
+       */
+      checked?: boolean;
+      /**
+       * For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.
+       */
+      align?: ("left" | "right" | "center" | null)[];
+      /**
+       * For code, a lang field can be present. It represents the language of computer code being marked up.
+       */
+      lang?: string;
+      /**
+       * For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
+       */
+      meta?: string;
+      /**
+       * For associations, an identifier field must be present. It can match an identifier field on another node.
+       */
+      identifier?: string;
+      /**
+       * For associations, a label field can be present. It represents the original value of the normalised identifier field.
+       */
+      label?: string;
+      /**
+       * For resources, an url field must be present. It represents a URL to the referenced resource.
+       */
+      url?: string;
+      /**
+       * For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip.
+       */
+      title?: string | null;
+      /**
+       * An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended.
+       */
+      alt?: string | null;
+    }[];
+    /**
+     * Extracted metadata fron the frontmatter of the document
+     */
+    meta?: {
+      [k: string]: any;
+    };
+    /**
+     * Extracted title of the document
+     */
+    title?: string;
+    /**
+     * Extracted first paragraph of the document
+     */
+    intro?: string;
+    /**
+     * Path (can be relative) to the first image in the document
+     */
+    image?: string;
+  } & {
+    /**
+     * Extracted metadata fron the frontmatter of the document
+     */
+    meta?: {
+      [k: string]: any;
+    };
+    /**
+     * Extracted title of the document
+     */
+    title?: string;
+    /**
+     * Extracted first paragraph of the document
+     */
+    intro?: string;
+    /**
+     * Path (can be relative) to the first image in the document
+     */
+    image?: string;
     [k: string]: any;
-  };
-  /**
-   * Extracted title of the document
-   */
-  title?: string;
-  /**
-   * Extracted first paragraph of the document
-   */
-  intro?: string;
-  /**
-   * Path (can be relative) to the first image in the document
-   */
-  image?: string;
+  })[];
   /**
    * The DOM-compatible representation of the document's inner HTML
    */
@@ -211,86 +443,6 @@ export interface Content {
    * Deprecated: the main HTML of the document. Use `document.innerHTML` instead.
    */
   html?: string;
-}
-/**
- * A section in a markdown document
- */
-export interface Mdastsection {
-  /**
-   * The inferred class names for the section
-   */
-  types?: string[];
-  /**
-   * The node type of the MDAST node
-   */
-  type?:
-    | "root"
-    | "paragraph"
-    | "text"
-    | "heading"
-    | "thematicBreak"
-    | "blockquote"
-    | "list"
-    | "table"
-    | "tableRow"
-    | "tableCell"
-    | "html"
-    | "code"
-    | "yaml"
-    | "definition"
-    | "footnoteDefinition"
-    | "emphasis"
-    | "strong"
-    | "delete"
-    | "inlineCode"
-    | "break"
-    | "link"
-    | "image"
-    | "linkReference"
-    | "imageReference"
-    | "footnote"
-    | "footnoteReference";
-  children?: any[];
-  /**
-   * Marks the position of the node in the original text flow
-   */
-  position?: {
-    /**
-     * A position in a text document
-     */
-    start?: {
-      /**
-       * Line number
-       */
-      line?: number;
-      /**
-       * Column number
-       */
-      column?: number;
-      /**
-       * Character in the entire document
-       */
-      offset?: number;
-    };
-    /**
-     * A position in a text document
-     */
-    end?: {
-      /**
-       * Line number
-       */
-      line?: number;
-      /**
-       * Column number
-       */
-      column?: number;
-      /**
-       * Character in the entire document
-       */
-      offset?: number;
-    };
-    indent?: any[];
-  };
   /**
    * Extracted metadata fron the frontmatter of the document
    */
@@ -309,22 +461,4 @@ export interface Mdastsection {
    * Path (can be relative) to the first image in the document
    */
   image?: string;
-}
-/**
- * The HTTP response object
- */
-export interface Response {
-  /**
-   * The HTTP status code
-   */
-  status?: number;
-  body?: {
-    [k: string]: any;
-  };
-  /**
-   * The HTTP headers of the response
-   */
-  headers?: {
-    [k: string]: string;
-  };
 }
