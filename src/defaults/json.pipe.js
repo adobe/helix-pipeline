@@ -29,15 +29,15 @@ const htmlpipe = (cont, payload, action) => {
   const pipe = new Pipeline(action);
   pipe
     .every(dump).when(() => !production())
-    .pre(adaptOWRequest)
-    .pre(fetch)
-    .pre(parse)
-    .pre(smartypants)
-    .pre(sections)
-    .pre(meta)
+    .before(adaptOWRequest)
+    .before(fetch)
+    .before(parse)
+    .before(smartypants)
+    .before(sections)
+    .before(meta)
     .once(cont)
-    .post(type)
-    .post(adaptOWResponse);
+    .after(type)
+    .after(adaptOWResponse);
 
   action.logger.log('debug', 'Running JSON pipeline');
   return pipe.run(payload);

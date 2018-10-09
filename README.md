@@ -51,13 +51,13 @@ module.exports.pipe = function(cont, params, secrets, logger = log) {
     logger.log("debug", "Constructing Custom Pipeline");
 
     return pipeline()
-        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload
+        .before(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload
         .once(cont)            // required: execute the continuation function
-        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response
+        .after(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response
 }
 ```
 
-In a typical pipeline, you will add additional processing steps as `.pre(require('some-module'))` or as `.post(require('some-module'))`.
+In a typical pipeline, you will add additional processing steps as `.before(require('some-module'))` or as `.after(require('some-module'))`.
 
 ### The Main Function
 

@@ -34,21 +34,21 @@ const htmlpipe = (cont, payload, action) => {
   const pipe = new Pipeline(action);
   pipe
     .every(dump).when(() => !production())
-    .pre(adaptOWRequest)
-    .pre(fetch)
+    .before(adaptOWRequest)
+    .before(fetch)
     .when(({ content }) => !(content && content.body && content.body.length > 0))
-    .pre(parse)
-    .pre(smartypants)
-    .pre(sections)
-    .pre(meta)
-    .pre(html)
-    .pre(responsive)
-    .pre(emit)
+    .before(parse)
+    .before(smartypants)
+    .before(sections)
+    .before(meta)
+    .before(html)
+    .before(responsive)
+    .before(emit)
     .once(cont)
-    .post(type)
-    .post(key)
-    .post(debug)
-    .post(adaptOWResponse);
+    .after(type)
+    .after(key)
+    .after(debug)
+    .after(adaptOWResponse);
 
   action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);
