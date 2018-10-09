@@ -27,7 +27,7 @@ Tracks the OpenWhisk action invocation
 
 ## logger
 
-A Winston logger instance
+A [Winston](https://github.com/winstonjs/winston) logger instance.
 
 `logger`
 * is optional

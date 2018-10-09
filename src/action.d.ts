@@ -47,7 +47,7 @@ export type RawRequest = {
 export interface Action {
   request?: RawRequest;
   /**
-   * A Winston logger instance
+   * A [Winston](https://github.com/winstonjs/winston) logger instance.
    */
   logger?: {
     [k: string]: any;

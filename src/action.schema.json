@@ -23,7 +23,7 @@
     },
     "logger": {
       "type": "object",
-      "description": "A Winston logger instance"
+      "description": "A [Winston](https://github.com/winstonjs/winston) logger instance."
     },
     "secrets": {
       "$ref": "https://ns.adobe.com/helix/pipeline/secrets"
