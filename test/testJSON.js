@@ -77,8 +77,8 @@ describe('Testing JSON Pipeline', () => {
     assert.strictEqual(typeof pipe, 'function');
   });
 
-  it('json.pipe makes HTTP requests', (done) => {
-    const result = pipe(
+  it('json.pipe makes HTTP requests', async () => {
+    const result = await pipe(
       ({ content }) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
@@ -99,16 +99,13 @@ describe('Testing JSON Pipeline', () => {
       },
     );
 
-    result.then((res) => {
-      assert.equal(201, res.statusCode);
-      assert.equal('application/json', res.headers['Content-Type']);
-      assert.deepEqual(res.body, { foo: 'bar' });
-      done();
-    });
+    assert.equal(201, result.response.status);
+    assert.equal(result.response.headers['Content-Type'], 'application/json');
+    assert.deepEqual(result.response.body, { foo: 'bar' });
   });
 
-  it('json.pipe keeps Mime-Type', (done) => {
-    const result = pipe(
+  it('json.pipe keeps Mime-Type', async () => {
+    const result = await pipe(
       ({ content }) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
@@ -129,11 +126,8 @@ describe('Testing JSON Pipeline', () => {
       },
     );
 
-    result.then((res) => {
-      assert.equal(201, res.statusCode);
-      assert.equal('text/plain+json', res.headers['Content-Type']);
-      assert.deepEqual(res.body, { foo: 'bar' });
-      done();
-    });
+    assert.equal(201, result.response.status);
+    assert.equal(result.response.headers['Content-Type'], 'text/plain+json');
+    assert.deepEqual(result.response.body, { foo: 'bar' });
   });
 });

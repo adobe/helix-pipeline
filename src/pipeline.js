@@ -86,7 +86,7 @@ class Pipeline {
    * @param {pipelineFunction} f function to add to the `post` list
    * @returns {Pipeline} this
    */
-  pre(f) {
+  before(f) {
     this._pres.push(f);
     this._last = this._pres;
     return this;
@@ -97,7 +97,7 @@ class Pipeline {
    * @param {pipelineFunction} f function to add to the `post` list
    * @returns {Pipeline} this
    */
-  post(f) {
+  after(f) {
     this._posts.push(f);
     this._last = this._posts;
     return this;

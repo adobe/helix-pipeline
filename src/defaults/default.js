@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 const winston = require('winston');
-const querystring = require('querystring');
 const Pipeline = require('../pipeline.js');
 
 /**
@@ -36,53 +35,6 @@ function pipe(next, payload, action) {
  */
 const pre = cont => cont;
 
-/**
- * A function that takes OpenWhisk-style req parameter and turns
- * it into the original Express-style request object which is returned.
- * @param {Object} payload Pipeline payload
- * @param {Object} action Object representing the OpenWhisk action, including
- * the request, __ow_method and __ow_headers for HTTP requests and secrets
- * @returns {Object} The original req object that is equivalent to an Express request object,
- * including a headers, method, and params field
- */
-function adaptOWRequest(payload, { logger, request: { headers, method, params: { req = '{}', params = '' } = {} } = {} }) {
-  try {
-    if (params !== '') {
-      return {
-        request: {
-          params: querystring.parse(params),
-          headers,
-          method,
-        },
-      };
-    }
-    return {
-      request: JSON.parse(req),
-    };
-  } catch (e) {
-    const out = logger || console;
-    out.error(`Cannot parse incoming request parameter: ${e.stack}`);
-    return {
-      request: {},
-    };
-  }
-}
-
-function adaptOWResponse(payload) {
-  const {
-    response: {
-      status = 200,
-      headers = { 'Content-Type': 'application/json' },
-      body = headers['Content-Type'] === 'application/json' ? {} : '',
-    },
-  } = payload;
-  return {
-    statusCode: status,
-    headers,
-    body,
-  };
-}
-
 const log = winston.createLogger({
   level: 'debug',
   format: winston.format.simple(),
@@ -95,8 +47,6 @@ const log = winston.createLogger({
 const defaults = {
   pipe,
   pre,
-  adaptOWRequest,
-  adaptOWResponse,
   log,
 };
 

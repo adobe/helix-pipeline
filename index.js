@@ -12,6 +12,7 @@
 
 const defaults = require('./src/defaults/default.js');
 const Pipeline = require('./src/pipeline.js');
+const OpenWhiskAction = require('./src/utils/openwhisk.js');
 const utils = require('./src/utils');
 
 /**
@@ -24,4 +25,5 @@ module.exports = {
   Pipeline,
   defaults,
   utils,
+  OpenWhiskAction,
 };
