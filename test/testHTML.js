@@ -106,6 +106,61 @@ describe('Testing HTML Pipeline', () => {
     assert.equal('<p>Hello World</p>', result.response.body);
   });
 
+  it('html.pipe complains when context is invalid', async () => {
+    try {
+      await pipe(
+        ({ content }) => {
+          // this is the main function (normally it would be the template function)
+          // but we use it to assert that pre-processing has happened
+          assert.equal(content.body, 'Hello World');
+          // and return a different status code
+          return { response: { status: 201, body: content.html } };
+        },
+        {
+          content: {
+            foo: 'Hello World',
+          },
+        },
+        {
+          request: { params },
+          secrets,
+          logger,
+        },
+      );
+      throw new Error('Invalid context not detected.');
+    } catch (e) {
+      assert.equal(e.message, 'Invalid Context at step 0\ndata.content should NOT have additional properties');
+    }
+  });
+
+  it('html.pipe complains when action is invalid', async () => {
+    try {
+      await pipe(
+        ({ content }) => {
+          // this is the main function (normally it would be the template function)
+          // but we use it to assert that pre-processing has happened
+          assert.equal(content.body, 'Hello World');
+          // and return a different status code
+          return { response: { status: 201, body: content.html } };
+        },
+        {
+          content: {
+            body: 'Hello World',
+          },
+        },
+        {
+          request: { params },
+          secrets,
+          logger,
+          break: true,
+        },
+      );
+      throw new Error('Invalid action not detected.');
+    } catch (e) {
+      assert.equal(e.message, 'Invalid Action at step 0\ndata should NOT have additional properties');
+    }
+  });
+
   it('html.pipe makes HTTP requests', async () => {
     const result = await pipe(
       ({ content }) => {
