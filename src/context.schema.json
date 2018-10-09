@@ -5,162 +5,19 @@
   "type": "object",
   "description": "The context thingie.",
   "additionalProperties": false,
-  "definitions": {
-    "response": {
-      "type": "object",
-      "description": "The HTTP response object",
-      "additionalProperties": false,
-      "properties": {
-        "status": {
-          "type": "integer",
-          "description": "The HTTP status code"
-        },
-        "body": {
-          "anyOf": [
-            {
-              "description": "The plain text or base64-encoded body of the response",
-              "type:": "string"
-            },
-            {
-              "description": "The JSON object to represent the body of the response",
-              "type": "object"
-            }
-          ]
-        },
-        "headers": {
-          "description": "The HTTP headers of the response",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "mdastsection": {
-      "properties": {
-        "types": {
-          "type": "array",
-          "description": "The inferred class names for the section",
-          "items": {
-            "type": "string"
-          }
-        },
-        "type": {
-          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/type"
-        },
-        "children": {
-          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/children"
-        },
-        "position": {
-          "$ref": "https://ns.adobe.com/helix/pipeline/mdast#/definitions/mdastnode/properties/position"
-        },
-        "meta": { "$ref": "#/definitions/metadata/properties/meta" },
-        "title": { "$ref": "#/definitions/metadata/properties/title" },
-        "intro": { "$ref": "#/definitions/metadata/properties/intro" },
-        "image": { "$ref": "#/definitions/metadata/properties/image" }
-      },
-      "description": "A section in a markdown document",
-      "additionalProperties": false
-    },
-    "metadata": {
-      "properties": {
-        "meta": {
-          "type": "object",
-          "description": "Extracted metadata fron the frontmatter of the document"
-        },
-        "title": {
-          "type": "string",
-          "description": "Extracted title of the document"
-        },
-        "intro": {
-          "type": "string",
-          "description": "Extracted first paragraph of the document"
-        },
-        "image": {
-          "type": "string",
-          "format": "uri-reference",
-          "description": "Path (can be relative) to the first image in the document"
-        }
-      }
-    },
-    "content": {
-      "description": "The content as retrieved from the repository and enriched in the pipeline.",
-      "additionalProperties": false,
-      "properties": {
-        "sources": {
-          "type": "array",
-          "description": "List of URIs that have been retrieved for this piece of content",
-          "items": {
-            "type": "string",
-            "format": "uri"
-          }
-        },
-        "body": {
-          "type": "string",
-          "description": "The content body of the retrieved source document"
-        },
-        "mdast": {
-          "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
-        },
-        "sections": {
-          "type": "array",
-          "description": "The extracted sections of the document",
-          "items": {
-            "$ref": "#/definitions/mdastsection"
-          }
-        },
-        "meta": { "$ref": "#/definitions/metadata/properties/meta" },
-        "title": { "$ref": "#/definitions/metadata/properties/title" },
-        "intro": { "$ref": "#/definitions/metadata/properties/intro" },
-        "image": { "$ref": "#/definitions/metadata/properties/image" },
-        "document": {
-          "type": "object",
-          "description": "The DOM-compatible representation of the document's inner HTML"
-        },
-        "htast": {
-          "type": "object",
-          "description": "Deprecated: the Hypermedia (HAST) AST"
-        },
-        "children": {
-          "type": "array",
-          "description": "Deprecated: the main HTML elements of the document. `document.children[].innerHTML` instead.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "html": {
-          "type": "string",
-          "description": "Deprecated: the main HTML of the document. Use `document.innerHTML` instead."
-        }
-      }
-    }
-  },
   "properties": {
     "error": {
       "type": "string",
-      "description": "An error message that has been generated during pipeline processing"
+      "description": "An error message that has been generated during pipeline processing.\nWhen this property is present, all other values can be ignored."
     },
     "request": {
-      "type": "object",
-      "description": "The HTTP Request",
-      "additionalProperties": false,
-      "properties": {
-        "params": {
-          "type": "object",
-          "description": "The passed through (and filtered) URL parameters of the request",
-          "additionalProperties": {
-            "anyOf": [
-              { "type": "string" },
-              { "type": "array", "items": { "type": "string" } }
-            ]
-          }
-        }
-      }
+      "$ref": "https://ns.adobe.com/helix/pipeline/request"
     },
     "content": {
-      "$ref": "#/definitions/content"
+      "$ref": "https://ns.adobe.com/helix/pipeline/content"
     },
     "response": {
-      "$ref": "#/definitions/response"
+      "$ref": "https://ns.adobe.com/helix/pipeline/response"
     }
   }
 }

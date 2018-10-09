@@ -1,0 +1,62 @@
+{
+  "$id": "https://ns.adobe.com/helix/pipeline/content",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Content",
+  "type": "object",
+  "description": "The content as retrieved from the repository and enriched in the pipeline.",
+  "additionalProperties": false,
+  "definitions": {
+    "content": {
+      "properties": {
+        "sources": {
+          "type": "array",
+          "description": "List of URIs that have been retrieved for this piece of content",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "body": {
+          "type": "string",
+          "description": "The content body of the retrieved source document"
+        },
+        "mdast": {
+          "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+        },
+        "sections": {
+          "type": "array",
+          "description": "The extracted sections of the document",
+          "items": {
+            "$ref": "https://ns.adobe.com/helix/pipeline/section"
+          }
+        },
+        "document": {
+          "type": "object",
+          "description": "The DOM-compatible representation of the document's inner HTML"
+        },
+        "htast": {
+          "type": "object",
+          "description": "Deprecated: the Hypermedia (HAST) AST",
+          "meta:status": "deprecated"
+        },
+        "children": {
+          "type": "array",
+          "description": "Deprecated: the main HTML elements of the document. `document.children[].innerHTML` instead.",
+          "items": {
+            "type": "string"
+          },
+          "meta:status": "deprecated"
+        },
+        "html": {
+          "type": "string",
+          "meta:status": "deprecated",
+          "description": "Deprecated: the main HTML of the document. Use `document.innerHTML` instead."
+        }
+      }
+    }
+  },
+  "allOf": [
+    { "$ref": "#/definitions/content"},
+    { "$ref": "https://ns.adobe.com/helix/pipeline/meta"}
+  ]
+}

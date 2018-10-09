@@ -1,0 +1,29 @@
+{
+  "$id": "https://ns.adobe.com/helix/pipeline/meta",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Meta",
+  "description": "Content and Section Metadata Properties",
+  "definitions": {
+    "meta": {
+      "properties": {
+        "meta": {
+          "type": "object",
+          "description": "Extracted metadata fron the frontmatter of the document"
+        },
+        "title": {
+          "type": "string",
+          "description": "Extracted title of the document"
+        },
+        "intro": {
+          "type": "string",
+          "description": "Extracted first paragraph of the document"
+        },
+        "image": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "Path (can be relative) to the first image in the document"
+        }
+      }
+    }
+  }
+}

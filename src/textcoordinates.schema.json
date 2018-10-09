@@ -1,0 +1,21 @@
+{
+  "$id": "https://ns.adobe.com/helix/pipeline/textcoordinates",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "description": "A position in a text document",
+  "additionalProperties": false,
+  "properties": {
+    "line": {
+      "type": "number",
+      "description": "Line number"
+    },
+    "column": {
+      "type": "number",
+      "description": "Column number"
+    },
+    "offset": {
+      "type": "number",
+      "description": "Character in the entire document"
+    }
+  }
+}

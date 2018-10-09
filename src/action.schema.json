@@ -7,52 +7,14 @@
   "additionalProperties": false,
   "properties": {
     "request": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "params": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "properties": {
-            "owner": {
-              "type": "string",
-              "description": "Owner of the GitHub repository. This is the name of a user or organization."
-            },
-            "repo": {
-              "type":"string",
-              "description": "Repository where content originates"
-            },
-            "ref": {
-              "type": "string",
-              "description": "Name of the branch or tag or the SHA of the commit"
-            },
-            "path": {
-              "type": "string",
-              "description": "Path to the requested (Markdown) file"
-            },
-            "__ow_headers": {
-              "type": "object",
-              "description": "Deprecated: The original OpenWhisk request headers"
-            }
-          }
-        }
-      }
+      "$ref": "https://ns.adobe.com/helix/pipeline/rawrequest"
     },
     "logger": {
       "type": "object",
       "description": "A Winston logger instance"
     },
     "secrets": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "Secrets passed into the pipeline such as API Keys or configuration settings.",
-      "patternProperties": {
-        "[A-Z0-9_]+": {
-          "type": "string"
-        }
-      }
+      "$ref": "https://ns.adobe.com/helix/pipeline/secrets"
     }
   }
 }
