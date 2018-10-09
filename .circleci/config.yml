@@ -57,6 +57,10 @@ jobs:
           MOCHA_FILE: junit/test-results.xml
         when: always
 
+    - run:
+        name: Generating Docs
+        command: npm run docs
+
     - store_test_results:
         path: junit
 
