@@ -42,6 +42,16 @@ const nopLogger = {
 */
 
 /**
+ * Tap function
+ *
+ * @typedef {function(context, _action, index)} tapFunction
+ * @callback tapFunction
+ * @param {Context} context Pipeline execution context that is passed along
+ * @param {Action} action Pipeline action define during construction
+ * @param {number} index index of the function invocation order
+*/
+
+/**
  * Pipeline that allows to execute a list of functions in order. The pipeline consists of 3
  * major function lists: `pre`, `once` and, `post`. the functions added to the `pre` list are
  * processed first, then the `once` function and finally the `post` functions.
@@ -67,6 +77,8 @@ class Pipeline {
     this._oncef = null;
     // functions that are executed after
     this._posts = [];
+    // functions that are executed before each step
+    this._taps = [];
   }
 
   /**
@@ -74,7 +86,7 @@ class Pipeline {
    * @param {pipelineFunction} f function to add to the `post` list
    * @returns {Pipeline} this
    */
-  pre(f) {
+  before(f) {
     this._pres.push(f);
     this._last = this._pres;
     return this;
@@ -85,9 +97,21 @@ class Pipeline {
    * @param {pipelineFunction} f function to add to the `post` list
    * @returns {Pipeline} this
    */
-  post(f) {
+  after(f) {
     this._posts.push(f);
     this._last = this._posts;
+    return this;
+  }
+
+  /**
+   * Adds a tap (observing) function to the pipeline. taps are executed for every
+   * single pipeline step and best used for validation, and logging. taps don't have
+   * any effect, i.e. the return value of a tap function is ignored.
+   * @param {pipelineFunction} f function to be executed in every step. Effects are ignored.
+   */
+  every(f) {
+    this._taps.push(f);
+    this._last = this._taps;
     return this;
   }
 
@@ -103,20 +127,20 @@ class Pipeline {
   when(predicate) {
     if (this._last && this._last.length > 0) {
       const lastfunc = this._last.pop();
-      const wrappedfunc = (args) => {
-        const result = predicate(args);
+      const wrappedfunc = (...args) => {
+        const result = predicate(args[0]);
         // check if predicate returns a promise like result
         if (_.isFunction(result.then)) {
           return result.then((predResult) => {
             if (predResult) {
-              return lastfunc(args, this._action);
+              return lastfunc(...args);
             }
-            return args;
+            return args[0];
           });
         } if (result) {
-          return lastfunc(args, this._action);
+          return lastfunc(...args);
         }
-        return args;
+        return args[0];
       };
       this._last.push(wrappedfunc);
     } else {
@@ -163,12 +187,14 @@ class Pipeline {
      * @param {pipelineFunction} currFunction Function that is currently "reduced"
      * @returns {Promise} Promise resolving to the new value of the accumulator
      */
-    const merge = (currContext, currFunction) => {
+    const merge = (currContext, currFunction, index) => {
       // copy the pipeline payload into a new object to avoid modifications
       const mergedargs = _.merge({}, currContext);
 
       // log the function that is being called and the parameters of the function
-      this._action.logger.silly('processing ', { function: `${currFunction}`, params: mergedargs });
+      this._action.logger.silly('processing ', { function: `${currFunction}`, index, params: mergedargs });
+
+      this._taps.map(f => f(mergedargs, this._action, index));
 
       return Promise.resolve(currFunction(mergedargs, this._action))
         .then((value) => {

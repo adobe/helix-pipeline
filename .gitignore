@@ -2,3 +2,4 @@ node_modules/
 pipeline.log
 logs/pipeline.log
 .nyc_output
+logs/debug

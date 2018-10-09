@@ -33,10 +33,10 @@ describe('Testing Pipeline', () => {
   it('Executes correct order', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .post(() => { order.push('post0'); })
-      .pre(() => { order.push('pre1'); })
-      .post(() => { order.push('post1'); })
+      .before(() => { order.push('pre0'); })
+      .after(() => { order.push('post0'); })
+      .before(() => { order.push('pre1'); })
+      .after(() => { order.push('post1'); })
       .once(() => { order.push('once'); })
       .run()
       .then(() => {
@@ -49,13 +49,13 @@ describe('Testing Pipeline', () => {
   it('Disables pre before when', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .pre(() => { order.push('disabled'); })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('disabled'); })
       .when(() => false)
-      .pre(() => { order.push('pre1'); })
+      .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
-      .post(() => { order.push('post0'); })
-      .post(() => { order.push('post1'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
@@ -67,13 +67,13 @@ describe('Testing Pipeline', () => {
   it('Disables pre before when conditionally', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .pre(() => { order.push('enabled'); })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('enabled'); })
       .when(() => true)
-      .pre(() => { order.push('pre1'); })
+      .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
-      .post(() => { order.push('post0'); })
-      .post(() => { order.push('post1'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'enabled', 'pre1', 'once', 'post0', 'post1']);
@@ -85,13 +85,13 @@ describe('Testing Pipeline', () => {
   it('When works with promises pre before when', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .pre(() => { order.push('disabled'); })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('disabled'); })
       .when(() => Promise.resolve(false))
-      .pre(() => { order.push('pre1'); })
+      .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
-      .post(() => { order.push('post0'); })
-      .post(() => { order.push('post1'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
@@ -103,13 +103,13 @@ describe('Testing Pipeline', () => {
   it('Disables post before when', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .pre(() => { order.push('pre1'); })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
-      .post(() => { order.push('post0'); })
-      .post(() => { order.push('disabled'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('disabled'); })
       .when(() => false)
-      .post(() => { order.push('post1'); })
+      .after(() => { order.push('post1'); })
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
@@ -122,10 +122,10 @@ describe('Testing Pipeline', () => {
     try {
       const order = [];
       new Pipeline({ logger })
-        .pre(() => { order.push('pre0'); })
+        .before(() => { order.push('pre0'); })
         .once(() => { order.push('once'); })
         .when(() => false)
-        .post(() => { order.push('post1'); })
+        .after(() => { order.push('post1'); })
         .run()
         .then(() => {
           assert.fail('when after once should fail.');
@@ -142,7 +142,7 @@ describe('Testing Pipeline', () => {
       const order = [];
       new Pipeline({ logger })
         .when(() => false)
-        .post(() => { order.push('post1'); })
+        .after(() => { order.push('post1'); })
         .run()
         .then(() => {
           assert.fail('when after once should fail.');
@@ -157,13 +157,13 @@ describe('Testing Pipeline', () => {
   it('Disables pre before unless', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .pre(() => { order.push('disabled'); })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('disabled'); })
       .unless(() => true)
-      .pre(() => { order.push('pre1'); })
+      .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
-      .post(() => { order.push('post0'); })
-      .post(() => { order.push('post1'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
@@ -175,13 +175,13 @@ describe('Testing Pipeline', () => {
   it('Enables pre before when', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .pre(() => { order.push('enabled'); })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('enabled'); })
       .when(() => true)
-      .pre(() => { order.push('pre1'); })
+      .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
-      .post(() => { order.push('post0'); })
-      .post(() => { order.push('post1'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'enabled', 'pre1', 'once', 'post0', 'post1']);
@@ -193,13 +193,13 @@ describe('Testing Pipeline', () => {
   it('Enables pre before unless', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .pre(() => { order.push('pre0'); })
-      .pre(() => { order.push('enabled'); })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('enabled'); })
       .unless(() => false)
-      .pre(() => { order.push('pre1'); })
+      .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
-      .post(() => { order.push('post0'); })
-      .post(() => { order.push('post1'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'enabled', 'pre1', 'once', 'post0', 'post1']);
@@ -210,13 +210,32 @@ describe('Testing Pipeline', () => {
 
   it('Executes promises', (done) => {
     const retval = new Pipeline({ logger })
-      .post(() => Promise.resolve({ foo: 'bar' }))
-      .post((v) => {
+      .after(() => Promise.resolve({ foo: 'bar' }))
+      .after((v) => {
         assert.equal(v.foo, 'bar');
       }).run();
     retval.then((r) => {
       assert.equal(r.foo, 'bar');
       done();
     });
+  });
+
+  it('Executes taps', (done) => {
+    new Pipeline({ logger })
+      .before(() => ({ foo: 'bar' }))
+      .after(() => ({ bar: 'baz' }))
+      .every((c, a, i) => { if (i === 1) { done(); } return true; })
+      .run();
+  });
+
+  it('Does not executes taps when conditions fail', (done) => {
+    new Pipeline({ logger })
+      .before(() => ({ foo: 'bar' }))
+      .after(() => ({ bar: 'baz' }))
+      .every((c, a, i) => { if (i === 1) { done(new Error('this is a trap')); } return true; })
+      .when(() => false)
+      .every((c, a, i) => { if (i === 1) { done(); } return true; })
+      .when(() => true)
+      .run();
   });
 });

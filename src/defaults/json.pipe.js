@@ -18,6 +18,8 @@ const meta = require('../html/get-metadata.js');
 const type = require('../json/set-content-type.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
+const production = require('../utils/is-production');
+const dump = require('../utils/dump-context.js');
 
 /* eslint no-param-reassign: off */
 
@@ -26,13 +28,14 @@ const htmlpipe = (cont, payload, action) => {
   action.logger.log('debug', 'Constructing JSON Pipeline');
   const pipe = new Pipeline(action);
   pipe
-    .pre(fetch)
-    .pre(parse)
-    .pre(smartypants)
-    .pre(sections)
-    .pre(meta)
+    .every(dump).when(() => !production())
+    .before(fetch)
+    .before(parse)
+    .before(smartypants)
+    .before(sections)
+    .before(meta)
     .once(cont)
-    .post(type);
+    .after(type);
 
   action.logger.log('debug', 'Running JSON pipeline');
   return pipe.run(payload);
