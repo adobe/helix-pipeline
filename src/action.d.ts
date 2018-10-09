@@ -11,50 +11,60 @@
   */
 
 /**
+ * The Request Object used for Invoking OpenWhisk
+ */
+export type RawRequest = {
+  params?: {
+    /**
+     * Owner of the GitHub repository. This is the name of a user or organization.
+     */
+    owner?: string;
+    /**
+     * Repository where content originates
+     */
+    repo?: string;
+    /**
+     * Name of the branch or tag or the SHA of the commit
+     */
+    ref?: string;
+    /**
+     * Path to the requested (Markdown) file
+     */
+    path?: string;
+    /**
+     * Deprecated: The original OpenWhisk request headers
+     */
+    __ow_headers?: {
+      [k: string]: any;
+    };
+    [k: string]: string;
+  };
+};
+
+/**
  * Tracks the OpenWhisk action invocation
  */
 export interface Action {
-  request?: {
-    params?: {
-      /**
-       * Owner of the GitHub repository. This is the name of a user or organization.
-       */
-      owner?: string;
-      /**
-       * Repository where content originates
-       */
-      repo?: string;
-      /**
-       * Name of the branch or tag or the SHA of the commit
-       */
-      ref?: string;
-      /**
-       * Path to the requested (Markdown) file
-       */
-      path?: string;
-      /**
-       * The original OpenWhisk request headers
-       */
-      __ow_headers?: {
-        [k: string]: any;
-      };
-      [k: string]: string;
-    };
-  };
+  request?: RawRequest;
   /**
    * A Winston logger instance
    */
   logger?: {
     [k: string]: any;
   };
+  secrets?: Secrets;
+}
+/**
+ * Secrets passed into the pipeline such as API Keys or configuration settings.
+ */
+export interface Secrets {
   /**
-   * Secrets passed into the pipeline such as API Keys or configuration settings.
+   * The Base URL for retrieving raw text files from GitHub
    */
-  secrets?: {
-    /**
-     * This interface was referenced by `undefined`'s JSON-Schema definition
-     * via the `patternProperty` "[A-Z0-9_]+".
-     */
-    [k: string]: string;
-  };
+  REPO_RAW_ROOT?: string;
+  /**
+   * This interface was referenced by `Secrets`'s JSON-Schema definition
+   * via the `patternProperty` "[A-Z0-9_]+".
+   */
+  [k: string]: string;
 }
