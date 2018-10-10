@@ -87,6 +87,7 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   before(f) {
+    Pipeline.describe(f);
     this._pres.push(f);
     this._last = this._pres;
     return this;
@@ -98,6 +99,7 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   after(f) {
+    Pipeline.describe(f);
     this._posts.push(f);
     this._last = this._posts;
     return this;
@@ -169,9 +171,40 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   once(f) {
+    Pipeline.describe(f);
     this._oncef = f;
     this._last = null;
     return this;
+  }
+
+  /**
+   * This helper method generates a human readable name for a given function
+   * It will include:
+   * - the name of the function or "anonymous"
+   * - the name of the function that called describe
+   * - the name and code location of the function that called the function before
+   * @param {Function} f
+   */
+  static describe(f) {
+    if (f.alias) {
+      return f.alias;
+    }
+    if (!f.alias && f.name) {
+      // eslint-disable-next-line no-param-reassign
+      f.alias = f.name;
+    } else if (!f.name && !f.alias) {
+      // eslint-disable-next-line no-param-reassign
+      f.alias = 'anonymous';
+    }
+
+    Error.captureStackTrace(f);
+    const [, current, injector, caller] = f.stack.split('\n').map(s => s.replace(/^.*at /, ''));
+    if (current.match(/Function\.describe/)) {
+      // eslint-disable-next-line no-param-reassign
+      f.alias = `${injector.replace(/Pipeline\./, '').replace(/ .*/, '')}:${f.alias} from ${caller}`;
+    }
+
+    return f.alias;
   }
 
   /**
@@ -192,14 +225,14 @@ class Pipeline {
       const mergedargs = _.merge({}, currContext);
 
       // log the function that is being called and the parameters of the function
-      this._action.logger.silly('processing ', { function: `${currFunction}`, index, params: mergedargs });
+      this._action.logger.silly('processing ', { function: Pipeline.describe(currFunction), index, params: mergedargs });
 
       this._taps.map(f => f(mergedargs, this._action, index));
 
       return Promise.resolve(currFunction(mergedargs, this._action))
         .then((value) => {
           const result = _.merge(currContext, value);
-          this._action.logger.silly('received ', { function: `${currFunction}`, result });
+          this._action.logger.silly('received ', { function: Pipeline.describe(currFunction), result });
           return result;
         });
     };

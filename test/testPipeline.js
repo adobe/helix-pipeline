@@ -16,7 +16,7 @@ const { Pipeline } = require('../index.js');
 
 const logger = winston.createLogger({
   // tune this for debugging
-  level: 'debug',
+  level: 'silly',
   // and turn this on if you want the output
   silent: true,
   format: winston.format.simple(),
@@ -41,6 +41,60 @@ describe('Testing Pipeline', () => {
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('Logs correct names', (done) => {
+    const order = [];
+
+    const pre0 = () => { order.push('pre0'); };
+    const post0 = function post0() {
+      order.push('post0');
+    };
+
+    function noOp() {}
+
+    let counter = 0;
+
+    const validatinglogger = {
+      error: noOp,
+      warn: noOp,
+      info: noOp,
+      verbose: noOp,
+      debug: noOp,
+      log: noOp,
+      silly(msg, obj) {
+        counter += 1;
+        if (counter === 1) {
+          assert.ok(obj.function.match(/^before:pre0/));
+        }
+        if (counter === 2) {
+          assert.ok(obj.function.match(/^before:pre0/));
+        }
+        if (counter === 3) {
+          assert.ok(obj.function.match(/^once:anonymous/));
+        }
+        if (counter === 4) {
+          assert.ok(obj.function.match(/^once:anonymous/));
+        }
+        if (counter === 5) {
+          assert.ok(obj.function.match(/^after:post0/));
+        }
+        if (counter === 6) {
+          assert.ok(obj.function.match(/^after:post0/));
+        }
+      },
+    };
+
+    new Pipeline({ logger: validatinglogger })
+      .before(pre0)
+      .after(post0)
+      .once(() => { order.push('once'); })
+      .run()
+      .then(() => {
+        assert.deepEqual(order, ['pre0', 'once', 'post0']);
         done();
       })
       .catch(done);
