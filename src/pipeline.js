@@ -12,9 +12,13 @@
 const _ = require('lodash/fp');
 const Promise = require('bluebird');
 
+const noOp = () => {};
 const nopLogger = {
-  debug: () => {},
-  silly: () => {},
+  debug: noOp,
+  warn: noOp,
+  silly: noOp,
+  log: noOp,
+  info: noOp,
 };
 
 /**
@@ -189,13 +193,24 @@ class Pipeline {
       // log the function that is being called and the parameters of the function
       this._action.logger.silly('processing ', { function: `${currFunction}`, index, params: mergedargs });
 
-      this._taps.map(f => f(mergedargs, this._action, index));
 
-      return Promise.resolve(currFunction(mergedargs, this._action))
-        .then((value) => {
-          const result = _.merge(currContext, value);
-          this._action.logger.silly('received ', { function: `${currFunction}`, result });
-          return result;
+      const tapresults = Promise.map(
+        this._taps,
+        f => Promise.attempt(() => f(mergedargs, this._action, index)),
+      );
+      return tapresults
+        .then(() => Promise.resolve(currFunction(mergedargs, this._action))
+          .then((value) => {
+            const result = _.merge(currContext, value);
+            this._action.logger.silly('received ', { function: `${currFunction}`, result });
+            return result;
+          })).catch((e) => {
+          // tapping failed
+          this._action.logger.warn('tapping failed', e);
+          return {
+            error: `${currContext.error || ''}
+${e}`,
+          };
         });
     };
 

@@ -9,28 +9,42 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+/* eslint-disable no-underscore-dangle */
 const Ajv = require('ajv');
 const fs = require('fs-extra');
 const path = require('path');
+const Promise = require('bluebird');
 
-const ajv = new Ajv({ allErrors: true, verbose: true });
-const schemadir = path.dirname(__dirname);
-fs.readdirSync(schemadir)
-  .filter(file => file.match(/\.schema\.json$/))
-  .map(file => ajv.addSchema(fs.readJSONSync(path.resolve(schemadir, file))));
+let _ajv;
 
-function validate(context, action, index) {
-  const cvalid = ajv.validate('https://ns.adobe.com/helix/pipeline/context', context);
-  if (!cvalid) {
-    action.logger.warn(`Invalid Context at step ${index}, ${ajv.errorsText()}`);
-    throw new Error(`Invalid Context at step ${index}
-${ajv.errorsText()}`);
+async function ajv() {
+  if (!_ajv) {
+    const schemadir = path.dirname(__dirname);
+    const validator = new Ajv({ allErrors: true, verbose: true });
+    const sourcefiles = await fs.readdir(schemadir);
+    const schemas = sourcefiles
+      .filter(file => file.match(/\.schema\.json$/))
+      .map(schema => path.resolve(schemadir, schema))
+      .map(schema => fs.readJSON(schema));
+    await Promise.map(schemas, schema => validator.addSchema(schema));
+    _ajv = validator;
   }
-  const avalid = ajv.validate('https://ns.adobe.com/helix/pipeline/action', action);
+  return _ajv;
+}
+
+async function validate(context, action, index) {
+  const validator = await ajv();
+  const cvalid = validator.validate('https://ns.adobe.com/helix/pipeline/context', context);
+  if (!cvalid) {
+    action.logger.warn(`Invalid Context at step ${index}, ${validator.errorsText()}`);
+    throw new Error(`Invalid Context at step ${index}
+${validator.errorsText()}`);
+  }
+  const avalid = validator.validate('https://ns.adobe.com/helix/pipeline/action', action);
   if (!avalid) {
-    action.logger.warn(`Invalid Action at step ${index}, ${ajv.errorsText()}`);
+    action.logger.warn(`Invalid Action at step ${index}, ${validator.errorsText()}`);
     throw new Error(`Invalid Action at step ${index}
-${ajv.errorsText()}`);
+${validator.errorsText()}`);
   }
 }
 
