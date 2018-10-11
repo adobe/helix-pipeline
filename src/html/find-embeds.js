@@ -31,9 +31,19 @@ function gatsbyEmbed(text) {
  */
 function iaEmbed({type, children}) {
   if (type==='paragraph'
-    && children.length 
+    && children.length === 1
     && children[0].type==='link'
     && URI.parse(children[0].url).reference === 'absolute') {
+    return URI.parse(children[0].url);
+  } 
+}
+
+function imgEmbed({type, children}) {
+  if (type==='paragraph'
+    && children.length === 1
+    && children[0].type==='image'
+    && URI.parse(children[0].url).reference === 'absolute'
+    && !URI.parse(children[0].url).path.match(/(jpe?g)|png|gif|webm$/i)) {
     return URI.parse(children[0].url);
   } 
 }
@@ -54,6 +64,8 @@ function find({ content: { mdast } }) {
       embed(gatsbyEmbed(node.value), node);
     } else if (node.type === 'paragraph' && iaEmbed(node)) {
       embed(iaEmbed(node), node);
+    } else if (node.type === 'paragraph' && imgEmbed(node)) {
+      embed(imgEmbed(node), node);
     }
   });
 

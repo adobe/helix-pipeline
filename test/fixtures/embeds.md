@@ -22,7 +22,11 @@ is an embed, but [this](https://www.youtube.com/watch?v=KOxbO0EI4MA "Audi R8") i
 
 is an embed, but 
 
-![](https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg) is just an image.
+![](https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg) is just an image. Even when 
+
+(https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg)
+
+is on a paragraph of its own.
 
 ## IA Writer-Style Embeds
 

@@ -574,13 +574,31 @@
       }
     },
     {
-      "type": "paragraph",
+      "type": "embed",
       "children": [
         {
-          "type": "image",
-          "title": null,
-          "url": "https://www.youtube.com/watch?v=KOxbO0EI4MA",
-          "alt": null,
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://www.youtube.com/watch?v=KOxbO0EI4MA",
+              "alt": null,
+              "position": {
+                "start": {
+                  "line": 21,
+                  "column": 1,
+                  "offset": 602
+                },
+                "end": {
+                  "line": 21,
+                  "column": 49,
+                  "offset": 650
+                },
+                "indent": []
+              }
+            }
+          ],
           "position": {
             "start": {
               "line": 21,
@@ -608,7 +626,8 @@
           "offset": 650
         },
         "indent": []
-      }
+      },
+      "url": "https://www.youtube.com/watch?v=KOxbO0EI4MA"
     },
     {
       "type": "paragraph",
@@ -669,7 +688,7 @@
         },
         {
           "type": "text",
-          "value": " is just an image.",
+          "value": " is just an image. Even when ",
           "position": {
             "start": {
               "line": 25,
@@ -678,8 +697,8 @@
             },
             "end": {
               "line": 25,
-              "column": 151,
-              "offset": 821
+              "column": 162,
+              "offset": 832
             },
             "indent": []
           }
@@ -693,8 +712,132 @@
         },
         "end": {
           "line": 25,
-          "column": 151,
-          "offset": 821
+          "column": 162,
+          "offset": 832
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "(",
+          "position": {
+            "start": {
+              "line": 27,
+              "column": 1,
+              "offset": 834
+            },
+            "end": {
+              "line": 27,
+              "column": 2,
+              "offset": 835
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg",
+          "children": [
+            {
+              "type": "text",
+              "value": "https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg",
+              "position": {
+                "start": {
+                  "line": 27,
+                  "column": 2,
+                  "offset": 835
+                },
+                "end": {
+                  "line": 27,
+                  "column": 129,
+                  "offset": 962
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 27,
+              "column": 2,
+              "offset": 835
+            },
+            "end": {
+              "line": 27,
+              "column": 129,
+              "offset": 962
+            },
+            "indent": []
+          }
+        },
+        {
+          "type": "text",
+          "value": ")",
+          "position": {
+            "start": {
+              "line": 27,
+              "column": 129,
+              "offset": 962
+            },
+            "end": {
+              "line": 27,
+              "column": 130,
+              "offset": 963
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 27,
+          "column": 1,
+          "offset": 834
+        },
+        "end": {
+          "line": 27,
+          "column": 130,
+          "offset": 963
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "is on a paragraph of its own.",
+          "position": {
+            "start": {
+              "line": 29,
+              "column": 1,
+              "offset": 965
+            },
+            "end": {
+              "line": 29,
+              "column": 30,
+              "offset": 994
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 29,
+          "column": 1,
+          "offset": 965
+        },
+        "end": {
+          "line": 29,
+          "column": 30,
+          "offset": 994
         },
         "indent": []
       }
@@ -708,14 +851,14 @@
           "value": "IA Writer-Style Embeds",
           "position": {
             "start": {
-              "line": 27,
+              "line": 31,
               "column": 4,
-              "offset": 826
+              "offset": 999
             },
             "end": {
-              "line": 27,
+              "line": 31,
               "column": 26,
-              "offset": 848
+              "offset": 1021
             },
             "indent": []
           }
@@ -723,14 +866,14 @@
       ],
       "position": {
         "start": {
-          "line": 27,
+          "line": 31,
           "column": 1,
-          "offset": 823
+          "offset": 996
         },
         "end": {
-          "line": 27,
+          "line": 31,
           "column": 26,
-          "offset": 848
+          "offset": 1021
         },
         "indent": []
       }
@@ -751,14 +894,14 @@
                   "value": "https://www.youtube.com/watch?v=KOxbO0EI4MA",
                   "position": {
                     "start": {
-                      "line": 29,
+                      "line": 33,
                       "column": 1,
-                      "offset": 850
+                      "offset": 1023
                     },
                     "end": {
-                      "line": 29,
+                      "line": 33,
                       "column": 44,
-                      "offset": 893
+                      "offset": 1066
                     },
                     "indent": []
                   }
@@ -766,14 +909,14 @@
               ],
               "position": {
                 "start": {
-                  "line": 29,
+                  "line": 33,
                   "column": 1,
-                  "offset": 850
+                  "offset": 1023
                 },
                 "end": {
-                  "line": 29,
+                  "line": 33,
                   "column": 44,
-                  "offset": 893
+                  "offset": 1066
                 },
                 "indent": []
               }
@@ -781,14 +924,14 @@
           ],
           "position": {
             "start": {
-              "line": 29,
+              "line": 33,
               "column": 1,
-              "offset": 850
+              "offset": 1023
             },
             "end": {
-              "line": 29,
+              "line": 33,
               "column": 44,
-              "offset": 893
+              "offset": 1066
             },
             "indent": []
           }
@@ -796,14 +939,14 @@
       ],
       "position": {
         "start": {
-          "line": 29,
+          "line": 33,
           "column": 1,
-          "offset": 850
+          "offset": 1023
         },
         "end": {
-          "line": 29,
+          "line": 33,
           "column": 44,
-          "offset": 893
+          "offset": 1066
         },
         "indent": []
       },
@@ -817,14 +960,14 @@
           "value": "is an embed, but ",
           "position": {
             "start": {
-              "line": 31,
+              "line": 35,
               "column": 1,
-              "offset": 895
+              "offset": 1068
             },
             "end": {
-              "line": 31,
+              "line": 35,
               "column": 18,
-              "offset": 912
+              "offset": 1085
             },
             "indent": []
           }
@@ -839,14 +982,14 @@
               "value": "https://www.youtube.com/watch?v=KOxbO0EI4MA",
               "position": {
                 "start": {
-                  "line": 31,
+                  "line": 35,
                   "column": 18,
-                  "offset": 912
+                  "offset": 1085
                 },
                 "end": {
-                  "line": 31,
+                  "line": 35,
                   "column": 61,
-                  "offset": 955
+                  "offset": 1128
                 },
                 "indent": []
               }
@@ -854,14 +997,14 @@
           ],
           "position": {
             "start": {
-              "line": 31,
+              "line": 35,
               "column": 18,
-              "offset": 912
+              "offset": 1085
             },
             "end": {
-              "line": 31,
+              "line": 35,
               "column": 61,
-              "offset": 955
+              "offset": 1128
             },
             "indent": []
           }
@@ -871,14 +1014,14 @@
           "value": " is just a link.",
           "position": {
             "start": {
-              "line": 31,
+              "line": 35,
               "column": 61,
-              "offset": 955
+              "offset": 1128
             },
             "end": {
-              "line": 31,
+              "line": 35,
               "column": 77,
-              "offset": 971
+              "offset": 1144
             },
             "indent": []
           }
@@ -886,14 +1029,14 @@
       ],
       "position": {
         "start": {
-          "line": 31,
+          "line": 35,
           "column": 1,
-          "offset": 895
+          "offset": 1068
         },
         "end": {
-          "line": 31,
+          "line": 35,
           "column": 77,
-          "offset": 971
+          "offset": 1144
         },
         "indent": []
       }
@@ -906,9 +1049,9 @@
       "offset": 0
     },
     "end": {
-      "line": 31,
+      "line": 35,
       "column": 77,
-      "offset": 971
+      "offset": 1144
     }
   }
 }
