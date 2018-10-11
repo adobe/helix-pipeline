@@ -25,6 +25,7 @@ const debug = require('../html/output-debug.js');
 const key = require('../html/set-surrogate-key');
 const production = require('../utils/is-production');
 const dump = require('../utils/dump-context.js');
+const validate = require('../utils/validate');
 
 /* eslint no-param-reassign: off */
 
@@ -34,6 +35,7 @@ const htmlpipe = (cont, payload, action) => {
   const pipe = new Pipeline(action);
   pipe
     .every(dump).when(() => !production())
+    .every(validate).when(() => !production())
     .before(fetch)
     .when(({ content }) => !(content && content.body && content.body.length > 0))
     .before(parse)

@@ -15,6 +15,12 @@ const Pipeline = require('./src/pipeline.js');
 const OpenWhiskAction = require('./src/utils/openwhisk.js');
 const utils = require('./src/utils');
 
+/**
+ * @module pipeline
+ * @typedef {import("./src/action").Action} Action
+ * @typedef {import("./src/context").Context} Context
+ */
+
 module.exports = {
   Pipeline,
   defaults,
