@@ -65,6 +65,7 @@ describe('Testing Pipeline', () => {
       verbose: noOp,
       debug: noOp,
       log: noOp,
+      level: 'silly',
       silly(msg, obj) {
         counter += 1;
         if (counter === 1) {
