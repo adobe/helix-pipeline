@@ -21,7 +21,7 @@ function key({ content, response }, { logger }) {
           'Surrogate-Key': content.sources.map((uri) => {
             const hash = crypto.createHash('sha256');
             hash.update(uri);
-            return hash.digest('hex');
+            return hash.digest('base64');
           }).join(' '),
         },
       },
