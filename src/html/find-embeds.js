@@ -9,17 +9,17 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const retext = require('retext');
+/* eslint-disable no-param-reassign */
 const map = require('unist-util-map');
-const URI = require("uri-js");
+const URI = require('uri-js');
 
 /**
  * Finds embeds like `video: https://www.youtube.com/embed/2Xc9gXyf2G4`
- * @param {*} text 
+ * @param {*} text
  */
 function gatsbyEmbed(text) {
   const matches = /^[a-z]+: +(http.*)$/.exec(text);
-  if (matches&&URI.parse(matches[1]).reference === 'absolute') {
+  if (matches && URI.parse(matches[1]).reference === 'absolute') {
     return URI.parse(matches[1]);
   }
   return false;
@@ -29,23 +29,25 @@ function gatsbyEmbed(text) {
  * Finds embeds that are single absolute links in a paragraph
  * @param {*} node An MDAST node
  */
-function iaEmbed({type, children}) {
-  if (type==='paragraph'
+function iaEmbed({ type, children }) {
+  if (type === 'paragraph'
     && children.length === 1
-    && children[0].type==='link'
+    && children[0].type === 'link'
     && URI.parse(children[0].url).reference === 'absolute') {
     return URI.parse(children[0].url);
-  } 
+  }
+  return false;
 }
 
-function imgEmbed({type, children}) {
-  if (type==='paragraph'
+function imgEmbed({ type, children }) {
+  if (type === 'paragraph'
     && children.length === 1
-    && children[0].type==='image'
+    && children[0].type === 'image'
     && URI.parse(children[0].url).reference === 'absolute'
     && !URI.parse(children[0].url).path.match(/(jpe?g)|png|gif|webm$/i)) {
     return URI.parse(children[0].url);
-  } 
+  }
+  return false;
 }
 
 function embed(uri, node) {
