@@ -10,16 +10,20 @@
  * governing permissions and limitations under the License.
  */
 const _ = require('lodash/fp');
+const callsites = require('callsites');
 const Promise = require('bluebird');
 
+const noOp = () => {};
+
 const nopLogger = {
-  error: () => {},
-  warn: () => {},
-  info: () => {},
-  verbose: () => {},
-  debug: () => {},
-  silly: () => {},
-  log: () => {},
+  debug: noOp,
+  warn: noOp,
+  silly: noOp,
+  log: noOp,
+  info: noOp,
+  verbose: noOp,
+  error: noOp,
+  level: 'error',
 };
 
 /**
@@ -87,6 +91,7 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   before(f) {
+    this.describe(f);
     this._pres.push(f);
     this._last = this._pres;
     return this;
@@ -98,6 +103,7 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   after(f) {
+    this.describe(f);
     this._posts.push(f);
     this._last = this._posts;
     return this;
@@ -169,9 +175,46 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   once(f) {
+    this.describe(f);
     this._oncef = f;
     this._last = null;
     return this;
+  }
+
+  /**
+   * This helper method generates a human readable name for a given function
+   * It will include:
+   * - the name of the function or "anonymous"
+   * - the name of the function that called describe
+   * - the name and code location of the function that called the function before
+   * @param {Function} f
+   */
+  describe(f) {
+    if (!this._action
+        || !this._action.logger
+        || !this._action.logger.level
+        || this._action.logger.level !== 'silly') {
+      // skip capturing the stack trace when it is mever read
+      return 'anonymous';
+    }
+    if (f.alias) {
+      return f.alias;
+    }
+    if (!f.alias && f.name) {
+      // eslint-disable-next-line no-param-reassign
+      f.alias = f.name;
+    } else if (!f.name && !f.alias) {
+      // eslint-disable-next-line no-param-reassign
+      f.alias = 'anonymous';
+    }
+
+    const [current, injector, caller] = callsites();
+    if (current.getFunctionName() === 'describe') {
+      // eslint-disable-next-line no-param-reassign
+      f.alias = `${injector.getFunctionName()}:${f.alias} from ${caller.getFileName()}:${caller.getLineNumber()}`;
+    }
+
+    return f.alias;
   }
 
   /**
@@ -192,14 +235,14 @@ class Pipeline {
       const mergedargs = _.merge({}, currContext);
 
       // log the function that is being called and the parameters of the function
-      this._action.logger.silly('processing ', { function: `${currFunction}`, index, params: mergedargs });
+      this._action.logger.silly('processing ', { function: this.describe(currFunction), index, params: mergedargs });
 
       this._taps.map(f => f(mergedargs, this._action, index));
 
       return Promise.resolve(currFunction(mergedargs, this._action))
         .then((value) => {
           const result = _.merge(currContext, value);
-          this._action.logger.silly('received ', { function: `${currFunction}`, result });
+          this._action.logger.silly('received ', { function: this.describe(currFunction), result });
           return result;
         });
     };
