@@ -180,7 +180,7 @@ describe('Testing HTML Pipeline', () => {
     const res = result.response;
     assert.equal(201, res.status);
     assert.equal('text/html', res.headers['Content-Type']);
-    assert.equal(res.headers['Surrogate-Key'], '87f5a156e8e5fa7e8a00dc18581e7b7e192f8dfcf30027926b00009ddcd674ad');
+    assert.equal(res.headers['Surrogate-Key'], 'h/WhVujl+n6KANwYWB57fhkvjfzzACeSawAAndzWdK0=');
     assert.equal('<', res.body[0]);
     assert.ok(res.body.match(/srcset/));
   });

@@ -1,6 +1,6 @@
 {
   "name": "@adobe/hypermedia-pipeline",
-  "version": "0.6.1-pre.0",
+  "version": "0.6.1-pre.3",
   "description": "",
   "repository": "https://github.com/adobe/hypermedia-pipeline",
   "main": "index.js",
@@ -37,6 +37,7 @@
     "ajv": "^6.5.4",
     "@adobe/openwhisk-loggly-wrapper": "^0.3.0",
     "bluebird": "^3.5.1",
+    "callsites": "^2.0.0",
     "fs-extra": "^7.0.0",
     "hast-to-hyperscript": "^5.0.0",
     "hast-util-to-html": "^4.0.1",
