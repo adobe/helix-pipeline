@@ -25,8 +25,20 @@ function gatsbyEmbed(text) {
   return false;
 }
 
+/**
+ * Finds embeds that are single absolute links in a paragraph
+ * @param {*} node An MDAST node
+ */
+function iaEmbed({type, children}) {
+  if (type==='paragraph'
+    && children.length 
+    && children[0].type==='link'
+    && URI.parse(children[0].url).reference === 'absolute') {
+    return URI.parse(children[0].url);
+  } 
+}
+
 function embed(uri, node) {
-  console.log('embedding');
   const children = [Object.assign({}, node)];
   node.type = 'embed';
   node.children = children;
@@ -39,8 +51,9 @@ function embed(uri, node) {
 function find({ content: { mdast } }) {
   map(mdast, (node) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      node = embed(gatsbyEmbed(node.value), node);
-      return node;
+      embed(gatsbyEmbed(node.value), node);
+    } else if (node.type === 'paragraph' && iaEmbed(node)) {
+      embed(iaEmbed(node), node);
     }
   });
 

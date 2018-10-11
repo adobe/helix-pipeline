@@ -16,7 +16,7 @@ is an embed, but
 
 is an embed, but [this](https://www.youtube.com/watch?v=KOxbO0EI4MA "Audi R8") is just a link and ![Audi R8](http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg) is just an image.
 
-## Link-Style Embeds
+## Image-Style Embeds
 
 ![](https://www.youtube.com/watch?v=KOxbO0EI4MA)
 
