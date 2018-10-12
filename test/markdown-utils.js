@@ -13,11 +13,29 @@
 const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
+const validate = require('../src/utils/validate.js');
+
+const noOp = () => {};
+const nopLogger = {
+  debug: noOp,
+  warn: noOp,
+  silly: noOp,
+  log: noOp,
+  info: noOp,
+  verbose: noOp,
+  error: noOp,
+  level: 'error',
+};
+
+function context(name, cb) {
+  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', `${name}.md`)).toString();
+  const out = cb(mddoc);
+  return out;
+}
 
 module.exports.assertMatch = function assertMatch(name, cb) {
-  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', `${name}.md`)).toString();
   const mdast = fs.readJsonSync(path.resolve(__dirname, 'fixtures', `${name}.json`));
-  const out = cb(mddoc);
+  const out = context(name, cb);
 
   try {
     return assert.deepEqual(out, mdast);
@@ -25,4 +43,15 @@ module.exports.assertMatch = function assertMatch(name, cb) {
     fs.writeJsonSync(`${name}.json`, out, { spaces: 2 });
     return assert.deepEqual(out, mdast);
   }
+};
+
+module.exports.assertValid = function assertValid(name, cb, done) {
+  const out = context(name, cb);
+  return validate(out, { logger: nopLogger }, 0)
+    .then(() => {
+      done();
+    })
+    .catch((e) => {
+      done(e);
+    });
 };

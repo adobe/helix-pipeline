@@ -13,7 +13,7 @@
 const winston = require('winston');
 const parse = require('../src/html/parse-markdown');
 const embeds = require('../src/html/find-embeds');
-const { assertMatch } = require('./markdown-utils');
+const { assertMatch, assertValid } = require('./markdown-utils');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -24,13 +24,24 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-function callback(body) {
+function mdast(body) {
   const parsed = parse({ content: { body } }, { logger });
   return embeds(parsed, { logger }).content.mdast;
 }
 
+function context(body) {
+  const parsed = parse({ content: { body } }, { logger });
+  return embeds(parsed, { logger });
+}
+
 describe('Test Embed Detection Processing', () => {
   it('Parses markdown with embeds', () => {
-    assertMatch('embeds', callback);
+    assertMatch('embeds', mdast);
+  });
+});
+
+describe('Validate Embed Examples In Pipeline', () => {
+  it('Markdown with embeds yields valid context', (done) => {
+    assertValid('embeds', context, done);
   });
 });
