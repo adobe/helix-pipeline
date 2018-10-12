@@ -33,3 +33,15 @@ is on a paragraph of its own.
 https://www.youtube.com/watch?v=KOxbO0EI4MA
 
 is an embed, but https://www.youtube.com/watch?v=KOxbO0EI4MA is just a link.
+
+# Whitelisting
+
+All embed hostnames must be whitelisted. Therefore, the following are not embeds:
+
+`video: https://www.example.com/embed/2Xc9gXyf2G4`
+
+[![Audi R8](http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg)](https://www.example.com/watch?v=KOxbO0EI4MA "Audi R8")
+
+![](https://www.example.com/watch?v=KOxbO0EI4MA)
+
+https://www.example.com/watch?v=KOxbO0EI4MA

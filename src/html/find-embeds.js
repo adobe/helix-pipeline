@@ -12,6 +12,8 @@
 /* eslint-disable no-param-reassign */
 const map = require('unist-util-map');
 const URI = require('uri-js');
+const mm = require('micromatch');
+const defaultwhitelist = require('./embed-whitelist.json');
 
 /**
  * Finds embeds like `video: https://www.youtube.com/embed/2Xc9gXyf2G4`
@@ -50,24 +52,28 @@ function imgEmbed({ type, children }) {
   return false;
 }
 
-function embed(uri, node) {
-  const children = [Object.assign({}, node)];
-  node.type = 'embed';
-  node.children = children;
-  node.url = URI.serialize(uri);
-  if (node.value) {
-    delete node.value;
+function embed(uri, node, whitelist = '', warn = () => {}) {
+  if (mm.any(uri.host, whitelist.split(','))) {
+    const children = [Object.assign({}, node)];
+    node.type = 'embed';
+    node.children = children;
+    node.url = URI.serialize(uri);
+    if (node.value) {
+      delete node.value;
+    }
+  } else {
+    warn(`Whitelist forbids embedding of URL: ${URI.serialize(uri)}`);
   }
 }
 
-function find({ content: { mdast } }) {
+function find({ content: { mdast } }, { logger, secrets: { EMBED_WHITELIST = defaultwhitelist.join(',') } = {} }) {
   map(mdast, (node) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      embed(gatsbyEmbed(node.value), node);
+      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger.warn);
     } else if (node.type === 'paragraph' && iaEmbed(node)) {
-      embed(iaEmbed(node), node);
+      embed(iaEmbed(node), node, EMBED_WHITELIST, logger.warn);
     } else if (node.type === 'paragraph' && imgEmbed(node)) {
-      embed(imgEmbed(node), node);
+      embed(imgEmbed(node), node, EMBED_WHITELIST, logger.warn);
     }
   });
 

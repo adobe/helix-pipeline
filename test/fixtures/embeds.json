@@ -1040,6 +1040,261 @@
         },
         "indent": []
       }
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Whitelisting",
+          "position": {
+            "start": {
+              "line": 37,
+              "column": 3,
+              "offset": 1148
+            },
+            "end": {
+              "line": 37,
+              "column": 15,
+              "offset": 1160
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 37,
+          "column": 1,
+          "offset": 1146
+        },
+        "end": {
+          "line": 37,
+          "column": 15,
+          "offset": 1160
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "All embed hostnames must be whitelisted. Therefore, the following are not embeds:",
+          "position": {
+            "start": {
+              "line": 39,
+              "column": 1,
+              "offset": 1162
+            },
+            "end": {
+              "line": 39,
+              "column": 82,
+              "offset": 1243
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 39,
+          "column": 1,
+          "offset": 1162
+        },
+        "end": {
+          "line": 39,
+          "column": 82,
+          "offset": 1243
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "inlineCode",
+          "value": "video: https://www.example.com/embed/2Xc9gXyf2G4",
+          "position": {
+            "start": {
+              "line": 41,
+              "column": 1,
+              "offset": 1245
+            },
+            "end": {
+              "line": 41,
+              "column": 51,
+              "offset": 1295
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 41,
+          "column": 1,
+          "offset": 1245
+        },
+        "end": {
+          "line": 41,
+          "column": 51,
+          "offset": 1295
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "link",
+          "title": "Audi R8",
+          "url": "https://www.example.com/watch?v=KOxbO0EI4MA",
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg",
+              "alt": "Audi R8",
+              "position": {
+                "start": {
+                  "line": 43,
+                  "column": 2,
+                  "offset": 1298
+                },
+                "end": {
+                  "line": 43,
+                  "column": 57,
+                  "offset": 1353
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 43,
+              "column": 1,
+              "offset": 1297
+            },
+            "end": {
+              "line": 43,
+              "column": 113,
+              "offset": 1409
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 43,
+          "column": 1,
+          "offset": 1297
+        },
+        "end": {
+          "line": 43,
+          "column": 113,
+          "offset": 1409
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "https://www.example.com/watch?v=KOxbO0EI4MA",
+          "alt": null,
+          "position": {
+            "start": {
+              "line": 45,
+              "column": 1,
+              "offset": 1411
+            },
+            "end": {
+              "line": 45,
+              "column": 49,
+              "offset": 1459
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 45,
+          "column": 1,
+          "offset": 1411
+        },
+        "end": {
+          "line": 45,
+          "column": 49,
+          "offset": 1459
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://www.example.com/watch?v=KOxbO0EI4MA",
+          "children": [
+            {
+              "type": "text",
+              "value": "https://www.example.com/watch?v=KOxbO0EI4MA",
+              "position": {
+                "start": {
+                  "line": 47,
+                  "column": 1,
+                  "offset": 1461
+                },
+                "end": {
+                  "line": 47,
+                  "column": 44,
+                  "offset": 1504
+                },
+                "indent": []
+              }
+            }
+          ],
+          "position": {
+            "start": {
+              "line": 47,
+              "column": 1,
+              "offset": 1461
+            },
+            "end": {
+              "line": 47,
+              "column": 44,
+              "offset": 1504
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 47,
+          "column": 1,
+          "offset": 1461
+        },
+        "end": {
+          "line": 47,
+          "column": 44,
+          "offset": 1504
+        },
+        "indent": []
+      }
     }
   ],
   "position": {
@@ -1049,9 +1304,9 @@
       "offset": 0
     },
     "end": {
-      "line": 35,
-      "column": 77,
-      "offset": 1144
+      "line": 47,
+      "column": 44,
+      "offset": 1504
     }
   }
 }
