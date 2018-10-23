@@ -76,9 +76,9 @@
       "type": "integer",
       "description": "Starting item of the list"
     },
-    "loose": {
+    "spread": {
       "type": "boolean",
-      "description": "A loose field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present)."
+      "description": "A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present)."
     },
     "checked": {
       "type": "boolean",
