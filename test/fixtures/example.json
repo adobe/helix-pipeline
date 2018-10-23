@@ -568,11 +568,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -627,7 +627,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -682,7 +682,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -737,7 +737,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -986,11 +986,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -1096,7 +1096,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -1326,11 +1326,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -1402,7 +1402,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -1474,7 +1474,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -1580,7 +1580,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -1761,6 +1761,7 @@
     {
       "type": "code",
       "lang": "javascript",
+      "meta": null,
       "value": "// the pipeline itself\nconst pipeline = require(\"@adobe/hypermedia-pipeline\");\n// helper functions and log\nconst { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');\n\nmodule.exports.pipe = function(cont, params, secrets, logger = log) {\n    logger.log(\"debug\", \"Constructing Custom Pipeline\");\n\n    return pipeline()\n        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload\n        .once(cont)            // required: execute the continuation function\n        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response\n}",
       "position": {
         "start": {
@@ -2278,11 +2279,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -2388,7 +2389,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -2494,7 +2495,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -2566,7 +2567,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -2799,11 +2800,11 @@
       "type": "list",
       "ordered": true,
       "start": 1,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -2858,7 +2859,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -2913,7 +2914,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3022,6 +3023,7 @@
     {
       "type": "code",
       "lang": "javascript",
+      "meta": null,
       "value": "// All wrapper functions must export `pre`\n// The functions takes following arguments:\n// - `cont` (the continuation function, i.e. the main template function)\n// - `payload` (the payload of the pipeline)\nmodule.exports.pre = (cont, payload) => {\n    const {request, content, context, response} = payload;\n    \n    // modifying the payload content before invoking the main function\n    content.hello = 'World';\n    const modifiedpayload = {request, content, context, response};\n\n    // invoking the main function with the new payload. Capturing the response\n    // payload for further modification\n\n    const responsepayload = cont(modifiedpayload);\n\n    // Adding a value to the payload response\n    const modifiedresponse = modifiedpayload.response;\n    modifiedresponse.hello = 'World';\n\n    return Object.assign(modifiedpayload, modifiedresponse);\n}",
       "position": {
         "start": {
@@ -3136,11 +3138,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3195,7 +3197,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3250,7 +3252,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3396,11 +3398,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3543,11 +3545,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3602,7 +3604,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3657,7 +3659,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3712,7 +3714,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3767,7 +3769,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3914,11 +3916,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -3990,7 +3992,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -4151,11 +4153,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -4244,7 +4246,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -4353,7 +4355,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -4412,11 +4414,11 @@
               "type": "list",
               "ordered": false,
               "start": null,
-              "loose": false,
+              "spread": false,
               "children": [
                 {
                   "type": "listItem",
-                  "loose": false,
+                  "spread": false,
                   "checked": null,
                   "children": [
                     {
@@ -4488,7 +4490,7 @@
                 },
                 {
                   "type": "listItem",
-                  "loose": false,
+                  "spread": false,
                   "checked": null,
                   "children": [
                     {
@@ -4560,7 +4562,7 @@
                 },
                 {
                   "type": "listItem",
-                  "loose": false,
+                  "spread": false,
                   "checked": null,
                   "children": [
                     {
@@ -4669,7 +4671,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -4741,7 +4743,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -4813,7 +4815,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -4981,11 +4983,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -5074,7 +5076,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -5146,7 +5148,7 @@
         },
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
@@ -5688,11 +5690,11 @@
       "type": "list",
       "ordered": false,
       "start": null,
-      "loose": false,
+      "spread": false,
       "children": [
         {
           "type": "listItem",
-          "loose": false,
+          "spread": false,
           "checked": null,
           "children": [
             {
