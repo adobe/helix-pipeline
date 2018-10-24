@@ -50,12 +50,12 @@
         },
         "method": {
           "type": "string",
-          "description": "The HTTP method of the request made to OpenWhisk/Petridish",
+          "description": "The HTTP method of the request made to OpenWhisk/Petridish. Note: OpenWhisk converts all methods to lowercase.",
           "meta:enum": {
-            "GET": "GET request",
-            "POST": "POST request",
-            "PUT": "PUT request (not handled by Helix)",
-            "DELETE": "DELETE request (not handled by Helix)"
+            "get": "GET request",
+            "post": "POST request",
+            "put": "PUT request (not handled by Helix)",
+            "delete": "DELETE request (not handled by Helix)"
           }
         },
         "params": {
