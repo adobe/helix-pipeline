@@ -24,7 +24,7 @@ All [MDAST Utilities](https://github.com/syntax-tree/mdast#list-of-utilities) ar
 |----------|------|----------|------------|
 | [align](#align) | `enum[]` | Optional | MDAST (this schema) |
 | [alt](#alt) | complex | Optional | MDAST (this schema) |
-| [checked](#checked) | `boolean` | Optional | MDAST (this schema) |
+| [checked](#checked) | complex | Optional | MDAST (this schema) |
 | [children](#children) | MDAST | Optional | MDAST (this schema) |
 | [depth](#depth) | `integer` | Optional | MDAST (this schema) |
 | [identifier](#identifier) | `string` | Optional | MDAST (this schema) |
@@ -33,7 +33,7 @@ All [MDAST Utilities](https://github.com/syntax-tree/mdast#list-of-utilities) ar
 | [meta](#meta) | `string` | Optional | MDAST (this schema) |
 | [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
 | [position](#position) | Position | Optional | MDAST (this schema) |
-| [spread](#spread) | `boolean` | Optional | MDAST (this schema) |
+| [spread](#spread) | complex | Optional | MDAST (this schema) |
 | [start](#start) | `integer` | Optional | MDAST (this schema) |
 | [title](#title) | complex | Optional | MDAST (this schema) |
 | [type](#type) | `enum` | Optional | MDAST (this schema) |
@@ -100,13 +100,23 @@ A checked field can be present. It represents whether the item is done (when tru
 
 `checked`
 * is optional
-* type: `boolean`
+* type: complex
 * defined in this schema
 
 ### checked Type
 
+Unknown type `null,boolean`.
 
-`boolean`
+```json
+{
+  "type": [
+    "null",
+    "boolean"
+  ],
+  "description": "A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present).",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -273,13 +283,23 @@ A spread field can be present. It represents that any of its items is separated 
 
 `spread`
 * is optional
-* type: `boolean`
+* type: complex
 * defined in this schema
 
 ### spread Type
 
+Unknown type `null,boolean`.
 
-`boolean`
+```json
+{
+  "type": [
+    "null",
+    "boolean"
+  ],
+  "description": "A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -353,6 +373,7 @@ The value of this property **must** be equal to one of the [known values below](
 | `thematicBreak` |  |
 | `blockquote` |  |
 | `list` |  |
+| `listItem` |  |
 | `table` |  |
 | `tableRow` |  |
 | `tableCell` |  |

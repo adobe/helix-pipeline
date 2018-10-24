@@ -27,6 +27,7 @@
         "thematicBreak",
         "blockquote",
         "list",
+        "listItem",
         "table",
         "tableRow",
         "tableCell",
@@ -77,11 +78,11 @@
       "description": "Starting item of the list"
     },
     "spread": {
-      "type": "boolean",
+      "type": ["null", "boolean"],
       "description": "A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present)."
     },
     "checked": {
-      "type": "boolean",
+      "type": ["null", "boolean"],
       "description": "A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present)."
     },
     "align": {
