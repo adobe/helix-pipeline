@@ -249,7 +249,7 @@ class Pipeline {
             return result;
           })).catch((e) => {
           // tapping failed
-          this._action.logger.warn('tapping failed', e);
+          this._action.logger.warn(`tapping failed: ${e}`, e);
           return {
             error: `${currContext.error || ''}
 ${e}`,
