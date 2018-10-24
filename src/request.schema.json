@@ -18,6 +18,59 @@
   "description": "The HTTP Request",
   "additionalProperties": false,
   "properties": {
+    "url": {
+      "type": "string",
+      "description": "The path and request parameters of the request URL",
+      "examples": [
+        "/index.html?foo=bar"
+      ]
+    },
+    "resourcePath": {
+      "type": "string",
+      "description": "The resource path (without extension) that has been requested",
+      "examples": [
+        "/index"
+      ]
+    },
+    "path": {
+      "type": "string",
+      "description": "The path and request parameters of the request URL",
+      "examples": [
+        "/index.html?foo=bar"
+      ]
+    },
+    "selector": {
+      "type": "string",
+      "description": "The selector (sub-type indicator)",
+      "examples": [
+        "",
+        "nav"
+      ]
+    },
+    "extension": {
+      "type": "string",
+      "description": "The extension of the requested resource",
+      "examples": [
+        "html",
+        "json"
+      ]
+    },
+    "method": {
+      "type": "string",
+      "description": "The HTTP method of the request",
+      "meta:enum": {
+        "GET": "GET request",
+        "POST": "POST request",
+        "PUT": "PUT request (not handled by Helix)",
+        "DELETE": "DELETE request (not handled by Helix)"
+      }
+    },
+    "headers": {
+      "description": "The HTTP headers of the request. Note: all header names will be lower-case.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
     "params": {
       "type": "object",
       "description": "The passed through (and filtered) URL parameters of the request",
