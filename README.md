@@ -77,7 +77,7 @@ Examples of possible template names include:
 
 ### (Optional) The Wrapper Function
 
-Sometimes it is neccessary to pre-process the payload in a template-specific fashion. This wrapper function (often called "Pre-JS" for brevity sake) allows the full transformation of the pipeline's payload.
+Sometimes it is necessary to pre-process the payload in a template-specific fashion. This wrapper function (often called "Pre-JS" for brevity sake) allows the full transformation of the pipeline's payload.
 
 Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:
 
@@ -181,7 +181,7 @@ The default pipeline extracts sections from a Markdown document, using both "the
 
 `content.sections` is an Array of `section` nodes, with `type` (String) and `children` (array of Node) properties. In addition, each section has a `types` attribute, which is an array of derived content types. Project Helix (and Hypermedia Pipeline) uses implied typing over declared content typing, which means it is not the task of the author to explicitly declare the content type of a section or document, but rather have the template interpret the contents of a section to understand the type of content it is dealing with.
 
-The `types` property is an array of string values that describes the type of the section based on the occurence of child nodes. This makes it easy to copy the value of `types` into the `class` attribute of an HTML element, so that CSS expressions matching types of sections can be written with ease. Following patterns of `type` values can be found:
+The `types` property is an array of string values that describes the type of the section based on the occurrence of child nodes. This makes it easy to copy the value of `types` into the `class` attribute of an HTML element, so that CSS expressions matching types of sections can be written with ease. Following patterns of `type` values can be found:
 
 - `has-<type>`: for each type of content that occurs at least once in the section, e.g. has-heading
 - `is-<type>-only`: for sections that only have content of a single type, e.g. is-image-only
