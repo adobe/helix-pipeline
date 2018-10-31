@@ -11,7 +11,6 @@
  */
 const _ = require('lodash/fp');
 const callsites = require('callsites');
-const Promise = require('bluebird');
 
 const noOp = () => {};
 const nopLogger = {
@@ -222,7 +221,7 @@ class Pipeline {
    * @returns {Promise<Context>} Promise that resolves to the final result of the accumulated
    * context.
    */
-  run(context = {}) {
+  async run(context = {}) {
     /**
      * Reduction function used to process the pipeline functions and merge the context parameters.
      * @param {Object} currContext Accumulated context
@@ -236,12 +235,15 @@ class Pipeline {
       // log the function that is being called and the parameters of the function
       this._action.logger.silly('processing ', { function: this.describe(currFunction), index, params: mergedargs });
 
+      const tapresults = this._taps.map((f) => {
+        try {
+          return f(mergedargs, this._action, index);
+        } catch (e) {
+          return Promise.reject(e);
+        }
+      });
 
-      const tapresults = Promise.map(
-        this._taps,
-        f => Promise.attempt(() => f(mergedargs, this._action, index)),
-      );
-      return tapresults
+      return Promise.all(tapresults)
         .then(() => Promise.resolve(currFunction(mergedargs, this._action))
           .then((value) => {
             const result = _.merge(currContext, value);
@@ -251,8 +253,7 @@ class Pipeline {
           // tapping failed
           this._action.logger.warn(`tapping failed: ${e}`, e);
           return {
-            error: `${currContext.error || ''}
-${e}`,
+            error: `${currContext.error || ''}\n${e}`,
           };
         });
     };
@@ -260,11 +261,9 @@ ${e}`,
     // go over inner.pres (those that run before), inner.oncef (the function that runs once)
     // and inner.posts (those that run after) – reduce using the merge function and return
     // the resolved value
-    return Promise.reduce(
-      [...this._pres, this._oncef, ...this._posts].filter(e => typeof e === 'function'),
-      merge,
-      context,
-    ).then(v => v);
+    return [...this._pres, this._oncef, ...this._posts]
+      .filter(e => typeof e === 'function')
+      .reduce(async (ctx, fn, index) => merge(await ctx, fn, index), context);
   }
 }
 
