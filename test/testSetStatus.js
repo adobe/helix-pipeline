@@ -58,4 +58,15 @@ describe('Test set-status', () => {
       {},
     );
   });
+
+  it('sets a 200 if all good', () => {
+    assert.deepEqual(
+      setStatus({ content: { html: '<html></html>' } }, { logger }),
+      {
+        response: {
+          status: 200,
+        },
+      },
+    );
+  });
 });

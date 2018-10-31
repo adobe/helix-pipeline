@@ -38,6 +38,10 @@ function setStatus({ content = {}, response = {}, error }, { logger }) {
     };
   }
 
-  return {};
+  return {
+    response: {
+      status: 200,
+    },
+  };
 }
 module.exports = setStatus;
