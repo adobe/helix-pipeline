@@ -30,7 +30,7 @@ const validate = require('../utils/validate');
 
 /* eslint no-param-reassign: off */
 
-const htmlpipe = async (cont, payload, action) => {
+const htmlpipe = (cont, payload, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = new Pipeline(action);
