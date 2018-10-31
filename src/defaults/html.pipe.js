@@ -19,6 +19,7 @@ const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
 const emit = require('../html/emit-html.js');
 const type = require('../html/set-content-type.js');
+const status = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const debug = require('../html/output-debug.js');
@@ -29,7 +30,7 @@ const validate = require('../utils/validate');
 
 /* eslint no-param-reassign: off */
 
-const htmlpipe = (cont, payload, action) => {
+const htmlpipe = async (cont, payload, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = new Pipeline(action);
@@ -47,6 +48,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(emit)
     .once(cont)
     .after(type)
+    .after(status)
     .after(key)
     .after(debug);
 
