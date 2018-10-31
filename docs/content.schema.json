@@ -15,7 +15,7 @@
     "title": "Content",
     "meta:status": "stabilizing",
     "type": "object",
-    "description": "The `content` object represents the content that is being processed in the pipeline.\n\nWith each step of the pipeline, the `content` will be enriched and gain additional properties.\n\nIn a typical processing, `content` will start empty, and then gain a [`body`](#body) as the resource is fetched from the content repository.\n\nIn the second step, the `body` will be parsed using a Markdown parser, resulting in the populated [`mdast`](#mdast) property, which is a representation of the Markdown.\n\nAfter that, the Markdown AST is processed furthermore to extract [`sections`](#meta), [`title`](#title), [`intro`](#intro), and [`meta`](#meta).",
+    "description": "The content as retrieved from the repository and enriched in the pipeline.",
     "additionalProperties": false,
     "properties": {
         "sources": {

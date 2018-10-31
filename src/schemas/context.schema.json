@@ -19,7 +19,7 @@
   "additionalProperties": false,
   "properties": {
     "error": {
-      "type": "string",
+      "type": ["string", "object"],
       "description": "An error message that has been generated during pipeline processing.\nWhen this property is present, all other values can be ignored."
     },
     "request": {
