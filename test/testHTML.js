@@ -67,7 +67,6 @@ const params = {
   repo: 'soupdemo',
   ref: 'master',
   selector: 'md',
-  branch: 'master',
 };
 
 const params404 = {
@@ -109,7 +108,6 @@ const params404 = {
   repo: 'soupdemo',
   ref: 'master',
   selector: 'md',
-  branch: 'master',
 };
 
 const secrets = {
@@ -229,11 +227,8 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe serves 404 for non existent content', async () => {
     const result = await pipe(
-      (content) => {
-        // this is the main function (normally it would be the template function)
-        assert.fail('template should not be called for non existent content');
-        return content;
-      },
+      // this is the main function (normally it would be the template function)
+      () => ({ response: { body: '<html></html>' } }),
       {
         request: {
           params: {
@@ -241,7 +236,7 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: { params: params404 },
         secrets,
         logger,
       },
