@@ -9,7 +9,7 @@
     "test": "nyc mocha",
     "lint": "npx eslint . && npm run types",
     "types": "npm run docs && node bin/schema2ts.js",
-    "docs": "npx jsonschema2md -d src -o docs",
+    "docs": "npx jsonschema2md -d src/schemas -o docs",
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect",
     "preversion": "npm test",

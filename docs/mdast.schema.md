@@ -5,9 +5,7 @@
 https://ns.adobe.com/helix/pipeline/mdast
 ```
 
-The Markdown AST is 100% API compatible with the [UnifiedJS MDAST](https://github.com/syntax-tree/mdast) data structure.
-
-All [MDAST Utilities](https://github.com/syntax-tree/mdast#list-of-utilities) are compatible and can be used for easy processing of MDAST trees.
+A node in the Markdown AST
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
@@ -24,16 +22,16 @@ All [MDAST Utilities](https://github.com/syntax-tree/mdast#list-of-utilities) ar
 |----------|------|----------|------------|
 | [align](#align) | `enum[]` | Optional | MDAST (this schema) |
 | [alt](#alt) | complex | Optional | MDAST (this schema) |
-| [checked](#checked) | `boolean` | Optional | MDAST (this schema) |
+| [checked](#checked) | complex | Optional | MDAST (this schema) |
 | [children](#children) | MDAST | Optional | MDAST (this schema) |
 | [depth](#depth) | `integer` | Optional | MDAST (this schema) |
 | [identifier](#identifier) | `string` | Optional | MDAST (this schema) |
 | [label](#label) | `string` | Optional | MDAST (this schema) |
 | [lang](#lang) | `string` | Optional | MDAST (this schema) |
-| [loose](#loose) | `boolean` | Optional | MDAST (this schema) |
 | [meta](#meta) | `string` | Optional | MDAST (this schema) |
 | [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
 | [position](#position) | Position | Optional | MDAST (this schema) |
+| [spread](#spread) | complex | Optional | MDAST (this schema) |
 | [start](#start) | `integer` | Optional | MDAST (this schema) |
 | [title](#title) | complex | Optional | MDAST (this schema) |
 | [type](#type) | `enum` | Optional | MDAST (this schema) |
@@ -100,13 +98,23 @@ A checked field can be present. It represents whether the item is done (when tru
 
 `checked`
 * is optional
-* type: `boolean`
+* type: complex
 * defined in this schema
 
 ### checked Type
 
+Unknown type `null,boolean`.
 
-`boolean`
+```json
+{
+  "type": [
+    "null",
+    "boolean"
+  ],
+  "description": "A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present).",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -213,24 +221,6 @@ For code, a lang field can be present. It represents the language of computer co
 
 
 
-## loose
-
-A loose field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).
-
-`loose`
-* is optional
-* type: `boolean`
-* defined in this schema
-
-### loose Type
-
-
-`boolean`
-
-
-
-
-
 ## meta
 
 For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
@@ -280,6 +270,34 @@ Is the list ordered
 
 
 * [Position](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
+
+
+
+
+
+## spread
+
+A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).
+
+`spread`
+* is optional
+* type: complex
+* defined in this schema
+
+### spread Type
+
+Unknown type `null,boolean`.
+
+```json
+{
+  "type": [
+    "null",
+    "boolean"
+  ],
+  "description": "A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -353,6 +371,7 @@ The value of this property **must** be equal to one of the [known values below](
 | `thematicBreak` |  |
 | `blockquote` |  |
 | `list` |  |
+| `listItem` |  |
 | `table` |  |
 | `tableRow` |  |
 | `tableCell` |  |

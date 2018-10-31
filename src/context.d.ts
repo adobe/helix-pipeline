@@ -77,7 +77,11 @@ export interface Context {
    * An error message that has been generated during pipeline processing.
    * When this property is present, all other values can be ignored.
    */
-  error?: string;
+  error?:
+    | string
+    | {
+        [k: string]: any;
+      };
   request?: Request;
   content?: Content;
   response?: Response;
@@ -87,6 +91,36 @@ export interface Context {
  */
 export interface Request {
   /**
+   * The path and request parameters of the request URL
+   */
+  url?: string;
+  /**
+   * The resource path (without extension) that has been requested
+   */
+  resourcePath?: string;
+  /**
+   * The path and request parameters of the request URL
+   */
+  path?: string;
+  /**
+   * The selector (sub-type indicator)
+   */
+  selector?: string;
+  /**
+   * The extension of the requested resource
+   */
+  extension?: string;
+  /**
+   * The HTTP method of the request
+   */
+  method?: string;
+  /**
+   * The HTTP headers of the request. Note: all header names will be lower-case.
+   */
+  headers?: {
+    [k: string]: string;
+  };
+  /**
    * The passed through (and filtered) URL parameters of the request
    */
   params?: {
@@ -94,15 +128,7 @@ export interface Request {
   };
 }
 /**
- * The `content` object represents the content that is being processed in the pipeline.
- *
- * With each step of the pipeline, the `content` will be enriched and gain additional properties.
- *
- * In a typical processing, `content` will start empty, and then gain a [`body`](#body) as the resource is fetched from the content repository.
- *
- * In the second step, the `body` will be parsed using a Markdown parser, resulting in the populated [`mdast`](#mdast) property, which is a representation of the Markdown.
- *
- * After that, the Markdown AST is processed furthermore to extract [`sections`](#meta), [`title`](#title), [`intro`](#intro), and [`meta`](#meta).
+ * The content as retrieved from the repository and enriched in the pipeline.
  */
 export interface Content {
   /**
@@ -158,9 +184,7 @@ export interface Content {
   image?: string;
 }
 /**
- * The Markdown AST is 100% API compatible with the [UnifiedJS MDAST](https://github.com/syntax-tree/mdast) data structure.
- *
- * All [MDAST Utilities](https://github.com/syntax-tree/mdast#list-of-utilities) are compatible and can be used for easy processing of MDAST trees.
+ * A node in the Markdown AST
  */
 export interface MDAST {
   /**
@@ -174,6 +198,7 @@ export interface MDAST {
     | "thematicBreak"
     | "blockquote"
     | "list"
+    | "listItem"
     | "table"
     | "tableRow"
     | "tableCell"
@@ -214,13 +239,13 @@ export interface MDAST {
    */
   start?: number;
   /**
-   * A loose field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).
+   * A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).
    */
-  loose?: boolean;
+  spread?: null | boolean;
   /**
    * A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present).
    */
-  checked?: boolean;
+  checked?: null | boolean;
   /**
    * For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.
    */
