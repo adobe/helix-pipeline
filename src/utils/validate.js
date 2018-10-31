@@ -44,12 +44,12 @@ async function validate(context, action, index) {
   const cvalid = validator.validate('https://ns.adobe.com/helix/pipeline/context', context);
   if (!cvalid) {
     action.logger.warn(`Invalid Context at step ${index}, ${validator.errorsText()}`);
-    throw new Error(`Invalid Context at step ${index}: ${validator.errorsText()}`);
+    throw new Error(`Invalid Context at step ${index}\n${validator.errorsText()}`);
   }
   const avalid = validator.validate('https://ns.adobe.com/helix/pipeline/action', action);
   if (!avalid) {
     action.logger.warn(`Invalid Action at step ${index}, ${validator.errorsText()}`);
-    throw new Error(`Invalid Action at step ${index}: ${validator.errorsText()}`);
+    throw new Error(`Invalid Action at step ${index}\n${validator.errorsText()}`);
   }
 }
 
