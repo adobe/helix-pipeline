@@ -42,10 +42,6 @@ export type RawRequest = {
   method?: string;
   params?: {
     /**
-     * A JSON-encoded map of request parameters
-     */
-    req?: string;
-    /**
      * Owner of the GitHub repository. This is the name of a user or organization.
      */
     owner?: string;

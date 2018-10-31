@@ -64,10 +64,6 @@
                         "type": "string"
                     },
                     "properties": {
-                        "req": {
-                            "type": "string",
-                            "description": "A JSON-encoded map of request parameters"
-                        },
                         "owner": {
                             "type": "string",
                             "description": "Owner of the GitHub repository. This is the name of a user or organization."

@@ -180,7 +180,6 @@ The HTTP method of the request made to OpenWhisk/Petridish. Note: OpenWhisk conv
 | `path`| string | Optional |
 | `ref`| string | Optional |
 | `repo`| string | Optional |
-| `req`| string | Optional |
 
 
 
@@ -279,26 +278,6 @@ Repository where content originates
 * type: `string`
 
 ##### repo Type
-
-
-`string`
-
-
-
-
-
-
-
-
-#### req
-
-A JSON-encoded map of request parameters
-
-`req`
-* is optional
-* type: `string`
-
-##### req Type
 
 
 `string`
