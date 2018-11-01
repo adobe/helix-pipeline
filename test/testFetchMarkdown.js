@@ -121,61 +121,61 @@ describe('Test URI parsing and construction', () => {
 });
 
 describe('Test invalid input', () => {
-  it('Test for missing owner', () => {
-    assert.ok(fetch(
+  it('Test for missing owner', async () => {
+    assert.ok((await fetch(
       {},
       {
         request: { params: { repo: 'xdm', ref: 'master', path: 'README.md' } },
         logger,
       },
-    ).error);
+    )).error);
   });
 
-  it('Test for missing repo', () => {
-    assert.ok(fetch(
+  it('Test for missing repo', async () => {
+    assert.ok((await fetch(
       {},
       {
         request: { params: { ref: 'master', path: 'README.md', owner: 'adobe' } },
         logger,
       },
-    ).error);
+    )).error);
   });
 
-  it('Test for missing ref', () => {
-    assert.ok(fetch(
+  it('Test for missing ref', async () => {
+    assert.ok((await fetch(
       {},
       {
         request: { params: { repo: 'xdm', path: 'README.md', owner: 'adobe' } },
         logger,
       },
-    ).error);
+    )).error);
   });
 
-  it('Test for missing path', () => {
-    assert.ok(fetch(
+  it('Test for missing path', async () => {
+    assert.ok((await fetch(
       {},
       {
         request: { params: { repo: 'xdm', ref: 'master', owner: 'adobe' } },
         logger,
       },
-    ).error);
+    )).error);
   });
 
-  it('Test for missing params', () => {
-    assert.ok(fetch(
+  it('Test for missing params', async () => {
+    assert.ok((await fetch(
       {},
       {
         request: {},
         logger,
       },
-    ).error);
+    )).error);
   });
 
-  it('Test for missing request', () => {
-    assert.ok(fetch(
+  it('Test for missing request', async () => {
+    assert.ok((await fetch(
       {},
       { logger },
-    ).error);
+    )).error);
   });
 
   it('Test for error pass-through', () => {
@@ -189,8 +189,8 @@ describe('Test invalid input', () => {
 });
 
 describe('Test non-existing content', () => {
-  it('Getting XDM README (from wrong URL)', () => {
-    assert.ok(fetch(
+  it('Getting XDM README (from wrong URL)', async () => {
+    assert.ok((await fetch(
       {},
       {
         request: {
@@ -200,7 +200,7 @@ describe('Test non-existing content', () => {
         },
         logger,
       },
-    ).error);
+    )).error);
   });
 });
 

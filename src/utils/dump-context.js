@@ -10,12 +10,27 @@
  * governing permissions and limitations under the License.
  */
 
-const tmp = require('tmp-promise');
+const tmp = require('tmp');
 const path = require('path');
 const fs = require('fs-extra');
 
 fs.mkdirpSync(path.resolve(process.cwd(), 'logs', 'debug'));
-const dumpdir = tmp.dir({ prefix: 'context_dump_', dir: path.resolve(process.cwd(), 'logs', 'debug'), unsafeCleanup: true }).then(o => o.path);
+
+async function dumpdir() {
+  return new Promise((resolve, reject) => {
+    tmp.dir({
+      prefix: 'context_dump_',
+      dir: path.resolve(process.cwd(), 'logs', 'debug'),
+      unsafeCleanup: true,
+    }, (err, tmpDirPath) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(tmpDirPath);
+      }
+    });
+  });
+}
 
 function tstamp() {
   const now = new Date();
@@ -37,9 +52,9 @@ function tstamp() {
 }
 
 async function dump(context, _, index) {
-  const dir = await dumpdir;
+  const dir = await dumpdir();
   const dumppath = path.resolve(dir, `context-${tstamp()}-step-${index}.json`);
-  fs.writeJsonSync(dumppath, context, { spaces: 2 });
+  await fs.writeJson(dumppath, context, { spaces: 2 });
   return dumppath;
 }
 
