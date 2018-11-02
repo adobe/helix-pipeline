@@ -13,8 +13,8 @@
 const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
-const validate = require('../src/utils/validate.js');
 const removePosition = require('unist-util-remove-position');
+const validate = require('../src/utils/validate.js');
 
 function cleanUp(json) {
   if (json) {
