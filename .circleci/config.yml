@@ -145,7 +145,6 @@ jobs:
 
       # generate markdowm
       - run: npm run docs
-      - run: node bin/show-stablization-candidates.js > STABILIZING.md
       - run: git config --global user.email "circleci@example.com" && git config --global user.name "CircleCi Build"
 
       # send up-to-date markdown back to GitHub
@@ -175,4 +174,4 @@ workflows:
         filters:
           branches:
             # disable for now, as the build fails
-            only: disabled_master
+            only: master
