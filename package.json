@@ -1,6 +1,6 @@
 {
   "name": "@adobe/hypermedia-pipeline",
-  "version": "0.7.2-pre.6",
+  "version": "0.7.2-pre.7",
   "description": "",
   "repository": "https://github.com/adobe/hypermedia-pipeline",
   "main": "index.js",
