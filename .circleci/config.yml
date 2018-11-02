@@ -171,7 +171,7 @@ workflows:
     - generate-docs:
         requires:
         - build
+        - publish-pre-release
         filters:
           branches:
-            # disable for now, as the build fails
             only: master
