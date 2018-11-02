@@ -10,9 +10,14 @@
  * governing permissions and limitations under the License.
  */
 
-function bail(logger, message, error) {
+function bail(logger, message, error, status = 500) {
   logger.error(message);
-  return { error: Object.assign({ message }, error) };
+  return {
+    error: Object.assign({ message }, error),
+    response: {
+      status,
+    },
+  };
 }
 
 module.exports = {

@@ -24,18 +24,6 @@ const logger = winston.createLogger({
 });
 
 describe('Test set-status', () => {
-  it('sets a 404 for no content', () => {
-    assert.deepEqual(
-      setStatus({}, { logger }),
-      {
-        response: {
-          status: 404,
-          body: '',
-        },
-      },
-    );
-  });
-
   it('sets a 500 for an error', () => {
     assert.deepEqual(
       setStatus({ content: { html: '<html></html>' }, error: 'oh, no!' }, { logger }),

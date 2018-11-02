@@ -48,9 +48,9 @@ const htmlpipe = (cont, payload, action) => {
     .before(emit)
     .once(cont)
     .after(type)
-    .after(status)
     .after(key)
-    .after(debug);
+    .after(debug)
+    .error(status);
 
   action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);

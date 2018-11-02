@@ -10,21 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-function setStatus({ content = {}, response = {}, error }, { logger }) {
+function setStatus({ response = {}, error }, { logger }) {
   // if a status is already default, keep it.
   if (response.status) {
     return {};
-  }
-
-  // if there is not content, send a 404
-  if (!content.html) {
-    logger.debug('no content.html -> 404');
-    return {
-      response: {
-        status: 404,
-        body: '',
-      },
-    };
   }
 
   // if there is an error, send a 500
