@@ -14,6 +14,17 @@ const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
 const validate = require('../src/utils/validate.js');
+const removePosition = require('unist-util-remove-position');
+
+function cleanUp(json) {
+  if (json) {
+    if (json.map) {
+      return json.map(node => removePosition(node, true));
+    }
+    return removePosition(json, true);
+  }
+  return json;
+}
 
 const noOp = () => {};
 const nopLogger = {
@@ -34,8 +45,8 @@ function context(name, cb) {
 }
 
 module.exports.assertMatch = function assertMatch(name, cb) {
-  const mdast = fs.readJsonSync(path.resolve(__dirname, 'fixtures', `${name}.json`));
-  const out = context(name, cb);
+  const mdast = cleanUp(fs.readJsonSync(path.resolve(__dirname, 'fixtures', `${name}.json`)));
+  const out = cleanUp(context(name, cb));
 
   try {
     return assert.deepEqual(out, mdast);

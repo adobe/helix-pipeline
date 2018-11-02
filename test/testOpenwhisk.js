@@ -79,36 +79,6 @@ describe('Testing OpenWhisk adapter', () => {
     assert.ok(out, 'missing request object');
   });
 
-  it('extractClientRequest needs to parse req parameter', () => {
-    const testObject = {
-      url: 'url',
-      headers: {
-        h1: '1',
-        h2: '2',
-      },
-      params: {
-        p1: '1',
-        p2: true,
-        p3: ['a', 'b', 'c'],
-        p4: {
-          p41: '1',
-        },
-      },
-    };
-    const out = extractClientRequest({ request: { params: { req: JSON.stringify(testObject) } } });
-    assert.ok(out, 'missing request object');
-    assert.deepStrictEqual(testObject, out, 'request object does not match incoming req');
-  });
-
-  it('extractClientRequest throws error on wrong req parameter', () => {
-    try {
-      extractClientRequest({ request: { params: { req: 'this is not json' } } });
-      assert.fail('should fail.');
-    } catch (e) {
-      // ok.
-    }
-  });
-
   it('extractClientRequest acts reasonably with no request object', () => {
     const out = extractClientRequest({});
     assert.ok(out, 'missing request object');
@@ -122,17 +92,25 @@ describe('Testing OpenWhisk adapter', () => {
       __ow_logger: log,
       __ow_method: 'get',
       path: '/test',
+      extension: 'html',
+      selector: 'print.preview',
+      params: 'a=42&b=green',
       SECRET: '1234',
     };
     let action = {};
+    let payload = {};
     await runPipeline((p, a) => {
       action = a;
+      payload = p;
     }, pipe, params);
 
-    assert.deepEqual({
+    assert.deepEqual(action, {
       request: {
         params: {
           path: '/test',
+          extension: 'html',
+          selector: 'print.preview',
+          params: 'a=42&b=green',
         },
         headers: {
           Host: 'example.com',
@@ -143,6 +121,22 @@ describe('Testing OpenWhisk adapter', () => {
       secrets: {
         SECRET: '1234',
       },
-    }, action);
+    });
+
+    assert.deepEqual(payload, {
+      request: {
+        params: {
+          a: '42',
+          b: 'green',
+        },
+        headers: {
+          Host: 'example.com',
+        },
+        method: 'get',
+        path: '/test',
+        extension: 'html',
+        selector: 'print.preview',
+      },
+    });
   });
 });

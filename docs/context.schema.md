@@ -23,7 +23,7 @@ The context thingie.
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
 | [content](#content) | Content | Optional | Context (this schema) |
-| [error](#error) | `string` | Optional | Context (this schema) |
+| [error](#error) | complex | Optional | Context (this schema) |
 | [request](#request) | Request | Optional | Context (this schema) |
 | [response](#response) | Response | Optional | Context (this schema) |
 
@@ -51,14 +51,23 @@ When this property is present, all other values can be ignored.
 
 `error`
 * is optional
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### error Type
 
+Unknown type `string,object`.
 
-`string`
-
+```json
+{
+  "type": [
+    "string",
+    "object"
+  ],
+  "description": "An error message that has been generated during pipeline processing.\nWhen this property is present, all other values can be ignored.",
+  "simpletype": "complex"
+}
+```
 
 
 

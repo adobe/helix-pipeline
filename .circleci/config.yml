@@ -145,13 +145,12 @@ jobs:
 
       # generate markdowm
       - run: npm run docs
-      - run: node bin/show-stablization-candidates.js > STABILIZING.md
       - run: git config --global user.email "circleci@example.com" && git config --global user.name "CircleCi Build"
 
       # send up-to-date markdown back to GitHub
       - run:
           name: Publish Markdown to GitHub
-          command: git add --force docs/* && git commit -m "[ci skip] updating documentation" && git push
+          command: git pull --no-commit && git add --force docs/* && git commit --allow-empty -m "[ci skip] updating documentation" && git push
 
 workflows:
   version: 2
@@ -172,6 +171,7 @@ workflows:
     - generate-docs:
         requires:
         - build
+        - publish-pre-release
         filters:
           branches:
             only: master

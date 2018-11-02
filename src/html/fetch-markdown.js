@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const client = require('request-promise');
+const client = require('request-promise-native');
 const URI = require('uri-js');
 const { bail } = require('../helper');
 
@@ -38,7 +38,7 @@ function uri(root, owner, repo, ref, path) {
  * @param {import("../context").Context} ctx some param
  * @param {import("../context").Action} action some other param
  */
-function fetch(
+async function fetch(
   { error, content: { sources = [] } = {} },
   {
     secrets = {},
@@ -81,9 +81,18 @@ function fetch(
     json: false,
   };
   logger.debug(`fetching Markdown from ${options.uri}`);
-  return client(options)
-    .then(resp => ({ content: { body: resp, sources: [...sources, options.uri] } }))
-    .catch(err => bail(logger, `Could not fetch Markdown from ${options.uri}`, err));
+  try {
+    const response = await client(options);
+    return {
+      content: {
+        body: response,
+        sources: [...sources, options.uri],
+      },
+    };
+  } catch (e) {
+    return bail(logger, `Could not fetch Markdown from ${options.uri}`, e);
+  }
 }
+
 module.exports = fetch;
 module.exports.uri = uri;

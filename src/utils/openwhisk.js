@@ -22,25 +22,18 @@ const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
  */
 function extractClientRequest(action) {
   const { request } = action;
-  try { // the edge encodes the client request parameters into the `params` param ;-)
-    if (!request || !request.params) {
-      return {};
-    }
-    if (request.params.params) {
-      return {
-        params: querystring.parse(request.params.params),
-        headers: request.headers,
-        method: request.method,
-      };
-    }
-    // alternatively it can encode the entire request as json
-    if (request.params.req) {
-      return JSON.parse(request.params.req);
-    }
+  if (!request || !request.params) {
     return {};
-  } catch (e) {
-    throw Error(`Error while parsing incoming request parameter: ${e.message}`);
   }
+  return {
+    // the edge encodes the client request parameters into the `params` param ;-)
+    params: request.params.params ? querystring.parse(request.params.params) : {},
+    headers: request.headers,
+    method: request.method,
+    path: request.params.path || '',
+    extension: request.params.extension || '',
+    selector: request.params.selector || '',
+  };
 }
 
 /**

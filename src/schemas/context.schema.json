@@ -10,23 +10,26 @@
     "OF ANY KIND, either express or implied. See the License for the specific language",
     "governing permissions and limitations under the License."
   ],
-  "$id": "https://ns.adobe.com/helix/pipeline/request",
+  "$id": "https://ns.adobe.com/helix/pipeline/context",
   "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Context",
   "type": "object",
-  "title": "Request",
   "meta:status": "stabilizing",
-  "description": "The HTTP Request",
+  "description": "The context thingie.",
   "additionalProperties": false,
   "properties": {
-    "params": {
-      "type": "object",
-      "description": "The passed through (and filtered) URL parameters of the request",
-      "additionalProperties": {
-        "anyOf": [
-          { "type": "string" },
-          { "type": "array", "items": { "type": "string" } }
-        ]
-      }
+    "error": {
+      "type": ["string", "object"],
+      "description": "An error message that has been generated during pipeline processing.\nWhen this property is present, all other values can be ignored."
+    },
+    "request": {
+      "$ref": "https://ns.adobe.com/helix/pipeline/request"
+    },
+    "content": {
+      "$ref": "https://ns.adobe.com/helix/pipeline/content"
+    },
+    "response": {
+      "$ref": "https://ns.adobe.com/helix/pipeline/response"
     }
   }
 }
