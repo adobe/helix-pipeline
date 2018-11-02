@@ -150,7 +150,7 @@ jobs:
       # send up-to-date markdown back to GitHub
       - run:
           name: Publish Markdown to GitHub
-          command: git add --force docs/* && git commit -m "[ci skip] updating documentation" && git pull && git push
+          command: git add --force docs/* && git commit --allow-empty -m "[ci skip] updating documentation" && git pull && git push
 
 workflows:
   version: 2
