@@ -1,5 +1,4 @@
-[
-  {
+[{
     "types": [
       "has-heading",
       "has-paragraph",
@@ -13,518 +12,129 @@
       "title": "foo"
     },
     "type": "root",
-    "children": [
-      {
+    "children": [{
         "type": "yaml",
-        "value": "title: foo",
-        "position": {
-          "start": {
-            "line": 1,
-            "column": 1,
-            "offset": 0
-          },
-          "end": {
-            "line": 3,
-            "column": 4,
-            "offset": 18
-          },
-          "indent": [
-            1,
-            1
-          ]
-        }
+        "value": "title: foo"
       },
       {
         "type": "heading",
         "depth": 1,
-        "children": [
-          {
-            "type": "text",
-            "value": "Hypermedia Pipeline",
-            "position": {
-              "start": {
-                "line": 4,
-                "column": 3,
-                "offset": 21
-              },
-              "end": {
-                "line": 4,
-                "column": 22,
-                "offset": 40
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 4,
-            "column": 1,
-            "offset": 19
-          },
-          "end": {
-            "line": 4,
-            "column": 22,
-            "offset": 40
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Hypermedia Pipeline"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines.",
-            "position": {
-              "start": {
-                "line": 6,
-                "column": 1,
-                "offset": 42
-              },
-              "end": {
-                "line": 6,
-                "column": 113,
-                "offset": 154
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 6,
-            "column": 1,
-            "offset": 42
-          },
-          "end": {
-            "line": 6,
-            "column": 113,
-            "offset": 154
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines."
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia.",
-            "position": {
-              "start": {
-                "line": 8,
-                "column": 1,
-                "offset": 156
-              },
-              "end": {
-                "line": 8,
-                "column": 138,
-                "offset": 293
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 8,
-            "column": 1,
-            "offset": 156
-          },
-          "end": {
-            "line": 8,
-            "column": 138,
-            "offset": 293
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia."
+        }]
       },
       {
         "type": "heading",
         "depth": 1,
-        "children": [
-          {
-            "type": "text",
-            "value": "Status",
-            "position": {
-              "start": {
-                "line": 10,
-                "column": 3,
-                "offset": 297
-              },
-              "end": {
-                "line": 10,
-                "column": 9,
-                "offset": 303
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 10,
-            "column": 1,
-            "offset": 295
-          },
-          "end": {
-            "line": 10,
-            "column": 9,
-            "offset": 303
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Status"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "link",
             "title": null,
             "url": "https://codecov.io/gh/adobe/hypermedia-pipeline",
-            "children": [
-              {
-                "type": "image",
-                "title": null,
-                "url": "https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg",
-                "alt": "codecov",
-                "position": {
-                  "start": {
-                    "line": 12,
-                    "column": 2,
-                    "offset": 306
-                  },
-                  "end": {
-                    "line": 12,
-                    "column": 83,
-                    "offset": 387
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 12,
-                "column": 1,
-                "offset": 305
-              },
-              "end": {
-                "line": 12,
-                "column": 133,
-                "offset": 437
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg",
+              "alt": "codecov"
+            }]
           },
           {
             "type": "text",
-            "value": "\n",
-            "position": {
-              "start": {
-                "line": 12,
-                "column": 133,
-                "offset": 437
-              },
-              "end": {
-                "line": 13,
-                "column": 1,
-                "offset": 438
-              },
-              "indent": [
-                1
-              ]
-            }
+            "value": "\n"
           },
           {
             "type": "link",
             "title": null,
             "url": "https://circleci.com/gh/adobe/parcel-plugin-htl",
-            "children": [
-              {
-                "type": "image",
-                "title": null,
-                "url": "https://img.shields.io/circleci/project/github/adobe/hypermedia-pipeline.svg",
-                "alt": "CircleCI",
-                "position": {
-                  "start": {
-                    "line": 13,
-                    "column": 2,
-                    "offset": 439
-                  },
-                  "end": {
-                    "line": 13,
-                    "column": 91,
-                    "offset": 528
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 13,
-                "column": 1,
-                "offset": 438
-              },
-              "end": {
-                "line": 13,
-                "column": 141,
-                "offset": 578
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/circleci/project/github/adobe/hypermedia-pipeline.svg",
+              "alt": "CircleCI"
+            }]
           },
           {
             "type": "text",
-            "value": "\n",
-            "position": {
-              "start": {
-                "line": 13,
-                "column": 141,
-                "offset": 578
-              },
-              "end": {
-                "line": 14,
-                "column": 1,
-                "offset": 579
-              },
-              "indent": [
-                1
-              ]
-            }
+            "value": "\n"
           },
           {
             "type": "link",
             "title": null,
             "url": "https://github.com/adobe/hypermedia-pipeline/blob/master/LICENSE.txt",
-            "children": [
-              {
-                "type": "image",
-                "title": null,
-                "url": "https://img.shields.io/github/license/adobe/hypermedia-pipeline.svg",
-                "alt": "GitHub license",
-                "position": {
-                  "start": {
-                    "line": 14,
-                    "column": 2,
-                    "offset": 580
-                  },
-                  "end": {
-                    "line": 14,
-                    "column": 88,
-                    "offset": 666
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 14,
-                "column": 1,
-                "offset": 579
-              },
-              "end": {
-                "line": 14,
-                "column": 159,
-                "offset": 737
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/github/license/adobe/hypermedia-pipeline.svg",
+              "alt": "GitHub license"
+            }]
           },
           {
             "type": "text",
-            "value": "\n",
-            "position": {
-              "start": {
-                "line": 14,
-                "column": 159,
-                "offset": 737
-              },
-              "end": {
-                "line": 15,
-                "column": 1,
-                "offset": 738
-              },
-              "indent": [
-                1
-              ]
-            }
+            "value": "\n"
           },
           {
             "type": "link",
             "title": null,
             "url": "https://github.com/adobe/hypermedia-pipeline/issues",
-            "children": [
-              {
-                "type": "image",
-                "title": null,
-                "url": "https://img.shields.io/github/issues/adobe/hypermedia-pipeline.svg",
-                "alt": "GitHub issues",
-                "position": {
-                  "start": {
-                    "line": 15,
-                    "column": 2,
-                    "offset": 739
-                  },
-                  "end": {
-                    "line": 15,
-                    "column": 86,
-                    "offset": 823
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 15,
-                "column": 1,
-                "offset": 738
-              },
-              "end": {
-                "line": 15,
-                "column": 140,
-                "offset": 877
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/github/issues/adobe/hypermedia-pipeline.svg",
+              "alt": "GitHub issues"
+            }]
           },
           {
             "type": "text",
-            "value": "\n",
-            "position": {
-              "start": {
-                "line": 15,
-                "column": 140,
-                "offset": 877
-              },
-              "end": {
-                "line": 16,
-                "column": 1,
-                "offset": 878
-              },
-              "indent": [
-                1
-              ]
-            }
+            "value": "\n"
           },
           {
             "type": "link",
             "title": null,
             "url": "https://www.npmjs.com/package/@adobe/hypermedia-pipeline",
-            "children": [
-              {
-                "type": "image",
-                "title": null,
-                "url": "https://img.shields.io/npm/dw/@adobe/hypermedia-pipeline.svg",
-                "alt": "npm",
-                "position": {
-                  "start": {
-                    "line": 16,
-                    "column": 2,
-                    "offset": 879
-                  },
-                  "end": {
-                    "line": 16,
-                    "column": 70,
-                    "offset": 947
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 16,
-                "column": 1,
-                "offset": 878
-              },
-              "end": {
-                "line": 16,
-                "column": 129,
-                "offset": 1006
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/npm/dw/@adobe/hypermedia-pipeline.svg",
+              "alt": "npm"
+            }]
           },
           {
             "type": "text",
-            "value": " ",
-            "position": {
-              "start": {
-                "line": 16,
-                "column": 129,
-                "offset": 1006
-              },
-              "end": {
-                "line": 16,
-                "column": 130,
-                "offset": 1007
-              },
-              "indent": []
-            }
+            "value": " "
           },
           {
             "type": "link",
             "title": null,
             "url": "https://greenkeeper.io/",
-            "children": [
-              {
-                "type": "image",
-                "title": null,
-                "url": "https://badges.greenkeeper.io/adobe/hypermedia-pipeline.svg",
-                "alt": "Greenkeeper badge",
-                "position": {
-                  "start": {
-                    "line": 16,
-                    "column": 131,
-                    "offset": 1008
-                  },
-                  "end": {
-                    "line": 16,
-                    "column": 212,
-                    "offset": 1089
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 16,
-                "column": 130,
-                "offset": 1007
-              },
-              "end": {
-                "line": 16,
-                "column": 238,
-                "offset": 1115
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "image",
+              "title": null,
+              "url": "https://badges.greenkeeper.io/adobe/hypermedia-pipeline.svg",
+              "alt": "Greenkeeper badge"
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 12,
-            "column": 1,
-            "offset": 305
-          },
-          "end": {
-            "line": 16,
-            "column": 238,
-            "offset": 1115
-          },
-          "indent": [
-            1,
-            1,
-            1,
-            1
-          ]
-        }
+        ]
       }
     ]
   },
@@ -543,445 +153,103 @@
       "class": "section"
     },
     "type": "root",
-    "children": [
-      {
+    "children": [{
         "type": "yaml",
-        "value": "class: section",
-        "position": {
-          "start": {
-            "line": 18,
-            "column": 1,
-            "offset": 1117
-          },
-          "end": {
-            "line": 20,
-            "column": 4,
-            "offset": 1139
-          },
-          "indent": [
-            1,
-            1
-          ]
-        }
+        "value": "class: section"
       },
       {
         "type": "heading",
         "depth": 2,
-        "children": [
-          {
-            "type": "text",
-            "value": "Anatomy of a Pipeline",
-            "position": {
-              "start": {
-                "line": 22,
-                "column": 4,
-                "offset": 1144
-              },
-              "end": {
-                "line": 22,
-                "column": 25,
-                "offset": 1165
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 22,
-            "column": 1,
-            "offset": 1141
-          },
-          "end": {
-            "line": 22,
-            "column": 25,
-            "offset": 1165
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Anatomy of a Pipeline"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "A pipeline consists of following main parts:",
-            "position": {
-              "start": {
-                "line": 24,
-                "column": 1,
-                "offset": 1167
-              },
-              "end": {
-                "line": 24,
-                "column": 45,
-                "offset": 1211
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 24,
-            "column": 1,
-            "offset": 1167
-          },
-          "end": {
-            "line": 24,
-            "column": 45,
-            "offset": 1211
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "A pipeline consists of following main parts:"
+        }]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "pre-processing functions",
-                    "position": {
-                      "start": {
-                        "line": 26,
-                        "column": 3,
-                        "offset": 1215
-                      },
-                      "end": {
-                        "line": 26,
-                        "column": 27,
-                        "offset": 1239
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 26,
-                    "column": 3,
-                    "offset": 1215
-                  },
-                  "end": {
-                    "line": 26,
-                    "column": 27,
-                    "offset": 1239
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 26,
-                "column": 1,
-                "offset": 1213
-              },
-              "end": {
-                "line": 26,
-                "column": 27,
-                "offset": 1239
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "pre-processing functions"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "the main response generating function",
-                    "position": {
-                      "start": {
-                        "line": 27,
-                        "column": 3,
-                        "offset": 1242
-                      },
-                      "end": {
-                        "line": 27,
-                        "column": 40,
-                        "offset": 1279
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 27,
-                    "column": 3,
-                    "offset": 1242
-                  },
-                  "end": {
-                    "line": 27,
-                    "column": 40,
-                    "offset": 1279
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 27,
-                "column": 1,
-                "offset": 1240
-              },
-              "end": {
-                "line": 27,
-                "column": 40,
-                "offset": 1279
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "the main response generating function"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "an optional wrapper function",
-                    "position": {
-                      "start": {
-                        "line": 28,
-                        "column": 3,
-                        "offset": 1282
-                      },
-                      "end": {
-                        "line": 28,
-                        "column": 31,
-                        "offset": 1310
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 28,
-                    "column": 3,
-                    "offset": 1282
-                  },
-                  "end": {
-                    "line": 28,
-                    "column": 31,
-                    "offset": 1310
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 28,
-                "column": 1,
-                "offset": 1280
-              },
-              "end": {
-                "line": 28,
-                "column": 31,
-                "offset": 1310
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "an optional wrapper function"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "post-processing functions",
-                    "position": {
-                      "start": {
-                        "line": 29,
-                        "column": 3,
-                        "offset": 1313
-                      },
-                      "end": {
-                        "line": 29,
-                        "column": 28,
-                        "offset": 1338
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 29,
-                    "column": 3,
-                    "offset": 1313
-                  },
-                  "end": {
-                    "line": 29,
-                    "column": 28,
-                    "offset": 1338
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 29,
-                "column": 1,
-                "offset": 1311
-              },
-              "end": {
-                "line": 29,
-                "column": 28,
-                "offset": 1338
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "post-processing functions"
+              }]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 26,
-            "column": 1,
-            "offset": 1213
-          },
-          "end": {
-            "line": 29,
-            "column": 28,
-            "offset": 1338
-          },
-          "indent": [
-            1,
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "Each step of the pipeline is processing a single payload object, that will slowly accumulate the ",
-            "position": {
-              "start": {
-                "line": 31,
-                "column": 1,
-                "offset": 1340
-              },
-              "end": {
-                "line": 31,
-                "column": 98,
-                "offset": 1437
-              },
-              "indent": []
-            }
+            "value": "Each step of the pipeline is processing a single payload object, that will slowly accumulate the "
           },
           {
             "type": "inlineCode",
-            "value": "return",
-            "position": {
-              "start": {
-                "line": 31,
-                "column": 98,
-                "offset": 1437
-              },
-              "end": {
-                "line": 31,
-                "column": 106,
-                "offset": 1445
-              },
-              "indent": []
-            }
+            "value": "return"
           },
           {
             "type": "text",
-            "value": " values of the functions above through ",
-            "position": {
-              "start": {
-                "line": 31,
-                "column": 106,
-                "offset": 1445
-              },
-              "end": {
-                "line": 31,
-                "column": 145,
-                "offset": 1484
-              },
-              "indent": []
-            }
+            "value": " values of the functions above through "
           },
           {
             "type": "inlineCode",
-            "value": "Object.assign",
-            "position": {
-              "start": {
-                "line": 31,
-                "column": 145,
-                "offset": 1484
-              },
-              "end": {
-                "line": 31,
-                "column": 160,
-                "offset": 1499
-              },
-              "indent": []
-            }
+            "value": "Object.assign"
           },
           {
             "type": "text",
-            "value": ".",
-            "position": {
-              "start": {
-                "line": 31,
-                "column": 160,
-                "offset": 1499
-              },
-              "end": {
-                "line": 31,
-                "column": 161,
-                "offset": 1500
-              },
-              "indent": []
-            }
+            "value": "."
           }
-        ],
-        "position": {
-          "start": {
-            "line": 31,
-            "column": 1,
-            "offset": 1340
-          },
-          "end": {
-            "line": 31,
-            "column": 161,
-            "offset": 1500
-          },
-          "indent": []
-        }
+        ]
       }
     ]
   },
@@ -994,76 +262,19 @@
     "intro": "This section has a paragraph, but no title.",
     "meta": {},
     "type": "root",
-    "children": [
-      {
+    "children": [{
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "This section has a paragraph, but no title.",
-            "position": {
-              "start": {
-                "line": 34,
-                "column": 1,
-                "offset": 1506
-              },
-              "end": {
-                "line": 34,
-                "column": 44,
-                "offset": 1549
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 34,
-            "column": 1,
-            "offset": 1506
-          },
-          "end": {
-            "line": 34,
-            "column": 44,
-            "offset": 1549
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "This section has a paragraph, but no title."
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Tough luck.",
-            "position": {
-              "start": {
-                "line": 36,
-                "column": 1,
-                "offset": 1551
-              },
-              "end": {
-                "line": 36,
-                "column": 12,
-                "offset": 1562
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 36,
-            "column": 1,
-            "offset": 1551
-          },
-          "end": {
-            "line": 36,
-            "column": 12,
-            "offset": 1562
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Tough luck."
+        }]
       }
     ]
   },
@@ -1076,44 +287,14 @@
     "title": "This section has a title, but no paragraph",
     "meta": {},
     "type": "root",
-    "children": [
-      {
-        "type": "heading",
-        "depth": 2,
-        "children": [
-          {
-            "type": "text",
-            "value": "This section has a title, but no paragraph",
-            "position": {
-              "start": {
-                "line": 39,
-                "column": 4,
-                "offset": 1571
-              },
-              "end": {
-                "line": 39,
-                "column": 46,
-                "offset": 1613
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 39,
-            "column": 1,
-            "offset": 1568
-          },
-          "end": {
-            "line": 39,
-            "column": 46,
-            "offset": 1613
-          },
-          "indent": []
-        }
-      }
-    ]
+    "children": [{
+      "type": "heading",
+      "depth": 2,
+      "children": [{
+        "type": "text",
+        "value": "This section has a title, but no paragraph"
+      }]
+    }]
   },
   {
     "title": "See below for the anatomy of a payload.",
@@ -1126,311 +307,76 @@
     "intro": "See below for the anatomy of a payload.",
     "meta": {},
     "type": "root",
-    "children": [
-      {
+    "children": [{
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "See below for the anatomy of a payload.",
-            "position": {
-              "start": {
-                "line": 43,
-                "column": 1,
-                "offset": 1620
-              },
-              "end": {
-                "line": 43,
-                "column": 40,
-                "offset": 1659
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 43,
-            "column": 1,
-            "offset": 1620
-          },
-          "end": {
-            "line": 43,
-            "column": 40,
-            "offset": 1659
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "See below for the anatomy of a payload."
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g.",
-            "position": {
-              "start": {
-                "line": 45,
-                "column": 1,
-                "offset": 1661
-              },
-              "end": {
-                "line": 45,
-                "column": 112,
-                "offset": 1772
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 45,
-            "column": 1,
-            "offset": 1661
-          },
-          "end": {
-            "line": 45,
-            "column": 112,
-            "offset": 1772
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g."
+        }]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "html.pipe.js",
-                    "position": {
-                      "start": {
-                        "line": 47,
-                        "column": 3,
-                        "offset": 1776
-                      },
-                      "end": {
-                        "line": 47,
-                        "column": 17,
-                        "offset": 1790
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " – creates HTML documents with the ",
-                    "position": {
-                      "start": {
-                        "line": 47,
-                        "column": 17,
-                        "offset": 1790
-                      },
-                      "end": {
-                        "line": 47,
-                        "column": 52,
-                        "offset": 1825
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "text/html",
-                    "position": {
-                      "start": {
-                        "line": 47,
-                        "column": 52,
-                        "offset": 1825
-                      },
-                      "end": {
-                        "line": 47,
-                        "column": 63,
-                        "offset": 1836
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " content-type",
-                    "position": {
-                      "start": {
-                        "line": 47,
-                        "column": 63,
-                        "offset": 1836
-                      },
-                      "end": {
-                        "line": 47,
-                        "column": 76,
-                        "offset": 1849
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 47,
-                    "column": 3,
-                    "offset": 1776
-                  },
-                  "end": {
-                    "line": 47,
-                    "column": 76,
-                    "offset": 1849
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "html.pipe.js"
+                },
+                {
+                  "type": "text",
+                  "value": " – creates HTML documents with the "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "text/html"
+                },
+                {
+                  "type": "text",
+                  "value": " content-type"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 47,
-                "column": 1,
-                "offset": 1774
-              },
-              "end": {
-                "line": 47,
-                "column": 76,
-                "offset": 1849
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "json.pipe.js",
-                    "position": {
-                      "start": {
-                        "line": 48,
-                        "column": 3,
-                        "offset": 1852
-                      },
-                      "end": {
-                        "line": 48,
-                        "column": 17,
-                        "offset": 1866
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " – creates JSON documents with the ",
-                    "position": {
-                      "start": {
-                        "line": 48,
-                        "column": 17,
-                        "offset": 1866
-                      },
-                      "end": {
-                        "line": 48,
-                        "column": 52,
-                        "offset": 1901
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "application/json",
-                    "position": {
-                      "start": {
-                        "line": 48,
-                        "column": 52,
-                        "offset": 1901
-                      },
-                      "end": {
-                        "line": 48,
-                        "column": 70,
-                        "offset": 1919
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " content-type",
-                    "position": {
-                      "start": {
-                        "line": 48,
-                        "column": 70,
-                        "offset": 1919
-                      },
-                      "end": {
-                        "line": 48,
-                        "column": 83,
-                        "offset": 1932
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 48,
-                    "column": 3,
-                    "offset": 1852
-                  },
-                  "end": {
-                    "line": 48,
-                    "column": 83,
-                    "offset": 1932
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "json.pipe.js"
+                },
+                {
+                  "type": "text",
+                  "value": " – creates JSON documents with the "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "application/json"
+                },
+                {
+                  "type": "text",
+                  "value": " content-type"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 48,
-                "column": 1,
-                "offset": 1850
-              },
-              "end": {
-                "line": 48,
-                "column": 83,
-                "offset": 1932
-              },
-              "indent": []
-            }
+              ]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 47,
-            "column": 1,
-            "offset": 1774
-          },
-          "end": {
-            "line": 48,
-            "column": 83,
-            "offset": 1932
-          },
-          "indent": [
-            1
-          ]
-        }
+        ]
       }
     ]
   },
@@ -1450,704 +396,166 @@
       "class": "code"
     },
     "type": "root",
-    "children": [
-      {
+    "children": [{
         "type": "yaml",
-        "value": "class: code",
-        "position": {
-          "start": {
-            "line": 51,
-            "column": 1,
-            "offset": 1935
-          },
-          "end": {
-            "line": 53,
-            "column": 4,
-            "offset": 1954
-          },
-          "indent": [
-            1,
-            1
-          ]
-        }
+        "value": "class: code"
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
-            "type": "text",
-            "value": "Building a Pipeline",
-            "position": {
-              "start": {
-                "line": 56,
-                "column": 5,
-                "offset": 1961
-              },
-              "end": {
-                "line": 56,
-                "column": 24,
-                "offset": 1980
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 56,
-            "column": 1,
-            "offset": 1957
-          },
-          "end": {
-            "line": 56,
-            "column": 24,
-            "offset": 1980
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Building a Pipeline"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "A pipeline builder can be created by creating a CommonJS module that exports a function ",
-            "position": {
-              "start": {
-                "line": 58,
-                "column": 1,
-                "offset": 1982
-              },
-              "end": {
-                "line": 58,
-                "column": 89,
-                "offset": 2070
-              },
-              "indent": []
-            }
+            "value": "A pipeline builder can be created by creating a CommonJS module that exports a function "
           },
           {
             "type": "inlineCode",
-            "value": "pipe",
-            "position": {
-              "start": {
-                "line": 58,
-                "column": 89,
-                "offset": 2070
-              },
-              "end": {
-                "line": 58,
-                "column": 95,
-                "offset": 2076
-              },
-              "indent": []
-            }
+            "value": "pipe"
           },
           {
             "type": "text",
-            "value": " which accepts following arguments and returns a Pipeline function.",
-            "position": {
-              "start": {
-                "line": 58,
-                "column": 95,
-                "offset": 2076
-              },
-              "end": {
-                "line": 58,
-                "column": 162,
-                "offset": 2143
-              },
-              "indent": []
-            }
+            "value": " which accepts following arguments and returns a Pipeline function."
           }
-        ],
-        "position": {
-          "start": {
-            "line": 58,
-            "column": 1,
-            "offset": 1982
-          },
-          "end": {
-            "line": 58,
-            "column": 162,
-            "offset": 2143
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "cont",
-                    "position": {
-                      "start": {
-                        "line": 60,
-                        "column": 3,
-                        "offset": 2147
-                      },
-                      "end": {
-                        "line": 60,
-                        "column": 9,
-                        "offset": 2153
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": the main function that will be executed as a continuation of the pipeline",
-                    "position": {
-                      "start": {
-                        "line": 60,
-                        "column": 9,
-                        "offset": 2153
-                      },
-                      "end": {
-                        "line": 60,
-                        "column": 84,
-                        "offset": 2228
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 60,
-                    "column": 3,
-                    "offset": 2147
-                  },
-                  "end": {
-                    "line": 60,
-                    "column": 84,
-                    "offset": 2228
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "cont"
+                },
+                {
+                  "type": "text",
+                  "value": ": the main function that will be executed as a continuation of the pipeline"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 60,
-                "column": 1,
-                "offset": 2145
-              },
-              "end": {
-                "line": 60,
-                "column": 84,
-                "offset": 2228
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "params",
-                    "position": {
-                      "start": {
-                        "line": 61,
-                        "column": 3,
-                        "offset": 2231
-                      },
-                      "end": {
-                        "line": 61,
-                        "column": 11,
-                        "offset": 2239
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": a map of parameters that are interpreted at runtime",
-                    "position": {
-                      "start": {
-                        "line": 61,
-                        "column": 11,
-                        "offset": 2239
-                      },
-                      "end": {
-                        "line": 61,
-                        "column": 64,
-                        "offset": 2292
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 61,
-                    "column": 3,
-                    "offset": 2231
-                  },
-                  "end": {
-                    "line": 61,
-                    "column": 64,
-                    "offset": 2292
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "params"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of parameters that are interpreted at runtime"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 61,
-                "column": 1,
-                "offset": 2229
-              },
-              "end": {
-                "line": 61,
-                "column": 64,
-                "offset": 2292
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "secrets",
-                    "position": {
-                      "start": {
-                        "line": 62,
-                        "column": 3,
-                        "offset": 2295
-                      },
-                      "end": {
-                        "line": 62,
-                        "column": 12,
-                        "offset": 2304
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": a map of protected configuration parameters like API keys that should be handled with care. By convention, all keys in ",
-                    "position": {
-                      "start": {
-                        "line": 62,
-                        "column": 12,
-                        "offset": 2304
-                      },
-                      "end": {
-                        "line": 62,
-                        "column": 133,
-                        "offset": 2425
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "secret",
-                    "position": {
-                      "start": {
-                        "line": 62,
-                        "column": 133,
-                        "offset": 2425
-                      },
-                      "end": {
-                        "line": 62,
-                        "column": 141,
-                        "offset": 2433
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " are in ALL_CAPS_SNAKE_CASE.",
-                    "position": {
-                      "start": {
-                        "line": 62,
-                        "column": 141,
-                        "offset": 2433
-                      },
-                      "end": {
-                        "line": 62,
-                        "column": 169,
-                        "offset": 2461
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 62,
-                    "column": 3,
-                    "offset": 2295
-                  },
-                  "end": {
-                    "line": 62,
-                    "column": 169,
-                    "offset": 2461
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "secrets"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of protected configuration parameters like API keys that should be handled with care. By convention, all keys in "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "secret"
+                },
+                {
+                  "type": "text",
+                  "value": " are in ALL_CAPS_SNAKE_CASE."
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 62,
-                "column": 1,
-                "offset": 2293
-              },
-              "end": {
-                "line": 62,
-                "column": 169,
-                "offset": 2461
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "logger",
-                    "position": {
-                      "start": {
-                        "line": 63,
-                        "column": 3,
-                        "offset": 2464
-                      },
-                      "end": {
-                        "line": 63,
-                        "column": 11,
-                        "offset": 2472
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "logger"
+                },
+                {
+                  "type": "text",
+                  "value": ": a "
+                },
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://www.github.com/winstonjs/winston",
+                  "children": [{
                     "type": "text",
-                    "value": ": a ",
-                    "position": {
-                      "start": {
-                        "line": 63,
-                        "column": 11,
-                        "offset": 2472
-                      },
-                      "end": {
-                        "line": 63,
-                        "column": 15,
-                        "offset": 2476
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "title": null,
-                    "url": "https://www.github.com/winstonjs/winston",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "Winston",
-                        "position": {
-                          "start": {
-                            "line": 63,
-                            "column": 16,
-                            "offset": 2477
-                          },
-                          "end": {
-                            "line": 63,
-                            "column": 23,
-                            "offset": 2484
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 63,
-                        "column": 15,
-                        "offset": 2476
-                      },
-                      "end": {
-                        "line": 63,
-                        "column": 66,
-                        "offset": 2527
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " logger",
-                    "position": {
-                      "start": {
-                        "line": 63,
-                        "column": 66,
-                        "offset": 2527
-                      },
-                      "end": {
-                        "line": 63,
-                        "column": 73,
-                        "offset": 2534
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 63,
-                    "column": 3,
-                    "offset": 2464
-                  },
-                  "end": {
-                    "line": 63,
-                    "column": 73,
-                    "offset": 2534
-                  },
-                  "indent": []
+                    "value": "Winston"
+                  }]
+                },
+                {
+                  "type": "text",
+                  "value": " logger"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 63,
-                "column": 1,
-                "offset": 2462
-              },
-              "end": {
-                "line": 63,
-                "column": 73,
-                "offset": 2534
-              },
-              "indent": []
-            }
+              ]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 60,
-            "column": 1,
-            "offset": 2145
-          },
-          "end": {
-            "line": 63,
-            "column": 73,
-            "offset": 2534
-          },
-          "indent": [
-            1,
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "This project's main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:",
-            "position": {
-              "start": {
-                "line": 65,
-                "column": 1,
-                "offset": 2536
-              },
-              "end": {
-                "line": 65,
-                "column": 162,
-                "offset": 2697
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 65,
-            "column": 1,
-            "offset": 2536
-          },
-          "end": {
-            "line": 65,
-            "column": 162,
-            "offset": 2697
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "This project's main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:"
+        }]
       },
       {
         "type": "code",
         "lang": "javascript",
         "meta": null,
-        "value": "// the pipeline itself\nconst pipeline = require(\"@adobe/hypermedia-pipeline\");\n// helper functions and log\nconst { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');\n\nmodule.exports.pipe = function(cont, params, secrets, logger = log) {\n    logger.log(\"debug\", \"Constructing Custom Pipeline\");\n\n    return pipeline()\n        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload\n        .once(cont)            // required: execute the continuation function\n        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response\n}",
-        "position": {
-          "start": {
-            "line": 67,
-            "column": 1,
-            "offset": 2699
-          },
-          "end": {
-            "line": 81,
-            "column": 4,
-            "offset": 3359
-          },
-          "indent": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
-        }
+        "value": "// the pipeline itself\nconst pipeline = require(\"@adobe/hypermedia-pipeline\");\n// helper functions and log\nconst { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');\n\nmodule.exports.pipe = function(cont, params, secrets, logger = log) {\n    logger.log(\"debug\", \"Constructing Custom Pipeline\");\n\n    return pipeline()\n        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload\n        .once(cont)            // required: execute the continuation function\n        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response\n}"
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "In a typical pipeline, you will add additional processing steps as ",
-            "position": {
-              "start": {
-                "line": 83,
-                "column": 1,
-                "offset": 3361
-              },
-              "end": {
-                "line": 83,
-                "column": 68,
-                "offset": 3428
-              },
-              "indent": []
-            }
+            "value": "In a typical pipeline, you will add additional processing steps as "
           },
           {
             "type": "inlineCode",
-            "value": ".pre(require('some-module'))",
-            "position": {
-              "start": {
-                "line": 83,
-                "column": 68,
-                "offset": 3428
-              },
-              "end": {
-                "line": 83,
-                "column": 98,
-                "offset": 3458
-              },
-              "indent": []
-            }
+            "value": ".pre(require('some-module'))"
           },
           {
             "type": "text",
-            "value": " or as ",
-            "position": {
-              "start": {
-                "line": 83,
-                "column": 98,
-                "offset": 3458
-              },
-              "end": {
-                "line": 83,
-                "column": 105,
-                "offset": 3465
-              },
-              "indent": []
-            }
+            "value": " or as "
           },
           {
             "type": "inlineCode",
-            "value": ".post(require('some-module'))",
-            "position": {
-              "start": {
-                "line": 83,
-                "column": 105,
-                "offset": 3465
-              },
-              "end": {
-                "line": 83,
-                "column": 136,
-                "offset": 3496
-              },
-              "indent": []
-            }
+            "value": ".post(require('some-module'))"
           },
           {
             "type": "text",
-            "value": ".",
-            "position": {
-              "start": {
-                "line": 83,
-                "column": 136,
-                "offset": 3496
-              },
-              "end": {
-                "line": 83,
-                "column": 137,
-                "offset": 3497
-              },
-              "indent": []
-            }
+            "value": "."
           }
-        ],
-        "position": {
-          "start": {
-            "line": 83,
-            "column": 1,
-            "offset": 3361
-          },
-          "end": {
-            "line": 83,
-            "column": 137,
-            "offset": 3497
-          },
-          "indent": []
-        }
+        ]
       }
     ]
   },
@@ -2165,3890 +573,904 @@
     "title": "The Main Function",
     "meta": {},
     "type": "root",
-    "children": [
-      {
+    "children": [{
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
-            "type": "text",
-            "value": "The Main Function",
-            "position": {
-              "start": {
-                "line": 87,
-                "column": 5,
-                "offset": 3508
-              },
-              "end": {
-                "line": 87,
-                "column": 22,
-                "offset": 3525
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 87,
-            "column": 1,
-            "offset": 3504
-          },
-          "end": {
-            "line": 87,
-            "column": 22,
-            "offset": 3525
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "The Main Function"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "The main function is typically a pure function that converts the ",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 1,
-                "offset": 3527
-              },
-              "end": {
-                "line": 89,
-                "column": 66,
-                "offset": 3592
-              },
-              "indent": []
-            }
+            "value": "The main function is typically a pure function that converts the "
           },
           {
             "type": "inlineCode",
-            "value": "request",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 66,
-                "offset": 3592
-              },
-              "end": {
-                "line": 89,
-                "column": 75,
-                "offset": 3601
-              },
-              "indent": []
-            }
+            "value": "request"
           },
           {
             "type": "text",
-            "value": ", ",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 75,
-                "offset": 3601
-              },
-              "end": {
-                "line": 89,
-                "column": 77,
-                "offset": 3603
-              },
-              "indent": []
-            }
+            "value": ", "
           },
           {
             "type": "inlineCode",
-            "value": "context",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 77,
-                "offset": 3603
-              },
-              "end": {
-                "line": 89,
-                "column": 86,
-                "offset": 3612
-              },
-              "indent": []
-            }
+            "value": "context"
           },
           {
             "type": "text",
-            "value": ", and ",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 86,
-                "offset": 3612
-              },
-              "end": {
-                "line": 89,
-                "column": 92,
-                "offset": 3618
-              },
-              "indent": []
-            }
+            "value": ", and "
           },
           {
             "type": "inlineCode",
-            "value": "content",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 92,
-                "offset": 3618
-              },
-              "end": {
-                "line": 89,
-                "column": 101,
-                "offset": 3627
-              },
-              "indent": []
-            }
+            "value": "content"
           },
           {
             "type": "text",
-            "value": " properties of the payload into a ",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 101,
-                "offset": 3627
-              },
-              "end": {
-                "line": 89,
-                "column": 135,
-                "offset": 3661
-              },
-              "indent": []
-            }
+            "value": " properties of the payload into a "
           },
           {
             "type": "inlineCode",
-            "value": "response",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 135,
-                "offset": 3661
-              },
-              "end": {
-                "line": 89,
-                "column": 145,
-                "offset": 3671
-              },
-              "indent": []
-            }
+            "value": "response"
           },
           {
             "type": "text",
-            "value": " object.",
-            "position": {
-              "start": {
-                "line": 89,
-                "column": 145,
-                "offset": 3671
-              },
-              "end": {
-                "line": 89,
-                "column": 153,
-                "offset": 3679
-              },
-              "indent": []
-            }
+            "value": " object."
           }
-        ],
-        "position": {
-          "start": {
-            "line": 89,
-            "column": 1,
-            "offset": 3527
-          },
-          "end": {
-            "line": 89,
-            "column": 153,
-            "offset": 3679
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "In most scenarios, the main function is compiled from a template in a templating language like HTL, JST, or JSX.",
-            "position": {
-              "start": {
-                "line": 91,
-                "column": 1,
-                "offset": 3681
-              },
-              "end": {
-                "line": 91,
-                "column": 113,
-                "offset": 3793
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 91,
-            "column": 1,
-            "offset": 3681
-          },
-          "end": {
-            "line": 91,
-            "column": 113,
-            "offset": 3793
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "In most scenarios, the main function is compiled from a template in a templating language like HTL, JST, or JSX."
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "Typically, there is one template (and thus one main function) for each content variation of the file type. Content variations are identified by a selector (the piece of the file name before the file extension, e.g. in ",
-            "position": {
-              "start": {
-                "line": 93,
-                "column": 1,
-                "offset": 3795
-              },
-              "end": {
-                "line": 93,
-                "column": 219,
-                "offset": 4013
-              },
-              "indent": []
-            }
+            "value": "Typically, there is one template (and thus one main function) for each content variation of the file type. Content variations are identified by a selector (the piece of the file name before the file extension, e.g. in "
           },
           {
             "type": "inlineCode",
-            "value": "example.navigation.html",
-            "position": {
-              "start": {
-                "line": 93,
-                "column": 219,
-                "offset": 4013
-              },
-              "end": {
-                "line": 93,
-                "column": 244,
-                "offset": 4038
-              },
-              "indent": []
-            }
+            "value": "example.navigation.html"
           },
           {
             "type": "text",
-            "value": " the selector would be ",
-            "position": {
-              "start": {
-                "line": 93,
-                "column": 244,
-                "offset": 4038
-              },
-              "end": {
-                "line": 93,
-                "column": 267,
-                "offset": 4061
-              },
-              "indent": []
-            }
+            "value": " the selector would be "
           },
           {
             "type": "inlineCode",
-            "value": "navigation",
-            "position": {
-              "start": {
-                "line": 93,
-                "column": 267,
-                "offset": 4061
-              },
-              "end": {
-                "line": 93,
-                "column": 279,
-                "offset": 4073
-              },
-              "indent": []
-            }
+            "value": "navigation"
           },
           {
             "type": "text",
-            "value": "). If no selector is provided, the template is the default template for the pipeline.",
-            "position": {
-              "start": {
-                "line": 93,
-                "column": 279,
-                "offset": 4073
-              },
-              "end": {
-                "line": 93,
-                "column": 364,
-                "offset": 4158
-              },
-              "indent": []
-            }
+            "value": "). If no selector is provided, the template is the default template for the pipeline."
           }
-        ],
-        "position": {
-          "start": {
-            "line": 93,
-            "column": 1,
-            "offset": 3795
-          },
-          "end": {
-            "line": 93,
-            "column": 364,
-            "offset": 4158
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Examples of possible template names include:",
-            "position": {
-              "start": {
-                "line": 95,
-                "column": 1,
-                "offset": 4160
-              },
-              "end": {
-                "line": 95,
-                "column": 45,
-                "offset": 4204
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 95,
-            "column": 1,
-            "offset": 4160
-          },
-          "end": {
-            "line": 95,
-            "column": 45,
-            "offset": 4204
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Examples of possible template names include:"
+        }]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "html.jsx",
-                    "position": {
-                      "start": {
-                        "line": 97,
-                        "column": 3,
-                        "offset": 4208
-                      },
-                      "end": {
-                        "line": 97,
-                        "column": 13,
-                        "offset": 4218
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " (compiled to ",
-                    "position": {
-                      "start": {
-                        "line": 97,
-                        "column": 13,
-                        "offset": 4218
-                      },
-                      "end": {
-                        "line": 97,
-                        "column": 27,
-                        "offset": 4232
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "html.js",
-                    "position": {
-                      "start": {
-                        "line": 97,
-                        "column": 27,
-                        "offset": 4232
-                      },
-                      "end": {
-                        "line": 97,
-                        "column": 36,
-                        "offset": 4241
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ") – default for the HTML pipeline",
-                    "position": {
-                      "start": {
-                        "line": 97,
-                        "column": 36,
-                        "offset": 4241
-                      },
-                      "end": {
-                        "line": 97,
-                        "column": 69,
-                        "offset": 4274
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 97,
-                    "column": 3,
-                    "offset": 4208
-                  },
-                  "end": {
-                    "line": 97,
-                    "column": 69,
-                    "offset": 4274
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "html.jsx"
+                },
+                {
+                  "type": "text",
+                  "value": " (compiled to "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "html.js"
+                },
+                {
+                  "type": "text",
+                  "value": ") – default for the HTML pipeline"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 97,
-                "column": 1,
-                "offset": 4206
-              },
-              "end": {
-                "line": 97,
-                "column": 69,
-                "offset": 4274
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "html.navigation.jst",
-                    "position": {
-                      "start": {
-                        "line": 98,
-                        "column": 3,
-                        "offset": 4277
-                      },
-                      "end": {
-                        "line": 98,
-                        "column": 24,
-                        "offset": 4298
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " (compiled to ",
-                    "position": {
-                      "start": {
-                        "line": 98,
-                        "column": 24,
-                        "offset": 4298
-                      },
-                      "end": {
-                        "line": 98,
-                        "column": 38,
-                        "offset": 4312
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "html.navigation.js",
-                    "position": {
-                      "start": {
-                        "line": 98,
-                        "column": 38,
-                        "offset": 4312
-                      },
-                      "end": {
-                        "line": 98,
-                        "column": 58,
-                        "offset": 4332
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ") – renders the navigation",
-                    "position": {
-                      "start": {
-                        "line": 98,
-                        "column": 58,
-                        "offset": 4332
-                      },
-                      "end": {
-                        "line": 98,
-                        "column": 84,
-                        "offset": 4358
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 98,
-                    "column": 3,
-                    "offset": 4277
-                  },
-                  "end": {
-                    "line": 98,
-                    "column": 84,
-                    "offset": 4358
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "html.navigation.jst"
+                },
+                {
+                  "type": "text",
+                  "value": " (compiled to "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "html.navigation.js"
+                },
+                {
+                  "type": "text",
+                  "value": ") – renders the navigation"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 98,
-                "column": 1,
-                "offset": 4275
-              },
-              "end": {
-                "line": 98,
-                "column": 84,
-                "offset": 4358
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "dropdown.json.js",
-                    "position": {
-                      "start": {
-                        "line": 99,
-                        "column": 3,
-                        "offset": 4361
-                      },
-                      "end": {
-                        "line": 99,
-                        "column": 21,
-                        "offset": 4379
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " (not compiled) – creates pure JSON output",
-                    "position": {
-                      "start": {
-                        "line": 99,
-                        "column": 21,
-                        "offset": 4379
-                      },
-                      "end": {
-                        "line": 99,
-                        "column": 63,
-                        "offset": 4421
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 99,
-                    "column": 3,
-                    "offset": 4361
-                  },
-                  "end": {
-                    "line": 99,
-                    "column": 63,
-                    "offset": 4421
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "dropdown.json.js"
+                },
+                {
+                  "type": "text",
+                  "value": " (not compiled) – creates pure JSON output"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 99,
-                "column": 1,
-                "offset": 4359
-              },
-              "end": {
-                "line": 99,
-                "column": 63,
-                "offset": 4421
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "dropdown.html.htl",
-                    "position": {
-                      "start": {
-                        "line": 100,
-                        "column": 3,
-                        "offset": 4424
-                      },
-                      "end": {
-                        "line": 100,
-                        "column": 22,
-                        "offset": 4443
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": " (compiled to ",
-                    "position": {
-                      "start": {
-                        "line": 100,
-                        "column": 22,
-                        "offset": 4443
-                      },
-                      "end": {
-                        "line": 100,
-                        "column": 36,
-                        "offset": 4457
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "dropdown.html.js",
-                    "position": {
-                      "start": {
-                        "line": 100,
-                        "column": 36,
-                        "offset": 4457
-                      },
-                      "end": {
-                        "line": 100,
-                        "column": 54,
-                        "offset": 4475
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ") – renders the dropdown component",
-                    "position": {
-                      "start": {
-                        "line": 100,
-                        "column": 54,
-                        "offset": 4475
-                      },
-                      "end": {
-                        "line": 100,
-                        "column": 88,
-                        "offset": 4509
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 100,
-                    "column": 3,
-                    "offset": 4424
-                  },
-                  "end": {
-                    "line": 100,
-                    "column": 88,
-                    "offset": 4509
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "dropdown.html.htl"
+                },
+                {
+                  "type": "text",
+                  "value": " (compiled to "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "dropdown.html.js"
+                },
+                {
+                  "type": "text",
+                  "value": ") – renders the dropdown component"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 100,
-                "column": 1,
-                "offset": 4422
-              },
-              "end": {
-                "line": 100,
-                "column": 88,
-                "offset": 4509
-              },
-              "indent": []
-            }
+              ]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 97,
-            "column": 1,
-            "offset": 4206
-          },
-          "end": {
-            "line": 100,
-            "column": 88,
-            "offset": 4509
-          },
-          "indent": [
-            1,
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
-            "type": "text",
-            "value": "(Optional) The Wrapper Function",
-            "position": {
-              "start": {
-                "line": 103,
-                "column": 5,
-                "offset": 4516
-              },
-              "end": {
-                "line": 103,
-                "column": 36,
-                "offset": 4547
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 103,
-            "column": 1,
-            "offset": 4512
-          },
-          "end": {
-            "line": 103,
-            "column": 36,
-            "offset": 4547
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "(Optional) The Wrapper Function"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Sometimes it is neccessary to pre-process the payload in a template-specific fashion. This wrapper function (often called \"Pre-JS\" for brevity sake) allows the full transformation of the pipeline's payload.",
-            "position": {
-              "start": {
-                "line": 105,
-                "column": 1,
-                "offset": 4549
-              },
-              "end": {
-                "line": 105,
-                "column": 207,
-                "offset": 4755
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 105,
-            "column": 1,
-            "offset": 4549
-          },
-          "end": {
-            "line": 105,
-            "column": 207,
-            "offset": 4755
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Sometimes it is neccessary to pre-process the payload in a template-specific fashion. This wrapper function (often called \"Pre-JS\" for brevity sake) allows the full transformation of the pipeline's payload."
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:",
-            "position": {
-              "start": {
-                "line": 107,
-                "column": 1,
-                "offset": 4757
-              },
-              "end": {
-                "line": 107,
-                "column": 256,
-                "offset": 5012
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 107,
-            "column": 1,
-            "offset": 4757
-          },
-          "end": {
-            "line": 107,
-            "column": 256,
-            "offset": 5012
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:"
+        }]
       },
       {
         "type": "list",
         "ordered": true,
         "start": 1,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "presentation (in the main function, often expressed in declarative templates)",
-                    "position": {
-                      "start": {
-                        "line": 109,
-                        "column": 4,
-                        "offset": 5017
-                      },
-                      "end": {
-                        "line": 109,
-                        "column": 81,
-                        "offset": 5094
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 109,
-                    "column": 4,
-                    "offset": 5017
-                  },
-                  "end": {
-                    "line": 109,
-                    "column": 81,
-                    "offset": 5094
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 109,
-                "column": 1,
-                "offset": 5014
-              },
-              "end": {
-                "line": 109,
-                "column": 81,
-                "offset": 5094
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "presentation (in the main function, often expressed in declarative templates)"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "business logic (in the wrapper function, often expressed in imperative code)",
-                    "position": {
-                      "start": {
-                        "line": 110,
-                        "column": 4,
-                        "offset": 5098
-                      },
-                      "end": {
-                        "line": 110,
-                        "column": 80,
-                        "offset": 5174
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 110,
-                    "column": 4,
-                    "offset": 5098
-                  },
-                  "end": {
-                    "line": 110,
-                    "column": 80,
-                    "offset": 5174
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 110,
-                "column": 1,
-                "offset": 5095
-              },
-              "end": {
-                "line": 110,
-                "column": 80,
-                "offset": 5174
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "business logic (in the wrapper function, often expressed in imperative code)"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "content-type specific implementation (in the pipeline, expressed in functional code)",
-                    "position": {
-                      "start": {
-                        "line": 111,
-                        "column": 4,
-                        "offset": 5178
-                      },
-                      "end": {
-                        "line": 111,
-                        "column": 88,
-                        "offset": 5262
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 111,
-                    "column": 4,
-                    "offset": 5178
-                  },
-                  "end": {
-                    "line": 111,
-                    "column": 88,
-                    "offset": 5262
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 111,
-                "column": 1,
-                "offset": 5175
-              },
-              "end": {
-                "line": 111,
-                "column": 88,
-                "offset": 5262
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "content-type specific implementation (in the pipeline, expressed in functional code)"
+              }]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 109,
-            "column": 1,
-            "offset": 5014
-          },
-          "end": {
-            "line": 111,
-            "column": 88,
-            "offset": 5262
-          },
-          "indent": [
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "A simple implementation of a wrapper function would look like this:",
-            "position": {
-              "start": {
-                "line": 113,
-                "column": 1,
-                "offset": 5264
-              },
-              "end": {
-                "line": 113,
-                "column": 68,
-                "offset": 5331
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 113,
-            "column": 1,
-            "offset": 5264
-          },
-          "end": {
-            "line": 113,
-            "column": 68,
-            "offset": 5331
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "A simple implementation of a wrapper function would look like this:"
+        }]
       },
       {
         "type": "code",
         "lang": "javascript",
         "meta": null,
-        "value": "// All wrapper functions must export `pre`\n// The functions takes following arguments:\n// - `cont` (the continuation function, i.e. the main template function)\n// - `payload` (the payload of the pipeline)\nmodule.exports.pre = (cont, payload) => {\n    const {request, content, context, response} = payload;\n    \n    // modifying the payload content before invoking the main function\n    content.hello = 'World';\n    const modifiedpayload = {request, content, context, response};\n\n    // invoking the main function with the new payload. Capturing the response\n    // payload for further modification\n\n    const responsepayload = cont(modifiedpayload);\n\n    // Adding a value to the payload response\n    const modifiedresponse = modifiedpayload.response;\n    modifiedresponse.hello = 'World';\n\n    return Object.assign(modifiedpayload, modifiedresponse);\n}",
-        "position": {
-          "start": {
-            "line": 115,
-            "column": 1,
-            "offset": 5333
-          },
-          "end": {
-            "line": 138,
-            "column": 4,
-            "offset": 6204
-          },
-          "indent": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
-        }
+        "value": "// All wrapper functions must export `pre`\n// The functions takes following arguments:\n// - `cont` (the continuation function, i.e. the main template function)\n// - `payload` (the payload of the pipeline)\nmodule.exports.pre = (cont, payload) => {\n    const {request, content, context, response} = payload;\n    \n    // modifying the payload content before invoking the main function\n    content.hello = 'World';\n    const modifiedpayload = {request, content, context, response};\n\n    // invoking the main function with the new payload. Capturing the response\n    // payload for further modification\n\n    const responsepayload = cont(modifiedpayload);\n\n    // Adding a value to the payload response\n    const modifiedresponse = modifiedpayload.response;\n    modifiedresponse.hello = 'World';\n\n    return Object.assign(modifiedpayload, modifiedresponse);\n}"
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
-            "type": "text",
-            "value": "Pre-Processing Functions",
-            "position": {
-              "start": {
-                "line": 140,
-                "column": 5,
-                "offset": 6210
-              },
-              "end": {
-                "line": 140,
-                "column": 29,
-                "offset": 6234
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 140,
-            "column": 1,
-            "offset": 6206
-          },
-          "end": {
-            "line": 140,
-            "column": 29,
-            "offset": 6234
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Pre-Processing Functions"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Pre-Processing functions are meant to:",
-            "position": {
-              "start": {
-                "line": 142,
-                "column": 1,
-                "offset": 6236
-              },
-              "end": {
-                "line": 142,
-                "column": 39,
-                "offset": 6274
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 142,
-            "column": 1,
-            "offset": 6236
-          },
-          "end": {
-            "line": 142,
-            "column": 39,
-            "offset": 6274
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Pre-Processing functions are meant to:"
+        }]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "parse and process request parameters",
-                    "position": {
-                      "start": {
-                        "line": 144,
-                        "column": 3,
-                        "offset": 6278
-                      },
-                      "end": {
-                        "line": 144,
-                        "column": 39,
-                        "offset": 6314
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 144,
-                    "column": 3,
-                    "offset": 6278
-                  },
-                  "end": {
-                    "line": 144,
-                    "column": 39,
-                    "offset": 6314
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 144,
-                "column": 1,
-                "offset": 6276
-              },
-              "end": {
-                "line": 144,
-                "column": 39,
-                "offset": 6314
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "parse and process request parameters"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "fetch and parse the requested content",
-                    "position": {
-                      "start": {
-                        "line": 145,
-                        "column": 3,
-                        "offset": 6317
-                      },
-                      "end": {
-                        "line": 145,
-                        "column": 40,
-                        "offset": 6354
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 145,
-                    "column": 3,
-                    "offset": 6317
-                  },
-                  "end": {
-                    "line": 145,
-                    "column": 40,
-                    "offset": 6354
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 145,
-                "column": 1,
-                "offset": 6315
-              },
-              "end": {
-                "line": 145,
-                "column": 40,
-                "offset": 6354
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "fetch and parse the requested content"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "transform the requested content",
-                    "position": {
-                      "start": {
-                        "line": 146,
-                        "column": 3,
-                        "offset": 6357
-                      },
-                      "end": {
-                        "line": 146,
-                        "column": 34,
-                        "offset": 6388
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 146,
-                    "column": 3,
-                    "offset": 6357
-                  },
-                  "end": {
-                    "line": 146,
-                    "column": 34,
-                    "offset": 6388
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 146,
-                "column": 1,
-                "offset": 6355
-              },
-              "end": {
-                "line": 146,
-                "column": 34,
-                "offset": 6388
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "text",
+                "value": "transform the requested content"
+              }]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 144,
-            "column": 1,
-            "offset": 6276
-          },
-          "end": {
-            "line": 146,
-            "column": 34,
-            "offset": 6388
-          },
-          "indent": [
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
-            "type": "text",
-            "value": "Post-Processing Functions",
-            "position": {
-              "start": {
-                "line": 148,
-                "column": 5,
-                "offset": 6394
-              },
-              "end": {
-                "line": 148,
-                "column": 30,
-                "offset": 6419
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 148,
-            "column": 1,
-            "offset": 6390
-          },
-          "end": {
-            "line": 148,
-            "column": 30,
-            "offset": 6419
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Post-Processing Functions"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Post-Processing functions are meant to:",
-            "position": {
-              "start": {
-                "line": 150,
-                "column": 1,
-                "offset": 6421
-              },
-              "end": {
-                "line": 150,
-                "column": 40,
-                "offset": 6460
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 150,
-            "column": 1,
-            "offset": 6421
-          },
-          "end": {
-            "line": 150,
-            "column": 40,
-            "offset": 6460
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Post-Processing functions are meant to:"
+        }]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
-            "type": "listItem",
-            "spread": false,
-            "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "process and transform the response",
-                    "position": {
-                      "start": {
-                        "line": 152,
-                        "column": 3,
-                        "offset": 6464
-                      },
-                      "end": {
-                        "line": 152,
-                        "column": 37,
-                        "offset": 6498
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 152,
-                    "column": 3,
-                    "offset": 6464
-                  },
-                  "end": {
-                    "line": 152,
-                    "column": 37,
-                    "offset": 6498
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 152,
-                "column": 1,
-                "offset": 6462
-              },
-              "end": {
-                "line": 152,
-                "column": 37,
-                "offset": 6498
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 152,
-            "column": 1,
-            "offset": 6462
-          },
-          "end": {
-            "line": 152,
-            "column": 37,
-            "offset": 6498
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [{
+            "type": "paragraph",
+            "children": [{
+              "type": "text",
+              "value": "process and transform the response"
+            }]
+          }]
+        }]
       },
       {
         "type": "heading",
         "depth": 2,
-        "children": [
-          {
-            "type": "text",
-            "value": "Anatomy of the Payload",
-            "position": {
-              "start": {
-                "line": 154,
-                "column": 4,
-                "offset": 6503
-              },
-              "end": {
-                "line": 154,
-                "column": 26,
-                "offset": 6525
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 154,
-            "column": 1,
-            "offset": 6500
-          },
-          "end": {
-            "line": 154,
-            "column": 26,
-            "offset": 6525
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Anatomy of the Payload"
+        }]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "Following main properties exist:",
-            "position": {
-              "start": {
-                "line": 156,
-                "column": 1,
-                "offset": 6527
-              },
-              "end": {
-                "line": 156,
-                "column": 33,
-                "offset": 6559
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 156,
-            "column": 1,
-            "offset": 6527
-          },
-          "end": {
-            "line": 156,
-            "column": 33,
-            "offset": 6559
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "Following main properties exist:"
+        }]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "request",
-                    "position": {
-                      "start": {
-                        "line": 158,
-                        "column": 3,
-                        "offset": 6563
-                      },
-                      "end": {
-                        "line": 158,
-                        "column": 12,
-                        "offset": 6572
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 158,
-                    "column": 3,
-                    "offset": 6563
-                  },
-                  "end": {
-                    "line": 158,
-                    "column": 12,
-                    "offset": 6572
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 158,
-                "column": 1,
-                "offset": 6561
-              },
-              "end": {
-                "line": 158,
-                "column": 12,
-                "offset": 6572
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "inlineCode",
+                "value": "request"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "content",
-                    "position": {
-                      "start": {
-                        "line": 159,
-                        "column": 3,
-                        "offset": 6575
-                      },
-                      "end": {
-                        "line": 159,
-                        "column": 12,
-                        "offset": 6584
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 159,
-                    "column": 3,
-                    "offset": 6575
-                  },
-                  "end": {
-                    "line": 159,
-                    "column": 12,
-                    "offset": 6584
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 159,
-                "column": 1,
-                "offset": 6573
-              },
-              "end": {
-                "line": 159,
-                "column": 12,
-                "offset": 6584
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "inlineCode",
+                "value": "content"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "response",
-                    "position": {
-                      "start": {
-                        "line": 160,
-                        "column": 3,
-                        "offset": 6587
-                      },
-                      "end": {
-                        "line": 160,
-                        "column": 13,
-                        "offset": 6597
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 160,
-                    "column": 3,
-                    "offset": 6587
-                  },
-                  "end": {
-                    "line": 160,
-                    "column": 13,
-                    "offset": 6597
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 160,
-                "column": 1,
-                "offset": 6585
-              },
-              "end": {
-                "line": 160,
-                "column": 13,
-                "offset": 6597
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "inlineCode",
+                "value": "response"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "context",
-                    "position": {
-                      "start": {
-                        "line": 161,
-                        "column": 3,
-                        "offset": 6600
-                      },
-                      "end": {
-                        "line": 161,
-                        "column": 12,
-                        "offset": 6609
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 161,
-                    "column": 3,
-                    "offset": 6600
-                  },
-                  "end": {
-                    "line": 161,
-                    "column": 12,
-                    "offset": 6609
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 161,
-                "column": 1,
-                "offset": 6598
-              },
-              "end": {
-                "line": 161,
-                "column": 12,
-                "offset": 6609
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "inlineCode",
+                "value": "context"
+              }]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "error",
-                    "position": {
-                      "start": {
-                        "line": 162,
-                        "column": 3,
-                        "offset": 6612
-                      },
-                      "end": {
-                        "line": 162,
-                        "column": 10,
-                        "offset": 6619
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 162,
-                    "column": 3,
-                    "offset": 6612
-                  },
-                  "end": {
-                    "line": 162,
-                    "column": 10,
-                    "offset": 6619
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 162,
-                "column": 1,
-                "offset": 6610
-              },
-              "end": {
-                "line": 162,
-                "column": 10,
-                "offset": 6619
-              },
-              "indent": []
-            }
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                "type": "inlineCode",
+                "value": "error"
+              }]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 158,
-            "column": 1,
-            "offset": 6561
-          },
-          "end": {
-            "line": 162,
-            "column": 10,
-            "offset": 6619
-          },
-          "indent": [
-            1,
-            1,
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "The ",
-            "position": {
-              "start": {
-                "line": 164,
-                "column": 5,
-                "offset": 6625
-              },
-              "end": {
-                "line": 164,
-                "column": 9,
-                "offset": 6629
-              },
-              "indent": []
-            }
+            "value": "The "
           },
           {
             "type": "inlineCode",
-            "value": "request",
-            "position": {
-              "start": {
-                "line": 164,
-                "column": 9,
-                "offset": 6629
-              },
-              "end": {
-                "line": 164,
-                "column": 18,
-                "offset": 6638
-              },
-              "indent": []
-            }
+            "value": "request"
           },
           {
             "type": "text",
-            "value": " object",
-            "position": {
-              "start": {
-                "line": 164,
-                "column": 18,
-                "offset": 6638
-              },
-              "end": {
-                "line": 164,
-                "column": 25,
-                "offset": 6645
-              },
-              "indent": []
-            }
+            "value": " object"
           }
-        ],
-        "position": {
-          "start": {
-            "line": 164,
-            "column": 1,
-            "offset": 6621
-          },
-          "end": {
-            "line": 164,
-            "column": 25,
-            "offset": 6645
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "params",
-                    "position": {
-                      "start": {
-                        "line": 166,
-                        "column": 3,
-                        "offset": 6649
-                      },
-                      "end": {
-                        "line": 166,
-                        "column": 11,
-                        "offset": 6657
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": a map of request parameters",
-                    "position": {
-                      "start": {
-                        "line": 166,
-                        "column": 11,
-                        "offset": 6657
-                      },
-                      "end": {
-                        "line": 166,
-                        "column": 40,
-                        "offset": 6686
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 166,
-                    "column": 3,
-                    "offset": 6649
-                  },
-                  "end": {
-                    "line": 166,
-                    "column": 40,
-                    "offset": 6686
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "params"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of request parameters"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 166,
-                "column": 1,
-                "offset": 6647
-              },
-              "end": {
-                "line": 166,
-                "column": 40,
-                "offset": 6686
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "headers",
-                    "position": {
-                      "start": {
-                        "line": 167,
-                        "column": 3,
-                        "offset": 6689
-                      },
-                      "end": {
-                        "line": 167,
-                        "column": 12,
-                        "offset": 6698
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": a map of HTTP headers",
-                    "position": {
-                      "start": {
-                        "line": 167,
-                        "column": 12,
-                        "offset": 6698
-                      },
-                      "end": {
-                        "line": 167,
-                        "column": 35,
-                        "offset": 6721
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 167,
-                    "column": 3,
-                    "offset": 6689
-                  },
-                  "end": {
-                    "line": 167,
-                    "column": 35,
-                    "offset": 6721
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "headers"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of HTTP headers"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 167,
-                "column": 1,
-                "offset": 6687
-              },
-              "end": {
-                "line": 167,
-                "column": 35,
-                "offset": 6721
-              },
-              "indent": []
-            }
+              ]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 166,
-            "column": 1,
-            "offset": 6647
-          },
-          "end": {
-            "line": 167,
-            "column": 35,
-            "offset": 6721
-          },
-          "indent": [
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "The ",
-            "position": {
-              "start": {
-                "line": 169,
-                "column": 5,
-                "offset": 6727
-              },
-              "end": {
-                "line": 169,
-                "column": 9,
-                "offset": 6731
-              },
-              "indent": []
-            }
+            "value": "The "
           },
           {
             "type": "inlineCode",
-            "value": "content",
-            "position": {
-              "start": {
-                "line": 169,
-                "column": 9,
-                "offset": 6731
-              },
-              "end": {
-                "line": 169,
-                "column": 18,
-                "offset": 6740
-              },
-              "indent": []
-            }
+            "value": "content"
           },
           {
             "type": "text",
-            "value": " object",
-            "position": {
-              "start": {
-                "line": 169,
-                "column": 18,
-                "offset": 6740
-              },
-              "end": {
-                "line": 169,
-                "column": 25,
-                "offset": 6747
-              },
-              "indent": []
-            }
+            "value": " object"
           }
-        ],
-        "position": {
-          "start": {
-            "line": 169,
-            "column": 1,
-            "offset": 6723
-          },
-          "end": {
-            "line": 169,
-            "column": 25,
-            "offset": 6747
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "body",
-                    "position": {
-                      "start": {
-                        "line": 171,
-                        "column": 3,
-                        "offset": 6751
-                      },
-                      "end": {
-                        "line": 171,
-                        "column": 9,
-                        "offset": 6757
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": the unparsed content body as a ",
-                    "position": {
-                      "start": {
-                        "line": 171,
-                        "column": 9,
-                        "offset": 6757
-                      },
-                      "end": {
-                        "line": 171,
-                        "column": 42,
-                        "offset": 6790
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "string",
-                    "position": {
-                      "start": {
-                        "line": 171,
-                        "column": 42,
-                        "offset": 6790
-                      },
-                      "end": {
-                        "line": 171,
-                        "column": 50,
-                        "offset": 6798
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 171,
-                    "column": 3,
-                    "offset": 6751
-                  },
-                  "end": {
-                    "line": 171,
-                    "column": 50,
-                    "offset": 6798
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "body"
+                },
+                {
+                  "type": "text",
+                  "value": ": the unparsed content body as a "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "string"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 171,
-                "column": 1,
-                "offset": 6749
-              },
-              "end": {
-                "line": 171,
-                "column": 50,
-                "offset": 6798
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "mdast",
-                    "position": {
-                      "start": {
-                        "line": 172,
-                        "column": 3,
-                        "offset": 6801
-                      },
-                      "end": {
-                        "line": 172,
-                        "column": 10,
-                        "offset": 6808
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "mdast"
+                },
+                {
+                  "type": "text",
+                  "value": ": the parsed "
+                },
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://github.com/syntax-tree/mdast",
+                  "children": [{
                     "type": "text",
-                    "value": ": the parsed ",
-                    "position": {
-                      "start": {
-                        "line": 172,
-                        "column": 10,
-                        "offset": 6808
-                      },
-                      "end": {
-                        "line": 172,
-                        "column": 23,
-                        "offset": 6821
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "link",
-                    "title": null,
-                    "url": "https://github.com/syntax-tree/mdast",
-                    "children": [
-                      {
-                        "type": "text",
-                        "value": "Markdown AST",
-                        "position": {
-                          "start": {
-                            "line": 172,
-                            "column": 24,
-                            "offset": 6822
-                          },
-                          "end": {
-                            "line": 172,
-                            "column": 36,
-                            "offset": 6834
-                          },
-                          "indent": []
-                        }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 172,
-                        "column": 23,
-                        "offset": 6821
-                      },
-                      "end": {
-                        "line": 172,
-                        "column": 75,
-                        "offset": 6873
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 172,
-                    "column": 3,
-                    "offset": 6801
-                  },
-                  "end": {
-                    "line": 172,
-                    "column": 75,
-                    "offset": 6873
-                  },
-                  "indent": []
+                    "value": "Markdown AST"
+                  }]
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 172,
-                "column": 1,
-                "offset": 6799
-              },
-              "end": {
-                "line": 172,
-                "column": 75,
-                "offset": 6873
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
+            "children": [{
                 "type": "paragraph",
-                "children": [
-                  {
+                "children": [{
                     "type": "inlineCode",
-                    "value": "meta",
-                    "position": {
-                      "start": {
-                        "line": 173,
-                        "column": 3,
-                        "offset": 6876
-                      },
-                      "end": {
-                        "line": 173,
-                        "column": 9,
-                        "offset": 6882
-                      },
-                      "indent": []
-                    }
+                    "value": "meta"
                   },
                   {
                     "type": "text",
-                    "value": ": a map metadata properties, including",
-                    "position": {
-                      "start": {
-                        "line": 173,
-                        "column": 9,
-                        "offset": 6882
-                      },
-                      "end": {
-                        "line": 173,
-                        "column": 47,
-                        "offset": 6920
-                      },
-                      "indent": []
-                    }
+                    "value": ": a map metadata properties, including"
                   }
-                ],
-                "position": {
-                  "start": {
-                    "line": 173,
-                    "column": 3,
-                    "offset": 6876
-                  },
-                  "end": {
-                    "line": 173,
-                    "column": 47,
-                    "offset": 6920
-                  },
-                  "indent": []
-                }
+                ]
               },
               {
                 "type": "list",
                 "ordered": false,
                 "start": null,
                 "spread": false,
-                "children": [
-                  {
+                "children": [{
                     "type": "listItem",
                     "spread": false,
                     "checked": null,
-                    "children": [
-                      {
-                        "type": "paragraph",
-                        "children": [
-                          {
-                            "type": "inlineCode",
-                            "value": "title",
-                            "position": {
-                              "start": {
-                                "line": 174,
-                                "column": 5,
-                                "offset": 6925
-                              },
-                              "end": {
-                                "line": 174,
-                                "column": 12,
-                                "offset": 6932
-                              },
-                              "indent": []
-                            }
-                          },
-                          {
-                            "type": "text",
-                            "value": ": title of the document",
-                            "position": {
-                              "start": {
-                                "line": 174,
-                                "column": 12,
-                                "offset": 6932
-                              },
-                              "end": {
-                                "line": 174,
-                                "column": 35,
-                                "offset": 6955
-                              },
-                              "indent": []
-                            }
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 174,
-                            "column": 5,
-                            "offset": 6925
-                          },
-                          "end": {
-                            "line": 174,
-                            "column": 35,
-                            "offset": 6955
-                          },
-                          "indent": []
+                    "children": [{
+                      "type": "paragraph",
+                      "children": [{
+                          "type": "inlineCode",
+                          "value": "title"
+                        },
+                        {
+                          "type": "text",
+                          "value": ": title of the document"
                         }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 174,
-                        "column": 3,
-                        "offset": 6923
-                      },
-                      "end": {
-                        "line": 174,
-                        "column": 35,
-                        "offset": 6955
-                      },
-                      "indent": []
-                    }
+                      ]
+                    }]
                   },
                   {
                     "type": "listItem",
                     "spread": false,
                     "checked": null,
-                    "children": [
-                      {
-                        "type": "paragraph",
-                        "children": [
-                          {
-                            "type": "inlineCode",
-                            "value": "intro",
-                            "position": {
-                              "start": {
-                                "line": 175,
-                                "column": 5,
-                                "offset": 6960
-                              },
-                              "end": {
-                                "line": 175,
-                                "column": 12,
-                                "offset": 6967
-                              },
-                              "indent": []
-                            }
-                          },
-                          {
-                            "type": "text",
-                            "value": ": a plain-text introduction or description",
-                            "position": {
-                              "start": {
-                                "line": 175,
-                                "column": 12,
-                                "offset": 6967
-                              },
-                              "end": {
-                                "line": 175,
-                                "column": 54,
-                                "offset": 7009
-                              },
-                              "indent": []
-                            }
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 175,
-                            "column": 5,
-                            "offset": 6960
-                          },
-                          "end": {
-                            "line": 175,
-                            "column": 54,
-                            "offset": 7009
-                          },
-                          "indent": []
+                    "children": [{
+                      "type": "paragraph",
+                      "children": [{
+                          "type": "inlineCode",
+                          "value": "intro"
+                        },
+                        {
+                          "type": "text",
+                          "value": ": a plain-text introduction or description"
                         }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 175,
-                        "column": 3,
-                        "offset": 6958
-                      },
-                      "end": {
-                        "line": 175,
-                        "column": 54,
-                        "offset": 7009
-                      },
-                      "indent": []
-                    }
+                      ]
+                    }]
                   },
                   {
                     "type": "listItem",
                     "spread": false,
                     "checked": null,
-                    "children": [
-                      {
-                        "type": "paragraph",
-                        "children": [
-                          {
-                            "type": "inlineCode",
-                            "value": "type",
-                            "position": {
-                              "start": {
-                                "line": 176,
-                                "column": 5,
-                                "offset": 7014
-                              },
-                              "end": {
-                                "line": 176,
-                                "column": 11,
-                                "offset": 7020
-                              },
-                              "indent": []
-                            }
-                          },
-                          {
-                            "type": "text",
-                            "value": ": the content type of the document",
-                            "position": {
-                              "start": {
-                                "line": 176,
-                                "column": 11,
-                                "offset": 7020
-                              },
-                              "end": {
-                                "line": 176,
-                                "column": 45,
-                                "offset": 7054
-                              },
-                              "indent": []
-                            }
-                          }
-                        ],
-                        "position": {
-                          "start": {
-                            "line": 176,
-                            "column": 5,
-                            "offset": 7014
-                          },
-                          "end": {
-                            "line": 176,
-                            "column": 45,
-                            "offset": 7054
-                          },
-                          "indent": []
+                    "children": [{
+                      "type": "paragraph",
+                      "children": [{
+                          "type": "inlineCode",
+                          "value": "type"
+                        },
+                        {
+                          "type": "text",
+                          "value": ": the content type of the document"
                         }
-                      }
-                    ],
-                    "position": {
-                      "start": {
-                        "line": 176,
-                        "column": 3,
-                        "offset": 7012
-                      },
-                      "end": {
-                        "line": 176,
-                        "column": 45,
-                        "offset": 7054
-                      },
-                      "indent": []
-                    }
+                      ]
+                    }]
                   }
-                ],
-                "position": {
-                  "start": {
-                    "line": 174,
-                    "column": 3,
-                    "offset": 6923
-                  },
-                  "end": {
-                    "line": 176,
-                    "column": 45,
-                    "offset": 7054
-                  },
-                  "indent": [
-                    3,
-                    3
-                  ]
-                }
+                ]
               }
-            ],
-            "position": {
-              "start": {
-                "line": 173,
-                "column": 1,
-                "offset": 6874
-              },
-              "end": {
-                "line": 176,
-                "column": 45,
-                "offset": 7054
-              },
-              "indent": [
-                1,
-                1,
-                1
+            ]
+          },
+          {
+            "type": "listItem",
+            "spread": false,
+            "checked": null,
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "htast"
+                },
+                {
+                  "type": "text",
+                  "value": ": the HTML AST"
+                }
               ]
-            }
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "htast",
-                    "position": {
-                      "start": {
-                        "line": 177,
-                        "column": 3,
-                        "offset": 7057
-                      },
-                      "end": {
-                        "line": 177,
-                        "column": 10,
-                        "offset": 7064
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": the HTML AST",
-                    "position": {
-                      "start": {
-                        "line": 177,
-                        "column": 10,
-                        "offset": 7064
-                      },
-                      "end": {
-                        "line": 177,
-                        "column": 24,
-                        "offset": 7078
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 177,
-                    "column": 3,
-                    "offset": 7057
-                  },
-                  "end": {
-                    "line": 177,
-                    "column": 24,
-                    "offset": 7078
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "html"
+                },
+                {
+                  "type": "text",
+                  "value": ": a string of the content rendered as HTML"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 177,
-                "column": 1,
-                "offset": 7055
-              },
-              "end": {
-                "line": 177,
-                "column": 24,
-                "offset": 7078
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "html",
-                    "position": {
-                      "start": {
-                        "line": 178,
-                        "column": 3,
-                        "offset": 7081
-                      },
-                      "end": {
-                        "line": 178,
-                        "column": 9,
-                        "offset": 7087
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": a string of the content rendered as HTML",
-                    "position": {
-                      "start": {
-                        "line": 178,
-                        "column": 9,
-                        "offset": 7087
-                      },
-                      "end": {
-                        "line": 178,
-                        "column": 51,
-                        "offset": 7129
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 178,
-                    "column": 3,
-                    "offset": 7081
-                  },
-                  "end": {
-                    "line": 178,
-                    "column": 51,
-                    "offset": 7129
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "children"
+                },
+                {
+                  "type": "text",
+                  "value": ": an array of top-level elements of the HTML-rendered content"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 178,
-                "column": 1,
-                "offset": 7079
-              },
-              "end": {
-                "line": 178,
-                "column": 51,
-                "offset": 7129
-              },
-              "indent": []
-            }
-          },
-          {
-            "type": "listItem",
-            "spread": false,
-            "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "children",
-                    "position": {
-                      "start": {
-                        "line": 179,
-                        "column": 3,
-                        "offset": 7132
-                      },
-                      "end": {
-                        "line": 179,
-                        "column": 13,
-                        "offset": 7142
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": an array of top-level elements of the HTML-rendered content",
-                    "position": {
-                      "start": {
-                        "line": 179,
-                        "column": 13,
-                        "offset": 7142
-                      },
-                      "end": {
-                        "line": 179,
-                        "column": 74,
-                        "offset": 7203
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 179,
-                    "column": 3,
-                    "offset": 7132
-                  },
-                  "end": {
-                    "line": 179,
-                    "column": 74,
-                    "offset": 7203
-                  },
-                  "indent": []
-                }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 179,
-                "column": 1,
-                "offset": 7130
-              },
-              "end": {
-                "line": 179,
-                "column": 74,
-                "offset": 7203
-              },
-              "indent": []
-            }
+              ]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 171,
-            "column": 1,
-            "offset": 6749
-          },
-          "end": {
-            "line": 179,
-            "column": 74,
-            "offset": 7203
-          },
-          "indent": [
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "The ",
-            "position": {
-              "start": {
-                "line": 181,
-                "column": 5,
-                "offset": 7209
-              },
-              "end": {
-                "line": 181,
-                "column": 9,
-                "offset": 7213
-              },
-              "indent": []
-            }
+            "value": "The "
           },
           {
             "type": "inlineCode",
-            "value": "response",
-            "position": {
-              "start": {
-                "line": 181,
-                "column": 9,
-                "offset": 7213
-              },
-              "end": {
-                "line": 181,
-                "column": 19,
-                "offset": 7223
-              },
-              "indent": []
-            }
+            "value": "response"
           },
           {
             "type": "text",
-            "value": " object",
-            "position": {
-              "start": {
-                "line": 181,
-                "column": 19,
-                "offset": 7223
-              },
-              "end": {
-                "line": 181,
-                "column": 26,
-                "offset": 7230
-              },
-              "indent": []
-            }
+            "value": " object"
           }
-        ],
-        "position": {
-          "start": {
-            "line": 181,
-            "column": 1,
-            "offset": 7205
-          },
-          "end": {
-            "line": 181,
-            "column": 26,
-            "offset": 7230
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
+        "children": [{
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "body",
-                    "position": {
-                      "start": {
-                        "line": 183,
-                        "column": 3,
-                        "offset": 7234
-                      },
-                      "end": {
-                        "line": 183,
-                        "column": 9,
-                        "offset": 7240
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": the unparsed response body as a ",
-                    "position": {
-                      "start": {
-                        "line": 183,
-                        "column": 9,
-                        "offset": 7240
-                      },
-                      "end": {
-                        "line": 183,
-                        "column": 43,
-                        "offset": 7274
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "inlineCode",
-                    "value": "string",
-                    "position": {
-                      "start": {
-                        "line": 183,
-                        "column": 43,
-                        "offset": 7274
-                      },
-                      "end": {
-                        "line": 183,
-                        "column": 51,
-                        "offset": 7282
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 183,
-                    "column": 3,
-                    "offset": 7234
-                  },
-                  "end": {
-                    "line": 183,
-                    "column": 51,
-                    "offset": 7282
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "body"
+                },
+                {
+                  "type": "text",
+                  "value": ": the unparsed response body as a "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "string"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 183,
-                "column": 1,
-                "offset": 7232
-              },
-              "end": {
-                "line": 183,
-                "column": 51,
-                "offset": 7282
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "headers",
-                    "position": {
-                      "start": {
-                        "line": 184,
-                        "column": 3,
-                        "offset": 7285
-                      },
-                      "end": {
-                        "line": 184,
-                        "column": 12,
-                        "offset": 7294
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": a map of HTTP response headers",
-                    "position": {
-                      "start": {
-                        "line": 184,
-                        "column": 12,
-                        "offset": 7294
-                      },
-                      "end": {
-                        "line": 184,
-                        "column": 44,
-                        "offset": 7326
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 184,
-                    "column": 3,
-                    "offset": 7285
-                  },
-                  "end": {
-                    "line": 184,
-                    "column": 44,
-                    "offset": 7326
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "headers"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of HTTP response headers"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 184,
-                "column": 1,
-                "offset": 7283
-              },
-              "end": {
-                "line": 184,
-                "column": 44,
-                "offset": 7326
-              },
-              "indent": []
-            }
+              ]
+            }]
           },
           {
             "type": "listItem",
             "spread": false,
             "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "status",
-                    "position": {
-                      "start": {
-                        "line": 185,
-                        "column": 3,
-                        "offset": 7329
-                      },
-                      "end": {
-                        "line": 185,
-                        "column": 11,
-                        "offset": 7337
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": the HTTP status code",
-                    "position": {
-                      "start": {
-                        "line": 185,
-                        "column": 11,
-                        "offset": 7337
-                      },
-                      "end": {
-                        "line": 185,
-                        "column": 33,
-                        "offset": 7359
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 185,
-                    "column": 3,
-                    "offset": 7329
-                  },
-                  "end": {
-                    "line": 185,
-                    "column": 33,
-                    "offset": 7359
-                  },
-                  "indent": []
+            "children": [{
+              "type": "paragraph",
+              "children": [{
+                  "type": "inlineCode",
+                  "value": "status"
+                },
+                {
+                  "type": "text",
+                  "value": ": the HTTP status code"
                 }
-              }
-            ],
-            "position": {
-              "start": {
-                "line": 185,
-                "column": 1,
-                "offset": 7327
-              },
-              "end": {
-                "line": 185,
-                "column": 33,
-                "offset": 7359
-              },
-              "indent": []
-            }
+              ]
+            }]
           }
-        ],
-        "position": {
-          "start": {
-            "line": 183,
-            "column": 1,
-            "offset": 7232
-          },
-          "end": {
-            "line": 185,
-            "column": 33,
-            "offset": 7359
-          },
-          "indent": [
-            1,
-            1
-          ]
-        }
+        ]
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "The ",
-            "position": {
-              "start": {
-                "line": 187,
-                "column": 5,
-                "offset": 7365
-              },
-              "end": {
-                "line": 187,
-                "column": 9,
-                "offset": 7369
-              },
-              "indent": []
-            }
+            "value": "The "
           },
           {
             "type": "inlineCode",
-            "value": "context",
-            "position": {
-              "start": {
-                "line": 187,
-                "column": 9,
-                "offset": 7369
-              },
-              "end": {
-                "line": 187,
-                "column": 18,
-                "offset": 7378
-              },
-              "indent": []
-            }
+            "value": "context"
           },
           {
             "type": "text",
-            "value": " object",
-            "position": {
-              "start": {
-                "line": 187,
-                "column": 18,
-                "offset": 7378
-              },
-              "end": {
-                "line": 187,
-                "column": 25,
-                "offset": 7385
-              },
-              "indent": []
-            }
+            "value": " object"
           }
-        ],
-        "position": {
-          "start": {
-            "line": 187,
-            "column": 1,
-            "offset": 7361
-          },
-          "end": {
-            "line": 187,
-            "column": 25,
-            "offset": 7385
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "TBD: used for stuff that is neither content, request, or response",
-            "position": {
-              "start": {
-                "line": 189,
-                "column": 1,
-                "offset": 7387
-              },
-              "end": {
-                "line": 189,
-                "column": 66,
-                "offset": 7452
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 189,
-            "column": 1,
-            "offset": 7387
-          },
-          "end": {
-            "line": 189,
-            "column": 66,
-            "offset": 7452
-          },
-          "indent": []
-        }
+        "children": [{
+          "type": "text",
+          "value": "TBD: used for stuff that is neither content, request, or response"
+        }]
       },
       {
         "type": "heading",
         "depth": 3,
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "The ",
-            "position": {
-              "start": {
-                "line": 191,
-                "column": 5,
-                "offset": 7458
-              },
-              "end": {
-                "line": 191,
-                "column": 9,
-                "offset": 7462
-              },
-              "indent": []
-            }
+            "value": "The "
           },
           {
             "type": "inlineCode",
-            "value": "error",
-            "position": {
-              "start": {
-                "line": 191,
-                "column": 9,
-                "offset": 7462
-              },
-              "end": {
-                "line": 191,
-                "column": 16,
-                "offset": 7469
-              },
-              "indent": []
-            }
+            "value": "error"
           },
           {
             "type": "text",
-            "value": " object",
-            "position": {
-              "start": {
-                "line": 191,
-                "column": 16,
-                "offset": 7469
-              },
-              "end": {
-                "line": 191,
-                "column": 23,
-                "offset": 7476
-              },
-              "indent": []
-            }
+            "value": " object"
           }
-        ],
-        "position": {
-          "start": {
-            "line": 191,
-            "column": 1,
-            "offset": 7454
-          },
-          "end": {
-            "line": 191,
-            "column": 23,
-            "offset": 7476
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "This object is only set when there has been an error during pipeline processing. Any step in the pipeline may set the ",
-            "position": {
-              "start": {
-                "line": 193,
-                "column": 1,
-                "offset": 7478
-              },
-              "end": {
-                "line": 193,
-                "column": 119,
-                "offset": 7596
-              },
-              "indent": []
-            }
+            "value": "This object is only set when there has been an error during pipeline processing. Any step in the pipeline may set the "
           },
           {
             "type": "inlineCode",
-            "value": "error",
-            "position": {
-              "start": {
-                "line": 193,
-                "column": 119,
-                "offset": 7596
-              },
-              "end": {
-                "line": 193,
-                "column": 126,
-                "offset": 7603
-              },
-              "indent": []
-            }
+            "value": "error"
           },
           {
             "type": "text",
-            "value": " object. Subsequent steps should simply skip any processing if they encounter an ",
-            "position": {
-              "start": {
-                "line": 193,
-                "column": 126,
-                "offset": 7603
-              },
-              "end": {
-                "line": 193,
-                "column": 207,
-                "offset": 7684
-              },
-              "indent": []
-            }
+            "value": " object. Subsequent steps should simply skip any processing if they encounter an "
           },
           {
             "type": "inlineCode",
-            "value": "error",
-            "position": {
-              "start": {
-                "line": 193,
-                "column": 207,
-                "offset": 7684
-              },
-              "end": {
-                "line": 193,
-                "column": 214,
-                "offset": 7691
-              },
-              "indent": []
-            }
+            "value": "error"
           },
           {
             "type": "text",
-            "value": " object.",
-            "position": {
-              "start": {
-                "line": 193,
-                "column": 214,
-                "offset": 7691
-              },
-              "end": {
-                "line": 193,
-                "column": 222,
-                "offset": 7699
-              },
-              "indent": []
-            }
+            "value": " object."
           }
-        ],
-        "position": {
-          "start": {
-            "line": 193,
-            "column": 1,
-            "offset": 7478
-          },
-          "end": {
-            "line": 193,
-            "column": 222,
-            "offset": 7699
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "Alternatively, steps can attempt to handle the ",
-            "position": {
-              "start": {
-                "line": 195,
-                "column": 1,
-                "offset": 7701
-              },
-              "end": {
-                "line": 195,
-                "column": 48,
-                "offset": 7748
-              },
-              "indent": []
-            }
+            "value": "Alternatively, steps can attempt to handle the "
           },
           {
             "type": "inlineCode",
-            "value": "error",
-            "position": {
-              "start": {
-                "line": 195,
-                "column": 48,
-                "offset": 7748
-              },
-              "end": {
-                "line": 195,
-                "column": 55,
-                "offset": 7755
-              },
-              "indent": []
-            }
+            "value": "error"
           },
           {
             "type": "text",
-            "value": " object, for instance by generating a formatted error message and leaving it in ",
-            "position": {
-              "start": {
-                "line": 195,
-                "column": 55,
-                "offset": 7755
-              },
-              "end": {
-                "line": 195,
-                "column": 135,
-                "offset": 7835
-              },
-              "indent": []
-            }
+            "value": " object, for instance by generating a formatted error message and leaving it in "
           },
           {
             "type": "inlineCode",
-            "value": "response.body",
-            "position": {
-              "start": {
-                "line": 195,
-                "column": 135,
-                "offset": 7835
-              },
-              "end": {
-                "line": 195,
-                "column": 150,
-                "offset": 7850
-              },
-              "indent": []
-            }
+            "value": "response.body"
           },
           {
             "type": "text",
-            "value": ".",
-            "position": {
-              "start": {
-                "line": 195,
-                "column": 150,
-                "offset": 7850
-              },
-              "end": {
-                "line": 195,
-                "column": 151,
-                "offset": 7851
-              },
-              "indent": []
-            }
+            "value": "."
           }
-        ],
-        "position": {
-          "start": {
-            "line": 195,
-            "column": 1,
-            "offset": 7701
-          },
-          "end": {
-            "line": 195,
-            "column": 151,
-            "offset": 7851
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [
-          {
+        "children": [{
             "type": "text",
-            "value": "The only known property in ",
-            "position": {
-              "start": {
-                "line": 197,
-                "column": 1,
-                "offset": 7853
-              },
-              "end": {
-                "line": 197,
-                "column": 28,
-                "offset": 7880
-              },
-              "indent": []
-            }
+            "value": "The only known property in "
           },
           {
             "type": "inlineCode",
-            "value": "error",
-            "position": {
-              "start": {
-                "line": 197,
-                "column": 28,
-                "offset": 7880
-              },
-              "end": {
-                "line": 197,
-                "column": 35,
-                "offset": 7887
-              },
-              "indent": []
-            }
+            "value": "error"
           },
           {
             "type": "text",
-            "value": " is",
-            "position": {
-              "start": {
-                "line": 197,
-                "column": 35,
-                "offset": 7887
-              },
-              "end": {
-                "line": 197,
-                "column": 38,
-                "offset": 7890
-              },
-              "indent": []
-            }
+            "value": " is"
           }
-        ],
-        "position": {
-          "start": {
-            "line": 197,
-            "column": 1,
-            "offset": 7853
-          },
-          "end": {
-            "line": 197,
-            "column": 38,
-            "offset": 7890
-          },
-          "indent": []
-        }
+        ]
       },
       {
         "type": "list",
         "ordered": false,
         "start": null,
         "spread": false,
-        "children": [
-          {
-            "type": "listItem",
-            "spread": false,
-            "checked": null,
-            "children": [
+        "children": [{
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [{
+            "type": "paragraph",
+            "children": [{
+                "type": "inlineCode",
+                "value": "message"
+              },
               {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "inlineCode",
-                    "value": "message",
-                    "position": {
-                      "start": {
-                        "line": 199,
-                        "column": 3,
-                        "offset": 7894
-                      },
-                      "end": {
-                        "line": 199,
-                        "column": 12,
-                        "offset": 7903
-                      },
-                      "indent": []
-                    }
-                  },
-                  {
-                    "type": "text",
-                    "value": ": the error message",
-                    "position": {
-                      "start": {
-                        "line": 199,
-                        "column": 12,
-                        "offset": 7903
-                      },
-                      "end": {
-                        "line": 199,
-                        "column": 31,
-                        "offset": 7922
-                      },
-                      "indent": []
-                    }
-                  }
-                ],
-                "position": {
-                  "start": {
-                    "line": 199,
-                    "column": 3,
-                    "offset": 7894
-                  },
-                  "end": {
-                    "line": 199,
-                    "column": 31,
-                    "offset": 7922
-                  },
-                  "indent": []
-                }
+                "type": "text",
+                "value": ": the error message"
               }
-            ],
-            "position": {
-              "start": {
-                "line": 199,
-                "column": 1,
-                "offset": 7892
-              },
-              "end": {
-                "line": 199,
-                "column": 31,
-                "offset": 7922
-              },
-              "indent": []
-            }
-          }
-        ],
-        "position": {
-          "start": {
-            "line": 199,
-            "column": 1,
-            "offset": 7892
-          },
-          "end": {
-            "line": 199,
-            "column": 31,
-            "offset": 7922
-          },
-          "indent": []
-        }
+            ]
+          }]
+        }]
       }
     ]
   }
