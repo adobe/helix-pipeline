@@ -13,7 +13,6 @@
 const Ajv = require('ajv');
 const fs = require('fs-extra');
 const path = require('path');
-const Promise = require('bluebird');
 
 let _ajv;
 
