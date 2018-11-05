@@ -60,8 +60,10 @@
                 },
                 "params": {
                     "type": "object",
+                    "description": "Parameters used to invoke the OpenWhisk action. These are either URL parameters added when invoking the action from the CDN or default parameters set during creation of the action.",
                     "additionalProperties": {
-                        "type": "string"
+                        "type": "string",
+                        "description": "All other parameters are interpretet as string."
                     },
                     "properties": {
                         "owner": {

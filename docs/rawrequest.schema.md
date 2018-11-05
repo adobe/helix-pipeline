@@ -161,6 +161,7 @@ The HTTP method of the request made to OpenWhisk/Petridish. Note: OpenWhisk conv
 
 ## params
 
+Parameters used to invoke the OpenWhisk action. These are either URL parameters added when invoking the action from the CDN or default parameters set during creation of the action.
 
 `params`
 * is optional
