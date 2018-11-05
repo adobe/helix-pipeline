@@ -20,6 +20,7 @@ A pipeline consists of following main parts:
 - the main response generating function
 - an optional wrapper function
 - post-processing functions
+- error handling functions
 
 Each step of the pipeline is processing a single payload object, that will slowly accumulate the `return` values of the functions above through `Object.assign`.
 
@@ -35,25 +36,22 @@ Typically, there is one pipeline for each content type supported and pipeline ar
 A pipeline builder can be created by creating a CommonJS module that exports a function `pipe` which accepts following arguments and returns a Pipeline function.
 
 - `cont`: the main function that will be executed as a continuation of the pipeline
-- `params`: a map of parameters that are interpreted at runtime
-- `secrets`: a map of protected configuration parameters like API keys that should be handled with care. By convention, all keys in `secret` are in ALL_CAPS_SNAKE_CASE.
-- `logger`: a [Winston](https://www.github.com/winstonjs/winston) logger
+- `payload`: the [payload](./docs/context.schema.md) (aka context) that is accumulated during the pipeline. 
+- `action`: the [action](./docs/action.schema.md) that servers as holder for extra pipeline invocation argument.
 
 This project's main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:
 
 ```javascript
 // the pipeline itself
 const pipeline = require("@adobe/hypermedia-pipeline");
-// helper functions and log
-const { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');
 
-module.exports.pipe = function(cont, params, secrets, logger = log) {
-    logger.log("debug", "Constructing Custom Pipeline");
+module.exports.pipe = function(cont, context, action) {
+    action.logger.log("debug", "Constructing Custom Pipeline");
 
     return pipeline()
-        .before(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload
+        .before(adjustContent)
         .once(cont)            // required: execute the continuation function
-        .after(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response
+        .after(cleanupContent)
 }
 ```
 
@@ -61,7 +59,7 @@ In a typical pipeline, you will add additional processing steps as `.before(requ
 
 ### The Main Function
 
-The main function is typically a pure function that converts the `request`, `context`, and `content` properties of the payload into a `response` object.
+The main function is typically a pure function that converts the `request` and `content` properties of the `context` into a `response` object.
 
 In most scenarios, the main function is compiled from a template in a templating language like HTL, JST, or JSX.
 
@@ -92,17 +90,18 @@ A simple implementation of a wrapper function would look like this:
 // The functions takes following arguments:
 // - `cont` (the continuation function, i.e. the main template function)
 // - `payload` (the payload of the pipeline)
-module.exports.pre = (cont, payload) => {
-    const {request, content, context, response} = payload;
+// - `action` (the action of the pipeline)
+module.exports.pre = (cont, payload, action) => {
+    const {request, content, response} = payload;
     
     // modifying the payload content before invoking the main function
     content.hello = 'World';
-    const modifiedpayload = {request, content, context, response};
+    const modifiedpayload = {request, content, response};
 
     // invoking the main function with the new payload. Capturing the response
     // payload for further modification
 
-    const responsepayload = cont(modifiedpayload);
+    const responsepayload = cont(modifiedpayload, action);
 
     // Adding a value to the payload response
     const modifiedresponse = modifiedpayload.response;
@@ -126,6 +125,26 @@ Post-Processing functions are meant to:
 
 - process and transform the response
 
+### Error Handlers
+
+In default state, the pipeline will process all normal functions but will skip `error handlers`  (`.error()`). But when the pipeline is in the _error state_, the normal processing functions are no longer executed until the end of the pipeline is reached or if the _error state_ is cleared. It will however, execute _error handlers_.
+The pipeline execution is in an _error state_ if `context.error` is defined. This can happen with if a processing function throws an Exception, or if it sets the `context.error` object directly.
+
+Example:
+
+```js
+new pipeline()
+  .before(doSomething)
+  .once(render)
+  .after(cleanup)
+  .error(handleError)
+  .after(done);
+```
+
+If in the above example, the `doSomething` causes an error, subsequently, `render` and `cleanup` will not be invoked. but `handleError` will. If `handleError` clears the error state (i.e. sets `context.error = null`), the `done` function will be invoked again.
+
+If in the above example, none of the functions causes an error, the `handleError` will never be invoked.
+
 ## Anatomy of the Payload
 
 Following main properties exist:
@@ -133,13 +152,16 @@ Following main properties exist:
 - `request`
 - `content`
 - `response`
-- `context`
 - `error`
+
+also see [context schema](./docs/context.schema.md)
 
 ### The `request` object
 
 - `params`: a map of request parameters
 - `headers`: a map of HTTP headers
+
+also see [request schema](./docs/request.schema.md)
 
 ### The `content` object
 
@@ -155,6 +177,8 @@ Following main properties exist:
 - `sections[]`: The main sections of the document, as an enhanced MDAST ([see below](#contentsections-in-detail))
 - `html`: a string of the content rendered as HTML
 - `children`: an array of top-level elements of the HTML-rendered content
+
+also see [content schema](./docs/content.schema.md)
 
 ### `content.document` in Detail
 
@@ -202,9 +226,7 @@ Each section has additional content-derived metadata properties, in particular:
 - `headers`: a map of HTTP response headers
 - `status`: the HTTP status code
 
-### The `context` object
-
-TBD: used for stuff that is neither content, request, or response
+also see [response schema](./docs/response.schema.md)
 
 ### The `error` object
 
