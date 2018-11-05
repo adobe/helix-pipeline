@@ -15,8 +15,28 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 | Property | Type | Required | Default | Defined by |
 |----------|------|----------|---------|------------|
+| [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional |  | Secrets (this schema) |
 | [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
 | `[A-Z0-9_]+` | `string` | Pattern |  | Secrets (this schema) |
+
+## EMBED_WHITELIST
+
+Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
+
+`EMBED_WHITELIST`
+* is optional
+* type: `string`
+* defined in this schema
+
+### EMBED_WHITELIST Type
+
+
+`string`
+
+
+
+
+
 
 ## REPO_RAW_ROOT
 

@@ -217,7 +217,8 @@ export interface MDAST {
     | "linkReference"
     | "imageReference"
     | "footnote"
-    | "footnoteReference";
+    | "footnoteReference"
+    | "embed";
   children?: {
     [k: string]: any;
   }[];
