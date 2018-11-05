@@ -10,16 +10,27 @@
  * governing permissions and limitations under the License.
  */
 
-function bail(logger, message, error, status = 500) {
-  logger.error(message);
+function setStatus({ response = {}, error }, { logger }) {
+  // if a status is already default, keep it.
+  if (response.status) {
+    return {};
+  }
+
+  // if there is an error, send a 500
+  if (error) {
+    logger.debug('payload.error -> 500');
+    return {
+      response: {
+        status: 500,
+        body: '',
+      },
+    };
+  }
+
   return {
-    error: Object.assign({ message }, error),
     response: {
-      status,
+      status: 200,
     },
   };
 }
-
-module.exports = {
-  bail,
-};
+module.exports = setStatus;

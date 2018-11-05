@@ -19,6 +19,7 @@ const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
 const emit = require('../html/emit-html.js');
 const type = require('../html/set-content-type.js');
+const status = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const debug = require('../html/output-debug.js');
@@ -48,7 +49,8 @@ const htmlpipe = (cont, payload, action) => {
     .once(cont)
     .after(type)
     .after(key)
-    .after(debug);
+    .after(debug)
+    .error(status);
 
   action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);

@@ -40,6 +40,9 @@ export type RawRequest = {
    * The HTTP method of the request made to OpenWhisk/Petridish. Note: OpenWhisk converts all methods to lowercase.
    */
   method?: string;
+  /**
+   * Parameters used to invoke the OpenWhisk action. These are either URL parameters added when invoking the action from the CDN or default parameters set during creation of the action.
+   */
   params?: {
     /**
      * Owner of the GitHub repository. This is the name of a user or organization.
@@ -63,6 +66,9 @@ export type RawRequest = {
     __ow_headers?: {
       [k: string]: any;
     };
+    /**
+     * All other parameters are interpretet as string.
+     */
     [k: string]: string;
   };
 };
@@ -88,6 +94,10 @@ export interface Secrets {
    * The Base URL for retrieving raw text files from GitHub
    */
   REPO_RAW_ROOT?: string;
+  /**
+   * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
+   */
+  EMBED_WHITELIST?: string;
   /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".

@@ -293,4 +293,73 @@ describe('Testing Pipeline', () => {
       .when(() => true)
       .run();
   });
+
+  it('Ignore error if no error', (done) => {
+    const order = [];
+    new Pipeline({ logger })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('pre1'); })
+      .once(() => { order.push('once'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
+      .error(() => { order.push('error'); })
+      .run()
+      .then(() => {
+        assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('skip functions if context.error', (done) => {
+    const order = [];
+    new Pipeline({ logger })
+      .before(() => { order.push('pre0'); return { error: 'stop' }; })
+      .before(() => { order.push('pre1'); })
+      .once(() => { order.push('once'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
+      .error(() => { order.push('error'); })
+      .run()
+      .then(() => {
+        assert.deepEqual(order, ['pre0', 'error']);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('skip functions if exception', (done) => {
+    const order = [];
+    new Pipeline({ logger })
+      .before(() => { order.push('pre0'); throw new Error('stop'); })
+      .before(() => { order.push('pre1'); })
+      .once(() => { order.push('once'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
+      .error(() => { order.push('error'); })
+      .run()
+      .then(() => {
+        assert.deepEqual(order, ['pre0', 'error']);
+        done();
+      })
+      .catch(done);
+  });
+
+  it('error handler can clear error', (done) => {
+    const order = [];
+    new Pipeline({ logger })
+      .before(() => { order.push('pre0'); throw new Error('stop'); })
+      .before(() => { order.push('pre1'); })
+      .error(() => { order.push('error0'); return { error: null }; })
+      .once(() => { order.push('once'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
+      .error(() => { order.push('error1'); })
+      .run()
+      .then(() => {
+        assert.deepEqual(order, ['pre0', 'error0', 'once', 'post0', 'post1']);
+        done();
+      })
+      .catch(done);
+  });
 });

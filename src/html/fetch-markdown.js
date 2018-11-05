@@ -90,7 +90,7 @@ async function fetch(
       },
     };
   } catch (e) {
-    return bail(logger, `Could not fetch Markdown from ${options.uri}`, e);
+    return bail(logger, `Could not fetch Markdown from ${options.uri}`, e, 404);
   }
 }
 

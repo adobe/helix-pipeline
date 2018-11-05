@@ -25,6 +25,16 @@ const nopLogger = {
 };
 
 /**
+ * Simple wrapper to mark a function as error handler
+ * @private
+ */
+function errorWrapper(fn) {
+  const wrapper = (...args) => fn(...args);
+  wrapper.errorHandler = true;
+  return wrapper;
+}
+
+/**
  * @typedef {Object} Context
  * @param {Winston.Logger} logger Winston logger to use
  */
@@ -159,7 +169,6 @@ class Pipeline {
    * Promise that resolves to something not-truthy.
    * @param {function(context)} predicate Predicate function.
    * @callback predicate
-   * @param {Context} context
    * @returns {Pipeline} this
    */
   unless(predicate) {
@@ -175,7 +184,25 @@ class Pipeline {
   once(f) {
     this.describe(f);
     this._oncef = f;
-    this._last = null;
+    this._last = this._posts;
+    return this;
+  }
+
+  /**
+   * Sets an error function. The error function is executed if the `context` contains an `error`
+   * object.
+   * @param {pipelineFunction} f the error function.
+   * @return {Pipeline} this;
+   */
+  error(f) {
+    this.describe(f);
+    if (!this._last) {
+      this._last = this._pres;
+    }
+    const wrapped = errorWrapper(f);
+    // ensure proper alias
+    wrapped.alias = f.alias;
+    this._last.push(wrapped);
     return this;
   }
 
@@ -226,15 +253,25 @@ class Pipeline {
      * Reduction function used to process the pipeline functions and merge the context parameters.
      * @param {Object} currContext Accumulated context
      * @param {pipelineFunction} currFunction Function that is currently "reduced"
+     * @param {number} index index of the function in the given array
      * @returns {Promise} Promise resolving to the new value of the accumulator
      */
-    const merge = (currContext, currFunction, index) => {
-      // copy the pipeline payload into a new object to avoid modifications
-      const mergedargs = _.merge({}, currContext);
+    const merge = async (currContext, currFunction, index) => {
+      const skip = (!currContext.error) === (!!currFunction.errorHandler);
 
       // log the function that is being called and the parameters of the function
-      this._action.logger.silly('processing ', { function: this.describe(currFunction), index, params: mergedargs });
+      this._action.logger.silly(skip ? 'skipping ' : 'processing ', {
+        function: this.describe(currFunction),
+        index,
+        params: currContext,
+      });
 
+      if (skip) {
+        return currContext;
+      }
+
+      // copy the pipeline payload into a new object to avoid modifications
+      const mergedargs = _.merge({}, currContext);
       const tapresults = this._taps.map((f) => {
         try {
           return f(mergedargs, this._action, index);
