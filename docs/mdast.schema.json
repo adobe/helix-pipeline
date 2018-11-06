@@ -142,7 +142,10 @@
             "description": "For code, a lang field can be present. It represents the language of computer code being marked up."
         },
         "meta": {
-            "type": "string",
+            "type": [
+                "null",
+                "string"
+            ],
             "description": "For code, if lang is present, a meta field can be present. It represents custom information relating to the node."
         },
         "identifier": {

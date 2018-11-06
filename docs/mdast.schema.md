@@ -28,7 +28,7 @@ A node in the Markdown AST
 | [identifier](#identifier) | `string` | Optional | MDAST (this schema) |
 | [label](#label) | `string` | Optional | MDAST (this schema) |
 | [lang](#lang) | `string` | Optional | MDAST (this schema) |
-| [meta](#meta) | `string` | Optional | MDAST (this schema) |
+| [meta](#meta) | complex | Optional | MDAST (this schema) |
 | [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
 | [position](#position) | Position | Optional | MDAST (this schema) |
 | [spread](#spread) | complex | Optional | MDAST (this schema) |
@@ -227,14 +227,23 @@ For code, if lang is present, a meta field can be present. It represents custom 
 
 `meta`
 * is optional
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### meta Type
 
+Unknown type `null,string`.
 
-`string`
-
+```json
+{
+  "type": [
+    "null",
+    "string"
+  ],
+  "description": "For code, if lang is present, a meta field can be present. It represents custom information relating to the node.",
+  "simpletype": "complex"
+}
+```
 
 
 
