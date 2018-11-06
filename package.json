@@ -59,7 +59,6 @@
     "retext": "^5.0.0",
     "retext-smartypants": "^3.0.1",
     "snyk": "^1.88.1",
-    "tmp": "0.0.33",
     "unified": "^7.0.0",
     "unist-util-find-all-between": "^1.0.2",
     "unist-util-map": "^1.0.4",

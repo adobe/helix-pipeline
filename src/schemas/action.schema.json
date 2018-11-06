@@ -25,6 +25,10 @@
       "type": "object",
       "description": "A [Winston](https://github.com/winstonjs/winston) logger instance."
     },
+    "debug": {
+      "type": "object",
+      "description": "Internal information related to debugging."
+    },
     "secrets": {
       "$ref": "https://ns.adobe.com/helix/pipeline/secrets"
     }
