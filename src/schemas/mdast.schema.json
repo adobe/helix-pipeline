@@ -104,7 +104,7 @@
       "description": "Is the list ordered"
     },
     "start": {
-      "type": "integer",
+      "type": ["null", "integer"],
       "description": "Starting item of the list"
     },
     "spread": {
