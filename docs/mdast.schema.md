@@ -32,7 +32,7 @@ A node in the Markdown AST
 | [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
 | [position](#position) | Position | Optional | MDAST (this schema) |
 | [spread](#spread) | complex | Optional | MDAST (this schema) |
-| [start](#start) | `integer` | Optional | MDAST (this schema) |
+| [start](#start) | complex | Optional | MDAST (this schema) |
 | [title](#title) | complex | Optional | MDAST (this schema) |
 | [type](#type) | `enum` | Optional | MDAST (this schema) |
 | [url](#url) | `string` | Optional | MDAST (this schema) |
@@ -309,14 +309,23 @@ Starting item of the list
 
 `start`
 * is optional
-* type: `integer`
+* type: complex
 * defined in this schema
 
 ### start Type
 
+Unknown type `null,integer`.
 
-`integer`
-
+```json
+{
+  "type": [
+    "null",
+    "integer"
+  ],
+  "description": "Starting item of the list",
+  "simpletype": "complex"
+}
+```
 
 
 

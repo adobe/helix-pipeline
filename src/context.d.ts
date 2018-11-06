@@ -238,7 +238,7 @@ export interface MDAST {
   /**
    * Starting item of the list
    */
-  start?: number;
+  start?: null | number;
   /**
    * A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).
    */
