@@ -10,27 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
-const tmp = require('tmp');
 const path = require('path');
 const fs = require('fs-extra');
-
-fs.mkdirpSync(path.resolve(process.cwd(), 'logs', 'debug'));
-
-async function dumpdir() {
-  return new Promise((resolve, reject) => {
-    tmp.dir({
-      prefix: 'context_dump_',
-      dir: path.resolve(process.cwd(), 'logs', 'debug'),
-      unsafeCleanup: true,
-    }, (err, tmpDirPath) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(tmpDirPath);
-      }
-    });
-  });
-}
 
 function tstamp() {
   const now = new Date();
@@ -51,9 +32,19 @@ function tstamp() {
   return retstr;
 }
 
-async function dump(context, _, index) {
-  const dir = await dumpdir();
-  const dumppath = path.resolve(dir, `context-${tstamp()}-step-${index}.json`);
+async function dump(context, action, index) {
+  const nowStr = tstamp();
+  // eslint-disable-next-line no-param-reassign
+  action.debug = action.debug || {};
+  if (!action.debug.dumpDir) {
+    const id = (context.request && context.request.headers && context.request.headers['x-openwhisk-activation-id']) || '';
+    const dirName = `context_dump_${nowStr}_${id}`;
+    // eslint-disable-next-line no-param-reassign
+    action.debug.dumpDir = path.resolve(process.cwd(), 'logs', 'debug', dirName);
+    await fs.ensureDir(action.debug.dumpDir);
+  }
+
+  const dumppath = path.resolve(action.debug.dumpDir, `context-${nowStr}-step-${index}.json`);
   await fs.writeJson(dumppath, context, { spaces: 2 });
   return dumppath;
 }

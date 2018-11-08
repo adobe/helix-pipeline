@@ -84,6 +84,12 @@ export interface Action {
   logger?: {
     [k: string]: any;
   };
+  /**
+   * Internal information related to debugging.
+   */
+  debug?: {
+    [k: string]: any;
+  };
   secrets?: Secrets;
 }
 /**
