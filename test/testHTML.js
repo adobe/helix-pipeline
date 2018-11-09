@@ -220,6 +220,7 @@ describe('Testing HTML Pipeline', () => {
     const res = result.response;
     assert.equal(201, res.status);
     assert.equal('text/html', res.headers['Content-Type']);
+    assert.equal('s-maxage=604800', res.headers['Cache-Control']);
     assert.equal(res.headers['Surrogate-Key'], 'h/WhVujl+n6KANwYWB57fhkvjfzzACeSawAAndzWdK0=');
     assert.equal('<', res.body[0]);
     assert.ok(res.body.match(/srcset/));
@@ -255,6 +256,7 @@ describe('Testing HTML Pipeline', () => {
           headers: {
             'Content-Type': 'text/plain',
             'Surrogate-Key': 'foobar',
+            'Cache-Control': 'max-age=0',
           },
         },
       }),
@@ -268,6 +270,7 @@ describe('Testing HTML Pipeline', () => {
 
     assert.equal(201, result.response.status);
     assert.equal('text/plain', result.response.headers['Content-Type']);
+    assert.equal('max-age=0', result.response.headers['Cache-Control']);
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
   });
 

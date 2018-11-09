@@ -27,6 +27,7 @@ const key = require('../html/set-surrogate-key');
 const production = require('../utils/is-production');
 const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
+const { cache, uncached } = require('../html/shared-cache');
 
 /* eslint no-param-reassign: off */
 
@@ -48,6 +49,8 @@ const htmlpipe = (cont, payload, action) => {
     .before(emit)
     .once(cont)
     .after(type)
+    .after(cache)
+    .when(uncached)
     .after(key)
     .after(debug)
     .error(status);
