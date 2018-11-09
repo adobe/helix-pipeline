@@ -23,6 +23,7 @@ const status = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const debug = require('../html/output-debug.js');
+const { esi, flag } = require('../html/flag-esi');
 const key = require('../html/set-surrogate-key');
 const production = require('../utils/is-production');
 const dump = require('../utils/dump-context.js');
@@ -50,6 +51,8 @@ const htmlpipe = (cont, payload, action) => {
     .after(type)
     .after(key)
     .after(debug)
+    .after(flag)
+    .when(esi) // flag ESI when there is ESI in the response
     .error(status);
 
   action.logger.log('debug', 'Running HTML pipeline');
