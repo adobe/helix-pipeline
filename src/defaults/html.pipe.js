@@ -27,6 +27,7 @@ const key = require('../html/set-surrogate-key');
 const production = require('../utils/is-production');
 const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
+const embeds = require('../html/find-embeds');
 
 /* eslint no-param-reassign: off */
 
@@ -40,6 +41,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(fetch)
     .when(({ content }) => !(content && content.body && content.body.length > 0))
     .before(parse)
+    .before(embeds)
     .before(smartypants)
     .before(sections)
     .before(meta)
