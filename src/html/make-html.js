@@ -12,12 +12,12 @@
 const tohtast = require('mdast-util-to-hast');
 const VDOMTransformer = require('../utils/mdast-to-vdom');
 
-function html({ content: { mdast } }, { logger }) {
+function html({ content: { mdast } }, { logger, secrets }) {
   logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
   const content = {};
   // do we still need this?
   content.htast = tohtast(mdast);
-  content.document = new VDOMTransformer(mdast).getDocument();
+  content.document = new VDOMTransformer(mdast, secrets).getDocument();
   return { content };
 }
 

@@ -35,7 +35,20 @@ function makewidths(options) {
   return widths.map((_, i) => Math.round(from + (i * range / steps)));
 }
 
-function image({ widths, sizes = ['100vw'] } = { widths: { from: 480, to: 4096, steps: 4 }, sizes: ['100vw'] }) {
+function image({
+  IMAGES_MIN_SIZE = 480,
+  IMAGES_MAX_SIZE = 4096,
+  IMAGES_SIZE_STEPS = 4,
+  IMAGES_SIZES = '100vw',
+} = {}) {
+  const widths = {
+    from: parseInt(IMAGES_MIN_SIZE),
+    to: parseInt(IMAGES_MAX_SIZE),
+    steps: parseInt(IMAGES_SIZE_STEPS),
+  };
+
+
+  const sizes = IMAGES_SIZES.split(',');
   /* Transform an image. */
   return function handler(h, node) {
     const srcurl = url.parse(node.url);

@@ -19,7 +19,8 @@ function embed({ EMBED_SERVICE = 'https://adobeioruntime.net/api/v1/web/helix/de
     const props = {
       src: EMBED_SERVICE + url,
     };
-    return h(node, 'esi:include', props);
+    const retval = h(node, 'esi:include', props);
+    return retval;
   };
 }
 

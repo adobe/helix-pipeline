@@ -12,7 +12,6 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
-const inspect = require('unist-util-inspect');
 const embed = require('../src/utils/embed-handler');
 const { pipe } = require('../src/defaults/html.pipe.js');
 
@@ -59,6 +58,8 @@ const params = {
 
 const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
+  EMBED_WHITELIST: '*.youtube.com',
+  EMBED_SERVICE: 'https://example-embed-service.com/',
 };
 
 const logger = winston.createLogger({
@@ -79,8 +80,8 @@ describe('Test Embed Handler', () => {
       url: 'https://www.example.com/',
     };
 
-    embed()((_, tagname, params, children) => {
-      assert.equal(params.src, 'https://adobeioruntime.net/api/v1/web/helix/default/embed/https://www.example.com/');
+    embed()((_, tagname, parameters, children) => {
+      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/default/embed/https://www.example.com/');
       assert.equal(children, undefined);
       assert.equal(tagname, 'esi:include');
     }, node);
@@ -91,11 +92,7 @@ describe('Test Embed Handler', () => {
 describe('Integration Test with Embeds', () => {
   it('html.pipe processes embeds', async () => {
     const result = await pipe(
-      ({ content }) => {
-        console.log(inspect(content.mdast));
-        // and return a different status code
-        return { response: { status: 201, body: content.html } };
-      },
+      ({ content }) => ({ response: { status: 201, body: content.html } }),
       {
         content: {
           body: `Hello World
@@ -103,7 +100,7 @@ Here comes an embed.
 
 https://www.youtube.com/watch?v=KOxbO0EI4MA
 
-Easy!
+![Easy!](easy.png)
 `,
         },
       },
@@ -116,6 +113,9 @@ Easy!
 
     assert.equal(201, result.response.status);
     assert.equal('text/html', result.response.headers['Content-Type']);
-    assert.equal('<p>Hello World</p>', result.response.body);
+    assert.equal(`<div><p>Hello World
+Here comes an embed.</p>
+<esi:include src="https://example-embed-service.com/https://www.youtube.com/watch?v=KOxbO0EI4MA"></esi:include>
+<p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w,easy.png?width=1384&amp;auto=webp 1384w,easy.png?width=2288&amp;auto=webp 2288w,easy.png?width=3192&amp;auto=webp 3192w,easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p></div>`, result.response.body);
   });
 });

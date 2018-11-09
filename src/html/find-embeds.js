@@ -53,7 +53,6 @@ function imgEmbed({ type, children }) {
 }
 
 function embed(uri, node, whitelist = '', warn = () => {}) {
-  console.log('embed this:', whitelist);
   if (mm.any(uri.host, whitelist.split(','))) {
     const children = [Object.assign({}, node)];
     node.type = 'embed';

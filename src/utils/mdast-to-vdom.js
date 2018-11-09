@@ -60,8 +60,8 @@ class VDOMTransformer {
         this._handlers[type] = (cb, node, parent) => VDOMTransformer.handle(cb, node, parent, that);
         return true;
       });
-    this._matchers.image = image(options);
-    this._matchers.embed = embed(options);
+    this._handlers.image = image(options);
+    this._handlers.embed = embed(options);
   }
 
   /**
