@@ -42,9 +42,9 @@ function image({
   IMAGES_SIZES = '100vw',
 } = {}) {
   const widths = {
-    from: parseInt(IMAGES_MIN_SIZE),
-    to: parseInt(IMAGES_MAX_SIZE),
-    steps: parseInt(IMAGES_SIZE_STEPS),
+    from: parseInt(IMAGES_MIN_SIZE, 10),
+    to: parseInt(IMAGES_MAX_SIZE, 10),
+    steps: parseInt(IMAGES_SIZE_STEPS, 10),
   };
 
 
