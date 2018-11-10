@@ -82,6 +82,10 @@
               "type": "string",
               "description": "Path to the requested (Markdown) file"
             },
+            "strain": {
+              "type": "string",
+              "description": "The resolved strain (variant)"
+            },
             "__ow_headers": {
               "type": "object",
               "description": "Deprecated: The original OpenWhisk request headers"
