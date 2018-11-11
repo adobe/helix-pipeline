@@ -20,20 +20,34 @@ function selectstrain({ content }, { request, logger }) {
     const { strain } = request.params;
     const { sections } = content;
     logger.debug(`Filtering sections not intended for strain ${strain}`);
-    const remaining = sections.filter((section) => {
+    const remaining = sections.map((section) => {
       if (section.meta && section.meta.strain && Array.isArray(section.meta.strain)) {
         // this is a list of strains
         // return true if the selected strain is somewhere in the array
-        return section.meta.strain.includes(strain);
+        return {
+          meta: {
+            type: 'array',
+            hidden: !section.meta.strain.includes(strain),
+          },
+        };
       } if (section.meta && section.meta.strain) {
         // we treat it as a string
         // return true if the selected strain is in the metadata
-        return section.meta.strain === strain;
+        return {
+          meta: {
+            type: 'string',
+            hidden: !(section.meta.strain === strain),
+          },
+        };
       }
       // if there is no metadata, or no strain selection, just include it
-      return true;
+      return {
+        meta: {
+          hidden: false,
+        },
+      };
     });
-    logger.debug(`${remaining.length}Sections remaining`);
+    logger.debug(`${remaining.length} Sections remaining`);
     return {
       content: {
         sections: remaining,

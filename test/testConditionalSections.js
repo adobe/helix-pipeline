@@ -70,23 +70,34 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
+// return only sections that are not hidden
+function nonhidden(section) {
+  if (section.meta && section.meta) {
+    return !section.meta.hidden;
+  }
+  return true;
+}
+
 describe('Integration Test Section Strain Filtering', () => {
   it('html.pipe sees only selected section', async () => {
     const myparams = Object.assign({ strain: 'a' }, params);
-    console.log('hi');
     const result = await pipe(
       ({ content }) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        console.log(content.sections);
-        assert.equal(content.sections.length, 1);
+        logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
+        assert.equal(content.sections.filter(nonhidden).length, 3);
         return { response: { body: content.html } };
       },
       {
         content: {
-          body: `This is an easy test.
-
+          body: `---
+frontmatter: true
 ---
+
+This is an easy test.
+
+***
 
 These two sections should always be shown
 
@@ -111,9 +122,7 @@ And this one only in strain "B"
         logger,
       },
     );
-    console.log(result);
     assert.equal(result.error, null);
-    assert.equal(200, result.response.status);
   });
 });
 
@@ -154,7 +163,7 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     const result = selectstrain(context, action);
-    assert.equal(result.content.sections.length, 2);
+    assert.equal(result.content.sections.filter(nonhidden).length, 2);
   });
 
   it('Filters sections based on strain (array)', () => {
@@ -176,7 +185,7 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     const result = selectstrain(context, action);
-    assert.equal(result.content.sections.length, 2);
+    assert.equal(result.content.sections.filter(nonhidden).length, 2);
   });
 
   it('Keeps sections without a strain', () => {
@@ -198,7 +207,7 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     const result = selectstrain(context, action);
-    assert.equal(result.content.sections.length, 2);
+    assert.equal(result.content.sections.filter(nonhidden).length, 2);
   });
 
   it('Keeps sections without metadata', () => {
@@ -220,6 +229,56 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     const result = selectstrain(context, action);
-    assert.equal(result.content.sections.length, 2);
+    assert.equal(result.content.sections.filter(nonhidden).length, 2);
+  });
+
+
+  it('Filters strain a', () => {
+    const context = {
+      content: {
+        sections: [{
+          type: 'root',
+          children: [],
+          title: 'This is an easy test.',
+          types: ['has-paragraph', 'is-paragraph-only'],
+          intro: 'This is an easy test.',
+          meta: { frontmatter: true },
+        },
+        {
+          type: 'root',
+          children: [],
+          title: 'These two sections should always be shown',
+          types: ['has-paragraph', 'is-paragraph-only'],
+          intro: 'These two sections should always be shown',
+          meta: {},
+        },
+        {
+          type: 'root',
+          children: [],
+          title: 'But this one only in strain “A”',
+          types: ['has-paragraph', 'is-paragraph-only'],
+          intro: 'But this one only in strain “A”',
+          meta: { strain: 'a' },
+        },
+        {
+          type: 'root',
+          children: [],
+          title: 'And this one only in strain “B”',
+          types: ['has-paragraph', 'is-paragraph-only'],
+          intro: 'And this one only in strain “B”',
+          meta: { strain: 'b' },
+        }],
+      },
+    };
+    const action = {
+      request: {
+        params: {
+          strain: 'a',
+        },
+      },
+      logger,
+    };
+    const result = selectstrain(context, action);
+    assert.equal(result.content.sections.filter(nonhidden).length, 3);
   });
 });
