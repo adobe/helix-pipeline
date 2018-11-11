@@ -21,6 +21,16 @@ function strain({content}, {request, logger}) {
     const sections = content.sections;
     logger.debug('Filtering sections not intended for strain ' + strain);
     const remaining = sections.filter(section => {
+      if (section.meta && section.meta.strain && Array.isArray(section.meta.strain)) {
+        // this is a list of strains
+        // return true if the selected strain is somewhere in the array
+        return section.meta.strain.includes(strain);
+      } else if (section.meta && section.meta.strain) {
+        // we treat it as a string
+        // return true if the selected strain is in the metadata
+        return section.meta.strain === strain;
+      }
+      // if there is no metadata, or no strain selection, just include it
       return true;
     });
     logger.debug(remaining.length + 'Sections remaining');
@@ -31,3 +41,5 @@ function strain({content}, {request, logger}) {
     }
   }
 }
+
+module.exports.strain = strain;
