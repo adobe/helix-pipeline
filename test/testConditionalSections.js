@@ -73,25 +73,47 @@ const secrets = {
 describe('Integration Test Section Strain Filtering', () => {
   it('html.pipe sees only selected section', async () => {
     const myparams = Object.assign({ strain: 'a' }, params);
-
-    await pipe(
+    console.log('hi');
+    const result = await pipe(
       ({ content }) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
+        console.log(content.sections);
         assert.equal(content.sections.length, 1);
         return { response: { body: content.html } };
       },
       {
         content: {
-          body: 'Hello World',
+          body: `This is an easy test.
+
+---
+
+These two sections should always be shown
+
+---
+strain: a
+---
+
+But this one only in strain "A"
+
+---
+strain: b
+---
+
+And this one only in strain "B"
+
+`,
         },
       },
       {
-        request: { myparams },
+        request: { params: myparams },
         secrets,
         logger,
       },
     );
+    console.log(result);
+    assert.equal(result.error, null);
+    assert.equal(200, result.response.status);
   });
 });
 
