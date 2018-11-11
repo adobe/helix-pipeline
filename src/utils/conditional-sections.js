@@ -10,15 +10,15 @@
  * governing permissions and limitations under the License.
  */
 
-function strain({ content }, { request, logger }) {
+function selectstrain({ content }, { request, logger }) {
   // this only works when there are multiple sections and a strain has been chosen
   if (request.params
       && request.params.strain
       && content
       && content.sections
       && content.sections.length) {
-    const strain = request.params.strain;
-    const sections = content.sections;
+    const { strain } = request.params;
+    const { sections } = content;
     logger.debug(`Filtering sections not intended for strain ${strain}`);
     const remaining = sections.filter((section) => {
       if (section.meta && section.meta.strain && Array.isArray(section.meta.strain)) {
@@ -43,4 +43,4 @@ function strain({ content }, { request, logger }) {
   return {};
 }
 
-module.exports.strain = strain;
+module.exports.selectstrain = selectstrain;

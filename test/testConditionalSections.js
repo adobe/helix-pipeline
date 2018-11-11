@@ -13,7 +13,7 @@
 
 const assert = require('assert');
 const winston = require('winston');
-const { strain } = require('../src/utils/conditional-sections');
+const { selectstrain } = require('../src/utils/conditional-sections');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -40,7 +40,7 @@ describe('Unit Test Section Strain Filtering', () => {
         },
       },
     };
-    const result = strain(context, action);
+    const result = selectstrain(context, action);
     assert.deepStrictEqual(result, {});
   });
 
@@ -62,7 +62,7 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = strain(context, action);
+    const result = selectstrain(context, action);
     assert.equal(result.content.sections.length, 2);
   });
 
@@ -84,7 +84,7 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = strain(context, action);
+    const result = selectstrain(context, action);
     assert.equal(result.content.sections.length, 2);
   });
 
@@ -107,7 +107,7 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = strain(context, action);
+    const result = selectstrain(context, action);
     assert.equal(result.content.sections.length, 2);
   });
 
@@ -129,7 +129,7 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = strain(context, action);
+    const result = selectstrain(context, action);
     assert.equal(result.content.sections.length, 2);
   });
 });
