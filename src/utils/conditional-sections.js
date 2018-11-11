@@ -10,22 +10,22 @@
  * governing permissions and limitations under the License.
  */
 
-function strain({content}, {request, logger}) {
+function strain({ content }, { request, logger }) {
   // this only works when there are multiple sections and a strain has been chosen
-  if (request.params && 
-      request.params.strain && 
-      content && 
-      content.sections && 
-      content.sections.length) {
+  if (request.params
+      && request.params.strain
+      && content
+      && content.sections
+      && content.sections.length) {
     const strain = request.params.strain;
     const sections = content.sections;
-    logger.debug('Filtering sections not intended for strain ' + strain);
-    const remaining = sections.filter(section => {
+    logger.debug(`Filtering sections not intended for strain ${strain}`);
+    const remaining = sections.filter((section) => {
       if (section.meta && section.meta.strain && Array.isArray(section.meta.strain)) {
         // this is a list of strains
         // return true if the selected strain is somewhere in the array
         return section.meta.strain.includes(strain);
-      } else if (section.meta && section.meta.strain) {
+      } if (section.meta && section.meta.strain) {
         // we treat it as a string
         // return true if the selected strain is in the metadata
         return section.meta.strain === strain;
@@ -33,13 +33,14 @@ function strain({content}, {request, logger}) {
       // if there is no metadata, or no strain selection, just include it
       return true;
     });
-    logger.debug(remaining.length + 'Sections remaining');
+    logger.debug(`${remaining.length}Sections remaining`);
     return {
       content: {
-        sections: remaining
-      }
-    }
+        sections: remaining,
+      },
+    };
   }
+  return {};
 }
 
 module.exports.strain = strain;
