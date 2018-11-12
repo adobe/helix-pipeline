@@ -172,6 +172,7 @@ describe('Testing HTML Pipeline', () => {
     assert.notEqual(500, result.response.status);
   });
 
+<<<<<<< HEAD
   it('html.pipe renders index.md from project-helix.io correctly', async () => {
     const result = await pipe(
       ({ content }) => {
@@ -198,6 +199,8 @@ describe('Testing HTML Pipeline', () => {
     assert.notEqual(500, result.response.status);
   });
 
+=======
+>>>>>>> origin/master
   it('html.pipe renders modified index.md from helix-cli correctly', async () => {
     const result = await pipe(
       ({ content }) => {
