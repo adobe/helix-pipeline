@@ -152,8 +152,8 @@ describe('Testing HTML Pipeline', () => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.equal(content.title, 'Helix - {{project.name}}');
-        assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
         assert.equal(content.image, './helix_logo.png');
+        assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
         // and return a different status code
         return { response: { status: 201, body: content.html } };
       },

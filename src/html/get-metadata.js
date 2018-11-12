@@ -95,7 +95,7 @@ function getmetadata({ content: { sections = [] } }, { logger }) {
       meta: retsections[0].meta,
       title: retsections[0].title,
       intro: retsections[0].intro,
-      image: img ? img.url : undefined,
+      image: img ? img.image : undefined,
     };
     return { content: retcontent };
   }
