@@ -25,7 +25,14 @@ function title(section) {
 }
 
 function intro(section) {
-  const para = select(section, 'paragraph')[0];
+  const para = select(section, 'paragraph').filter((p) => {
+    if (p.children.length === 0) {
+      return false;
+    } if (p.children.length === 1 && p.children[0].type === 'image') {
+      return false;
+    }
+    return true;
+  })[0];
   return para ? Object.assign({ intro: plain(para) }, section) : section;
 }
 
