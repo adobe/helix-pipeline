@@ -146,6 +146,84 @@ describe('Testing HTML Pipeline', () => {
     assert.equal('<p>Hello World</p>', result.response.body);
   });
 
+  it('html.pipe renders index.md from helix-cli correctly', async () => {
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.equal(content.title, 'Helix - {{project.name}}');
+        assert.equal(content.image, './helix_logo.png');
+        assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
+        // and return a different status code
+        return { response: { status: 201, body: content.html } };
+      },
+      {
+        content: {
+          body: fs.readFileSync(path.resolve(__dirname, 'fixtures/index-unmodified.md')).toString(),
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(result.error, undefined);
+    assert.notEqual(500, result.response.status);
+  });
+
+  it('html.pipe renders index.md from project-helix.io correctly', async () => {
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.equal(content.title, 'Welcome to Project Helix');
+        assert.equal(content.image, 'assets/browser.png');
+        assert.equal(content.intro, 'Helix is the new experience management service to create, manage, and deliver great digital experiences.');
+        // and return a different status code
+        return { response: { status: 201, body: content.html } };
+      },
+      {
+        content: {
+          body: fs.readFileSync(path.resolve(__dirname, 'fixtures/index-projecthelixio.md')).toString(),
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(result.error, undefined);
+    assert.notEqual(500, result.response.status);
+  });
+
+  it('html.pipe renders modified index.md from helix-cli correctly', async () => {
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.equal(content.title, 'Helix - {{project.name}}');
+        assert.equal(content.image, undefined);
+        assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
+        // and return a different status code
+        return { response: { status: 201, body: content.html } };
+      },
+      {
+        content: {
+          body: fs.readFileSync(path.resolve(__dirname, 'fixtures/index-modified.md')).toString(),
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(result.error, undefined);
+    assert.notEqual(500, result.response.status);
+  });
+
   it('html.pipe complains when context is invalid', async () => {
     const result = await pipe(
       ({ content }) => ({ response: { status: 201, body: content.html } }),
@@ -220,6 +298,7 @@ describe('Testing HTML Pipeline', () => {
     const res = result.response;
     assert.equal(201, res.status);
     assert.equal('text/html', res.headers['Content-Type']);
+    assert.equal('s-maxage=604800', res.headers['Cache-Control']);
     assert.equal(res.headers['Surrogate-Key'], 'h/WhVujl+n6KANwYWB57fhkvjfzzACeSawAAndzWdK0=');
     assert.equal('<', res.body[0]);
     assert.ok(res.body.match(/srcset/));
@@ -255,6 +334,7 @@ describe('Testing HTML Pipeline', () => {
           headers: {
             'Content-Type': 'text/plain',
             'Surrogate-Key': 'foobar',
+            'Cache-Control': 'max-age=0',
           },
         },
       }),
@@ -268,6 +348,7 @@ describe('Testing HTML Pipeline', () => {
 
     assert.equal(201, result.response.status);
     assert.equal('text/plain', result.response.headers['Content-Type']);
+    assert.equal('max-age=0', result.response.headers['Cache-Control']);
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
   });
 
