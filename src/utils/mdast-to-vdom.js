@@ -11,7 +11,7 @@
  */
 
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
-const select = require('unist-util-select');
+const { selectAll } = require('unist-util-select');
 const handlers = require('mdast-util-to-hast/lib/handlers');
 const tohast = require('mdast-util-to-hast');
 const unified = require('unified');
@@ -179,7 +179,7 @@ class VDOMTransformer {
    */
   static matchfn(ast, pattern) {
     // get all nodes that match the pattern
-    const matches = select(ast, pattern);
+    const matches = selectAll(pattern, ast);
     return function match(node) {
       // return true if the given node is in the found set
       return matches.indexOf(node) >= 0;
