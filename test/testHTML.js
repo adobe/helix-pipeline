@@ -143,7 +143,28 @@ describe('Testing HTML Pipeline', () => {
 
     assert.equal(201, result.response.status);
     assert.equal('text/html', result.response.headers['Content-Type']);
+    assert.equal(undefined, result.response.headers['X-ESI']);
     assert.equal('<p>Hello World</p>', result.response.body);
+  });
+
+  it('html.pipe detects ESI in response body', async () => {
+    const result = await pipe(
+      ({ content }) => ({ response: { body: `${content.html}<esi:include src="foo.html">` } }),
+      {
+        content: {
+          body: 'Hello World',
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal('enabled', result.response.headers['X-ESI']);
+    assert.equal('text/html', result.response.headers['Content-Type']);
+    assert.equal('<p>Hello World</p><esi:include src="foo.html">', result.response.body);
   });
 
   it('html.pipe renders index.md from helix-cli correctly', async () => {
