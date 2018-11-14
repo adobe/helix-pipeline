@@ -9,16 +9,19 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const tohtast = require('mdast-util-to-hast');
-const VDOMTransformer = require('../utils/mdast-to-vdom');
-
-function html({ content: { mdast } }, { logger, secrets }) {
-  logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
-  const content = {};
-  // do we still need this?
-  content.htast = tohtast(mdast);
-  content.document = new VDOMTransformer(mdast, secrets).getDocument();
-  return { content };
+/**
+ * Handles `embed` MDAST nodes by converting them into `<esi:include>` tags
+ * @param {string} EMBED_SERVICE the URL of an embedding service compatible with https://github.com/adobe/helix-embed that returns HTML
+ */
+function embed({ EMBED_SERVICE = 'https://adobeioruntime.net/api/v1/web/helix/default/embed/' } = {}) {
+  return function handler(h, node) {
+    const { url } = node;
+    const props = {
+      src: EMBED_SERVICE + url,
+    };
+    const retval = h(node, 'esi:include', props);
+    return retval;
+  };
 }
 
-module.exports = html;
+module.exports = embed;
