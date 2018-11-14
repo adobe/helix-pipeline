@@ -9,30 +9,36 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const select = require('unist-util-select');
+const { select, selectAll } = require('unist-util-select');
 const plain = require('mdast-util-to-string');
 const { safeLoad } = require('js-yaml');
 
 function yaml(section) {
-  const yamls = select(section, 'yaml'); // select all YAML nodes
+  const yamls = selectAll('yaml', section); // select all YAML nodes
   const mapped = yamls.map(({ value }) => safeLoad(value));
   return Object.assign({ meta: Object.assign({}, ...mapped) }, section);
 }
 
 function title(section) {
-  const header = select(section, 'heading')[0];
+  const header = select('heading', section);
   return header ? Object.assign({ title: plain(header) }, section) : section;
 }
 
 function intro(section) {
-  const para = select(section, 'paragraph')[0];
+  const para = selectAll('paragraph', section).filter((p) => {
+    if ((p.children.length === 0)
+        || (p.children.length === 1 && p.children[0].type === 'image')) {
+      return false;
+    }
+    return true;
+  })[0];
   return para ? Object.assign({ intro: plain(para) }, section) : section;
 }
 
 function image(section) {
   // selects the most prominent image of the section
   // TODO: get a better measure of prominence than "first"
-  const img = select(section, 'image')[0];
+  const img = select('image', section);
   return img ? Object.assign({ image: img.url }, section) : section;
 }
 
@@ -95,7 +101,7 @@ function getmetadata({ content: { sections = [] } }, { logger }) {
       meta: retsections[0].meta,
       title: retsections[0].title,
       intro: retsections[0].intro,
-      image: img ? img.url : undefined,
+      image: img ? img.image : undefined,
     };
     return { content: retcontent };
   }

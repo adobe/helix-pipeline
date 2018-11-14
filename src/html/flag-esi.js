@@ -9,16 +9,28 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const tohtast = require('mdast-util-to-hast');
-const VDOMTransformer = require('../utils/mdast-to-vdom');
-
-function html({ content: { mdast } }, { logger, secrets }) {
-  logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
-  const content = {};
-  // do we still need this?
-  content.htast = tohtast(mdast);
-  content.document = new VDOMTransformer(mdast, secrets).getDocument();
-  return { content };
+/**
+ * Detects if ESI tags are used in the repose body. Intended to be used as
+ * a predicate in the pipeline construction.
+ * @param {Context} param0 the pipeline payload
+ */
+function esi({ response }) {
+  return response && response.body && /<esi:include/.test(response.body);
 }
 
-module.exports = html;
+/**
+ * Flags the response as containing ESI by adding the `X-ESI: enabled` header
+ */
+function flag() {
+  return {
+    response: {
+      headers: {
+        'X-ESI': 'enabled',
+      },
+    },
+  };
+}
+
+module.exports = {
+  esi, flag,
+};
