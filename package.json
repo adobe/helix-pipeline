@@ -46,7 +46,7 @@
     "jsdom": "^13.0.0",
     "json-schema-to-typescript": "^6.0.1",
     "lodash": "^4.17.10",
-    "mdast-util-to-hast": "^3.0.1",
+    "mdast-util-to-hast": "^4.0.0",
     "mdast-util-to-string": "^1.0.4",
     "mdurl": "^1.0.1",
     "micromatch": "^3.1.10",
