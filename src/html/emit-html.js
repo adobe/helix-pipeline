@@ -9,12 +9,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const tohtml = require('hast-util-to-html');
 
-function emit({ content: { htast } }, { logger }) {
-  logger.debug(`Emitting HTML from ${typeof htast}`);
-  const children = htast.children.map(tohtml);
-  return { content: { html: children.join(''), children } };
+function emit({ content: { document } }, { logger }) {
+  logger.debug(`Emitting HTML from ${typeof document}`);
+
+  const children = Array.from(document.body.childNodes).map(node => node.outerHTML);
+
+  return { content: { html: document.body.innerHTML, children } };
 }
 
 module.exports = emit;

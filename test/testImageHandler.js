@@ -55,7 +55,11 @@ describe('Test Image Handler', () => {
       url: 'test.png',
     };
 
-    image({ widths: [100, 200, 300] })((orignode, tagname, params, children) => {
+    image({
+      IMAGES_MIN_SIZE: 100,
+      IMAGES_MAX_SIZE: 300,
+      IMAGES_SIZE_STEPS: 1,
+    })((orignode, tagname, params, children) => {
       assert.equal(params.src, orignode.url);
       assert.equal(children, undefined);
       assert.equal(tagname, 'img');
