@@ -258,7 +258,7 @@ export interface MDAST {
   /**
    * For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
    */
-  meta?: string;
+  meta?: null | string;
   /**
    * For associations, an identifier field must be present. It can match an identifier field on another node.
    */

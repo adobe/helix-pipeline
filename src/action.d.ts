@@ -61,6 +61,10 @@ export type RawRequest = {
      */
     path?: string;
     /**
+     * The resolved strain (variant)
+     */
+    strain?: string;
+    /**
      * Deprecated: The original OpenWhisk request headers
      */
     __ow_headers?: {
@@ -104,6 +108,26 @@ export interface Secrets {
    * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
    */
   EMBED_WHITELIST?: string;
+  /**
+   * URL of an Embed Service that takes the appended URL and returns an embeddable HTML representation.
+   */
+  EMBED_SERVICE?: string;
+  /**
+   * Minimum physical width of responsive images to generate
+   */
+  IMAGES_MIN_SIZE?: string;
+  /**
+   * Maximum physical with of responsive images to generate
+   */
+  IMAGES_MAX_SIZE?: string;
+  /**
+   * Number of intermediary size steps to create per image
+   */
+  IMAGES_SIZE_STEPS?: string;
+  /**
+   * Value for the `sizes` attribute of generated responsive images
+   */
+  IMAGES_SIZES?: string;
   /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".

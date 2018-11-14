@@ -62,8 +62,12 @@ describe('Test MDAST to VDOM Transformation', () => {
     });
     const node = transformer.process();
     assert.equal(node.outerHTML, `<ul>
-<li><code>body</code>: the unparsed content body as a <code>string</code></li>
-<li><code>mdast</code>: the parsed <a href="https://github.com/syntax-tree/mdast" rel="nofollow">Markdown AST</a></li>
+<li>
+<p><code>body</code>: the unparsed content body as a <code>string</code></p>
+</li>
+<li>
+<p><code>mdast</code>: the parsed <a href="https://github.com/syntax-tree/mdast" rel="nofollow">Markdown AST</a></p>
+</li>
 <li>
 <p><code>meta</code>: a map metadata properties, including</p>
 <ul>
@@ -72,9 +76,15 @@ describe('Test MDAST to VDOM Transformation', () => {
 <li><code>type</code>: the content type of the document</li>
 </ul>
 </li>
-<li><code>htast</code>: the HTML AST</li>
-<li><code>html</code>: a string of the content rendered as HTML</li>
-<li><code>children</code>: an array of top-level elements of the HTML-rendered content</li>
+<li>
+<p><code>htast</code>: the HTML AST</p>
+</li>
+<li>
+<p><code>html</code>: a string of the content rendered as HTML</p>
+</li>
+<li>
+<p><code>children</code>: an array of top-level elements of the HTML-rendered content</p>
+</li>
 </ul>`);
   });
 });

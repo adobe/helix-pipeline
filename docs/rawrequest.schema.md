@@ -181,6 +181,7 @@ Parameters used to invoke the OpenWhisk action. These are either URL parameters 
 | `path`| string | Optional |
 | `ref`| string | Optional |
 | `repo`| string | Optional |
+| `strain`| string | Optional |
 
 
 
@@ -279,6 +280,26 @@ Repository where content originates
 * type: `string`
 
 ##### repo Type
+
+
+`string`
+
+
+
+
+
+
+
+
+#### strain
+
+The resolved strain (variant)
+
+`strain`
+* is optional
+* type: `string`
+
+##### strain Type
 
 
 `string`
