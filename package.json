@@ -37,7 +37,7 @@
   "dependencies": {
     "@adobe/openwhisk-loggly-wrapper": "^0.3.0",
     "ajv": "^6.5.4",
-    "callsites": "^2.0.0",
+    "callsites": "^3.0.0",
     "fs-extra": "^7.0.0",
     "hast-to-hyperscript": "^6.0.0",
     "hast-util-to-html": "^5.0.0",
