@@ -13,7 +13,6 @@
 const map = require('unist-util-map');
 const URI = require('uri-js');
 const mm = require('micromatch');
-const defaultwhitelist = require('./embed-whitelist.json');
 
 /**
  * Finds embeds like `video: https://www.youtube.com/embed/2Xc9gXyf2G4`
@@ -66,7 +65,7 @@ function embed(uri, node, whitelist = '', warn = () => {}) {
   }
 }
 
-function find({ content: { mdast } }, { logger, secrets: { EMBED_WHITELIST = defaultwhitelist.join(',') } = {} }) {
+function find({ content: { mdast } }, { logger, secrets: { EMBED_WHITELIST } }) {
   map(mdast, (node) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
       embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger.warn);
