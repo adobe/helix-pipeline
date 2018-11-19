@@ -15,7 +15,9 @@ const { log } = require('./default.js');
 const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
+const html = require('../html/make-html');
 const type = require('../xml/set-content-type.js');
+const emit = require('../xml/emit-xml.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const production = require('../utils/is-production');
@@ -36,6 +38,8 @@ const xmlpipe = (cont, payload, action) => {
     .before(smartypants)
     .before(sections)
     .before(meta)
+    .before(html)
+    .before(emit)
     .once(cont)
     .after(type);
 

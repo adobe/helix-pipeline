@@ -9,26 +9,20 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* eslint-env mocha */
-const assert = require('assert');
-const winston = require('winston');
-const { pipe } = require('../src/defaults/xml.pipe.js');
 
-const logger = winston.createLogger({
-  // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
-});
+const builder = require('xmlbuilder');
 
+function emit({ content }, { logger }) {
+  logger.debug(`Emitting XML from ${typeof document}`);
 
-describe('Testing XML Pipeline', () => {
-  it('xml.pipe is a function', () => {
-    assert.ok(pipe);
-    assert.strictEqual(typeof pipe, 'function');
-  });
-});
+  const xmlroot = builder.create(content.mdast, { encoding: 'utf-8' });
+
+  return {
+    content: {
+      xmlroot,
+      xml: xmlroot.end({ pretty: true }),
+    },
+  };
+}
+
+module.exports = emit;
