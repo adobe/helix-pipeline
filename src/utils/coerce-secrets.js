@@ -12,13 +12,14 @@
 const ajv = require('./validator');
 
 async function coerce(action) {
-  const validator = await ajv(action.logger, { useDefaults: true, coerceTypes: true });
+  const defaultsetter = await ajv(action.logger, { useDefaults: true, coerceTypes: true });
   if (!action.secrets) {
+    /* eslint-disable no-param-reassign */
     action.secrets = {};
   }
   if (action.secrets) {
-    action.logger.debug('Corecing secrets');
-    validator.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
+    action.logger.debug('Coercing secrets');
+    defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
   }
 }
 

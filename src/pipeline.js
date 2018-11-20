@@ -81,7 +81,7 @@ class Pipeline {
     this._action.logger = action.logger || nopLogger;
 
     this._action.logger.debug('Creating pipeline');
-    
+
     coerce(this._action);
 
 

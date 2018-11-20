@@ -13,12 +13,13 @@
 const Ajv = require('ajv');
 const fs = require('fs-extra');
 const path = require('path');
+const hash = require('object-hash');
 
-let _ajv;
+const _ajv = {};
 
 async function ajv(logger, options = {}) {
-  if (!_ajv) {
-    logger.debug('initializing ajv');
+  if (!_ajv[hash(options)]) {
+    logger.debug(`initializing ajv ${JSON.stringify(options)}`);
     const schemadir = path.resolve(__dirname, '..', 'schemas');
     const validator = new Ajv(Object.assign({ allErrors: true, verbose: true }, options));
     const sourcefiles = await fs.readdir(schemadir);
@@ -33,9 +34,9 @@ async function ajv(logger, options = {}) {
       logger.debug(`- ${schemaData.$id}  (${path.basename(file)})`);
     }));
     logger.debug('ajv initialized');
-    _ajv = validator;
+    _ajv[hash(options)] = validator;
   }
-  return _ajv;
+  return _ajv[hash(options)];
 }
 
 module.exports = ajv;
