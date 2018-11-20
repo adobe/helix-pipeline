@@ -104,24 +104,22 @@ describe('Testing OpenWhisk adapter', () => {
       payload = p;
     }, pipe, params);
 
-    assert.deepEqual(action, {
-      request: {
-        params: {
-          path: '/test',
-          extension: 'html',
-          selector: 'print.preview',
-          params: 'a=42&b=green',
-        },
-        headers: {
-          Host: 'example.com',
-        },
-        method: 'get',
+    assert.deepEqual(action.request, {
+      params: {
+        path: '/test',
+        extension: 'html',
+        selector: 'print.preview',
+        params: 'a=42&b=green',
       },
-      logger: log,
-      secrets: {
-        SECRET: '1234',
+      headers: {
+        Host: 'example.com',
       },
+      method: 'get',
     });
+
+    assert.deepEqual(action.logger, log);
+
+    assert.deepEqual(action.secrets.SECRET, '1234');
 
     assert.deepEqual(payload, {
       request: {
