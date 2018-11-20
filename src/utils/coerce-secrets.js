@@ -11,9 +11,13 @@
  */
 const ajv = require('./validator');
 
-async function coerce(_context, action) {
+async function coerce(action) {
   const validator = await ajv(action.logger, { useDefaults: true, coerceTypes: true });
+  if (!action.secrets) {
+    action.secrets = {};
+  }
   if (action.secrets) {
+    action.logger.debug('Corecing secrets');
     validator.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
   }
 }

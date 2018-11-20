@@ -11,6 +11,7 @@
  */
 const _ = require('lodash/fp');
 const callsites = require('callsites');
+const coerce = require('./utils/coerce-secrets');
 
 const noOp = () => {};
 const nopLogger = {
@@ -80,6 +81,9 @@ class Pipeline {
     this._action.logger = action.logger || nopLogger;
 
     this._action.logger.debug('Creating pipeline');
+    
+    coerce(this._action);
+
 
     // function chain that was defined last. used for `when` and `unless`
     this._last = null;
