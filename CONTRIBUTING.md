@@ -45,7 +45,7 @@ Each commit message that is not part of a pull request:
 
 ## Coding Styleguides
 
-There are no coding style guides... yet.
+Project Helix uses the [AirBNB JavaScript Style Guide](https://github.com/airbnb/javascript), enforced through `npm lint`.
 
 # How Contributions get Reviewed
 
@@ -61,7 +61,6 @@ Then, you can release using:
 
 ```bash
 $ npm login
-$ npm publish --access public
+$ npm version minor
+$ npm publish --access public --tag latest
 ```
-
-Do not forget to add a `git tag` corresponding to the released version number
