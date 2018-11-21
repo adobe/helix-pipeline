@@ -84,7 +84,6 @@ class Pipeline {
 
     coerce(this._action);
 
-
     // function chain that was defined last. used for `when` and `unless`
     this._last = null;
     // functions that are executed first
