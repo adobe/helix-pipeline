@@ -21,8 +21,10 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional | `480` | Secrets (this schema) |
 | [IMAGES_SIZES](#images_sizes) | `string` | Optional | `"100vw"` | Secrets (this schema) |
 | [IMAGES_SIZE_STEPS](#images_size_steps) | `integer` | Optional | `4` | Secrets (this schema) |
+| [REPO_API_ROOT](#repo_api_root) | `string` | Optional | `"https://api.github.com/"` | Secrets (this schema) |
 | [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
-| `[A-Z0-9_]+` | `string` | Pattern |  | Secrets (this schema) |
+| [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional | `true` | Secrets (this schema) |
+| `[A-Z0-9_]+` | complex | Pattern |  | Secrets (this schema) |
 
 ## EMBED_SERVICE
 
@@ -144,6 +146,27 @@ Number of intermediary size steps to create per image
 
 
 
+## REPO_API_ROOT
+
+The base URL for all GitHub API operations
+
+`REPO_API_ROOT`
+* is optional
+* type: `string`
+* default: `"https://api.github.com/"`
+* defined in this schema
+
+### REPO_API_ROOT Type
+
+
+`string`
+* format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
+
+
+
+
+
+
 ## REPO_RAW_ROOT
 
 The Base URL for retrieving raw text files from GitHub
@@ -158,7 +181,26 @@ The Base URL for retrieving raw text files from GitHub
 
 
 `string`
+* format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
 
+
+
+
+
+
+## TEST_BOOLEAN
+
+
+`TEST_BOOLEAN`
+* is optional
+* type: `boolean`
+* default: `true`
+* defined in this schema
+
+### TEST_BOOLEAN Type
+
+
+`boolean`
 
 
 
@@ -170,14 +212,24 @@ Applies to all properties that match the regular expression `[A-Z0-9_]+`
 
 `[A-Z0-9_]+`
 * is a property pattern
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### Pattern [A-Z0-9_]+ Type
 
+Unknown type `boolean,integer,number,string`.
 
-`string`
-
+```json
+{
+  "type": [
+    "boolean",
+    "integer",
+    "number",
+    "string"
+  ],
+  "simpletype": "complex"
+}
+```
 
 
 
