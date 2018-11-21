@@ -17,10 +17,8 @@ async function coerce(action) {
     /* eslint-disable no-param-reassign */
     action.secrets = {};
   }
-  if (action.secrets) {
-    action.logger.debug('Coercing secrets');
-    defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
-  }
+  action.logger.debug('Coercing secrets');
+  defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
 }
 
 module.exports = coerce;
