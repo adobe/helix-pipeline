@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
-const setcontenttype = require('../src/html/set-content-type.js');
+const type = require('../src/utils/set-content-type.js');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -23,10 +23,18 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
+const payload = {
+  response: {
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+  },
+};
+
 describe('Test set-content-type', () => {
-  it('sets a missing content type', () => {
+  it('sets a content type', () => {
     assert.deepEqual(
-      setcontenttype({}, { logger }),
+      type('text/html', {}, { logger }),
       {
         response: {
           headers: {
@@ -36,16 +44,8 @@ describe('Test set-content-type', () => {
       },
     );
   });
-  it('sets keeps content type', () => {
+  it('keeps existing content type', () => {
     assert.deepEqual(
-      setcontenttype({
-        response: {
-          headers: {
-            'Content-Type': 'text/plain',
-          },
-        },
-      }, { logger }),
-      {},
-    );
+      type('text/html', payload, { logger }), payload);
   });
 });

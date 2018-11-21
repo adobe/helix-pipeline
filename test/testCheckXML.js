@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
-const { pipe } = require('../src/defaults/xml.pipe.js');
+const check = require('../src/xml/check-xml');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -20,14 +20,28 @@ const logger = winston.createLogger({
   // and turn this on if you want the output
   silent: true,
   format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
+  transports: [new winston.transports.Console()],
 });
 
-describe('Testing XML Pipeline', () => {
-  it('xml.pipe is a function', () => {
-    assert.ok(pipe);
-    assert.strictEqual(typeof pipe, 'function');
+const payload = {
+  response: {
+    headers: {
+      'Content-Type': 'text/plain',
+    },
+    body: '<?xml version="1.0" encoding="utf-8"?><parent><child /></parent>',
+  },
+};
+
+describe('Test check-xml', () => {
+  it('validates proper XML', () => {
+    assert.deepEqual(check(payload, { logger }), payload);
+  });
+  it('throws error on improper XML', () => {
+    payload.response.body = '<?xml version="1.0" encoding="utf-8"?><parent><child /></root>';
+    try {
+      check(payload, { logger });
+    } catch (e) {
+      assert.ok(e);
+    }
   });
 });

@@ -9,19 +9,28 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function type({ response }, { logger }) {
-  // somebody already set a content type, keep as is
-  if (!(response && response.headers && response.headers['Content-Type'])) {
-    logger.debug('Setting content type header');
+
+function setStatus({ response = {}, error }, { logger }) {
+  // if a status is already default, keep it.
+  if (response.status) {
+    return {};
+  }
+
+  // if there is an error, send a 500
+  if (error) {
+    logger.debug('payload.error -> 500');
     return {
       response: {
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        status: 500,
+        body: `<?xml version='1.0' encoding='utf-8'?>\n<Error>\n\t<Code>500</Code>\n\t<Message>${error}</Message>\n</Error>`,
       },
     };
   }
-  logger.debug('Keeping existing content type header');
-  return {};
+
+  return {
+    response: {
+      status: 200,
+    },
+  };
 }
-module.exports = type;
+module.exports = setStatus;

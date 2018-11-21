@@ -15,7 +15,7 @@ const { log } = require('./default.js');
 const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
-const type = require('../json/set-content-type.js');
+const type = require('../utils/set-content-type.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const production = require('../utils/is-production');
@@ -37,7 +37,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(sections)
     .before(meta)
     .once(cont)
-    .after(type);
+    .after(({ response }) => type('application/json', { response }, action));
 
   action.logger.log('debug', 'Running JSON pipeline');
   return pipe.run(payload);

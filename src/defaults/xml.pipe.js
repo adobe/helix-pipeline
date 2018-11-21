@@ -15,14 +15,17 @@ const { log } = require('./default.js');
 const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
-const html = require('../html/make-html');
-const type = require('../xml/set-content-type.js');
-const emit = require('../xml/emit-xml.js');
+const { esi, flag } = require('../html/flag-esi');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
+const { cache, uncached } = require('../html/shared-cache');
+const key = require('../html/set-surrogate-key');
 const production = require('../utils/is-production');
 const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
+const type = require('../utils/set-content-type.js');
+const emit = require('../xml/emit-xml.js');
+const status = require('../xml/set-status.js');
 
 /* eslint no-param-reassign: off */
 
@@ -38,10 +41,16 @@ const xmlpipe = (cont, payload, action) => {
     .before(smartypants)
     .before(sections)
     .before(meta)
-    .before(html)
-    .before(emit)
     .once(cont)
-    .after(type);
+    .after(emit)
+    .after(check)
+    .after(({ response }) => type('application/xml', { response }, action))
+    .after(cache)
+    .when(uncached)
+    .after(key)
+    .after(flag)
+    .when(esi) // flag ESI when there is ESI in the response
+    .error(status);
 
   action.logger.log('debug', 'Running XML pipeline');
   return pipe.run(payload);

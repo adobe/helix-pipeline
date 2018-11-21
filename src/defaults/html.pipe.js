@@ -18,7 +18,7 @@ const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
 const emit = require('../html/emit-html.js');
-const type = require('../html/set-content-type.js');
+const type = require('../utils/set-content-type.js');
 const status = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
@@ -53,7 +53,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(responsive)
     .before(emit)
     .once(cont)
-    .after(type)
+    .after(({ response }) => type('text/html', { response }, action))
     .after(cache)
     .when(uncached)
     .after(key)
