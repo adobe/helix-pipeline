@@ -14,11 +14,11 @@ const parse = require('xml2js').parseString;
 function check({ response }, { logger }) {
   if (response.body) {
     logger.debug('Validating XML');
-    parse(response.body, (err, result) => {
+    parse(response.body, { trim: true }, (err) => {
       if (err) {
-        throw new Error(`Error parsing XML\n${err}`);
+        throw new Error(`Error parsing XML: ${err}`);
       }
-      logger.debug(result);
+      return { response };
     });
   }
   logger.debug('No XML to validate');

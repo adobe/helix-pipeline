@@ -12,26 +12,27 @@
 
 const builder = require('xmlbuilder');
 
-function emit({ response, content }, { logger }) {
+function emit({ content, response }, { logger }) {
   if (response.body) {
     logger.debug('Response body already exists');
-    return { response };
+    return {};
   }
   if (content.xml) {
     try {
       logger.debug(`Emitting XML from ${typeof content.xml}`);
-      const xmlroot = builder.create(content.xml, { encoding: 'utf-8' });
+      const xml = builder.create(content.xml, { encoding: 'utf-8' });
       return {
         response: {
-          body: xmlroot.end({ pretty: true }),
+          body: xml.end({ pretty: content.xmlPretty }),
         },
       };
     } catch (e) {
       logger.error(`Error building XML: ${e}`);
+      return {};
     }
   }
   logger.debug('No XML to emit');
-  return { response };
+  return {};
 }
 
 module.exports = emit;

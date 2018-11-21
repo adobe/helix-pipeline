@@ -25,7 +25,8 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
 const type = require('../utils/set-content-type.js');
 const emit = require('../xml/emit-xml.js');
-const status = require('../xml/set-status.js');
+const status = require('../xml/set-xml-status.js');
+const check = require('../xml/check-xml');
 
 /* eslint no-param-reassign: off */
 
@@ -43,8 +44,8 @@ const xmlpipe = (cont, payload, action) => {
     .before(meta)
     .once(cont)
     .after(emit)
-    .after(check)
     .after(({ response }) => type('application/xml', { response }, action))
+    .after(check)
     .after(cache)
     .when(uncached)
     .after(key)
