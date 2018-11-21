@@ -9,19 +9,16 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/**
- * Handles `embed` MDAST nodes by converting them into `<esi:include>` tags
- * @param {string} EMBED_SERVICE the URL of an embedding service compatible with https://github.com/adobe/helix-embed that returns HTML
- */
-function embed({ EMBED_SERVICE }) {
-  return function handler(h, node) {
-    const { url } = node;
-    const props = {
-      src: EMBED_SERVICE + url,
-    };
-    const retval = h(node, 'esi:include', props);
-    return retval;
-  };
+const ajv = require('./validator');
+
+async function coerce(action) {
+  const defaultsetter = await ajv(action.logger, { useDefaults: true, coerceTypes: true });
+  if (!action.secrets) {
+    /* eslint-disable no-param-reassign */
+    action.secrets = {};
+  }
+  action.logger.debug('Coercing secrets');
+  defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
 }
 
-module.exports = embed;
+module.exports = coerce;

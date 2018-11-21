@@ -13,8 +13,6 @@ const client = require('request-promise-native');
 const URI = require('uri-js');
 const { bail } = require('../helper');
 
-const GH_RAW = 'https://raw.githubusercontent.com/';
-
 function uri(root, owner, repo, ref, path) {
   const rootURI = URI.parse(root);
   const rootPath = rootURI.path;
@@ -73,7 +71,7 @@ async function fetch(
     return bail(logger, 'Unknown path, cannot fetch content');
   }
 
-  const { REPO_RAW_ROOT: rootPath = GH_RAW } = secrets;
+  const { REPO_RAW_ROOT: rootPath } = secrets;
 
   // everything looks good, make the HTTP request
   const options = {

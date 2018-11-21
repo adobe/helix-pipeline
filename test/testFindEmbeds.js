@@ -14,6 +14,7 @@ const winston = require('winston');
 const parse = require('../src/html/parse-markdown');
 const embeds = require('../src/html/find-embeds');
 const { assertMatch, assertValid } = require('./markdown-utils');
+const coerce = require('../src/utils/coerce-secrets');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -24,17 +25,25 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
+const action = {
+  logger,
+};
+
 function mdast(body) {
   const parsed = parse({ content: { body } }, { logger });
-  return embeds(parsed, { logger }).content.mdast;
+  return embeds(parsed, action).content.mdast;
 }
 
 function context(body) {
   const parsed = parse({ content: { body } }, { logger });
-  return embeds(parsed, { logger });
+  return embeds(parsed, action);
 }
 
 describe('Test Embed Detection Processing', () => {
+  before('Coerce defaults', async () => {
+    await coerce(action);
+  });
+
   it('Parses markdown with embeds', () => {
     assertMatch('embeds', mdast);
   });

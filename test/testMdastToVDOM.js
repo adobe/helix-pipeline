@@ -15,19 +15,36 @@ const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
 const h = require('hyperscript');
+const winston = require('winston');
 const VDOM = require('../').utils.vdom;
+const coerce = require('../src/utils/coerce-secrets');
+
+const logger = winston.createLogger({
+  // tune this for debugging
+  level: 'debug',
+  // and turn this on if you want the output
+  silent: true,
+  format: winston.format.simple(),
+  transports: [new winston.transports.Console()],
+});
+
+const action = { logger };
 
 describe('Test MDAST to VDOM Transformation', () => {
+  before('Coerce defaults', async () => {
+    await coerce(action);
+  });
+
   it('Simple MDAST Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
-    const transformer = new VDOM(mdast);
+    const transformer = new VDOM(mdast, action.secrets);
     const node = transformer.process();
     assert.equal(node.outerHTML, '<h1>Hello World</h1>');
   });
 
   it('Custom Text Matcher Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
-    const transformer = new VDOM(mdast);
+    const transformer = new VDOM(mdast, action.secrets);
     transformer.match('heading', () => '<h1>All Headings are the same to me</h1>');
     const node = transformer.process();
     assert.equal(node.outerHTML, '<h1>All Headings are the same to me</h1>');
@@ -35,7 +52,7 @@ describe('Test MDAST to VDOM Transformation', () => {
 
   it('Programmatic Matcher Function', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
-    const transformer = new VDOM(mdast);
+    const transformer = new VDOM(mdast, action.secrets);
     transformer.match(({ type }) => type === 'heading', () => '<h1>All Headings are the same to me</h1>');
     const node = transformer.process();
     assert.equal(node.outerHTML, '<h1>All Headings are the same to me</h1>');
@@ -43,7 +60,7 @@ describe('Test MDAST to VDOM Transformation', () => {
 
   it('Custom Text Matcher with Multiple Elements', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
-    const transformer = new VDOM(mdast);
+    const transformer = new VDOM(mdast, action.secrets);
     transformer.match('heading', () => '<a name="h1"></a><h1>All Headings are the same to me</h1>');
     const node = transformer.process();
     assert.equal(node.outerHTML, '<div><a name="h1"></a><h1>All Headings are the same to me</h1></div>');
@@ -51,7 +68,7 @@ describe('Test MDAST to VDOM Transformation', () => {
 
   it('Custom Text Matcher with VDOM Nodes', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'links.json'));
-    const transformer = new VDOM(mdast);
+    const transformer = new VDOM(mdast, action.secrets);
     transformer.match('link', (_, node) => {
       const res = h(
         'a',

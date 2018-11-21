@@ -9,34 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* eslint-disable no-underscore-dangle */
-const Ajv = require('ajv');
-const fs = require('fs-extra');
-const path = require('path');
-
-let _ajv;
-
-async function ajv(logger) {
-  if (!_ajv) {
-    logger.debug('initializing ajv');
-    const schemadir = path.resolve(__dirname, '..', 'schemas');
-    const validator = new Ajv({ allErrors: true, verbose: true });
-    const sourcefiles = await fs.readdir(schemadir);
-
-    const schemas = sourcefiles
-      .filter(file => file.match(/\.schema\.json$/))
-      .map(schema => path.resolve(schemadir, schema));
-
-    await Promise.all(schemas.map(async (file) => {
-      const schemaData = await fs.readJSON(file);
-      validator.addSchema(schemaData);
-      logger.debug(`- ${schemaData.$id}  (${path.basename(file)})`);
-    }));
-    logger.debug('ajv initialized');
-    _ajv = validator;
-  }
-  return _ajv;
-}
+const ajv = require('./validator');
 
 async function validate(context, action, index) {
   const validator = await ajv(action.logger);

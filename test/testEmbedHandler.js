@@ -14,6 +14,7 @@ const assert = require('assert');
 const winston = require('winston');
 const embed = require('../src/utils/embed-handler');
 const { pipe } = require('../src/defaults/html.pipe.js');
+const coerce = require('../src/utils/coerce-secrets');
 
 const params = {
   path: '/hello.md',
@@ -74,13 +75,17 @@ const logger = winston.createLogger({
 });
 
 describe('Test Embed Handler', () => {
-  it('Creates ESI', () => {
+  it('Creates ESI', async () => {
     const node = {
       type: 'embed',
       url: 'https://www.example.com/',
     };
 
-    embed()((_, tagname, parameters, children) => {
+    const action = { logger };
+    await coerce(action);
+
+
+    embed(action.secrets)((_, tagname, parameters, children) => {
       assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/default/embed/https://www.example.com/');
       assert.equal(children, undefined);
       assert.equal(tagname, 'esi:include');
