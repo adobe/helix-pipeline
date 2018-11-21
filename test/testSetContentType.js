@@ -45,7 +45,6 @@ describe('Test set-content-type', () => {
     );
   });
   it('keeps existing content type', () => {
-    assert.deepEqual(
-      type('text/html', payload, { logger }), payload);
+    assert.deepEqual(type('text/html', payload, { logger }), payload);
   });
 });
