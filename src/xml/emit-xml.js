@@ -18,13 +18,12 @@ function emit({ content, response }, { secrets, logger }) {
     return {};
   }
   if (content.xml) {
-    const pretty = secrets.XML_PRETTY || false;
     try {
       logger.debug(`Emitting XML from ${typeof content.xml}`);
       const xml = builder.create(content.xml, { encoding: 'utf-8' });
       return {
         response: {
-          body: xml.end({ pretty }),
+          body: xml.end({ pretty: !!secrets.XML_PRETTY }),
         },
       };
     } catch (e) {
