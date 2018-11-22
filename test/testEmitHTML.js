@@ -10,11 +10,9 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
+const assert = require('assert');
 const winston = require('winston');
-const parse = require('../src/html/parse-markdown');
-const embeds = require('../src/html/find-embeds');
-const { assertMatch, assertValid } = require('./markdown-utils');
-const coerce = require('../src/utils/coerce-secrets');
+const emit = require('../src/html/emit-html');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -25,32 +23,39 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-const action = {
-  logger,
-};
-
-function mdast(body) {
-  const parsed = parse({ content: { body } }, { logger });
-  return embeds(parsed, action).content.mdast;
-}
-
-function context(body) {
-  const parsed = parse({ content: { body } }, { logger });
-  return embeds(parsed, action);
-}
-
-describe('Test Embed Detection Processing', () => {
-  before('Coerce defaults', async () => {
-    await coerce(action);
+describe('Test HTML emitter', () => {
+  it('emitter works with empty document', () => {
+    const out = emit({ content: { document: { body: {} } } }, { logger });
+    assert.deepEqual({
+      content: {
+        children: [],
+        html: '',
+      },
+    }, out);
   });
 
-  it('Parses markdown with embeds', () => {
-    assertMatch('embeds', mdast);
-  });
-});
-
-describe('Validate Embed Examples In Pipeline', () => {
-  it('Markdown with embeds yields valid context', (done) => {
-    assertValid('embeds', context, done);
+  it('emitter transforms the given body', () => {
+    const out = emit({
+      content: {
+        document: {
+          body: {
+            innerHTML: 'ab',
+            firstChild: {
+              childNodes: [{
+                outerHTML: 'a',
+              }, {
+                outerHTML: 'b',
+              }],
+            },
+          },
+        },
+      },
+    }, { logger });
+    assert.deepEqual({
+      content: {
+        children: ['a', 'b'],
+        html: 'ab',
+      },
+    }, out);
   });
 });

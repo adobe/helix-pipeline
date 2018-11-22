@@ -9,16 +9,16 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+const ajv = require('./validator');
 
-function emit({ content: { document } }, { logger }) {
-  logger.debug(`Emitting HTML from ${typeof document}`);
-
-  const children = document.body && document.body.firstChild && document.body.firstChild.childNodes
-    ? Array.from(document.body.firstChild.childNodes)
-      .filter(node => node && node.outerHTML)
-      .map(node => node.outerHTML) : [];
-
-  return { content: { html: document.body.innerHTML || '', children } };
+async function coerce(action) {
+  const defaultsetter = await ajv(action.logger, { useDefaults: true, coerceTypes: true });
+  if (!action.secrets) {
+    /* eslint-disable no-param-reassign */
+    action.secrets = {};
+  }
+  action.logger.debug('Coercing secrets');
+  defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
 }
 
-module.exports = emit;
+module.exports = coerce;

@@ -36,10 +36,10 @@ function makewidths(options) {
 }
 
 function image({
-  IMAGES_MIN_SIZE = 480,
-  IMAGES_MAX_SIZE = 4096,
-  IMAGES_SIZE_STEPS = 4,
-  IMAGES_SIZES = '100vw',
+  IMAGES_MIN_SIZE,
+  IMAGES_MAX_SIZE,
+  IMAGES_SIZE_STEPS,
+  IMAGES_SIZES,
 } = {}) {
   const widths = {
     from: parseInt(IMAGES_MIN_SIZE, 10),

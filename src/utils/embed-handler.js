@@ -13,7 +13,7 @@
  * Handles `embed` MDAST nodes by converting them into `<esi:include>` tags
  * @param {string} EMBED_SERVICE the URL of an embedding service compatible with https://github.com/adobe/helix-embed that returns HTML
  */
-function embed({ EMBED_SERVICE = 'https://adobeioruntime.net/api/v1/web/helix/default/embed/' } = {}) {
+function embed({ EMBED_SERVICE }) {
   return function handler(h, node) {
     const { url } = node;
     const props = {

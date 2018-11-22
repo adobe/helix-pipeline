@@ -11,9 +11,36 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
+const winston = require('winston');
 const image = require('../src/utils/image-handler');
+const coerce = require('../src/utils/coerce-secrets');
+
+const logger = winston.createLogger({
+  // tune this for debugging
+  level: 'debug',
+  // and turn this on if you want the output
+  silent: true,
+  format: winston.format.simple(),
+  transports: [new winston.transports.Console()],
+});
+
+const myaction = {
+  secrets: {
+    IMAGES_MIN_SIZE: 100,
+    IMAGES_MAX_SIZE: 300,
+    IMAGES_SIZE_STEPS: 1,
+  },
+  logger,
+};
+
+const action = { logger };
 
 describe('Test Image Handler', () => {
+  before('Coerce defaults', async () => {
+    await coerce(action);
+    await coerce(myaction);
+  });
+
   it('Does not modify absolute URLs', () => {
     const node = {
       type: 'image',
@@ -21,7 +48,7 @@ describe('Test Image Handler', () => {
       url: 'https://www.example.com/test.png',
     };
 
-    image()((orignode, tagname, params, children) => {
+    image(action.secrets)((orignode, tagname, params, children) => {
       assert.equal(params.src, orignode.url);
       assert.equal(children, undefined);
       assert.equal(tagname, 'img');
@@ -36,7 +63,7 @@ describe('Test Image Handler', () => {
       title: 'Foo Bar',
     };
 
-    image()((orignode, tagname, params, children) => {
+    image(action.secrets)((orignode, tagname, params, children) => {
       assert.equal(params.src, orignode.url);
       assert.equal(children, undefined);
       assert.equal(tagname, 'img');
@@ -55,11 +82,7 @@ describe('Test Image Handler', () => {
       url: 'test.png',
     };
 
-    image({
-      IMAGES_MIN_SIZE: 100,
-      IMAGES_MAX_SIZE: 300,
-      IMAGES_SIZE_STEPS: 1,
-    })((orignode, tagname, params, children) => {
+    image(myaction.secrets)((orignode, tagname, params, children) => {
       assert.equal(params.src, orignode.url);
       assert.equal(children, undefined);
       assert.equal(tagname, 'img');

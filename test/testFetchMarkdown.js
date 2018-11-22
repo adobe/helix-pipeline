@@ -13,6 +13,7 @@
 const assert = require('assert');
 const winston = require('winston');
 const fetch = require('../src/html/fetch-markdown');
+const coerce = require('../src/utils/coerce-secrets');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -190,33 +191,35 @@ describe('Test invalid input', () => {
 
 describe('Test non-existing content', () => {
   it('Getting XDM README (from wrong URL)', async () => {
-    assert.ok((await fetch(
-      {},
-      {
-        request: {
-          params: {
-            repo: 'xdm', ref: 'master', path: 'README.md', owner: 'nobody',
-          },
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'nobody',
         },
-        logger,
       },
-    )).error);
+      logger,
+    };
+
+    await coerce(myaction);
+
+    assert.ok((await fetch({}, myaction)).error);
   });
 });
 
 describe('Test requests', () => {
   it('Getting XDM README', async () => {
-    const result = await fetch(
-      {},
-      {
-        request: {
-          params: {
-            repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
-          },
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        logger,
       },
-    );
+      logger,
+    };
+
+    await coerce(myaction);
+
+    const result = await fetch({}, myaction);
     assert.ok(result.content.body);
   });
 });
