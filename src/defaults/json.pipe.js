@@ -37,7 +37,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(sections)
     .before(meta)
     .once(cont)
-    .after(({ response }) => type('application/json', { response }, action));
+    .after(type('application/json'));
 
   action.logger.log('debug', 'Running JSON pipeline');
   return pipe.run(payload);

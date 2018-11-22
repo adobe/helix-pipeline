@@ -44,7 +44,7 @@ const xmlpipe = (cont, payload, action) => {
     .before(meta)
     .once(cont)
     .after(emit)
-    .after(({ response }) => type('application/xml', { response }, action))
+    .after(type('application/xml'))
     .after(check)
     .after(cache)
     .when(uncached)

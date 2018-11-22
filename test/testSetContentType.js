@@ -32,9 +32,13 @@ const payload = {
 };
 
 describe('Test set-content-type', () => {
+  it('is a function', () => {
+    assert.equal(typeof type('foo/bar'), 'function');
+  });
+
   it('sets a content type', () => {
     assert.deepEqual(
-      type('text/html', {}, { logger }),
+      type('text/html')({}, { logger }),
       {
         response: {
           headers: {
@@ -45,6 +49,6 @@ describe('Test set-content-type', () => {
     );
   });
   it('keeps existing content type', () => {
-    assert.deepEqual(type('text/html', payload, { logger }), payload);
+    assert.deepEqual(type('text/html')(payload, { logger }), payload);
   });
 });

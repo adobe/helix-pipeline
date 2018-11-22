@@ -30,7 +30,7 @@ describe('Test set-xml-status', () => {
       {
         response: {
           status: 500,
-          body: '<?xml version="1.0" encoding="utf-8"?><Error><Code>500</Code><Message>oh, no!</Message></Error>',
+          body: '<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>oh, no!</message></error>',
         },
       },
     );

@@ -53,7 +53,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(responsive)
     .before(emit)
     .once(cont)
-    .after(({ response }) => type('text/html', { response }, action))
+    .after(type('text/html'))
     .after(cache)
     .when(uncached)
     .after(key)

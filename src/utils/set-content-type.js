@@ -10,19 +10,21 @@
  * governing permissions and limitations under the License.
  */
 
-function type(mime, { response }, { logger }) {
-  if (!(response && response.headers && response.headers['Content-Type'])) {
-    logger.debug(`Setting content type header to ${mime}`);
-    return {
-      response: {
-        headers: {
-          'Content-Type': mime,
+function type(mime) {
+  return function setmime({ response }, { logger }) {
+    if (!(response && response.headers && response.headers['Content-Type'])) {
+      logger.debug(`Setting content type header to ${mime}`);
+      return {
+        response: {
+          headers: {
+            'Content-Type': mime,
+          },
         },
-      },
-    };
-  }
-  logger.debug('Keeping existing content type header');
-  return { response };
+      };
+    }
+    logger.debug('Keeping existing content type header');
+    return { response };
+  };
 }
 
 module.exports = type;
