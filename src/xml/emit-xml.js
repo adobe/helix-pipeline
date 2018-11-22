@@ -12,18 +12,19 @@
 
 const builder = require('xmlbuilder');
 
-function emit({ content, response }, { logger }) {
+function emit({ content, response }, { secrets, logger }) {
   if (response.body) {
     logger.debug('Response body already exists');
     return {};
   }
   if (content.xml) {
+    const pretty = secrets.XML_PRETTY || false;
     try {
       logger.debug(`Emitting XML from ${typeof content.xml}`);
       const xml = builder.create(content.xml, { encoding: 'utf-8' });
       return {
         response: {
-          body: xml.end({ pretty: content.xmlPretty }),
+          body: xml.end({ pretty }),
         },
       };
     } catch (e) {

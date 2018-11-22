@@ -23,41 +23,56 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
+const xml = {
+  document: {
+    title: {
+      '#text': 'Bill, Welcome to the future',
+      '@level': 1,
+    },
+  },
+};
+
 const payload = {
   content: {
-    xml: {
-      document: {
-        title: {
-          '#text': 'Bill, Welcome to the future',
-          '@level': 1,
-        },
-      },
-    },
+    xml,
   },
   response: {},
 };
 
+const action = {
+  secrets: { },
+  logger,
+};
+
 const expectedXML = '<?xml version="1.0" encoding="utf-8"?><document><title level="1">Bill, Welcome to the future</title></document>';
+const expectedPrettyXML = '<?xml version="1.0" encoding="utf-8"?>\n<document>\n  <title level="1">Bill, Welcome to the future</title>\n</document>';
 
 describe('Test emit-xml', () => {
   it('builds XML from object', () => {
-    const output = emit(payload, { logger });
+    const output = emit(payload, action);
     assert.deepEqual(output.response.body, expectedXML);
   });
 
-  it('fails gracefully in case of invalid object', () => {
-    payload.content.xml = /bla/; // unexpected RegExp object which will break xmlbuilder-js
-    assert.deepEqual(emit(payload, { logger }), {});
+  it('builds pretty XML from object', () => {
+    action.secrets.XML_PRETTY = true;
+    const output = emit(payload, action);
+    assert.deepEqual(output.response.body, expectedPrettyXML);
+    action.secrets.XML_PRETTY = false;
   });
 
   it('does nothing if no object specified', () => {
     payload.content.xml = undefined;
-    assert.deepEqual(emit(payload, { logger }), {});
+    assert.deepEqual(emit(payload, action), {});
+  });
+
+  it('fails gracefully in case of invalid object', () => {
+    payload.content.xml = function bla() {}; // unexpected value which will break xmlbuilder-js
+    assert.deepEqual(emit(payload, action), {});
   });
 
   it('keeps existing response body', () => {
-    payload.content.xml = undefined;
+    payload.content.xml = xml;
     payload.response.body = expectedXML;
-    assert.deepEqual(emit(payload, { logger }), {});
+    assert.deepEqual(emit(payload, action), {});
   });
 });
