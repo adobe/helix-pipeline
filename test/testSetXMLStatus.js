@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
-const type = require('../src/utils/set-content-type.js');
+const setStatus = require('../src/xml/set-xml-status.js');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -23,32 +23,45 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-const payload = {
-  response: {
-    headers: {
-      'Content-Type': 'text/plain',
-    },
-  },
-};
-
-describe('Test set-content-type', () => {
-  it('is a function', () => {
-    assert.equal(typeof type('foo/bar'), 'function');
-  });
-
-  it('sets a content type', () => {
+describe('Test set-xml-status', () => {
+  it('sets a 500 for an error', () => {
     assert.deepEqual(
-      type('text/html')({}, { logger }),
+      setStatus({ content: { }, error: 'oh, no!' }, { logger }),
       {
         response: {
-          headers: {
-            'Content-Type': 'text/html',
-          },
+          status: 500,
+          body: '<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>oh, no!</message></error>',
         },
       },
     );
   });
-  it('keeps existing content type', () => {
-    assert.deepEqual(type('text/html')(payload, { logger }), payload);
+
+  it('keeps an existing status', () => {
+    assert.deepEqual(
+      setStatus({
+        response: {
+          status: 201,
+        },
+      }, { logger }),
+      {},
+    );
+  });
+
+  it('sets a 200 if all good', () => {
+    assert.deepEqual(
+      setStatus({
+        content: {
+          xml: {
+            root: {},
+          },
+        },
+      },
+      { logger }),
+      {
+        response: {
+          status: 200,
+        },
+      },
+    );
   });
 });

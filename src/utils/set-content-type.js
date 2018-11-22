@@ -9,19 +9,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function type({ response }, { logger }) {
-  // somebody already set a content type, keep as is
-  if (!(response && response.headers && response.headers['Content-Type'])) {
-    logger.debug('Setting content type header');
-    return {
-      response: {
-        headers: {
-          'Content-Type': 'text/html',
+
+function type(mime) {
+  return function setmime({ response }, { logger }) {
+    if (!(response && response.headers && response.headers['Content-Type'])) {
+      logger.debug(`Setting content type header to ${mime}`);
+      return {
+        response: {
+          headers: {
+            'Content-Type': mime,
+          },
         },
-      },
-    };
-  }
-  logger.debug('Keeping existing content type header');
-  return {};
+      };
+    }
+    logger.debug('Keeping existing content type header');
+    return { response };
+  };
 }
+
 module.exports = type;

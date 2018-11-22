@@ -65,7 +65,9 @@
     "unist-util-map": "^1.0.4",
     "unist-util-select": "^2.0.0",
     "uri-js": "^4.2.2",
-    "winston": "^3.0.0"
+    "winston": "^3.0.0",
+    "xml2js": "^0.4.19",
+    "xmlbuilder": "^10.1.1"
   },
   "snyk": true
 }

@@ -9,19 +9,30 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function type({ response }, { logger }) {
-  // somebody already set a content type, keep as is
-  if (!(response && response.headers && response.headers['Content-Type'])) {
-    logger.debug('Setting content type header');
-    return {
-      response: {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      },
-    };
+
+const builder = require('xmlbuilder');
+
+function emit({ content, response }, { logger }) {
+  if (response.body) {
+    logger.debug('Response body already exists');
+    return {};
   }
-  logger.debug('Keeping existing content type header');
+  if (content.xml) {
+    try {
+      logger.debug(`Emitting XML from ${typeof content.xml}`);
+      const xml = builder.create(content.xml, { encoding: 'utf-8' });
+      return {
+        response: {
+          body: xml.end({ pretty: content.xmlPretty }),
+        },
+      };
+    } catch (e) {
+      logger.error(`Error building XML: ${e}`);
+      return {};
+    }
+  }
+  logger.debug('No XML to emit');
   return {};
 }
-module.exports = type;
+
+module.exports = emit;

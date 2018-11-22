@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
-const type = require('../src/utils/set-content-type.js');
+const check = require('../src/xml/check-xml');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -28,27 +28,26 @@ const payload = {
     headers: {
       'Content-Type': 'text/plain',
     },
+    body: '<?xml version="1.0" encoding="utf-8"?><parent><child /></parent>',
   },
 };
 
-describe('Test set-content-type', () => {
-  it('is a function', () => {
-    assert.equal(typeof type('foo/bar'), 'function');
+describe('Test check-xml', () => {
+  it('validates proper XML', () => {
+    assert.deepEqual(check(payload, { logger }), {});
   });
 
-  it('sets a content type', () => {
-    assert.deepEqual(
-      type('text/html')({}, { logger }),
-      {
-        response: {
-          headers: {
-            'Content-Type': 'text/html',
-          },
-        },
-      },
-    );
+  it('throws error on improper XML', () => {
+    payload.response.body = '<?xml version="1.0" encoding="utf-8"?><parent><child /></root>';
+    try {
+      check(payload, { logger });
+    } catch (e) {
+      assert.ok(e);
+    }
   });
-  it('keeps existing content type', () => {
-    assert.deepEqual(type('text/html')(payload, { logger }), payload);
+
+  it('does nothing with empty response body', () => {
+    payload.response.body = '';
+    assert.deepEqual(check(payload, { logger }), {});
   });
 });
