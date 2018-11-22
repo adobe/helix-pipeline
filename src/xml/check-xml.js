@@ -18,11 +18,11 @@ function check({ response }, { logger }) {
       if (err) {
         throw new Error(`Error parsing XML: ${err}`);
       }
-      return { response };
+      return { };
     });
   }
   logger.debug('No XML to validate');
-  return { response };
+  return { };
 }
 
 module.exports = check;

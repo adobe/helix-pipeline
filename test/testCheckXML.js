@@ -34,8 +34,9 @@ const payload = {
 
 describe('Test check-xml', () => {
   it('validates proper XML', () => {
-    assert.deepEqual(check(payload, { logger }), payload);
+    assert.deepEqual(check(payload, { logger }), {});
   });
+
   it('throws error on improper XML', () => {
     payload.response.body = '<?xml version="1.0" encoding="utf-8"?><parent><child /></root>';
     try {
@@ -43,5 +44,10 @@ describe('Test check-xml', () => {
     } catch (e) {
       assert.ok(e);
     }
+  });
+
+  it('does nothing with empty response body', () => {
+    payload.response.body = '';
+    assert.deepEqual(check(payload, { logger }), {});
   });
 });

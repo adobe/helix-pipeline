@@ -50,6 +50,11 @@ describe('Test emit-xml', () => {
     assert.deepEqual(emit(payload, { logger }), {});
   });
 
+  it('does nothing if no object specified', () => {
+    payload.content.xml = undefined;
+    assert.deepEqual(emit(payload, { logger }), {});
+  });
+
   it('keeps existing response body', () => {
     payload.content.xml = undefined;
     payload.response.body = expectedXML;
