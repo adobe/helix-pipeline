@@ -45,8 +45,8 @@ describe('Test emit-xml', () => {
     assert.deepEqual(output.response.body, expectedXML);
   });
 
-  it('fails gracefully in case of unexpected object', () => {
-    payload.content.xml = 'something unexpected';
+  it('fails gracefully in case of invalid object', () => {
+    payload.content.xml = /bla/; // unexpected RegExp object which will break xmlbuilder-js
     assert.deepEqual(emit(payload, { logger }), {});
   });
 
