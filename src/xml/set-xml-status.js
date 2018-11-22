@@ -22,7 +22,7 @@ function setStatus({ response = {}, error }, { logger }) {
     return {
       response: {
         status: 500,
-        body: `<?xml version="1.0" encoding="utf-8"?><Error><Code>500</Code><Message>${error}</Message></Error>`,
+        body: `<?xml version="1.0" encoding="utf-8"?><Error><Code>500</Code><Message>${error.trim()}</Message></Error>`,
       },
     };
   }

@@ -151,13 +151,32 @@ describe('Testing XML Pipeline', () => {
 
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'application/xml');
-    assert.deepEqual(result.response.body,
+    assert.equal(result.response.body,
       '<?xml version="1.0" encoding="utf-8"?><document><title level="1">Bill, Welcome to the future</title></document>');
+  });
+
+  it('xmp.pipe does not overwrite existing respone body', async () => {
+    const payload = {
+      response: {
+        body: '<?xml version="1.0" encoding="utf-8"?><test />',
+      },
+    };
+    const result = await pipe(
+      () => {},
+      payload,
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal(result.response.body, payload.response.body);
   });
 
   it('xml.pipe serves 404 for non existent content', async () => {
     const result = await pipe(
-      () => ({}),
+      () => {}, // empty main function
       {},
       {
         request: { params: params404 },
@@ -170,7 +189,7 @@ describe('Testing XML Pipeline', () => {
     assert.equal(res.status, 404);
   });
 
-  it('xml.pipe detects ESI in XML', async () => {
+  it('xml.pipe detects ESI tag in XML object', async () => {
     const result = await pipe(
       ({ content }) => {
         const c = content;
