@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+
+orbs:
+    helix-smoke-tests: adobe/helix-smoke-tests@0.0.4
+
 jobs:
   build:
     docker:
@@ -118,7 +122,6 @@ jobs:
         name: publish pre-release
         command: npm publish --tag next --access public
 
-
   generate-docs:
     docker:
       - image: circleci/node:8
@@ -175,3 +178,9 @@ workflows:
         filters:
           branches:
             only: master
+
+  smoke:
+    jobs:
+    - helix-smoke-tests/run:
+        token: ${SMOKE_TEST_TOKEN}
+        remote_repo: adobe/helix-continuous
