@@ -135,9 +135,9 @@ describe('Testing XML Pipeline', () => {
         assert.ok(content.body);
         assert.ok(content.mdast);
         assert.ok(content.meta);
-        assert.equal('Medium', content.meta.template);
-        assert.equal('Project Helix', content.intro);
-        assert.equal('Bill, Welcome to the future', content.title);
+        assert.equal(content.meta.template, 'Medium');
+        assert.equal(content.intro, 'Project Helix');
+        assert.equal(content.title, 'Bill, Welcome to the future');
         // and return a different status code
         return { content: c, response: { status: 201 } };
       },
@@ -185,8 +185,7 @@ describe('Testing XML Pipeline', () => {
       },
     );
 
-    const res = result.response;
-    assert.equal(res.status, 404);
+    assert.equal(result.response.status, 404);
   });
 
   it('xml.pipe detects ESI tag in XML object', async () => {
@@ -211,6 +210,6 @@ describe('Testing XML Pipeline', () => {
       },
     );
     assert.equal(result.response.status, 201);
-    assert.equal('enabled', result.response.headers['X-ESI']);
+    assert.equal(result.response.headers['X-ESI'], 'enabled');
   });
 });

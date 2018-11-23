@@ -85,9 +85,9 @@ describe('Testing JSON Pipeline', () => {
         assert.ok(content.body);
         assert.ok(content.mdast);
         assert.ok(content.meta);
-        assert.equal('Medium', content.meta.template);
-        assert.equal('Project Helix', content.intro);
-        assert.equal('Bill, Welcome to the future', content.title);
+        assert.equal(content.meta.template, 'Medium');
+        assert.equal(content.intro, 'Project Helix');
+        assert.equal(content.title, 'Bill, Welcome to the future');
         // and return a different status code
         return { response: { status: 201, body: { foo: 'bar' } } };
       },
@@ -99,7 +99,7 @@ describe('Testing JSON Pipeline', () => {
       },
     );
 
-    assert.equal(201, result.response.status);
+    assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'application/json');
     assert.deepEqual(result.response.body, { foo: 'bar' });
   });
@@ -112,9 +112,9 @@ describe('Testing JSON Pipeline', () => {
         assert.ok(content.body);
         assert.ok(content.mdast);
         assert.ok(content.meta);
-        assert.equal('Medium', content.meta.template);
-        assert.equal('Project Helix', content.intro);
-        assert.equal('Bill, Welcome to the future', content.title);
+        assert.equal(content.meta.template, 'Medium');
+        assert.equal(content.intro, 'Project Helix');
+        assert.equal(content.title, 'Bill, Welcome to the future');
         // and return a different status code
         return { response: { status: 201, body: { foo: 'bar' }, headers: { 'Content-Type': 'text/plain+json' } } };
       },
@@ -126,7 +126,7 @@ describe('Testing JSON Pipeline', () => {
       },
     );
 
-    assert.equal(201, result.response.status);
+    assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/plain+json');
     assert.deepEqual(result.response.body, { foo: 'bar' });
   });

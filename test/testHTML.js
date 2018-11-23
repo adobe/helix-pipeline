@@ -141,10 +141,10 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    assert.equal(201, result.response.status);
-    assert.equal('text/html', result.response.headers['Content-Type']);
-    assert.equal(undefined, result.response.headers['X-ESI']);
-    assert.equal('<p>Hello World</p>', result.response.body);
+    assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers['Content-Type'], 'text/html');
+    assert.equal(result.response.headers['X-ESI'], undefined);
+    assert.equal(result.response.body, '<p>Hello World</p>');
   });
 
   it('html.pipe detects ESI in response body', async () => {
@@ -162,9 +162,9 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    assert.equal('enabled', result.response.headers['X-ESI']);
-    assert.equal('text/html', result.response.headers['Content-Type']);
-    assert.equal('<p>Hello World</p><esi:include src="foo.html">', result.response.body);
+    assert.equal(result.response.headers['X-ESI'], 'enabled');
+    assert.equal(result.response.headers['Content-Type'], 'text/html');
+    assert.equal(result.response.body, '<p>Hello World</p><esi:include src="foo.html">');
   });
 
   it('html.pipe renders index.md from helix-cli correctly', async () => {
@@ -190,7 +190,7 @@ describe('Testing HTML Pipeline', () => {
       },
     );
     assert.equal(result.error, undefined);
-    assert.notEqual(500, result.response.status);
+    assert.notEqual(result.response.status, 500);
   });
 
   it('html.pipe renders index.md from project-helix.io correctly', async () => {
@@ -296,9 +296,9 @@ describe('Testing HTML Pipeline', () => {
         assert.equal(typeof content.document.getElementsByTagName, 'function');
         assert.equal(content.document.getElementsByTagName('h1').length, 1);
         assert.equal(content.document.getElementsByTagName('h1')[0].innerHTML, 'Bill, Welcome to the future');
-        assert.equal('Medium', content.meta.template);
-        assert.equal('Project Helix', content.intro);
-        assert.equal('Bill, Welcome to the future', content.title);
+        assert.equal(content.meta.template, 'Medium');
+        assert.equal(content.intro, 'Project Helix');
+        assert.equal(content.title, 'Bill, Welcome to the future');
         assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
         // and return a different status code
         return { response: { status: 201, body: content.html } };
@@ -317,11 +317,11 @@ describe('Testing HTML Pipeline', () => {
     );
 
     const res = result.response;
-    assert.equal(201, res.status);
-    assert.equal('text/html', res.headers['Content-Type']);
-    assert.equal('s-maxage=604800', res.headers['Cache-Control']);
+    assert.equal(res.status, 201);
+    assert.equal(res.headers['Content-Type'], 'text/html');
+    assert.equal(res.headers['Cache-Control'], 's-maxage=604800');
     assert.equal(res.headers['Surrogate-Key'], 'h/WhVujl+n6KANwYWB57fhkvjfzzACeSawAAndzWdK0=');
-    assert.equal('<', res.body[0]);
+    assert.equal(res.body[0], '<');
     assert.ok(res.body.match(/srcset/));
   });
 
@@ -343,7 +343,7 @@ describe('Testing HTML Pipeline', () => {
     );
 
     const res = result.response;
-    assert.equal(404, res.status);
+    assert.equal(res.status, 404);
   });
 
   it('html.pipe keeps existing headers', async () => {
@@ -367,9 +367,9 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    assert.equal(201, result.response.status);
-    assert.equal('text/plain', result.response.headers['Content-Type']);
-    assert.equal('max-age=0', result.response.headers['Cache-Control']);
+    assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers['Content-Type'], 'text/plain');
+    assert.equal(result.response.headers['Cache-Control'], 'max-age=0');
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
   });
 
@@ -393,8 +393,8 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    assert.equal(201, result.response.status);
-    assert.equal('text/plain', result.response.headers['Content-Type']);
+    assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers['Content-Type'], 'text/plain');
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
 
     const dir = await dump({}, {}, -1);

@@ -26,12 +26,14 @@ const logger = winston.createLogger({
 describe('Test HTML emitter', () => {
   it('emitter works with empty document', () => {
     const out = emit({ content: { document: { body: {} } } }, { logger });
-    assert.deepEqual({
-      content: {
-        children: [],
-        html: '',
+    assert.deepEqual(
+      out, {
+        content: {
+          children: [],
+          html: '',
+        },
       },
-    }, out);
+    );
   });
 
   it('emitter transforms the given body', () => {
@@ -51,11 +53,13 @@ describe('Test HTML emitter', () => {
         },
       },
     }, { logger });
-    assert.deepEqual({
-      content: {
-        children: ['a', 'b'],
-        html: 'ab',
+    assert.deepEqual(
+      out, {
+        content: {
+          children: ['a', 'b'],
+          html: 'ab',
+        },
       },
-    }, out);
+    );
   });
 });
