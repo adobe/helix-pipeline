@@ -109,8 +109,16 @@ const params404 = {
 
 const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
+  XML_PRETTY: false,
 };
 
+const payload = {
+  response: {
+    body: '<?xml version="1.0" encoding="utf-8"?><test />',
+  },
+};
+
+const expectedXML = '<?xml version="1.0" encoding="utf-8"?><document><title level="1">Bill, Welcome to the future</title></document>';
 
 describe('Testing XML Pipeline', () => {
   it('xml.pipe is a function', () => {
@@ -151,16 +159,10 @@ describe('Testing XML Pipeline', () => {
 
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'application/xml');
-    assert.equal(result.response.body,
-      '<?xml version="1.0" encoding="utf-8"?><document><title level="1">Bill, Welcome to the future</title></document>');
+    assert.equal(result.response.body, expectedXML);
   });
 
   it('xmp.pipe does not overwrite existing respone body', async () => {
-    const payload = {
-      response: {
-        body: '<?xml version="1.0" encoding="utf-8"?><test />',
-      },
-    };
     const result = await pipe(
       () => {},
       payload,
@@ -168,6 +170,19 @@ describe('Testing XML Pipeline', () => {
         request: { params },
         secrets,
         logger,
+      },
+    );
+
+    assert.equal(result.response.body, payload.response.body);
+  });
+
+  it('xmp.pipe uses default logger if none provided', async () => {
+    const result = await pipe(
+      () => {},
+      payload,
+      {
+        request: { params },
+        secrets,
       },
     );
 

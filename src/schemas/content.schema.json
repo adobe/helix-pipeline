@@ -66,10 +66,6 @@
       "type": "object",
       "description": "The XML object to emit. See xmlbuilder-js for syntax."
     },
-    "xmlPretty": {
-      "type": "boolean",
-      "description": "Make emitted XML pretty (default: false)"
-    },
     "meta": {
       "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta"
     },

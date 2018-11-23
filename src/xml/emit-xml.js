@@ -12,7 +12,7 @@
 
 const builder = require('xmlbuilder');
 
-function emit({ content, response }, { logger }) {
+function emit({ content, response }, { secrets, logger }) {
   if (response.body) {
     logger.debug('Response body already exists');
     return {};
@@ -23,7 +23,7 @@ function emit({ content, response }, { logger }) {
       const xml = builder.create(content.xml, { encoding: 'utf-8' });
       return {
         response: {
-          body: xml.end({ pretty: content.xmlPretty }),
+          body: xml.end({ pretty: !!secrets.XML_PRETTY }),
         },
       };
     } catch (e) {
