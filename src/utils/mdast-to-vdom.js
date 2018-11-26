@@ -62,7 +62,7 @@ class VDOMTransformer {
         return true;
       });
     this._handlers.image = image(options);
-    this._handlers.embed = link(options);
+    this._handlers.link = link(options);
     this._handlers.embed = embed(options);
   }
 

@@ -23,7 +23,7 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-const action = { logger, secrets: { LINK_TITLES: false } };
+const action = { logger, secrets: { } };
 
 describe('Test Link Handler', () => {
   // test link rewriting
@@ -34,14 +34,9 @@ describe('Test Link Handler', () => {
       expectedUrl: '/test.html',
     },
     {
-      title: 'Does not alter URL without extension',
-      originalUrl: 'https://www.example.com/?bla',
-      expectedUrl: 'https://www.example.com/?bla',
-    },
-    {
       title: 'Does not alter URL with non .md extension',
-      originalUrl: 'https://www.example.com/test.png',
-      expectedUrl: 'https://www.example.com/test.png',
+      originalUrl: '/test.png',
+      expectedUrl: '/test.png',
     },
     {
       title: 'Does not lose query string while rewriting',
@@ -54,9 +49,9 @@ describe('Test Link Handler', () => {
       expectedUrl: '/test.html#bla',
     },
     {
-      title: 'Handles missing URL correctly',
-      originalUrl: undefined,
-      expectedUrl: undefined,
+      title: 'Ignores URL will protocol',
+      originalUrl: 'https://www.example.com/test.md',
+      expectedUrl: 'https://www.example.com/test.md',
     },
   ].forEach((testCase) => {
     it(testCase.title, () => {
@@ -70,27 +65,5 @@ describe('Test Link Handler', () => {
         assert.equal(tagName, 'a');
       }, node);
     });
-  });
-  // test link titles
-  const options = { LINK_TITLES: true };
-  it('Reuses existing node title', () => {
-    const node = {
-      type: 'link',
-      title: 'Test',
-    };
-    link(options)((_, tagName, parameters) => {
-      assert.equal(parameters.title, node.title);
-      assert.equal(tagName, 'a');
-    }, node);
-  });
-  it('Uses href as title if node has none', () => {
-    const node = {
-      type: 'link',
-      url: '/test.md',
-    };
-    link(options)((_, tagName, parameters) => {
-      assert.equal(parameters.title, parameters.href);
-      assert.equal(tagName, 'a');
-    }, node);
   });
 });

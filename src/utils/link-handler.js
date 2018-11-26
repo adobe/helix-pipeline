@@ -10,16 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
-function link({ LINK_TITLES }) {
-  return function handler(h, node) {
-    const props = {};
-    if (node.url) {
-      props.href = node.url.replace(/\.md/, '.html');
+const fallback = require('mdast-util-to-hast/lib/handlers/link');
+const url = require('url');
+const clone = require('clone');
+
+
+function link() {
+  return function handler(h, node, children) {
+    const n = clone(node);
+    if (!url.parse(n.url).protocol) {
+      n.url = n.url.replace(/\.md/, '.html');
     }
-    if (LINK_TITLES) {
-      props.title = node.title || props.href;
-    }
-    return h(node, 'a', props);
+    return fallback(h, n, children);
   };
 }
 

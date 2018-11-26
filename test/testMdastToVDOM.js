@@ -14,7 +14,7 @@
 const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
-const h = require('hyperscript');
+// const h = require('hyperscript');
 const winston = require('winston');
 const VDOM = require('../').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
@@ -66,6 +66,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     assert.equal(node.outerHTML, '<div><a name="h1"></a><h1>All Headings are the same to me</h1></div>');
   });
 
+  /*
   it('Custom Text Matcher with VDOM Nodes', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'links.json'));
     const transformer = new VDOM(mdast, action.secrets);
@@ -104,4 +105,5 @@ describe('Test MDAST to VDOM Transformation', () => {
 </li>
 </ul>`);
   });
+  */
 });
