@@ -21,6 +21,7 @@ const h = require('hyperscript');
 const { JSDOM } = require('jsdom');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
+const link = require('./link-handler');
 
 /**
  * @typedef {function(parent, tagname, attributes, children)} handlerFunction
@@ -61,6 +62,7 @@ class VDOMTransformer {
         return true;
       });
     this._handlers.image = image(options);
+    this._handlers.embed = link(options);
     this._handlers.embed = embed(options);
   }
 
