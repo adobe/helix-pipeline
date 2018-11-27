@@ -22,6 +22,7 @@ const { JSDOM } = require('jsdom');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
 const link = require('./link-handler');
+const types = require('../schemas/mdast.schema.json').properties.type.enum;
 
 /**
  * @typedef {function(parent, tagname, attributes, children)} handlerFunction
@@ -55,15 +56,14 @@ class VDOMTransformer {
 
     this._handlers = {};
     const that = this;
-    Object.keys(handlers)
-      // use our own handle function
-      .map((type) => {
-        this._handlers[type] = (cb, node, parent) => VDOMTransformer.handle(cb, node, parent, that);
-        return true;
-      });
-    this._handlers.image = image(options);
-    this._handlers.link = link(options);
-    this._handlers.embed = embed(options);
+    // use our own handle function for every known node type
+    types.map((type) => {
+      this._handlers[type] = (cb, node, parent) => VDOMTransformer.handle(cb, node, parent, that);
+      return true;
+    });
+    this.match('image', image(options));
+    this.match('embed', embed(options));
+    this.match('link', link(options));
   }
 
   /**

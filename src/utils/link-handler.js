@@ -13,16 +13,15 @@
 const fallback = require('mdast-util-to-hast/lib/handlers/link');
 const uri = require('uri-js');
 
-
-function link() {
-  return function handler(h, node, children) {
+function link({ extension = 'html' } = {}) {
+  return function handler(h, node) {
     const n = Object.assign({}, node);
     const uriParts = uri.parse(n.url);
     if (!uriParts.scheme && uriParts.path) {
-      uriParts.path = uriParts.path.replace(/\.md/, '.html');
+      uriParts.path = uriParts.path.replace(/\.md$/, `.${extension}`);
       n.url = uri.serialize(uriParts);
     }
-    return fallback(h, n, children);
+    return fallback(h, n);
   };
 }
 
