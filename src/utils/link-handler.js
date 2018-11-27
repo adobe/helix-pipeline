@@ -11,16 +11,16 @@
  */
 
 const fallback = require('mdast-util-to-hast/lib/handlers/link');
-const url = require('url');
-const clone = require('clone');
+const uri = require('uri-js');
 
 
 function link() {
   return function handler(h, node, children) {
-    const n = clone(node);
-    const parts = url.parse(n.url);
-    if (!parts.protocol && parts.path) {
-      n.url = n.url.replace(parts.path, parts.path.replace(/\.md/, '.html'));
+    const n = Object.assign({}, node);
+    const uriParts = uri.parse(n.url);
+    if (!uriParts.scheme && uriParts.path) {
+      uriParts.path = uriParts.path.replace(/\.md/, '.html');
+      n.url = uri.serialize(uriParts);
     }
     return fallback(h, n, children);
   };
