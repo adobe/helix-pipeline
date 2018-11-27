@@ -49,7 +49,7 @@ describe('Test Link Handler', () => {
       expectedUrl: '/test.html#bla',
     },
     {
-      title: 'Ignores URL will protocol',
+      title: 'Ignores URL with protocol',
       originalUrl: 'https://www.example.com/test.md',
       expectedUrl: 'https://www.example.com/test.md',
     },

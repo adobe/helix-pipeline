@@ -18,8 +18,9 @@ const clone = require('clone');
 function link() {
   return function handler(h, node, children) {
     const n = clone(node);
-    if (!url.parse(n.url).protocol) {
-      n.url = n.url.replace(/\.md/, '.html');
+    const parts = url.parse(n.url);
+    if (!parts.protocol && parts.path) {
+      n.url = n.url.replace(parts.path, parts.path.replace(/\.md/, '.html'));
     }
     return fallback(h, n, children);
   };
