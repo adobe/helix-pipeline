@@ -12,7 +12,7 @@
 
 const fallback = require('mdast-util-to-hast/lib/handlers/image');
 const normalize = require('mdurl/encode');
-const url = require('url');
+const url = require('uri-js');
 
 /**
  * Creates an array of widths based on a set of options
@@ -52,7 +52,7 @@ function image({
   /* Transform an image. */
   return function handler(h, node) {
     const srcurl = url.parse(node.url);
-    if (srcurl.protocol) {
+    if (srcurl.scheme) {
       return fallback(h, node);
     }
 

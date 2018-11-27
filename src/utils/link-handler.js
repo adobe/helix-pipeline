@@ -9,18 +9,20 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const tohtast = require('mdast-util-to-hast');
-const VDOMTransformer = require('../utils/mdast-to-vdom');
 
-function html({ content: { mdast }, request }, { logger, secrets }) {
-  logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
-  const extension = request && request.extension ? request.extension : 'html';
-  const content = {};
-  // do we still need this?
-  content.htast = tohtast(mdast);
-  content.document = new VDOMTransformer(mdast, Object.assign({ extension }, secrets))
-    .getDocument();
-  return { content };
+const fallback = require('mdast-util-to-hast/lib/handlers/link');
+const uri = require('uri-js');
+
+function link({ extension = 'html' } = {}) {
+  return function handler(h, node) {
+    const n = Object.assign({}, node);
+    const uriParts = uri.parse(n.url);
+    if (!uriParts.scheme && uriParts.path) {
+      uriParts.path = uriParts.path.replace(/\.md$/, `.${extension}`);
+      n.url = uri.serialize(uriParts);
+    }
+    return fallback(h, n);
+  };
 }
 
-module.exports = html;
+module.exports = link;

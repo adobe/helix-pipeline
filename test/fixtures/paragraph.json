@@ -1,0 +1,98 @@
+{
+  "type": "paragraph",
+  "children": [
+    {
+      "type": "link",
+      "title": null,
+      "url": "https://house.md/syntax-tree/mdast.md",
+      "children": [
+        {
+          "type": "text",
+          "value": "External link",
+          "position": {
+            "start": {
+              "line": 162,
+              "column": 24,
+              "offset": 6704
+            },
+            "end": {
+              "line": 162,
+              "column": 36,
+              "offset": 6716
+            },
+            "indent": []
+          }
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 162,
+          "column": 23,
+          "offset": 6703
+        },
+        "end": {
+          "line": 162,
+          "column": 75,
+          "offset": 6755
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "text",
+      "value": ": the parsed ",
+      "position": {
+        "start": {
+          "line": 162,
+          "column": 10,
+          "offset": 6690
+        },
+        "end": {
+          "line": 162,
+          "column": 23,
+          "offset": 6703
+        },
+        "indent": []
+      }
+    },
+    {
+      "type": "link",
+      "title": "My title",
+      "url": "/mdast.md",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "/dist/img/ipad.png",
+          "alt": "ipad"
+        }
+      ],
+      "position": {
+        "start": {
+          "line": 162,
+          "column": 23,
+          "offset": 6703
+        },
+        "end": {
+          "line": 162,
+          "column": 75,
+          "offset": 6755
+        },
+        "indent": []
+      }
+    }
+  ],
+  "position": {
+    "start": {
+      "line": 162,
+      "column": 3,
+      "offset": 6683
+    },
+    "end": {
+      "line": 162,
+      "column": 75,
+      "offset": 6755
+    },
+    "indent": []
+  }
+}

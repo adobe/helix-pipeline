@@ -66,7 +66,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     assert.equal(node.outerHTML, '<div><a name="h1"></a><h1>All Headings are the same to me</h1></div>');
   });
 
-  it('Custom Text Matcher with VDOM Nodes', () => {
+  it('Custom link handler with VDOM Nodes', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'links.json'));
     const transformer = new VDOM(mdast, action.secrets);
     transformer.match('link', (_, node) => {
@@ -103,5 +103,20 @@ describe('Test MDAST to VDOM Transformation', () => {
 <p><code>children</code>: an array of top-level elements of the HTML-rendered content</p>
 </li>
 </ul>`);
+  });
+
+  it('Custom link handler does not interfere with link rewriting', () => {
+    const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'paragraph.json'));
+    const transformer = new VDOM(mdast, action.secrets);
+    transformer.match('link[url^="http"]', (_, node) => {
+      const res = h(
+        'a',
+        { href: node.url, rel: 'nofollow' },
+        node.children.map(({ value }) => value),
+      );
+      return res;
+    });
+    const node = transformer.process();
+    assert.equal(node.outerHTML, '<p><a href="https://house.md/syntax-tree/mdast.md" rel="nofollow">External link</a>: the parsed <a href="/mdast.html" title="My title"><img src="/dist/img/ipad.png" alt="ipad" srcset="/dist/img/ipad.png?width=480&amp;auto=webp 480w,/dist/img/ipad.png?width=1384&amp;auto=webp 1384w,/dist/img/ipad.png?width=2288&amp;auto=webp 2288w,/dist/img/ipad.png?width=3192&amp;auto=webp 3192w,/dist/img/ipad.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></a></p>');
   });
 });
