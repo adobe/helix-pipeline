@@ -1,4 +1,6 @@
-# Hypermedia Pipeline
+# Helix Pipeline
+
+(formerly known as Hypermedia Pipeline)
 
 This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines.
 
@@ -6,11 +8,11 @@ It uses reducers and continuations to create a simple processing pipeline that c
 
 # Status
 
-[![codecov](https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg)](https://codecov.io/gh/adobe/hypermedia-pipeline)
-[![CircleCI](https://img.shields.io/circleci/project/github/adobe/hypermedia-pipeline.svg)](https://circleci.com/gh/adobe/hypermedia-pipeline)
-[![GitHub license](https://img.shields.io/github/license/adobe/hypermedia-pipeline.svg)](https://github.com/adobe/hypermedia-pipeline/blob/master/LICENSE.txt)
-[![GitHub issues](https://img.shields.io/github/issues/adobe/hypermedia-pipeline.svg)](https://github.com/adobe/hypermedia-pipeline/issues)
-[![npm](https://img.shields.io/npm/dw/@adobe/hypermedia-pipeline.svg)](https://www.npmjs.com/package/@adobe/hypermedia-pipeline) [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/hypermedia-pipeline.svg)](https://greenkeeper.io/)
+[![codecov](https://img.shields.io/codecov/c/github/adobe/helix-pipeline.svg)](https://codecov.io/gh/adobe/helix-pipeline)
+[![CircleCI](https://img.shields.io/circleci/project/github/adobe/helix-pipeline.svg)](https://circleci.com/gh/adobe/helix-pipeline)
+[![GitHub license](https://img.shields.io/github/license/adobe/helix-pipeline.svg)](https://github.com/adobe/helix-pipeline/blob/master/LICENSE.txt)
+[![GitHub issues](https://img.shields.io/github/issues/adobe/helix-pipeline.svg)](https://github.com/adobe/helix-pipeline/issues)
+[![npm](https://img.shields.io/npm/dw/@adobe/helix-pipeline.svg)](https://www.npmjs.com/package/@adobe/helix-pipeline) [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/helix-pipeline.svg)](https://greenkeeper.io/)
 
 ## Anatomy of a Pipeline
 
