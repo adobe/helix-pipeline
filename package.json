@@ -1,8 +1,8 @@
 {
-  "name": "@adobe/hypermedia-pipeline",
+  "name": "@adobe/helix-pipeline",
   "version": "0.8.1-pre.2",
   "description": "",
-  "repository": "https://github.com/adobe/hypermedia-pipeline",
+  "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
