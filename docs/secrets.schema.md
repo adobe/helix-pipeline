@@ -24,6 +24,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [REPO_API_ROOT](#repo_api_root) | `string` | Optional | `"https://api.github.com/"` | Secrets (this schema) |
 | [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
 | [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional | `true` | Secrets (this schema) |
+| [XML_PRETTY](#xml_pretty) | `boolean` | Optional | `true` | Secrets (this schema) |
 | `[A-Z0-9_]+` | complex | Pattern |  | Secrets (this schema) |
 
 ## EMBED_SERVICE
@@ -198,6 +199,25 @@ The Base URL for retrieving raw text files from GitHub
 * defined in this schema
 
 ### TEST_BOOLEAN Type
+
+
+`boolean`
+
+
+
+
+
+## XML_PRETTY
+
+Print XML with line breaks and indentation
+
+`XML_PRETTY`
+* is optional
+* type: `boolean`
+* default: `true`
+* defined in this schema
+
+### XML_PRETTY Type
 
 
 `boolean`

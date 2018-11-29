@@ -33,6 +33,7 @@ The content as retrieved from the repository and enriched in the pipeline.
 | [sections](#sections) | Section | Optional | Content (this schema) |
 | [sources](#sources) | `string[]` | Optional | Content (this schema) |
 | [title](#title) | `string` | Optional | Content (this schema) |
+| [xml](#xml) | `object` | Optional | Content (this schema) |
 
 ## body
 
@@ -287,6 +288,29 @@ Extracted title of the document
 
 
 `string`
+
+
+
+
+
+
+## xml
+
+The XML object to emit. See xmlbuilder-js for syntax.
+
+`xml`
+* is optional
+* type: `object`
+* defined in this schema
+
+### xml Type
+
+
+`object` with following properties:
+
+
+| Property | Type | Required |
+|----------|------|----------|
 
 
 
