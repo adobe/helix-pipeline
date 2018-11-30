@@ -23,19 +23,19 @@ const logger = winston.createLogger({
   transports: [new winston.transports.Console()],
 });
 
-const xml = {
-  document: {
-    title: {
-      '#text': 'Bill, Welcome to the future',
-      '@level': 1,
+const content = {
+  xml: {
+    document: {
+      title: {
+        '#text': 'Bill, Welcome to the future',
+        '@level': 1,
+      },
     },
   },
 };
 
 const payload = {
-  content: {
-    xml,
-  },
+  content,
   response: {},
 };
 
@@ -60,19 +60,22 @@ describe('Test emit-xml', () => {
     action.secrets.XML_PRETTY = false;
   });
 
-  it('does nothing if no object specified', () => {
-    payload.content.xml = undefined;
-    assert.deepEqual(emit(payload, action), {});
+  it('does nothing if no XML object specified', () => {
+    assert.deepEqual(emit({ content: {}, response: {} }, action), {});
   });
 
   it('fails gracefully in case of invalid object', () => {
-    payload.content.xml = function bla() {}; // unexpected value which will break xmlbuilder-js
-    assert.deepEqual(emit(payload, action), {});
+    // xml contains unexpected value which will break xmlbuilder-js
+    assert.deepEqual(emit({ content: { xml: function bla() {} }, response: {} }, action), {});
   });
 
   it('keeps existing response body', () => {
-    payload.content.xml = xml;
     payload.response.body = expectedXML;
     assert.deepEqual(emit(payload, action), {});
+  });
+
+  it('handles missing response object', () => {
+    const output = emit({ content }, action);
+    assert.deepEqual(output.response.body, expectedXML);
   });
 });
