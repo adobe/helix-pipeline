@@ -12,7 +12,7 @@
 
 const builder = require('xmlbuilder');
 
-function emit({ content, response }, { secrets, logger }) {
+function emit({ content, response = {} }, { secrets, logger }) {
   if (response.body) {
     logger.debug('Response body already exists');
     return {};
