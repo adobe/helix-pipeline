@@ -60,7 +60,7 @@
     "request-promise-native": "^1.0.5",
     "retext": "^6.0.0",
     "retext-smartypants": "^3.0.1",
-    "snyk": "^1.88.1",
+    "snyk": "^1.113.0",
     "unified": "^7.0.0",
     "unist-util-find-all-between": "^1.0.2",
     "unist-util-map": "^1.0.4",
