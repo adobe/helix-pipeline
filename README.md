@@ -257,7 +257,7 @@ It can be used in scenarios where:
 Load the `VDOM` helper through:
 
 ```javascript
-const VDOM = require('@adobe/hypermedia-pipeline').utils.vdom;
+const VDOM = require('@adobe/helix-pipeline').utils.vdom;
 ```
 
 #### Simple Transformations
