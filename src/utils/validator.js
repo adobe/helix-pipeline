@@ -11,7 +11,6 @@
  */
 /* eslint-disable no-underscore-dangle */
 const Ajv = require('ajv');
-const fs = require('fs-extra');
 const path = require('path');
 const hash = require('object-hash');
 
@@ -22,8 +21,8 @@ function ajv(logger, options = {}) {
     logger.debug(`initializing ajv ${JSON.stringify(options)}`);
     const schemadir = path.resolve(__dirname, '..', 'schemas');
     const validator = new Ajv(Object.assign({ allErrors: true, verbose: true }, options));
-    // compromise: in order to avoid async code here 
-    // (which would complicate pipeline implementation considerably) 
+    // compromise: in order to avoid async code here
+    // (which would complicate pipeline implementation considerably)
     // we're using static file names and synchronous reads/requires (#134)
     const schemaFiles = [
       `${schemadir}/action.schema.json`,
@@ -40,6 +39,8 @@ function ajv(logger, options = {}) {
       `${schemadir}/textcoordinates.schema.json`,
     ];
     schemaFiles.forEach((schemaFile) => {
+      /* eslint-disable global-require */
+      /* eslint-disable import/no-dynamic-require */
       const schemaData = require(schemaFile);
       validator.addSchema(schemaData);
       logger.debug(`- ${schemaData.$id}  (${path.basename(schemaFile)})`);
