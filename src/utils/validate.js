@@ -11,8 +11,8 @@
  */
 const ajv = require('./validator');
 
-async function validate(context, action, index) {
-  const validator = await ajv(action.logger);
+function validate(context, action, index) {
+  const validator = ajv(action.logger);
   const cvalid = validator.validate('https://ns.adobe.com/helix/pipeline/context', context);
   if (!cvalid) {
     action.logger.warn(`Invalid Context at step ${index}, ${validator.errorsText()}`);
