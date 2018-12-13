@@ -51,15 +51,23 @@ function image(section) {
  */
 function sectiontype(section) {
   const children = section.children || [];
-  const typecounter = children.reduce((counter, { type }) => {
+
+  function reducer(counter, { type, children: pChildren }) {
     if (type === 'yaml') {
       return counter;
     }
-    const mycounter = {};
+
+    let mycounter = {};
+    if (pChildren && pChildren.length > 0) {
+      mycounter = Object.assign(counter, pChildren.reduce(reducer, {}));
+    }
+
     const mycount = counter[type] || 0;
     mycounter[type] = mycount + 1;
     return Object.assign(counter, mycounter);
-  }, {});
+  }
+
+  const typecounter = children.reduce(reducer, {});
 
   const types = Object.keys(typecounter).map(type => `has-${type}`);
   if (Object.keys(typecounter).length === 1) {
