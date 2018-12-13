@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
+/* eslint-disable import/no-extraneous-dependencies */
 const { compileFromFile } = require('json-schema-to-typescript');
 const { writeFileSync } = require('fs-extra');
 const fs = require('fs-extra');
