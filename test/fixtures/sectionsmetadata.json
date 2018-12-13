@@ -1,9 +1,13 @@
 [{
     "types": [
+      "has-text",
       "has-heading",
       "has-paragraph",
-      "is-paragraph-heading",
-      "is-paragraph"
+      "has-image",
+      "has-link",
+      "is-link-text-paragraph",
+      "is-link-text",
+      "is-link"
     ],
     "image": "https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg",
     "intro": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines.",
@@ -140,12 +144,15 @@
   },
   {
     "types": [
+      "has-text",
       "has-heading",
       "has-paragraph",
+      "has-listItem",
       "has-list",
-      "is-paragraph-heading-list",
-      "is-paragraph-heading",
-      "is-paragraph"
+      "has-inlineCode",
+      "is-listItem-text-paragraph",
+      "is-listItem-text",
+      "is-listItem"
     ],
     "intro": "A pipeline consists of following main parts:",
     "title": "Anatomy of a Pipeline",
@@ -256,8 +263,10 @@
   {
     "title": "This section has a paragraph, but no title.",
     "types": [
-      "has-paragraph",
-      "is-paragraph-only"
+       "has-text",
+       "has-paragraph",
+       "is-paragraph-text",
+       "is-paragraph"
     ],
     "intro": "This section has a paragraph, but no title.",
     "meta": {},
@@ -281,8 +290,10 @@
   {
     "intro": "This section has a title, but no paragraph",
     "types": [
-      "has-heading",
-      "is-heading-only"
+       "has-text",
+       "has-heading",
+       "is-text-heading",
+       "is-text"
     ],
     "title": "This section has a title, but no paragraph",
     "meta": {},
@@ -299,10 +310,14 @@
   {
     "title": "See below for the anatomy of a payload.",
     "types": [
-      "has-paragraph",
-      "has-list",
-      "is-paragraph-list",
-      "is-paragraph"
+       "has-text",
+       "has-paragraph",
+       "has-inlineCode",
+       "has-listItem",
+       "has-list",
+       "is-text-inlineCode-listItem",
+       "is-text-inlineCode",
+       "is-text"
     ],
     "intro": "See below for the anatomy of a payload.",
     "meta": {},
@@ -382,13 +397,17 @@
   },
   {
     "types": [
+      "has-text",
       "has-heading",
+      "has-inlineCode",
       "has-paragraph",
+      "has-listItem",
+      "has-link",
       "has-list",
       "has-code",
-      "is-paragraph-heading-list",
-      "is-paragraph-heading",
-      "is-paragraph"
+      "is-listItem-text-paragraph",
+      "is-listItem-text",
+      "is-listItem"
     ],
     "intro": "A pipeline builder can be created by creating a CommonJS module that exports a function pipe which accepts following arguments and returns a Pipeline function.",
     "title": "Building a Pipeline",
@@ -561,13 +580,17 @@
   },
   {
     "types": [
-      "has-heading",
-      "has-paragraph",
-      "has-list",
-      "has-code",
-      "is-paragraph-heading-list",
-      "is-paragraph-heading",
-      "is-paragraph"
+       "has-text",
+       "has-heading",
+       "has-inlineCode",
+       "has-paragraph",
+       "has-listItem",
+       "has-list",
+       "has-code",
+       "has-link",
+       "is-heading-list-text",
+       "is-heading-list",
+       "is-heading"
     ],
     "intro": "The main function is typically a pure function that converts the request, context, and content properties of the payload into a response object.",
     "title": "The Main Function",
