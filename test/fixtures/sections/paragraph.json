@@ -1,0 +1,20 @@
+[{
+    "types": [
+      "has-paragraph",
+      "nb-paragraph-1",
+      "is-paragraph-only"
+    ],
+    "type": "root",
+    "intro": "This is only a paragraph.",
+    "title": "This is only a paragraph.",
+    "meta": {},
+    "children": [{
+        "type": "paragraph",
+        "children": [{
+          "type": "text",
+          "value": "This is only a paragraph."
+        }]
+      }
+    ]
+  }
+]

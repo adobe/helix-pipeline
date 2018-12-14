@@ -1,0 +1,66 @@
+[{
+  "types": [
+    "has-heading",
+    "has-list",
+    "nb-heading-1",
+    "nb-list-1",
+    "is-heading-list",
+    "is-heading"
+  ],
+  "intro": "list item 1",
+  "title": "Header and a list",
+  "meta": {},
+  "type": "root",
+  "children": [{
+      "type": "heading",
+      "depth": 1,
+      "children": [{
+        "type": "text",
+        "value": "Header and a list"
+      }]
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "start": null,
+      "spread": false,
+      "children": [{
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [{
+            "type": "paragraph",
+            "children": [{
+              "type": "text",
+              "value": "list item 1"
+            }]
+          }]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [{
+            "type": "paragraph",
+            "children": [{
+              "type": "text",
+              "value": "list item 2"
+            }]
+          }]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [{
+            "type": "paragraph",
+            "children": [{
+              "type": "text",
+              "value": "list item 3"
+            }]
+          }]
+        }
+      ]
+    }
+  ]
+}]

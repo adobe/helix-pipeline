@@ -1,0 +1,31 @@
+[{
+    "types": [
+      "has-heading",
+      "has-paragraph",
+      "nb-heading-1",
+      "nb-paragraph-1",
+      "is-heading-paragraph",
+      "is-heading"
+    ],
+    "type": "root",
+    "intro": "This is a paragraph.",
+    "meta": {},
+    "title": "Header and one paragraph",
+    "children": [{
+        "type": "heading",
+        "depth": 1,
+        "children": [{
+          "type": "text",
+          "value": "Header and one paragraph"
+        }]
+      },
+      {
+        "type": "paragraph",
+        "children": [{
+          "type": "text",
+          "value": "This is a paragraph."
+        }]
+      }
+    ]
+  }
+]

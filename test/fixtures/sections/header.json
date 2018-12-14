@@ -1,0 +1,21 @@
+[{
+    "types": [
+      "has-heading",
+      "nb-heading-1",
+      "is-heading-only"
+    ],
+    "type": "root",
+    "meta": {},
+    "intro": "Header only",
+    "title": "Header only",
+    "children": [{
+        "type": "heading",
+        "depth": 1,
+        "children": [{
+          "type": "text",
+          "value": "Header only"
+        }]
+      }
+    ]
+  }
+]

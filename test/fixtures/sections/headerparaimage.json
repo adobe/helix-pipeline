@@ -1,0 +1,43 @@
+[{
+    "types": [
+      "has-heading",
+      "has-paragraph",
+      "has-image",
+      "nb-heading-1",
+      "nb-paragraph-1",
+      "nb-image-1",
+      "is-heading-paragraph-image",
+      "is-heading-paragraph",
+      "is-heading"
+    ],
+    "type": "root",
+    "intro": "This is a paragraph.",
+    "image": "./helix_logo.png",
+    "meta": {},
+    "title": "Header, a paragraph and one image",
+    "children": [{
+        "type": "heading",
+        "depth": 1,
+        "children": [{
+          "type": "text",
+          "value": "Header, a paragraph and one image"
+        }]
+      },
+      {
+        "type": "paragraph",
+        "children": [{
+          "type": "text",
+          "value": "This is a paragraph."
+        }]
+      },{
+        "type": "paragraph",
+        "children": [{
+          "alt": "helix-logo",
+          "title": null,
+          "type": "image",
+          "url": "./helix_logo.png"
+          }]
+      }
+    ]
+  }
+]
