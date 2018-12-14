@@ -1,30 +1,36 @@
-[{
+[
+  {
     "types": [
-      "has-heading",
       "has-paragraph",
-      "nb-heading-1",
+      "has-heading",
       "nb-paragraph-1",
-      "is-heading-paragraph",
-      "is-heading"
+      "nb-heading-1",
+      "is-paragraph-heading",
+      "is-paragraph"
     ],
-    "type": "root",
     "intro": "This is a paragraph.",
-    "meta": {},
     "title": "Header and one paragraph",
-    "children": [{
+    "meta": {},
+    "type": "root",
+    "children": [
+      {
         "type": "heading",
         "depth": 1,
-        "children": [{
-          "type": "text",
-          "value": "Header and one paragraph"
-        }]
+        "children": [
+          {
+            "type": "text",
+            "value": "Header and one paragraph"
+          }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [{
-          "type": "text",
-          "value": "This is a paragraph."
-        }]
+        "children": [
+          {
+            "type": "text",
+            "value": "This is a paragraph."
+          }
+        ]
       }
     ]
   }

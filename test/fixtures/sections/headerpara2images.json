@@ -1,50 +1,61 @@
-[{
+[
+  {
     "types": [
-      "has-heading",
-      "has-paragraph",
       "has-image",
-      "nb-heading-1",
-      "nb-paragraph-1",
+      "has-paragraph",
+      "has-heading",
       "nb-image-2",
-      "is-image-heading-paragraph",
-      "is-image-heading",
+      "nb-paragraph-1",
+      "nb-heading-1",
+      "is-image-paragraph-heading",
+      "is-image-paragraph",
       "is-image"
     ],
-    "type": "root",
-    "intro": "This is a paragraph.",
     "image": "./helix_logo.png",
-    "meta": {},
+    "intro": "This is a paragraph.",
     "title": "Header, a paragraph and one image",
-    "children": [{
+    "meta": {},
+    "type": "root",
+    "children": [
+      {
         "type": "heading",
         "depth": 1,
-        "children": [{
-          "type": "text",
-          "value": "Header, a paragraph and one image"
-        }]
+        "children": [
+          {
+            "type": "text",
+            "value": "Header, a paragraph and one image"
+          }
+        ]
       },
       {
         "type": "paragraph",
-        "children": [{
-          "type": "text",
-          "value": "This is a paragraph."
-        }]
-      },{
+        "children": [
+          {
+            "type": "text",
+            "value": "This is a paragraph."
+          }
+        ]
+      },
+      {
         "type": "paragraph",
-        "children": [{
-          "alt": "helix-logo",
-          "title": null,
-          "type": "image",
-          "url": "./helix_logo.png"
-          }]
-      },{
-        "type": "paragraph",
-        "children": [{
-          "alt": "helix-logo",
-          "title": null,
-          "type": "image",
-          "url": "./helix_logo.png"
-          }]
+        "children": [
+          {
+            "type": "image",
+            "title": null,
+            "url": "./helix_logo.png",
+            "alt": "helix-logo"
+          },
+          {
+            "type": "text",
+            "value": "\n"
+          },
+          {
+            "type": "image",
+            "title": null,
+            "url": "./helix_logo.png",
+            "alt": "helix-logo"
+          }
+        ]
       }
     ]
   }

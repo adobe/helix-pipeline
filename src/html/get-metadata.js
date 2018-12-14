@@ -65,7 +65,7 @@ function sectiontype(section) {
       pChildren.forEach(({ type: subType }) => {
         // exclude text which are default paragraph content
         if (subType !== 'text') {
-          const mycount = counter[subType] || 0;
+          const mycount = mycounter[subType] || 0;
           mycounter[subType] = mycount + 1;
         }
       });
@@ -73,11 +73,14 @@ function sectiontype(section) {
 
     if (Object.keys(mycounter).length === 0) {
       // was really a paragraph, only text inside
-      const mycount = counter[type] || 0;
+      const mycount = mycounter[type] || 0;
       mycounter[type] = mycount + 1;
     }
 
-    return Object.assign(counter, mycounter);
+    Object.keys(counter).forEach((key) => {
+      mycounter[key] = counter[key] + (mycounter[key] || 0);
+    });
+    return mycounter;
   }
 
   const typecounter = children.reduce(reducer, {});

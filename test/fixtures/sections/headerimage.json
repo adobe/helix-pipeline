@@ -1,32 +1,39 @@
-[{
-    "types": [
-      "has-heading",
-      "has-image",
-      "nb-heading-1",
-      "nb-image-1",
-      "is-heading-image",
-      "is-heading"
-    ],
-    "type": "root",
+[
+  {
     "intro": "Header and one image",
+    "types": [
+      "has-image",
+      "has-heading",
+      "nb-image-1",
+      "nb-heading-1",
+      "is-image-heading",
+      "is-image"
+    ],
     "image": "./helix_logo.png",
-    "meta": {},
     "title": "Header and one image",
-    "children": [{
+    "meta": {},
+    "type": "root",
+    "children": [
+      {
         "type": "heading",
         "depth": 1,
-        "children": [{
-          "type": "text",
-          "value": "Header and one image"
-        }]
-      }, {
+        "children": [
+          {
+            "type": "text",
+            "value": "Header and one image"
+          }
+        ]
+      },
+      {
         "type": "paragraph",
-        "children": [{
-          "alt": "helix-logo",
-          "title": null,
-          "type": "image",
-          "url": "./helix_logo.png"
-          }]
+        "children": [
+          {
+            "type": "image",
+            "title": null,
+            "url": "./helix_logo.png",
+            "alt": "helix-logo"
+          }
+        ]
       }
     ]
   }
