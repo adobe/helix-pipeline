@@ -20,9 +20,12 @@ const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
  */
 function buildUrl(p) {
   let path = p.path || '/';
-  if (path.indexOf('.') !== -1) path = path.substring(0, path.lastIndexOf('.'));
+  const dot = path.lastIndexOf('.');
+  if (dot !== -1) {
+    path = path.substring(0, dot);
+  }
   const sel = p.selector ? `.${p.selector}` : '';
-  const ext = p.extension ? `.${p.extension}` : '';
+  const ext = `.${p.extension || 'html'}`;
   const query = p.params ? `?${p.params}` : '';
   return `${path}${sel}${ext}${query}`;
 }
