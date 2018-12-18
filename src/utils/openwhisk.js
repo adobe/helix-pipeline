@@ -15,6 +15,19 @@ const querystring = require('querystring');
 const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
 
 /**
+ * Builds the URL from path, selector, extension and params
+ * @param {Object} p The request parameters
+ */
+function buildUrl(p) {
+  let path = p.path || '/';
+  if (path.indexOf('.') !== -1) path = path.substring(0, path.lastIndexOf('.'));
+  const sel = p.selector ? `.${p.selector}` : '';
+  const ext = p.extension ? `.${p.extension}` : '';
+  const query = p.params ? `?${p.params}` : '';
+  return `${path}${sel}${ext}${query}`;
+}
+
+/**
  * A function that takes OpenWhisk-style req parameter and turns
  * it into the original Express-style request object which is returned.
  * @param {Object} action The pipeline action context
@@ -33,7 +46,7 @@ function extractClientRequest(action) {
     path: request.params.path || '',
     extension: request.params.extension || '',
     selector: request.params.selector || '',
-    url: request.params.url || '',
+    url: buildUrl(request.params),
   };
 }
 
