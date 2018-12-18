@@ -96,6 +96,7 @@ describe('Testing OpenWhisk adapter', () => {
       selector: 'print.preview',
       params: 'a=42&b=green',
       SECRET: '1234',
+      url: '/test.print.preview.html',
     };
     let action = {};
     let payload = {};
@@ -110,6 +111,7 @@ describe('Testing OpenWhisk adapter', () => {
         extension: 'html',
         selector: 'print.preview',
         params: 'a=42&b=green',
+        url: '/test.print.preview.html',
       },
       headers: {
         Host: 'example.com',
@@ -134,6 +136,7 @@ describe('Testing OpenWhisk adapter', () => {
         path: '/test',
         extension: 'html',
         selector: 'print.preview',
+        url: '/test.print.preview.html',
       },
     });
   });

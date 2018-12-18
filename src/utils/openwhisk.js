@@ -33,6 +33,7 @@ function extractClientRequest(action) {
     path: request.params.path || '',
     extension: request.params.extension || '',
     selector: request.params.selector || '',
+    url: request.params.url || '',
   };
 }
 
