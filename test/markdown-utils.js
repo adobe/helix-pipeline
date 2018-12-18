@@ -58,11 +58,10 @@ module.exports.assertMatch = function assertMatch(name, cb) {
 
 module.exports.assertValid = function assertValid(name, cb, done) {
   const out = context(name, cb);
-  return validate(out, { logger: nopLogger }, 0)
-    .then(() => {
-      done();
-    })
-    .catch((e) => {
-      done(e);
-    });
+  try {
+    validate(out, { logger: nopLogger }, 0);
+    done();
+  } catch (e) {
+    done(e);
+  }
 };

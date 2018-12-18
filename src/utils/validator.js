@@ -11,28 +11,40 @@
  */
 /* eslint-disable no-underscore-dangle */
 const Ajv = require('ajv');
-const fs = require('fs-extra');
 const path = require('path');
 const hash = require('object-hash');
 
 const _ajv = {};
 
-async function ajv(logger, options = {}) {
+function ajv(logger, options = {}) {
   if (!_ajv[hash(options)]) {
     logger.debug(`initializing ajv ${JSON.stringify(options)}`);
     const schemadir = path.resolve(__dirname, '..', 'schemas');
     const validator = new Ajv(Object.assign({ allErrors: true, verbose: true }, options));
-    const sourcefiles = await fs.readdir(schemadir);
-
-    const schemas = sourcefiles
-      .filter(file => file.match(/\.schema\.json$/))
-      .map(schema => path.resolve(schemadir, schema));
-
-    await Promise.all(schemas.map(async (file) => {
-      const schemaData = await fs.readJSON(file);
+    // compromise: in order to avoid async code here
+    // (which would complicate pipeline implementation considerably)
+    // we're using static file names and synchronous reads/requires (#134)
+    const schemaFiles = [
+      `${schemadir}/action.schema.json`,
+      `${schemadir}/content.schema.json`,
+      `${schemadir}/context.schema.json`,
+      `${schemadir}/mdast.schema.json`,
+      `${schemadir}/meta.schema.json`,
+      `${schemadir}/position.schema.json`,
+      `${schemadir}/rawrequest.schema.json`,
+      `${schemadir}/request.schema.json`,
+      `${schemadir}/response.schema.json`,
+      `${schemadir}/secrets.schema.json`,
+      `${schemadir}/section.schema.json`,
+      `${schemadir}/textcoordinates.schema.json`,
+    ];
+    schemaFiles.forEach((schemaFile) => {
+      /* eslint-disable global-require */
+      /* eslint-disable import/no-dynamic-require */
+      const schemaData = require(schemaFile);
       validator.addSchema(schemaData);
-      logger.debug(`- ${schemaData.$id}  (${path.basename(file)})`);
-    }));
+      logger.debug(`- ${schemaData.$id}  (${path.basename(schemaFile)})`);
+    });
     logger.debug('ajv initialized');
     _ajv[hash(options)] = validator;
   }

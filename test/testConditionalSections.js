@@ -14,7 +14,7 @@
 const assert = require('assert');
 const winston = require('winston');
 const { pipe } = require('../src/defaults/html.pipe.js');
-const { selectstrain } = require('../src/utils/conditional-sections');
+const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
 
 const logger = winston.createLogger({
   // tune this for debugging
@@ -280,5 +280,160 @@ describe('Unit Test Section Strain Filtering', () => {
     };
     const result = selectstrain(context, action);
     assert.equal(result.content.sections.filter(nonhidden).length, 3);
+    assert.deepEqual(result.content.sections.filter(nonhidden)[0], {
+      meta: { hidden: false },
+    });
+  });
+});
+
+describe('Select Sections for Testing #unit', () => {
+  it('Works with empty section lists', () => {
+    assert.deepEqual(testgroups(), {});
+  });
+
+  it('Works with single test variants', () => {
+    assert.deepEqual(Object.keys(testgroups([
+      { meta: { test: 'a', title: 'a' } },
+      { meta: { test: 'a', title: 'b' } },
+      {},
+    ])), ['a']);
+  });
+
+  it('Works with multiple test variants', () => {
+    assert.deepEqual(Object.keys(testgroups([
+      { meta: { test: 'a', title: 'a' } },
+      { meta: { test: 'a', title: 'b' } },
+      { meta: { test: 'b', title: 'A' } },
+      { meta: { test: 'b', title: 'A' } },
+      {},
+    ])), ['a', 'b']);
+  });
+});
+
+describe('Pick among possible candidate sections #unit', () => {
+  it('Works with empty candidate lists', () => {
+    assert.deepEqual(pick(), {});
+  });
+
+  it('Picks a candidate for each group', () => {
+    assert.deepEqual(pick({
+      a: [1, 2, 3],
+      b: [4, 5, 6],
+    }), { a: 2, b: 5 });
+  });
+
+  it('Picks a different candidate for each strain', () => {
+    assert.notDeepEqual(pick({
+      a: [1, 2, 3],
+      b: [4, 5, 6],
+    }, 'zap'), pick({
+      a: [1, 2, 3],
+      b: [4, 5, 6],
+    }, 'zip'));
+  });
+});
+
+describe('Integration Test A/B Testing', () => {
+  it('html.pipe sees only one variant', async () => {
+    const myparams = Object.assign({ strain: 'default' }, params);
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
+        assert.equal(content.sections.filter(nonhidden).length, 3);
+        assert.equal(content.sections.filter(nonhidden)[2].meta.test, 'a');
+        return { response: { body: content.html } };
+      },
+      {
+        content: {
+          body: `---
+frontmatter: true
+---
+
+This is an easy test.
+
+***
+
+These two sections should always be shown
+
+---
+test: a
+---
+
+But neither this one.
+
+---
+test: a
+---
+
+Or this one at the same time.
+
+`,
+        },
+      },
+      {
+        request: { params: myparams },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(result.error, null);
+  });
+
+  it('variant in html.pipe differs from strain to strain', async () => {
+    async function runpipe(strain) {
+      let selected = {};
+      const myparams = Object.assign({ strain }, params);
+      const result = await pipe(
+        ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+          logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
+          assert.equal(content.sections.filter(nonhidden).length, 3);
+          // remember what was selected
+          /* eslint-disable-next-line prefer-destructuring */
+          selected = content.sections.filter(nonhidden)[2];
+          return { response: { body: content.html } };
+        },
+        {
+          content: {
+            body: `---
+frontmatter: true
+---
+
+This is an easy test.
+
+***
+
+These two sections should always be shown
+
+---
+test: a
+---
+
+But neither this one.
+
+---
+test: a
+---
+
+Or this one at the same time.
+
+`,
+          },
+        },
+        {
+          request: { params: myparams },
+          secrets,
+          logger,
+        },
+      );
+      assert.equal(result.error, null);
+      return selected;
+    }
+
+    assert.notDeepEqual(await runpipe('foo'), await runpipe('bar'));
+    assert.deepEqual(await runpipe('baz'), await runpipe('baz'));
   });
 });
