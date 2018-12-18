@@ -52,10 +52,10 @@
             "type": "string",
             "description": "The HTTP method of the request",
             "meta:enum": {
-                "get": "GET request",
-                "post": "POST request",
-                "put": "PUT request (not handled by Helix)",
-                "delete": "DELETE request (not handled by Helix)"
+                "GET": "GET request",
+                "POST": "POST request",
+                "PUT": "PUT request (not handled by Helix)",
+                "DELETE": "DELETE request (not handled by Helix)"
             }
         },
         "headers": {
