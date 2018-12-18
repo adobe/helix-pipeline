@@ -50,7 +50,7 @@
         },
         "method": {
             "type": "string",
-            "description": "The HTTP method of the request",
+            "description": "The HTTP method of the request. Note: method names can be lower-case.",
             "meta:enum": {
                 "GET": "GET request",
                 "POST": "POST request",
