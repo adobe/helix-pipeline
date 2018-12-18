@@ -91,7 +91,7 @@ describe('Testing OpenWhisk adapter', () => {
       },
       __ow_logger: log,
       __ow_method: 'get',
-      path: '/test',
+      path: '/test.md',
       extension: 'html',
       selector: 'print.preview',
       params: 'a=42&b=green',
@@ -106,7 +106,7 @@ describe('Testing OpenWhisk adapter', () => {
 
     assert.deepEqual(action.request, {
       params: {
-        path: '/test',
+        path: '/test.md',
         extension: 'html',
         selector: 'print.preview',
         params: 'a=42&b=green',
@@ -131,7 +131,7 @@ describe('Testing OpenWhisk adapter', () => {
           Host: 'example.com',
         },
         method: 'get',
-        path: '/test',
+        path: '/test.md',
         extension: 'html',
         selector: 'print.preview',
         url: '/test.print.preview.html?a=42&b=green',
