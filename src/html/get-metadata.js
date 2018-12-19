@@ -60,10 +60,10 @@ function sectiontype(section) {
     const mycounter = {};
 
     if (type === 'paragraph' && pChildren && pChildren.length > 0) {
-       // if child is a paragraph, check its children, it might contain an image or a list
+      // if child is a paragraph, check its children, it might contain an image or a list
       // which are always wrapped by default.
       pChildren.forEach(({ type: subType }) => {
-         // exclude text nodes which are default paragraph content
+        // exclude text nodes which are default paragraph content
         if (subType !== 'text') {
           const mycount = mycounter[subType] || 0;
           mycounter[subType] = mycount + 1;
