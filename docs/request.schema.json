@@ -29,7 +29,7 @@
             "type": "string",
             "description": "The path of the request URL",
             "examples": [
-                "/index.html"
+                "/index.md"
             ]
         },
         "selector": {
