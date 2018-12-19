@@ -12,6 +12,9 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
+const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
+const FSPersister = require('@pollyjs/persister-fs');
+const setupPolly = require('@pollyjs/core').setupMocha;
 const { pipe } = require('../src/defaults/json.pipe.js');
 
 const logger = winston.createLogger({
@@ -72,6 +75,18 @@ const secrets = {
 };
 
 describe('Testing JSON Pipeline', () => {
+  setupPolly({
+    logging: false,
+    recordFailedRequests: true,
+    adapters: [NodeHttpAdapter],
+    persister: FSPersister,
+    persisterOptions: {
+      fs: {
+        recordingsDir: 'test/fixtures',
+      },
+    },
+  });
+
   it('json.pipe is a function', () => {
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');

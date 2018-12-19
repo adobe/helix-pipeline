@@ -12,6 +12,9 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
+const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
+const FSPersister = require('@pollyjs/persister-fs');
+const setupPolly = require('@pollyjs/core').setupMocha;
 const fetch = require('../src/html/fetch-markdown');
 const coerce = require('../src/utils/coerce-secrets');
 
@@ -180,6 +183,18 @@ describe('Test invalid input', () => {
 });
 
 describe('Test non-existing content', () => {
+  setupPolly({
+    logging: false,
+    recordFailedRequests: true,
+    adapters: [NodeHttpAdapter],
+    persister: FSPersister,
+    persisterOptions: {
+      fs: {
+        recordingsDir: 'test/fixtures',
+      },
+    },
+  });
+
   it('Getting XDM README (from wrong URL)', async () => {
     const myaction = {
       request: {
@@ -213,6 +228,18 @@ describe('Test non-existing content', () => {
 });
 
 describe('Test requests', () => {
+  setupPolly({
+    logging: false,
+    recordFailedRequests: false,
+    adapters: [NodeHttpAdapter],
+    persister: FSPersister,
+    persisterOptions: {
+      fs: {
+        recordingsDir: 'test/fixtures',
+      },
+    },
+  });
+
   it('Getting XDM README', async () => {
     const myaction = {
       request: {
@@ -227,5 +254,6 @@ describe('Test requests', () => {
 
     const result = await fetch({}, myaction);
     assert.ok(result.content.body);
+    assert.equal(result.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
   });
 });

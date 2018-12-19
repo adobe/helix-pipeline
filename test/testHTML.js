@@ -14,6 +14,9 @@ const assert = require('assert');
 const winston = require('winston');
 const fs = require('fs-extra');
 const path = require('path');
+const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
+const FSPersister = require('@pollyjs/persister-fs');
+const setupPolly = require('@pollyjs/core').setupMocha;
 const { pipe } = require('../src/defaults/html.pipe.js');
 const dump = require('../src/utils/dump-context.js');
 
@@ -115,6 +118,18 @@ const secrets = {
 };
 
 describe('Testing HTML Pipeline', () => {
+  setupPolly({
+    logging: false,
+    recordFailedRequests: true,
+    adapters: [NodeHttpAdapter],
+    persister: FSPersister,
+    persisterOptions: {
+      fs: {
+        recordingsDir: 'test/fixtures',
+      },
+    },
+  });
+
   it('html.pipe is a function', () => {
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');
