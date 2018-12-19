@@ -135,7 +135,7 @@ describe('Testing XML Pipeline', () => {
       },
     },
   });
-  
+
   it('xml.pipe is a function', () => {
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');

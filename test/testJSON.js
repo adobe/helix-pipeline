@@ -86,7 +86,7 @@ describe('Testing JSON Pipeline', () => {
       },
     },
   });
-  
+
   it('json.pipe is a function', () => {
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');
