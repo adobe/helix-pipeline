@@ -23,16 +23,16 @@ describe('Test Check for Production Environment', () => {
   });
 
   it('Detects production environment in uncooperative situations', () => {
-    // eslint-disable-next-line no-underscore-dangle
-
     const oldenv = Object.assign({}, process.env);
 
     // trying to reproduce a really odd exception we are seeing in production.
     process.env = {
+      // eslint-disable-next-line no-underscore-dangle
       get __OW_ACTIVATION_ID() {
-        return null['__OW_ACTIVATION_ID'];
-      }
-    }
+        // eslint-disable-next-line no-underscore-dangle
+        return null.__OW_ACTIVATION_ID;
+      },
+    };
 
     assert.ok(production());
     // eslint-disable-next-line no-underscore-dangle
