@@ -227,7 +227,7 @@ describe('Test non-existing content', () => {
 describe('Test requests', () => {
   setupPolly({
     logging: false,
-    recordFailedRequests: true,
+    recordFailedRequests: false,
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
