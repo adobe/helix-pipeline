@@ -14,7 +14,7 @@ const assert = require('assert');
 const winston = require('winston');
 const parse = require('../src/html/parse-markdown');
 const split = require('../src/html/split-sections');
-const { assertMatch } = require('./markdown-utils');
+const { assertMatchDir } = require('./markdown-utils');
 const getmetadata = require('../src/html/get-metadata');
 
 const logger = winston.createLogger({
@@ -31,9 +31,22 @@ function callback(body) {
   return getmetadata(parsed, { logger }).content.sections;
 }
 
+const SECTIONS_BLOCS = [
+  'header',
+  'paragraph',
+  'headerparagraph',
+  'headerlist',
+  'headerimage',
+  'headerparaimage',
+  'headerpara2images',
+  'complex',
+];
+
 describe('Test getMetadata', () => {
-  it('getmetadata gets section metadata', () => {
-    assertMatch('sectionsmetadata', callback);
+  SECTIONS_BLOCS.forEach((block) => {
+    it(`indvidual section block: ${block}`, () => {
+      assertMatchDir('sections', block, callback);
+    });
   });
 
   it('getmetadata does not fail with "empty" mdast', () => {

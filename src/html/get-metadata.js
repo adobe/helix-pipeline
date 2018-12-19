@@ -51,17 +51,42 @@ function image(section) {
  */
 function sectiontype(section) {
   const children = section.children || [];
-  const typecounter = children.reduce((counter, { type }) => {
+
+  function reducer(counter, { type, children: pChildren }) {
     if (type === 'yaml') {
       return counter;
     }
-    const mycounter = {};
-    const mycount = counter[type] || 0;
-    mycounter[type] = mycount + 1;
-    return Object.assign(counter, mycounter);
-  }, {});
 
-  const types = Object.keys(typecounter).map(type => `has-${type}`);
+    const mycounter = {};
+
+    if (type === 'paragraph' && pChildren && pChildren.length > 0) {
+      // if child is a paragraph, check its children, it might contain an image or a list
+      // which are always wrapped by default.
+      pChildren.forEach(({ type: subType }) => {
+        // exclude text nodes which are default paragraph content
+        if (subType !== 'text') {
+          const mycount = mycounter[subType] || 0;
+          mycounter[subType] = mycount + 1;
+        }
+      });
+    }
+
+    if (Object.keys(mycounter).length === 0) {
+      // was really a paragraph, only text inside
+      const mycount = mycounter[type] || 0;
+      mycounter[type] = mycount + 1;
+    }
+
+    Object.keys(counter).forEach((key) => {
+      mycounter[key] = counter[key] + (mycounter[key] || 0);
+    });
+    return mycounter;
+  }
+
+  const typecounter = children.reduce(reducer, {});
+
+  const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
+  types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
   if (Object.keys(typecounter).length === 1) {
     types.push(`is-${Object.keys(typecounter)[0]}-only`);
   } else {

@@ -38,15 +38,15 @@ const nopLogger = {
   level: 'error',
 };
 
-function context(name, cb) {
-  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', `${name}.md`)).toString();
+function context(dir, name, cb) {
+  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', dir, `${name}.md`)).toString();
   const out = cb(mddoc);
   return out;
 }
 
-module.exports.assertMatch = function assertMatch(name, cb) {
-  const mdast = cleanUp(fs.readJsonSync(path.resolve(__dirname, 'fixtures', `${name}.json`)));
-  const out = cleanUp(context(name, cb));
+function assertMatchDir(dir, name, cb) {
+  const mdast = cleanUp(fs.readJsonSync(path.resolve(__dirname, 'fixtures', dir, `${name}.json`)));
+  const out = cleanUp(context(dir, name, cb));
 
   try {
     return assert.deepEqual(out, mdast);
@@ -54,14 +54,26 @@ module.exports.assertMatch = function assertMatch(name, cb) {
     fs.writeJsonSync(`${name}.json`, out, { spaces: 2 });
     return assert.deepEqual(out, mdast);
   }
-};
+}
 
-module.exports.assertValid = function assertValid(name, cb, done) {
-  const out = context(name, cb);
+function assertValidDir(dir, name, cb, done) {
+  const out = context(dir, name, cb);
   try {
     validate(out, { logger: nopLogger }, 0);
     done();
   } catch (e) {
     done(e);
   }
+}
+
+module.exports.assertMatch = function assertMatch(name, cb) {
+  assertMatchDir('', name, cb);
 };
+
+module.exports.assertMatchDir = assertMatchDir;
+
+module.exports.assertValid = function assertValid(name, cb, done) {
+  assertValidDir('', name, cb, done);
+};
+
+module.exports.assertValidDir = assertValidDir;
