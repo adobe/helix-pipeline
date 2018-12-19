@@ -60,7 +60,7 @@ function sectiontype(section) {
     const mycounter = {};
 
     if (type === 'paragraph' && pChildren && pChildren.length > 0) {
-      // if child is a paragraph, check its children, it might contains an image or a list
+       // if child is a paragraph, check its children, it might contain an image or a list
       // which are always wrapped by default.
       pChildren.forEach(({ type: subType }) => {
         // exclude text which are default paragraph content
