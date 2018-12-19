@@ -325,6 +325,50 @@ describe('Testing HTML Pipeline', () => {
     assert.ok(res.body.match(/srcset/));
   });
 
+  it('html.pipe makes HTTP requests and falls back to master', async () => {
+    const myparams = Object.assign({}, params);
+    delete myparams.ref;
+
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.ok(content.body);
+        assert.ok(content.mdast);
+        assert.ok(content.meta);
+        assert.ok(content.document);
+        assert.equal(typeof content.document.getElementsByTagName, 'function');
+        assert.equal(content.document.getElementsByTagName('h1').length, 1);
+        assert.equal(content.document.getElementsByTagName('h1')[0].innerHTML, 'Bill, Welcome to the future');
+        assert.equal(content.meta.template, 'Medium');
+        assert.equal(content.intro, 'Project Helix');
+        assert.equal(content.title, 'Bill, Welcome to the future');
+        assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
+        // and return a different status code
+        return { response: { status: 201, body: content.html } };
+      },
+      {
+        request: {
+          params: {
+          },
+        },
+      },
+      {
+        request: { params: myparams },
+        secrets,
+        logger,
+      },
+    );
+
+    const res = result.response;
+    assert.equal(res.status, 201);
+    assert.equal(res.headers['Content-Type'], 'text/html');
+    assert.equal(res.headers['Cache-Control'], 's-maxage=604800');
+    assert.equal(res.headers['Surrogate-Key'], 'h/WhVujl+n6KANwYWB57fhkvjfzzACeSawAAndzWdK0=');
+    assert.equal(res.body[0], '<');
+    assert.ok(res.body.match(/srcset/));
+  });
+
   it('html.pipe serves 404 for non existent content', async () => {
     const result = await pipe(
       // this is the main function (normally it would be the template function)
