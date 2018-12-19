@@ -12,7 +12,6 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const winston = require('winston');
-const { Polly } = require('@pollyjs/core');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const setupPolly = require('@pollyjs/core').setupMocha;
@@ -201,14 +200,12 @@ describe('Test non-existing content', () => {
     persister: FSPersister,
     persisterOptions: {
       fs: {
-        recordingsDir: 'test/fixtures'
-      }
-    }
+        recordingsDir: 'test/fixtures',
+      },
+    },
   });
 
   it('Getting XDM README (from wrong URL)', async () => {
-    
-
     const myaction = {
       request: {
         params: {
@@ -232,9 +229,9 @@ describe('Test requests', () => {
     persister: FSPersister,
     persisterOptions: {
       fs: {
-        recordingsDir: 'test/fixtures'
-      }
-    }
+        recordingsDir: 'test/fixtures',
+      },
+    },
   });
 
   it('Getting XDM README', async () => {
