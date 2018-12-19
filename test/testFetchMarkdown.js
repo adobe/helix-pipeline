@@ -257,3 +257,94 @@ describe('Test requests', () => {
     assert.equal(result.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
   });
 });
+
+
+describe('Test misbehaved HTTP Responses', () => {
+  setupPolly({
+    logging: false,
+    recordFailedRequests: false,
+    adapters: [NodeHttpAdapter],
+    persister: FSPersister,
+    persisterOptions: {
+      fs: {
+        recordingsDir: 'test/fixtures',
+      },
+    },
+  });
+
+  it('Getting XDM README with bad HTTP Status Code', async function badStatus() {
+    const { server } = this.polly;
+
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
+      .intercept((_, res) => res.sendStatus(500));
+
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
+        },
+      },
+      logger,
+    };
+
+    await coerce(myaction);
+
+    const result = await fetch({}, myaction);
+    assert.ok(result.error);
+    assert.equal(result.response.status, 502);
+  });
+
+  it('Getting XDM README with ultra-short Timeout', async function shortTimeout() {
+    const { server } = this.polly;
+
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
+      .intercept((_, res) => wait(50).then(res.sendStatus(500)));
+
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
+        },
+      },
+      logger,
+      secrets: {
+        HTTP_TIMEOUT: 10,
+      },
+    };
+
+    await coerce(myaction);
+
+    const result = await fetch({}, myaction);
+    assert.ok(result.error);
+    assert.equal(result.response.status, 504);
+  });
+
+  it('Getting XDM README with Backend Timeout', async function badTimeout() {
+    const { server } = this.polly;
+
+    const wait = ms => new Promise(r => setTimeout(r, ms));
+
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
+      .intercept((_, res) => wait(2000).then(res.sendStatus(500)));
+
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
+        },
+      },
+      logger,
+    };
+
+    await coerce(myaction);
+
+    const result = await fetch({}, myaction);
+    assert.ok(result.error);
+    assert.equal(result.response.status, 504);
+  }).timeout(3000);
+});

@@ -37,19 +37,22 @@ function uri(root, owner, repo, ref, path) {
  * @param {import("../context").Action} action some other param
  */
 async function fetch(
-  { error, content: { sources = [] } = {} },
+  { content: { sources = [] } = {} },
   {
     secrets = {},
     request,
     logger,
   },
 ) {
-  if (error) {
-    // don't do anything if there is an error
-    return {};
-  }
   if (!request || !request.params) {
     return bail(logger, 'Request parameters are missing');
+  }
+
+  let timeout;
+  if (!secrets.HTTP_TIMEOUT) {
+    logger.warn('No HTTP timeout set, risk of denial-of-service');
+  } else {
+    timeout = secrets.HTTP_TIMEOUT;
   }
 
   // get required request parameters
@@ -80,6 +83,7 @@ async function fetch(
   const options = {
     uri: uri(rootPath, owner, repo, ref, path),
     json: false,
+    timeout,
   };
   logger.debug(`fetching Markdown from ${options.uri}`);
   try {
@@ -91,7 +95,14 @@ async function fetch(
       },
     };
   } catch (e) {
-    return bail(logger, `Could not fetch Markdown from ${options.uri}`, e, 404);
+    if (e && e.statusCode && e.statusCode === 404) {
+      return bail(logger, `Could not find Markdown at ${options.uri}`, e, 404);
+    } if (e && e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT')) {
+      // return gateway timeout
+      return bail(logger, `Gateway timout of ${timeout} milliseconds exceeded for ${options.uri}`, e, 504);
+    }
+    // return a bad gateway for all other errors
+    return bail(logger, `Could not fetch Markdown from ${options.uri}`, e, 502);
   }
 }
 
