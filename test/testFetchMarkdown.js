@@ -251,5 +251,6 @@ describe('Test requests', () => {
 
     const result = await fetch({}, myaction);
     assert.ok(result.content.body);
+    assert.equal(result.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
   });
 });
