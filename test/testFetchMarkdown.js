@@ -143,13 +143,13 @@ describe('Test invalid input', () => {
   });
 
   it('Test for missing ref', async () => {
-    assert.ok((await fetch(
+    assert.equal((await fetch(
       {},
       {
         request: { params: { repo: 'xdm', path: 'README.md', owner: 'adobe' } },
         logger,
       },
-    )).error);
+    )).error, null);
   });
 
   it('Test for missing path', async () => {
@@ -203,6 +203,22 @@ describe('Test non-existing content', () => {
     await coerce(myaction);
 
     assert.ok((await fetch({}, myaction)).error);
+  });
+
+  it('Getting XDM README (with missing ref)', async () => {
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: '', path: 'README.md', owner: 'adobe',
+        },
+      },
+      logger,
+    };
+
+    await coerce(myaction);
+
+    const result = await fetch({}, myaction);
+    assert.ok(result.content.body);
   });
 });
 
