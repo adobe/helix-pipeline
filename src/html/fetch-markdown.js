@@ -37,7 +37,7 @@ function uri(root, owner, repo, ref, path) {
  * @param {import("../context").Action} action some other param
  */
 async function fetch(
-  { error, content: { sources = [] } = {} },
+  { content: { sources = [] } = {} },
   {
     secrets = {},
     request,
