@@ -22,6 +22,23 @@ describe('Test Check for Production Environment', () => {
     delete process.env.__OW_ACTIVATION_ID;
   });
 
+  it('Detects production environment in uncooperative situations', () => {
+    const oldenv = Object.assign({}, process.env);
+
+    // trying to reproduce a really odd exception we are seeing in production.
+    process.env = {
+      // eslint-disable-next-line no-underscore-dangle
+      get __OW_ACTIVATION_ID() {
+        // eslint-disable-next-line no-underscore-dangle
+        return null.__OW_ACTIVATION_ID;
+      },
+    };
+
+    assert.ok(production());
+    // eslint-disable-next-line no-underscore-dangle
+    process.env = oldenv;
+  });
+
   it('Detects non-production environment', () => {
     assert.ok(!production());
   });

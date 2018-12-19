@@ -13,8 +13,13 @@
  * Returns true when run inside an OpenWhisk action, false otherwise.
  */
 function production() {
-  // eslint-disable-next-line no-underscore-dangle
-  return !!process.env.__OW_ACTIVATION_ID;
+  try {
+    // eslint-disable-next-line no-underscore-dangle
+    return process && process.env && !!process.env.__OW_ACTIVATION_ID;
+  } catch (e) {
+    // this error only occurs when running inside OpenWhisk
+    return true;
+  }
 }
 
 module.exports = production;
