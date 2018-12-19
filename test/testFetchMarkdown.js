@@ -142,16 +142,6 @@ describe('Test invalid input', () => {
     )).error);
   });
 
-  it('Test for missing ref', async () => {
-    assert.equal((await fetch(
-      {},
-      {
-        request: { params: { repo: 'xdm', path: 'README.md', owner: 'adobe' } },
-        logger,
-      },
-    )).error, null);
-  });
-
   it('Test for missing path', async () => {
     assert.ok((await fetch(
       {},

@@ -54,8 +54,10 @@ async function fetch(
 
   // get required request parameters
   const {
-    owner, repo, ref, path,
+    owner, repo, path,
   } = request.params;
+
+  let { ref } = request.params;
 
   // bail if a required parameter cannot be found
   if (!owner) {
@@ -64,11 +66,12 @@ async function fetch(
   if (!repo) {
     return bail(logger, 'Unknown repo, cannot fetch content');
   }
-  if (!ref) {
-    return bail(logger, 'Unknown ref, cannot fetch content');
-  }
   if (!path) {
     return bail(logger, 'Unknown path, cannot fetch content');
+  }
+  if (!ref) {
+    logger.warn(`Recoverable error: no ref given for ${repo}/${owner}.git${path}, falling back to master`);
+    ref = 'master';
   }
 
   const { REPO_RAW_ROOT: rootPath } = secrets;
