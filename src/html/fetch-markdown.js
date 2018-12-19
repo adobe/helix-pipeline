@@ -44,10 +44,6 @@ async function fetch(
     logger,
   },
 ) {
-  if (error) {
-    // don't do anything if there is an error
-    return {};
-  }
   if (!request || !request.params) {
     return bail(logger, 'Request parameters are missing');
   }
