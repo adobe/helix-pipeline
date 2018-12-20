@@ -17,6 +17,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 |----------|------|----------|---------|------------|
 | [EMBED_SERVICE](#embed_service) | `string` | Optional | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
 | [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
+| [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional | `1000` | Secrets (this schema) |
 | [IMAGES_MAX_SIZE](#images_max_size) | `integer` | Optional | `4096` | Secrets (this schema) |
 | [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional | `480` | Secrets (this schema) |
 | [IMAGES_SIZES](#images_sizes) | `string` | Optional | `"100vw"` | Secrets (this schema) |
@@ -61,6 +62,26 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 
 
 `string`
+
+
+
+
+
+
+## HTTP_TIMEOUT
+
+Timeout for outgoing HTTP requests in milliseconds
+
+`HTTP_TIMEOUT`
+* is optional
+* type: `integer`
+* default: `1000`
+* defined in this schema
+
+### HTTP_TIMEOUT Type
+
+
+`integer`
 
 
 

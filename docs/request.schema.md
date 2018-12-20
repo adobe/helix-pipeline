@@ -20,7 +20,6 @@ The HTTP Request
 | [method](#method) | `string` | Optional | Request (this schema) |
 | [params](#params) | `object` | Optional | Request (this schema) |
 | [path](#path) | `string` | Optional | Request (this schema) |
-| [resourcePath](#resourcepath) | `string` | Optional | Request (this schema) |
 | [selector](#selector) | `string` | Optional | Request (this schema) |
 | [url](#url) | `string` | Optional | Request (this schema) |
 
@@ -83,7 +82,7 @@ Unknown type ``.
 
 ## method
 
-The HTTP method of the request
+The HTTP method of the request. Note: method names can be lower-case.
 
 `method`
 * is optional
@@ -133,7 +132,7 @@ The passed through (and filtered) URL parameters of the request
 
 ## path
 
-The path and request parameters of the request URL
+The path of the request URL
 
 `path`
 * is optional
@@ -152,32 +151,7 @@ The path and request parameters of the request URL
 ### path Example
 
 ```json
-"/index.html?foo=bar"
-```
-
-
-## resourcePath
-
-The resource path (without extension) that has been requested
-
-`resourcePath`
-* is optional
-* type: `string`
-* defined in this schema
-
-### resourcePath Type
-
-
-`string`
-
-
-
-
-
-### resourcePath Example
-
-```json
-"/index"
+"/index.md"
 ```
 
 
