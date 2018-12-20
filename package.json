@@ -6,7 +6,7 @@
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
-    "test": "nyc mocha --exit",
+    "test": "nyc nyc --reporter=lcov --reporter=text-lcov mocha --exit",
     "lint": "npx eslint . && npm run types",
     "types": "npm run docs && node bin/schema2ts.js",
     "docs": "npx jsonschema2md -d src/schemas -o docs",
