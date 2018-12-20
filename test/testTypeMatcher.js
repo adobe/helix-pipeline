@@ -23,6 +23,9 @@ describe('Test Type Matcher Util', () => {
     assert.deepEqual(new TypeMatcher(null).process(), []);
     assert.deepEqual(new TypeMatcher().process(), []);
     assert.deepEqual(new TypeMatcher([]).process(), []);
+    assert.deepEqual(new TypeMatcher([
+      { type: 'root' },
+    ]).process(), { type: 'root', types: [] });
   });
 
   it('TypeMatcher returns empty array if no matchers are registered', () => {

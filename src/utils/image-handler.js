@@ -16,17 +16,13 @@ const url = require('uri-js');
 
 /**
  * Creates an array of widths based on a set of options
- * @param {(object|number[])} options either an array of sizes or a set of parameters
+ * @param {object} options a set of parameters
  * to generate an array of options
  * @param {number} options.from smallest possible size
  * @param {number} options.to largest possible size
  * @param {number} options.steps number of steps
  */
 function makewidths(options) {
-  if (Array.isArray(options)) {
-    return options;
-  }
-
   const { from, to } = options;
   const range = to - from;
   const steps = Math.max(2, options.steps);
@@ -40,7 +36,7 @@ function image({
   IMAGES_MAX_SIZE,
   IMAGES_SIZE_STEPS,
   IMAGES_SIZES,
-} = {}) {
+}) {
   const widths = {
     from: parseInt(IMAGES_MIN_SIZE, 10),
     to: parseInt(IMAGES_MAX_SIZE, 10),

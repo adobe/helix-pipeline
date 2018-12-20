@@ -137,7 +137,7 @@ describe('Testing Pipeline', () => {
       .catch(done);
   });
 
-  it('When works with promises pre before when', (done) => {
+  it('When works with promises resolving false pre before when', (done) => {
     const order = [];
     new Pipeline({ logger })
       .before(() => { order.push('pre0'); })
@@ -150,6 +150,25 @@ describe('Testing Pipeline', () => {
       .run()
       .then(() => {
         assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
+        done();
+      })
+      .catch(done);
+  });
+
+
+  it('When works with promises resolving true pre before when', (done) => {
+    const order = [];
+    new Pipeline({ logger })
+      .before(() => { order.push('pre0'); })
+      .before(() => { order.push('enabled'); })
+      .when(() => Promise.resolve(true))
+      .before(() => { order.push('pre1'); })
+      .once(() => { order.push('once'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
+      .run()
+      .then(() => {
+        assert.deepEqual(order, ['pre0', 'enabled', 'pre1', 'once', 'post0', 'post1']);
         done();
       })
       .catch(done);
