@@ -199,9 +199,7 @@ class Pipeline {
    */
   error(f) {
     this.describe(f);
-    if (!this._last) {
-      this._last = this._pres;
-    }
+
     const wrapped = errorWrapper(f);
     // ensure proper alias
     wrapped.alias = f.alias;
