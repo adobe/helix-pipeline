@@ -78,11 +78,7 @@ class VDOMTransformer {
   static toHTAST(htmlstr, cb, node) {
     // we parse the string to HTAST
     const htast = unified().use(parse, { fragment: true }).parse(htmlstr);
-    /* h(node, tagName, props, children) */
-    if (htast.children.length === 1) {
-      const child = htast.children[0];
-      return cb(node, child.tagName, child.properties, child.children);
-    }
+    // TODO: Get rid of the wrapper div
     return cb(node, 'div', {}, htast.children);
   }
 
