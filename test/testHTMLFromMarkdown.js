@@ -75,25 +75,25 @@ const logger = winston.createLogger({
  * level, so differences not affecting the html (like most whitespace)
  * are ignored.
  *
- * This may check multiple categories of template functions; currently
- * the following classes are checked:
- *
- * * Ones rendering content.children
- * * Ones rendering content.html
- *
  * @param {String} md The markdown to convert to html.
  * @param {String} html The html we expect to be generated.
  */
 const assertMd = async (md, html) => {
-  const fromChildren = ({ content }) => ({ response: { status: 201, body: content.children.join('\n') } });
   const fromHTML = ({ content }) => ({ response: { status: 201, body: content.html } });
 
-  const expected = new JSDOM(html).window.document.body;
-  await Promise.all([fromChildren, fromHTML].map(async (fn) => {
-    const generated = await pipe(fn, { content: { body: md } }, { logger, request: { params } });
-    const actual = new JSDOM(generated.response.body).window.document.body;
-    assertEquivalentNode(actual, expected);
-  }));
+  const generated = await pipe(
+    fromHTML,
+    { content: { body: md } },
+    {
+      logger,
+      request: { params },
+    },
+  );
+
+  assertEquivalentNode(
+    new JSDOM(generated.response.body).window.document.body,
+    new JSDOM(html).window.document.body,
+  );
 };
 
 /**
