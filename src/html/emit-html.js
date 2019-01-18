@@ -13,12 +13,9 @@
 function emit({ content: { document } }, { logger }) {
   logger.debug(`Emitting HTML from ${typeof document}`);
 
-  const children = document.body && document.body.firstChild && document.body.firstChild.childNodes
-    ? Array.from(document.body.firstChild.childNodes)
-      .filter(node => node && node.outerHTML)
-      .map(node => node.outerHTML) : [];
-
-  return { content: { html: document.body.innerHTML || '', children } };
+  const html = document.body.innerHTML || '';
+  const children = Array.from(document.body.childNodes).map(node => node.outerHTML).filter(x => x);
+  return { content: { html, children } };
 }
 
 module.exports = emit;

@@ -114,4 +114,7 @@ const itMd = (desc, md, html) => {
 
 describe('Testing Markdown conversion', () => {
   itMd('Renders empty markdown', '', '');
+  itMd('Renders single paragraph', // Regression #157
+    'Hello World.',
+    '<p>Hello World.</p>');
 });
