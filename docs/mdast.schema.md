@@ -27,7 +27,7 @@ A node in the Markdown AST
 | [depth](#depth) | `integer` | Optional | MDAST (this schema) |
 | [identifier](#identifier) | `string` | Optional | MDAST (this schema) |
 | [label](#label) | `string` | Optional | MDAST (this schema) |
-| [lang](#lang) | `string` | Optional | MDAST (this schema) |
+| [lang](#lang) | complex | Optional | MDAST (this schema) |
 | [meta](#meta) | complex | Optional | MDAST (this schema) |
 | [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
 | [position](#position) | Position | Optional | MDAST (this schema) |
@@ -208,14 +208,23 @@ For code, a lang field can be present. It represents the language of computer co
 
 `lang`
 * is optional
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### lang Type
 
+Unknown type `null,string`.
 
-`string`
-
+```json
+{
+  "type": [
+    "null",
+    "string"
+  ],
+  "description": "For code, a lang field can be present. It represents the language of computer code being marked up.",
+  "simpletype": "complex"
+}
+```
 
 
 

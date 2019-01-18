@@ -252,7 +252,7 @@ export interface MDAST {
   /**
    * For code, a lang field can be present. It represents the language of computer code being marked up.
    */
-  lang?: string;
+  lang?: null | string;
   /**
    * For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
    */

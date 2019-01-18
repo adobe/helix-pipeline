@@ -117,4 +117,30 @@ describe('Testing Markdown conversion', () => {
   itMd('Renders single paragraph', // Regression #157
     'Hello World.',
     '<p>Hello World.</p>');
+
+  it('Code blocks with lang', async () => {
+    await assertMd(
+      '```javascript\n```',
+      '<pre><code class="language-javascript"></code></pre>',
+    );
+    await assertMd(
+      '```javascript\nconsole.log(42);\n```',
+      '<pre><code class="language-javascript">console.log(42);\n</code></pre>',
+    );
+  });
+
+  it('Code blocks without lang', async () => {
+    await assertMd(
+      '    Hello World',
+      '<pre><code>Hello World\n</code></pre>',
+    );
+    await assertMd(
+      '```Hello World```',
+      '<p><code>Hello World</code></p>',
+    );
+    await assertMd(
+      '```\nHello World\n```',
+      '<pre><code>Hello World\n</code></pre>',
+    );
+  });
 });

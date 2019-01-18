@@ -138,7 +138,10 @@
             }
         },
         "lang": {
-            "type": "string",
+            "type": [
+                "null",
+                "string"
+            ],
             "description": "For code, a lang field can be present. It represents the language of computer code being marked up."
         },
         "meta": {
