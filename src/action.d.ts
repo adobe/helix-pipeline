@@ -105,6 +105,10 @@ export interface Secrets {
    */
   REPO_RAW_ROOT?: string;
   /**
+   * The base URL for all GitHub API operations
+   */
+  REPO_API_ROOT?: string;
+  /**
    * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
    */
   EMBED_WHITELIST?: string;
@@ -115,22 +119,31 @@ export interface Secrets {
   /**
    * Minimum physical width of responsive images to generate
    */
-  IMAGES_MIN_SIZE?: string;
+  IMAGES_MIN_SIZE?: number;
+  /**
+   * Timeout for outgoing HTTP requests in milliseconds
+   */
+  HTTP_TIMEOUT?: number;
   /**
    * Maximum physical with of responsive images to generate
    */
-  IMAGES_MAX_SIZE?: string;
+  IMAGES_MAX_SIZE?: number;
   /**
    * Number of intermediary size steps to create per image
    */
-  IMAGES_SIZE_STEPS?: string;
+  IMAGES_SIZE_STEPS?: number;
   /**
    * Value for the `sizes` attribute of generated responsive images
    */
   IMAGES_SIZES?: string;
+  TEST_BOOLEAN?: boolean;
+  /**
+   * Print XML with line breaks and indentation
+   */
+  XML_PRETTY?: boolean;
   /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".
    */
-  [k: string]: string;
+  [k: string]: boolean | number | string;
 }

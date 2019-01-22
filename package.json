@@ -19,6 +19,7 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
+    "@adobe/helix-shared": "^0.4.1",
     "@adobe/jsonschema2md": "^1.1.1-SNAPSHOT.236",
     "@pollyjs/adapter-node-http": "^1.4.1",
     "@pollyjs/core": "^1.4.1",

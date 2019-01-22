@@ -10,18 +10,14 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const parse = require('../src/html/parse-markdown');
 const smartypants = require('../src/html/smartypants');
 const { assertMatch } = require('./markdown-utils');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
+  level: 'info',
 });
 
 function callback(body) {

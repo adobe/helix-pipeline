@@ -15,17 +15,13 @@ const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
 const h = require('hyperscript');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const VDOM = require('../').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
+  level: 'info',
 });
 
 const action = { logger };

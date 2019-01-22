@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const fs = require('fs-extra');
 const path = require('path');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
@@ -20,15 +20,9 @@ const setupPolly = require('@pollyjs/core').setupMocha;
 const { pipe } = require('../src/defaults/html.pipe.js');
 const dump = require('../src/utils/dump-context.js');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
+  level: 'info',
 });
 
 const params = {
