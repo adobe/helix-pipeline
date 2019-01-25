@@ -42,6 +42,21 @@ function image(section) {
   return img ? Object.assign({ image: img.url }, section) : section;
 }
 
+function constructTypes(typecounter) {
+  const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
+  types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
+  if (Object.keys(typecounter).length === 1) {
+    types.push(`is-${Object.keys(typecounter)[0]}-only`);
+  } else {
+    types.push(...Object.entries(typecounter) // get pairs of type, count
+      .sort((left, right) => left[1] < right[1]) // sort descending by count
+      .slice(0, 3) // take the top three
+      .map(([name]) => name) // keep only the type
+      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
+  }
+  return types;
+}
+
 /**
  * Sets the `types` attribute of the section, using following patterns:
  * 1. has-<type> for every type of content found in the section
@@ -52,7 +67,11 @@ function image(section) {
 function sectiontype(section) {
   const children = section.children || [];
 
-  function reducer(counter, { type, children: pChildren }) {
+  const childrenTypes = new Array(section.children.length);
+
+  function reducer(counter, { type, children: pChildren }, index) {
+    childrenTypes[index] = [];
+
     if (type === 'yaml') {
       return counter;
     }
@@ -67,14 +86,25 @@ function sectiontype(section) {
         if (subType !== 'text') {
           const mycount = mycounter[subType] || 0;
           mycounter[subType] = mycount + 1;
+          childrenTypes[index].push(`is-${subType}`);
         }
       });
+    }
+
+    if (type === 'list' && pChildren && pChildren.length > 0) {
+      // if list, analyze the children of its children (listitems)
+      let listtypecounter = {};
+      pChildren.forEach((listitem) => {
+        listtypecounter = listitem.children.reduce(reducer, listtypecounter);
+      });
+      childrenTypes[index] = constructTypes(listtypecounter);
     }
 
     if (Object.keys(mycounter).length === 0) {
       // was really a paragraph, only text inside
       const mycount = mycounter[type] || 0;
       mycounter[type] = mycount + 1;
+      childrenTypes[index].push(`is-${type}`);
     }
 
     Object.keys(counter).forEach((key) => {
@@ -85,19 +115,79 @@ function sectiontype(section) {
 
   const typecounter = children.reduce(reducer, {});
 
-  const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
-  types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
-  if (Object.keys(typecounter).length === 1) {
-    types.push(`is-${Object.keys(typecounter)[0]}-only`);
-  } else {
-    types.push(...Object.entries(typecounter) // get pairs of type, count
-      .sort((left, right) => left[1] < right[1]) // sort descending by count
-      .slice(0, 3) // take the top three
-      .map(([name]) => name) // keep only the type
-      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
+  const types = constructTypes(typecounter);
+
+  return Object.assign({ types, childrenTypes }, section);
+}
+
+/**
+ * Sets the `types` attribute of the section, using following patterns:
+ * 1. has-<type> for every type of content found in the section
+ * 2. is-<type>-only for sections that have only content of type
+ * 3. is-<type1>-<type2>-<type3> ranks the top three most common types of content
+ * @param {*} section
+ */
+function listtype(section) {
+  const lists = selectAll('list', section);
+
+  if (!lists) {
+    return section;
   }
 
-  return Object.assign({ types }, section);
+  lists.forEach((list) => {
+    function reducer(counter, { type, children: pChildren }) {
+      if (type === 'yaml') {
+        return counter;
+      }
+
+      const mycounter = {};
+
+      if (type === 'paragraph' && pChildren && pChildren.length > 0) {
+        // if child is a paragraph, check its children, it might contain an image or a list
+        // which are always wrapped by default.
+        pChildren.forEach(({ type: subType }) => {
+          // exclude text nodes which are default paragraph content
+          if (subType !== 'text') {
+            const mycount = mycounter[subType] || 0;
+            mycounter[subType] = mycount + 1;
+          }
+        });
+      }
+
+      if (Object.keys(mycounter).length === 0) {
+        // was really a paragraph, only text inside
+        const mycount = mycounter[type] || 0;
+        mycounter[type] = mycount + 1;
+      }
+
+      Object.keys(counter).forEach((key) => {
+        mycounter[key] = counter[key] + (mycounter[key] || 0);
+      });
+      return mycounter;
+    }
+
+    let typecounter = {};
+    list.children.forEach((listitem) => {
+      typecounter = listitem.children.reduce(reducer, typecounter);
+    });
+
+    const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
+    types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
+    if (Object.keys(typecounter).length === 1) {
+      types.push(`is-${Object.keys(typecounter)[0]}-only`);
+    } else {
+      types.push(...Object.entries(typecounter) // get pairs of type, count
+        .sort((left, right) => left[1] < right[1]) // sort descending by count
+        .slice(0, 3) // take the top three
+        .map(([name]) => name) // keep only the type
+        .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    list.types = types;
+  });
+
+  return section;
 }
 
 function fallback(section) {
