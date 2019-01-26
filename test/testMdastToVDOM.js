@@ -11,11 +11,12 @@
  */
 /* eslint-env mocha */
 
-const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
 const h = require('hyperscript');
 const winston = require('winston');
+const { JSDOM } = require('jsdom');
+const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const VDOM = require('../').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
@@ -30,6 +31,13 @@ const logger = winston.createLogger({
 
 const action = { logger };
 
+const assertTransformerYieldsDocument = (transformer, expected) => {
+  assertEquivalentNode(
+    transformer.getDocument(),
+    new JSDOM(expected).window.document,
+  );
+};
+
 describe('Test MDAST to VDOM Transformation', () => {
   before('Coerce defaults', async () => {
     await coerce(action);
@@ -37,33 +45,43 @@ describe('Test MDAST to VDOM Transformation', () => {
 
   it('Simple MDAST Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
-    const transformer = new VDOM(mdast, action.secrets);
-    const node = transformer.process();
-    assert.equal(node.outerHTML, '<h1>Hello World</h1>');
+    assertTransformerYieldsDocument(
+      new VDOM(mdast, action.secrets),
+      '<h1>Hello World</h1>',
+    );
   });
 
   it('Custom Text Matcher Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     const transformer = new VDOM(mdast, action.secrets);
     transformer.match('heading', () => '<h1>All Headings are the same to me</h1>');
-    const node = transformer.process();
-    assert.equal(node.outerHTML, '<h1>All Headings are the same to me</h1>');
+    assertTransformerYieldsDocument(
+      transformer,
+      '<h1>All Headings are the same to me</h1>',
+    );
   });
 
   it('Programmatic Matcher Function', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     const transformer = new VDOM(mdast, action.secrets);
     transformer.match(({ type }) => type === 'heading', () => '<h1>All Headings are the same to me</h1>');
-    const node = transformer.process();
-    assert.equal(node.outerHTML, '<h1>All Headings are the same to me</h1>');
+    assertTransformerYieldsDocument(
+      transformer,
+      '<h1>All Headings are the same to me</h1>',
+    );
   });
 
   it('Custom Text Matcher with Multiple Elements', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     const transformer = new VDOM(mdast, action.secrets);
     transformer.match('heading', () => '<a name="h1"></a><h1>All Headings are the same to me</h1>');
-    const node = transformer.process();
-    assert.equal(node.outerHTML, '<div><a name="h1"></a><h1>All Headings are the same to me</h1></div>');
+    assertTransformerYieldsDocument(
+      transformer, `
+      <div>
+        <a name="h1"></a>
+        <h1>All Headings are the same to me</h1>
+      </div>`,
+    );
   });
 
   it('Custom link handler with VDOM Nodes', () => {
@@ -77,32 +95,36 @@ describe('Test MDAST to VDOM Transformation', () => {
       );
       return res;
     });
-    const node = transformer.process();
-    assert.equal(node.outerHTML, `<ul>
-<li>
-<p><code>body</code>: the unparsed content body as a <code>string</code></p>
-</li>
-<li>
-<p><code>mdast</code>: the parsed <a href="https://github.com/syntax-tree/mdast" rel="nofollow">Markdown AST</a></p>
-</li>
-<li>
-<p><code>meta</code>: a map metadata properties, including</p>
-<ul>
-<li><code>title</code>: title of the document</li>
-<li><code>intro</code>: a plain-text introduction or description</li>
-<li><code>type</code>: the content type of the document</li>
-</ul>
-</li>
-<li>
-<p><code>htast</code>: the HTML AST</p>
-</li>
-<li>
-<p><code>html</code>: a string of the content rendered as HTML</p>
-</li>
-<li>
-<p><code>children</code>: an array of top-level elements of the HTML-rendered content</p>
-</li>
-</ul>`);
+    assertTransformerYieldsDocument(
+      transformer, `
+        <ul>
+          <li>
+            <p>
+              <code>body</code>: the unparsed content body as a <code>string</code>
+            </p>
+          </li>
+          <li>
+            <p><code>mdast</code>: the parsed <a href="https://github.com/syntax-tree/mdast" rel="nofollow">Markdown AST</a></p>
+          </li>
+          <li>
+            <p><code>meta</code>: a map metadata properties, including</p>
+            <ul>
+              <li><code>title</code>: title of the document</li>
+              <li><code>intro</code>: a plain-text introduction or description</li>
+              <li><code>type</code>: the content type of the document</li>
+            </ul>
+          </li>
+          <li>
+            <p><code>htast</code>: the HTML AST</p>
+          </li>
+          <li>
+            <p><code>html</code>: a string of the content rendered as HTML</p>
+          </li>
+          <li>
+            <p><code>children</code>: an array of top-level elements of the HTML-rendered content</p>
+          </li>
+        </ul>`,
+    );
   });
 
   it('Custom link handler does not interfere with link rewriting', () => {
@@ -116,7 +138,18 @@ describe('Test MDAST to VDOM Transformation', () => {
       );
       return res;
     });
-    const node = transformer.process();
-    assert.equal(node.outerHTML, '<p><a href="https://house.md/syntax-tree/mdast.md" rel="nofollow">External link</a>: the parsed <a href="/mdast.html" title="My title"><img src="/dist/img/ipad.png" alt="ipad" srcset="/dist/img/ipad.png?width=480&amp;auto=webp 480w,/dist/img/ipad.png?width=1384&amp;auto=webp 1384w,/dist/img/ipad.png?width=2288&amp;auto=webp 2288w,/dist/img/ipad.png?width=3192&amp;auto=webp 3192w,/dist/img/ipad.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></a></p>');
+    assertTransformerYieldsDocument(
+      transformer, `
+        <p>
+          <a href="https://house.md/syntax-tree/mdast.md"
+              rel="nofollow">External link</a>:
+            the parsed
+            <a href="/mdast.html" title="My title">
+              <img src="/dist/img/ipad.png" alt="ipad"
+                   srcset="/dist/img/ipad.png?width=480&amp;auto=webp 480w,/dist/img/ipad.png?width=1384&amp;auto=webp 1384w,/dist/img/ipad.png?width=2288&amp;auto=webp 2288w,/dist/img/ipad.png?width=3192&amp;auto=webp 3192w,/dist/img/ipad.png?width=4096&amp;auto=webp 4096w"
+                   sizes="100vw">
+            </a>
+        </p>`,
+    );
   });
 });
