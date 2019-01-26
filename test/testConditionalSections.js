@@ -12,17 +12,13 @@
 /* eslint-env mocha */
 
 const assert = require('assert');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const { pipe } = require('../src/defaults/html.pipe.js');
 const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
+  level: 'info',
 });
 
 const params = {

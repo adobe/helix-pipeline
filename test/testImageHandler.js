@@ -11,17 +11,13 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const image = require('../src/utils/image-handler');
 const coerce = require('../src/utils/coerce-secrets');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
+  level: 'info',
 });
 
 const myaction = {

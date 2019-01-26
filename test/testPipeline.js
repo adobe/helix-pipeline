@@ -11,18 +11,12 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const { Pipeline } = require('../index.js');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'silly',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
+  level: 'info',
 });
 
 describe('Testing Pipeline', () => {
