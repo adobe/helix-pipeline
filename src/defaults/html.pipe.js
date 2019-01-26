@@ -42,7 +42,7 @@ const htmlpipe = (cont, payload, action) => {
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
     .before(fetch)
-    .when(({ content }) => !(content && content.body && content.body.length > 0))
+    .when(({ content }) => !(content !== undefined && content.body !== undefined))
     .before(parse)
     .before(embeds)
     .before(smartypants)

@@ -25,7 +25,6 @@ describe('Test HTML emitter', () => {
     assert.deepEqual(
       out, {
         content: {
-          children: [],
           html: '',
         },
       },
@@ -52,7 +51,6 @@ describe('Test HTML emitter', () => {
     assert.deepEqual(
       out, {
         content: {
-          children: ['a', 'b'],
           html: 'ab',
         },
       },

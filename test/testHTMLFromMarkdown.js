@@ -10,11 +10,10 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const embed = require('../src/utils/embed-handler');
+const winston = require('winston');
+const { JSDOM } = require('jsdom');
+const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const { pipe } = require('../src/defaults/html.pipe.js');
-const coerce = require('../src/utils/coerce-secrets');
 
 const params = {
   path: '/hello.md',
@@ -57,64 +56,91 @@ const params = {
   selector: 'md',
 };
 
-const secrets = {
-  REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
-  EMBED_WHITELIST: '*.youtube.com',
-  EMBED_SERVICE: 'https://example-embed-service.com/',
+const logger = winston.createLogger({
+  // tune this for debugging
+  level: 'debug',
+  // and turn this on if you want the output
+  silent: true,
+  format: winston.format.simple(),
+  transports: [
+    new winston.transports.Console(),
+  ],
+});
+
+/**
+ * Assert that a specific html dom is generated from the given markdown
+ * using our html pipeline.
+ *
+ * The comparison between generated html and given html is done on dom
+ * level, so differences not affecting the html (like most whitespace)
+ * are ignored.
+ *
+ * @param {String} md The markdown to convert to html.
+ * @param {String} html The html we expect to be generated.
+ */
+const assertMd = async (md, html) => {
+  const fromHTML = ({ content }) => ({ response: { status: 201, body: content.html } });
+
+  const generated = await pipe(
+    fromHTML,
+    { content: { body: md } },
+    {
+      logger,
+      request: { params },
+    },
+  );
+
+  assertEquivalentNode(
+    new JSDOM(generated.response.body).window.document.body,
+    new JSDOM(html).window.document.body,
+  );
 };
 
-const logger = Logger.getTestLogger({
-  // tune this for debugging
-  level: 'info',
-});
-
-describe('Test Embed Handler', () => {
-  it('Creates ESI', async () => {
-    const node = {
-      type: 'embed',
-      url: 'https://www.example.com/',
-    };
-
-    const action = { logger };
-    await coerce(action);
-
-
-    embed(action.secrets)((_, tagname, parameters, children) => {
-      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/default/embed/https://www.example.com/');
-      assert.equal(children, undefined);
-      assert.equal(tagname, 'esi:include');
-    }, node);
+/**
+ * Test a specific markdown feature.
+ *
+ * This is just a wrapper calling it and then issuing a single
+ * assertMd.
+ *
+ * @param {String} desc The description passed to it.
+ * @param {String} md The markdown passed to the pipeline.
+ * @param {String} html The html that is expected to be generated.
+ */
+const itMd = (desc, md, html) => {
+  it(desc, async () => {
+    await assertMd(md, html);
   });
-});
+};
 
+describe('Testing Markdown conversion', () => {
+  itMd('Renders empty markdown', '', '');
+  itMd('Renders single paragraph', // Regression #157
+    'Hello World.',
+    '<p>Hello World.</p>');
 
-describe('Integration Test with Embeds', () => {
-  it('html.pipe processes embeds', async () => {
-    const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.html } }),
-      {
-        content: {
-          body: `Hello World
-Here comes an embed.
-
-https://www.youtube.com/watch?v=KOxbO0EI4MA
-
-![Easy!](easy.png)
-`,
-        },
-      },
-      {
-        request: { params },
-        secrets,
-        logger,
-      },
+  it('Code blocks with lang', async () => {
+    await assertMd(
+      '```javascript\n```',
+      '<pre><code class="language-javascript"></code></pre>',
     );
+    await assertMd(
+      '```javascript\nconsole.log(42);\n```',
+      '<pre><code class="language-javascript">console.log(42);\n</code></pre>',
+    );
+  });
 
-    assert.equal(result.response.status, 201);
-    assert.equal(result.response.headers['Content-Type'], 'text/html');
-    assert.equal(result.response.body, `<p>Hello World
-Here comes an embed.</p>
-<esi:include src="https://example-embed-service.com/https://www.youtube.com/watch?v=KOxbO0EI4MA"></esi:include>
-<p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w,easy.png?width=1384&amp;auto=webp 1384w,easy.png?width=2288&amp;auto=webp 2288w,easy.png?width=3192&amp;auto=webp 3192w,easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p>`);
+  it('Code blocks without lang', async () => {
+    await assertMd(
+      '    Hello World',
+      '<pre><code>Hello World\n</code></pre>',
+    );
+    await assertMd(
+      '```Hello World```',
+      '<p><code>Hello World</code></p>',
+    );
+    await assertMd(
+      '```\nHello World\n```',
+      '<pre><code>Hello World\n</code></pre>',
+    );
   });
 });

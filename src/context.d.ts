@@ -153,10 +153,6 @@ export interface Content {
     [k: string]: any;
   };
   /**
-   * Deprecated: the main HTML elements of the document. `document.children[].innerHTML` instead.
-   */
-  children?: string[];
-  /**
    * Deprecated: the main HTML of the document. Use `document.innerHTML` instead.
    */
   html?: string;
@@ -256,7 +252,7 @@ export interface MDAST {
   /**
    * For code, a lang field can be present. It represents the language of computer code being marked up.
    */
-  lang?: string;
+  lang?: null | string;
   /**
    * For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
    */

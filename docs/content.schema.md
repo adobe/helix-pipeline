@@ -22,7 +22,6 @@ The content as retrieved from the repository and enriched in the pipeline.
 | Property | Type | Required | Defined by |
 |----------|------|----------|------------|
 | [body](#body) | `string` | Optional | Content (this schema) |
-| [children](#children) | `string[]` | Optional | Content (this schema) |
 | [document](#document) | `object` | Optional | Content (this schema) |
 | [htast](#htast) | `object` | Optional | Content (this schema) |
 | [html](#html) | `string` | Optional | Content (this schema) |
@@ -48,32 +47,6 @@ The content body of the retrieved source document
 
 
 `string`
-
-
-
-
-
-
-## children
-
-Deprecated: the main HTML elements of the document. `document.children[].innerHTML` instead.
-
-`children`
-* is optional
-* type: `string[]`
-
-* defined in this schema
-
-### children Type
-
-
-Array type: `string[]`
-
-All items must be of the type:
-`string`
-
-
-
 
 
 
