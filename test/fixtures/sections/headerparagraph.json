@@ -8,6 +8,14 @@
       "is-paragraph-heading",
       "is-paragraph"
     ],
+    "childrenTypes": [
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ]
+    ],
     "intro": "This is a paragraph.",
     "title": "Header and one paragraph",
     "meta": {},

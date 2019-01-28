@@ -42,6 +42,10 @@ function image(section) {
   return img ? Object.assign({ image: img.url }, section) : section;
 }
 
+/**
+ * Construct the strings corresponding to the number of occurences per type.
+ * @param {Object} typecounter Type as a key, number of occurences as value
+ */
 function constructTypes(typecounter) {
   const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
   types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
@@ -62,12 +66,13 @@ function constructTypes(typecounter) {
  * 1. has-<type> for every type of content found in the section
  * 2. is-<type>-only for sections that have only content of type
  * 3. is-<type1>-<type2>-<type3> ranks the top three most common types of content
+ * 4. nb-<type>-<nb_occurences> is the number of occurences per typ
  * @param {*} section
  */
 function sectiontype(section) {
   const children = section.children || [];
 
-  const childrenTypes = new Array(section.children.length);
+  const childrenTypes = new Array(children.length);
 
   function reducer(counter, { type, children: pChildren }, index) {
     childrenTypes[index] = [];

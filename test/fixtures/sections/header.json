@@ -1,20 +1,29 @@
-[{
+[
+  {
+    "intro": "Header only",
     "types": [
       "has-heading",
       "nb-heading-1",
       "is-heading-only"
     ],
-    "type": "root",
-    "meta": {},
-    "intro": "Header only",
+    "childrenTypes": [
+      [
+        "is-heading"
+      ]
+    ],
     "title": "Header only",
-    "children": [{
+    "meta": {},
+    "type": "root",
+    "children": [
+      {
         "type": "heading",
         "depth": 1,
-        "children": [{
-          "type": "text",
-          "value": "Header only"
-        }]
+        "children": [
+          {
+            "type": "text",
+            "value": "Header only"
+          }
+        ]
       }
     ]
   }

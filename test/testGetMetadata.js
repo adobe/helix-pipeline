@@ -100,7 +100,7 @@ describe('Test getMetadata', () => {
       {
         content:
           {
-            sections: [{ meta: {}, types: [] }],
+            sections: [{ meta: {}, types: [], childrenTypes: [] }],
             meta: {},
             title: undefined,
             intro: undefined,

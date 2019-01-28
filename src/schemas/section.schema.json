@@ -28,7 +28,7 @@
         },
         "childrenTypes": {
           "type": "array",
-          "description": "The inferred class names for the children",
+          "description": "The inferred class names for the first level children",
           "items": {
             "type": "array",
             "description": "The inferred class names for the child",

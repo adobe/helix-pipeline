@@ -9,6 +9,14 @@
       "is-image-heading",
       "is-image"
     ],
+    "childrenTypes": [
+      [
+        "is-heading"
+      ],
+      [
+        "is-image"
+      ]
+    ],
     "image": "./helix_logo.png",
     "title": "Header and one image",
     "meta": {},

@@ -8,6 +8,17 @@
       "is-list-heading",
       "is-list"
     ],
+    "childrenTypes": [
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-paragraph",
+        "nb-paragraph-3",
+        "is-paragraph-only",
+        "is-list"
+      ]
+    ],
     "intro": "list item 1",
     "title": "Header and a list",
     "meta": {},

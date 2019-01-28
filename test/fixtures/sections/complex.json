@@ -11,6 +11,29 @@
       "is-link-heading",
       "is-link"
     ],
+    "childrenTypes": [
+      [],
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-link",
+        "is-link",
+        "is-link",
+        "is-link",
+        "is-link",
+        "is-link"
+      ]
+    ],
     "image": "https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg",
     "intro": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines.",
     "title": "Hypermedia Pipeline",
@@ -180,6 +203,27 @@
       "is-inlineCode-list",
       "is-inlineCode"
     ],
+    "childrenTypes": [
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-paragraph",
+        "nb-paragraph-4",
+        "is-paragraph-only",
+        "is-list"
+      ],
+      [
+        "is-inlineCode",
+        "is-inlineCode"
+      ]
+    ],
     "intro": "A pipeline consists of following main parts:",
     "title": "Anatomy of a Pipeline",
     "meta": {
@@ -316,6 +360,14 @@
       "nb-paragraph-2",
       "is-paragraph-only"
     ],
+    "childrenTypes": [
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-paragraph"
+      ]
+    ],
     "intro": "This section has a paragraph, but no title.",
     "meta": {},
     "type": "root",
@@ -347,6 +399,11 @@
       "nb-heading-1",
       "is-heading-only"
     ],
+    "childrenTypes": [
+      [
+        "is-heading"
+      ]
+    ],
     "title": "This section has a title, but no paragraph",
     "meta": {},
     "type": "root",
@@ -372,6 +429,21 @@
       "nb-paragraph-2",
       "is-paragraph-list",
       "is-paragraph"
+    ],
+    "childrenTypes": [
+      [
+        "is-inlineCode",
+        "is-inlineCode"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-inlineCode",
+        "nb-inlineCode-4",
+        "is-inlineCode-only",
+        "is-list"
+      ]
     ],
     "intro": "See below for the anatomy of a payload.",
     "meta": {},
@@ -476,6 +548,37 @@
       "is-inlineCode-code-paragraph",
       "is-inlineCode-code",
       "is-inlineCode"
+    ],
+    "childrenTypes": [
+      [
+        "is-inlineCode",
+        "is-link"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-inlineCode"
+      ],
+      [
+        "has-inlineCode",
+        "has-link",
+        "nb-inlineCode-5",
+        "nb-link-1",
+        "is-inlineCode-link",
+        "is-inlineCode",
+        "is-list"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-code"
+      ],
+      [
+        "is-inlineCode",
+        "is-inlineCode"
+      ]
     ],
     "intro": "A pipeline builder can be created by creating a CommonJS module that exports a function pipe which accepts following arguments and returns a Pipeline function.",
     "title": "Building a Pipeline",
@@ -683,6 +786,149 @@
       "is-inlineCode-heading-list",
       "is-inlineCode-heading",
       "is-inlineCode"
+    ],
+    "childrenTypes": [
+      [
+        "is-inlineCode"
+      ],
+      [
+        "has-inlineCode",
+        "nb-inlineCode-3",
+        "is-inlineCode-only",
+        "is-list"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-inlineCode",
+        "is-inlineCode"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-inlineCode",
+        "nb-inlineCode-7",
+        "is-inlineCode-only",
+        "is-list"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-paragraph",
+        "nb-paragraph-3",
+        "is-paragraph-only",
+        "is-list"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-code"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-paragraph",
+        "nb-paragraph-3",
+        "is-paragraph-only",
+        "is-list"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-paragraph",
+        "nb-paragraph-1",
+        "is-paragraph-only",
+        "is-list"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "has-inlineCode",
+        "nb-inlineCode-5",
+        "is-inlineCode-only",
+        "is-list"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "has-inlineCode",
+        "nb-inlineCode-2",
+        "is-inlineCode-only",
+        "is-list"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "has-inlineCode",
+        "has-list",
+        "has-link",
+        "nb-inlineCode-7",
+        "nb-list-1",
+        "nb-link-1",
+        "is-inlineCode-list-link",
+        "is-inlineCode-list",
+        "is-inlineCode",
+        "is-list"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "has-inlineCode",
+        "nb-inlineCode-4",
+        "is-inlineCode-only",
+        "is-list"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-paragraph"
+      ],
+      [
+        "is-heading"
+      ],
+      [
+        "is-inlineCode",
+        "is-inlineCode"
+      ],
+      [
+        "is-inlineCode",
+        "is-inlineCode"
+      ],
+      [
+        "is-inlineCode"
+      ],
+      [
+        "has-inlineCode",
+        "nb-inlineCode-1",
+        "is-inlineCode-only",
+        "is-list"
+      ]
     ],
     "intro": "The main function is typically a pure function that converts the request, context, and content properties of the payload into a response object.",
     "title": "The Main Function",

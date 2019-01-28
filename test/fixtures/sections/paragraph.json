@@ -1,19 +1,28 @@
-[{
+[
+  {
+    "title": "This is only a paragraph.",
     "types": [
       "has-paragraph",
       "nb-paragraph-1",
       "is-paragraph-only"
     ],
-    "type": "root",
+    "childrenTypes": [
+      [
+        "is-paragraph"
+      ]
+    ],
     "intro": "This is only a paragraph.",
-    "title": "This is only a paragraph.",
     "meta": {},
-    "children": [{
+    "type": "root",
+    "children": [
+      {
         "type": "paragraph",
-        "children": [{
-          "type": "text",
-          "value": "This is only a paragraph."
-        }]
+        "children": [
+          {
+            "type": "text",
+            "value": "This is only a paragraph."
+          }
+        ]
       }
     ]
   }
