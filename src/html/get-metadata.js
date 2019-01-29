@@ -66,7 +66,7 @@ function constructTypes(typecounter) {
  * 1. has-<type> for every type of content found in the section
  * 2. is-<type>-only for sections that have only content of type
  * 3. is-<type1>-<type2>-<type3> ranks the top three most common types of content
- * 4. nb-<type>-<nb_occurences> is the number of occurences per typ
+ * 4. nb-<type>-<nb_occurences> is the number of occurences per type
  * @param {*} section
  */
 function sectiontype(section) {
