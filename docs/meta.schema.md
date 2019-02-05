@@ -25,6 +25,7 @@ Content and Section Metadata Properties
 Path (can be relative) to the first image in the document
 
 `image`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -33,6 +34,7 @@ Path (can be relative) to the first image in the document
 
 
 `string`
+
 * format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
 
 
@@ -45,6 +47,7 @@ Path (can be relative) to the first image in the document
 Extracted first paragraph of the document
 
 `intro`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -59,11 +62,13 @@ Extracted first paragraph of the document
 
 
 
+
 ## meta
 
 Extracted metadata fron the frontmatter of the document
 
 `meta`
+
 * is optional
 * type: `object`
 * defined in this schema
@@ -87,6 +92,7 @@ Extracted metadata fron the frontmatter of the document
 Extracted title of the document
 
 `title`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -95,6 +101,7 @@ Extracted title of the document
 
 
 `string`
+
 
 
 

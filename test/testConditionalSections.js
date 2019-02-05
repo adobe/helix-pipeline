@@ -83,7 +83,7 @@ describe('Integration Test Section Strain Filtering', () => {
         // but we use it to assert that pre-processing has happened
         logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
         assert.equal(content.sections.filter(nonhidden).length, 3);
-        return { response: { body: content.html } };
+        return { response: { body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -339,7 +339,7 @@ describe('Integration Test A/B Testing', () => {
         logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
         assert.equal(content.sections.filter(nonhidden).length, 3);
         assert.equal(content.sections.filter(nonhidden)[2].meta.test, 'a');
-        return { response: { body: content.html } };
+        return { response: { body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -390,7 +390,7 @@ Or this one at the same time.
           // remember what was selected
           /* eslint-disable-next-line prefer-destructuring */
           selected = content.sections.filter(nonhidden)[2];
-          return { response: { body: content.html } };
+          return { response: { body: content.document.body.innerHTML } };
         },
         {
           content: {

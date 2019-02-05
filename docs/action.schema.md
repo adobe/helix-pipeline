@@ -31,6 +31,7 @@ Tracks the OpenWhisk action invocation
 Internal information related to debugging.
 
 `debug`
+
 * is optional
 * type: `object`
 * defined in this schema
@@ -54,6 +55,7 @@ Internal information related to debugging.
 A [Winston](https://github.com/winstonjs/winston) logger instance.
 
 `logger`
+
 * is optional
 * type: `object`
 * defined in this schema
@@ -76,6 +78,7 @@ A [Winston](https://github.com/winstonjs/winston) logger instance.
 
 
 `request`
+
 * is optional
 * type: Raw Request
 * defined in this schema
@@ -93,6 +96,7 @@ A [Winston](https://github.com/winstonjs/winston) logger instance.
 
 
 `secrets`
+
 * is optional
 * type: Secrets
 * defined in this schema

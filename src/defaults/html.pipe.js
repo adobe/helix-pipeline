@@ -17,7 +17,6 @@ const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
-const emit = require('../html/emit-html.js');
 const type = require('../utils/set-content-type.js');
 const status = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
@@ -52,7 +51,6 @@ const htmlpipe = (cont, payload, action) => {
     .before(selecttest)
     .before(html)
     .before(responsive)
-    .before(emit)
     .once(cont)
     .after(type('text/html'))
     .after(cache)
