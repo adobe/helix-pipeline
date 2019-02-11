@@ -38,7 +38,6 @@ The content as retrieved from the repository and enriched in the pipeline.
 The content body of the retrieved source document
 
 `body`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -53,13 +52,11 @@ The content body of the retrieved source document
 
 
 
-
 ## document
 
 The DOM-compatible representation of the document's inner HTML
 
 `document`
-
 * is optional
 * type: `object`
 * defined in this schema
@@ -83,7 +80,6 @@ The DOM-compatible representation of the document's inner HTML
 Deprecated: the Hypermedia (HAST) AST
 
 `htast`
-
 * is optional
 * type: `object`
 * defined in this schema
@@ -107,7 +103,6 @@ Deprecated: the Hypermedia (HAST) AST
 Path (can be relative) to the first image in the document
 
 `image`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -116,7 +111,6 @@ Path (can be relative) to the first image in the document
 
 
 `string`
-
 * format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
 
 
@@ -129,7 +123,6 @@ Path (can be relative) to the first image in the document
 Extracted first paragraph of the document
 
 `intro`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -144,12 +137,10 @@ Extracted first paragraph of the document
 
 
 
-
 ## mdast
 
 
 `mdast`
-
 * is optional
 * type: MDAST
 * defined in this schema
@@ -168,7 +159,6 @@ Extracted first paragraph of the document
 Extracted metadata fron the frontmatter of the document
 
 `meta`
-
 * is optional
 * type: `object`
 * defined in this schema
@@ -192,9 +182,9 @@ Extracted metadata fron the frontmatter of the document
 The extracted sections of the document
 
 `sections`
-
 * is optional
 * type: Section
+
 * defined in this schema
 
 ### sections Type
@@ -217,9 +207,9 @@ All items must be of the type:
 List of URIs that have been retrieved for this piece of content
 
 `sources`
-
 * is optional
 * type: `string[]`
+
 * defined in this schema
 
 ### sources Type
@@ -229,7 +219,6 @@ Array type: `string[]`
 
 All items must be of the type:
 `string`
-
 * format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
 
 
@@ -244,7 +233,6 @@ All items must be of the type:
 Extracted title of the document
 
 `title`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -259,13 +247,11 @@ Extracted title of the document
 
 
 
-
 ## xml
 
 The XML object to emit. See xmlbuilder-js for syntax.
 
 `xml`
-
 * is optional
 * type: `object`
 * defined in this schema

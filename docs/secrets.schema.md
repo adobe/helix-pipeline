@@ -33,7 +33,6 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 URL of an Embed Service that takes the appended URL and returns an embeddable HTML representation.
 
 `EMBED_SERVICE`
-
 * is optional
 * type: `string`
 * default: `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"`
@@ -49,13 +48,11 @@ URL of an Embed Service that takes the appended URL and returns an embeddable HT
 
 
 
-
 ## EMBED_WHITELIST
 
 Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
 
 `EMBED_WHITELIST`
-
 * is optional
 * type: `string`
 * default: `"www.youtube.com, spark.adobe.com, unsplash.com/photos"`
@@ -71,13 +68,11 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 
 
 
-
 ## HTTP_TIMEOUT
 
 Timeout for outgoing HTTP requests in milliseconds
 
 `HTTP_TIMEOUT`
-
 * is optional
 * type: `integer`
 * default: `1000`
@@ -93,13 +88,11 @@ Timeout for outgoing HTTP requests in milliseconds
 
 
 
-
 ## IMAGES_MAX_SIZE
 
 Maximum physical with of responsive images to generate
 
 `IMAGES_MAX_SIZE`
-
 * is optional
 * type: `integer`
 * default: `4096`
@@ -115,13 +108,11 @@ Maximum physical with of responsive images to generate
 
 
 
-
 ## IMAGES_MIN_SIZE
 
 Minimum physical width of responsive images to generate
 
 `IMAGES_MIN_SIZE`
-
 * is optional
 * type: `integer`
 * default: `480`
@@ -137,13 +128,11 @@ Minimum physical width of responsive images to generate
 
 
 
-
 ## IMAGES_SIZES
 
 Value for the `sizes` attribute of generated responsive images
 
 `IMAGES_SIZES`
-
 * is optional
 * type: `string`
 * default: `"100vw"`
@@ -159,13 +148,11 @@ Value for the `sizes` attribute of generated responsive images
 
 
 
-
 ## IMAGES_SIZE_STEPS
 
 Number of intermediary size steps to create per image
 
 `IMAGES_SIZE_STEPS`
-
 * is optional
 * type: `integer`
 * default: `4`
@@ -181,13 +168,11 @@ Number of intermediary size steps to create per image
 
 
 
-
 ## REPO_API_ROOT
 
 The base URL for all GitHub API operations
 
 `REPO_API_ROOT`
-
 * is optional
 * type: `string`
 * default: `"https://api.github.com/"`
@@ -197,7 +182,6 @@ The base URL for all GitHub API operations
 
 
 `string`
-
 * format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
 
 
@@ -210,7 +194,6 @@ The base URL for all GitHub API operations
 The Base URL for retrieving raw text files from GitHub
 
 `REPO_RAW_ROOT`
-
 * is optional
 * type: `string`
 * default: `"https://raw.githubusercontent.com/"`
@@ -220,7 +203,6 @@ The Base URL for retrieving raw text files from GitHub
 
 
 `string`
-
 * format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
 
 
@@ -232,7 +214,6 @@ The Base URL for retrieving raw text files from GitHub
 
 
 `TEST_BOOLEAN`
-
 * is optional
 * type: `boolean`
 * default: `true`
@@ -252,7 +233,6 @@ The Base URL for retrieving raw text files from GitHub
 Print XML with line breaks and indentation
 
 `XML_PRETTY`
-
 * is optional
 * type: `boolean`
 * default: `true`
@@ -272,7 +252,6 @@ Applies to all properties that match the regular expression `[A-Z0-9_]+`
 
 
 `[A-Z0-9_]+`
-
 * is a property pattern
 * type: complex
 * defined in this schema

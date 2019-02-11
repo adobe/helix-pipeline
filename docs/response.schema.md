@@ -23,7 +23,6 @@ The HTTP response object
 
 
 `body`
-
 * is optional
 * type: complex
 * defined in this schema
@@ -51,7 +50,6 @@ The HTTP response object
 The HTTP headers of the response
 
 `headers`
-
 * is optional
 * type: complex
 * defined in this schema
@@ -79,7 +77,6 @@ Unknown type ``.
 The HTTP status code
 
 `status`
-
 * is optional
 * type: `integer`
 * defined in this schema
@@ -88,7 +85,6 @@ The HTTP status code
 
 
 `integer`
-
 
 
 

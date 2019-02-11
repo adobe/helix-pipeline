@@ -28,7 +28,6 @@ The HTTP Request
 The extension of the requested resource
 
 `extension`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -37,7 +36,6 @@ The extension of the requested resource
 
 
 `string`
-
 
 
 
@@ -60,7 +58,6 @@ The extension of the requested resource
 The HTTP headers of the request. Note: all header names will be lower-case.
 
 `headers`
-
 * is optional
 * type: complex
 * defined in this schema
@@ -88,7 +85,6 @@ Unknown type ``.
 The HTTP method of the request. Note: method names can be lower-case.
 
 `method`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -97,7 +93,6 @@ The HTTP method of the request. Note: method names can be lower-case.
 
 
 `string`
-
 
 
 
@@ -117,7 +112,6 @@ The HTTP method of the request. Note: method names can be lower-case.
 The passed through (and filtered) URL parameters of the request
 
 `params`
-
 * is optional
 * type: `object`
 * defined in this schema
@@ -141,7 +135,6 @@ The passed through (and filtered) URL parameters of the request
 The path of the request URL
 
 `path`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -150,7 +143,6 @@ The path of the request URL
 
 
 `string`
-
 
 
 
@@ -168,7 +160,6 @@ The path of the request URL
 The selector (sub-type indicator)
 
 `selector`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -177,7 +168,6 @@ The selector (sub-type indicator)
 
 
 `string`
-
 
 
 
@@ -200,7 +190,6 @@ The selector (sub-type indicator)
 The path and request parameters of the request URL
 
 `url`
-
 * is optional
 * type: `string`
 * defined in this schema
@@ -209,7 +198,6 @@ The path and request parameters of the request URL
 
 
 `string`
-
 
 
 

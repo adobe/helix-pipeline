@@ -36,9 +36,9 @@ A section in a markdown document
 The AST nodes making up the section. Section dividers are not included.
 
 `children`
-
 * is optional
 * type: MDAST
+
 * defined in this schema
 
 ### children Type
@@ -61,7 +61,6 @@ All items must be of the type:
 Path (can be relative) to the first image in the document
 
 `image`
-
 * is optional
 * type: `string`
 * defined in [Meta](meta.schema.md#image)
@@ -70,7 +69,6 @@ Path (can be relative) to the first image in the document
 
 
 `string`
-
 * format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
 
 
@@ -83,7 +81,6 @@ Path (can be relative) to the first image in the document
 Extracted first paragraph of the document
 
 `intro`
-
 * is optional
 * type: `string`
 * defined in [Meta](meta.schema.md#intro)
@@ -98,13 +95,11 @@ Extracted first paragraph of the document
 
 
 
-
 ## meta
 
 Extracted metadata fron the frontmatter of the document
 
 `meta`
-
 * is optional
 * type: `object`
 * defined in [Meta](meta.schema.md#meta)
@@ -127,7 +122,6 @@ Extracted metadata fron the frontmatter of the document
 
 
 `position`
-
 * is optional
 * type: Position
 * defined in this schema
@@ -146,7 +140,6 @@ Extracted metadata fron the frontmatter of the document
 Extracted title of the document
 
 `title`
-
 * is optional
 * type: `string`
 * defined in [Meta](meta.schema.md#title)
@@ -161,13 +154,11 @@ Extracted title of the document
 
 
 
-
 ## type
 
 The MDAST node type. Each section can be treated as a standalone document.
 
 `type`
-
 * is optional
 * type: `const`
 * defined in this schema
@@ -187,9 +178,9 @@ The value of this property **must** be equal to:
 The inferred class names for the section
 
 `types`
-
 * is optional
 * type: `string[]`
+
 * defined in this schema
 
 ### types Type
@@ -199,7 +190,6 @@ Array type: `string[]`
 
 All items must be of the type:
 `string`
-
 
 
 
