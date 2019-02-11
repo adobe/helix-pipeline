@@ -28,6 +28,7 @@ Marks the position of an AST node in the original text flow
 
 
 `end`
+
 * is optional
 * type: Text Coordinates
 * defined in this schema
@@ -45,9 +46,9 @@ Marks the position of an AST node in the original text flow
 
 
 `indent`
+
 * is optional
 * type: `array`
-
 * defined in this schema
 
 ### indent Type
@@ -64,6 +65,7 @@ Array type: `array`
 
 
 `start`
+
 * is optional
 * type: Text Coordinates
 * defined in this schema

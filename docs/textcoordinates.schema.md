@@ -24,6 +24,7 @@ A position in a text document
 Column number
 
 `column`
+
 * is optional
 * type: `number`
 * defined in this schema
@@ -38,11 +39,13 @@ Column number
 
 
 
+
 ## line
 
 Line number
 
 `line`
+
 * is optional
 * type: `number`
 * defined in this schema
@@ -57,11 +60,13 @@ Line number
 
 
 
+
 ## offset
 
 Character in the entire document
 
 `offset`
+
 * is optional
 * type: `number`
 * defined in this schema
@@ -70,6 +75,7 @@ Character in the entire document
 
 
 `number`
+
 
 
 

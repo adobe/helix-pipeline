@@ -31,6 +31,7 @@ The context thingie.
 
 
 `content`
+
 * is optional
 * type: Content
 * defined in this schema
@@ -50,6 +51,7 @@ An error message that has been generated during pipeline processing.
 When this property is present, all other values can be ignored.
 
 `error`
+
 * is optional
 * type: complex
 * defined in this schema
@@ -77,6 +79,7 @@ Unknown type `string,object`.
 
 
 `request`
+
 * is optional
 * type: Request
 * defined in this schema
@@ -94,6 +97,7 @@ Unknown type `string,object`.
 
 
 `response`
+
 * is optional
 * type: Response
 * defined in this schema
