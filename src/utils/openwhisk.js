@@ -103,7 +103,7 @@ function extractActionContext(params) {
   });
 
   // setup action
-  const action = {
+  return {
     secrets,
     request: {
       params: disclosed,
@@ -112,18 +112,6 @@ function extractActionContext(params) {
     },
     logger: __ow_logger,
   };
-
-  // calc root path
-  if (!action.request.params.rootPath) {
-    let rootPath = action.request.headers['x-fulldirname'] || '/';
-    const rootDir = action.request.headers['x-dirname'] || '/';
-    if (rootPath.endsWith(rootDir)) {
-      rootPath = rootPath.substring(0, rootPath.length - rootDir.length);
-    }
-    action.request.params.rootPath = rootPath;
-  }
-
-  return action;
 }
 
 /**
