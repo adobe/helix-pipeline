@@ -20,7 +20,7 @@
             "properties": {
                 "meta": {
                     "type": "object",
-                    "description": "Extracted metadata fron the frontmatter of the document"
+                    "description": "Extracted metadata from the frontmatter of the document"
                 },
                 "title": {
                     "type": "string",

@@ -1,14 +1,14 @@
 /*
-  * Copyright 2018 Adobe. All rights reserved.
-  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-  * you may not use this file except in compliance with the License. You may obtain a copy
-  * of the License at http://www.apache.org/licenses/LICENSE-2.0
-  *
-  * Unless required by applicable law or agreed to in writing, software distributed under
-  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-  * OF ANY KIND, either express or implied. See the License for the specific language
-  * governing permissions and limitations under the License.
-  */
+ * Copyright 2018 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 
 /**
  * A section in a markdown document
@@ -30,7 +30,7 @@ export type Section = {
    */
   children?: MDAST[];
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;
@@ -49,7 +49,7 @@ export type Section = {
   image?: string;
 } & {
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;
@@ -91,11 +91,11 @@ export interface Context {
  */
 export interface Request {
   /**
-   * The path and request parameters of the request URL
+   * The path and request parameters of the client request URL
    */
   url?: string;
   /**
-   * The path of the request URL
+   * The path of the client request URL
    */
   path?: string;
   /**
@@ -159,7 +159,7 @@ export interface Content {
     [k: string]: any;
   };
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;

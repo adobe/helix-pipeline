@@ -20,16 +20,16 @@
     "properties": {
         "url": {
             "type": "string",
-            "description": "The path and request parameters of the request URL",
+            "description": "The path and request parameters of the client request URL",
             "examples": [
-                "/index.html?foo=bar"
+                "/docs/api/general/index.nav.html?a=1"
             ]
         },
         "path": {
             "type": "string",
-            "description": "The path of the request URL",
+            "description": "The path of the client request URL",
             "examples": [
-                "/index.md"
+                "/docs/api/general/index.nav.html"
             ]
         },
         "selector": {
