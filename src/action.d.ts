@@ -15,7 +15,7 @@
  */
 export type RawRequest = {
   /**
-   * The headers of the request made to OpenWhisk/Petridish
+   * The headers of the request made to OpenWhisk/helix-simulator
    */
   headers?: {
     /**
@@ -37,7 +37,7 @@ export type RawRequest = {
     [k: string]: string;
   };
   /**
-   * The HTTP method of the request made to OpenWhisk/Petridish. Note: OpenWhisk converts all methods to lowercase.
+   * The HTTP method of the request made to OpenWhisk/helix-simulator. Note: OpenWhisk converts all methods to lowercase.
    */
   method?: string;
   /**
@@ -58,8 +58,14 @@ export type RawRequest = {
     ref?: string;
     /**
      * Path to the requested (Markdown) file
+     * @example "/general/index.md"
      */
     path?: string;
+    /**
+     * The request root path of the current strain.
+     * @example "/docs/api"
+     */
+    rootPath?: string;
     /**
      * The resolved strain (variant)
      */
@@ -71,7 +77,7 @@ export type RawRequest = {
       [k: string]: any;
     };
     /**
-     * All other parameters are interpretet as string.
+     * All other parameters are interpreted as string.
      */
     [k: string]: string;
   };

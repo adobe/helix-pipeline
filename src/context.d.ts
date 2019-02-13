@@ -30,7 +30,7 @@ export type Section = {
    */
   children?: MDAST[];
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;
@@ -49,7 +49,7 @@ export type Section = {
   image?: string;
 } & {
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;
@@ -91,23 +91,28 @@ export interface Context {
  */
 export interface Request {
   /**
-   * The path and request parameters of the request URL
+   * The path and request parameters of the client request URL.
+   * @example "/docs/api/general/index.nav.html?a=1"
    */
   url?: string;
   /**
-   * The path of the request URL
+   * The path of the client request URL
+   * @example "/docs/api/general/index.nav.html"
    */
   path?: string;
   /**
    * The selector (sub-type indicator)
+   * @example "nav"
    */
   selector?: string;
   /**
    * The extension of the requested resource
+   * @example "html"
    */
   extension?: string;
   /**
    * The HTTP method of the request. Note: method names can be lower-case.
+   * @example "get"
    */
   method?: string;
   /**
@@ -159,7 +164,7 @@ export interface Content {
     [k: string]: any;
   };
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;

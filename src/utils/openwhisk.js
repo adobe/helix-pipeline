@@ -15,10 +15,11 @@ const querystring = require('querystring');
 const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
 
 /**
- * Builds the URL from path, selector, extension and params
+ * Builds the request path from path, selector, extension and params
  * @param {Object} p The request parameters
  */
-function buildUrl(p) {
+function buildPath(p) {
+  const rootPath = p.rootPath || '';
   let path = p.path || '/';
   const dot = path.lastIndexOf('.');
   if (dot !== -1) {
@@ -26,8 +27,7 @@ function buildUrl(p) {
   }
   const sel = p.selector ? `.${p.selector}` : '';
   const ext = `.${p.extension || 'html'}`;
-  const query = p.params ? `?${p.params}` : '';
-  return `${path}${sel}${ext}${query}`;
+  return `${rootPath}${path}${sel}${ext}`;
 }
 
 /**
@@ -41,15 +41,17 @@ function extractClientRequest(action) {
   if (!request || !request.params) {
     return {};
   }
+  const reqPath = buildPath(request.params);
+  const query = request.params.params ? `?${request.params.params}` : '';
   return {
     // the edge encodes the client request parameters into the `params` param ;-)
     params: request.params.params ? querystring.parse(request.params.params) : {},
     headers: request.headers,
     method: request.method,
-    path: request.params.path || '',
+    path: reqPath,
     extension: request.params.extension || '',
     selector: request.params.selector || '',
-    url: buildUrl(request.params),
+    url: `${reqPath}${query}`,
   };
 }
 
@@ -101,7 +103,7 @@ function extractActionContext(params) {
   });
 
   // setup action
-  return {
+  const action = {
     secrets,
     request: {
       params: disclosed,
@@ -110,6 +112,18 @@ function extractActionContext(params) {
     },
     logger: __ow_logger,
   };
+
+  // calc root path
+  if (!action.request.params.rootPath) {
+    let rootPath = action.request.headers['x-fulldirname'] || '/';
+    const rootDir = action.request.headers['x-dirname'] || '/';
+    if (rootPath.endsWith(rootDir)) {
+      rootPath = rootPath.substring(0, rootPath.length - rootDir.length);
+    }
+    action.request.params.rootPath = rootPath;
+  }
+
+  return action;
 }
 
 /**
