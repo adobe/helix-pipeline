@@ -30,7 +30,7 @@ export type Section = {
    */
   children?: MDAST[];
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;
@@ -49,7 +49,7 @@ export type Section = {
   image?: string;
 } & {
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;
@@ -91,11 +91,11 @@ export interface Context {
  */
 export interface Request {
   /**
-   * The path and request parameters of the request URL
+   * The path and request parameters of the client request URL
    */
   url?: string;
   /**
-   * The path of the request URL
+   * The path of the client request URL
    */
   path?: string;
   /**
@@ -159,7 +159,7 @@ export interface Content {
     [k: string]: any;
   };
   /**
-   * Extracted metadata fron the frontmatter of the document
+   * Extracted metadata from the frontmatter of the document
    */
   meta?: {
     [k: string]: any;

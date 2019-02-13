@@ -95,6 +95,7 @@ describe('Testing OpenWhisk adapter', () => {
       extension: 'html',
       selector: 'print.preview',
       params: 'a=42&b=green',
+      rootPath: '/docs',
       SECRET: '1234',
     };
     let action = {};
@@ -110,6 +111,7 @@ describe('Testing OpenWhisk adapter', () => {
         extension: 'html',
         selector: 'print.preview',
         params: 'a=42&b=green',
+        rootPath: '/docs',
       },
       headers: {
         Host: 'example.com',
@@ -131,10 +133,10 @@ describe('Testing OpenWhisk adapter', () => {
           Host: 'example.com',
         },
         method: 'get',
-        path: '/test.md',
+        path: '/docs/test.print.preview.html',
         extension: 'html',
         selector: 'print.preview',
-        url: '/test.print.preview.html?a=42&b=green',
+        url: '/docs/test.print.preview.html?a=42&b=green',
       },
     });
   });
