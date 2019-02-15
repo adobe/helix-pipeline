@@ -40,6 +40,11 @@ describe('Test Markdown Parsing', () => {
     assertMatch('frontmatter', callback);
   });
 
+  // unskip once #155 is fixed
+  it.skip('Parses headings correctly', () => {
+    assertMatch('headings', callback);
+  });
+
   it('Does not get confused by thematic breaks', () => {
     assertMatch('confusing', callback);
   });
