@@ -39,9 +39,6 @@ const thbreak = {
 function parse({ content: { body = '' } = {} }, { logger }) {
   logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
 
-  // disable setext headings (=== and ---)
-  remark.Parser.prototype.blockTokenizers.setextHeading = () => {};
-
   const preprocessor = unified()
     .use(remark, { setext: false })
     .use(frontmatter, { type: 'yaml', marker: '-', anywhere: true });
