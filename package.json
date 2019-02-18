@@ -72,7 +72,7 @@
     "uri-js": "^4.2.2",
     "winston": "^3.0.0",
     "xml2js": "^0.4.19",
-    "xmlbuilder": "^10.1.1"
+    "xmlbuilder": "^11.0.0"
   },
   "snyk": true
 }
