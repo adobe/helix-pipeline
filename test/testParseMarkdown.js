@@ -36,7 +36,6 @@ describe('Test Markdown Parsing', () => {
     assertMatch('frontmatter', callback);
   });
 
-  // unskip once #155 is fixed
   it('Parses headings correctly', () => {
     assertMatch('headings', callback);
   });
