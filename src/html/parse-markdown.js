@@ -40,7 +40,7 @@ function parse({ content: { body = '' } = {} }, { logger }) {
   logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
 
   const preprocessor = unified()
-    .use(remark, { setext: false })
+    .use(remark)
     .use(frontmatter, { type: 'yaml', marker: '-', anywhere: true });
 
   // see https://github.com/syntax-tree/mdast for documentation
