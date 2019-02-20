@@ -91,7 +91,7 @@ describe('Test Embed Handler', () => {
 describe('Integration Test with Embeds', () => {
   it('html.pipe processes embeds', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.html } }),
+      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
         content: {
           body: `Hello World

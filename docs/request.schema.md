@@ -132,7 +132,7 @@ The passed through (and filtered) URL parameters of the request
 
 ## path
 
-The path of the request URL
+The path of the client request URL
 
 `path`
 * is optional
@@ -151,7 +151,7 @@ The path of the request URL
 ### path Example
 
 ```json
-"/index.md"
+"/docs/api/general/index.nav.html"
 ```
 
 
@@ -187,7 +187,7 @@ The selector (sub-type indicator)
 
 ## url
 
-The path and request parameters of the request URL
+The path and request parameters of the client request URL
 
 `url`
 * is optional
@@ -206,6 +206,6 @@ The path and request parameters of the request URL
 ### url Example
 
 ```json
-"/index.html?foo=bar"
+"/docs/api/general/index.nav.html?a=1"
 ```
 
