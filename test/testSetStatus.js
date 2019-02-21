@@ -21,12 +21,16 @@ const logger = Logger.getTestLogger({
 
 describe('Test set-status', () => {
   it('sets a 500 for an error', () => {
+    const error = 'oh, no!';
     assert.deepEqual(
-      setStatus({ content: { html: '<html></html>' }, error: 'oh, no!' }, { logger }),
+      setStatus({ content: { html: '<html></html>' }, error }, { logger }),
       {
         response: {
           status: 500,
-          body: '',
+          headers: {
+            'Content-Type': 'text/html',
+          },
+          body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
         },
       },
     );
