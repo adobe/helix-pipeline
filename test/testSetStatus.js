@@ -20,20 +20,33 @@ const logger = Logger.getTestLogger({
 });
 
 describe('Test set-status', () => {
+  const error = 'oh, no!';
+
   it('sets a 500 for an error', () => {
-    const error = 'oh, no!';
     assert.deepEqual(
       setStatus({ content: { html: '<html></html>' }, error }, { logger }),
       {
-        response: {
-          status: 500,
-          headers: {
-            'Content-Type': 'text/html',
-          },
-          body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
+        status: 500,
+        headers: {
+          'Content-Type': 'text/html',
         },
+        body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
       },
     );
+  });
+
+  it('omits error message when in production', () => {
+    /* eslint-disable no-underscore-dangle */
+    process.env.__OW_ACTIVATION_ID = 'dummy'; // simulate production env
+    assert.deepEqual(
+      setStatus({ content: { html: '<html></html>' }, error }, { logger }),
+      {
+        status: 500,
+        body: '',
+      },
+    );
+    delete process.env.__OW_ACTIVATION_ID;
+    /* eslint-enable no-underscore-dangle */
   });
 
   it('keeps an existing status', () => {

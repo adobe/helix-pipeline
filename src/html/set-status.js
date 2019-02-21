@@ -9,6 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+const production = require('../utils/is-production');
 
 function setStatus({ response = {}, error }, { logger }) {
   // if a status is already default, keep it.
@@ -19,15 +20,16 @@ function setStatus({ response = {}, error }, { logger }) {
   // if there is an error, send a 500
   if (error) {
     logger.debug('payload.error -> 500');
-    return {
-      response: {
-        status: 500,
-        headers: {
-          'Content-Type': 'text/html',
-        },
-        body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
-      },
-    };
+    const isDev = !production();
+    const res = {};
+    res.status = 500;
+    if (isDev) {
+      res.body = `<html><body><h1>500</h1><p>${error}</p></body></html>`;
+      res.headers = { 'Content-Type': 'text/html' };
+    } else {
+      res.body = '';
+    }
+    return res;
   }
 
   return {
