@@ -22,7 +22,10 @@ function setStatus({ response = {}, error }, { logger }) {
     return {
       response: {
         status: 500,
-        body: '',
+        headers: {
+          'Content-Type': 'text/html',
+        },
+        body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
       },
     };
   }
