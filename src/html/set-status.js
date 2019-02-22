@@ -9,36 +9,50 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const production = require('../utils/is-production');
 
-function setStatus({ response = {}, error }, { logger }) {
-  // if a status is already default, keep it.
-  if (response.status) {
-    return {};
-  }
-
-  // if there is an error, send a 500
-  if (error) {
-    logger.debug('payload.error -> 500');
-    const isDev = !production();
-    const res = {
-      status: 500,
-    };
-    if (isDev) {
-      res.body = `<html><body><h1>500</h1><p>${error}</p></body></html>`;
-      res.headers = { 'Content-Type': 'text/html' };
-    } else {
-      res.body = '';
-    }
-    return {
-      response: res,
-    };
-  }
-
-  return {
+function setVerboseError(error) {
+  const res = {
     response: {
-      status: 200,
+      status: 500,
+      body: `<html><body><h1>500</h1><pre>${error}</pre></body></html>`,
+      headers: {
+        'Content-Type': 'text/html',
+      },
     },
   };
+  return res;
 }
+
+function selectStatus(prod) {
+  return ({ response = {}, error }, { logger }) => {
+    // if a status is already default, keep it.
+    if (response.status) {
+      return {};
+    }
+    if (!error) {
+      return {
+        response: {
+          status: 200,
+        },
+      };
+    }
+    // error handling
+    logger.debug('payload.error -> 500');
+    if (prod) {
+      return {
+        response: {
+          status: 500,
+          body: '',
+        },
+      };
+    }
+    return setVerboseError(error);
+  };
+}
+
+function setStatus({ response = {}, error }, { logger }) {
+  return selectStatus(false)({ response, error }, { logger });
+}
+
 module.exports = setStatus;
+module.exports.selectStatus = selectStatus;

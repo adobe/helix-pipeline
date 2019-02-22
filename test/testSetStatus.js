@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
-const setStatus = require('../src/html/set-status.js');
+const status = require('../src/html/set-status.js');
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
@@ -22,26 +22,24 @@ const logger = Logger.getTestLogger({
 describe('Test set-status', () => {
   const error = 'oh, no!';
 
-  it('sets a 500 for an error', () => {
+  it('sets a verbose 500 for an error in dev', () => {
     assert.deepEqual(
-      setStatus({ content: { html: '<html></html>' }, error }, { logger }),
+      status.selectStatus(false)({ content: { html: '<html></html>' }, error }, { logger }),
       {
         response: {
           status: 500,
           headers: {
             'Content-Type': 'text/html',
           },
-          body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
+          body: `<html><body><h1>500</h1><pre>${error}</pre></body></html>`,
         },
       },
     );
   });
 
-  it('omits error message when in production', () => {
-    /* eslint-disable no-underscore-dangle */
-    process.env.__OW_ACTIVATION_ID = 'dummy'; // simulate production env
+  it('sets a terse 500 for an error in production', () => {
     assert.deepEqual(
-      setStatus({ content: { html: '<html></html>' }, error }, { logger }),
+      status.selectStatus(true)({ content: { html: '<html></html>' }, error }, { logger }),
       {
         response: {
           status: 500,
@@ -49,13 +47,11 @@ describe('Test set-status', () => {
         },
       },
     );
-    delete process.env.__OW_ACTIVATION_ID;
-    /* eslint-enable no-underscore-dangle */
   });
 
   it('keeps an existing status', () => {
     assert.deepEqual(
-      setStatus({
+      status({
         response: {
           status: 201,
         },
@@ -66,7 +62,7 @@ describe('Test set-status', () => {
 
   it('sets a 200 if all good', () => {
     assert.deepEqual(
-      setStatus({ content: { html: '<html></html>' } }, { logger }),
+      status({ content: { html: '<html></html>' } }, { logger }),
       {
         response: {
           status: 200,
