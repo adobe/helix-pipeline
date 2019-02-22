@@ -26,11 +26,13 @@ describe('Test set-status', () => {
     assert.deepEqual(
       setStatus({ content: { html: '<html></html>' }, error }, { logger }),
       {
-        status: 500,
-        headers: {
-          'Content-Type': 'text/html',
+        response: {
+          status: 500,
+          headers: {
+            'Content-Type': 'text/html',
+          },
+          body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
         },
-        body: `<html><body><h1>500</h1><p>${error}</p></body></html>`,
       },
     );
   });
@@ -41,8 +43,10 @@ describe('Test set-status', () => {
     assert.deepEqual(
       setStatus({ content: { html: '<html></html>' }, error }, { logger }),
       {
-        status: 500,
-        body: '',
+        response: {
+          status: 500,
+          body: '',
+        },
       },
     );
     delete process.env.__OW_ACTIVATION_ID;

@@ -21,15 +21,18 @@ function setStatus({ response = {}, error }, { logger }) {
   if (error) {
     logger.debug('payload.error -> 500');
     const isDev = !production();
-    const res = {};
-    res.status = 500;
+    const res = {
+      status: 500,
+    };
     if (isDev) {
       res.body = `<html><body><h1>500</h1><p>${error}</p></body></html>`;
       res.headers = { 'Content-Type': 'text/html' };
     } else {
       res.body = '';
     }
-    return res;
+    return {
+      response: res,
+    };
   }
 
   return {
