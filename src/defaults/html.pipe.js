@@ -18,7 +18,7 @@ const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
 const type = require('../utils/set-content-type.js');
-const status = require('../html/set-status.js');
+const { selectStatus } = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const { selectstrain, selecttest } = require('../utils/conditional-sections');
@@ -59,7 +59,7 @@ const htmlpipe = (cont, payload, action) => {
     .after(debug)
     .after(flag)
     .when(esi) // flag ESI when there is ESI in the response
-    .error(status);
+    .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);
