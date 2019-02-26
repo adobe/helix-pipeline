@@ -7,7 +7,7 @@
   "types": "index.d.ts",
   "scripts": {
     "semantic-release": "semantic-release",
-    "commit": "npm run lint && npm run docs && git-cz",
+    "commit": "git-cz",
     "test": "nyc nyc --reporter=lcov mocha --exit",
     "lint": "npx eslint . && npm run types",
     "types": "npm run docs && node bin/schema2ts.js",
