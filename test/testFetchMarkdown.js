@@ -294,11 +294,12 @@ describe('Test misbehaved HTTP Responses', () => {
   it('Getting XDM README with ultra-short Timeout', async function shortTimeout() {
     const { server } = this.polly;
 
-    const wait = ms => new Promise(r => setTimeout(r, ms));
-
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept((_, res) => wait(50).then(res.sendStatus(500)));
+      .intercept(async (_, res) => {
+        await server.timeout(50);
+        res.sendStatus(500);
+      });
 
     const myaction = {
       request: {
@@ -322,11 +323,13 @@ describe('Test misbehaved HTTP Responses', () => {
   it('Getting XDM README with Backend Timeout', async function badTimeout() {
     const { server } = this.polly;
 
-    const wait = ms => new Promise(r => setTimeout(r, ms));
 
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept((_, res) => wait(2000).then(res.sendStatus(500)));
+      .intercept(async (_, res) => {
+        await server.timeout(2000);
+        res.sendStatus(500);
+      });
 
     const myaction = {
       request: {
