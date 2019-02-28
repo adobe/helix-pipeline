@@ -62,9 +62,7 @@ $ npm run commit
 
 # How Contributions get Reviewed
 
-One of the maintainers will look at the pull request within one week. If you haven't heard back from the maintainers within a week, it is not impolite to send a reminder to [Grp-XDM-API-WGs](mailto:Grp-XDM-API-WGs@adobe.com).
-
-Feedback on the pull request will be given in writing, in GitHub.
+One of the maintainers will look at the pull request within one week. Feedback on the pull request will be given in writing, in GitHub.
 
 # Release Management
 
