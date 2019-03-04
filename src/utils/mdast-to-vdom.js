@@ -189,12 +189,27 @@ class VDOMTransformer {
 
   /**
    * Turns the MDAST into a full DOM-like structure using JSDOM
-   * @returns {Node} a full DOM node
+   * @returns {Document} a full DOM document
    */
   getDocument() {
     // mdast -> hast; hast -> html -> DOM using JSDOM
     const hast = mdast2hast(this._root, { handlers: this._handlers });
     return new JSDOM(hast2html(hast)).window.document;
+  }
+
+  /**
+   * Turns the MDAST into a DOM-node-like structure using JSDOM
+   * @param {string} tag the tag of the container node
+   * @returns {Node} a DOM node containing the HTML-processed MDAST
+   */
+  getNode(tag = 'div') {
+    const hast = mdast2hast(this._root, { handlers: this._handlers });
+
+    // create a JSDOM object with the hast surrounded by the provided tag
+    const dom = new JSDOM(`<${tag}>${hast2html(hast)}</${tag}>`);
+
+    // return the single child node which is the "tag" node
+    return dom.window.document.body.firstChild;
   }
 }
 
