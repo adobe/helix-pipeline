@@ -9,14 +9,6 @@
       "is-image-heading",
       "is-image"
     ],
-    "childrenTypes": [
-      [
-        "is-heading"
-      ],
-      [
-        "is-image"
-      ]
-    ],
     "image": "./helix_logo.png",
     "title": "Header and one image",
     "meta": {},
@@ -30,7 +22,12 @@
             "type": "text",
             "value": "Header and one image"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -41,7 +38,12 @@
             "url": "./helix_logo.png",
             "alt": "helix-logo"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-image"
+          ]
+        }
       }
     ]
   }

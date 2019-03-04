@@ -6,11 +6,6 @@
       "nb-paragraph-1",
       "is-paragraph-only"
     ],
-    "childrenTypes": [
-      [
-        "is-paragraph"
-      ]
-    ],
     "intro": "This is only a paragraph.",
     "meta": {},
     "type": "root",
@@ -22,7 +17,12 @@
             "type": "text",
             "value": "This is only a paragraph."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       }
     ]
   }

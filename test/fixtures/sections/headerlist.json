@@ -8,17 +8,6 @@
       "is-list-heading",
       "is-list"
     ],
-    "childrenTypes": [
-      [
-        "is-paragraph"
-      ],
-      [
-        "has-paragraph",
-        "nb-paragraph-3",
-        "is-paragraph-only",
-        "is-list"
-      ]
-    ],
     "intro": "list item 1",
     "title": "Header and a list",
     "meta": {},
@@ -32,7 +21,12 @@
             "type": "text",
             "value": "Header and a list"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "list",
@@ -52,7 +46,12 @@
                     "type": "text",
                     "value": "list item 1"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -68,7 +67,12 @@
                     "type": "text",
                     "value": "list item 2"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -84,11 +88,21 @@
                     "type": "text",
                     "value": "list item 3"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       }
     ]
   }

@@ -8,14 +8,6 @@
       "is-paragraph-heading",
       "is-paragraph"
     ],
-    "childrenTypes": [
-      [
-        "is-heading"
-      ],
-      [
-        "is-paragraph"
-      ]
-    ],
     "intro": "This is a paragraph.",
     "title": "Header and one paragraph",
     "meta": {},
@@ -29,7 +21,12 @@
             "type": "text",
             "value": "Header and one paragraph"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -38,7 +35,12 @@
             "type": "text",
             "value": "This is a paragraph."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       }
     ]
   }

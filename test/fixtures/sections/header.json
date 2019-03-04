@@ -6,11 +6,6 @@
       "nb-heading-1",
       "is-heading-only"
     ],
-    "childrenTypes": [
-      [
-        "is-heading"
-      ]
-    ],
     "title": "Header only",
     "meta": {},
     "type": "root",
@@ -23,7 +18,12 @@
             "type": "text",
             "value": "Header only"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       }
     ]
   }

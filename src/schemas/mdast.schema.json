@@ -151,6 +151,11 @@
     "alt": {
       "type": ["string", "null"],
       "description": "An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended."
+    },
+    "data": {
+      "type": "object",
+      "description": "data is guaranteed to never be specified by unist or specifications implementing unist. Free data space.",
+      "additionalProperties": true
     }
   }
 }

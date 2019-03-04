@@ -26,17 +26,6 @@
             "type": "string"
           }
         },
-        "childrenTypes": {
-          "type": "array",
-          "description": "The inferred class names for the first level children",
-          "items": {
-            "type": "array",
-            "description": "The inferred class names for the child",
-            "items": {
-              "type": "string"
-            }
-          }
-        },
         "type": {
           "const": "root",
           "description": "The MDAST node type. Each section can be treated as a standalone document."

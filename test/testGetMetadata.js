@@ -38,7 +38,7 @@ const SECTIONS_BLOCS = [
   'complex',
 ];
 
-describe('Test getMetadata', () => {
+describe.only('Test getMetadata', () => {
   SECTIONS_BLOCS.forEach((block) => {
     it(`indvidual section block: ${block}`, () => {
       assertMatchDir('sections', block, callback);
@@ -96,7 +96,7 @@ describe('Test getMetadata', () => {
       {
         content:
           {
-            sections: [{ meta: {}, types: [], childrenTypes: [] }],
+            sections: [{ meta: {}, types: [] }],
             meta: {},
             title: undefined,
             intro: undefined,

@@ -72,10 +72,11 @@ function constructTypes(typecounter) {
 function sectiontype(section) {
   const children = section.children || [];
 
-  const childrenTypes = new Array(children.length);
+  function reducer(counter, node) {
+    const { type, children: pChildren } = node;
 
-  function reducer(counter, { type, children: pChildren }, index) {
-    childrenTypes[index] = [];
+    // eslint-disable-next-line no-param-reassign
+    node.data = Object.assign({ types: [] }, node.data);
 
     if (type === 'yaml') {
       return counter;
@@ -91,7 +92,7 @@ function sectiontype(section) {
         if (subType !== 'text') {
           const mycount = mycounter[subType] || 0;
           mycounter[subType] = mycount + 1;
-          childrenTypes[index].push(`is-${subType}`);
+          node.data.types.push(`is-${subType}`);
         }
       });
     }
@@ -102,14 +103,14 @@ function sectiontype(section) {
       pChildren.forEach((listitem) => {
         listtypecounter = listitem.children.reduce(reducer, listtypecounter);
       });
-      childrenTypes[index] = constructTypes(listtypecounter);
+      node.data.types.concat(listtypecounter);
     }
 
     if (Object.keys(mycounter).length === 0) {
       // was really a paragraph, only text inside
       const mycount = mycounter[type] || 0;
       mycounter[type] = mycount + 1;
-      childrenTypes[index].push(`is-${type}`);
+      node.data.types.push(`is-${type}`);
     }
 
     Object.keys(counter).forEach((key) => {
@@ -122,7 +123,7 @@ function sectiontype(section) {
 
   const types = constructTypes(typecounter);
 
-  return Object.assign({ types, childrenTypes }, section);
+  return Object.assign({ types }, section);
 }
 
 function fallback(section) {
