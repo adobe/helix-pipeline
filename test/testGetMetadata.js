@@ -38,7 +38,7 @@ const SECTIONS_BLOCS = [
   'complex',
 ];
 
-describe.only('Test getMetadata', () => {
+describe('Test getMetadata', () => {
   SECTIONS_BLOCS.forEach((block) => {
     it(`indvidual section block: ${block}`, () => {
       assertMatchDir('sections', block, callback);
