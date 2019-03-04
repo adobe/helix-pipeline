@@ -1,21 +1,21 @@
 /*
-  * Copyright 2018 Adobe. All rights reserved.
-  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
-  * you may not use this file except in compliance with the License. You may obtain a copy
-  * of the License at http://www.apache.org/licenses/LICENSE-2.0
-  *
-  * Unless required by applicable law or agreed to in writing, software distributed under
-  * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
-  * OF ANY KIND, either express or implied. See the License for the specific language
-  * governing permissions and limitations under the License.
-  */
+ * Copyright 2018 Adobe. All rights reserved.
+ * This file is licensed to you under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License. You may obtain a copy
+ * of the License at http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software distributed under
+ * the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR REPRESENTATIONS
+ * OF ANY KIND, either express or implied. See the License for the specific language
+ * governing permissions and limitations under the License.
+ */
 
 /**
  * The Request Object used for Invoking OpenWhisk
  */
 export type RawRequest = {
   /**
-   * The headers of the request made to OpenWhisk/Petridish
+   * The headers of the request made to OpenWhisk (or Simulator)
    */
   headers?: {
     /**
@@ -37,7 +37,7 @@ export type RawRequest = {
     [k: string]: string;
   };
   /**
-   * The HTTP method of the request made to OpenWhisk/Petridish. Note: OpenWhisk converts all methods to lowercase.
+   * The HTTP method of the request made to OpenWhisk (or Simulator). Note: OpenWhisk converts all methods to lowercase.
    */
   method?: string;
   /**
@@ -61,6 +61,10 @@ export type RawRequest = {
      */
     path?: string;
     /**
+     * The request root path of the current strain.
+     */
+    rootPath?: string;
+    /**
      * The resolved strain (variant)
      */
     strain?: string;
@@ -71,7 +75,7 @@ export type RawRequest = {
       [k: string]: any;
     };
     /**
-     * All other parameters are interpretet as string.
+     * All other parameters are interpreted as string.
      */
     [k: string]: string;
   };
@@ -105,6 +109,10 @@ export interface Secrets {
    */
   REPO_RAW_ROOT?: string;
   /**
+   * The base URL for all GitHub API operations
+   */
+  REPO_API_ROOT?: string;
+  /**
    * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
    */
   EMBED_WHITELIST?: string;
@@ -115,22 +123,31 @@ export interface Secrets {
   /**
    * Minimum physical width of responsive images to generate
    */
-  IMAGES_MIN_SIZE?: string;
+  IMAGES_MIN_SIZE?: number;
+  /**
+   * Timeout for outgoing HTTP requests in milliseconds
+   */
+  HTTP_TIMEOUT?: number;
   /**
    * Maximum physical with of responsive images to generate
    */
-  IMAGES_MAX_SIZE?: string;
+  IMAGES_MAX_SIZE?: number;
   /**
    * Number of intermediary size steps to create per image
    */
-  IMAGES_SIZE_STEPS?: string;
+  IMAGES_SIZE_STEPS?: number;
   /**
    * Value for the `sizes` attribute of generated responsive images
    */
   IMAGES_SIZES?: string;
+  TEST_BOOLEAN?: boolean;
+  /**
+   * Print XML with line breaks and indentation
+   */
+  XML_PRETTY?: boolean;
   /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".
    */
-  [k: string]: string;
+  [k: string]: boolean | number | string;
 }

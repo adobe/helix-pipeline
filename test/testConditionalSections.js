@@ -12,17 +12,13 @@
 /* eslint-env mocha */
 
 const assert = require('assert');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const { pipe } = require('../src/defaults/html.pipe.js');
 const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
+  level: 'info',
 });
 
 const params = {
@@ -87,7 +83,7 @@ describe('Integration Test Section Strain Filtering', () => {
         // but we use it to assert that pre-processing has happened
         logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
         assert.equal(content.sections.filter(nonhidden).length, 3);
-        return { response: { body: content.html } };
+        return { response: { body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -343,7 +339,7 @@ describe('Integration Test A/B Testing', () => {
         logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
         assert.equal(content.sections.filter(nonhidden).length, 3);
         assert.equal(content.sections.filter(nonhidden)[2].meta.test, 'a');
-        return { response: { body: content.html } };
+        return { response: { body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -394,7 +390,7 @@ Or this one at the same time.
           // remember what was selected
           /* eslint-disable-next-line prefer-destructuring */
           selected = content.sections.filter(nonhidden)[2];
-          return { response: { body: content.html } };
+          return { response: { body: content.document.body.innerHTML } };
         },
         {
           content: {

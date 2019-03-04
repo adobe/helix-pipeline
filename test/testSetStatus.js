@@ -11,22 +11,35 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const winston = require('winston');
-const setStatus = require('../src/html/set-status.js');
+const { Logger } = require('@adobe/helix-shared');
+const status = require('../src/html/set-status.js');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
+  level: 'info',
 });
 
 describe('Test set-status', () => {
-  it('sets a 500 for an error', () => {
+  const error = 'oh, no!';
+
+  it('sets a verbose 500 for an error in dev', () => {
     assert.deepEqual(
-      setStatus({ content: { html: '<html></html>' }, error: 'oh, no!' }, { logger }),
+      status.selectStatus(false)({ content: { html: '<html></html>' }, error }, { logger }),
+      {
+        response: {
+          status: 500,
+          headers: {
+            'Content-Type': 'text/html',
+          },
+          body: `<html><body><h1>500</h1><pre>${error}</pre></body></html>`,
+        },
+      },
+    );
+  });
+
+  it('sets a terse 500 for an error in production', () => {
+    assert.deepEqual(
+      status.selectStatus(true)({ content: { html: '<html></html>' }, error }, { logger }),
       {
         response: {
           status: 500,
@@ -38,7 +51,7 @@ describe('Test set-status', () => {
 
   it('keeps an existing status', () => {
     assert.deepEqual(
-      setStatus({
+      status({
         response: {
           status: 201,
         },
@@ -49,7 +62,7 @@ describe('Test set-status', () => {
 
   it('sets a 200 if all good', () => {
     assert.deepEqual(
-      setStatus({ content: { html: '<html></html>' } }, { logger }),
+      status({ content: { html: '<html></html>' } }, { logger }),
       {
         response: {
           status: 200,

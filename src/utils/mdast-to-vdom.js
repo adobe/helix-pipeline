@@ -13,11 +13,10 @@
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
 const { selectAll } = require('unist-util-select');
 const handlers = require('mdast-util-to-hast/lib/handlers');
-const tohast = require('mdast-util-to-hast');
+const mdast2hast = require('mdast-util-to-hast');
+const hast2html = require('hast-util-to-html');
 const unified = require('unified');
 const parse = require('rehype-parse');
-const tohyper = require('hast-to-hyperscript');
-const h = require('hyperscript');
 const { JSDOM } = require('jsdom');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
@@ -189,20 +188,13 @@ class VDOMTransformer {
   }
 
   /**
-   * Turns the MDAST into a basic DOM-like structure using Hyperscript
-   * @returns {Node} a simple DOM node (not all DOM functions exposed)
-   */
-  process() {
-    // turn MDAST to HTAST and then HTAST to VDOM via Hyperscript
-    return tohyper(h, tohast(this._root, { handlers: this._handlers }));
-  }
-
-  /**
    * Turns the MDAST into a full DOM-like structure using JSDOM
    * @returns {Node} a full DOM node
    */
   getDocument() {
-    return new JSDOM(this.process().outerHTML).window.document;
+    // mdast -> hast; hast -> html -> DOM using JSDOM
+    const hast = mdast2hast(this._root, { handlers: this._handlers });
+    return new JSDOM(hast2html(hast)).window.document;
   }
 }
 

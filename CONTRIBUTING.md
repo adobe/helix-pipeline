@@ -47,20 +47,26 @@ Each commit message that is not part of a pull request:
 
 Project Helix uses the [AirBNB JavaScript Style Guide](https://github.com/airbnb/javascript), enforced through `npm lint`.
 
+## Commit Message Format
+
+This project uses a structured commit changelog format that should be used for every commit. Use `npm run commit` instead of your usual `git commit` to generate commit messages using a wizard.
+
+```bash
+# either add all changed files
+$ git add -A
+# or selectively add files
+$ git add package.json
+# then commit using the wizard
+$ npm run commit
+```
+
 # How Contributions get Reviewed
 
-One of the maintainers will look at the pull request within one week. If you haven't heard back from the maintainers within a week, it is not impolite to send a reminder to [Grp-XDM-API-WGs](mailto:Grp-XDM-API-WGs@adobe.com).
-
-Feedback on the pull request will be given in writing, in GitHub.
+One of the maintainers will look at the pull request within one week. Feedback on the pull request will be given in writing, in GitHub.
 
 # Release Management
 
 The project's committers will release to the [Adobe organization on npmjs.org](https://www.npmjs.com/org/adobe).
 Please contact the [Adobe Open Source Advisory Board](https://git.corp.adobe.com/OpenSourceAdvisoryBoard/discuss/issues) to get access to the npmjs organization.
-Then, you can release using:
 
-```bash
-$ npm login
-$ npm version minor
-$ npm publish --access public --tag latest
-```
+The release process is fully automated using `semantic-release`, increasing the version numbers, etc. based on the contents of the commit messages found.

@@ -11,20 +11,16 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const setupPolly = require('@pollyjs/core').setupMocha;
 const fetch = require('../src/html/fetch-markdown');
 const coerce = require('../src/utils/coerce-secrets');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [new winston.transports.Console()],
+  level: 'info',
 });
 
 describe('Test URI parsing and construction', () => {
@@ -298,11 +294,12 @@ describe('Test misbehaved HTTP Responses', () => {
   it('Getting XDM README with ultra-short Timeout', async function shortTimeout() {
     const { server } = this.polly;
 
-    const wait = ms => new Promise(r => setTimeout(r, ms));
-
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept((_, res) => wait(50).then(res.sendStatus(500)));
+      .intercept(async (_, res) => {
+        await server.timeout(50);
+        res.sendStatus(500);
+      });
 
     const myaction = {
       request: {
@@ -326,11 +323,13 @@ describe('Test misbehaved HTTP Responses', () => {
   it('Getting XDM README with Backend Timeout', async function badTimeout() {
     const { server } = this.polly;
 
-    const wait = ms => new Promise(r => setTimeout(r, ms));
 
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept((_, res) => wait(2000).then(res.sendStatus(500)));
+      .intercept(async (_, res) => {
+        await server.timeout(2000);
+        res.sendStatus(500);
+      });
 
     const myaction = {
       request: {

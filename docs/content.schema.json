@@ -49,19 +49,6 @@
             "description": "Deprecated: the Hypermedia (HAST) AST",
             "meta:status": "deprecated"
         },
-        "children": {
-            "type": "array",
-            "description": "Deprecated: the main HTML elements of the document. `document.children[].innerHTML` instead.",
-            "items": {
-                "type": "string"
-            },
-            "meta:status": "deprecated"
-        },
-        "html": {
-            "type": "string",
-            "meta:status": "deprecated",
-            "description": "Deprecated: the main HTML of the document. Use `document.innerHTML` instead."
-        },
         "xml": {
             "type": "object",
             "description": "The XML object to emit. See xmlbuilder-js for syntax."

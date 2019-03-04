@@ -97,7 +97,7 @@ Extracted first paragraph of the document
 
 ## meta
 
-Extracted metadata fron the frontmatter of the document
+Extracted metadata from the frontmatter of the document
 
 `meta`
 * is optional

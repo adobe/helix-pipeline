@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const winston = require('winston');
+const { Logger } = require('@adobe/helix-shared');
 const fs = require('fs-extra');
 const path = require('path');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
@@ -20,15 +20,9 @@ const setupPolly = require('@pollyjs/core').setupMocha;
 const { pipe } = require('../src/defaults/html.pipe.js');
 const dump = require('../src/utils/dump-context.js');
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
+  level: 'info',
 });
 
 const params = {
@@ -142,7 +136,7 @@ describe('Testing HTML Pipeline', () => {
         // but we use it to assert that pre-processing has happened
         assert.equal(content.body, 'Hello World');
         // and return a different status code
-        return { response: { status: 201, body: content.html } };
+        return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -164,7 +158,7 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe detects ESI in response body', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { body: `${content.html}<esi:include src="foo.html">` } }),
+      ({ content }) => ({ response: { body: `${content.document.body.innerHTML}<esi:include src="foo.html">` } }),
       {
         content: {
           body: 'Hello World',
@@ -191,7 +185,7 @@ describe('Testing HTML Pipeline', () => {
         assert.equal(content.image, './helix_logo.png');
         assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
         // and return a different status code
-        return { response: { status: 201, body: content.html } };
+        return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -217,7 +211,7 @@ describe('Testing HTML Pipeline', () => {
         assert.equal(content.image, 'assets/browser.png');
         assert.equal(content.intro, 'Helix is the new experience management service to create, manage, and deliver great digital experiences.');
         // and return a different status code
-        return { response: { status: 201, body: content.html } };
+        return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -243,7 +237,7 @@ describe('Testing HTML Pipeline', () => {
         assert.equal(content.image, undefined);
         assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
         // and return a different status code
-        return { response: { status: 201, body: content.html } };
+        return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
         content: {
@@ -262,7 +256,7 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe complains when context is invalid', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.html } }),
+      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
         content: {
           foo: 'Hello World',
@@ -281,7 +275,7 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe complains when action is invalid', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.html } }),
+      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
         content: {
           body: 'Hello World',
@@ -316,7 +310,7 @@ describe('Testing HTML Pipeline', () => {
         assert.equal(content.title, 'Bill, Welcome to the future');
         assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
         // and return a different status code
-        return { response: { status: 201, body: content.html } };
+        return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
         request: {
@@ -360,7 +354,7 @@ describe('Testing HTML Pipeline', () => {
         assert.equal(content.title, 'Bill, Welcome to the future');
         assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
         // and return a different status code
-        return { response: { status: 201, body: content.html } };
+        return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
         request: {
@@ -410,7 +404,7 @@ describe('Testing HTML Pipeline', () => {
       ({ content }) => ({
         response: {
           status: 201,
-          body: content.html,
+          body: content.document.body.innerHTML,
           headers: {
             'Content-Type': 'text/plain',
             'Surrogate-Key': 'foobar',
@@ -437,7 +431,7 @@ describe('Testing HTML Pipeline', () => {
       ({ content }) => ({
         response: {
           status: 201,
-          body: content.html,
+          body: content.document.body.innerHTML,
           headers: {
             'Content-Type': 'text/plain',
             'Surrogate-Key': 'foobar',
