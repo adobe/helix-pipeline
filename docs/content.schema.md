@@ -24,7 +24,6 @@ The content as retrieved from the repository and enriched in the pipeline.
 | [body](#body) | `string` | Optional | Content (this schema) |
 | [document](#document) | `object` | Optional | Content (this schema) |
 | [htast](#htast) | `object` | Optional | Content (this schema) |
-| [html](#html) | `string` | Optional | Content (this schema) |
 | [image](#image) | `string` | Optional | Content (this schema) |
 | [intro](#intro) | `string` | Optional | Content (this schema) |
 | [mdast](#mdast) | MDAST | Optional | Content (this schema) |
@@ -99,25 +98,6 @@ Deprecated: the Hypermedia (HAST) AST
 
 
 
-## html
-
-Deprecated: the main HTML of the document. Use `document.innerHTML` instead.
-
-`html`
-* is optional
-* type: `string`
-* defined in this schema
-
-### html Type
-
-
-`string`
-
-
-
-
-
-
 ## image
 
 Path (can be relative) to the first image in the document
@@ -176,7 +156,7 @@ Extracted first paragraph of the document
 
 ## meta
 
-Extracted metadata fron the frontmatter of the document
+Extracted metadata from the frontmatter of the document
 
 `meta`
 * is optional

@@ -79,7 +79,9 @@ const logger = winston.createLogger({
  * @param {String} html The html we expect to be generated.
  */
 const assertMd = async (md, html) => {
-  const fromHTML = ({ content }) => ({ response: { status: 201, body: content.html } });
+  const fromHTML = ({ content }) => (
+    { response: { status: 201, body: content.document.body.innerHTML } }
+  );
 
   const generated = await pipe(
     fromHTML,

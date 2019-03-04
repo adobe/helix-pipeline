@@ -36,6 +36,10 @@ describe('Test Markdown Parsing', () => {
     assertMatch('frontmatter', callback);
   });
 
+  it('Parses headings correctly', () => {
+    assertMatch('headings', callback);
+  });
+
   it('Does not get confused by thematic breaks', () => {
     assertMatch('confusing', callback);
   });
