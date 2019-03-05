@@ -12,7 +12,7 @@
 
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
 const { selectAll } = require('unist-util-select');
-const handlers = require('mdast-util-to-hast/lib/handlers');
+const defaultHandlers = require('mdast-util-to-hast/lib/handlers');
 const mdast2hast = require('mdast-util-to-hast');
 const hast2html = require('hast-util-to-html');
 const unified = require('unified');
@@ -119,7 +119,7 @@ class VDOMTransformer {
    */
   static default(node) {
     // use the default handler from mdast-util-to-hast
-    return handlers[node.type];
+    return defaultHandlers[node.type];
   }
 
   /**
@@ -188,13 +188,32 @@ class VDOMTransformer {
   }
 
   /**
+   * Transfroms an MDAST node into an HTML string. mdast-util-to-hast handlers can be specified.
+   * @param {Node} ast the MDAST root node
+   * @param {*} handlers the mdast-util-to-hast handlers for the transformation
+   * @returns {string} the corresponding HTML
+   */
+  static toHTML(mdast, handlers) {
+    return hast2html(mdast2hast(mdast, { handlers }));
+  }
+
+  /**
    * Turns the MDAST into a full DOM-like structure using JSDOM
-   * @returns {Node} a full DOM node
+   * @returns {Document} a full DOM document
    */
   getDocument() {
     // mdast -> hast; hast -> html -> DOM using JSDOM
-    const hast = mdast2hast(this._root, { handlers: this._handlers });
-    return new JSDOM(hast2html(hast)).window.document;
+    return new JSDOM(VDOMTransformer.toHTML(this._root, this._handlers)).window.document;
+  }
+
+  /**
+   * Turns the MDAST into a DOM-node-like structure using JSDOM
+   * @param {string} tag the tag of the container node
+   * @returns {Node} a DOM node containing the HTML-processed MDAST
+   */
+  getNode(tag = 'div') {
+    // create a JSDOM object with the hast surrounded by the provided tag
+    return new JSDOM(`<${tag}>${VDOMTransformer.toHTML(this._root, this._handlers)}</${tag}>`).window.document.body.firstChild;
   }
 }
 

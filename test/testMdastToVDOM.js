@@ -32,6 +32,11 @@ const assertTransformerYieldsDocument = (transformer, expected) => {
     transformer.getDocument(),
     new JSDOM(expected).window.document,
   );
+
+  assertEquivalentNode(
+    transformer.getNode('section'),
+    new JSDOM(`<section>${expected}</section>`).window.document.body.firstChild,
+  );
 };
 
 describe('Test MDAST to VDOM Transformation', () => {
