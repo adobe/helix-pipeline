@@ -12,7 +12,7 @@
 
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
 const { selectAll } = require('unist-util-select');
-const handlers = require('mdast-util-to-hast/lib/handlers');
+const defaultHandlers = require('mdast-util-to-hast/lib/handlers');
 const mdast2hast = require('mdast-util-to-hast');
 const hast2html = require('hast-util-to-html');
 const unified = require('unified');
@@ -119,7 +119,7 @@ class VDOMTransformer {
    */
   static default(node) {
     // use the default handler from mdast-util-to-hast
-    return handlers[node.type];
+    return defaultHandlers[node.type];
   }
 
   /**
@@ -188,13 +188,22 @@ class VDOMTransformer {
   }
 
   /**
+   * Transfroms an MDAST node into an HTML string. mdast-util-to-hast handlers can be specified.
+   * @param {Node} ast the MDAST root node
+   * @param {*} handlers the mdast-util-to-hast handlers for the transformation
+   * @returns {string} the corresponding HTML
+   */
+  static toHTML(mdast, handlers) {
+    return hast2html(mdast2hast(mdast, { handlers }));
+  }
+
+  /**
    * Turns the MDAST into a full DOM-like structure using JSDOM
    * @returns {Document} a full DOM document
    */
   getDocument() {
     // mdast -> hast; hast -> html -> DOM using JSDOM
-    const hast = mdast2hast(this._root, { handlers: this._handlers });
-    return new JSDOM(hast2html(hast)).window.document;
+    return new JSDOM(VDOMTransformer.toHTML(this._root, this._handlers)).window.document;
   }
 
   /**
@@ -203,13 +212,8 @@ class VDOMTransformer {
    * @returns {Node} a DOM node containing the HTML-processed MDAST
    */
   getNode(tag = 'div') {
-    const hast = mdast2hast(this._root, { handlers: this._handlers });
-
     // create a JSDOM object with the hast surrounded by the provided tag
-    const dom = new JSDOM(`<${tag}>${hast2html(hast)}</${tag}>`);
-
-    // return the single child node which is the "tag" node
-    return dom.window.document.body.firstChild;
+    return new JSDOM(`<${tag}>${VDOMTransformer.toHTML(this._root, this._handlers)}</${tag}>`).window.document.body.firstChild;
   }
 }
 
