@@ -24,6 +24,7 @@ A node in the Markdown AST
 | [alt](#alt) | complex | Optional | MDAST (this schema) |
 | [checked](#checked) | complex | Optional | MDAST (this schema) |
 | [children](#children) | MDAST | Optional | MDAST (this schema) |
+| [data](#data) | `object` | Optional | MDAST (this schema) |
 | [depth](#depth) | `integer` | Optional | MDAST (this schema) |
 | [identifier](#identifier) | `string` | Optional | MDAST (this schema) |
 | [label](#label) | `string` | Optional | MDAST (this schema) |
@@ -138,6 +139,29 @@ All items must be of the type:
 * [MDAST](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
 
 
+
+
+
+
+
+
+## data
+
+data is guaranteed to never be specified by unist or specifications implementing unist. Free data space.
+
+`data`
+* is optional
+* type: `object`
+* defined in this schema
+
+### data Type
+
+
+`object` with following properties:
+
+
+| Property | Type | Required |
+|----------|------|----------|
 
 
 
