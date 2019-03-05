@@ -349,6 +349,9 @@
         ],
         "data": {
           "types": [
+            "has-paragraph",
+            "nb-paragraph-4",
+            "is-paragraph-only",
             "is-list"
           ]
         }
@@ -574,6 +577,9 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "nb-inlineCode-4",
+            "is-inlineCode-only",
             "is-list"
           ]
         }
@@ -781,6 +787,12 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "has-link",
+            "nb-inlineCode-5",
+            "nb-link-1",
+            "is-inlineCode-link",
+            "is-inlineCode",
             "is-list"
           ]
         }
@@ -1123,6 +1135,9 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "nb-inlineCode-7",
+            "is-inlineCode-only",
             "is-list"
           ]
         }
@@ -1242,6 +1257,9 @@
         ],
         "data": {
           "types": [
+            "has-paragraph",
+            "nb-paragraph-3",
+            "is-paragraph-only",
             "is-list"
           ]
         }
@@ -1372,6 +1390,9 @@
         ],
         "data": {
           "types": [
+            "has-paragraph",
+            "nb-paragraph-3",
+            "is-paragraph-only",
             "is-list"
           ]
         }
@@ -1435,6 +1456,9 @@
         ],
         "data": {
           "types": [
+            "has-paragraph",
+            "nb-paragraph-1",
+            "is-paragraph-only",
             "is-list"
           ]
         }
@@ -1582,6 +1606,9 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "nb-inlineCode-5",
+            "is-inlineCode-only",
             "is-list"
           ]
         }
@@ -1668,6 +1695,9 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "nb-inlineCode-2",
+            "is-inlineCode-only",
             "is-list"
           ]
         }
@@ -1875,6 +1905,9 @@
                 ],
                 "data": {
                   "types": [
+                    "has-inlineCode",
+                    "nb-inlineCode-3",
+                    "is-inlineCode-only",
                     "is-list"
                   ]
                 }
@@ -1959,6 +1992,15 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "has-list",
+            "has-link",
+            "nb-inlineCode-7",
+            "nb-list-1",
+            "nb-link-1",
+            "is-inlineCode-list-link",
+            "is-inlineCode-list",
+            "is-inlineCode",
             "is-list"
           ]
         }
@@ -2075,6 +2117,9 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "nb-inlineCode-4",
+            "is-inlineCode-only",
             "is-list"
           ]
         }
@@ -2257,6 +2302,9 @@
         ],
         "data": {
           "types": [
+            "has-inlineCode",
+            "nb-inlineCode-1",
+            "is-inlineCode-only",
             "is-list"
           ]
         }
