@@ -103,7 +103,7 @@ function sectiontype(section) {
       pChildren.forEach((listitem) => {
         listtypecounter = listitem.children.reduce(reducer, listtypecounter);
       });
-      node.data.types.concat(listtypecounter);
+      constructTypes(listtypecounter).forEach(item => node.data.types.push(item));
     }
 
     if (Object.keys(mycounter).length === 0) {

@@ -100,6 +100,9 @@
         ],
         "data": {
           "types": [
+            "has-paragraph",
+            "nb-paragraph-3",
+            "is-paragraph-only",
             "is-list"
           ]
         }
