@@ -21,7 +21,10 @@
     "children": [
       {
         "type": "yaml",
-        "value": "title: foo"
+        "value": "title: foo",
+        "data": {
+          "types": []
+        }
       },
       {
         "type": "heading",
@@ -31,7 +34,12 @@
             "type": "text",
             "value": "Hypermedia Pipeline"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -40,7 +48,12 @@
             "type": "text",
             "value": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -49,7 +62,12 @@
             "type": "text",
             "value": "It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -59,7 +77,12 @@
             "type": "text",
             "value": "Status"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -162,7 +185,17 @@
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-link",
+            "is-link",
+            "is-link",
+            "is-link",
+            "is-link",
+            "is-link"
+          ]
+        }
       }
     ]
   },
@@ -189,7 +222,10 @@
     "children": [
       {
         "type": "yaml",
-        "value": "class: section"
+        "value": "class: section",
+        "data": {
+          "types": []
+        }
       },
       {
         "type": "heading",
@@ -199,7 +235,12 @@
             "type": "text",
             "value": "Anatomy of a Pipeline"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -208,7 +249,12 @@
             "type": "text",
             "value": "A pipeline consists of following main parts:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "list",
@@ -228,7 +274,12 @@
                     "type": "text",
                     "value": "pre-processing functions"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -244,7 +295,12 @@
                     "type": "text",
                     "value": "the main response generating function"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -260,7 +316,12 @@
                     "type": "text",
                     "value": "an optional wrapper function"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -276,11 +337,21 @@
                     "type": "text",
                     "value": "post-processing functions"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -305,7 +376,13 @@
             "type": "text",
             "value": "."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode",
+            "is-inlineCode"
+          ]
+        }
       }
     ]
   },
@@ -327,7 +404,12 @@
             "type": "text",
             "value": "This section has a paragraph, but no title."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -336,7 +418,12 @@
             "type": "text",
             "value": "Tough luck."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       }
     ]
   },
@@ -359,7 +446,12 @@
             "type": "text",
             "value": "This section has a title, but no paragraph"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       }
     ]
   },
@@ -384,7 +476,12 @@
             "type": "text",
             "value": "See below for the anatomy of a payload."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -393,7 +490,12 @@
             "type": "text",
             "value": "Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "list",
@@ -425,7 +527,13 @@
                     "type": "text",
                     "value": " content-type"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -453,11 +561,22 @@
                     "type": "text",
                     "value": " content-type"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       }
     ]
   },
@@ -486,7 +605,10 @@
     "children": [
       {
         "type": "yaml",
-        "value": "class: code"
+        "value": "class: code",
+        "data": {
+          "types": []
+        }
       },
       {
         "type": "heading",
@@ -496,7 +618,12 @@
             "type": "text",
             "value": "Building a Pipeline"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -513,7 +640,12 @@
             "type": "text",
             "value": " which accepts following arguments and returns a Pipeline function."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode"
+          ]
+        }
       },
       {
         "type": "list",
@@ -537,7 +669,12 @@
                     "type": "text",
                     "value": ": the main function that will be executed as a continuation of the pipeline"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -557,7 +694,12 @@
                     "type": "text",
                     "value": ": a map of parameters that are interpreted at runtime"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -585,7 +727,13 @@
                     "type": "text",
                     "value": " are in ALL_CAPS_SNAKE_CASE."
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -620,11 +768,22 @@
                     "type": "text",
                     "value": " logger"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-link"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -633,13 +792,23 @@
             "type": "text",
             "value": "This project's main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "code",
         "lang": "javascript",
         "meta": null,
-        "value": "// the pipeline itself\nconst pipeline = require(\"@adobe/hypermedia-pipeline\");\n// helper functions and log\nconst { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');\n\nmodule.exports.pipe = function(cont, params, secrets, logger = log) {\n    logger.log(\"debug\", \"Constructing Custom Pipeline\");\n\n    return pipeline()\n        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload\n        .once(cont)            // required: execute the continuation function\n        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response\n}"
+        "value": "// the pipeline itself\nconst pipeline = require(\"@adobe/hypermedia-pipeline\");\n// helper functions and log\nconst { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');\n\nmodule.exports.pipe = function(cont, params, secrets, logger = log) {\n    logger.log(\"debug\", \"Constructing Custom Pipeline\");\n\n    return pipeline()\n        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload\n        .once(cont)            // required: execute the continuation function\n        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response\n}",
+        "data": {
+          "types": [
+            "is-code"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -664,7 +833,13 @@
             "type": "text",
             "value": "."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode",
+            "is-inlineCode"
+          ]
+        }
       }
     ]
   },
@@ -697,7 +872,12 @@
             "type": "text",
             "value": "The Main Function"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -738,7 +918,15 @@
             "type": "text",
             "value": " object."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode",
+            "is-inlineCode",
+            "is-inlineCode",
+            "is-inlineCode"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -747,7 +935,12 @@
             "type": "text",
             "value": "In most scenarios, the main function is compiled from a template in a templating language like HTL, JST, or JSX."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -772,7 +965,13 @@
             "type": "text",
             "value": "). If no selector is provided, the template is the default template for the pipeline."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode",
+            "is-inlineCode"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -781,7 +980,12 @@
             "type": "text",
             "value": "Examples of possible template names include:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "list",
@@ -813,7 +1017,13 @@
                     "type": "text",
                     "value": ") – default for the HTML pipeline"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -841,7 +1051,13 @@
                     "type": "text",
                     "value": ") – renders the navigation"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -861,7 +1077,12 @@
                     "type": "text",
                     "value": " (not compiled) – creates pure JSON output"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -889,11 +1110,22 @@
                     "type": "text",
                     "value": ") – renders the dropdown component"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -903,7 +1135,12 @@
             "type": "text",
             "value": "(Optional) The Wrapper Function"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -912,7 +1149,12 @@
             "type": "text",
             "value": "Sometimes it is neccessary to pre-process the payload in a template-specific fashion. This wrapper function (often called \"Pre-JS\" for brevity sake) allows the full transformation of the pipeline's payload."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -921,7 +1163,12 @@
             "type": "text",
             "value": "Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "list",
@@ -941,7 +1188,12 @@
                     "type": "text",
                     "value": "presentation (in the main function, often expressed in declarative templates)"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -957,7 +1209,12 @@
                     "type": "text",
                     "value": "business logic (in the wrapper function, often expressed in imperative code)"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -973,11 +1230,21 @@
                     "type": "text",
                     "value": "content-type specific implementation (in the pipeline, expressed in functional code)"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -986,13 +1253,23 @@
             "type": "text",
             "value": "A simple implementation of a wrapper function would look like this:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "code",
         "lang": "javascript",
         "meta": null,
-        "value": "// All wrapper functions must export `pre`\n// The functions takes following arguments:\n// - `cont` (the continuation function, i.e. the main template function)\n// - `payload` (the payload of the pipeline)\nmodule.exports.pre = (cont, payload) => {\n    const {request, content, context, response} = payload;\n    \n    // modifying the payload content before invoking the main function\n    content.hello = 'World';\n    const modifiedpayload = {request, content, context, response};\n\n    // invoking the main function with the new payload. Capturing the response\n    // payload for further modification\n\n    const responsepayload = cont(modifiedpayload);\n\n    // Adding a value to the payload response\n    const modifiedresponse = modifiedpayload.response;\n    modifiedresponse.hello = 'World';\n\n    return Object.assign(modifiedpayload, modifiedresponse);\n}"
+        "value": "// All wrapper functions must export `pre`\n// The functions takes following arguments:\n// - `cont` (the continuation function, i.e. the main template function)\n// - `payload` (the payload of the pipeline)\nmodule.exports.pre = (cont, payload) => {\n    const {request, content, context, response} = payload;\n    \n    // modifying the payload content before invoking the main function\n    content.hello = 'World';\n    const modifiedpayload = {request, content, context, response};\n\n    // invoking the main function with the new payload. Capturing the response\n    // payload for further modification\n\n    const responsepayload = cont(modifiedpayload);\n\n    // Adding a value to the payload response\n    const modifiedresponse = modifiedpayload.response;\n    modifiedresponse.hello = 'World';\n\n    return Object.assign(modifiedpayload, modifiedresponse);\n}",
+        "data": {
+          "types": [
+            "is-code"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1002,7 +1279,12 @@
             "type": "text",
             "value": "Pre-Processing Functions"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -1011,7 +1293,12 @@
             "type": "text",
             "value": "Pre-Processing functions are meant to:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "list",
@@ -1031,7 +1318,12 @@
                     "type": "text",
                     "value": "parse and process request parameters"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -1047,7 +1339,12 @@
                     "type": "text",
                     "value": "fetch and parse the requested content"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -1063,11 +1360,21 @@
                     "type": "text",
                     "value": "transform the requested content"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1077,7 +1384,12 @@
             "type": "text",
             "value": "Post-Processing Functions"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -1086,7 +1398,12 @@
             "type": "text",
             "value": "Post-Processing functions are meant to:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "list",
@@ -1106,11 +1423,21 @@
                     "type": "text",
                     "value": "process and transform the response"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1120,7 +1447,12 @@
             "type": "text",
             "value": "Anatomy of the Payload"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -1129,7 +1461,12 @@
             "type": "text",
             "value": "Following main properties exist:"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "list",
@@ -1149,7 +1486,12 @@
                     "type": "inlineCode",
                     "value": "request"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1165,7 +1507,12 @@
                     "type": "inlineCode",
                     "value": "content"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1181,7 +1528,12 @@
                     "type": "inlineCode",
                     "value": "response"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1197,7 +1549,12 @@
                     "type": "inlineCode",
                     "value": "context"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1213,11 +1570,21 @@
                     "type": "inlineCode",
                     "value": "error"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1235,7 +1602,12 @@
             "type": "text",
             "value": " object"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "list",
@@ -1259,7 +1631,12 @@
                     "type": "text",
                     "value": ": a map of request parameters"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1279,11 +1656,21 @@
                     "type": "text",
                     "value": ": a map of HTTP headers"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1301,7 +1688,12 @@
             "type": "text",
             "value": " object"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "list",
@@ -1329,7 +1721,13 @@
                     "type": "inlineCode",
                     "value": "string"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1360,7 +1758,13 @@
                       }
                     ]
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-link"
+                  ]
+                }
               }
             ]
           },
@@ -1380,7 +1784,12 @@
                     "type": "text",
                     "value": ": a map metadata properties, including"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               },
               {
                 "type": "list",
@@ -1404,7 +1813,12 @@
                             "type": "text",
                             "value": ": title of the document"
                           }
-                        ]
+                        ],
+                        "data": {
+                          "types": [
+                            "is-inlineCode"
+                          ]
+                        }
                       }
                     ]
                   },
@@ -1424,7 +1838,12 @@
                             "type": "text",
                             "value": ": a plain-text introduction or description"
                           }
-                        ]
+                        ],
+                        "data": {
+                          "types": [
+                            "is-inlineCode"
+                          ]
+                        }
                       }
                     ]
                   },
@@ -1444,11 +1863,21 @@
                             "type": "text",
                             "value": ": the content type of the document"
                           }
-                        ]
+                        ],
+                        "data": {
+                          "types": [
+                            "is-inlineCode"
+                          ]
+                        }
                       }
                     ]
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-list"
+                  ]
+                }
               }
             ]
           },
@@ -1468,7 +1897,12 @@
                     "type": "text",
                     "value": ": the HTML AST"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1488,7 +1922,12 @@
                     "type": "text",
                     "value": ": a string of the content rendered as HTML"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1508,11 +1947,21 @@
                     "type": "text",
                     "value": ": an array of top-level elements of the HTML-rendered content"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1530,7 +1979,12 @@
             "type": "text",
             "value": " object"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "list",
@@ -1558,7 +2012,13 @@
                     "type": "inlineCode",
                     "value": "string"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode",
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1578,7 +2038,12 @@
                     "type": "text",
                     "value": ": a map of HTTP response headers"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           },
@@ -1598,11 +2063,21 @@
                     "type": "text",
                     "value": ": the HTTP status code"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1620,7 +2095,12 @@
             "type": "text",
             "value": " object"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -1629,7 +2109,12 @@
             "type": "text",
             "value": "TBD: used for stuff that is neither content, request, or response"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "heading",
@@ -1647,7 +2132,12 @@
             "type": "text",
             "value": " object"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -1672,7 +2162,13 @@
             "type": "text",
             "value": " object."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode",
+            "is-inlineCode"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -1697,7 +2193,13 @@
             "type": "text",
             "value": "."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode",
+            "is-inlineCode"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -1714,7 +2216,12 @@
             "type": "text",
             "value": " is"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-inlineCode"
+          ]
+        }
       },
       {
         "type": "list",
@@ -1738,11 +2245,21 @@
                     "type": "text",
                     "value": ": the error message"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-inlineCode"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       }
     ]
   }

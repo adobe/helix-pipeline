@@ -43,16 +43,41 @@ function image(section) {
 }
 
 /**
+ * Construct the strings corresponding to the number of occurences per type.
+ * @param {Object} typecounter Type as a key, number of occurences as value
+ */
+function constructTypes(typecounter) {
+  const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
+  types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
+  if (Object.keys(typecounter).length === 1) {
+    types.push(`is-${Object.keys(typecounter)[0]}-only`);
+  } else {
+    types.push(...Object.entries(typecounter) // get pairs of type, count
+      .sort((left, right) => left[1] < right[1]) // sort descending by count
+      .slice(0, 3) // take the top three
+      .map(([name]) => name) // keep only the type
+      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
+  }
+  return types;
+}
+
+/**
  * Sets the `types` attribute of the section, using following patterns:
  * 1. has-<type> for every type of content found in the section
  * 2. is-<type>-only for sections that have only content of type
  * 3. is-<type1>-<type2>-<type3> ranks the top three most common types of content
+ * 4. nb-<type>-<nb_occurences> is the number of occurences per type
  * @param {*} section
  */
 function sectiontype(section) {
   const children = section.children || [];
 
-  function reducer(counter, { type, children: pChildren }) {
+  function reducer(counter, node) {
+    const { type, children: pChildren } = node;
+
+    // eslint-disable-next-line no-param-reassign
+    node.data = Object.assign({ types: [] }, node.data);
+
     if (type === 'yaml') {
       return counter;
     }
@@ -67,14 +92,25 @@ function sectiontype(section) {
         if (subType !== 'text') {
           const mycount = mycounter[subType] || 0;
           mycounter[subType] = mycount + 1;
+          node.data.types.push(`is-${subType}`);
         }
       });
+    }
+
+    if (type === 'list' && pChildren && pChildren.length > 0) {
+      // if list, analyze the children of its children (listitems)
+      let listtypecounter = {};
+      pChildren.forEach((listitem) => {
+        listtypecounter = listitem.children.reduce(reducer, listtypecounter);
+      });
+      node.data.types.concat(listtypecounter);
     }
 
     if (Object.keys(mycounter).length === 0) {
       // was really a paragraph, only text inside
       const mycount = mycounter[type] || 0;
       mycounter[type] = mycount + 1;
+      node.data.types.push(`is-${type}`);
     }
 
     Object.keys(counter).forEach((key) => {
@@ -85,17 +121,7 @@ function sectiontype(section) {
 
   const typecounter = children.reduce(reducer, {});
 
-  const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
-  types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
-  if (Object.keys(typecounter).length === 1) {
-    types.push(`is-${Object.keys(typecounter)[0]}-only`);
-  } else {
-    types.push(...Object.entries(typecounter) // get pairs of type, count
-      .sort((left, right) => left[1] < right[1]) // sort descending by count
-      .slice(0, 3) // take the top three
-      .map(([name]) => name) // keep only the type
-      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
-  }
+  const types = constructTypes(typecounter);
 
   return Object.assign({ types }, section);
 }

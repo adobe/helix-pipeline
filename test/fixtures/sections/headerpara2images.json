@@ -25,7 +25,12 @@
             "type": "text",
             "value": "Header, a paragraph and one image"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -34,7 +39,12 @@
             "type": "text",
             "value": "This is a paragraph."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -55,7 +65,13 @@
             "url": "./helix_logo.png",
             "alt": "helix-logo"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-image",
+            "is-image"
+          ]
+        }
       }
     ]
   }

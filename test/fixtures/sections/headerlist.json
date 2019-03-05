@@ -21,7 +21,12 @@
             "type": "text",
             "value": "Header and a list"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "list",
@@ -41,7 +46,12 @@
                     "type": "text",
                     "value": "list item 1"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -57,7 +67,12 @@
                     "type": "text",
                     "value": "list item 2"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           },
@@ -73,11 +88,21 @@
                     "type": "text",
                     "value": "list item 3"
                   }
-                ]
+                ],
+                "data": {
+                  "types": [
+                    "is-paragraph"
+                  ]
+                }
               }
             ]
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-list"
+          ]
+        }
       }
     ]
   }

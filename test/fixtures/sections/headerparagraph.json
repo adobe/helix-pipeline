@@ -21,7 +21,12 @@
             "type": "text",
             "value": "Header and one paragraph"
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-heading"
+          ]
+        }
       },
       {
         "type": "paragraph",
@@ -30,7 +35,12 @@
             "type": "text",
             "value": "This is a paragraph."
           }
-        ]
+        ],
+        "data": {
+          "types": [
+            "is-paragraph"
+          ]
+        }
       }
     ]
   }
