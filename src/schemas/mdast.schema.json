@@ -155,7 +155,32 @@
     "data": {
       "type": "object",
       "description": "data is guaranteed to never be specified by unist or specifications implementing unist. Free data space.",
-      "additionalProperties": true
+      "additionalProperties": true,
+      "types": {
+        "type": ["null", "array"],
+        "description": "The inferred class names for the node",
+        "items": {
+          "type": "string"
+        }
+      },
+      "hName": {
+         "description": "May be use to override the element’s tag-name",
+         "type": ["null", "string"]
+      },
+      "hProperties": {
+        "description": "May be used to define extra DOM element properties",
+        "type": ["null", "array"],
+        "items": {
+          "type": "object"
+        }
+      },
+      "hChildren": {
+        "description": "May be used to define extra HAST children",
+        "type": ["null", "array"],
+        "items": {
+          "type": "object"
+        }
+      }
     }
   }
 }
