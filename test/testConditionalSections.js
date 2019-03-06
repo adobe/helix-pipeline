@@ -414,7 +414,7 @@ But neither this one.
 test: a
 ---
 
-Or that one at the same time.
+Or that one at the same time, because they are both part of an A/B test.
 
 `,
           },
