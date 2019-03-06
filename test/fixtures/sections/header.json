@@ -4,7 +4,7 @@
     "types": [
       "has-heading",
       "nb-heading-1",
-      "is-heading-only"
+      "has-only-heading"
     ],
     "title": "Header only",
     "meta": {},

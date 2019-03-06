@@ -4,7 +4,7 @@
     "types": [
       "has-paragraph",
       "nb-paragraph-1",
-      "is-paragraph-only"
+      "has-only-paragraph"
     ],
     "intro": "This is only a paragraph.",
     "meta": {},
