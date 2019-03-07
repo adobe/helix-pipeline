@@ -41,7 +41,7 @@
         ],
         "data": {
           "types": [
-            "is-image"
+            "has-image"
           ]
         }
       }
