@@ -30,6 +30,8 @@ function callback(body) {
 const SECTIONS_BLOCS = [
   'header',
   'paragraph',
+  'paragraphwithlink',
+  '2images',
   'headerparagraph',
   'headerlist',
   'headerimage',
