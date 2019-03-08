@@ -351,7 +351,7 @@
           "types": [
             "has-paragraph",
             "nb-paragraph-4",
-            "is-paragraph-only",
+            "has-only-paragraph",
             "is-list"
           ]
         }
@@ -394,7 +394,7 @@
     "types": [
       "has-paragraph",
       "nb-paragraph-2",
-      "is-paragraph-only"
+      "has-only-paragraph"
     ],
     "intro": "This section has a paragraph, but no title.",
     "meta": {},
@@ -435,7 +435,7 @@
     "types": [
       "has-heading",
       "nb-heading-1",
-      "is-heading-only"
+      "has-only-heading"
     ],
     "title": "This section has a title, but no paragraph",
     "meta": {},
@@ -579,7 +579,7 @@
           "types": [
             "has-inlineCode",
             "nb-inlineCode-4",
-            "is-inlineCode-only",
+            "has-only-inlineCode",
             "is-list"
           ]
         }
@@ -1137,7 +1137,7 @@
           "types": [
             "has-inlineCode",
             "nb-inlineCode-7",
-            "is-inlineCode-only",
+            "has-only-inlineCode",
             "is-list"
           ]
         }
@@ -1259,7 +1259,7 @@
           "types": [
             "has-paragraph",
             "nb-paragraph-3",
-            "is-paragraph-only",
+            "has-only-paragraph",
             "is-list"
           ]
         }
@@ -1392,7 +1392,7 @@
           "types": [
             "has-paragraph",
             "nb-paragraph-3",
-            "is-paragraph-only",
+            "has-only-paragraph",
             "is-list"
           ]
         }
@@ -1458,7 +1458,7 @@
           "types": [
             "has-paragraph",
             "nb-paragraph-1",
-            "is-paragraph-only",
+            "has-only-paragraph",
             "is-list"
           ]
         }
@@ -1608,7 +1608,7 @@
           "types": [
             "has-inlineCode",
             "nb-inlineCode-5",
-            "is-inlineCode-only",
+            "has-only-inlineCode",
             "is-list"
           ]
         }
@@ -1697,7 +1697,7 @@
           "types": [
             "has-inlineCode",
             "nb-inlineCode-2",
-            "is-inlineCode-only",
+            "has-only-inlineCode",
             "is-list"
           ]
         }
@@ -1907,7 +1907,7 @@
                   "types": [
                     "has-inlineCode",
                     "nb-inlineCode-3",
-                    "is-inlineCode-only",
+                    "has-only-inlineCode",
                     "is-list"
                   ]
                 }
@@ -2119,7 +2119,7 @@
           "types": [
             "has-inlineCode",
             "nb-inlineCode-4",
-            "is-inlineCode-only",
+            "has-only-inlineCode",
             "is-list"
           ]
         }
@@ -2304,7 +2304,7 @@
           "types": [
             "has-inlineCode",
             "nb-inlineCode-1",
-            "is-inlineCode-only",
+            "has-only-inlineCode",
             "is-list"
           ]
         }

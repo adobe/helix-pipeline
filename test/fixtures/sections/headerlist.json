@@ -102,7 +102,7 @@
           "types": [
             "has-paragraph",
             "nb-paragraph-3",
-            "is-paragraph-only",
+            "has-only-paragraph",
             "is-list"
           ]
         }
