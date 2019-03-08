@@ -2,13 +2,13 @@
   {
     "types": [
       "has-image",
-      "has-paragraph",
+      "has-text",
       "has-heading",
       "nb-image-1",
-      "nb-paragraph-1",
+      "nb-text-1",
       "nb-heading-1",
-      "is-image-paragraph-heading",
-      "is-image-paragraph",
+      "is-image-text-heading",
+      "is-image-text",
       "is-image"
     ],
     "image": "./helix_logo.png",
@@ -42,7 +42,7 @@
         ],
         "data": {
           "types": [
-            "is-paragraph"
+            "is-text"
           ]
         }
       },
@@ -58,7 +58,7 @@
         ],
         "data": {
           "types": [
-            "is-image"
+            "has-image"
           ]
         }
       }

@@ -49,7 +49,7 @@
                 ],
                 "data": {
                   "types": [
-                    "is-paragraph"
+                    "is-text"
                   ]
                 }
               }
@@ -70,7 +70,7 @@
                 ],
                 "data": {
                   "types": [
-                    "is-paragraph"
+                    "is-text"
                   ]
                 }
               }
@@ -91,7 +91,7 @@
                 ],
                 "data": {
                   "types": [
-                    "is-paragraph"
+                    "is-text"
                   ]
                 }
               }
@@ -100,9 +100,9 @@
         ],
         "data": {
           "types": [
-            "has-paragraph",
-            "nb-paragraph-3",
-            "has-only-paragraph",
+            "has-text",
+            "nb-text-3",
+            "has-only-text",
             "is-list"
           ]
         }

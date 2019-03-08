@@ -1,12 +1,12 @@
 [
   {
     "types": [
-      "has-paragraph",
+      "has-text",
       "has-heading",
-      "nb-paragraph-1",
+      "nb-text-1",
       "nb-heading-1",
-      "is-paragraph-heading",
-      "is-paragraph"
+      "is-text-heading",
+      "is-text"
     ],
     "intro": "This is a paragraph.",
     "title": "Header and one paragraph",
@@ -38,7 +38,7 @@
         ],
         "data": {
           "types": [
-            "is-paragraph"
+            "is-text"
           ]
         }
       }

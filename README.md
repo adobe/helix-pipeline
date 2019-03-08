@@ -212,7 +212,7 @@ The `types` property is an array of string values that describes the type of the
 
 - `has-<type>`: for each type of content that occurs at least once in the section, e.g. has-heading
 - `has-only-<type>`: for sections that only have content of a single type, e.g. has-only-image
-- `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-paragraph-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
+- `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-text-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
 - `nb-<type>-<occurences>`: number of occurences of each type in the section
 
 Each section has additional content-derived metadata properties, in particular:
@@ -579,8 +579,8 @@ Step 5 (diff only):
 +        ],
 +        "title": "Hello World",
 +        "types": [
-+          "has-paragraph",
-+          "has-only-paragraph"
++          "has-text",
++          "has-only-text"
 +        ],
 +        "intro": "Hello World",
 +        "meta": {}

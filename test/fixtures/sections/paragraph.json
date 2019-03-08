@@ -2,9 +2,9 @@
   {
     "title": "This is only a paragraph.",
     "types": [
-      "has-paragraph",
-      "nb-paragraph-1",
-      "has-only-paragraph"
+      "has-text",
+      "nb-text-1",
+      "has-only-text"
     ],
     "intro": "This is only a paragraph.",
     "meta": {},
@@ -20,7 +20,7 @@
         ],
         "data": {
           "types": [
-            "is-paragraph"
+            "is-text"
           ]
         }
       }
