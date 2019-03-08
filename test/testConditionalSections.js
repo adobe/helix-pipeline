@@ -236,7 +236,7 @@ describe('Unit Test Section Strain Filtering', () => {
           type: 'root',
           children: [],
           title: 'This is an easy test.',
-          types: ['has-paragraph', 'is-paragraph-only'],
+          types: ['has-paragraph', 'has-only-paragraph'],
           intro: 'This is an easy test.',
           meta: { frontmatter: true },
         },
@@ -244,7 +244,7 @@ describe('Unit Test Section Strain Filtering', () => {
           type: 'root',
           children: [],
           title: 'These two sections should always be shown',
-          types: ['has-paragraph', 'is-paragraph-only'],
+          types: ['has-paragraph', 'has-only-paragraph'],
           intro: 'These two sections should always be shown',
           meta: {},
         },
@@ -252,7 +252,7 @@ describe('Unit Test Section Strain Filtering', () => {
           type: 'root',
           children: [],
           title: 'But this one only in strain “A”',
-          types: ['has-paragraph', 'is-paragraph-only'],
+          types: ['has-paragraph', 'has-only-paragraph'],
           intro: 'But this one only in strain “A”',
           meta: { strain: 'a' },
         },
@@ -260,7 +260,7 @@ describe('Unit Test Section Strain Filtering', () => {
           type: 'root',
           children: [],
           title: 'And this one only in strain “B”',
-          types: ['has-paragraph', 'is-paragraph-only'],
+          types: ['has-paragraph', 'has-only-paragraph'],
           intro: 'And this one only in strain “B”',
           meta: { strain: 'b' },
         }],
@@ -414,7 +414,7 @@ But neither this one.
 test: a
 ---
 
-Or that one at the same time.
+Or that one at the same time, because they are both part of an A/B test.
 
 `,
           },

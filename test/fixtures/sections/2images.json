@@ -4,7 +4,7 @@
     "types": [
       "has-image",
       "nb-image-2",
-      "is-image-only"
+      "has-only-image"
     ],
     "image": "./helix_logo.png",
     "intro": "helix-logo\nhelix-logo",

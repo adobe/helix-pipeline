@@ -102,7 +102,7 @@
           "types": [
             "has-text",
             "nb-text-3",
-            "is-text-only",
+            "has-only-text",
             "is-list"
           ]
         }

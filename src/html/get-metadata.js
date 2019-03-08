@@ -50,7 +50,7 @@ function constructTypes(typecounter) {
   const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
   types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
   if (Object.keys(typecounter).length === 1) {
-    types.push(`is-${Object.keys(typecounter)[0]}-only`);
+    types.push(`has-only-${Object.keys(typecounter)[0]}`);
   } else {
     types.push(...Object.entries(typecounter) // get pairs of type, count
       .sort((left, right) => left[1] < right[1]) // sort descending by count

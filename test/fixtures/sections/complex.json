@@ -347,7 +347,7 @@
           "types": [
             "has-text",
             "nb-text-4",
-            "is-text-only",
+            "has-only-text",
             "is-list"
           ]
         }
@@ -390,7 +390,7 @@
     "types": [
       "has-text",
       "nb-text-2",
-      "is-text-only"
+      "has-only-text"
     ],
     "intro": "This section has a paragraph, but no title.",
     "meta": {},
@@ -431,7 +431,7 @@
     "types": [
       "has-heading",
       "nb-heading-1",
-      "is-heading-only"
+      "has-only-heading"
     ],
     "title": "This section has a title, but no paragraph",
     "meta": {},
@@ -1267,7 +1267,7 @@
           "types": [
             "has-text",
             "nb-text-3",
-            "is-text-only",
+            "has-only-text",
             "is-list"
           ]
         }
@@ -1400,7 +1400,7 @@
           "types": [
             "has-text",
             "nb-text-3",
-            "is-text-only",
+            "has-only-text",
             "is-list"
           ]
         }
@@ -1466,7 +1466,7 @@
           "types": [
             "has-text",
             "nb-text-1",
-            "is-text-only",
+            "has-only-text",
             "is-list"
           ]
         }
@@ -1616,7 +1616,7 @@
           "types": [
             "has-inlineCode",
             "nb-inlineCode-5",
-            "is-inlineCode-only",
+            "has-only-inlineCode",
             "is-list"
           ]
         }

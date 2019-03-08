@@ -211,7 +211,7 @@ The default pipeline extracts sections from a Markdown document, using both "the
 The `types` property is an array of string values that describes the type of the section based on the occurrence of child nodes. This makes it easy to copy the value of `types` into the `class` attribute of an HTML element, so that CSS expressions matching types of sections can be written with ease. Following patterns of `type` values can be found:
 
 - `has-<type>`: for each type of content that occurs at least once in the section, e.g. has-heading
-- `is-<type>-only`: for sections that only have content of a single type, e.g. is-image-only
+- `has-only-<type>`: for sections that only have content of a single type, e.g. has-only-image
 - `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-text-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
 - `nb-<type>-<occurences>`: number of occurences of each type in the section
 
@@ -580,7 +580,7 @@ Step 5 (diff only):
 +        "title": "Hello World",
 +        "types": [
 +          "has-text",
-+          "is-text-only"
++          "has-only-text"
 +        ],
 +        "intro": "Hello World",
 +        "meta": {}
