@@ -291,7 +291,7 @@ class Pipeline {
           // tapping failed
           this._action.logger.warn(`tapping failed: ${e}`, e);
           return {
-            error: `${currContext.error || ''}\n${e}`,
+            error: `${currContext.error || ''}\n${e.stack || ''}`,
           };
         });
     };
