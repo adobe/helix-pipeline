@@ -93,6 +93,10 @@
             "type": "string",
             "description": "The string value of the node, if it is a terminal node."
         },
+        "payload": {
+            "type": "object",
+            "description": "The payload of a frontmatter/yaml block"
+        },
         "depth": {
             "type": "integer",
             "minimum": 1,

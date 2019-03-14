@@ -18,27 +18,28 @@ A node in the Markdown AST
 
 # MDAST Properties
 
-| Property | Type | Required | Nullable | Defined by |
-|----------|------|----------|----------|------------|
-| [align](#align) | `enum[]` | Optional  | No | MDAST (this schema) |
-| [alt](#alt) | `string` | Optional  | Yes | MDAST (this schema) |
-| [checked](#checked) | `boolean` | Optional  | Yes | MDAST (this schema) |
-| [children](#children) | MDAST | Optional  | No | MDAST (this schema) |
-| [data](#data) | `object` | Optional  | No | MDAST (this schema) |
-| [depth](#depth) | `integer` | Optional  | No | MDAST (this schema) |
-| [identifier](#identifier) | `string` | Optional  | No | MDAST (this schema) |
-| [label](#label) | `string` | Optional  | No | MDAST (this schema) |
-| [lang](#lang) | `string` | Optional  | Yes | MDAST (this schema) |
-| [meta](#meta) | `string` | Optional  | Yes | MDAST (this schema) |
-| [ordered](#ordered) | `boolean` | Optional  | No | MDAST (this schema) |
-| [position](#position) | Position | Optional  | No | MDAST (this schema) |
-| [referenceType](#referencetype) | `enum` | Optional  | No | MDAST (this schema) |
-| [spread](#spread) | `boolean` | Optional  | Yes | MDAST (this schema) |
-| [start](#start) | `integer` | Optional  | Yes | MDAST (this schema) |
-| [title](#title) | `string` | Optional  | Yes | MDAST (this schema) |
-| [type](#type) | `enum` | Optional  | No | MDAST (this schema) |
-| [url](#url) | `string` | Optional  | No | MDAST (this schema) |
-| [value](#value) | `string` | Optional  | No | MDAST (this schema) |
+| Property | Type | Required | Defined by |
+|----------|------|----------|------------|
+| [align](#align) | `enum[]` | Optional | MDAST (this schema) |
+| [alt](#alt) | complex | Optional | MDAST (this schema) |
+| [checked](#checked) | complex | Optional | MDAST (this schema) |
+| [children](#children) | MDAST | Optional | MDAST (this schema) |
+| [data](#data) | `object` | Optional | MDAST (this schema) |
+| [depth](#depth) | `integer` | Optional | MDAST (this schema) |
+| [identifier](#identifier) | `string` | Optional | MDAST (this schema) |
+| [label](#label) | `string` | Optional | MDAST (this schema) |
+| [lang](#lang) | complex | Optional | MDAST (this schema) |
+| [meta](#meta) | complex | Optional | MDAST (this schema) |
+| [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
+| [payload](#payload) | `object` | Optional | MDAST (this schema) |
+| [position](#position) | Position | Optional | MDAST (this schema) |
+| [referenceType](#referencetype) | `enum` | Optional | MDAST (this schema) |
+| [spread](#spread) | complex | Optional | MDAST (this schema) |
+| [start](#start) | complex | Optional | MDAST (this schema) |
+| [title](#title) | complex | Optional | MDAST (this schema) |
+| [type](#type) | `enum` | Optional | MDAST (this schema) |
+| [url](#url) | `string` | Optional | MDAST (this schema) |
+| [value](#value) | `string` | Optional | MDAST (this schema) |
 
 ## align
 
@@ -74,15 +75,23 @@ An alt field should be present. It represents equivalent content for environment
 `alt`
 
 * is optional
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### alt Type
 
+Unknown type `string,null`.
 
-`string`, nullable
-
-
+```json
+{
+  "type": [
+    "string",
+    "null"
+  ],
+  "description": "An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended.",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -95,13 +104,23 @@ A checked field can be present. It represents whether the item is done (when tru
 `checked`
 
 * is optional
-* type: `boolean`
+* type: complex
 * defined in this schema
 
 ### checked Type
 
+Unknown type `null,boolean`.
 
-`boolean`, nullable
+```json
+{
+  "type": [
+    "null",
+    "boolean"
+  ],
+  "description": "A checked field can be present. It represents whether the item is done (when true), not done (when false), or indeterminate or not applicable (when null or not present).",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -226,15 +245,23 @@ For code, a lang field can be present. It represents the language of computer co
 `lang`
 
 * is optional
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### lang Type
 
+Unknown type `null,string`.
 
-`string`, nullable
-
-
+```json
+{
+  "type": [
+    "null",
+    "string"
+  ],
+  "description": "For code, a lang field can be present. It represents the language of computer code being marked up.",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -247,15 +274,23 @@ For code, if lang is present, a meta field can be present. It represents custom 
 `meta`
 
 * is optional
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### meta Type
 
+Unknown type `null,string`.
 
-`string`, nullable
-
-
+```json
+{
+  "type": [
+    "null",
+    "string"
+  ],
+  "description": "For code, if lang is present, a meta field can be present. It represents custom information relating to the node.",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -275,6 +310,30 @@ Is the list ordered
 
 
 `boolean`
+
+
+
+
+
+## payload
+
+The payload of a frontmatter/yaml block
+
+`payload`
+
+* is optional
+* type: `object`
+* defined in this schema
+
+### payload Type
+
+
+`object` with following properties:
+
+
+| Property | Type | Required |
+|----------|------|----------|
+
 
 
 
@@ -327,13 +386,23 @@ A spread field can be present. It represents that any of its items is separated 
 `spread`
 
 * is optional
-* type: `boolean`
+* type: complex
 * defined in this schema
 
 ### spread Type
 
+Unknown type `null,boolean`.
 
-`boolean`, nullable
+```json
+{
+  "type": [
+    "null",
+    "boolean"
+  ],
+  "description": "A spread field can be present. It represents that any of its items is separated by a blank line from its siblings or contains two or more children (when true), or not (when false or not present).",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -346,15 +415,23 @@ Starting item of the list
 `start`
 
 * is optional
-* type: `integer`
+* type: complex
 * defined in this schema
 
 ### start Type
 
+Unknown type `null,integer`.
 
-`integer`, nullable
-
-
+```json
+{
+  "type": [
+    "null",
+    "integer"
+  ],
+  "description": "Starting item of the list",
+  "simpletype": "complex"
+}
+```
 
 
 
@@ -367,15 +444,23 @@ For resources, a title field can be present. It represents advisory information 
 `title`
 
 * is optional
-* type: `string`
+* type: complex
 * defined in this schema
 
 ### title Type
 
+Unknown type `string,null`.
 
-`string`, nullable
-
-
+```json
+{
+  "type": [
+    "string",
+    "null"
+  ],
+  "description": "For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip.",
+  "simpletype": "complex"
+}
+```
 
 
 

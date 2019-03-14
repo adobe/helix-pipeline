@@ -30,6 +30,7 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
 const { cache, uncached } = require('../html/shared-cache');
 const embeds = require('../html/find-embeds');
+const parseFrontmatter = require('../html/parse-frontmatter');
 
 /* eslint no-param-reassign: off */
 /* eslint newline-per-chained-call: off */
@@ -47,6 +48,7 @@ const htmlpipe = (cont, payload, action) => {
     .every(validate).when(() => !production())
     .before(fetch).expose('fetch').when(hascontent)
     .before(parse).expose('parse')
+    .before(parseFrontmatter)
     .before(embeds)
     .before(smartypants)
     .before(sections)

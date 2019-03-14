@@ -429,7 +429,13 @@ Or that one at the same time, because they are both part of an A/B test.
       return selected;
     }
 
-    assert.notDeepEqual(await runpipe('foo'), await runpipe('bar'));
+    // The terms/strains below *happen* to work. They *happen* to produce
+    // different hash values for the current section format and content above.
+    // If this test fails – especially if you changed anything about the section
+    // format, section metadata, the mdast format or the input above, you probably
+    // want to change one of these values until you find one that *happens* to work
+    // again...
+    assert.notDeepEqual(await runpipe('foo'), await runpipe('bang'));
     assert.deepEqual(await runpipe('baz'), await runpipe('baz'));
   });
 });

@@ -10,7 +10,9 @@
     },
     {
       "type": "yaml",
-      "value": "section: true"
+      "payload": {
+        "section": true
+      }
     },
     {
       "type": "paragraph",

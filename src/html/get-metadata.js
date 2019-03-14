@@ -11,12 +11,14 @@
  */
 const { select, selectAll } = require('unist-util-select');
 const plain = require('mdast-util-to-string');
-const { safeLoad } = require('js-yaml');
+const { flat, obj, map } = require('@adobe/helix-shared').sequence;
+
 
 function yaml(section) {
-  const yamls = selectAll('yaml', section); // select all YAML nodes
-  const mapped = yamls.map(({ value }) => safeLoad(value));
-  return Object.assign({ meta: Object.assign({}, ...mapped) }, section);
+  const yamls = selectAll('yaml', section);
+  /* eslint-disable-next-line no-param-reassign */
+  section.meta = obj(flat(map(yamls, ({ payload }) => payload)));
+  return section;
 }
 
 function title(section) {

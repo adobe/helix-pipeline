@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const { Logger } = require('@adobe/helix-shared');
 const parse = require('../src/html/parse-markdown');
+const parseFront = require('../src/html/parse-frontmatter');
 const { assertMatch } = require('./markdown-utils');
 
 const logger = Logger.getTestLogger({
@@ -20,7 +21,9 @@ const logger = Logger.getTestLogger({
 });
 
 function callback(body) {
-  return parse({ content: { body } }, { logger }).content.mdast;
+  const { mdast } = parse({ content: { body } }, { logger }).content;
+  parseFront({ content: { mdast, body } });
+  return mdast;
 }
 
 describe('Test Markdown Parsing', () => {

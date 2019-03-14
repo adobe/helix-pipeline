@@ -27,6 +27,7 @@ const type = require('../utils/set-content-type.js');
 const emit = require('../xml/emit-xml.js');
 const status = require('../xml/set-xml-status.js');
 const check = require('../xml/check-xml');
+const parseFrontmatter = require('../html/parse-frontmatter');
 
 /* eslint no-param-reassign: off */
 
@@ -39,6 +40,7 @@ const xmlpipe = (cont, payload, action) => {
     .every(validate).when(() => !production())
     .before(fetch)
     .before(parse)
+    .before(parseFrontmatter)
     .before(smartypants)
     .before(sections)
     .before(meta)
