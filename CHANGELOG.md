@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/adobe/helix-pipeline/compare/v1.0.2...v1.0.3) (2019-03-14)
+
+
+### Bug Fixes
+
+* **pipeline:** don't hide stack trace from errors ([b911467](https://github.com/adobe/helix-pipeline/commit/b911467))
+
 ## [1.0.2](https://github.com/adobe/helix-pipeline/compare/v1.0.1...v1.0.2) (2019-03-11)
 
 
