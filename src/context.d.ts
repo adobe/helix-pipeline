@@ -222,6 +222,12 @@ export interface MDAST {
    */
   value?: string;
   /**
+   * The payload of a frontmatter/yaml block
+   */
+  payload?: {
+    [k: string]: any;
+  };
+  /**
    * The heading level
    */
   depth?: number;
@@ -273,6 +279,16 @@ export interface MDAST {
    * An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended.
    */
   alt?: string | null;
+  /**
+   * Represents the explicitness of a reference.
+   */
+  referenceType?: "shortcut" | "collapsed" | "full";
+  /**
+   * data is guaranteed to never be specified by unist or specifications implementing unist. Free data space.
+   */
+  data?: {
+    [k: string]: any;
+  };
 }
 /**
  * Marks the position of an AST node in the original text flow

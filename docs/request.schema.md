@@ -13,15 +13,15 @@ The HTTP Request
 
 # Request Properties
 
-| Property | Type | Required | Nullable | Defined by |
-|----------|------|----------|----------|------------|
-| [extension](#extension) | `string` | Optional  | No | Request (this schema) |
-| [headers](#headers) | complex | Optional  | No | Request (this schema) |
-| [method](#method) | `string` | Optional  | No | Request (this schema) |
-| [params](#params) | `object` | Optional  | No | Request (this schema) |
-| [path](#path) | `string` | Optional  | No | Request (this schema) |
-| [selector](#selector) | `string` | Optional  | No | Request (this schema) |
-| [url](#url) | `string` | Optional  | No | Request (this schema) |
+| Property | Type | Required | Defined by |
+|----------|------|----------|------------|
+| [extension](#extension) | `string` | Optional | Request (this schema) |
+| [headers](#headers) | complex | Optional | Request (this schema) |
+| [method](#method) | `string` | Optional | Request (this schema) |
+| [params](#params) | `object` | Optional | Request (this schema) |
+| [path](#path) | `string` | Optional | Request (this schema) |
+| [selector](#selector) | `string` | Optional | Request (this schema) |
+| [url](#url) | `string` | Optional | Request (this schema) |
 
 ## extension
 

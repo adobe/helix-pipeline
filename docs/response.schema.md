@@ -13,11 +13,11 @@ The HTTP response object
 
 # Response Properties
 
-| Property | Type | Required | Nullable | Defined by |
-|----------|------|----------|----------|------------|
-| [body](#body) | complex | Optional  | No | Response (this schema) |
-| [headers](#headers) | complex | Optional  | No | Response (this schema) |
-| [status](#status) | `integer` | Optional  | No | Response (this schema) |
+| Property | Type | Required | Defined by |
+|----------|------|----------|------------|
+| [body](#body) | complex | Optional | Response (this schema) |
+| [headers](#headers) | complex | Optional | Response (this schema) |
+| [status](#status) | `integer` | Optional | Response (this schema) |
 
 ## body
 
@@ -39,13 +39,6 @@ The HTTP response object
 
 
 #### Option 2
-
-
-`object` with following properties:
-
-
-| Property | Type | Required |
-|----------|------|----------|
 
 
 

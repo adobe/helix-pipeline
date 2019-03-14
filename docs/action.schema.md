@@ -19,12 +19,12 @@ Tracks the OpenWhisk action invocation
 
 # Action Properties
 
-| Property | Type | Required | Nullable | Defined by |
-|----------|------|----------|----------|------------|
-| [debug](#debug) | `object` | Optional  | No | Action (this schema) |
-| [logger](#logger) | `object` | Optional  | No | Action (this schema) |
-| [request](#request) | Raw Request | Optional  | No | Action (this schema) |
-| [secrets](#secrets) | Secrets | Optional  | No | Action (this schema) |
+| Property | Type | Required | Defined by |
+|----------|------|----------|------------|
+| [debug](#debug) | `object` | Optional | Action (this schema) |
+| [logger](#logger) | `object` | Optional | Action (this schema) |
+| [request](#request) | Raw Request | Optional | Action (this schema) |
+| [secrets](#secrets) | Secrets | Optional | Action (this schema) |
 
 ## debug
 

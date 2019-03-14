@@ -21,6 +21,7 @@ const sections = require('../html/split-sections');
 const production = require('../utils/is-production');
 const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
+const parseFrontmatter = require('../html/parse-frontmatter');
 
 /* eslint no-param-reassign: off */
 
@@ -33,6 +34,7 @@ const htmlpipe = (cont, payload, action) => {
     .every(validate).when(() => !production())
     .before(fetch)
     .before(parse)
+    .before(parseFrontmatter)
     .before(smartypants)
     .before(sections)
     .before(meta)

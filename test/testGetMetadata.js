@@ -14,6 +14,7 @@ const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const parse = require('../src/html/parse-markdown');
 const split = require('../src/html/split-sections');
+const parseFront = require('../src/html/parse-frontmatter');
 const { assertMatchDir } = require('./markdown-utils');
 const getmetadata = require('../src/html/get-metadata');
 
@@ -23,8 +24,10 @@ const logger = Logger.getTestLogger({
 });
 
 function callback(body) {
-  const parsed = split(parse({ content: { body } }, { logger }), { logger });
-  return getmetadata(parsed, { logger }).content.sections;
+  const parsed = parse({ content: { body } }, { logger });
+  parseFront({ content: { mdast: parsed.content.mdast, body } });
+  const splitted = split(parsed, { logger });
+  return getmetadata(splitted, { logger }).content.sections;
 }
 
 const SECTIONS_BLOCS = [

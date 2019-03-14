@@ -1,8 +1,11 @@
-[{
+[
+  {
     "type": "root",
     "children": [{
         "type": "yaml",
-        "value": "title: foo"
+        "payload": {
+          "title": "foo"
+        }
       },
       {
         "type": "heading",
@@ -130,7 +133,9 @@
     "type": "root",
     "children": [{
         "type": "yaml",
-        "value": "class: section"
+        "payload": {
+          "class": "section"
+        }
       },
       {
         "type": "heading",
@@ -303,7 +308,9 @@
     "type": "root",
     "children": [{
         "type": "yaml",
-        "value": "class: code"
+        "payload": {
+          "class": "code"
+        }
       },
       {
         "type": "heading",

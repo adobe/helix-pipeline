@@ -13,11 +13,11 @@ A position in a text document
 
 # Text Coordinates Properties
 
-| Property | Type | Required | Nullable | Defined by |
-|----------|------|----------|----------|------------|
-| [column](#column) | `number` | Optional  | No | Text Coordinates (this schema) |
-| [line](#line) | `number` | Optional  | No | Text Coordinates (this schema) |
-| [offset](#offset) | `number` | Optional  | No | Text Coordinates (this schema) |
+| Property | Type | Required | Defined by |
+|----------|------|----------|------------|
+| [column](#column) | `number` | Optional | Text Coordinates (this schema) |
+| [line](#line) | `number` | Optional | Text Coordinates (this schema) |
+| [offset](#offset) | `number` | Optional | Text Coordinates (this schema) |
 
 ## column
 
