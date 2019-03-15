@@ -156,9 +156,33 @@ describe('Testing HTML Pipeline', () => {
     assert.equal(result.response.body, '<p>Hello World</p>');
   });
 
-  it('html.pipe detects ESI in response body', async () => {
-    const result = await pipe(
-      ({ content }) => ({ response: { body: `${content.document.body.innerHTML}<esi:include src="foo.html">` } }),
+  it('html.pipe can be extended', async () => {
+    const myfunc = ({ content }) => ({ response: { body: `${content.document.body.innerHTML}<esi:include src="foo.html">` } });
+
+    let calledfoo = false;
+    let calledbar = false;
+    function foo() {
+      assert.equal(calledfoo, false, 'foo has not yet been called');
+      assert.equal(calledbar, false, 'bar has not yet been called');
+      calledfoo = true;
+    }
+
+    function bar() {
+      assert.equal(calledfoo, true, 'foo has been called');
+      assert.equal(calledbar, false, 'bar has not yet been called');
+      calledbar = true;
+    }
+
+    myfunc.before = {
+      fetch: foo,
+    };
+
+    myfunc.after = {
+      flag: bar,
+    };
+
+    await pipe(
+      myfunc,
       {
         content: {
           body: 'Hello World',
@@ -171,9 +195,8 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    assert.equal(result.response.headers['X-ESI'], 'enabled');
-    assert.equal(result.response.headers['Content-Type'], 'text/html');
-    assert.equal(result.response.body, '<p>Hello World</p><esi:include src="foo.html">');
+    assert.equal(calledfoo, true, 'foo has been called');
+    assert.equal(calledbar, true, 'bar has been called');
   });
 
   it('html.pipe renders index.md from helix-cli correctly', async () => {

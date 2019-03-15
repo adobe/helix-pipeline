@@ -61,6 +61,10 @@ const htmlpipe = (cont, payload, action) => {
     .when(esi) // flag ESI when there is ESI in the response
     .error(selectStatus(production()));
 
+
+  // pipe.attach.before(foo, 'fetch');
+  // pipe.attach.after(bar, 'flag');
+
   action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);
 };
