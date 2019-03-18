@@ -108,14 +108,30 @@ class Pipeline {
       this.sealed = true;
     };
 
+    /**
+     * Registers an extension to the pipeline.
+     * @param {String} name - name of the extension point (typically the function name).
+     * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
+     * @param {integer} offset - where to insert the new function (0 = before, 1 = after)
+     */
     this.attach.generic = (name, f, offset = 0) => {
+      // see the describe function below for the generated names
+      // we parse the extracted name to get the matching extension
+      // point
       const re = new RegExp(`^.*\\:${name} from `);
+
+      // find the index of the function where the resolved alias
+      // matches the provided name by searching the list of pre and
+      // post functions
       const foundpres = this._pres
         .filter(pre => pre.alias)
         .findIndex(pre => re.test(pre.alias));
       const foundposts = this._posts
         .filter(post => post.alias)
         .findIndex(post => re.test(post.alias));
+
+      // if something has been found in either lists, insert the
+      // new function into the list, with the correct offset
       if (foundpres !== -1) {
         this._pres.splice(foundpres + offset, 0, f);
       }
@@ -123,8 +139,21 @@ class Pipeline {
         this._posts.splice(foundposts + offset, 0, f);
       }
     };
+    /**
+     * Registers an extension to the pipeline. The function `f` will be run in
+     * the pipeline before the function called `name` will be executed. If `name`
+     * does not exist, `f` will never be executed.
+     * @param {String} name - name of the extension point (typically the function name).
+     * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
+     */
     this.attach.before = (name, f) => this.attach.generic(name, f, 0);
-
+    /**
+     * Registers an extension to the pipeline. The function `f` will be run in
+     * the pipeline after the function called `name` will be executed. If `name`
+     * does not exist, `f` will never be executed.
+     * @param {String} name - name of the extension point (typically the function name).
+     * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
+     */
     this.attach.after = (name, f) => this.attach.generic(name, f, 1);
   }
 
