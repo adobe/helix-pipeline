@@ -100,15 +100,15 @@ class Pipeline {
         return;
       }
       if (ext && ext.before && typeof ext.before === 'object') {
-        Object.keys(ext.before).map(key => this.attach.before(ext.before[key], key));
+        Object.keys(ext.before).map(key => this.attach.before(key, ext.before[key]));
       }
       if (ext && ext.after && typeof ext.after === 'object') {
-        Object.keys(ext.after).map(key => this.attach.after(ext.after[key], key));
+        Object.keys(ext.after).map(key => this.attach.after(key, ext.after[key]));
       }
       this.sealed = true;
     };
 
-    this.attach.generic = (f, name, offset = 0) => {
+    this.attach.generic = (name, f, offset = 0) => {
       const re = new RegExp(`^.*\\:${name} from `);
       const foundpres = this._pres
         .filter(pre => pre.alias)
@@ -123,9 +123,9 @@ class Pipeline {
         this._posts.splice(foundposts + offset, 0, f);
       }
     };
-    this.attach.before = (f, name) => this.attach.generic(f, name, 0);
+    this.attach.before = (name, f) => this.attach.generic(name, f, 0);
 
-    this.attach.after = (f, name) => this.attach.generic(f, name, 1);
+    this.attach.after = (name, f) => this.attach.generic(name, f, 1);
   }
 
   /**

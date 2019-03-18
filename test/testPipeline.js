@@ -82,8 +82,8 @@ describe('Testing Pipeline', () => {
       })
       .after(third);
 
-    pipe.attach.before(first, 'second');
-    pipe.attach.after(fourth, 'third');
+    pipe.attach.before('second', first);
+    pipe.attach.after('third', fourth);
 
     await pipe.run();
     assert.deepStrictEqual(order, ['one', 'two', 'middle', 'three', 'four']);
