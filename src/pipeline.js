@@ -95,15 +95,15 @@ class Pipeline {
     // functions that are executed before each step
     this._taps = [];
 
-    this.attach = function attach(ext) {
+    this.attach = (ext) => {
       if (this.sealed) {
         return;
       }
       if (ext && ext.before && typeof ext.before === 'object') {
-        Object.keys(ext.before).map(key => this.before(ext.before[key], key));
+        Object.keys(ext.before).map(key => this.attach.before(ext.before[key], key));
       }
       if (ext && ext.after && typeof ext.after === 'object') {
-        Object.keys(ext.after).map(key => this.after(ext.after[key], key));
+        Object.keys(ext.after).map(key => this.attach.after(ext.after[key], key));
       }
       this.sealed = true;
     };
@@ -118,8 +118,9 @@ class Pipeline {
         .findIndex(post => re.test(post.alias));
       if (foundpres !== -1) {
         this._pres.splice(foundpres + offset, 0, f);
-      } else if (foundposts !== -1) {
-        this._posts.splice(foundpres + offset, 0, f);
+      }
+      if (foundposts !== -1) {
+        this._posts.splice(foundposts + offset, 0, f);
       }
     };
     this.attach.before = (f, name) => this.attach.generic(f, name, 0);
