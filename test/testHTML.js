@@ -157,7 +157,12 @@ describe('Testing HTML Pipeline', () => {
   });
 
   it('html.pipe can be extended', async () => {
-    const myfunc = ({ content }) => ({ response: { body: `${content.document.body.innerHTML}<esi:include src="foo.html">` } });
+    const myfunc = ({ content }) => ({
+      response: {
+        body: `<h1>${content.title}</h1>
+${content.document.body.innerHTML}`,
+      },
+    });
 
     let calledfoo = false;
     let calledbar = false;
@@ -173,15 +178,26 @@ describe('Testing HTML Pipeline', () => {
       calledbar = true;
     }
 
+    function shouttitle(p) {
+      return {
+        content: {
+          title: `${p.content.title.toUpperCase()}!!!`,
+        },
+      };
+    }
+
     myfunc.before = {
       fetch: foo,
     };
 
     myfunc.after = {
       flag: bar,
+      // after the metadata has been retrived, make sure that
+      // the title is being shouted
+      getmetadata: shouttitle,
     };
 
-    await pipe(
+    const res = await pipe(
       myfunc,
       {
         content: {
@@ -197,6 +213,8 @@ describe('Testing HTML Pipeline', () => {
 
     assert.equal(calledfoo, true, 'foo has been called');
     assert.equal(calledbar, true, 'bar has been called');
+
+    assert.ok(res.response.body.match(/HELLO WORLD/));
   });
 
   it('html.pipe renders index.md from helix-cli correctly', async () => {

@@ -154,7 +154,7 @@ class Pipeline {
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
      */
-    this.attach.after = (name, f) => this.attach.generic(name, f, 1);
+    this.attach.after = (name, f) => this.attach.generic(name, f, 2);
   }
 
   /**
