@@ -114,7 +114,7 @@ class Pipeline {
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
      * @param {integer} before - where to insert the new function (true = before, false = after)
      */
-    this.attach.generic = (name, f, before = true) => {
+    const attachGeneric = (name, f, before) => {
       const offset = before ? 0 : 1;
       // find the index of the function where the resolved ext name
       // matches the provided name by searching the list of pre and
@@ -143,7 +143,7 @@ class Pipeline {
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
      */
-    this.attach.before = (name, f) => this.attach.generic(name, f, true);
+    this.attach.before = (name, f) => attachGeneric.bind(this)(name, f, true);
     /**
      * Registers an extension to the pipeline. The function `f` will be run in
      * the pipeline after the function called `name` will be executed. If `name`
@@ -151,7 +151,7 @@ class Pipeline {
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
      */
-    this.attach.after = (name, f) => this.attach.generic(name, f, false);
+    this.attach.after = (name, f) => attachGeneric.bind(this)(name, f, false);
   }
 
   /**
