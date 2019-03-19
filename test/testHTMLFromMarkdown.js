@@ -145,4 +145,12 @@ describe('Testing Markdown conversion', () => {
       '<pre><code>Hello World\n</code></pre>',
     );
   });
+
+  it('Link references', async () => {
+    await assertMd(
+      `Hello [World]
+[World]: http://example.com`,
+      '<p>Hello <a href="http://example.com">World</a></p>',
+    );
+  });
 });
