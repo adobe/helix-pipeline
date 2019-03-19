@@ -178,6 +178,19 @@
             ],
             "description": "An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended."
         },
+        "referenceType": {
+            "enum": [
+                "shortcut",
+                "collapsed",
+                "full"
+            ],
+            "description": "Represents the explicitness of a reference.",
+            "meta:enum": {
+                "shortcut": "the reference is implicit, its identifier inferred from its content",
+                "collapsed": "the reference is explicit, its identifier inferred from its content",
+                "full": "the reference is explicit, its identifier explicitly set"
+            }
+        },
         "data": {
             "type": "object",
             "description": "data is guaranteed to never be specified by unist or specifications implementing unist. Free data space.",
