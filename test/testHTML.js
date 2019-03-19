@@ -166,6 +166,7 @@ ${content.document.body.innerHTML}`,
 
     let calledfoo = false;
     let calledbar = false;
+    let calledbaz = false;
     function foo() {
       assert.equal(calledfoo, false, 'foo has not yet been called');
       assert.equal(calledbar, false, 'bar has not yet been called');
@@ -176,6 +177,10 @@ ${content.document.body.innerHTML}`,
       assert.equal(calledfoo, true, 'foo has been called');
       assert.equal(calledbar, false, 'bar has not yet been called');
       calledbar = true;
+    }
+
+    function baz() {
+      calledbaz = true;
     }
 
     function shouttitle(p) {
@@ -191,10 +196,11 @@ ${content.document.body.innerHTML}`,
     };
 
     myfunc.after = {
-      flag: bar,
+      esi: bar,
       // after the metadata has been retrived, make sure that
       // the title is being shouted
-      getmetadata: shouttitle,
+      meta: shouttitle,
+      never: baz,
     };
 
     const res = await pipe(
@@ -213,6 +219,7 @@ ${content.document.body.innerHTML}`,
 
     assert.equal(calledfoo, true, 'foo has been called');
     assert.equal(calledbar, true, 'bar has been called');
+    assert.equal(calledbaz, false, 'baz has never been called');
 
     assert.ok(res.response.body.match(/HELLO WORLD/));
   });

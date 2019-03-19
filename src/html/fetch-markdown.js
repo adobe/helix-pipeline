@@ -107,5 +107,7 @@ async function fetch(
   }
 }
 
+fetch.ext = 'fetch';
+
 module.exports = fetch;
 module.exports.uri = uri;

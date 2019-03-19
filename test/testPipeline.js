@@ -75,6 +75,12 @@ describe('Testing Pipeline', () => {
       order.push('four');
     };
 
+    // inject explicit extension points
+    [first, second, third, fourth].forEach((f) => {
+      // eslint-disable-next-line no-param-reassign
+      f.ext = f.name;
+    });
+
     const pipe = new Pipeline({ logger })
       .before(second)
       .once(() => {
@@ -107,6 +113,12 @@ describe('Testing Pipeline', () => {
     const fourth = function fourth() {
       order.push('four');
     };
+
+    // inject explicit extension points
+    [first, second, third, fourth].forEach((f) => {
+      // eslint-disable-next-line no-param-reassign
+      f.ext = f.name;
+    });
 
     const middle = function middle() {
       order.push('middle');

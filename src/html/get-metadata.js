@@ -166,4 +166,6 @@ function getmetadata({ content: { sections = [] } }, { logger }) {
   return { content: { meta: {} } };
 }
 
+getmetadata.ext = 'meta';
+
 module.exports = getmetadata;

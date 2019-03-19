@@ -115,21 +115,14 @@ class Pipeline {
      * @param {integer} before - where to insert the new function (true = before, false = after)
      */
     this.attach.generic = (name, f, before = true) => {
-      const offset = before ? 0 : 2;
-      // see the describe function below for the generated names
-      // we parse the extracted name to get the matching extension
-      // point
-      const re = new RegExp(`^.*\\:${name} from `);
-
-      // find the index of the function where the resolved alias
+      const offset = before ? 0 : 1;
+      // find the index of the function where the resolved ext name
       // matches the provided name by searching the list of pre and
       // post functions
       const foundpres = this._pres
-        .filter(pre => pre.alias)
-        .findIndex(pre => re.test(pre.alias));
+        .findIndex(pre => pre && pre.ext && pre.ext === name);
       const foundposts = this._posts
-        .filter(post => post.alias)
-        .findIndex(post => re.test(post.alias));
+        .findIndex(post => post && post.ext && post.ext === name);
 
       // if something has been found in either lists, insert the
       // new function into the list, with the correct offset
@@ -138,6 +131,9 @@ class Pipeline {
       }
       if (foundposts !== -1) {
         this._posts.splice(foundposts + offset, 0, f);
+      }
+      if (foundpres === -1 && foundposts === -1) {
+        this._action.logger.warn(`Unknown extension point ${name}`);
       }
     };
     /**
@@ -195,6 +191,15 @@ class Pipeline {
   }
 
   /**
+   * Declares the last function that has been added to be a named extension point
+   * @param {string} name - name of the new extension point
+   */
+  ext(name) {
+    this._last.slice(-1).pop().ext = name;
+    return this;
+  }
+
+  /**
    * Adds a condition to the previously defined `pre` or `post` function. The previously defined
    * function will only be executed if the predicate evaluates to something truthy or returns a
    * Promise that resolves to something truthy.
@@ -222,6 +227,7 @@ class Pipeline {
         return args[0];
       };
       wrappedfunc.alias = lastfunc.alias;
+      wrappedfunc.ext = lastfunc.ext;
       this._last.push(wrappedfunc);
     } else {
       throw new Error('when() needs function to operate on.');

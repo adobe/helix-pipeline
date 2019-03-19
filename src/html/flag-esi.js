@@ -34,3 +34,6 @@ function flag() {
 module.exports = {
   esi, flag,
 };
+
+// make flag esi a pipeline extension point
+module.exports.flag.ext = 'flag-esi';
