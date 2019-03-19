@@ -31,3 +31,6 @@ It works! {{project.name}} is up and running.
 5. Publish your project to GitHub: `git add git remote add origin https://github.com/user/repo.git && git push`
 6. Deploy the project: `hlx deploy`
 7. Make it visible to the world: `hlx publish`
+
+> [!NOTE]
+> This is intended to break.
