@@ -32,6 +32,7 @@ A node in the Markdown AST
 | [meta](#meta) | complex | Optional | MDAST (this schema) |
 | [ordered](#ordered) | `boolean` | Optional | MDAST (this schema) |
 | [position](#position) | Position | Optional | MDAST (this schema) |
+| [referenceType](#referencetype) | `enum` | Optional | MDAST (this schema) |
 | [spread](#spread) | complex | Optional | MDAST (this schema) |
 | [start](#start) | complex | Optional | MDAST (this schema) |
 | [title](#title) | complex | Optional | MDAST (this schema) |
@@ -313,6 +314,27 @@ Is the list ordered
 
 * [Position](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
 
+
+
+
+
+## referenceType
+
+Represents the explicitness of a reference.
+
+`referenceType`
+* is optional
+* type: `enum`
+* defined in this schema
+
+The value of this property **must** be equal to one of the [known values below](#referencetype-known-values).
+
+### referenceType Known Values
+| Value | Description |
+|-------|-------------|
+| `shortcut` | the reference is implicit, its identifier inferred from its content |
+| `collapsed` | the reference is explicit, its identifier inferred from its content |
+| `full` | the reference is explicit, its identifier explicitly set |
 
 
 
