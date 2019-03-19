@@ -63,6 +63,4 @@ function parse({ content: { body = '' } = {} }, { logger }) {
   return { content: { mdast } };
 }
 
-parse.ext = 'parse';
-
 module.exports = parse;

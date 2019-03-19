@@ -23,6 +23,4 @@ function html({ content: { mdast }, request }, { logger, secrets }) {
   return { content };
 }
 
-html.ext = 'html';
-
 module.exports = html;
