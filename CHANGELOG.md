@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/adobe/helix-pipeline/compare/v1.0.4...v1.0.5) (2019-03-19)
+
+
+### Bug Fixes
+
+* **markdown:** Fix handling of references in Markdown validation ([4d69499](https://github.com/adobe/helix-pipeline/commit/4d69499)), closes [#159](https://github.com/adobe/helix-pipeline/issues/159)
+
 ## [1.0.4](https://github.com/adobe/helix-pipeline/compare/v1.0.3...v1.0.4) (2019-03-14)
 
 
