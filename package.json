@@ -12,11 +12,7 @@
     "lint": "npx eslint . && npm run types",
     "types": "npm run docs && node bin/schema2ts.js",
     "docs": "npx jsonschema2md -d src/schemas -o docs",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect",
-    "preversion": "npm test",
-    "postversion": "git push origin master --follow-tags",
-    "delete-git-tag": "git tag -d v$npm_package_version && git push origin :v$npm_package_version"
+    "snyk-protect": "snyk protect"
   },
   "author": "",
   "license": "Apache-2.0",
