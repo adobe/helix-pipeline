@@ -194,7 +194,7 @@ class Pipeline {
    * Declares the last function that has been added to be a named extension point
    * @param {string} name - name of the new extension point
    */
-  ext(name) {
+  extensible(name) {
     this._last.slice(-1).pop().ext = name;
     return this;
   }

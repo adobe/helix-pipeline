@@ -45,22 +45,22 @@ const htmlpipe = (cont, payload, action) => {
   pipe
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
-    .before(fetch).when(hascontent).ext('fetch')
-    .before(parse).ext('parse')
+    .before(fetch).when(hascontent).extensible('fetch')
+    .before(parse).extensible('parse')
     .before(embeds)
     .before(smartypants)
     .before(sections)
-    .before(meta).ext('meta')
+    .before(meta).extensible('meta')
     .before(selectstrain)
     .before(selecttest)
-    .before(html).ext('html')
+    .before(html).extensible('html')
     .before(responsive)
     .once(cont)
     .after(type('text/html'))
     .after(cache).when(uncached)
     .after(key)
     .after(debug)
-    .after(flag).when(esi).ext('esi') // flag ESI when there is ESI in the response
+    .after(flag).when(esi).extensible('esi') // flag ESI when there is ESI in the response
     .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running HTML pipeline');
