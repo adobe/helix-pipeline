@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/adobe/helix-pipeline/compare/v1.0.5...v1.0.6) (2019-03-20)
+
+
+### Bug Fixes
+
+* **release:** semantic-release now updates package.json ([fcb78b8](https://github.com/adobe/helix-pipeline/commit/fcb78b8)), closes [#212](https://github.com/adobe/helix-pipeline/issues/212)
+
 ## [1.0.5](https://github.com/adobe/helix-pipeline/compare/v1.0.4...v1.0.5) (2019-03-19)
 
 
