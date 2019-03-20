@@ -9,6 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
 const _ = require('lodash/fp');
 const callsites = require('callsites');
 const coerce = require('./utils/coerce-secrets');
@@ -194,7 +195,7 @@ class Pipeline {
    * Declares the last function that has been added to be a named extension point
    * @param {string} name - name of the new extension point
    */
-  extensible(name) {
+  expose(name) {
     this._last.slice(-1).pop().ext = name;
     return this;
   }
