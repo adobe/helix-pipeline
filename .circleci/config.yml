@@ -85,10 +85,6 @@ jobs:
         keys:
         - v2-dependencies-{{ checksum "package-lock.json" }}
 
-    - add_ssh_keys:
-        fingerprints:
-        - "e2:da:a5:eb:5a:3c:69:a8:d7:1a:db:19:26:86:69:2b"
-
     - run:
         name: prepare test git user
         command: git config --global user.email "circleci@example.com" && git config --global user.name "CircleCi Build"
