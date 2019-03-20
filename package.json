@@ -51,7 +51,7 @@
     "unist-util-remove-position": "^1.1.2"
   },
   "dependencies": {
-    "@adobe/helix-shared": "0.8.1",
+    "@adobe/helix-shared": "0.8.2",
     "@adobe/openwhisk-loggly-wrapper": "0.4.1",
     "ajv": "^6.6.2",
     "callsites": "^3.0.0",
