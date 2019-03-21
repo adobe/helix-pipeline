@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/adobe/helix-pipeline/compare/v1.0.6...v1.1.0) (2019-03-21)
+
+
+### Bug Fixes
+
+* **pipeline:** Fix off-by-one error in pipeline extensibility ([89ea8f5](https://github.com/adobe/helix-pipeline/commit/89ea8f5))
+
+
+### Features
+
+* **pipeline:** Add advanced extensibility support ([7aa691b](https://github.com/adobe/helix-pipeline/commit/7aa691b))
+* **pipeline:** Introduced explicit, named extension points ([461d3f6](https://github.com/adobe/helix-pipeline/commit/461d3f6))
+
 ## [1.0.6](https://github.com/adobe/helix-pipeline/compare/v1.0.5...v1.0.6) (2019-03-20)
 
 
