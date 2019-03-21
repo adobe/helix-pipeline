@@ -32,6 +32,11 @@ const { cache, uncached } = require('../html/shared-cache');
 const embeds = require('../html/find-embeds');
 
 /* eslint no-param-reassign: off */
+/* eslint newline-per-chained-call: off */
+
+function hascontent({ content }) {
+  return !(content !== undefined && content.body !== undefined);
+}
 
 const htmlpipe = (cont, payload, action) => {
   action.logger = action.logger || log;
@@ -40,25 +45,22 @@ const htmlpipe = (cont, payload, action) => {
   pipe
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
-    .before(fetch)
-    .when(({ content }) => !(content !== undefined && content.body !== undefined))
-    .before(parse)
+    .before(fetch).expose('fetch').when(hascontent)
+    .before(parse).expose('parse')
     .before(embeds)
     .before(smartypants)
     .before(sections)
-    .before(meta)
+    .before(meta).expose('meta')
     .before(selectstrain)
     .before(selecttest)
-    .before(html)
+    .before(html).expose('html')
     .before(responsive)
     .once(cont)
     .after(type('text/html'))
-    .after(cache)
-    .when(uncached)
+    .after(cache).when(uncached)
     .after(key)
     .after(debug)
-    .after(flag)
-    .when(esi) // flag ESI when there is ESI in the response
+    .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running HTML pipeline');

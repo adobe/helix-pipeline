@@ -156,9 +156,55 @@ describe('Testing HTML Pipeline', () => {
     assert.equal(result.response.body, '<p>Hello World</p>');
   });
 
-  it('html.pipe detects ESI in response body', async () => {
-    const result = await pipe(
-      ({ content }) => ({ response: { body: `${content.document.body.innerHTML}<esi:include src="foo.html">` } }),
+  it('html.pipe can be extended', async () => {
+    const myfunc = ({ content }) => ({
+      response: {
+        body: `<h1>${content.title}</h1>
+${content.document.body.innerHTML}`,
+      },
+    });
+
+    let calledfoo = false;
+    let calledbar = false;
+    let calledbaz = false;
+    function foo() {
+      assert.equal(calledfoo, false, 'foo has not yet been called');
+      assert.equal(calledbar, false, 'bar has not yet been called');
+      calledfoo = true;
+    }
+
+    function bar() {
+      assert.equal(calledfoo, true, 'foo has been called');
+      assert.equal(calledbar, false, 'bar has not yet been called');
+      calledbar = true;
+    }
+
+    function baz() {
+      calledbaz = true;
+    }
+
+    function shouttitle(p) {
+      return {
+        content: {
+          title: `${p.content.title.toUpperCase()}!!!`,
+        },
+      };
+    }
+
+    myfunc.before = {
+      fetch: foo,
+    };
+
+    myfunc.after = {
+      esi: bar,
+      // after the metadata has been retrived, make sure that
+      // the title is being shouted
+      meta: shouttitle,
+      never: baz,
+    };
+
+    const res = await pipe(
+      myfunc,
       {
         content: {
           body: 'Hello World',
@@ -171,9 +217,11 @@ describe('Testing HTML Pipeline', () => {
       },
     );
 
-    assert.equal(result.response.headers['X-ESI'], 'enabled');
-    assert.equal(result.response.headers['Content-Type'], 'text/html');
-    assert.equal(result.response.body, '<p>Hello World</p><esi:include src="foo.html">');
+    assert.equal(calledfoo, true, 'foo has been called');
+    assert.equal(calledbar, true, 'bar has been called');
+    assert.equal(calledbaz, false, 'baz has never been called');
+
+    assert.ok(res.response.body.match(/HELLO WORLD/));
   });
 
   it('html.pipe renders index.md from helix-cli correctly', async () => {

@@ -9,6 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
 const _ = require('lodash/fp');
 const callsites = require('callsites');
 const coerce = require('./utils/coerce-secrets');
@@ -94,6 +95,64 @@ class Pipeline {
     this._posts = [];
     // functions that are executed before each step
     this._taps = [];
+
+    this.attach = (ext) => {
+      if (this.sealed) {
+        return;
+      }
+      if (ext && ext.before && typeof ext.before === 'object') {
+        Object.keys(ext.before).map(key => this.attach.before(key, ext.before[key]));
+      }
+      if (ext && ext.after && typeof ext.after === 'object') {
+        Object.keys(ext.after).map(key => this.attach.after(key, ext.after[key]));
+      }
+      this.sealed = true;
+    };
+
+    /**
+     * Registers an extension to the pipeline.
+     * @param {String} name - name of the extension point (typically the function name).
+     * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
+     * @param {integer} before - where to insert the new function (true = before, false = after)
+     */
+    const attachGeneric = (name, f, before) => {
+      const offset = before ? 0 : 1;
+      // find the index of the function where the resolved ext name
+      // matches the provided name by searching the list of pre and
+      // post functions
+      const foundpres = this._pres
+        .findIndex(pre => pre && pre.ext && pre.ext === name);
+      const foundposts = this._posts
+        .findIndex(post => post && post.ext && post.ext === name);
+
+      // if something has been found in either lists, insert the
+      // new function into the list, with the correct offset
+      if (foundpres !== -1) {
+        this._pres.splice(foundpres + offset, 0, f);
+      }
+      if (foundposts !== -1) {
+        this._posts.splice(foundposts + offset, 0, f);
+      }
+      if (foundpres === -1 && foundposts === -1) {
+        this._action.logger.warn(`Unknown extension point ${name}`);
+      }
+    };
+    /**
+     * Registers an extension to the pipeline. The function `f` will be run in
+     * the pipeline before the function called `name` will be executed. If `name`
+     * does not exist, `f` will never be executed.
+     * @param {String} name - name of the extension point (typically the function name).
+     * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
+     */
+    this.attach.before = (name, f) => attachGeneric.bind(this)(name, f, true);
+    /**
+     * Registers an extension to the pipeline. The function `f` will be run in
+     * the pipeline after the function called `name` will be executed. If `name`
+     * does not exist, `f` will never be executed.
+     * @param {String} name - name of the extension point (typically the function name).
+     * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
+     */
+    this.attach.after = (name, f) => attachGeneric.bind(this)(name, f, false);
   }
 
   /**
@@ -133,6 +192,15 @@ class Pipeline {
   }
 
   /**
+   * Declares the last function that has been added to be a named extension point
+   * @param {string} name - name of the new extension point
+   */
+  expose(name) {
+    this._last.slice(-1).pop().ext = name;
+    return this;
+  }
+
+  /**
    * Adds a condition to the previously defined `pre` or `post` function. The previously defined
    * function will only be executed if the predicate evaluates to something truthy or returns a
    * Promise that resolves to something truthy.
@@ -159,6 +227,8 @@ class Pipeline {
         }
         return args[0];
       };
+      wrappedfunc.alias = lastfunc.alias;
+      wrappedfunc.ext = lastfunc.ext;
       this._last.push(wrappedfunc);
     } else {
       throw new Error('when() needs function to operate on.');
@@ -215,14 +285,8 @@ class Pipeline {
    * - the name and code location of the function that called the function before
    * @param {Function} f
    */
+  // eslint-disable-next-line class-methods-use-this
   describe(f) {
-    if (!this._action
-        || !this._action.logger
-        || !this._action.logger.level
-        || this._action.logger.level !== 'silly') {
-      // skip capturing the stack trace when it is mever read
-      return 'anonymous';
-    }
     if (f.alias) {
       return f.alias;
     }
@@ -250,6 +314,8 @@ class Pipeline {
    * context.
    */
   async run(context = {}) {
+    // register all custom attachers to the pipeline
+    this.attach(this._oncef);
     /**
      * Reduction function used to process the pipeline functions and merge the context parameters.
      * @param {Object} currContext Accumulated context

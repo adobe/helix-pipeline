@@ -40,6 +40,107 @@ describe('Testing Pipeline', () => {
       .catch(done);
   });
 
+  it('Can be run twice', async () => {
+    const order = [];
+    const pipe = new Pipeline({ logger })
+      .before(() => { order.push('pre0'); })
+      .after(() => { order.push('post0'); })
+      .before(() => { order.push('pre1'); })
+      .after(() => { order.push('post1'); })
+      .once(() => { order.push('once'); });
+
+    await pipe.run();
+    assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
+
+    await pipe.run();
+    assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1', 'pre0', 'pre1', 'once', 'post0', 'post1']);
+  });
+
+  it('Can be extended', async () => {
+    const order = [];
+
+    const first = function first() {
+      order.push('one');
+    };
+
+    const second = function second() {
+      order.push('two');
+    };
+
+    const third = function third() {
+      order.push('three');
+    };
+
+    const fourth = function fourth() {
+      order.push('four');
+    };
+
+    // inject explicit extension points
+    [first, second, third, fourth].forEach((f) => {
+      // eslint-disable-next-line no-param-reassign
+      f.ext = f.name;
+    });
+
+    const pipe = new Pipeline({ logger })
+      .before(second)
+      .once(() => {
+        order.push('middle');
+      })
+      .after(third);
+
+    pipe.attach.before('second', first);
+    pipe.attach.after('third', fourth);
+
+    await pipe.run();
+    assert.deepStrictEqual(order, ['one', 'two', 'middle', 'three', 'four']);
+  });
+
+  it('Can be extended using shorthand syntax', async () => {
+    const order = [];
+
+    const first = function first() {
+      order.push('one');
+    };
+
+    const second = function second() {
+      order.push('two');
+    };
+
+    const third = function third() {
+      order.push('three');
+    };
+
+    const fourth = function fourth() {
+      order.push('four');
+    };
+
+    // inject explicit extension points
+    [first, second, third, fourth].forEach((f) => {
+      // eslint-disable-next-line no-param-reassign
+      f.ext = f.name;
+    });
+
+    const middle = function middle() {
+      order.push('middle');
+    };
+
+    middle.before = {
+      second: first,
+    };
+
+    middle.after = {
+      third: fourth,
+    };
+
+    const pipe = new Pipeline({ logger })
+      .before(second)
+      .once(middle)
+      .after(third);
+
+    await pipe.run();
+    assert.deepStrictEqual(order, ['one', 'two', 'middle', 'three', 'four']);
+  });
+
   it('Logs correct names', (done) => {
     const order = [];
 
