@@ -45,6 +45,26 @@ function ajv(logger, options = {}) {
       validator.addSchema(schemaData);
       logger.debug(`- ${schemaData.$id}  (${path.basename(schemaFile)})`);
     });
+
+    validator.enhancedErrorsText = function enhancedErrorsText(errs, opts = {}) {
+      const errors = errs || this.errors;
+      if (!errors) return 'No errors';
+
+      const separator = opts.separator === undefined ? '\n' : opts.separator;
+
+      let text = '';
+      errors.forEach((err) => {
+        if (err) {
+          if (err.data && err.data.type) {
+            text += `${err.data.type}${err.schemaPath} ${err.message} - path: ${err.dataPath}${separator}`;
+          } else {
+            text += `${err.schemaPath} ${err.message} - value: ${err.data} - path: ${err.dataPath}${separator}`;
+          }
+        }
+      });
+      return text.slice(0, -separator.length);
+    }.bind(validator);
+
     logger.debug('ajv initialized');
     _ajv[hash(options)] = validator;
   }
