@@ -13,6 +13,7 @@
 const Ajv = require('ajv');
 const path = require('path');
 const hash = require('object-hash');
+const util = require('util');
 
 const _ajv = {};
 
@@ -57,8 +58,10 @@ function ajv(logger, options = {}) {
         if (err) {
           if (err.data && err.data.type) {
             text += `${err.data.type}${err.schemaPath} ${err.message} - path: ${err.dataPath}${separator}`;
+          } else if (typeof err.data !== 'object') {
+            text += `${err.schemaPath} ${err.message} - params: ${JSON.stringify(util.inspect(err.params))} - value: ${err.data} - path: ${err.dataPath}${separator}`;
           } else {
-            text += `${err.schemaPath} ${err.message} - value: ${err.data} - path: ${err.dataPath}${separator}`;
+            text += `${err.schemaPath} ${err.message} - params: ${JSON.stringify(util.inspect(err.params))} - path: ${err.dataPath}${separator}`;
           }
         }
       });

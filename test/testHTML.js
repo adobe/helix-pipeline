@@ -317,8 +317,8 @@ ${content.document.body.innerHTML}`,
       },
     );
     assert.ok(result.error);
-    assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0');
-    assert.equal(result.error.split('\n')[2], 'data.content should NOT have additional properties');
+    assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
+    assert.equal(result.error.split('\n')[2], '#/additionalProperties should NOT have additional properties - params: "{ additionalProperty: \'foo\' }" - path: .content');
   });
 
   it('html.pipe complains when action is invalid', async () => {
@@ -337,8 +337,8 @@ ${content.document.body.innerHTML}`,
       },
     );
     assert.ok(result.error);
-    assert.equal(result.error.split('\n')[1], 'Error: Invalid Action at step 0');
-    assert.equal(result.error.split('\n')[2], 'data should NOT have additional properties');
+    assert.equal(result.error.split('\n')[1], 'Error: Invalid Action at step 0: ');
+    assert.equal(result.error.split('\n')[2], '#/additionalProperties should NOT have additional properties - params: "{ additionalProperty: \'break\' }" - path: ');
   });
 
   it('html.pipe makes HTTP requests', async () => {
