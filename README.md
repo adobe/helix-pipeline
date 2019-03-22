@@ -130,8 +130,8 @@ Post-Processing functions are meant to:
 
 ### Error Handlers
 
-In default state, the pipeline will process all normal functions but will skip `error handlers`  (`.error()`). But when the pipeline is in the _error state_, the normal processing functions are no longer executed until the end of the pipeline is reached or if the _error state_ is cleared. It will however, execute _error handlers_.
-The pipeline execution is in an _error state_ if `context.error` is defined. This can happen with if a processing function throws an Exception, or if it sets the `context.error` object directly.
+In default state, the pipeline will process all normal functions but will skip `error handlers`  (`.error()`). When the pipeline is in the _error state_ normal processing functions are suspended until the end of the pipeline is reached, or the _error state_ is cleared. While in the _error state_, _error handlers_ will be executed.
+The pipeline execution is in an _error state_ if `context.error` is defined. An _Error state_ can happen when a processing function throws an Exception, or if it sets the `context.error` object directly.
 
 Example:
 
