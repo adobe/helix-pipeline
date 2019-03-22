@@ -321,6 +321,44 @@ ${content.document.body.innerHTML}`,
     assert.equal(result.error.split('\n')[2], '#/additionalProperties should NOT have additional properties - params: "{ additionalProperty: \'foo\' }" - path: .content');
   });
 
+  it('html.pipe complains with a specific message for mdast nodes when context is invalid', async () => {
+    const result = await pipe(
+      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
+      {
+        content: {
+          sections: [{ type: 'notroot' }],
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.ok(result.error);
+    assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
+    assert.equal(result.error.split('\n')[2], '#/properties/type/const should be equal to constant - params: "{ allowedValue: \'root\' }" - value: notroot - path: .content.sections[0].type');
+  });
+
+  it('html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid', async () => {
+    const result = await pipe(
+      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
+      {
+        content: {
+          sections: [{ type: 'root', custom: 'notallowed' }],
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.ok(result.error);
+    assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
+    assert.equal(result.error.split('\n')[2], 'root#/additionalProperties should NOT have additional properties - path: .content.sections[0]');
+  });
+
   it('html.pipe complains when action is invalid', async () => {
     const result = await pipe(
       ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
