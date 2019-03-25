@@ -355,7 +355,7 @@ class Pipeline {
             return result;
           })).catch((e) => {
           // tapping failed
-          this._action.logger.warn(`tapping failed: ${e}`, e);
+          this._action.logger.error(`tapping failed: ${e.stack}`);
           return {
             error: `${currContext.error || ''}\n${e.stack || ''}`,
           };
