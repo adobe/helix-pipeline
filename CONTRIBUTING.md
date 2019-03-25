@@ -36,12 +36,7 @@ In your pull request, outline:
 
 Lastly, please follow the [pull request template](PULL_REQUEST_TEMPLATE.md) when submitting a pull request!
 
-Each commit message that is not part of a pull request:
-
-* Should contain the issue ID like `#123`
-* Can contain the tag `[trivial]` for trivial changes that don't relate to an issue
-
-
+Commit messages must respect [Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0-beta.3/). You can use `npm run commit` which will guide you to create a commit message that respects the convention. If you know the convention, you can still use your favorite commit mechanism.
 
 ## Coding Styleguides
 
