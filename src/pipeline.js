@@ -222,7 +222,7 @@ class Pipeline {
             }
             return args[0];
           });
-        } if (result) {
+        } else if (result) {
           return lastfunc(...args);
         }
         return args[0];

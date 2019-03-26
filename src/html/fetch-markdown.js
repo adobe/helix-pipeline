@@ -98,7 +98,7 @@ async function fetch(
   } catch (e) {
     if (e && e.statusCode && e.statusCode === 404) {
       return bail(logger, `Could not find Markdown at ${options.uri}`, e, 404);
-    } if ((e && e.response && e.response.elapsedTime && e.response.elapsedTime > timeout) || (e && e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT'))) {
+    } else if ((e && e.response && e.response.elapsedTime && e.response.elapsedTime > timeout) || (e && e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT'))) {
       // return gateway timeout
       return bail(logger, `Gateway timout of ${timeout} milliseconds exceeded for ${options.uri}`, e, 504);
     }

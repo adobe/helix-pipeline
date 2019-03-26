@@ -106,7 +106,7 @@ class VDOMTransformer {
 
     if (result && typeof result === 'string') {
       return VDOMTransformer.toHTAST(result, cb, node);
-    } if (result && typeof result === 'object' && result.outerHTML) {
+    } else if (result && typeof result === 'object' && result.outerHTML) {
       return VDOMTransformer.toHTAST(result.outerHTML, cb, node);
     }
     return result;
