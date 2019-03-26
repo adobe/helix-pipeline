@@ -17,7 +17,7 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@adobe/jsonschema2md": "^1.1.1-SNAPSHOT.236",
+    "@adobe/jsonschema2md": "^2.0.0",
     "@pollyjs/adapter-node-http": "^2.2.0",
     "@pollyjs/core": "^2.3.0",
     "@pollyjs/persister-fs": "^2.1.0",
