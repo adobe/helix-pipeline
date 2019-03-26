@@ -338,6 +338,12 @@ class Pipeline {
       }
 
       // copy the pipeline payload into a new object to avoid modifications
+      // TODO: Better way of write-protecting the args for tapped functions; this may lead
+      // to weird bugs in user's code because modification seems to work but in
+      // fact the modification results are ignored; this one also has the draw
+      // TODO: This is also inefficient
+      // TODO: This also only works for objects and arrays; any data of custom type (e.g. DOM)
+      // is overwritten
       const mergedargs = _.merge({}, currContext);
       const tapresults = this._taps.map((f) => {
         try {
@@ -350,7 +356,7 @@ class Pipeline {
       return Promise.all(tapresults)
         .then(() => Promise.resolve(currFunction(mergedargs, this._action))
           .then((value) => {
-            const result = _.merge(currContext, value);
+            const result = currFunction.does_mutate ? mergedargs : _.merge(currContext, value);
             this._action.logger.silly('received ', { function: this.describe(currFunction), result });
             return result;
           })).catch((e) => {
