@@ -26,6 +26,6 @@ describe('Test bail', () => {
   });
 
   it('Bail logs something', (done) => {
-    helper.bail({ error: () => { done(); } }, 'This is bad');
+    helper.bail({ error: () => done() }, 'This is bad');
   });
 });

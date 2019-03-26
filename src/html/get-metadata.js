@@ -136,7 +136,7 @@ function sectiontype(section) {
 function fallback(section) {
   if (section.intro && !section.title) {
     return Object.assign({ title: section.intro }, section);
-  } if (section.title && !section.intro) {
+  } else if (section.title && !section.intro) {
     return Object.assign({ intro: section.title }, section);
   }
   return section;

@@ -31,7 +31,7 @@ function selectstrain({ content }, { request, logger }) {
             hidden: !section.meta.strain.includes(strain),
           },
         };
-      } if (section.meta && section.meta.strain) {
+      } else if (section.meta && section.meta.strain) {
         // we treat it as a string
         // return true if the selected strain is in the metadata
         return {

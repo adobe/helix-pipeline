@@ -144,7 +144,7 @@ describe('Testing Pipeline', () => {
   it('Logs correct names', (done) => {
     const order = [];
 
-    const pre0 = () => { order.push('pre0'); };
+    const pre0 = () => order.push('pre0');
     const post0 = function post0() {
       order.push('post0');
     };
@@ -393,7 +393,12 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .before(() => ({ foo: 'bar' }))
       .after(() => ({ bar: 'baz' }))
-      .every((c, a, i) => { if (i === 1) { done(); } return true; })
+      .every((c, a, i) => {
+        if (i === 1) {
+          done();
+        }
+        return true;
+      })
       .run();
   });
 
@@ -401,9 +406,19 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .before(() => ({ foo: 'bar' }))
       .after(() => ({ bar: 'baz' }))
-      .every((c, a, i) => { if (i === 1) { done(new Error('this is a trap')); } return true; })
+      .every((c, a, i) => {
+        if (i === 1) {
+          done(new Error('this is a trap'));
+        }
+        return true;
+      })
       .when(() => false)
-      .every((c, a, i) => { if (i === 1) { done(); } return true; })
+      .every((c, a, i) => {
+        if (i === 1) {
+          done();
+        }
+        return true;
+      })
       .when(() => true)
       .run();
   });
@@ -428,7 +443,10 @@ describe('Testing Pipeline', () => {
   it('skip functions if context.error', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .before(() => { order.push('pre0'); return { error: 'stop' }; })
+      .before(() => {
+        order.push('pre0');
+        return { error: 'stop' };
+      })
       .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
       .after(() => { order.push('post0'); })
@@ -445,7 +463,10 @@ describe('Testing Pipeline', () => {
   it('skip functions if exception', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .before(() => { order.push('pre0'); throw new Error('stop'); })
+      .before(() => {
+        order.push('pre0');
+        throw new Error('stop');
+      })
       .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
       .after(() => { order.push('post0'); })
@@ -462,9 +483,15 @@ describe('Testing Pipeline', () => {
   it('error handler can clear error', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .before(() => { order.push('pre0'); throw new Error('stop'); })
+      .before(() => {
+        order.push('pre0');
+        throw new Error('stop');
+      })
       .before(() => { order.push('pre1'); })
-      .error(() => { order.push('error0'); return { error: null }; })
+      .error(() => {
+        order.push('error0');
+        return { error: null };
+      })
       .once(() => { order.push('once'); })
       .after(() => { order.push('post0'); })
       .after(() => { order.push('post1'); })
