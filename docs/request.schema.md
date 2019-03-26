@@ -13,21 +13,22 @@ The HTTP Request
 
 # Request Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [extension](#extension) | `string` | Optional | Request (this schema) |
-| [headers](#headers) | complex | Optional | Request (this schema) |
-| [method](#method) | `string` | Optional | Request (this schema) |
-| [params](#params) | `object` | Optional | Request (this schema) |
-| [path](#path) | `string` | Optional | Request (this schema) |
-| [selector](#selector) | `string` | Optional | Request (this schema) |
-| [url](#url) | `string` | Optional | Request (this schema) |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [extension](#extension) | `string` | Optional  | No | Request (this schema) |
+| [headers](#headers) | complex | Optional  | No | Request (this schema) |
+| [method](#method) | `string` | Optional  | No | Request (this schema) |
+| [params](#params) | `object` | Optional  | No | Request (this schema) |
+| [path](#path) | `string` | Optional  | No | Request (this schema) |
+| [selector](#selector) | `string` | Optional  | No | Request (this schema) |
+| [url](#url) | `string` | Optional  | No | Request (this schema) |
 
 ## extension
 
 The extension of the requested resource
 
 `extension`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -36,6 +37,7 @@ The extension of the requested resource
 
 
 `string`
+
 
 
 
@@ -58,6 +60,7 @@ The extension of the requested resource
 The HTTP headers of the request. Note: all header names will be lower-case.
 
 `headers`
+
 * is optional
 * type: complex
 * defined in this schema
@@ -85,6 +88,7 @@ Unknown type ``.
 The HTTP method of the request. Note: method names can be lower-case.
 
 `method`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -93,6 +97,7 @@ The HTTP method of the request. Note: method names can be lower-case.
 
 
 `string`
+
 
 
 
@@ -112,6 +117,7 @@ The HTTP method of the request. Note: method names can be lower-case.
 The passed through (and filtered) URL parameters of the request
 
 `params`
+
 * is optional
 * type: `object`
 * defined in this schema
@@ -135,6 +141,7 @@ The passed through (and filtered) URL parameters of the request
 The path of the client request URL
 
 `path`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -143,6 +150,7 @@ The path of the client request URL
 
 
 `string`
+
 
 
 
@@ -160,6 +168,7 @@ The path of the client request URL
 The selector (sub-type indicator)
 
 `selector`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -168,6 +177,7 @@ The selector (sub-type indicator)
 
 
 `string`
+
 
 
 
@@ -190,6 +200,7 @@ The selector (sub-type indicator)
 The path and request parameters of the client request URL
 
 `url`
+
 * is optional
 * type: `string`
 * defined in this schema
@@ -198,6 +209,7 @@ The path and request parameters of the client request URL
 
 
 `string`
+
 
 
 

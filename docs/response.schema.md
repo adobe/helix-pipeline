@@ -13,16 +13,17 @@ The HTTP response object
 
 # Response Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [body](#body) | complex | Optional | Response (this schema) |
-| [headers](#headers) | complex | Optional | Response (this schema) |
-| [status](#status) | `integer` | Optional | Response (this schema) |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [body](#body) | complex | Optional  | No | Response (this schema) |
+| [headers](#headers) | complex | Optional  | No | Response (this schema) |
+| [status](#status) | `integer` | Optional  | No | Response (this schema) |
 
 ## body
 
 
 `body`
+
 * is optional
 * type: complex
 * defined in this schema
@@ -40,6 +41,13 @@ The HTTP response object
 #### Option 2
 
 
+`object` with following properties:
+
+
+| Property | Type | Required |
+|----------|------|----------|
+
+
 
 
 
@@ -50,6 +58,7 @@ The HTTP response object
 The HTTP headers of the response
 
 `headers`
+
 * is optional
 * type: complex
 * defined in this schema
@@ -77,6 +86,7 @@ Unknown type ``.
 The HTTP status code
 
 `status`
+
 * is optional
 * type: `integer`
 * defined in this schema
@@ -85,6 +95,7 @@ The HTTP status code
 
 
 `integer`
+
 
 
 

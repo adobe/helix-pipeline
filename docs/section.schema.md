@@ -19,26 +19,26 @@ A section in a markdown document
 
 # Section Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [children](#children) | MDAST | Optional | Section (this schema) |
-| [image](#image) | `string` | Optional | [Meta](meta.schema.md#image) |
-| [intro](#intro) | `string` | Optional | [Meta](meta.schema.md#intro) |
-| [meta](#meta) | `object` | Optional | [Meta](meta.schema.md#meta) |
-| [position](#position) | Position | Optional | Section (this schema) |
-| [title](#title) | `string` | Optional | [Meta](meta.schema.md#title) |
-| [type](#type) | `const` | Optional | Section (this schema) |
-| [types](#types) | `string[]` | Optional | Section (this schema) |
-| `*` | any | Additional | this schema *allows* additional properties |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [children](#children) | MDAST | Optional  | No | Section (this schema) |
+| [image](#image) | `string` | Optional  | No | [Meta](meta.schema.md#image) |
+| [intro](#intro) | `string` | Optional  | No | [Meta](meta.schema.md#intro) |
+| [meta](#meta) | `object` | Optional  | No | [Meta](meta.schema.md#meta) |
+| [position](#position) | Position | Optional  | No | Section (this schema) |
+| [title](#title) | `string` | Optional  | No | [Meta](meta.schema.md#title) |
+| [type](#type) | `const` | Optional  | No | Section (this schema) |
+| [types](#types) | `string[]` | Optional  | No | Section (this schema) |
+| `*` | any | Additional | Yes | this schema *allows* additional properties |
 
 ## children
 
 The AST nodes making up the section. Section dividers are not included.
 
 `children`
+
 * is optional
 * type: MDAST
-
 * defined in this schema
 
 ### children Type
@@ -61,6 +61,7 @@ All items must be of the type:
 Path (can be relative) to the first image in the document
 
 `image`
+
 * is optional
 * type: `string`
 * defined in [Meta](meta.schema.md#image)
@@ -69,6 +70,7 @@ Path (can be relative) to the first image in the document
 
 
 `string`
+
 * format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
 
 
@@ -81,6 +83,7 @@ Path (can be relative) to the first image in the document
 Extracted first paragraph of the document
 
 `intro`
+
 * is optional
 * type: `string`
 * defined in [Meta](meta.schema.md#intro)
@@ -95,11 +98,13 @@ Extracted first paragraph of the document
 
 
 
+
 ## meta
 
 Extracted metadata from the frontmatter of the document
 
 `meta`
+
 * is optional
 * type: `object`
 * defined in [Meta](meta.schema.md#meta)
@@ -122,6 +127,7 @@ Extracted metadata from the frontmatter of the document
 
 
 `position`
+
 * is optional
 * type: Position
 * defined in this schema
@@ -140,6 +146,7 @@ Extracted metadata from the frontmatter of the document
 Extracted title of the document
 
 `title`
+
 * is optional
 * type: `string`
 * defined in [Meta](meta.schema.md#title)
@@ -154,11 +161,13 @@ Extracted title of the document
 
 
 
+
 ## type
 
 The MDAST node type. Each section can be treated as a standalone document.
 
 `type`
+
 * is optional
 * type: `const`
 * defined in this schema
@@ -178,9 +187,9 @@ The value of this property **must** be equal to:
 The inferred class names for the section
 
 `types`
+
 * is optional
 * type: `string[]`
-
 * defined in this schema
 
 ### types Type
@@ -197,4 +206,21 @@ All items must be of the type:
 
 
 
+
+
+
+
+**All** of the following *requirements* need to be fulfilled.
+
+
+#### Requirement 1
+
+
+* []() – `#/definitions/section`
+
+
+#### Requirement 2
+
+
+* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta`
 

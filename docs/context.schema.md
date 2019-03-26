@@ -20,17 +20,18 @@ The context thingie.
 
 # Context Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [content](#content) | Content | Optional | Context (this schema) |
-| [error](#error) | complex | Optional | Context (this schema) |
-| [request](#request) | Request | Optional | Context (this schema) |
-| [response](#response) | Response | Optional | Context (this schema) |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [content](#content) | Content | Optional  | No | Context (this schema) |
+| [error](#error) | multiple | Optional  | No | Context (this schema) |
+| [request](#request) | Request | Optional  | No | Context (this schema) |
+| [response](#response) | Response | Optional  | No | Context (this schema) |
 
 ## content
 
 
 `content`
+
 * is optional
 * type: Content
 * defined in this schema
@@ -50,24 +51,17 @@ An error message that has been generated during pipeline processing.
 When this property is present, all other values can be ignored.
 
 `error`
+
 * is optional
-* type: complex
+* type: multiple
 * defined in this schema
 
 ### error Type
 
-Unknown type `string,object`.
 
-```json
-{
-  "type": [
-    "string",
-    "object"
-  ],
-  "description": "An error message that has been generated during pipeline processing.\nWhen this property is present, all other values can be ignored.",
-  "simpletype": "complex"
-}
-```
+Either one of:
+ * `string`
+ * `object`
 
 
 
@@ -77,6 +71,7 @@ Unknown type `string,object`.
 
 
 `request`
+
 * is optional
 * type: Request
 * defined in this schema
@@ -94,6 +89,7 @@ Unknown type `string,object`.
 
 
 `response`
+
 * is optional
 * type: Response
 * defined in this schema

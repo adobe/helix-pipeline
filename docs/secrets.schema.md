@@ -13,26 +13,27 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 # Secrets Properties
 
-| Property | Type | Required | Default | Defined by |
-|----------|------|----------|---------|------------|
-| [EMBED_SERVICE](#embed_service) | `string` | Optional | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
-| [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
-| [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional | `1000` | Secrets (this schema) |
-| [IMAGES_MAX_SIZE](#images_max_size) | `integer` | Optional | `4096` | Secrets (this schema) |
-| [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional | `480` | Secrets (this schema) |
-| [IMAGES_SIZES](#images_sizes) | `string` | Optional | `"100vw"` | Secrets (this schema) |
-| [IMAGES_SIZE_STEPS](#images_size_steps) | `integer` | Optional | `4` | Secrets (this schema) |
-| [REPO_API_ROOT](#repo_api_root) | `string` | Optional | `"https://api.github.com/"` | Secrets (this schema) |
-| [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
-| [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional | `true` | Secrets (this schema) |
-| [XML_PRETTY](#xml_pretty) | `boolean` | Optional | `true` | Secrets (this schema) |
-| `[A-Z0-9_]+` | complex | Pattern |  | Secrets (this schema) |
+| Property | Type | Required | Nullable | Default | Defined by |
+|----------|------|----------|----------|---------|------------|
+| [EMBED_SERVICE](#embed_service) | `string` | Optional  | No | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
+| [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional  | No | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
+| [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional  | No | `1000` | Secrets (this schema) |
+| [IMAGES_MAX_SIZE](#images_max_size) | `integer` | Optional  | No | `4096` | Secrets (this schema) |
+| [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional  | No | `480` | Secrets (this schema) |
+| [IMAGES_SIZES](#images_sizes) | `string` | Optional  | No | `"100vw"` | Secrets (this schema) |
+| [IMAGES_SIZE_STEPS](#images_size_steps) | `integer` | Optional  | No | `4` | Secrets (this schema) |
+| [REPO_API_ROOT](#repo_api_root) | `string` | Optional  | No | `"https://api.github.com/"` | Secrets (this schema) |
+| [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional  | No | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
+| [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
+| [XML_PRETTY](#xml_pretty) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
+| `[A-Z0-9_]+` | multiple | Pattern | No |  | Secrets (this schema) |
 
 ## EMBED_SERVICE
 
 URL of an Embed Service that takes the appended URL and returns an embeddable HTML representation.
 
 `EMBED_SERVICE`
+
 * is optional
 * type: `string`
 * default: `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"`
@@ -48,11 +49,13 @@ URL of an Embed Service that takes the appended URL and returns an embeddable HT
 
 
 
+
 ## EMBED_WHITELIST
 
 Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
 
 `EMBED_WHITELIST`
+
 * is optional
 * type: `string`
 * default: `"www.youtube.com, spark.adobe.com, unsplash.com/photos"`
@@ -68,11 +71,13 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 
 
 
+
 ## HTTP_TIMEOUT
 
 Timeout for outgoing HTTP requests in milliseconds
 
 `HTTP_TIMEOUT`
+
 * is optional
 * type: `integer`
 * default: `1000`
@@ -88,11 +93,13 @@ Timeout for outgoing HTTP requests in milliseconds
 
 
 
+
 ## IMAGES_MAX_SIZE
 
 Maximum physical with of responsive images to generate
 
 `IMAGES_MAX_SIZE`
+
 * is optional
 * type: `integer`
 * default: `4096`
@@ -108,11 +115,13 @@ Maximum physical with of responsive images to generate
 
 
 
+
 ## IMAGES_MIN_SIZE
 
 Minimum physical width of responsive images to generate
 
 `IMAGES_MIN_SIZE`
+
 * is optional
 * type: `integer`
 * default: `480`
@@ -128,11 +137,13 @@ Minimum physical width of responsive images to generate
 
 
 
+
 ## IMAGES_SIZES
 
 Value for the `sizes` attribute of generated responsive images
 
 `IMAGES_SIZES`
+
 * is optional
 * type: `string`
 * default: `"100vw"`
@@ -148,11 +159,13 @@ Value for the `sizes` attribute of generated responsive images
 
 
 
+
 ## IMAGES_SIZE_STEPS
 
 Number of intermediary size steps to create per image
 
 `IMAGES_SIZE_STEPS`
+
 * is optional
 * type: `integer`
 * default: `4`
@@ -168,11 +181,13 @@ Number of intermediary size steps to create per image
 
 
 
+
 ## REPO_API_ROOT
 
 The base URL for all GitHub API operations
 
 `REPO_API_ROOT`
+
 * is optional
 * type: `string`
 * default: `"https://api.github.com/"`
@@ -182,6 +197,7 @@ The base URL for all GitHub API operations
 
 
 `string`
+
 * format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
 
 
@@ -194,6 +210,7 @@ The base URL for all GitHub API operations
 The Base URL for retrieving raw text files from GitHub
 
 `REPO_RAW_ROOT`
+
 * is optional
 * type: `string`
 * default: `"https://raw.githubusercontent.com/"`
@@ -203,6 +220,7 @@ The Base URL for retrieving raw text files from GitHub
 
 
 `string`
+
 * format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
 
 
@@ -214,6 +232,7 @@ The Base URL for retrieving raw text files from GitHub
 
 
 `TEST_BOOLEAN`
+
 * is optional
 * type: `boolean`
 * default: `true`
@@ -233,6 +252,7 @@ The Base URL for retrieving raw text files from GitHub
 Print XML with line breaks and indentation
 
 `XML_PRETTY`
+
 * is optional
 * type: `boolean`
 * default: `true`
@@ -252,8 +272,9 @@ Applies to all properties that match the regular expression `[A-Z0-9_]+`
 
 
 `[A-Z0-9_]+`
+
 * is a property pattern
-* type: complex
+* type: multiple
 * defined in this schema
 
 ### Pattern [A-Z0-9_]+ Type
@@ -268,7 +289,7 @@ Unknown type `boolean,integer,number,string`.
     "number",
     "string"
   ],
-  "simpletype": "complex"
+  "simpletype": "multiple"
 }
 ```
 

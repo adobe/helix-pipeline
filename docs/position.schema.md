@@ -18,16 +18,17 @@ Marks the position of an AST node in the original text flow
 
 # Position Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [end](#end) | Text Coordinates | Optional | Position (this schema) |
-| [indent](#indent) | `array` | Optional | Position (this schema) |
-| [start](#start) | Text Coordinates | Optional | Position (this schema) |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [end](#end) | Text Coordinates | Optional  | No | Position (this schema) |
+| [indent](#indent) | `array` | Optional  | No | Position (this schema) |
+| [start](#start) | Text Coordinates | Optional  | No | Position (this schema) |
 
 ## end
 
 
 `end`
+
 * is optional
 * type: Text Coordinates
 * defined in this schema
@@ -45,9 +46,9 @@ Marks the position of an AST node in the original text flow
 
 
 `indent`
+
 * is optional
 * type: `array`
-
 * defined in this schema
 
 ### indent Type
@@ -64,6 +65,7 @@ Array type: `array`
 
 
 `start`
+
 * is optional
 * type: Text Coordinates
 * defined in this schema

@@ -19,18 +19,19 @@ Tracks the OpenWhisk action invocation
 
 # Action Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [debug](#debug) | `object` | Optional | Action (this schema) |
-| [logger](#logger) | `object` | Optional | Action (this schema) |
-| [request](#request) | Raw Request | Optional | Action (this schema) |
-| [secrets](#secrets) | Secrets | Optional | Action (this schema) |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [debug](#debug) | `object` | Optional  | No | Action (this schema) |
+| [logger](#logger) | `object` | Optional  | No | Action (this schema) |
+| [request](#request) | Raw Request | Optional  | No | Action (this schema) |
+| [secrets](#secrets) | Secrets | Optional  | No | Action (this schema) |
 
 ## debug
 
 Internal information related to debugging.
 
 `debug`
+
 * is optional
 * type: `object`
 * defined in this schema
@@ -54,6 +55,7 @@ Internal information related to debugging.
 A [Winston](https://github.com/winstonjs/winston) logger instance.
 
 `logger`
+
 * is optional
 * type: `object`
 * defined in this schema
@@ -76,6 +78,7 @@ A [Winston](https://github.com/winstonjs/winston) logger instance.
 
 
 `request`
+
 * is optional
 * type: Raw Request
 * defined in this schema
@@ -93,6 +96,7 @@ A [Winston](https://github.com/winstonjs/winston) logger instance.
 
 
 `secrets`
+
 * is optional
 * type: Secrets
 * defined in this schema
