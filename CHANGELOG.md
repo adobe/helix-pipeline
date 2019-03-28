@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/adobe/helix-pipeline/compare/v1.1.1...v1.2.0) (2019-03-28)
+
+
+### Features
+
+* Pipeline now supports pipeline steps that mutate the input ([2b6ddf0](https://github.com/adobe/helix-pipeline/commit/2b6ddf0))
+
 ## [1.1.1](https://github.com/adobe/helix-pipeline/compare/v1.1.0...v1.1.1) (2019-03-22)
 
 
