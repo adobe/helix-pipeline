@@ -19,17 +19,17 @@ A section in a markdown document
 
 # Section Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [children](#children) | MDAST | Optional | Section (this schema) |
-| [image](#image) | `string` | Optional | [Meta](meta.schema.md#image) |
-| [intro](#intro) | `string` | Optional | [Meta](meta.schema.md#intro) |
-| [meta](#meta) | `object` | Optional | [Meta](meta.schema.md#meta) |
-| [position](#position) | Position | Optional | Section (this schema) |
-| [title](#title) | `string` | Optional | [Meta](meta.schema.md#title) |
-| [type](#type) | `const` | Optional | Section (this schema) |
-| [types](#types) | `string[]` | Optional | Section (this schema) |
-| `*` | any | Additional | this schema *allows* additional properties |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [children](#children) | MDAST | Optional  | No | Section (this schema) |
+| [image](#image) | `string` | Optional  | No | [Meta](meta.schema.md#image) |
+| [intro](#intro) | `string` | Optional  | No | [Meta](meta.schema.md#intro) |
+| [meta](#meta) | `object` | Optional  | No | [Meta](meta.schema.md#meta) |
+| [position](#position) | Position | Optional  | No | Section (this schema) |
+| [title](#title) | `string` | Optional  | No | [Meta](meta.schema.md#title) |
+| [type](#type) | `const` | Optional  | No | Section (this schema) |
+| [types](#types) | `string[]` | Optional  | No | Section (this schema) |
+| `*` | any | Additional | Yes | this schema *allows* additional properties |
 
 ## children
 
@@ -207,4 +207,20 @@ All items must be of the type:
 
 
 
+
+
+
+**All** of the following *requirements* need to be fulfilled.
+
+
+#### Requirement 1
+
+
+* []() – `#/definitions/section`
+
+
+#### Requirement 2
+
+
+* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta`
 

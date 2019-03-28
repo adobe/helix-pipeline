@@ -19,19 +19,19 @@ The content as retrieved from the repository and enriched in the pipeline.
 
 # Content Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [body](#body) | `string` | Optional | Content (this schema) |
-| [document](#document) | `object` | Optional | Content (this schema) |
-| [htast](#htast) | `object` | Optional | Content (this schema) |
-| [image](#image) | `string` | Optional | Content (this schema) |
-| [intro](#intro) | `string` | Optional | Content (this schema) |
-| [mdast](#mdast) | MDAST | Optional | Content (this schema) |
-| [meta](#meta) | `object` | Optional | Content (this schema) |
-| [sections](#sections) | Section | Optional | Content (this schema) |
-| [sources](#sources) | `string[]` | Optional | Content (this schema) |
-| [title](#title) | `string` | Optional | Content (this schema) |
-| [xml](#xml) | `object` | Optional | Content (this schema) |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [body](#body) | `string` | Optional  | No | Content (this schema) |
+| [document](#document) | `object` | Optional  | No | Content (this schema) |
+| [htast](#htast) | `object` | Optional  | No | Content (this schema) |
+| [image](#image) | `string` | Optional  | No | Content (this schema) |
+| [intro](#intro) | `string` | Optional  | No | Content (this schema) |
+| [mdast](#mdast) | MDAST | Optional  | No | Content (this schema) |
+| [meta](#meta) | `object` | Optional  | No | Content (this schema) |
+| [sections](#sections) | Section | Optional  | No | Content (this schema) |
+| [sources](#sources) | `string[]` | Optional  | No | Content (this schema) |
+| [title](#title) | `string` | Optional  | No | Content (this schema) |
+| [xml](#xml) | `object` | Optional  | No | Content (this schema) |
 
 ## body
 

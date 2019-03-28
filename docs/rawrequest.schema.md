@@ -13,12 +13,12 @@ The Request Object used for Invoking OpenWhisk
 
 # Raw Request Properties
 
-| Property | Type | Required | Defined by |
-|----------|------|----------|------------|
-| [headers](#headers) | `object` | Optional | Raw Request (this schema) |
-| [method](#method) | `string` | Optional | Raw Request (this schema) |
-| [params](#params) | `object` | Optional | Raw Request (this schema) |
-| `*` | any | Additional | this schema *allows* additional properties |
+| Property | Type | Required | Nullable | Defined by |
+|----------|------|----------|----------|------------|
+| [headers](#headers) | `object` | Optional  | No | Raw Request (this schema) |
+| [method](#method) | `string` | Optional  | No | Raw Request (this schema) |
+| [params](#params) | `object` | Optional  | No | Raw Request (this schema) |
+| `*` | any | Additional | Yes | this schema *allows* additional properties |
 
 ## headers
 
@@ -209,15 +209,13 @@ Deprecated: The original OpenWhisk request headers
 
 ##### __ow_headers Type
 
-Unknown type `object`.
 
-```json
-{
-  "type": "object",
-  "description": "Deprecated: The original OpenWhisk request headers",
-  "simpletype": "`object`"
-}
-```
+`object` with following properties:
+
+
+| Property | Type | Required |
+|----------|------|----------|
+
 
 
 
@@ -370,4 +368,14 @@ The resolved strain (variant)
 
 
 
+
+
+
+**All** of the following *requirements* need to be fulfilled.
+
+
+#### Requirement 1
+
+
+* []() – `#/definitions/rawrequest`
 

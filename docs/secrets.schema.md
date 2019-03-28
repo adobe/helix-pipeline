@@ -13,20 +13,20 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 # Secrets Properties
 
-| Property | Type | Required | Default | Defined by |
-|----------|------|----------|---------|------------|
-| [EMBED_SERVICE](#embed_service) | `string` | Optional | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
-| [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
-| [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional | `1000` | Secrets (this schema) |
-| [IMAGES_MAX_SIZE](#images_max_size) | `integer` | Optional | `4096` | Secrets (this schema) |
-| [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional | `480` | Secrets (this schema) |
-| [IMAGES_SIZES](#images_sizes) | `string` | Optional | `"100vw"` | Secrets (this schema) |
-| [IMAGES_SIZE_STEPS](#images_size_steps) | `integer` | Optional | `4` | Secrets (this schema) |
-| [REPO_API_ROOT](#repo_api_root) | `string` | Optional | `"https://api.github.com/"` | Secrets (this schema) |
-| [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
-| [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional | `true` | Secrets (this schema) |
-| [XML_PRETTY](#xml_pretty) | `boolean` | Optional | `true` | Secrets (this schema) |
-| `[A-Z0-9_]+` | complex | Pattern |  | Secrets (this schema) |
+| Property | Type | Required | Nullable | Default | Defined by |
+|----------|------|----------|----------|---------|------------|
+| [EMBED_SERVICE](#embed_service) | `string` | Optional  | No | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
+| [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional  | No | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
+| [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional  | No | `1000` | Secrets (this schema) |
+| [IMAGES_MAX_SIZE](#images_max_size) | `integer` | Optional  | No | `4096` | Secrets (this schema) |
+| [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional  | No | `480` | Secrets (this schema) |
+| [IMAGES_SIZES](#images_sizes) | `string` | Optional  | No | `"100vw"` | Secrets (this schema) |
+| [IMAGES_SIZE_STEPS](#images_size_steps) | `integer` | Optional  | No | `4` | Secrets (this schema) |
+| [REPO_API_ROOT](#repo_api_root) | `string` | Optional  | No | `"https://api.github.com/"` | Secrets (this schema) |
+| [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional  | No | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
+| [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
+| [XML_PRETTY](#xml_pretty) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
+| `[A-Z0-9_]+` | multiple | Pattern | No |  | Secrets (this schema) |
 
 ## EMBED_SERVICE
 
@@ -274,7 +274,7 @@ Applies to all properties that match the regular expression `[A-Z0-9_]+`
 `[A-Z0-9_]+`
 
 * is a property pattern
-* type: complex
+* type: multiple
 * defined in this schema
 
 ### Pattern [A-Z0-9_]+ Type
@@ -289,7 +289,7 @@ Unknown type `boolean,integer,number,string`.
     "number",
     "string"
   ],
-  "simpletype": "complex"
+  "simpletype": "multiple"
 }
 ```
 
