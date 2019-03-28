@@ -13,6 +13,7 @@
 const winston = require('winston');
 const { JSDOM } = require('jsdom');
 const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
+const { multiline } = require('@adobe/helix-shared').string;
 const { pipe } = require('../src/defaults/html.pipe.js');
 
 const params = {
@@ -85,7 +86,7 @@ const assertMd = async (md, html) => {
 
   const generated = await pipe(
     fromHTML,
-    { content: { body: md } },
+    { content: { body: multiline(md) } },
     {
       logger,
       request: { params },
@@ -132,10 +133,14 @@ describe('Testing Markdown conversion', () => {
   });
 
   it('Code blocks without lang', async () => {
-    await assertMd(
-      '    Hello World',
-      '<pre><code>Hello World\n</code></pre>',
-    );
+    await assertMd(`
+        # Hello
+
+            Hello World
+      `, `
+        <h1>Hello</h1>
+        <pre><code>Hello World\n</code></pre>
+    `);
     await assertMd(
       '```Hello World```',
       '<p><code>Hello World</code></p>',
@@ -147,10 +152,37 @@ describe('Testing Markdown conversion', () => {
   });
 
   it('Link references', async () => {
-    await assertMd(
-      `Hello [World]
-[World]: http://example.com`,
-      '<p>Hello <a href="http://example.com">World</a></p>',
-    );
+    await assertMd(`
+        Hello [World]
+        [World]: http://example.com
+      `, `
+        <p>Hello <a href="http://example.com">World</a></p>
+    `);
+  });
+
+  it('GFM', async () => {
+    await assertMd(`
+        Hello World.
+
+        | foo | bar |
+        | --- | --- |
+        | baz | bim |
+      `, `
+        <p>Hello World.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>foo</th>
+              <th>bar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>baz</td>
+              <td>bim</td>
+            </tr>
+          </tbody>
+        </table>
+      `);
   });
 });
