@@ -39,7 +39,7 @@ const assertTransformerYieldsDocument = (transformer, expected) => {
   );
 };
 
-describe('Test MDAST to VDOM Transformation', () => {
+describe.only('Test MDAST to VDOM Transformation', () => {
   before('Coerce defaults', async () => {
     await coerce(action);
   });
@@ -48,7 +48,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     assertTransformerYieldsDocument(
       new VDOM(mdast, action.secrets),
-      '<h1>Hello World</h1>',
+      '<h1 id="hello-world">Hello World</h1>',
     );
   });
 
