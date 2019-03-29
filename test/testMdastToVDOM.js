@@ -39,7 +39,7 @@ const assertTransformerYieldsDocument = (transformer, expected) => {
   );
 };
 
-describe.only('Test MDAST to VDOM Transformation', () => {
+describe('Test MDAST to VDOM Transformation', () => {
   before('Coerce defaults', async () => {
     await coerce(action);
   });
