@@ -32,9 +32,6 @@ function generateId(text) {
  */
 function getParentHeadings(parent, heading) {
   const currentHeadingIndex = parent.children.indexOf(heading);
-  if (currentHeadingIndex === -1) {
-    return [];
-  }
   let { depth } = heading;
   let parentHeadings = parent.children.slice(0, currentHeadingIndex).filter(n => n.type === 'heading');
   parentHeadings = parentHeadings.reverse().reduce((headings, h) => {
