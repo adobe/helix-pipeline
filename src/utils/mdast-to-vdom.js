@@ -18,6 +18,7 @@ const hast2html = require('hast-util-to-html');
 const unified = require('unified');
 const parse = require('rehype-parse');
 const { JSDOM } = require('jsdom');
+const heading = require('./heading-handler');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
 const link = require('./link-handler');
@@ -60,6 +61,7 @@ class VDOMTransformer {
       this._handlers[type] = (cb, node, parent) => VDOMTransformer.handle(cb, node, parent, that);
       return true;
     });
+    this.match('heading', heading(options));
     this.match('image', image(options));
     this.match('embed', embed(options));
     this.match('link', link(options));
