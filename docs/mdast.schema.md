@@ -57,9 +57,34 @@ For tables, an align field can be present. If present, it must be a list of alig
 Array type: `enum[]`
 
 All items must be of the type:
-`string`
+Unknown type `null,string`.
 
-
+```json
+{
+  "description": "For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.",
+  "type": "array",
+  "items": {
+    "type": [
+      "null",
+      "string"
+    ],
+    "enum": [
+      "left",
+      "right",
+      "center",
+      null
+    ],
+    "simpletype": "`enum`",
+    "meta:enum": {
+      "left": "",
+      "right": "",
+      "center": "",
+      "null": ""
+    }
+  },
+  "simpletype": "`enum[]`"
+}
+```
 
 
 
