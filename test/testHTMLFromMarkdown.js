@@ -160,6 +160,39 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
+  it('Link with angle brackets', async () => {
+    await assertMd(`
+        # Foo
+
+        Hello World [link](<foobar)
+      `, `
+        <h1>Foo</h1>
+        <p>Hello World [link](&lt;foobar)</p>
+    `);
+  });
+
+  it('Link with space', async () => {
+    await assertMd(`
+        # Foo
+
+        Hello World [link](foo bar)
+      `, `
+        <h1>Foo</h1>
+        <p>Hello World [link](foo bar)</p>
+    `);
+  });
+
+  it('Link with special character', async () => {
+    await assertMd(`
+        # Foo
+
+        Hello World [link](λ)
+      `, `
+        <h1>Foo</h1>
+        <p>Hello World <a href="%CE%BB">link</a></p>
+    `);
+  });
+
   it('GFM', async () => {
     await assertMd(`
         Hello World.
