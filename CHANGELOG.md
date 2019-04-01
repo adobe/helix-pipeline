@@ -1,3 +1,11 @@
+## [1.2.2](https://github.com/adobe/helix-pipeline/compare/v1.2.1...v1.2.2) (2019-04-01)
+
+
+### Bug Fixes
+
+* **markdown:** [#158](https://github.com/adobe/helix-pipeline/issues/158) GFM Tables crash the pipeline ([4a4546f](https://github.com/adobe/helix-pipeline/commit/4a4546f))
+* **package:** update xmlbuilder to version 12.0.0 ([b65ffc6](https://github.com/adobe/helix-pipeline/commit/b65ffc6))
+
 ## [1.2.1](https://github.com/adobe/helix-pipeline/compare/v1.2.0...v1.2.1) (2019-04-01)
 
 
