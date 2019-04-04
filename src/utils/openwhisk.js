@@ -90,6 +90,7 @@ function extractActionContext(params) {
     __ow_headers,
     __ow_method,
     __ow_logger,
+    body, // skip body here
     ...disclosed
   } = params;
 
@@ -131,6 +132,17 @@ async function runPipeline(cont, pipe, actionParams) {
     const payload = {
       request: extractClientRequest(action),
     };
+    // if request has JSON body.content, pass it to payload.content
+    if (actionParams.body && action.request.headers['content-type'].endsWith('json')) {
+      try {
+        const body = JSON.parse(actionParams.body);
+        if (body.content) {
+          payload.content = body.content;
+        }
+      } catch (e) {
+        action.logger.warn('Invalid request body found', e);
+      }
+    }
     return pipe(cont, payload, action);
   }
   return createActionResponse(await owwrapper(runner, actionParams));
