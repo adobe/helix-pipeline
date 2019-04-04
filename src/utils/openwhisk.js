@@ -133,7 +133,7 @@ async function runPipeline(cont, pipe, actionParams) {
       request: extractClientRequest(action),
     };
     // if request has JSON body.content, pass it to payload.content
-    if (actionParams.body && action.request.headers['content-type'].endsWith('json')) {
+    if (actionParams.body && action.request.headers['content-type'] === 'application/json') {
       try {
         const body = JSON.parse(actionParams.body);
         if (body.content) {
