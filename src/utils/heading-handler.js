@@ -9,52 +9,62 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
 const fallback = require('mdast-util-to-hast/lib/handlers/heading');
+const HtmlId = require('./generate-html-id');
+
+let headingIdentifiersCache = {};
 
 /**
- * Generates a valid HTML identifier from the string
- * @param {string} text The text to use to generate the identifier
- * @returns {string} the string for the identifier
+ * Gets the text content for the specified heading.
+ * @param {UnistParent~Heading} heading The heading node
+ * @returns {string} The text content for the heading
  */
-function generateId(text) {
-  return text.toLowerCase()
-    .replace(/[^a-z0-9]/g, '-') // replace non-alphanumerical characters by '-'
-    .replace(/-+/g, '-') // replace consecutive '-' by a single instance
-    .replace(/(^-|-$)/g, ''); // trim leading and tailing '-';
+function getTextContent(heading) {
+  return heading.children
+    .filter(el => el.type === 'text')
+    .map(el => el.value)
+    .join('').trim();
 }
 
 /**
- * Gets the list of parent heading nodes for the specified heading.
- * @param {UnistParent~Parent} parent The parent node for the MDAST
- * @param {UnistParent~Heading} heading The heading node to get the parents of
- * @returns {UnistParent~Heading[]} The list of parent headings
+ * Suffix the specified heading identifier to avoid collisions with existing headings.
+ * @param {string} headingIdentifier The heading identifier
+ * @returns {string} The suffixed heading identifier
  */
-function getParentHeadings(parent, heading) {
-  const currentHeadingIndex = parent.children.indexOf(heading);
-  let { depth } = heading;
-  let parentHeadings = parent.children.slice(0, currentHeadingIndex).filter(n => n.type === 'heading');
-  parentHeadings = parentHeadings.reverse().reduce((headings, h) => {
-    if (h.depth < depth) {
-      headings.push(h);
-      depth -= 1;
-    }
-    return headings;
-  }, []);
-  return parentHeadings.reverse();
+function suffixHeadingIdentifier(headingIdentifier) {
+  // If heading is of the form `foo`, turn it to `foo-1`
+  // If heading is of the form `foo-1` already, turn it to `foo-1-1`
+  const headingIdentifierRoot = headingIdentifier.replace(/-\d+$/, '');
+  headingIdentifiersCache[headingIdentifier] = headingIdentifiersCache[headingIdentifier]
+    || (headingIdentifiersCache[headingIdentifierRoot] ? 1 : 0);
+
+  let suffix = '';
+  headingIdentifiersCache[headingIdentifier] = headingIdentifiersCache[headingIdentifier] || 0;
+  if (headingIdentifiersCache[headingIdentifier] > 0) {
+    suffix = `-${headingIdentifiersCache[headingIdentifier]}`;
+  }
+  headingIdentifiersCache[headingIdentifier] += 1;
+
+  return headingIdentifier + suffix;
 }
 
 function headingHandler() {
   return function handler(h, node, parent) {
+    // Reset heading cache on 1st heading
+    if (node === parent.children.filter(el => el.type === 'heading')[0]) {
+      headingIdentifiersCache = {};
+    }
+
     // Prepare the heading id (prefixed with the ids of its parent headings)
-    const headings = getParentHeadings(parent, node);
-    headings.push(node);
-    const headingsIdentifier = headings.map(heading => generateId(heading.children[0].value)).join('--');
+    let headingIdentifier = HtmlId.generateId(getTextContent(node));
+
+    // Verify existing headings for a collision and append a suffix if needed
+    headingIdentifier = suffixHeadingIdentifier(headingIdentifier, headingIdentifiersCache);
 
     // Inject the id after transformation
     const n = Object.assign({}, node);
     const el = fallback(h, n);
-    el.properties.id = headingsIdentifier;
+    el.properties.id = headingIdentifier;
     return el;
   };
 }
