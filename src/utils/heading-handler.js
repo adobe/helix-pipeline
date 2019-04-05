@@ -59,7 +59,7 @@ function headingHandler() {
     let headingIdentifier = HtmlId.generateId(getTextContent(node));
 
     // Verify existing headings for a collision and append a suffix if needed
-    headingIdentifier = suffixHeadingIdentifier(headingIdentifier, headingIdentifiersCache);
+    headingIdentifier = suffixHeadingIdentifier(headingIdentifier);
 
     // Inject the id after transformation
     const n = Object.assign({}, node);
