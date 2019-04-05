@@ -138,7 +138,7 @@ describe('Testing Markdown conversion', () => {
 
             Hello World
       `, `
-        <h1>Hello</h1>
+        <h1 id="hello">Hello</h1>
         <pre><code>Hello World\n</code></pre>
     `);
     await assertMd(
@@ -166,7 +166,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](<foobar)
       `, `
-        <h1>Foo</h1>
+        <h1 id="foo">Foo</h1>
         <p>Hello World [link](&lt;foobar)</p>
     `);
   });
@@ -177,7 +177,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](foo bar)
       `, `
-        <h1>Foo</h1>
+        <h1 id="foo">Foo</h1>
         <p>Hello World [link](foo bar)</p>
     `);
   });
@@ -188,7 +188,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](λ)
       `, `
-        <h1>Foo</h1>
+        <h1 id="foo">Foo</h1>
         <p>Hello World <a href="%CE%BB">link</a></p>
     `);
   });
