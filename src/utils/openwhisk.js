@@ -63,17 +63,17 @@ function extractClientRequest(action) {
 async function createActionResponse(payload) {
   const {
     response: {
-      status = 200,
+      status,
       headers = { 'Content-Type': 'application/json' },
       body = headers['Content-Type'] === 'application/json' ? {} : '',
-      error,
     } = {},
+    error,
   } = payload;
   return {
-    statusCode: status,
+    statusCode: status || (error ? 500 : 200),
     headers,
     body,
-    error,
+    error: error ? (error.stack || error) : undefined, // workaround for https://github.com/apache/incubator-openwhisk-runtime-nodejs/issues/63
   };
 }
 

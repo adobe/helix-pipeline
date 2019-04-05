@@ -20,7 +20,7 @@ const {
 const { pipe, log } = require('../src/defaults/default.js');
 
 describe('Testing OpenWhisk adapter', () => {
-  it('createActionResponse keeps response in tact', async () => {
+  it('createActionResponse keeps response intact', async () => {
     const inp = {
       response: {
         status: 301,
@@ -63,6 +63,57 @@ describe('Testing OpenWhisk adapter', () => {
     assert.strictEqual(out.headers.Location, undefined);
     assert.strictEqual(out.headers['Content-Type'], 'text/plain');
     assert.deepStrictEqual(out.body, '');
+  });
+
+  it('createActionResponse propagates error', async () => {
+    const inp = {
+      error: new Error('boom!'),
+    };
+    const out = await createActionResponse(inp);
+    assert.strictEqual(out.statusCode, 500);
+    assert.ok(typeof out.error !== 'undefined');
+  });
+
+  it('createActionResponse provides reasonable defaults in case of error', async () => {
+    const inp = {
+      error: new Error('boom!'),
+    };
+    const out = await createActionResponse(inp);
+    assert.strictEqual(out.statusCode, 500);
+    assert.ok(typeof out.error !== 'undefined');
+    assert.strictEqual(out.headers['Content-Type'], 'application/json');
+    assert.deepStrictEqual(out.body, {});
+  });
+
+  it('createActionResponse keeps response intact in case of error', async () => {
+    const inp = {
+      response: {
+        status: 403,
+        headers: {
+          Location: 'https://example.com',
+          'Content-Type': 'text/plain',
+        },
+        body: 'Forbidden',
+      },
+      error: new Error('Forbidden'),
+    };
+    const out = await createActionResponse(inp);
+    assert.strictEqual(out.statusCode, 403);
+    assert.ok(typeof out.error !== 'undefined');
+    assert.strictEqual(out.headers.Location, 'https://example.com');
+    assert.strictEqual(out.headers['Content-Type'], 'text/plain');
+    assert.strictEqual(out.body, 'Forbidden');
+  });
+
+  it('Pipeline errors are propagated to action response', async () => {
+    const out = await runPipeline(() => {
+      // trigger runtime exception
+      /* eslint no-undef: 0 */
+      foo.bar = 'boom!';
+    }, pipe, {});
+
+    assert.strictEqual(out.statusCode, 500);
+    assert.ok(typeof out.error !== 'undefined');
   });
 
   it('extractClientRequest needs to parse params parameter', () => {
