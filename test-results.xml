@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Mocha Tests" time="3.9579999999999997" tests="224" failures="0">
+  <testsuite name="Root Suite" timestamp="2019-04-05T23:00:00" tests="0" failures="0" time="0">
+  </testsuite>
+  <testsuite name="Test check-xml" timestamp="2019-04-05T23:00:00" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testCheckXML.js" failures="0" time="0.007">
+    <testcase name="Test check-xml validates proper XML" time="0.006" classname="validates proper XML">
+    </testcase>
+    <testcase name="Test check-xml throws error on improper XML" time="0.001" classname="throws error on improper XML">
+    </testcase>
+    <testcase name="Test check-xml does nothing with empty response body" time="0" classname="does nothing with empty response body">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Coercing Secrets" timestamp="2019-04-05T23:00:00" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testCoercer.js" failures="0" time="0.042">
+    <testcase name="Test Coercing Secrets Secrets will be created" time="0.04" classname="Secrets will be created">
+    </testcase>
+    <testcase name="Test Coercing Secrets Defaults have correct values" time="0" classname="Defaults have correct values">
+    </testcase>
+    <testcase name="Test Coercing Secrets Defaults have correct types (number)" time="0.001" classname="Defaults have correct types (number)">
+    </testcase>
+    <testcase name="Test Coercing Secrets Defaults have correct types (boolean)" time="0" classname="Defaults have correct types (boolean)">
+    </testcase>
+    <testcase name="Test Coercing Secrets Secrets have correct types (boolean)" time="0" classname="Secrets have correct types (boolean)">
+    </testcase>
+    <testcase name="Test Coercing Secrets Secrets have correct types (number)" time="0.001" classname="Secrets have correct types (number)">
+    </testcase>
+  </testsuite>
+  <testsuite name="Integration Test Section Strain Filtering" timestamp="2019-04-05T23:00:00" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testConditionalSections.js" failures="0" time="0.121">
+    <testcase name="Integration Test Section Strain Filtering html.pipe sees only selected section" time="0.121" classname="html.pipe sees only selected section">
+    </testcase>
+  </testsuite>
+  <testsuite name="Unit Test Section Strain Filtering" timestamp="2019-04-05T23:00:00" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testConditionalSections.js" failures="0" time="0">
+    <testcase name="Unit Test Section Strain Filtering Works with empty section lists" time="0" classname="Works with empty section lists">
+    </testcase>
+    <testcase name="Unit Test Section Strain Filtering Filters sections based on strain" time="0" classname="Filters sections based on strain">
+    </testcase>
+    <testcase name="Unit Test Section Strain Filtering Filters sections based on strain (array)" time="0" classname="Filters sections based on strain (array)">
+    </testcase>
+    <testcase name="Unit Test Section Strain Filtering Keeps sections without a strain" time="0" classname="Keeps sections without a strain">
+    </testcase>
+    <testcase name="Unit Test Section Strain Filtering Keeps sections without metadata" time="0" classname="Keeps sections without metadata">
+    </testcase>
+    <testcase name="Unit Test Section Strain Filtering Filters strain a" time="0" classname="Filters strain a">
+    </testcase>
+  </testsuite>
+  <testsuite name="Select Sections for Testing #unit" timestamp="2019-04-05T23:00:00" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testConditionalSections.js" failures="0" time="0">
+    <testcase name="Select Sections for Testing #unit Works with empty section lists" time="0" classname="Works with empty section lists">
+    </testcase>
+    <testcase name="Select Sections for Testing #unit Works with single test variants" time="0" classname="Works with single test variants">
+    </testcase>
+    <testcase name="Select Sections for Testing #unit Works with multiple test variants" time="0" classname="Works with multiple test variants">
+    </testcase>
+  </testsuite>
+  <testsuite name="Pick among possible candidate sections #unit" timestamp="2019-04-05T23:00:00" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testConditionalSections.js" failures="0" time="0.004">
+    <testcase name="Pick among possible candidate sections #unit Works with empty candidate lists" time="0" classname="Works with empty candidate lists">
+    </testcase>
+    <testcase name="Pick among possible candidate sections #unit Picks a candidate for each group" time="0.003" classname="Picks a candidate for each group">
+    </testcase>
+    <testcase name="Pick among possible candidate sections #unit Picks a different candidate for each strain" time="0.001" classname="Picks a different candidate for each strain">
+    </testcase>
+  </testsuite>
+  <testsuite name="Integration Test A/B Testing" timestamp="2019-04-05T23:00:00" tests="2" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testConditionalSections.js" failures="0" time="0.16899999999999998">
+    <testcase name="Integration Test A/B Testing html.pipe sees only one variant" time="0.046" classname="html.pipe sees only one variant">
+    </testcase>
+    <testcase name="Integration Test A/B Testing variant in html.pipe differs from strain to strain" time="0.123" classname="variant in html.pipe differs from strain to strain">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Temp Context Dumper" timestamp="2019-04-05T23:00:01" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testDebugTmp.js" failures="0" time="0.001">
+    <testcase name="Test Temp Context Dumper Creates a temp directory" time="0.001" classname="Creates a temp directory">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing Default Pipeline" timestamp="2019-04-05T23:00:01" tests="2" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testDefault.js" failures="0" time="0">
+    <testcase name="Testing Default Pipeline Default Pipeline can be loaded" time="0" classname="Default Pipeline can be loaded">
+    </testcase>
+    <testcase name="Testing Default Pipeline creates and runs the default pipeline" time="0" classname="creates and runs the default pipeline">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Embed Handler" timestamp="2019-04-05T23:00:01" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testEmbedHandler.js" failures="0" time="0">
+    <testcase name="Test Embed Handler Creates ESI" time="0" classname="Creates ESI">
+    </testcase>
+  </testsuite>
+  <testsuite name="Integration Test with Embeds" timestamp="2019-04-05T23:00:01" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testEmbedHandler.js" failures="0" time="0.034">
+    <testcase name="Integration Test with Embeds html.pipe processes embeds" time="0.034" classname="html.pipe processes embeds">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test emit-xml" timestamp="2019-04-05T23:00:01" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testEmitXML.js" failures="0" time="0.005">
+    <testcase name="Test emit-xml builds XML from object" time="0.004" classname="builds XML from object">
+    </testcase>
+    <testcase name="Test emit-xml builds pretty XML from object" time="0" classname="builds pretty XML from object">
+    </testcase>
+    <testcase name="Test emit-xml does nothing if no XML object specified" time="0" classname="does nothing if no XML object specified">
+    </testcase>
+    <testcase name="Test emit-xml fails gracefully in case of invalid object" time="0.001" classname="fails gracefully in case of invalid object">
+    </testcase>
+    <testcase name="Test emit-xml keeps existing response body" time="0" classname="keeps existing response body">
+    </testcase>
+    <testcase name="Test emit-xml handles missing response object" time="0" classname="handles missing response object">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test URI parsing and construction" timestamp="2019-04-05T23:00:01" tests="8" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFetchMarkdown.js" failures="0" time="0">
+    <testcase name="Test URI parsing and construction fetch.uri is a function" time="0" classname="fetch.uri is a function">
+    </testcase>
+    <testcase name="Test URI parsing and construction fetch.uri constructs URIs" time="0" classname="fetch.uri constructs URIs">
+    </testcase>
+    <testcase name="Test URI parsing and construction fetch.uri deals with trailing slashes" time="0" classname="fetch.uri deals with trailing slashes">
+    </testcase>
+    <testcase name="Test URI parsing and construction fetch.uri deals with leading slashes" time="0" classname="fetch.uri deals with leading slashes">
+    </testcase>
+    <testcase name="Test URI parsing and construction fetch.uri deals with slashes in refs" time="0" classname="fetch.uri deals with slashes in refs">
+    </testcase>
+    <testcase name="Test URI parsing and construction fetch.uri deals with ugly slashes in refs" time="0" classname="fetch.uri deals with ugly slashes in refs">
+    </testcase>
+    <testcase name="Test URI parsing and construction fetch.uri deals with ugly slashes in owner" time="0" classname="fetch.uri deals with ugly slashes in owner">
+    </testcase>
+    <testcase name="Test URI parsing and construction fetch.uri deals with ugly slashes in repo" time="0" classname="fetch.uri deals with ugly slashes in repo">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test invalid input" timestamp="2019-04-05T23:00:01" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFetchMarkdown.js" failures="0" time="0.001">
+    <testcase name="Test invalid input Test for missing owner" time="0.001" classname="Test for missing owner">
+    </testcase>
+    <testcase name="Test invalid input Test for missing repo" time="0" classname="Test for missing repo">
+    </testcase>
+    <testcase name="Test invalid input Test for missing path" time="0" classname="Test for missing path">
+    </testcase>
+    <testcase name="Test invalid input Test for missing params" time="0" classname="Test for missing params">
+    </testcase>
+    <testcase name="Test invalid input Test for missing request" time="0" classname="Test for missing request">
+    </testcase>
+    <testcase name="Test invalid input Test for error pass-through" time="0" classname="Test for error pass-through">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test non-existing content" timestamp="2019-04-05T23:00:01" tests="2" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFetchMarkdown.js" failures="0" time="0.029">
+    <testcase name="Test non-existing content Getting XDM README (from wrong URL)" time="0.025" classname="Getting XDM README (from wrong URL)">
+    </testcase>
+    <testcase name="Test non-existing content Getting XDM README (with missing ref)" time="0.004" classname="Getting XDM README (with missing ref)">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test requests" timestamp="2019-04-05T23:00:01" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFetchMarkdown.js" failures="0" time="0.004">
+    <testcase name="Test requests Getting XDM README" time="0.004" classname="Getting XDM README">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test misbehaved HTTP Responses" timestamp="2019-04-05T23:00:01" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFetchMarkdown.js" failures="0" time="2.071">
+    <testcase name="Test misbehaved HTTP Responses Getting XDM README with bad HTTP Status Code" time="0.009" classname="Getting XDM README with bad HTTP Status Code">
+    </testcase>
+    <testcase name="Test misbehaved HTTP Responses Getting XDM README with ultra-short Timeout" time="0.055" classname="Getting XDM README with ultra-short Timeout">
+    </testcase>
+    <testcase name="Test misbehaved HTTP Responses Getting XDM README with Backend Timeout" time="2.007" classname="Getting XDM README with Backend Timeout">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Embed Detection Processing" timestamp="2019-04-05T23:00:03" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFindEmbeds.js" failures="0" time="0.009">
+    <testcase name="Test Embed Detection Processing Parses markdown with embeds" time="0.009" classname="Parses markdown with embeds">
+    </testcase>
+  </testsuite>
+  <testsuite name="Validate Embed Examples In Pipeline" timestamp="2019-04-05T23:00:03" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFindEmbeds.js" failures="0" time="0.006">
+    <testcase name="Validate Embed Examples In Pipeline Markdown with embeds yields valid context" time="0.006" classname="Markdown with embeds yields valid context">
+    </testcase>
+  </testsuite>
+  <testsuite name="parseFrontmatter" timestamp="2019-04-05T23:00:03" tests="34" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testFrontmatter.js" failures="0" time="0.044000000000000025">
+    <testcase name="parseFrontmatter Empty document should be ignored" time="0.001" classname="Empty document should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter Just some text should be ignored" time="0.001" classname="Just some text should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter Hash based second level header should be ignored" time="0.001" classname="Hash based second level header should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter Underline second level header should be ignored" time="0.002" classname="Underline second level header should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter Single &lt;hr&gt; should be ignored" time="0.001" classname="Single &lt;hr&gt; should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter h2 with underline followed by &lt;hr&gt; should be ignored" time="0" classname="h2 with underline followed by &lt;hr&gt; should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter diversity of h2 with underline and &lt;hr&gt; should be ignored" time="0.001" classname="diversity of h2 with underline and &lt;hr&gt; should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter resolving ambiguity by using h2 underlined with 4 dashes should be ignored" time="0.001" classname="resolving ambiguity by using h2 underlined with 4 dashes should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter resolving ambiguity by using hr with spaces between dashes should be ignored" time="0.001" classname="resolving ambiguity by using hr with spaces between dashes should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter resolving ambiguity by using hr with spaces between dashes should be ignored" time="0.001" classname="resolving ambiguity by using hr with spaces between dashes should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter resolving ambiguity by using hr with asterisk should be ignored" time="0.001" classname="resolving ambiguity by using hr with asterisk should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter resolving ambiguity by using hr with asterisk #2 should be ignored" time="0.001" classname="resolving ambiguity by using hr with asterisk #2 should be ignored">
+    </testcase>
+    <testcase name="parseFrontmatter reject invalid yaml should raise exception" time="0.005" classname="reject invalid yaml should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter reject yaml with list should raise exception" time="0.002" classname="reject yaml with list should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter reject yaml with json style list should raise exception" time="0.002" classname="reject yaml with json style list should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter reject yaml with number should raise exception" time="0.001" classname="reject yaml with number should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter reject yaml with string should raise exception" time="0.001" classname="reject yaml with string should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter Reject yaml with null should raise exception" time="0" classname="Reject yaml with null should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter with corrupted yaml should raise exception" time="0" classname="frontmatter with corrupted yaml should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter with insufficient space before it should raise exception" time="0.001" classname="frontmatter with insufficient space before it should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter with insufficient space after it should raise exception" time="0.001" classname="frontmatter with insufficient space after it should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter with insufficient space on both ends should raise exception" time="0.001" classname="frontmatter with insufficient space on both ends should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter with empty line between paragraphs should raise exception" time="0.001" classname="frontmatter with empty line between paragraphs should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter with empty line should raise exception" time="0.002" classname="frontmatter with empty line should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter with empty line filled with space should raise exception" time="0.001" classname="frontmatter with empty line filled with space should raise exception">
+    </testcase>
+    <testcase name="parseFrontmatter Entire doc is frontmatter" time="0.002" classname="Entire doc is frontmatter">
+    </testcase>
+    <testcase name="parseFrontmatter Entire doc is frontmatter w trailing space" time="0" classname="Entire doc is frontmatter w trailing space">
+    </testcase>
+    <testcase name="parseFrontmatter Frontmatter; underline h2; frontmatter" time="0.001" classname="Frontmatter; underline h2; frontmatter">
+    </testcase>
+    <testcase name="parseFrontmatter Frontmatter; underline h2; frontmatter; w trailing space" time="0.001" classname="Frontmatter; underline h2; frontmatter; w trailing space">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter; frontmatter" time="0.003" classname="frontmatter; frontmatter">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter, &lt;hr&gt;, frontmatter" time="0.001" classname="frontmatter, &lt;hr&gt;, frontmatter">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter, text, frontmatter" time="0.002" classname="frontmatter, text, frontmatter">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter, &lt;hr&gt;, frontmatter, &lt;hr&gt;" time="0.001" classname="frontmatter, &lt;hr&gt;, frontmatter, &lt;hr&gt;">
+    </testcase>
+    <testcase name="parseFrontmatter frontmatter, text, frontmatter, text, frontmatter, text, frontmatter, text" time="0.003" classname="frontmatter, text, frontmatter, text, frontmatter, text, frontmatter, text">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test getMetadata" timestamp="2019-04-05T23:00:03" tests="13" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testGetMetadata.js" failures="0" time="0.04000000000000001">
+    <testcase name="Test getMetadata indvidual section block: header" time="0.002" classname="indvidual section block: header">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: paragraph" time="0.001" classname="indvidual section block: paragraph">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: paragraphwithlink" time="0.001" classname="indvidual section block: paragraphwithlink">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: 2images" time="0.001" classname="indvidual section block: 2images">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: headerparagraph" time="0.001" classname="indvidual section block: headerparagraph">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: headerlist" time="0.002" classname="indvidual section block: headerlist">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: headerimage" time="0.001" classname="indvidual section block: headerimage">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: headerparaimage" time="0.001" classname="indvidual section block: headerparaimage">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: headerpara2images" time="0.001" classname="indvidual section block: headerpara2images">
+    </testcase>
+    <testcase name="Test getMetadata indvidual section block: complex" time="0.028" classname="indvidual section block: complex">
+    </testcase>
+    <testcase name="Test getMetadata getmetadata does not fail with &quot;empty&quot; mdast" time="0.001" classname="getmetadata does not fail with &quot;empty&quot; mdast">
+    </testcase>
+    <testcase name="Test getMetadata getmetadata does not fail with missing sections" time="0" classname="getmetadata does not fail with missing sections">
+    </testcase>
+    <testcase name="Test getMetadata getmetadata does not fail with empty sections" time="0" classname="getmetadata does not fail with empty sections">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing HTML Pipeline" timestamp="2019-04-05T23:00:03" tests="15" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testHTML.js" failures="0" time="0.5279999999999999">
+    <testcase name="Testing HTML Pipeline html.pipe is a function" time="0" classname="html.pipe is a function">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe does not make HTTP requests if body is provided" time="0.018" classname="html.pipe does not make HTTP requests if body is provided">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe can be extended" time="0.029" classname="html.pipe can be extended">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe renders index.md from helix-cli correctly" time="0.12" classname="html.pipe renders index.md from helix-cli correctly">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe renders index.md from project-helix.io correctly" time="0.142" classname="html.pipe renders index.md from project-helix.io correctly">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe renders modified index.md from helix-cli correctly" time="0.06" classname="html.pipe renders modified index.md from helix-cli correctly">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe complains when context is invalid" time="0.006" classname="html.pipe complains when context is invalid">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe complains with a specific message for mdast nodes when context is invalid" time="0.003" classname="html.pipe complains with a specific message for mdast nodes when context is invalid">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid" time="0.002" classname="html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe complains when action is invalid" time="0.002" classname="html.pipe complains when action is invalid">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe makes HTTP requests" time="0.038" classname="html.pipe makes HTTP requests">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe makes HTTP requests and falls back to master" time="0.032" classname="html.pipe makes HTTP requests and falls back to master">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe serves 404 for non existent content" time="0.008" classname="html.pipe serves 404 for non existent content">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe keeps existing headers" time="0.036" classname="html.pipe keeps existing headers">
+    </testcase>
+    <testcase name="Testing HTML Pipeline html.pipe produces debug dumps" time="0.032" classname="html.pipe produces debug dumps">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing Markdown conversion" timestamp="2019-04-05T23:00:03" tests="9" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testHTMLFromMarkdown.js" failures="0" time="0.4190000000000001">
+    <testcase name="Testing Markdown conversion Renders empty markdown" time="0.062" classname="Renders empty markdown">
+    </testcase>
+    <testcase name="Testing Markdown conversion Renders single paragraph" time="0.037" classname="Renders single paragraph">
+    </testcase>
+    <testcase name="Testing Markdown conversion Code blocks with lang" time="0.063" classname="Code blocks with lang">
+    </testcase>
+    <testcase name="Testing Markdown conversion Code blocks without lang" time="0.09" classname="Code blocks without lang">
+    </testcase>
+    <testcase name="Testing Markdown conversion Link references" time="0.028" classname="Link references">
+    </testcase>
+    <testcase name="Testing Markdown conversion Link with angle brackets" time="0.03" classname="Link with angle brackets">
+    </testcase>
+    <testcase name="Testing Markdown conversion Link with space" time="0.032" classname="Link with space">
+    </testcase>
+    <testcase name="Testing Markdown conversion Link with special character" time="0.031" classname="Link with special character">
+    </testcase>
+    <testcase name="Testing Markdown conversion GFM" time="0.046" classname="GFM">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test bail" timestamp="2019-04-05T23:00:04" tests="2" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testHelper.js" failures="0" time="0.001">
+    <testcase name="Test bail Bail returns an error" time="0" classname="Bail returns an error">
+    </testcase>
+    <testcase name="Test bail Bail logs something" time="0.001" classname="Bail logs something">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Image Handler" timestamp="2019-04-05T23:00:04" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testImageHandler.js" failures="0" time="0">
+    <testcase name="Test Image Handler Does not modify absolute URLs" time="0" classname="Does not modify absolute URLs">
+    </testcase>
+    <testcase name="Test Image Handler Injects Source Sets for Relative URLs" time="0" classname="Injects Source Sets for Relative URLs">
+    </testcase>
+    <testcase name="Test Image Handler Allows overriding Image Options" time="0" classname="Allows overriding Image Options">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Check for Production Environment" timestamp="2019-04-05T23:00:04" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testIsProduction.js" failures="0" time="0.001">
+    <testcase name="Test Check for Production Environment Detects production environment" time="0.001" classname="Detects production environment">
+    </testcase>
+    <testcase name="Test Check for Production Environment Detects production environment in uncooperative situations" time="0" classname="Detects production environment in uncooperative situations">
+    </testcase>
+    <testcase name="Test Check for Production Environment Detects non-production environment" time="0" classname="Detects non-production environment">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing JSON Pipeline" timestamp="2019-04-05T23:00:04" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testJSON.js" failures="0" time="0.032">
+    <testcase name="Testing JSON Pipeline json.pipe is a function" time="0" classname="json.pipe is a function">
+    </testcase>
+    <testcase name="Testing JSON Pipeline json.pipe makes HTTP requests" time="0.016" classname="json.pipe makes HTTP requests">
+    </testcase>
+    <testcase name="Testing JSON Pipeline json.pipe keeps Mime-Type" time="0.016" classname="json.pipe keeps Mime-Type">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Link Handler" timestamp="2019-04-05T23:00:04" tests="5" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testLinkHandler.js" failures="0" time="0">
+    <testcase name="Test Link Handler Rewrites .md extension to .html" time="0" classname="Rewrites .md extension to .html">
+    </testcase>
+    <testcase name="Test Link Handler Does not alter URL with non .md extension" time="0" classname="Does not alter URL with non .md extension">
+    </testcase>
+    <testcase name="Test Link Handler Does not lose query string while rewriting" time="0" classname="Does not lose query string while rewriting">
+    </testcase>
+    <testcase name="Test Link Handler Does not lose hash while rewriting" time="0" classname="Does not lose hash while rewriting">
+    </testcase>
+    <testcase name="Test Link Handler Ignores URL with protocol" time="0" classname="Ignores URL with protocol">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test MDAST to VDOM Transformation" timestamp="2019-04-05T23:00:04" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testMdastToVDOM.js" failures="0" time="0.19499999999999998">
+    <testcase name="Test MDAST to VDOM Transformation Simple MDAST Conversion" time="0.021" classname="Simple MDAST Conversion">
+    </testcase>
+    <testcase name="Test MDAST to VDOM Transformation Custom Text Matcher Conversion" time="0.021" classname="Custom Text Matcher Conversion">
+    </testcase>
+    <testcase name="Test MDAST to VDOM Transformation Programmatic Matcher Function" time="0.019" classname="Programmatic Matcher Function">
+    </testcase>
+    <testcase name="Test MDAST to VDOM Transformation Custom Text Matcher with Multiple Elements" time="0.025" classname="Custom Text Matcher with Multiple Elements">
+    </testcase>
+    <testcase name="Test MDAST to VDOM Transformation Custom link handler with VDOM Nodes" time="0.082" classname="Custom link handler with VDOM Nodes">
+    </testcase>
+    <testcase name="Test MDAST to VDOM Transformation Custom link handler does not interfere with link rewriting" time="0.027" classname="Custom link handler does not interfere with link rewriting">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing OpenWhisk adapter" timestamp="2019-04-05T23:00:04" tests="7" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testOpenwhisk.js" failures="0" time="0.004">
+    <testcase name="Testing OpenWhisk adapter createActionResponse keeps response in tact" time="0" classname="createActionResponse keeps response in tact">
+    </testcase>
+    <testcase name="Testing OpenWhisk adapter createActionResponse provides reasonable defaults for JSON" time="0" classname="createActionResponse provides reasonable defaults for JSON">
+    </testcase>
+    <testcase name="Testing OpenWhisk adapter createActionResponse provides reasonable defaults for plain text" time="0" classname="createActionResponse provides reasonable defaults for plain text">
+    </testcase>
+    <testcase name="Testing OpenWhisk adapter extractClientRequest needs to parse params parameter" time="0.001" classname="extractClientRequest needs to parse params parameter">
+    </testcase>
+    <testcase name="Testing OpenWhisk adapter extractClientRequest acts reasonably on wrong params parameter" time="0" classname="extractClientRequest acts reasonably on wrong params parameter">
+    </testcase>
+    <testcase name="Testing OpenWhisk adapter extractClientRequest acts reasonably with no request object" time="0" classname="extractClientRequest acts reasonably with no request object">
+    </testcase>
+    <testcase name="Testing OpenWhisk adapter openwhisk parameters are properly adapted" time="0.003" classname="openwhisk parameters are properly adapted">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test outputDebug" timestamp="2019-04-05T23:00:04" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testOutputDebug.js" failures="0" time="0.001">
+    <testcase name="Test outputDebug Testing no debug" time="0" classname="Testing no debug">
+    </testcase>
+    <testcase name="Test outputDebug Testing simple payload" time="0.001" classname="Testing simple payload">
+    </testcase>
+    <testcase name="Test outputDebug Testing upper case body tag" time="0" classname="Testing upper case body tag">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Markdown Parsing" timestamp="2019-04-05T23:00:04" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testParseMarkdown.js" failures="0" time="0.033">
+    <testcase name="Test Markdown Parsing Parses simple markdown" time="0.001" classname="Parses simple markdown">
+    </testcase>
+    <testcase name="Test Markdown Parsing Parses example markdown" time="0.012" classname="Parses example markdown">
+    </testcase>
+    <testcase name="Test Markdown Parsing Parses frontmatter markdown" time="0.015" classname="Parses frontmatter markdown">
+    </testcase>
+    <testcase name="Test Markdown Parsing Parses headings correctly" time="0.001" classname="Parses headings correctly">
+    </testcase>
+    <testcase name="Test Markdown Parsing Does not get confused by thematic breaks" time="0.001" classname="Does not get confused by thematic breaks">
+    </testcase>
+    <testcase name="Test Markdown Parsing Does not get confused by grayscale" time="0.003" classname="Does not get confused by grayscale">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test compiled patterns" timestamp="2019-04-05T23:00:04" tests="4" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testPatternCompiler.js" failures="0" time="0">
+    <testcase name="Test compiled patterns Basic pattern matches" time="0" classname="Basic pattern matches">
+    </testcase>
+    <testcase name="Test compiled patterns Or expressions work" time="0" classname="Or expressions work">
+    </testcase>
+    <testcase name="Test compiled patterns Matches a gallery" time="0" classname="Matches a gallery">
+    </testcase>
+    <testcase name="Test compiled patterns Matches a section with text or lists" time="0" classname="Matches a section with text or lists">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing Pipeline" timestamp="2019-04-05T23:00:04" tests="23" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testPipeline.js" failures="0" time="0.016000000000000007">
+    <testcase name="Testing Pipeline Executes without logger" time="0" classname="Executes without logger">
+    </testcase>
+    <testcase name="Testing Pipeline Executes correct order" time="0.001" classname="Executes correct order">
+    </testcase>
+    <testcase name="Testing Pipeline Can be run twice" time="0.001" classname="Can be run twice">
+    </testcase>
+    <testcase name="Testing Pipeline Can be extended" time="0.001" classname="Can be extended">
+    </testcase>
+    <testcase name="Testing Pipeline Can be extended using shorthand syntax" time="0.001" classname="Can be extended using shorthand syntax">
+    </testcase>
+    <testcase name="Testing Pipeline Logs correct names" time="0.001" classname="Logs correct names">
+    </testcase>
+    <testcase name="Testing Pipeline Disables pre before when" time="0.003" classname="Disables pre before when">
+    </testcase>
+    <testcase name="Testing Pipeline Disables pre before when conditionally" time="0" classname="Disables pre before when conditionally">
+    </testcase>
+    <testcase name="Testing Pipeline When works with promises resolving false pre before when" time="0" classname="When works with promises resolving false pre before when">
+    </testcase>
+    <testcase name="Testing Pipeline When works with promises resolving true pre before when" time="0.001" classname="When works with promises resolving true pre before when">
+    </testcase>
+    <testcase name="Testing Pipeline Disables post before when" time="0.001" classname="Disables post before when">
+    </testcase>
+    <testcase name="Testing Pipeline when after once throws error" time="0" classname="when after once throws error">
+    </testcase>
+    <testcase name="Testing Pipeline when before pre throws error" time="0.001" classname="when before pre throws error">
+    </testcase>
+    <testcase name="Testing Pipeline Disables pre before unless" time="0" classname="Disables pre before unless">
+    </testcase>
+    <testcase name="Testing Pipeline Enables pre before when" time="0.001" classname="Enables pre before when">
+    </testcase>
+    <testcase name="Testing Pipeline Enables pre before unless" time="0.001" classname="Enables pre before unless">
+    </testcase>
+    <testcase name="Testing Pipeline Executes promises" time="0" classname="Executes promises">
+    </testcase>
+    <testcase name="Testing Pipeline Executes taps" time="0.001" classname="Executes taps">
+    </testcase>
+    <testcase name="Testing Pipeline Does not executes taps when conditions fail" time="0" classname="Does not executes taps when conditions fail">
+    </testcase>
+    <testcase name="Testing Pipeline Ignore error if no error" time="0" classname="Ignore error if no error">
+    </testcase>
+    <testcase name="Testing Pipeline skip functions if context.error" time="0.001" classname="skip functions if context.error">
+    </testcase>
+    <testcase name="Testing Pipeline skip functions if exception" time="0.001" classname="skip functions if exception">
+    </testcase>
+    <testcase name="Testing Pipeline error handler can clear error" time="0" classname="error handler can clear error">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test set-content-type" timestamp="2019-04-05T23:00:04" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testSetContentType.js" failures="0" time="0">
+    <testcase name="Test set-content-type is a function" time="0" classname="is a function">
+    </testcase>
+    <testcase name="Test set-content-type sets a content type" time="0" classname="sets a content type">
+    </testcase>
+    <testcase name="Test set-content-type keeps existing content type" time="0" classname="keeps existing content type">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test set-status" timestamp="2019-04-05T23:00:04" tests="4" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testSetStatus.js" failures="0" time="0">
+    <testcase name="Test set-status sets a verbose 500 for an error in dev" time="0" classname="sets a verbose 500 for an error in dev">
+    </testcase>
+    <testcase name="Test set-status sets a terse 500 for an error in production" time="0" classname="sets a terse 500 for an error in production">
+    </testcase>
+    <testcase name="Test set-status keeps an existing status" time="0" classname="keeps an existing status">
+    </testcase>
+    <testcase name="Test set-status sets a 200 if all good" time="0" classname="sets a 200 if all good">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test set-xml-status" timestamp="2019-04-05T23:00:04" tests="3" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testSetXMLStatus.js" failures="0" time="0">
+    <testcase name="Test set-xml-status sets a 500 for an error" time="0" classname="sets a 500 for an error">
+    </testcase>
+    <testcase name="Test set-xml-status keeps an existing status" time="0" classname="keeps an existing status">
+    </testcase>
+    <testcase name="Test set-xml-status sets a 200 if all good" time="0" classname="sets a 200 if all good">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Smartypants Processing" timestamp="2019-04-05T23:00:04" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testSmartypants.js" failures="0" time="0.001">
+    <testcase name="Test Smartypants Processing Parses markdown with formatting" time="0.001" classname="Parses markdown with formatting">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Section Splitting" timestamp="2019-04-05T23:00:04" tests="1" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testSplitSections.js" failures="0" time="0.016">
+    <testcase name="Test Section Splitting Parses markdown with sections" time="0.016" classname="Parses markdown with sections">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test Type Matcher Util" timestamp="2019-04-05T23:00:04" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testTypeMatcher.js" failures="0" time="0.003">
+    <testcase name="Test Type Matcher Util TypeMatcher works with empty input" time="0.001" classname="TypeMatcher works with empty input">
+    </testcase>
+    <testcase name="Test Type Matcher Util TypeMatcher returns empty array if no matchers are registered" time="0" classname="TypeMatcher returns empty array if no matchers are registered">
+    </testcase>
+    <testcase name="Test Type Matcher Util TypeMatcher matches simple expressions" time="0.001" classname="TypeMatcher matches simple expressions">
+    </testcase>
+    <testcase name="Test Type Matcher Util TypeMatcher matches multiple expressions" time="0" classname="TypeMatcher matches multiple expressions">
+    </testcase>
+    <testcase name="Test Type Matcher Util TypeMatcher can match with functions" time="0.001" classname="TypeMatcher can match with functions">
+    </testcase>
+    <testcase name="Test Type Matcher Util TypeMatcher can match with functions" time="0" classname="TypeMatcher can match with functions">
+    </testcase>
+  </testsuite>
+  <testsuite name="Test VDOMTransformer#toHTML" timestamp="2019-04-05T23:00:04" tests="7" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testVDOMTransformer.js" failures="0" time="0.001">
+    <testcase name="Test VDOMTransformer#toHTML empty node" time="0" classname="empty node">
+    </testcase>
+    <testcase name="Test VDOMTransformer#toHTML paragraph node" time="0.001" classname="paragraph node">
+    </testcase>
+    <testcase name="Test VDOMTransformer#toHTML image node" time="0" classname="image node">
+    </testcase>
+    <testcase name="Test VDOMTransformer#toHTML h1 node" time="0" classname="h1 node">
+    </testcase>
+    <testcase name="Test VDOMTransformer#toHTML complex node" time="0" classname="complex node">
+    </testcase>
+    <testcase name="Test VDOMTransformer#toHTML custom handler" time="0" classname="custom handler">
+    </testcase>
+    <testcase name="Test VDOMTransformer#toHTML multiple custom handlers" time="0" classname="multiple custom handlers">
+    </testcase>
+  </testsuite>
+  <testsuite name="Testing XML Pipeline" timestamp="2019-04-05T23:00:04" tests="6" file="/Users/ramboz/Projects/helix/helix-pipeline/test/testXML.js" failures="0" time="0.11999999999999998">
+    <testcase name="Testing XML Pipeline xml.pipe is a function" time="0" classname="xml.pipe is a function">
+    </testcase>
+    <testcase name="Testing XML Pipeline xml.pipe makes HTTP requests" time="0.022" classname="xml.pipe makes HTTP requests">
+    </testcase>
+    <testcase name="Testing XML Pipeline xmp.pipe does not overwrite existing respone body" time="0.019" classname="xmp.pipe does not overwrite existing respone body">
+    </testcase>
+    <testcase name="Testing XML Pipeline xmp.pipe uses default logger if none provided" time="0.038" classname="xmp.pipe uses default logger if none provided">
+    </testcase>
+    <testcase name="Testing XML Pipeline xml.pipe serves 404 for non existent content" time="0.01" classname="xml.pipe serves 404 for non existent content">
+    </testcase>
+    <testcase name="Testing XML Pipeline xml.pipe detects ESI tag in XML object" time="0.031" classname="xml.pipe detects ESI tag in XML object">
+    </testcase>
+  </testsuite>
+</testsuites>

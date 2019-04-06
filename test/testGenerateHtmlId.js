@@ -17,8 +17,12 @@ describe('Test generate-html-id', () => {
   it('returns the lowercase version of the provided text', () => {
     assert.equal('foo', check.generateId('foo'));
     assert.equal('bar', check.generateId('Bar'));
-    assert.equal('baz', check.generateId('bAz'));
-    assert.equal('qux', check.generateId('quX'));
+    assert.equal('baz', check.generateId('BAZ'));
+  });
+
+  it('separates camelcase words in the identifier', () => {
+    assert.equal('f-oo', check.generateId('fOo'));
+    assert.equal('ba-r', check.generateId('baR'));
   });
 
   it('replaces white spaces with a simple dash', () => {
@@ -28,15 +32,15 @@ describe('Test generate-html-id', () => {
   it('removes special characters', () => {
     assert.equal('foo', check.generateId('foo!'));
     assert.equal('bar', check.generateId('=bar'));
-    assert.equal('baz', check.generateId('ba?z'));
+    assert.equal('ba-z', check.generateId('ba?z'));
   });
 
   it('supports accented characters', () => {
-    assert.equal('fòó', check.generateId('fòó'));
-    assert.equal('bär', check.generateId('bär'));
-    assert.equal('bâz', check.generateId('bâz'));
-    assert.equal('qũx', check.generateId('qũx'));
-    assert.equal('çŏrgę', check.generateId('çŏrgę'));
+    assert.equal('foo', check.generateId('fòó'));
+    assert.equal('bar', check.generateId('bär'));
+    assert.equal('baz', check.generateId('bâz'));
+    assert.equal('qux', check.generateId('qũx'));
+    assert.equal('corge', check.generateId('çŏrgę'));
   });
 
   it('supports unicode foreign scripts', () => {

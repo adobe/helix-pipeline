@@ -9,19 +9,15 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const XRegExp = require('xregexp');
+const _ = require('lodash');
 
 module.exports = {
+
   /**
    * Generates a valid HTML identifier from the string
    * @param {string} text The text to use to generate the identifier
    * @returns {string} the string for the identifier
    */
-  generateId: (text) => {
-    const unicodeWord = XRegExp('[^\\pL\\pN _-]+', 'g'); // Accept unicode letters, numbers, space, underscore and '-'
-    return text.toLowerCase()
-      .replace(/\s/g, '-') // replace white-spaces by '-'
-      .replace(unicodeWord, ''); // remove all non-letters
-  },
+  generateId: text => _.kebabCase(text),
 
 };
