@@ -52,6 +52,19 @@ describe('Test MDAST to VDOM Transformation', () => {
     );
   });
 
+  it('Headings MDAST Conversion', () => {
+    const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'heading-ids.json'));
+    assertTransformerYieldsDocument(
+      new VDOM(mdast, action.secrets), `
+      <h1 id="foo">Foo</h1>
+      <h2 id="bar">Bar</h2>
+      <h3 id="baz">Baz</h1>
+      <h2 id="qux">Qux</h2>
+      <h3 id="bar-1">Bar</h3>
+      <h4 id="bar-1-1">Bar-1</h4>`,
+    );
+  });
+
   it('Sections MDAST Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'headings.json'));
     assertTransformerYieldsDocument(
