@@ -1,3 +1,11 @@
+## [1.2.3](https://github.com/adobe/helix-pipeline/compare/v1.2.2...v1.2.3) (2019-04-08)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([859e54a](https://github.com/adobe/helix-pipeline/commit/859e54a))
+* package.json & package-lock.json to reduce vulnerabilities ([f51940b](https://github.com/adobe/helix-pipeline/commit/f51940b))
+
 ## [1.2.2](https://github.com/adobe/helix-pipeline/compare/v1.2.1...v1.2.2) (2019-04-01)
 
 
