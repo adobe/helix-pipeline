@@ -141,7 +141,7 @@ describe('Testing OpenWhisk adapter', () => {
     });
   });
 
-  it('openwhisk adds JSON request body.content to payload.content', async () => {
+  it('openwhisk adds JSON content from post request to payload', async () => {
     const params = {
       __ow_headers: {
         'content-type': 'application/json',
@@ -151,33 +151,15 @@ describe('Testing OpenWhisk adapter', () => {
     };
     let payload = {};
 
-    // adds JSON from request body.content to payload.content
-    params.body = '{ "content": { "body": "# Foo" } }';
-
-    await runPipeline((p) => {
-      payload = p;
-    }, pipe, params);
-
-    assert.deepEqual(payload.content, {
+    // passes JSON content from post request to payload
+    params.content = {
       body: '# Foo',
-    });
+    };
 
-    // ignores JSON request body if no content object
-    params.body = '{ "foo": "bar" }';
-    payload = {}; // reset
     await runPipeline((p) => {
       payload = p;
     }, pipe, params);
 
-    assert.equal(payload.content, undefined);
-
-    // ignores invalid JSON in request body
-    params.body = 'no json here';
-    payload = {}; // reset
-    await runPipeline((p) => {
-      payload = p;
-    }, pipe, params);
-
-    assert.equal(payload.content, undefined);
+    assert.deepEqual(payload.content, params.content);
   });
 });
