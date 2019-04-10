@@ -102,6 +102,9 @@ function extractActionContext(params) {
     }
   });
 
+  // extract content (will be added to payload)
+  delete disclosed.content;
+
   // setup action
   return {
     secrets,
@@ -131,6 +134,10 @@ async function runPipeline(cont, pipe, actionParams) {
     const payload = {
       request: extractClientRequest(action),
     };
+    if (params.content) {
+      // pass content param from request to payload
+      payload.content = params.content;
+    }
     return pipe(cont, payload, action);
   }
   return createActionResponse(await owwrapper(runner, actionParams));

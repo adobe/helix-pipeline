@@ -140,4 +140,26 @@ describe('Testing OpenWhisk adapter', () => {
       },
     });
   });
+
+  it('openwhisk adds JSON content from post request to payload', async () => {
+    const params = {
+      __ow_headers: {
+        'content-type': 'application/json',
+      },
+      __ow_logger: log,
+      __ow_method: 'post',
+    };
+    let payload = {};
+
+    // passes JSON content from post request to payload
+    params.content = {
+      body: '# Foo',
+    };
+
+    await runPipeline((p) => {
+      payload = p;
+    }, pipe, params);
+
+    assert.deepEqual(payload.content, params.content);
+  });
 });
