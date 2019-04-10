@@ -90,7 +90,6 @@ function extractActionContext(params) {
     __ow_headers,
     __ow_method,
     __ow_logger,
-    content,
     ...disclosed
   } = params;
 
@@ -102,6 +101,9 @@ function extractActionContext(params) {
       delete disclosed[key];
     }
   });
+
+  // extract content (will be added to payload)
+  delete disclosed.content;
 
   // setup action
   return {
