@@ -39,7 +39,7 @@ async function dump(context, action, index) {
   if (!action.debug.dumpDir) {
     const id = (context.request && context.request.headers && context.request.headers['x-openwhisk-activation-id']) || '';
     const pathStr = context.request && context.request.path ? context.request.path.replace(/\//g, '-').substring(1) : '';
-    const dirName = `context_dump_${pathStr}_${nowStr}_${id}`;
+    const dirName = `context_dump_${nowStr}_${pathStr}_${id}`;
     // eslint-disable-next-line no-param-reassign
     action.debug.dumpDir = path.resolve(process.cwd(), 'logs', 'debug', dirName);
     await fs.ensureDir(action.debug.dumpDir);
