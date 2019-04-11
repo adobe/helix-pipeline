@@ -5,6 +5,11 @@
 
 * **package:** update @adobe/helix-shared to version 0.10.3 ([ce30189](https://github.com/adobe/helix-pipeline/commit/ce30189))
 
+### Features
+
+* **openwhisk**: add request body to payload #235
+
+
 # [1.3.0](https://github.com/adobe/helix-pipeline/compare/v1.2.4...v1.3.0) (2019-04-10)
 
 
