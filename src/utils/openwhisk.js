@@ -19,14 +19,6 @@ const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
  * @param {Object} req The action request
  */
 function buildPath(req) {
-  // workaround for https://github.com/adobe/helix-pipeline/issues/254 until `contentRoot` is
-  // supplied. check for `x-old-url` header.
-  if (req.headers && req.headers['x-old-url']) {
-    const u = req.headers['x-old-url'];
-    const idx = u.indexOf('?');
-    return idx > 0 ? u.substring(0, idx) : u;
-  }
-
   const p = req.params;
   const rootPath = p.rootPath || '';
   let path = p.path || '/';
@@ -36,6 +28,14 @@ function buildPath(req) {
   }
   const sel = p.selector ? `.${p.selector}` : '';
   const ext = `.${p.extension || 'html'}`;
+
+  // workaround for https://github.com/adobe/helix-pipeline/issues/254 until `contentRoot` is
+  // supplied. remove the repo-root-path prefix
+  const contentRoot = req.headers ? (req.headers['x-repo-root-path'] || '').replace(/\/*$/, '') : '';
+  if (contentRoot && path.startsWith(contentRoot)) {
+    path = path.substring(contentRoot.length);
+  }
+
   return `${rootPath}${path}${sel}${ext}`;
 }
 

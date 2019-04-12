@@ -172,7 +172,7 @@ describe('Testing OpenWhisk adapter', () => {
     });
   });
 
-  it('extractClientRequest uses x-old-url correctly for directory', () => {
+  it('extractClientRequest is correct with directory', () => {
     const ctx = extractClientRequest({
       request: {
         method: 'get',
@@ -200,8 +200,8 @@ describe('Testing OpenWhisk adapter', () => {
       },
       method: 'get',
       params: {},
-      url: '/api/general/',
-      path: '/api/general/',
+      url: '/api/general/index.html',
+      path: '/api/general/index.html',
       selector: '',
     });
   });
