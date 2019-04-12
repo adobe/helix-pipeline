@@ -1,3 +1,10 @@
+## [1.3.2](https://github.com/adobe/helix-pipeline/compare/v1.3.1...v1.3.2) (2019-04-12)
+
+
+### Bug Fixes
+
+* **openwhisk:** properly propagate error in action response ([#238](https://github.com/adobe/helix-pipeline/issues/238)) ([c680eed](https://github.com/adobe/helix-pipeline/commit/c680eed)), closes [#237](https://github.com/adobe/helix-pipeline/issues/237)
+
 ## [1.3.1](https://github.com/adobe/helix-pipeline/compare/v1.3.0...v1.3.1) (2019-04-11)
 
 
