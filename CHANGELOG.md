@@ -1,3 +1,10 @@
+## [1.3.3](https://github.com/adobe/helix-pipeline/compare/v1.3.2...v1.3.3) (2019-04-12)
+
+
+### Bug Fixes
+
+* **openwhisk:** context.request.path & context.request.url are incorrect for subdirectory strains ([#256](https://github.com/adobe/helix-pipeline/issues/256)) ([7fce752](https://github.com/adobe/helix-pipeline/commit/7fce752)), closes [#254](https://github.com/adobe/helix-pipeline/issues/254)
+
 ## [1.3.2](https://github.com/adobe/helix-pipeline/compare/v1.3.1...v1.3.2) (2019-04-12)
 
 
