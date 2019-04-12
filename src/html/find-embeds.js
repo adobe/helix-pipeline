@@ -52,7 +52,7 @@ function imgEmbed({ type, children }) {
 }
 
 function embed(uri, node, whitelist = '', warn = () => {}) {
-  if (mm.any(uri.host, whitelist.split(','))) {
+  if (mm.some(uri.host, whitelist.split(','))) {
     const children = [Object.assign({}, node)];
     node.type = 'embed';
     node.children = children;
