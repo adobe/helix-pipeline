@@ -20,7 +20,7 @@ const {
 const { pipe, log } = require('../src/defaults/default.js');
 
 describe('Testing OpenWhisk adapter', () => {
-  it('createActionResponse keeps response in tact', async () => {
+  it('createActionResponse keeps response intact', async () => {
     const inp = {
       response: {
         status: 301,
@@ -65,6 +65,57 @@ describe('Testing OpenWhisk adapter', () => {
     assert.deepStrictEqual(out.body, '');
   });
 
+  it('createActionResponse propagates error', async () => {
+    const inp = {
+      error: new Error('boom!'),
+    };
+    const out = await createActionResponse(inp);
+    assert.strictEqual(out.statusCode, 500);
+    assert.ok(typeof out.error !== 'undefined');
+  });
+
+  it('createActionResponse provides reasonable defaults in case of error', async () => {
+    const inp = {
+      error: new Error('boom!'),
+    };
+    const out = await createActionResponse(inp);
+    assert.strictEqual(out.statusCode, 500);
+    assert.ok(typeof out.error !== 'undefined');
+    assert.strictEqual(out.headers['Content-Type'], 'application/json');
+    assert.deepStrictEqual(out.body, {});
+  });
+
+  it('createActionResponse keeps response intact in case of error', async () => {
+    const inp = {
+      response: {
+        status: 403,
+        headers: {
+          Location: 'https://example.com',
+          'Content-Type': 'text/plain',
+        },
+        body: 'Forbidden',
+      },
+      error: new Error('Forbidden'),
+    };
+    const out = await createActionResponse(inp);
+    assert.strictEqual(out.statusCode, 403);
+    assert.ok(typeof out.error !== 'undefined');
+    assert.strictEqual(out.headers.Location, 'https://example.com');
+    assert.strictEqual(out.headers['Content-Type'], 'text/plain');
+    assert.strictEqual(out.body, 'Forbidden');
+  });
+
+  it('Pipeline errors are propagated to action response', async () => {
+    const out = await runPipeline(() => {
+      // trigger runtime exception
+      /* eslint no-undef: 0 */
+      foo.bar = 'boom!';
+    }, pipe, {});
+
+    assert.strictEqual(out.statusCode, 500);
+    assert.ok(typeof out.error !== 'undefined');
+  });
+
   it('extractClientRequest needs to parse params parameter', () => {
     const testObject = {
       foo: 'foo',
@@ -82,6 +133,77 @@ describe('Testing OpenWhisk adapter', () => {
   it('extractClientRequest acts reasonably with no request object', () => {
     const out = extractClientRequest({});
     assert.ok(out, 'missing request object');
+  });
+
+  it('extractClientRequest uses x-old-url correctly', () => {
+    const ctx = extractClientRequest({
+      request: {
+        method: 'get',
+        params: {
+          extension: 'html',
+          owner: 'tripodsan',
+          params: 'a=42&b=green',
+          path: '/docs/index.md',
+          ref: 'master',
+          repo: 'hlxtest',
+          rootPath: '/api/general',
+          selector: '',
+        },
+        headers: {
+          'x-old-url': '/api/general/index.html?a=42&b=green',
+          'x-repo-root-path': '/docs',
+        },
+      },
+    });
+    assert.deepEqual(ctx, {
+      extension: 'html',
+      headers: {
+        'x-old-url': '/api/general/index.html?a=42&b=green',
+        'x-repo-root-path': '/docs',
+      },
+      method: 'get',
+      params: {
+        a: '42',
+        b: 'green',
+      },
+      url: '/api/general/index.html?a=42&b=green',
+      path: '/api/general/index.html',
+      selector: '',
+    });
+  });
+
+  it('extractClientRequest uses x-old-url correctly for directory', () => {
+    const ctx = extractClientRequest({
+      request: {
+        method: 'get',
+        params: {
+          extension: 'html',
+          owner: 'tripodsan',
+          params: '',
+          path: '/docs/index.md',
+          ref: 'master',
+          repo: 'hlxtest',
+          rootPath: '/api/general',
+          selector: '',
+        },
+        headers: {
+          'x-old-url': '/api/general/',
+          'x-repo-root-path': '/docs',
+        },
+      },
+    });
+    assert.deepEqual(ctx, {
+      extension: 'html',
+      headers: {
+        'x-old-url': '/api/general/',
+        'x-repo-root-path': '/docs',
+      },
+      method: 'get',
+      params: {},
+      url: '/api/general/',
+      path: '/api/general/',
+      selector: '',
+    });
   });
 
   it('openwhisk parameters are properly adapted', async () => {
@@ -139,5 +261,27 @@ describe('Testing OpenWhisk adapter', () => {
         url: '/docs/test.print.preview.html?a=42&b=green',
       },
     });
+  });
+
+  it('openwhisk adds JSON content from post request to payload', async () => {
+    const params = {
+      __ow_headers: {
+        'content-type': 'application/json',
+      },
+      __ow_logger: log,
+      __ow_method: 'post',
+    };
+    let payload = {};
+
+    // passes JSON content from post request to payload
+    params.content = {
+      body: '# Foo',
+    };
+
+    await runPipeline((p) => {
+      payload = p;
+    }, pipe, params);
+
+    assert.deepEqual(payload.content, params.content);
   });
 });
