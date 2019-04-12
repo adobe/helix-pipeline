@@ -172,11 +172,7 @@ describe('Testing OpenWhisk adapter', () => {
     });
   });
 
-<<<<<<< HEAD
   it('extractClientRequest is correct with directory', () => {
-=======
-  it('extractClientRequest uses x-old-url correctly for directory', () => {
->>>>>>> fix(openwhisk): context.request.path & context.request.url are incorrect for subdirectory strains (#256)
     const ctx = extractClientRequest({
       request: {
         method: 'get',
@@ -204,13 +200,8 @@ describe('Testing OpenWhisk adapter', () => {
       },
       method: 'get',
       params: {},
-<<<<<<< HEAD
       url: '/api/general/index.html',
       path: '/api/general/index.html',
-=======
-      url: '/api/general/',
-      path: '/api/general/',
->>>>>>> fix(openwhisk): context.request.path & context.request.url are incorrect for subdirectory strains (#256)
       selector: '',
     });
   });
