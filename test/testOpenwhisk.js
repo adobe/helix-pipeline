@@ -135,6 +135,77 @@ describe('Testing OpenWhisk adapter', () => {
     assert.ok(out, 'missing request object');
   });
 
+  it('extractClientRequest uses x-old-url correctly', () => {
+    const ctx = extractClientRequest({
+      request: {
+        method: 'get',
+        params: {
+          extension: 'html',
+          owner: 'tripodsan',
+          params: 'a=42&b=green',
+          path: '/docs/index.md',
+          ref: 'master',
+          repo: 'hlxtest',
+          rootPath: '/api/general',
+          selector: '',
+        },
+        headers: {
+          'x-old-url': '/api/general/index.html?a=42&b=green',
+          'x-repo-root-path': '/docs',
+        },
+      },
+    });
+    assert.deepEqual(ctx, {
+      extension: 'html',
+      headers: {
+        'x-old-url': '/api/general/index.html?a=42&b=green',
+        'x-repo-root-path': '/docs',
+      },
+      method: 'get',
+      params: {
+        a: '42',
+        b: 'green',
+      },
+      url: '/api/general/index.html?a=42&b=green',
+      path: '/api/general/index.html',
+      selector: '',
+    });
+  });
+
+  it('extractClientRequest uses x-old-url correctly for directory', () => {
+    const ctx = extractClientRequest({
+      request: {
+        method: 'get',
+        params: {
+          extension: 'html',
+          owner: 'tripodsan',
+          params: '',
+          path: '/docs/index.md',
+          ref: 'master',
+          repo: 'hlxtest',
+          rootPath: '/api/general',
+          selector: '',
+        },
+        headers: {
+          'x-old-url': '/api/general/',
+          'x-repo-root-path': '/docs',
+        },
+      },
+    });
+    assert.deepEqual(ctx, {
+      extension: 'html',
+      headers: {
+        'x-old-url': '/api/general/',
+        'x-repo-root-path': '/docs',
+      },
+      method: 'get',
+      params: {},
+      url: '/api/general/',
+      path: '/api/general/',
+      selector: '',
+    });
+  });
+
   it('openwhisk parameters are properly adapted', async () => {
     const params = {
       __ow_headers: {
