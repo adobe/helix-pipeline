@@ -1,3 +1,10 @@
+## [1.3.5](https://github.com/adobe/helix-pipeline/compare/v1.3.4...v1.3.5) (2019-04-12)
+
+
+### Bug Fixes
+
+* **openwhisk:** directory index information is not available anymore ([#259](https://github.com/adobe/helix-pipeline/issues/259)) ([5ac70b4](https://github.com/adobe/helix-pipeline/commit/5ac70b4)), closes [#258](https://github.com/adobe/helix-pipeline/issues/258)
+
 ## [1.3.4](https://github.com/adobe/helix-pipeline/compare/v1.3.3...v1.3.4) (2019-04-12)
 
 
