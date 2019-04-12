@@ -1,3 +1,11 @@
+## [1.3.4](https://github.com/adobe/helix-pipeline/compare/v1.3.3...v1.3.4) (2019-04-12)
+
+
+### Bug Fixes
+
+* **embed:** adjust to new micromatch API ([8c8ce3a](https://github.com/adobe/helix-pipeline/commit/8c8ce3a))
+* **package:** update micromatch to version 4.0.0 ([bb43d96](https://github.com/adobe/helix-pipeline/commit/bb43d96))
+
 ## [1.3.3](https://github.com/adobe/helix-pipeline/compare/v1.3.2...v1.3.3) (2019-04-12)
 
 
