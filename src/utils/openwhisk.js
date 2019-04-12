@@ -16,9 +16,18 @@ const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
 
 /**
  * Builds the request path from path, selector, extension and params
- * @param {Object} p The request parameters
+ * @param {Object} req The action request
  */
-function buildPath(p) {
+function buildPath(req) {
+  // workaround for https://github.com/adobe/helix-pipeline/issues/254 until `contentRoot` is
+  // supplied. check for `x-old-url` header.
+  if (req.headers && req.headers['x-old-url']) {
+    const u = req.headers['x-old-url'];
+    const idx = u.indexOf('?');
+    return idx > 0 ? u.substring(0, idx) : u;
+  }
+
+  const p = req.params;
   const rootPath = p.rootPath || '';
   let path = p.path || '/';
   const dot = path.lastIndexOf('.');
@@ -41,7 +50,7 @@ function extractClientRequest(action) {
   if (!request || !request.params) {
     return {};
   }
-  const reqPath = buildPath(request.params);
+  const reqPath = buildPath(request);
   const query = request.params.params ? `?${request.params.params}` : '';
   return {
     // the edge encodes the client request parameters into the `params` param ;-)
