@@ -23,18 +23,21 @@ const { normalizeURL } = require('../utils/util');
 const fetch = async ({ content = [] }, { request, logger }) => {
   const { sources = [] } = content;
 
+  logger.info(`A`);
   if (!request || !request.params) {
     return bail(logger, 'Request parameters are missing');
   }
 
   const { owner, repo, path, ref } = request.params;
 
+  logger.info(`B`, {owner, repo, path, ref}`);
   for (const [key, val] of iter({ owner, repo, path, ref })) {
     if (!val) {
       return bail(logger, `Unknown ${key}, cannot fetch content.`);
     }
   }
 
+  logger.info(`C`);
   const opt = {
     url: normalizeURL(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`),
     qs: { ref },
