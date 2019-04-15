@@ -10,102 +10,51 @@
  * governing permissions and limitations under the License.
  */
 const client = require('request-promise-native');
-const URI = require('uri-js');
+const { iter } = require('@adobe/helix-shared').sequence;
 const { bail } = require('../helper');
-
-function uri(root, owner, repo, ref, path) {
-  const rootURI = URI.parse(root);
-  const rootPath = rootURI.path;
-  // remove double slashes
-  const fullPath = `${rootPath}/${owner}/${repo}/${ref}/${path}`.replace(
-    /\/+/g,
-    '/',
-  );
-
-  return URI.serialize({
-    scheme: rootURI.scheme,
-    host: rootURI.host,
-    port: rootURI.port,
-    path: fullPath,
-  });
-}
+const { normalizeURL } = require('../utils/util');
 
 /**
- * Fetches the Markdown specified in the action and returns
- * the body of the Markdown document
- * @param {import("../context").Context} ctx some param
- * @param {import("../context").Action} action some other param
+ * Stage of the markdown->html pipeline that actually fetches the content.
+ *
+ * @param {import("../context").Context} ctx
+ * @param {import("../context").Action} action
  */
-async function fetch(
-  { content: { sources = [] } = {} },
-  {
-    secrets = {},
-    request,
-    logger,
-  },
-) {
+const fetch = async ({ content = [] }, { request, logger }) => {
+  const { sources = [] } = content;
+
   if (!request || !request.params) {
     return bail(logger, 'Request parameters are missing');
   }
 
-  let timeout;
-  if (!secrets.HTTP_TIMEOUT) {
-    logger.warn('No HTTP timeout set, risk of denial-of-service');
-  } else {
-    timeout = secrets.HTTP_TIMEOUT;
+  const { owner, repo, path, ref } = request.params;
+
+  for (const [key, val] of iter({ owner, repo, path, ref })) {
+    if (!val) {
+      return bail(logger, `Unknown ${key}, cannot fetch content.`);
+    }
   }
 
-  // get required request parameters
-  const {
-    owner, repo, path,
-  } = request.params;
-
-  let { ref } = request.params;
-
-  // bail if a required parameter cannot be found
-  if (!owner) {
-    return bail(logger, 'Unknown owner, cannot fetch content');
-  }
-  if (!repo) {
-    return bail(logger, 'Unknown repo, cannot fetch content');
-  }
-  if (!path) {
-    return bail(logger, 'Unknown path, cannot fetch content');
-  }
-  if (!ref) {
-    logger.warn(`Recoverable error: no ref given for ${repo}/${owner}.git${path}, falling back to master`);
-    ref = 'master';
-  }
-
-  const { REPO_RAW_ROOT: rootPath } = secrets;
-
-  // everything looks good, make the HTTP request
-  const options = {
-    uri: uri(rootPath, owner, repo, ref, path),
-    json: false,
-    timeout,
+  const opt = {
+    url: normalizeURL(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`),
+    qs: { ref },
+    headers: {
+      Accept: 'application/vnd.github.VERSION.raw"',
+      'User-Agent': 'project-helix'
+    },
+    timeout: 1000,
     time: true,
   };
-  logger.debug(`fetching Markdown from ${options.uri}`);
-  try {
-    const response = await client(options);
-    return {
-      content: {
-        body: response,
-        sources: [...sources, options.uri],
-      },
-    };
-  } catch (e) {
-    if (e && e.statusCode && e.statusCode === 404) {
-      return bail(logger, `Could not find Markdown at ${options.uri}`, e, 404);
-    } else if ((e && e.response && e.response.elapsedTime && e.response.elapsedTime > timeout) || (e && e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT'))) {
-      // return gateway timeout
-      return bail(logger, `Gateway timout of ${timeout} milliseconds exceeded for ${options.uri}`, e, 504);
-    }
-    // return a bad gateway for all other errors
-    return bail(logger, `Could not fetch Markdown from ${options.uri}`, e, 502);
-  }
-}
+
+  logger.debug(`Fetching Markdown from ${opt.url}`);
+  const response = await client(opt);
+
+  return {
+    content: {
+      body: response,
+      sources: [...sources, opt.url],
+    },
+  };
+};
 
 module.exports = fetch;
-module.exports.uri = uri;
