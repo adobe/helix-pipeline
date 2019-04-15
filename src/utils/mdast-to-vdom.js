@@ -18,7 +18,7 @@ const hast2html = require('hast-util-to-html');
 const unified = require('unified');
 const parse = require('rehype-parse');
 const { JSDOM } = require('jsdom');
-const heading = require('./heading-handler');
+const HeadingHandler = require('./heading-handler');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
 const link = require('./link-handler');
@@ -61,7 +61,9 @@ class VDOMTransformer {
       this._handlers[type] = (cb, node, parent) => VDOMTransformer.handle(cb, node, parent, that);
       return true;
     });
-    this.match('heading', heading(options));
+
+    this._headingHandler = new HeadingHandler(options);
+    this.match('heading', this._headingHandler.handler());
     this.match('image', image(options));
     this.match('embed', embed(options));
     this.match('link', link(options));
@@ -216,6 +218,14 @@ class VDOMTransformer {
   getNode(tag = 'div') {
     // create a JSDOM object with the hast surrounded by the provided tag
     return new JSDOM(`<${tag}>${VDOMTransformer.toHTML(this._root, this._handlers)}</${tag}>`).window.document.body.firstChild;
+  }
+
+  /**
+   * Resets the transformer to avoid leakages between sequential transformations
+   */
+  reset() {
+    // Reset the heading handler so that id uniqueness is guarateed and reset
+    this._headingHandler.reset();
   }
 }
 

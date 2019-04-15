@@ -151,6 +151,25 @@ describe('Testing Markdown conversion', () => {
     );
   });
 
+  it('Quote with markdown', async () => {
+    await assertMd(`
+        # Foo
+
+        bar
+
+        > # Foo
+        >
+        > bar
+      `, `
+        <h1 id="foo">Foo</h1>
+        <p>bar</p>
+        <blockquote>
+        <h1 id="foo-1">Foo</h1>
+        <p>bar</p>
+        </blockquote>
+      `);
+  });
+
   it('Link references', async () => {
     await assertMd(`
         Hello [World]

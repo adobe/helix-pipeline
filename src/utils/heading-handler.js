@@ -10,9 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const fallback = require('mdast-util-to-hast/lib/handlers/heading');
-const HtmlId = require('./generate-html-id');
-
-let headingIdentifiersCache = {};
+const GithubSlugger = require('github-slugger');
 
 /**
  * Gets the text content for the specified heading.
@@ -27,46 +25,40 @@ function getTextContent(heading) {
 }
 
 /**
- * Suffix the specified heading identifier to avoid collisions with existing headings.
- * @param {string} headingIdentifier The heading identifier
- * @returns {string} The suffixed heading identifier
+ * Utility class injects heading identifiers during the MDAST to VDOM transformation.
  */
-function suffixHeadingIdentifier(headingIdentifier) {
-  // If heading is of the form `foo`, turn it to `foo-1`
-  // If heading is of the form `foo-1` already, turn it to `foo-1-1`
-  const headingIdentifierRoot = headingIdentifier.replace(/-\d+$/, '');
-  headingIdentifiersCache[headingIdentifier] = headingIdentifiersCache[headingIdentifier]
-    || (headingIdentifiersCache[headingIdentifierRoot] ? 1 : 0);
-
-  let suffix = '';
-  headingIdentifiersCache[headingIdentifier] = headingIdentifiersCache[headingIdentifier] || 0;
-  if (headingIdentifiersCache[headingIdentifier] > 0) {
-    suffix = `-${headingIdentifiersCache[headingIdentifier]}`;
+class HeadingHandler {
+  /**
+   * Initializes the handler
+   */
+  constructor() {
+    // scoping the slugger instance to the current transform operation
+    // so that heading uniqueness is guaranteed for each transformation separately
+    this.slugger = new GithubSlugger();
   }
-  headingIdentifiersCache[headingIdentifier] += 1;
 
-  return headingIdentifier + suffix;
+  /**
+   * Reset the heading counter
+   */
+  reset() {
+    this.slugger.reset();
+  }
+
+  /**
+   * Returns the handler function
+   */
+  handler() {
+    return (h, node) => {
+      // Prepare the heading id
+      const headingIdentifier = this.slugger.slug(getTextContent(node));
+
+      // Inject the id after transformation
+      const n = Object.assign({}, node);
+      const el = fallback(h, n);
+      el.properties.id = headingIdentifier;
+      return el;
+    };
+  }
 }
 
-function headingHandler() {
-  return function handler(h, node, parent) {
-    // Reset heading cache on 1st heading
-    if (node === parent.children.filter(el => el.type === 'heading')[0]) {
-      headingIdentifiersCache = {};
-    }
-
-    // Prepare the heading id (prefixed with the ids of its parent headings)
-    let headingIdentifier = HtmlId.generateId(getTextContent(node));
-
-    // Verify existing headings for a collision and append a suffix if needed
-    headingIdentifier = suffixHeadingIdentifier(headingIdentifier);
-
-    // Inject the id after transformation
-    const n = Object.assign({}, node);
-    const el = fallback(h, n);
-    el.properties.id = headingIdentifier;
-    return el;
-  };
-}
-
-module.exports = headingHandler;
+module.exports = HeadingHandler;

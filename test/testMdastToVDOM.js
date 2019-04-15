@@ -33,6 +33,9 @@ const assertTransformerYieldsDocument = (transformer, expected) => {
     new JSDOM(expected).window.document,
   );
 
+  // Reset the transformer between the 2 calls to avoid leakages in the tests
+  transformer.reset();
+
   assertEquivalentNode(
     transformer.getNode('section'),
     new JSDOM(`<section>${expected}</section>`).window.document.body.firstChild,
