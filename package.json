@@ -17,7 +17,6 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "picomatch": "*",
     "@adobe/jsonschema2md": "^2.0.0",
     "@pollyjs/adapter-node-http": "^2.2.0",
     "@pollyjs/core": "^2.3.0",
@@ -41,6 +40,7 @@
     "mocha": "^6.1.0",
     "mocha-junit-reporter": "^1.17.0",
     "nyc": "^13.3.0",
+    "picomatch": "^2.0.4",
     "semantic-release": "^15.13.3",
     "snyk": "^1.124.1",
     "unist-builder": "^1.0.3",
