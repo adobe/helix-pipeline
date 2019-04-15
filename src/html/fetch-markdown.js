@@ -28,7 +28,7 @@ const fetch = async ({ content = [] }, { request, logger }) => {
     return bail(logger, 'Request parameters are missing');
   }
 
-  const { owner, repo, path, ref = 'refs/heads/master } = request.params;
+  const { owner, repo, path, ref = 'refs/heads/master' } = request.params;
 
   logger.info(`B ${request}`);
   logger.info(`X ${request.params}`);
