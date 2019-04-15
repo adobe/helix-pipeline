@@ -30,7 +30,7 @@ const fetch = async ({ content = [] }, { request, logger }) => {
 
   const { owner, repo, path, ref } = request.params;
 
-  logger.info(`B`, {owner, repo, path, ref}`);
+  logger.info(`B`, {owner, repo, path, ref});
   for (const [key, val] of iter({ owner, repo, path, ref })) {
     if (!val) {
       return bail(logger, `Unknown ${key}, cannot fetch content.`);
