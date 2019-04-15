@@ -28,14 +28,14 @@ const fetch = async ({ content = [] }, { request, logger }) => {
     return bail(logger, 'Request parameters are missing');
   }
 
-  const { owner, repo, path, ref } = request.params;
+  const { owner, repo, path, ref = 'master' } = request.params;
 
-  logger.info(`B`, {owner, repo, path, ref});
-  for (const [key, val] of iter({ owner, repo, path, ref })) {
-    if (!val) {
-      return bail(logger, `Unknown ${key}, cannot fetch content.`);
-    }
-  }
+  logger.info(`B $({owner, repo, path, ref})`);
+  // for (const [key, val] of iter({ owner, repo, path })) {
+  //   if (!val) {
+  //     return bail(logger, `Unknown ${key}, cannot fetch content.`);
+  //   }
+  // }
 
   logger.info(`C`);
   const opt = {
