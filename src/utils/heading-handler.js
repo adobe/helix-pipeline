@@ -13,18 +13,6 @@ const fallback = require('mdast-util-to-hast/lib/handlers/heading');
 const GithubSlugger = require('github-slugger');
 
 /**
- * Gets the text content for the specified heading.
- * @param {UnistParent~Heading} heading The heading node
- * @returns {string} The text content for the heading
- */
-function getTextContent(heading) {
-  return heading.children
-    .filter(el => el.type === 'text')
-    .map(el => el.value)
-    .join('').trim();
-}
-
-/**
  * Utility class injects heading identifiers during the MDAST to VDOM transformation.
  */
 class HeadingHandler {
@@ -35,6 +23,18 @@ class HeadingHandler {
     // scoping the slugger instance to the current transform operation
     // so that heading uniqueness is guaranteed for each transformation separately
     this.slugger = new GithubSlugger();
+  }
+
+  /**
+   * Gets the text content for the specified heading.
+   * @param {UnistParent~Heading} heading The heading node
+   * @returns {string} The text content for the heading
+   */
+  static getTextContent(heading) {
+    return heading.children
+      .filter(el => el.type === 'text')
+      .map(el => el.value)
+      .join('').trim();
   }
 
   /**
@@ -50,7 +50,7 @@ class HeadingHandler {
   handler() {
     return (h, node) => {
       // Prepare the heading id
-      const headingIdentifier = this.slugger.slug(getTextContent(node));
+      const headingIdentifier = this.slugger.slug(HeadingHandler.getTextContent(node));
 
       // Inject the id after transformation
       const n = Object.assign({}, node);
