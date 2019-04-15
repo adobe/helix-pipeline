@@ -29,10 +29,10 @@ const fetch = async ({ content = [] }, { request, logger }) => {
   }
 
   const { owner, repo, path, ref = 'refs/heads/master' } = request.params;
+  const dump = (o) => require('util').inspect(o, {depth: null});
 
-  logger.info(`B ${request}`);
-  logger.info(`X ${request.params}`);
-  logger.info(`X ${({owner, repo, path, ref})}`);
+  logger.info(`B ${dump(request)}`);
+  logger.info(`X ${dump({owner, repo, path, ref})}`);
   // for (const [key, val] of iter({ owner, repo, path })) {
   //   if (!val) {
   //     return bail(logger, `Unknown ${key}, cannot fetch content.`);
