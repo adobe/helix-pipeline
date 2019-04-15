@@ -48,7 +48,7 @@
   },
   "dependencies": {
     "@adobe/helix-shared": "0.10.3",
-    "@adobe/openwhisk-loggly-wrapper": "0.4.1",
+    "@adobe/openwhisk-loggly-wrapper": "0.4.2",
     "ajv": "^6.6.2",
     "callsites": "^3.0.0",
     "clone": "^2.1.2",
