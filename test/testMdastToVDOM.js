@@ -94,10 +94,10 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Programmatic Matcher Function', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     const transformer = new VDOM(mdast, action.secrets);
-    transformer.match(({ type }) => type === 'heading', () => '<h1>All Headings are the same to me</h1>');
+    transformer.match(({ type }) => type === 'heading', () => '<h1 id="h1">All Headings are the same to me</h1>');
     assertTransformerYieldsDocument(
       transformer,
-      '<h1>All Headings are the same to me</h1>',
+      '<h1 id="user-content-h1">All Headings are the same to me</h1>',
     );
   });
 
@@ -108,7 +108,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     assertTransformerYieldsDocument(
       transformer, `
       <div>
-        <a name="h1"></a>
+        <a name="user-content-h1"></a>
         <h1>All Headings are the same to me</h1>
       </div>`,
     );

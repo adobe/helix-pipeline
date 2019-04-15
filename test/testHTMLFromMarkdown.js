@@ -266,4 +266,28 @@ describe('Testing Markdown conversion', () => {
         </table>
       `);
   });
+
+  it('XSS escape href attribute on links', async () => {
+    await assertMd(`
+        [Foo](javascript://%0Dalert('XSS!'))
+        [Bar](javascript:alert('XSS!'))
+      `, `
+        <p>
+          <a>Foo</a>
+          <a>Bar</a>
+        </p>
+    `);
+  });
+
+  it('XSS escape href in images', async () => {
+    await assertMd(`
+        ![Foo](javascript://%0Dalert('XSS!'))
+        ![Bar](javascript:alert('XSS!'))
+      `, `
+        <p>
+          <img alt="Foo">
+          <img alt="Bar">
+        </p>
+    `);
+  });
 });

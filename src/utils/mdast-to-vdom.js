@@ -19,6 +19,7 @@ const unified = require('unified');
 const parse = require('rehype-parse');
 const { JSDOM } = require('jsdom');
 const HeadingHandler = require('./heading-handler');
+const sanitize = require('./sanitize-hast');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
 const link = require('./link-handler');
