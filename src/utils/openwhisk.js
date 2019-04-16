@@ -51,6 +51,10 @@ function extractClientRequest(action) {
     return {};
   }
   const reqPath = buildPath(request);
+  let pathInfo = reqPath.replace(/\/*$/, '');
+  if (`${pathInfo}/`.startsWith(`${request.params.rootPath}/`)) {
+    pathInfo = pathInfo.substring(request.params.rootPath.length);
+  }
   const query = request.params.params ? `?${request.params.params}` : '';
   return {
     // the edge encodes the client request parameters into the `params` param ;-)
@@ -61,6 +65,8 @@ function extractClientRequest(action) {
     extension: request.params.extension || '',
     selector: request.params.selector || '',
     url: `${reqPath}${query}`,
+    rootPath: request.params.rootPath,
+    pathInfo,
   };
 }
 

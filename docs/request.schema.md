@@ -20,6 +20,8 @@ The HTTP Request
 | [method](#method) | `string` | Optional  | No | Request (this schema) |
 | [params](#params) | `object` | Optional  | No | Request (this schema) |
 | [path](#path) | `string` | Optional  | No | Request (this schema) |
+| [pathInfo](#pathinfo) | `string` | Optional  | No | Request (this schema) |
+| [rootPath](#rootpath) | `string` | Optional  | No | Request (this schema) |
 | [selector](#selector) | `string` | Optional  | No | Request (this schema) |
 | [url](#url) | `string` | Optional  | No | Request (this schema) |
 
@@ -160,6 +162,60 @@ The path of the client request URL
 
 ```json
 "/docs/api/general/index.nav.html"
+```
+
+
+## pathInfo
+
+The part of the client path that is relative to the rootPath
+
+`pathInfo`
+
+* is optional
+* type: `string`
+* defined in this schema
+
+### pathInfo Type
+
+
+`string`
+
+
+
+
+
+
+### pathInfo Example
+
+```json
+"/general/index.nav.html"
+```
+
+
+## rootPath
+
+The request root path of the current strain.
+
+`rootPath`
+
+* is optional
+* type: `string`
+* defined in this schema
+
+### rootPath Type
+
+
+`string`
+
+
+
+
+
+
+### rootPath Example
+
+```json
+"/docs/api"
 ```
 
 
