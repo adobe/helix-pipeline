@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/adobe/helix-pipeline/compare/v1.4.0...v1.5.0) (2019-04-16)
+
+
+### Features
+
+* **html pipe:** add support for anchors on headings ([f52f768](https://github.com/adobe/helix-pipeline/commit/f52f768)), closes [#26](https://github.com/adobe/helix-pipeline/issues/26)
+
 # [1.4.0](https://github.com/adobe/helix-pipeline/compare/v1.3.5...v1.4.0) (2019-04-16)
 
 
