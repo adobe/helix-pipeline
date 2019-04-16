@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/adobe/helix-pipeline/compare/v1.3.5...v1.4.0) (2019-04-16)
+
+
+### Features
+
+* **openwhisk:** add request.pathInfo ([#257](https://github.com/adobe/helix-pipeline/issues/257)) ([8485626](https://github.com/adobe/helix-pipeline/commit/8485626)), closes [#255](https://github.com/adobe/helix-pipeline/issues/255)
+
 ## [1.3.5](https://github.com/adobe/helix-pipeline/compare/v1.3.4...v1.3.5) (2019-04-12)
 
 
