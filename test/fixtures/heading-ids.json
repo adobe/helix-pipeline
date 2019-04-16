@@ -1,0 +1,64 @@
+{
+  "type": "root",
+  "children": [{
+      "children": [
+        {
+          "type": "text",
+          "value": "Foo"
+        }
+      ],
+      "depth": 1,
+      "type": "heading"
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Bar"
+        }
+      ],
+      "depth": 2,
+      "type": "heading"
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Baz"
+        }
+      ],
+      "depth": 3,
+      "type": "heading"
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Qux"
+        }
+      ],
+      "depth": 2,
+      "type": "heading"
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Bar"
+        }
+      ],
+      "depth": 3,
+      "type": "heading"
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "Bar-1"
+        }
+      ],
+      "depth": 4,
+      "type": "heading"
+    }
+  ]
+}

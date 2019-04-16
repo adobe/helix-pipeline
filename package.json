@@ -53,6 +53,7 @@
     "callsites": "^3.0.0",
     "clone": "^2.1.2",
     "fs-extra": "^7.0.0",
+    "github-slugger": "^1.2.1",
     "hast-to-hyperscript": "^6.0.0",
     "hast-util-to-html": "^5.0.0",
     "hyperscript": "^2.0.2",

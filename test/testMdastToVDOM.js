@@ -33,6 +33,9 @@ const assertTransformerYieldsDocument = (transformer, expected) => {
     new JSDOM(expected).window.document,
   );
 
+  // Reset the transformer between the 2 calls to avoid leakages in the tests
+  transformer.reset();
+
   assertEquivalentNode(
     transformer.getNode('section'),
     new JSDOM(`<section>${expected}</section>`).window.document.body.firstChild,
@@ -48,7 +51,35 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     assertTransformerYieldsDocument(
       new VDOM(mdast, action.secrets),
-      '<h1>Hello World</h1>',
+      '<h1 id="hello-world">Hello World</h1>',
+    );
+  });
+
+  it('Headings MDAST Conversion', () => {
+    const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'heading-ids.json'));
+    assertTransformerYieldsDocument(
+      new VDOM(mdast, action.secrets), `
+      <h1 id="foo">Foo</h1>
+      <h2 id="bar">Bar</h2>
+      <h3 id="baz">Baz</h1>
+      <h2 id="qux">Qux</h2>
+      <h3 id="bar-1">Bar</h3>
+      <h4 id="bar-1-1">Bar-1</h4>`,
+    );
+  });
+
+  it('Sections MDAST Conversion', () => {
+    const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'headings.json'));
+    assertTransformerYieldsDocument(
+      new VDOM(mdast, action.secrets), `
+      <h1 id="heading-1-double-underline">Heading 1 (double-underline)</h1>
+      <h2 id="heading-2-single-underline">Heading 2 (single-underline)</h2>
+      <h1 id="heading-1">Heading 1</h1>
+      <h2 id="heading-2">Heading 2</h2>
+      <h3 id="heading-3">Heading 3</h3>
+      <h4 id="heading-4">Heading 4</h4>
+      <h5 id="heading-5">Heading 5</h5>
+      <h6 id="heading-6">Heading 6</h6>`,
     );
   });
 
