@@ -168,6 +168,8 @@ describe('Testing OpenWhisk adapter', () => {
       },
       url: '/api/general/index.html?a=42&b=green',
       path: '/api/general/index.html',
+      rootPath: '/api/general',
+      pathInfo: '/index.html',
       selector: '',
     });
   });
@@ -202,6 +204,8 @@ describe('Testing OpenWhisk adapter', () => {
       params: {},
       url: '/api/general/index.html',
       path: '/api/general/index.html',
+      rootPath: '/api/general',
+      pathInfo: '/index.html',
       selector: '',
     });
   });
@@ -259,6 +263,8 @@ describe('Testing OpenWhisk adapter', () => {
         extension: 'html',
         selector: 'print.preview',
         url: '/docs/test.print.preview.html?a=42&b=green',
+        rootPath: '/docs',
+        pathInfo: '/test.print.preview.html',
       },
     });
   });

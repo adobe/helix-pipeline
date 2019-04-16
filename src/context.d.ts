@@ -99,6 +99,14 @@ export interface Request {
    */
   path?: string;
   /**
+   * The part of the client path that is relative to the rootPath
+   */
+  pathInfo?: string;
+  /**
+   * The request root path of the current strain.
+   */
+  rootPath?: string;
+  /**
    * The selector (sub-type indicator)
    */
   selector?: string;

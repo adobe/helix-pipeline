@@ -32,6 +32,20 @@
                 "/docs/api/general/index.nav.html"
             ]
         },
+        "pathInfo": {
+            "type": "string",
+            "description": "The part of the client path that is relative to the rootPath",
+            "examples": [
+                "/general/index.nav.html"
+            ]
+        },
+        "rootPath": {
+            "type": "string",
+            "description": "The request root path of the current strain.",
+            "examples": [
+                "/docs/api"
+            ]
+        },
         "selector": {
             "type": "string",
             "description": "The selector (sub-type indicator)",
