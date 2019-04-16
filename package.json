@@ -39,7 +39,7 @@
     "lint-staged": "^8.1.4",
     "mocha": "^6.1.0",
     "mocha-junit-reporter": "^1.17.0",
-    "nyc": "^13.3.0",
+    "nyc": "^14.0.0",
     "semantic-release": "^15.13.3",
     "snyk": "^1.124.1",
     "unist-builder": "^1.0.3",
