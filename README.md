@@ -166,7 +166,7 @@ In this example, two extension points, `init` and `cleanup` have been defined. N
 
 #### Common Extension Points
 
-The creation of extension points are the responsibility of the pipeline author, but in order to standardize extension points, following common names have been established:
+The creation of extension points is the responsibility of the pipeline author, but in order to standardize extension points, the following common names have been established:
 
 - `fetch` for the pipeline step that retrieves raw content, i.e. a Markdown document
 - `parse` for the pipeline step that parses the raw content and transforms it into a document structure such as a Markdown AST
