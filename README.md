@@ -199,7 +199,7 @@ module.exports.after = {
 }
 ```
 
-All functions that are using the `before` and `after` extension points need to folllow the same interface that all other pipeline functions follow, i.e. they have access to `context` and `action` and they should return a modified `context` object.
+All functions that are using the `before` and `after` extension points need to follow the same interface that all other pipeline functions follow, i.e. they have access to `context` and `action` and they should return a modified `context` object.
 
 A more complex example of using these extension points to implement custom markdown content nodes and handle 404 errors can be found in the [helix-cli integration tests](https://github.com/adobe/helix-cli/blob/master/test/integration/src/html.pre.js).
 
