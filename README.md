@@ -148,6 +148,62 @@ If in the above example, the `doSomething` causes an error, subsequently, `rende
 
 If in the above example, none of the functions causes an error, the `handleError` will never be invoked.
 
+### Extension Points
+
+In addition to the (optional) wrapper function which can be invoked prior to the `once` function, pipeline creators can expose named extension points. These extension points allow users of a pipeline to inject additional functions that will be called right before or right after an extension point. To keep the extension points independent from the implementation (i.e. the name of the function), pipeline authors should use the `expose(name)` function to expose a particular extension point.
+
+Example:
+
+```js
+new pipeline()
+  .before(doSomething).expose('init')
+  .once(render)
+  .after(cleanup).expose('cleanup')
+  .after(done);
+```
+
+In this example, two extension points, `init` and `cleanup` have been defined. Note how the name of the extension point can be the same as the name of the function (i.e. `cleanup`), but does not have to be the same (i.e. `init` vs. `doSomething`).
+
+#### Common Extension Points
+
+The creation of extension points are the responsibility of the pipeline author, but in order to standardize extension points, following common names have been established:
+
+- `fetch` for the pipeline step that retrieves raw content, i.e. a Markdown document
+- `parse` for the pipeline step that parses the raw content and transforms it into a document structure such as a Markdown AST
+- `meta` for the pipeline step that extracts metadata from the content structure
+- `html` for the pipeline step that turns the Markdown document into a (HTML) DOM
+- `esi` for the pipeline step that scans the generated output for ESI markers and sets appropriate headers
+
+#### Using Extension Points
+
+The easiest way to use extension points is by expanding on the [Wrapper Function described above](#optional-the-wrapper-function). Instead of just exporting a `pre` function, the wrapper can also export:
+
+- a `before` object
+- an `after` object
+
+Each of these objects can have keys that correspond to the named extension points defined for the pipeline.
+
+Example
+
+```js
+module.exports.before = {
+  html: (context, action) => {
+    // will get called before the "html" pipeline step
+  }
+}
+
+module.exports.after = {
+  fetch: (context, action) => {
+    // will get called after the "fetch" pipeline step
+  }
+}
+```
+
+All functions that are using the `before` and `after` extension points need to folllow the same interface that all other pipeline functions follow, i.e. they have access to `context` and `action` and they should return a modified `context` object.
+
+A more complex example of using these extension points to implement custom markdown content nodes and handle 404 errors can be found in the [helix-cli integration tests](https://github.com/adobe/helix-cli/blob/master/test/integration/src/html.pre.js).
+
+
 ## Anatomy of the Payload
 
 Following main properties exist:
