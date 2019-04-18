@@ -16,13 +16,20 @@
 const URI = require('uri-js');
 
 function embed({ EMBED_SERVICE }) {
-  return function handler(h, node) {
+  return function handler(h, node, _, handlechild) {
     const { url } = node;
     const props = {
       // prepend the embed service for absolute URLs
       src: (URI.parse(url).reference === 'absolute' ? EMBED_SERVICE : '') + url,
     };
-    const retval = h(node, 'esi:include', props);
+    const retval = [h(node, 'esi:include', props)];
+
+    if (node.children && node.children.length) {
+      const rem = h(node, 'esi:remove', {});
+      node.children.forEach(childnode => handlechild(h, childnode, node, rem));
+      retval.push(rem);
+    }
+
     return retval;
   };
 }
