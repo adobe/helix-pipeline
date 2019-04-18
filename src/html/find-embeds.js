@@ -114,7 +114,7 @@ function internalembed(uri, node, extension) {
 }
 
 function find({ content: { mdast }, request: { extension, url } },
-  { logger, secrets: { EMBED_WHITELIST, EMBED_SELECTOR }, request: { path } }) {
+  { logger, secrets: { EMBED_WHITELIST, EMBED_SELECTOR }, request: { params: { path } } }) {
   const resourceext = `.${extension}`;
   const contentext = p.extname(path);
   map(mdast, (node) => {

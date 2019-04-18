@@ -68,6 +68,12 @@ const logger = Logger.getTestLogger({
   level: 'info',
 });
 
+
+const crequest = {
+  extension: 'html',
+  url: '/test/test.html',
+};
+
 describe('Test Embed Handler', () => {
   it('Creates ESI', async () => {
     const node = {
@@ -93,6 +99,7 @@ describe('Integration Test with Embeds', () => {
     const result = await pipe(
       ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
+        request: crequest,
         content: {
           body: `Hello World
 Here comes an embed.

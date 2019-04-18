@@ -27,7 +27,9 @@ const logger = Logger.getTestLogger({
 const action = {
   logger,
   request: {
-    path: '/index.md',
+    params: {
+      path: '/index.md',
+    },
   },
 };
 
