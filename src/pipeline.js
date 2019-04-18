@@ -372,7 +372,6 @@ class Pipeline {
     // and inner.posts (those that run after) – reduce using the merge function and return
     // the resolved value
     return [...this._pres, this._oncef, ...this._posts]
-      .filter(e => typeof e === 'function')
       .reduce(async (ctx, fn, index) => merge(await ctx, fn, index), context);
   }
 }
