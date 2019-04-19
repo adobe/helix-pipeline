@@ -10,24 +10,27 @@
  * governing permissions and limitations under the License.
  */
 const crypto = require('crypto');
+const { type } = require('@adobe/helix-shared').types;
+const { map, join } = require('@adobe/helix-shared').sequence;
+const { setdefault } = require('@adobe/helix-shared').types;
 
-function key({ content, response }, { logger }) {
+function key(context, { logger }) {
+  const cont = setdefault(context, 'content', {});
+  const res = setdefault(context, 'response', {});
+  const headers = setdefault(res, 'headers', {});
+
   // somebody already set a surrogate key
-  if (!(response && response.headers && response.headers['Surrogate-Key']) && (content && content.sources && Array.isArray(content.sources))) {
-    logger.debug('Setting Surrogate-Key header');
-    return {
-      response: {
-        headers: {
-          'Surrogate-Key': content.sources.map((uri) => {
-            const hash = crypto.createHash('sha256');
-            hash.update(uri);
-            return hash.digest('base64');
-          }).join(' '),
-        },
-      },
-    };
+  if (headers['Surrogate-Key'] || !(type(cont.sources) === Array)) {
+    logger.debug('Keeping existing Surrogate-Key header');
+    return;
   }
-  logger.debug('Keeping existing Surrogate-Key header');
-  return {};
+
+  logger.debug('Setting Surrogate-Key header');
+  headers['Surrogate-Key'] = join(' ')(map(cont.sources, (uri) => {
+    const hash = crypto.createHash('sha256');
+    hash.update(uri);
+    return hash.digest('base64');
+  }));
 }
+
 module.exports = key;

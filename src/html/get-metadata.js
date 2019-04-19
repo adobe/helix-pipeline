@@ -11,19 +11,21 @@
  */
 const { select, selectAll } = require('unist-util-select');
 const plain = require('mdast-util-to-string');
-const { flat, obj, map } = require('@adobe/helix-shared').sequence;
+const { empty } = require('@adobe/helix-shared').types;
+const {
+  flat, obj, map, each,
+} = require('@adobe/helix-shared').sequence;
 
 
 function yaml(section) {
   const yamls = selectAll('yaml', section);
-  /* eslint-disable-next-line no-param-reassign */
   section.meta = obj(flat(map(yamls, ({ payload }) => payload)));
   return section;
 }
 
 function title(section) {
   const header = select('heading', section);
-  return header ? Object.assign({ title: plain(header) }, section) : section;
+  section.title = header ? plain(header) : '';
 }
 
 function intro(section) {
@@ -34,14 +36,16 @@ function intro(section) {
     }
     return true;
   })[0];
-  return para ? Object.assign({ intro: plain(para) }, section) : section;
+  section.intro = para ? plain(para) : '';
 }
 
 function image(section) {
   // selects the most prominent image of the section
   // TODO: get a better measure of prominence than "first"
   const img = select('image', section);
-  return img ? Object.assign({ image: img.url }, section) : section;
+  if (img) {
+    section.image = img.url;
+  }
 }
 
 /**
@@ -77,7 +81,6 @@ function sectiontype(section) {
   function reducer(counter, node) {
     const { type, children: pChildren } = node;
 
-    // eslint-disable-next-line no-param-reassign
     node.data = Object.assign({ types: [] }, node.data);
 
     if (type === 'yaml') {
@@ -129,43 +132,36 @@ function sectiontype(section) {
   }
 
   const typecounter = children.reduce(reducer, {});
-
-  const types = constructTypes(typecounter);
-
-  return Object.assign({ types }, section);
+  section.types = constructTypes(typecounter);
 }
 
 function fallback(section) {
   if (section.intro && !section.title) {
-    return Object.assign({ title: section.intro }, section);
+    section.title = section.intro;
   } else if (section.title && !section.intro) {
-    return Object.assign({ intro: section.title }, section);
+    section.intro = section.title;
   }
-  return section;
 }
 
-function getmetadata({ content: { sections = [] } }, { logger }) {
+function getmetadata({ content }, { logger }) {
+  const { sections } = content;
+  if (!sections) {
+    content.meta = {};
+    return;
+  }
+
   logger.debug(`Parsing Markdown Metadata from ${sections.length} sections`);
 
-  const retsections = sections
-    .map(yaml)
-    .map(title)
-    .map(intro)
-    .map(image)
-    .map(sectiontype)
-    .map(fallback);
-  const img = retsections.filter(section => section.image)[0];
-  if (retsections[0]) {
-    const retcontent = {
-      sections: retsections,
-      meta: retsections[0].meta,
-      title: retsections[0].title,
-      intro: retsections[0].intro,
-      image: img ? img.image : undefined,
-    };
-    return { content: retcontent };
-  }
-  return { content: { meta: {} } };
+  each([yaml, title, intro, image, sectiontype, fallback], (fn) => {
+    each(sections, fn);
+  });
+
+  const img = sections.filter(section => section.image)[0];
+
+  content.meta = empty(sections) ? {} : sections[0].meta;
+  content.title = empty(sections) ? '' : sections[0].title;
+  content.intro = empty(sections) ? '' : sections[0].intro;
+  content.image = img ? img.image : undefined;
 }
 
 module.exports = getmetadata;

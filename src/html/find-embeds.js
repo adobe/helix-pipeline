@@ -9,7 +9,6 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-/* eslint-disable no-param-reassign */
 const map = require('unist-util-map');
 const URI = require('uri-js');
 const mm = require('micromatch');
@@ -135,8 +134,6 @@ function find({ content: { mdast }, request: { extension, url } },
       internalembed(internalImgEmbed(node, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
     }
   });
-
-  return { content: { mdast } };
 }
 
 module.exports = find;

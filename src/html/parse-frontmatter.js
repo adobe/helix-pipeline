@@ -259,7 +259,13 @@ const findFrontmatter = (mdast, str) => {
 
 class FrontmatterParsingError extends Error {}
 
-const parseFrontmatter = ({ content: { mdast, body } }) => {
+const parseFrontmatter = ({ content = {} }) => {
+  const { mdast, body } = content;
+
+  if (!mdast || !body) {
+    return;
+  }
+
   // We splice the mdast.
   let off = 0;
 
@@ -301,7 +307,5 @@ const parseFrontmatter = ({ content: { mdast, body } }) => {
   }
 };
 
-parseFrontmatter.does_mutate = true;
 assign(parseFrontmatter, { findFrontmatter, FrontmatterParsingError });
-
 module.exports = parseFrontmatter;

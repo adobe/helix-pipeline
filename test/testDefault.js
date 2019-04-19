@@ -27,9 +27,9 @@ describe('Testing Default Pipeline', () => {
   });
 
   it('creates and runs the default pipeline', async () => {
-    const out = await pipe((payload, action) => ({
-      body: `test. payload: ${payload.title} action: ${action.title}`,
-    }), {
+    const out = await pipe((payload, action) => {
+      payload.body = `test. payload: ${payload.title} action: ${action.title}`;
+    }, {
       title: 'my payload',
     }, {
       title: 'my action',

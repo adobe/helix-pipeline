@@ -42,8 +42,12 @@ module.exports = {
     // Allow return before else & redundant else statements
     'no-else-return': 'off',
 
-    // allow dangling underscores for 'fields'
-    'no-underscore-dangle': ['error', {'allowAfterThis': true}],
+    // Quite useful to mark values as unused
+    'no-underscore-dangle': 'off',
+
+    // We have quite a lot of use cases where assignment to function
+    // parameters is definitely desirable
+    'no-param-reassign': 'off',
 
     // enforce license header
     'header/header': [2, 'block', ['',

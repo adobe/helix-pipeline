@@ -9,9 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+const { inspect } = require('util');
 const client = require('request-promise-native');
 const URI = require('uri-js');
-const { bail } = require('../helper');
+const { setdefault } = require('@adobe/helix-shared').types;
 
 function uri(root, owner, repo, ref, path) {
   const rootURI = URI.parse(root);
@@ -36,16 +37,11 @@ function uri(root, owner, repo, ref, path) {
  * @param {import("../context").Context} ctx some param
  * @param {import("../context").Action} action some other param
  */
-async function fetch(
-  { content: { sources = [] } = {} },
-  {
-    secrets = {},
-    request,
-    logger,
-  },
-) {
+async function fetch(context, { secrets = {}, request, logger }) {
+  const content = setdefault(context, 'content', {});
+
   if (!request || !request.params) {
-    return bail(logger, 'Request parameters are missing');
+    throw new Error('Request parameters missing');
   }
 
   let timeout;
@@ -64,13 +60,13 @@ async function fetch(
 
   // bail if a required parameter cannot be found
   if (!owner) {
-    return bail(logger, 'Unknown owner, cannot fetch content');
+    throw new Error('Unknown owner, cannot fetch content');
   }
   if (!repo) {
-    return bail(logger, 'Unknown repo, cannot fetch content');
+    throw new Error('Unknown repo, cannot fetch content');
   }
   if (!path) {
-    return bail(logger, 'Unknown path, cannot fetch content');
+    throw new Error('Unknown path, cannot fetch content');
   }
   if (!ref) {
     logger.warn(`Recoverable error: no ref given for ${repo}/${owner}.git${path}, falling back to master`);
@@ -86,24 +82,25 @@ async function fetch(
     timeout,
     time: true,
   };
+
   logger.debug(`fetching Markdown from ${options.uri}`);
   try {
-    const response = await client(options);
-    return {
-      content: {
-        body: response,
-        sources: [...sources, options.uri],
-      },
-    };
+    content.body = await client(options);
+    setdefault(content, 'sources', []).push(options.uri);
   } catch (e) {
-    if (e && e.statusCode && e.statusCode === 404) {
-      return bail(logger, `Could not find Markdown at ${options.uri}`, e, 404);
-    } else if ((e && e.response && e.response.elapsedTime && e.response.elapsedTime > timeout) || (e && e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT'))) {
+    if (e.statusCode === 404) {
+      logger.error(`Could not find Markdown at ${options.uri}`);
+      setdefault(context, 'response', {}).status = 404;
+    } else if ((e.response && e.response.elapsedTime && e.response.elapsedTime > timeout) || (e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT'))) {
       // return gateway timeout
-      return bail(logger, `Gateway timout of ${timeout} milliseconds exceeded for ${options.uri}`, e, 504);
+      logger.error(`Gateway timout of ${timeout} milliseconds exceeded for ${options.uri}`);
+      setdefault(context, 'response', {}).status = 504;
+    } else {
+      logger.error(`Error while fetching Markdown from ${options.uri} with the following `
+                   + `options:\n${inspect(options, { depth: null })}`);
+      setdefault(context, 'response', {}).status = 502;
     }
-    // return a bad gateway for all other errors
-    return bail(logger, `Could not fetch Markdown from ${options.uri}`, e, 502);
+    context.error = e;
   }
 }
 

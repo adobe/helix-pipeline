@@ -25,11 +25,10 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
 const type = require('../utils/set-content-type.js');
 const emit = require('../xml/emit-xml.js');
-const { selectStatus } = require('../xml/set-xml-status.js');
+const selectStatus = require('../xml/set-xml-status.js');
 const check = require('../xml/check-xml');
 const parseFrontmatter = require('../html/parse-frontmatter');
 
-/* eslint no-param-reassign: off */
 /* eslint newline-per-chained-call: off */
 
 const xmlpipe = (cont, payload, action) => {
@@ -53,7 +52,7 @@ const xmlpipe = (cont, payload, action) => {
     .when(uncached)
     .after(key)
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
-    .error(selectStatus(production()));
+    .error(selectStatus);
 
   action.logger.log('debug', 'Running XML pipeline');
   return pipe.run(payload);

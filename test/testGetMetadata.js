@@ -24,10 +24,12 @@ const logger = Logger.getTestLogger({
 });
 
 function callback(body) {
-  const parsed = parse({ content: { body } }, { logger });
-  parseFront({ content: { mdast: parsed.content.mdast, body } });
-  const splitted = split(parsed, { logger });
-  return getmetadata(splitted, { logger }).content.sections;
+  const dat = { content: { body } };
+  parse(dat, { logger });
+  parseFront(dat);
+  split(dat, { logger });
+  getmetadata(dat, { logger });
+  return dat.content.sections;
 }
 
 const SECTIONS_BLOCS = [
@@ -51,63 +53,62 @@ describe('Test getMetadata', () => {
   });
 
   it('getmetadata does not fail with "empty" mdast', () => {
-    assert.deepEqual(
-      getmetadata({
-        content: {
-          sections: [],
-          mdast: {
-            children: [],
-            position: {},
-            type: '',
-          },
+    const dat = {
+      content: {
+        sections: [],
+        mdast: {
+          children: [],
+          position: {},
+          type: '',
         },
-      }, { logger }),
-      {
-        content: { meta: {} },
       },
-    );
+    };
+    getmetadata(dat, { logger });
+    assert.deepEqual(dat.content.meta, {});
   });
 
   it('getmetadata does not fail with missing sections', () => {
-    assert.deepEqual(
-      getmetadata({
-        content: {
-          mdast: {
-            children: [],
-            position: {},
-            type: '',
-          },
+    const dat = {
+      content: {
+        mdast: {
+          children: [],
+          position: {},
+          type: '',
         },
-      }, { logger }),
-      {
-        content: { meta: {} },
       },
-    );
+    };
+    getmetadata(dat, { logger });
+    assert.deepEqual(dat.content.meta, {});
   });
 
   it('getmetadata does not fail with empty sections', () => {
-    assert.deepEqual(
-      getmetadata({
-        content: {
-          sections: [{}],
-          mdast: {
-            children: [],
-            position: {},
-            type: '',
-          },
+    const dat = {
+      content: {
+        sections: [{}],
+        mdast: {
+          children: [],
+          position: {},
+          type: '',
         },
-      }, { logger }),
-
-      {
-        content:
-          {
-            sections: [{ meta: {}, types: [] }],
-            meta: {},
-            title: undefined,
-            intro: undefined,
-            image: undefined,
-          },
       },
-    );
+    };
+    getmetadata(dat, { logger });
+    assert.deepEqual(dat.content, {
+      sections: [{
+        meta: {},
+        title: '',
+        intro: '',
+        types: [],
+      }],
+      meta: {},
+      title: '',
+      intro: '',
+      image: undefined,
+      mdast: {
+        children: [],
+        position: {},
+        type: '',
+      },
+    });
   });
 });

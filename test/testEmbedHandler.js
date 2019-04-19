@@ -97,7 +97,9 @@ describe('Test Embed Handler', () => {
 describe('Integration Test with Embeds', () => {
   it('html.pipe processes embeds', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
+      (context) => {
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
+      },
       {
         request: crequest,
         content: {
@@ -128,7 +130,9 @@ Here comes an embed.</p>
 
   it('html.pipe processes internal embeds', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
+      (context) => {
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
+      },
       {
         request: crequest,
         content: {

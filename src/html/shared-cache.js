@@ -10,19 +10,16 @@
  * governing permissions and limitations under the License.
  */
 
+const { setdefault } = require('@adobe/helix-shared').types;
+
 function uncached({ response }) {
   return !(response && response.headers && response.headers['Cache-Control']);
 }
 
-function cache() {
-  return {
-    response: {
-      headers: {
-        // cache for up to one week in CDN
-        'Cache-Control': 's-maxage=604800',
-      },
-    },
-  };
+function cache(context) {
+  const res = setdefault(context, 'response', {});
+  const headers = setdefault(res, 'headers', {});
+  headers['Cache-Control'] = 's-maxage=604800';
 }
 
 module.exports = { uncached, cache };

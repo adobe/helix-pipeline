@@ -12,17 +12,17 @@
 const parse = require('xml2js').parseString;
 
 function check({ response }, { logger }) {
-  if (response.body) {
-    logger.debug('Validating XML');
-    parse(response.body, { trim: true }, (err) => {
-      if (err) {
-        throw new Error(`Error parsing XML: ${err}`);
-      }
-      return { };
-    });
+  if (!response.body) {
+    logger.debug('No XML to validate');
+    return;
   }
-  logger.debug('No XML to validate');
-  return { };
+
+  logger.debug('Validating XML');
+  parse(response.body, { trim: true }, (err) => {
+    if (err) {
+      throw new Error(`Error parsing XML: ${err}`);
+    }
+  });
 }
 
 module.exports = check;

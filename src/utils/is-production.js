@@ -15,7 +15,7 @@
 function production() {
   try {
     // eslint-disable-next-line no-underscore-dangle
-    return process && process.env && !!process.env.__OW_ACTIVATION_ID;
+    return Boolean(process.env.__OW_ACTIVATION_ID);
   } catch (e) {
     // this error only occurs when running inside OpenWhisk
     return true;

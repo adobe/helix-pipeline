@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { deepclone } = require('@adobe/helix-shared').types;
 const emit = require('../src/json/emit-json');
 
 const logger = Logger.getTestLogger({
@@ -35,57 +36,34 @@ const expectedJSON = Object.assign({}, content.json);
 
 describe('Test emit-json', () => {
   it('builds JSON from object', () => {
-    const output = emit({ content, response }, action);
-    assert.deepEqual(output.response.body, expectedJSON);
+    const dat = deepclone({ content, response });
+    emit(dat, action);
+    assert.deepEqual(dat.response.body, expectedJSON);
   });
 
   it('does nothing if no JSON object specified', () => {
-    assert.deepEqual(emit({ content: {}, response }, action), {});
-  });
-
-  it('fails gracefully in case of invalid object', () => {
-    // exclude element with illegal value
-    assert.deepEqual(emit({
-      content: {
-        json: {
-          with: {
-            illegal: function elementValue() {},
-          },
-        },
-      },
-      response,
-    }, action), {
-      response: {
-        body: {
-          with: {},
-        },
-      },
-    });
-    // JSON.stringify does not like circular structures
-    const obj = {};
-    obj.a = { b: obj };
-    assert.deepEqual(emit({
-      content: {
-        json: {
-          foo: obj,
-        },
-      },
-      response,
-    }, action), { });
+    const dat = deepclone({ content: {}, response });
+    emit(dat, action);
+    assert(dat, { content: {}, response });
   });
 
   it('keeps existing response body', () => {
     response.body = expectedJSON;
-    assert.deepEqual(emit({ content, response }, action), {});
+    const dat = deepclone({ content, response });
+    emit(dat, action);
+    assert.deepEqual(dat, { content, response });
   });
 
   it('handles missing response object', () => {
-    const output = emit({ content }, action);
-    assert.deepEqual(output.response.body, expectedJSON);
+    const dat = deepclone({ content });
+    emit(dat, action);
+    assert.deepEqual(dat.response.body, expectedJSON);
   });
 
   it('handles missing content object', () => {
     // no content object at all
-    assert.deepEqual(emit({ response }, action), { });
+    const dat = deepclone({ response });
+    emit(dat, action);
+    assert.deepEqual(dat, { response, content: {} });
   });
 });

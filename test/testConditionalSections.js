@@ -13,6 +13,7 @@
 
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { setdefault } = require('@adobe/helix-shared').types;
 const { pipe } = require('../src/defaults/html.pipe.js');
 const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
 
@@ -72,23 +73,19 @@ const crequest = {
 };
 
 // return only sections that are not hidden
-function nonhidden(section) {
-  if (section.meta && section.meta) {
-    return !section.meta.hidden;
-  }
-  return true;
-}
+const nonhidden = section => !section.meta.hidden;
 
 describe('Integration Test Section Strain Filtering', () => {
   it('html.pipe sees only selected section', async () => {
     const myparams = Object.assign({ strain: 'a' }, params);
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
+        const { content } = context;
         logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
         assert.equal(content.sections.filter(nonhidden).length, 3);
-        return { response: { body: content.document.body.innerHTML } };
+        setdefault(context, 'response', {}).body = content.document.body.innerHTML;
       },
       {
         request: crequest,
@@ -137,14 +134,14 @@ describe('Unit Test Section Strain Filtering', () => {
       },
     };
     const action = {
+      logger,
       request: {
         params: {
           strain: 'empty',
         },
       },
     };
-    const result = selectstrain(context, action);
-    assert.deepStrictEqual(result, {});
+    selectstrain(context, action);
   });
 
   it('Filters sections based on strain', () => {
@@ -165,8 +162,8 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = selectstrain(context, action);
-    assert.equal(result.content.sections.filter(nonhidden).length, 2);
+    selectstrain(context, action);
+    assert.equal(context.content.sections.filter(nonhidden).length, 2);
   });
 
   it('Filters sections based on strain (array)', () => {
@@ -187,8 +184,8 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = selectstrain(context, action);
-    assert.equal(result.content.sections.filter(nonhidden).length, 2);
+    selectstrain(context, action);
+    assert.equal(context.content.sections.filter(nonhidden).length, 2);
   });
 
   it('Keeps sections without a strain', () => {
@@ -209,8 +206,8 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = selectstrain(context, action);
-    assert.equal(result.content.sections.filter(nonhidden).length, 2);
+    selectstrain(context, action);
+    assert.equal(context.content.sections.filter(nonhidden).length, 2);
   });
 
   it('Keeps sections without metadata', () => {
@@ -231,8 +228,8 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = selectstrain(context, action);
-    assert.equal(result.content.sections.filter(nonhidden).length, 2);
+    selectstrain(context, action);
+    assert.equal(context.content.sections.filter(nonhidden).length, 2);
   });
 
 
@@ -281,11 +278,9 @@ describe('Unit Test Section Strain Filtering', () => {
       },
       logger,
     };
-    const result = selectstrain(context, action);
-    assert.equal(result.content.sections.filter(nonhidden).length, 3);
-    assert.deepEqual(result.content.sections.filter(nonhidden)[0], {
-      meta: { hidden: false },
-    });
+    selectstrain(context, action);
+    assert.equal(context.content.sections.filter(nonhidden).length, 3);
+    assert.equal(context.content.sections.filter(nonhidden)[0].meta.hidden, false);
   });
 });
 
@@ -340,13 +335,14 @@ describe('Integration Test A/B Testing', () => {
   it('html.pipe sees only one variant', async () => {
     const myparams = Object.assign({ strain: 'default' }, params);
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
         assert.equal(content.sections.filter(nonhidden).length, 3);
         assert.equal(content.sections.filter(nonhidden)[2].meta.test, 'a');
-        return { response: { body: content.document.body.innerHTML } };
+        setdefault(context, 'response', {}).body = content.document.body.innerHTML;
       },
       {
         request: crequest,
@@ -390,15 +386,16 @@ Or this one at the same time.
       let selected = {};
       const myparams = Object.assign({ strain }, params);
       const result = await pipe(
-        ({ content }) => {
-        // this is the main function (normally it would be the template function)
-        // but we use it to assert that pre-processing has happened
+        (context) => {
+          const { content } = context;
+          // this is the main function (normally it would be the template function)
+          // but we use it to assert that pre-processing has happened
           logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
           assert.equal(content.sections.filter(nonhidden).length, 3);
           // remember what was selected
           /* eslint-disable-next-line prefer-destructuring */
           selected = content.sections.filter(nonhidden)[2];
-          return { response: { body: content.document.body.innerHTML } };
+          setdefault(context, 'response', {}).body = content.document.body.innerHTML;
         },
         {
           request: crequest,

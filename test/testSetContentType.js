@@ -33,18 +33,13 @@ describe('Test set-content-type', () => {
   });
 
   it('sets a content type', () => {
-    assert.deepEqual(
-      type('text/html')({}, { logger }),
-      {
-        response: {
-          headers: {
-            'Content-Type': 'text/html',
-          },
-        },
-      },
-    );
+    const data = {};
+    type('text/html')(data, { logger });
+    assert.strictEqual(data.response.headers['Content-Type'], 'text/html');
   });
+
   it('keeps existing content type', () => {
-    assert.deepEqual(type('text/html')(payload, { logger }), payload);
+    type('text/html')(payload, { logger });
+    assert.strictEqual(payload.response.headers['Content-Type'], 'text/plain');
   });
 });

@@ -12,7 +12,19 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
-const status = require('../src/html/set-status.js');
+const selectStatus_ = require('../src/html/set-status.js');
+
+const selectStatus = inProduction => (context, env) => {
+  // Mocking whether we are in production or not
+  const old = process.env.__OW_ACTIVATION_ID;
+  try {
+    process.env.__OW_ACTIVATION_ID = inProduction ? 'mocked' : '';
+    selectStatus_(context, env);
+    return context;
+  } finally {
+    process.env.__OW_ACTIVATION_ID = old;
+  }
+};
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
@@ -23,51 +35,25 @@ describe('Test set-status', () => {
   const error = 'oh, no!';
 
   it('sets a verbose 500 for an error in dev', () => {
-    assert.deepEqual(
-      status.selectStatus(false)({ content: { html: '<html></html>' }, error }, { logger }),
-      {
-        response: {
-          status: 500,
-          headers: {
-            'Content-Type': 'text/html',
-          },
-          body: `<html><body><h1>500</h1><pre>${error}</pre></body></html>`,
-        },
-      },
-    );
+    const data = selectStatus(false)({ content: { html: '<html></html>' }, error }, { logger });
+    assert.strictEqual(data.response.status, 500);
+    assert.strictEqual(data.response.body, `<html><body><h1>500</h1><pre>${error}</pre></body></html>`);
+    assert.strictEqual(data.response.headers['Content-Type'], 'text/html');
   });
 
   it('sets a terse 500 for an error in production', () => {
-    assert.deepEqual(
-      status.selectStatus(true)({ content: { html: '<html></html>' }, error }, { logger }),
-      {
-        response: {
-          status: 500,
-          body: '',
-        },
-      },
-    );
+    const data = selectStatus(true)({ content: { html: '<html></html>' }, error }, { logger });
+    assert.strictEqual(data.response.status, 500);
+    assert.strictEqual(data.response.body, '');
   });
 
   it('keeps an existing status', () => {
-    assert.deepEqual(
-      status({
-        response: {
-          status: 201,
-        },
-      }, { logger }),
-      {},
-    );
+    const data = selectStatus(true)({ response: { status: 201 } }, { logger });
+    assert.strictEqual(data.response.status, 201);
   });
 
   it('sets a 200 if all good', () => {
-    assert.deepEqual(
-      status({ content: { html: '<html></html>' } }, { logger }),
-      {
-        response: {
-          status: 200,
-        },
-      },
-    );
+    const data = selectStatus(true)({ content: { html: '<html></html>' } }, { logger });
+    assert.strictEqual(data.response.status, 200);
   });
 });

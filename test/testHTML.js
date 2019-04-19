@@ -121,6 +121,7 @@ describe('Testing HTML Pipeline', () => {
   setupPolly({
     logging: false,
     recordFailedRequests: true,
+    recordIfMissing: false,
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -137,12 +138,12 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe does not make HTTP requests if body is provided', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        assert.equal(content.body, 'Hello World');
+        assert.equal(context.content.body, 'Hello World');
         // and return a different status code
-        return { response: { status: 201, body: content.document.body.innerHTML } };
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
       },
       {
         request: crequest,
@@ -165,14 +166,14 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe keeps proper ESI tags', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        assert.equal(content.body, 'Hello World');
+        assert.equal(context.content.body, 'Hello World');
         // and return a different status code
-        return {
-          response: {
-            status: 201, body: `<html>
+        context.response = {
+          status: 201,
+          body: `<html>
 <head><title>ESI-Test</title><head>
 <body>
 <div>
@@ -180,7 +181,6 @@ describe('Testing HTML Pipeline', () => {
 </div>
 </body>
 </html>`,
-          },
         };
       },
       {
@@ -206,14 +206,14 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe keeps self-closing ESI tags', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        assert.equal(content.body, 'Hello World');
+        assert.equal(context.content.body, 'Hello World');
         // and return a different status code
-        return {
-          response: {
-            status: 201, body: `<html>
+        context.response = {
+          status: 201,
+          body: `<html>
 <head><title>ESI-Test</title><head>
 <body>
 <div>
@@ -221,7 +221,6 @@ describe('Testing HTML Pipeline', () => {
 </div>
 </body>
 </html>`,
-          },
         };
       },
       {
@@ -248,14 +247,14 @@ describe('Testing HTML Pipeline', () => {
 
   it('html.pipe keeps double ESI tags', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        assert.equal(content.body, 'Hello World');
+        assert.equal(context.content.body, 'Hello World');
         // and return a different status code
-        return {
-          response: {
-            status: 201, body: `<html>
+        context.response = {
+          status: 201,
+          body: `<html>
 <head><title>ESI-Test</title><head>
 <body>
 <div>
@@ -264,7 +263,6 @@ describe('Testing HTML Pipeline', () => {
 </div>
 </body>
 </html>`,
-          },
         };
       },
       {
@@ -290,12 +288,12 @@ describe('Testing HTML Pipeline', () => {
   });
 
   it('html.pipe can be extended', async () => {
-    const myfunc = ({ content }) => ({
-      response: {
-        body: `<h1>${content.title}</h1>
-${content.document.body.innerHTML}`,
-      },
-    });
+    const myfunc = (context) => {
+      context.response = {
+        body: `<h1>${context.content.title}</h1>
+${context.content.document.body.innerHTML}`,
+      };
+    };
 
     let calledfoo = false;
     let calledbar = false;
@@ -317,11 +315,7 @@ ${content.document.body.innerHTML}`,
     }
 
     function shouttitle(p) {
-      return {
-        content: {
-          title: `${p.content.title.toUpperCase()}!!!`,
-        },
-      };
+      p.content.title = `${p.content.title.toUpperCase()}!!!`;
     }
 
     myfunc.before = {
@@ -360,14 +354,15 @@ ${content.document.body.innerHTML}`,
 
   it('html.pipe renders index.md from helix-cli correctly', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.equal(content.title, 'Helix - {{project.name}}');
         assert.equal(content.image, './helix_logo.png');
         assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
         // and return a different status code
-        return { response: { status: 201, body: content.document.body.innerHTML } };
+        context.response = { status: 201, body: content.document.body.innerHTML };
       },
       {
         request: crequest,
@@ -387,14 +382,15 @@ ${content.document.body.innerHTML}`,
 
   it('html.pipe renders index.md from project-helix.io correctly', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.equal(content.title, 'Welcome to Project Helix');
         assert.equal(content.image, 'assets/browser.png');
         assert.equal(content.intro, 'Helix is the new experience management service to create, manage, and deliver great digital experiences.');
         // and return a different status code
-        return { response: { status: 201, body: content.document.body.innerHTML } };
+        context.response = { status: 201, body: content.document.body.innerHTML };
       },
       {
         request: crequest,
@@ -414,14 +410,15 @@ ${content.document.body.innerHTML}`,
 
   it('html.pipe renders modified index.md from helix-cli correctly', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.equal(content.title, 'Helix - {{project.name}}');
         assert.equal(content.image, undefined);
         assert.equal(content.intro, 'It works! {{project.name}} is up and running.');
         // and return a different status code
-        return { response: { status: 201, body: content.document.body.innerHTML } };
+        context.response = { status: 201, body: content.document.body.innerHTML };
       },
       {
         request: crequest,
@@ -441,7 +438,9 @@ ${content.document.body.innerHTML}`,
 
   it('html.pipe complains when context is invalid', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
+      (context) => {
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
+      },
       {
         request: crequest,
         content: {
@@ -454,9 +453,9 @@ ${content.document.body.innerHTML}`,
         logger,
       },
     );
-    assert.ok(result.error, 'no error reported');
-    assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
-    assert.equal(result.error.split('\n')[2], '#/additionalProperties should NOT have additional properties - params: "{ additionalProperty: \'foo\' }" - path: .content');
+    assert.ok(result.error);
+    assert(result.error.stack.includes('Error: Invalid Context'));
+    assert(result.error.stack.includes('additionalProperties should NOT have additional properties'));
   });
 
   it('html.pipe complains with a specific message for mdast nodes when context is invalid', async () => {
@@ -475,14 +474,15 @@ ${content.document.body.innerHTML}`,
       },
     );
     assert.ok(result.error);
-    assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
-    assert.equal(result.error.split('\n')[2], '#/properties/type/const should be equal to constant - params: "{ allowedValue: \'root\' }" - value: notroot - path: .content.sections[0].type');
+    assert(result.error.stack.includes('Error: Invalid Context'));
+    assert(result.error.stack.includes('should be equal to constant'));
   });
 
   it('html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
-      {
+      (context) => {
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
+      }, {
         request: crequest,
         content: {
           sections: [{ type: 'root', custom: 'notallowed' }],
@@ -495,14 +495,15 @@ ${content.document.body.innerHTML}`,
       },
     );
     assert.ok(result.error);
-    assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
-    assert.equal(result.error.split('\n')[2], 'root#/additionalProperties should NOT have additional properties - path: .content.sections[0]');
+    assert(result.error.stack.includes('Error: Invalid Context'));
+    assert(result.error.stack.includes('additionalProperties should NOT have additional properties'));
   });
 
   it('html.pipe complains when action is invalid', async () => {
     const result = await pipe(
-      ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
-      {
+      (context) => {
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
+      }, {
         request: crequest,
         content: {
           body: 'Hello World',
@@ -516,13 +517,14 @@ ${content.document.body.innerHTML}`,
       },
     );
     assert.ok(result.error);
-    assert.equal(result.error.split('\n')[1], 'Error: Invalid Action at step 0: ');
-    assert.equal(result.error.split('\n')[2], '#/additionalProperties should NOT have additional properties - params: "{ additionalProperty: \'break\' }" - path: ');
+    assert(result.error.stack.includes('Error: Invalid Action'));
+    assert(result.error.stack.includes('additionalProperties should NOT have additional properties'));
   });
 
   it('html.pipe makes HTTP requests', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.ok(content.body);
@@ -537,7 +539,7 @@ ${content.document.body.innerHTML}`,
         assert.equal(content.title, 'Bill, Welcome to the future');
         assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
         // and return a different status code
-        return { response: { status: 201, body: content.document.body.innerHTML } };
+        context.response = { status: 201, body: content.document.body.innerHTML };
       },
       {
         request: {
@@ -566,7 +568,8 @@ ${content.document.body.innerHTML}`,
     delete myparams.ref;
 
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.ok(content.body);
@@ -581,7 +584,7 @@ ${content.document.body.innerHTML}`,
         assert.equal(content.title, 'Bill, Welcome to the future');
         assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
         // and return a different status code
-        return { response: { status: 201, body: content.document.body.innerHTML } };
+        context.response = { status: 201, body: content.document.body.innerHTML };
       },
       {
         request: {
@@ -628,17 +631,17 @@ ${content.document.body.innerHTML}`,
 
   it('html.pipe keeps existing headers', async () => {
     const result = await pipe(
-      ({ content }) => ({
-        response: {
+      (context) => {
+        context.response = {
           status: 201,
-          body: content.document.body.innerHTML,
+          body: context.content.document.body.innerHTML,
           headers: {
             'Content-Type': 'text/plain',
             'Surrogate-Key': 'foobar',
             'Cache-Control': 'max-age=0',
           },
-        },
-      }),
+        };
+      },
       { request: crequest },
       {
         request: { params },
@@ -655,16 +658,16 @@ ${content.document.body.innerHTML}`,
 
   it('html.pipe produces debug dumps', async () => {
     const result = await pipe(
-      ({ content }) => ({
-        response: {
+      (context) => {
+        context.response = {
           status: 201,
-          body: content.document.body.innerHTML,
+          body: context.content.document.body.innerHTML,
           headers: {
             'Content-Type': 'text/plain',
             'Surrogate-Key': 'foobar',
           },
-        },
-      }),
+        };
+      },
       { request: crequest },
       {
         request: { params },

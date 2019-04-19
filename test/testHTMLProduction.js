@@ -82,8 +82,8 @@ describe('Testing HTML Pipeline in Production', () => {
 
   it('html.pipe adds headers from meta and link tags', async () => {
     const result = await pipe(
-      ({ content }) => ({
-        response: {
+      (context) => {
+        context.response = {
           status: 201,
           headers: {
             Foo: 'bar',
@@ -100,11 +100,11 @@ describe('Testing HTML Pipeline in Production', () => {
     <link rel="previous" src="previous.html" />
   </head>
   <body>
-    ${content.document.body.innerHTML}
+    ${context.content.document.body.innerHTML}
   </body>
 </html>`,
-        },
-      }),
+        };
+      },
       {
         request: crequest,
         content: {

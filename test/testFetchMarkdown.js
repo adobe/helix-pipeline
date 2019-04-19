@@ -122,59 +122,65 @@ describe('Test URI parsing and construction', () => {
 
 describe('Test invalid input', () => {
   it('Test for missing owner', async () => {
-    assert.ok((await fetch(
+    await assert.rejects(() => (fetch(
       {},
       {
         request: { params: { repo: 'xdm', ref: 'master', path: 'README.md' } },
         logger,
       },
-    )).error);
+    )), {
+      name: 'Error',
+      message: 'Unknown owner, cannot fetch content',
+    });
   });
 
   it('Test for missing repo', async () => {
-    assert.ok((await fetch(
+    await assert.rejects(() => (fetch(
       {},
       {
         request: { params: { ref: 'master', path: 'README.md', owner: 'adobe' } },
         logger,
       },
-    )).error);
+    )), {
+      name: 'Error',
+      message: 'Unknown repo, cannot fetch content',
+    });
   });
 
   it('Test for missing path', async () => {
-    assert.ok((await fetch(
+    await assert.rejects(() => (fetch(
       {},
       {
         request: { params: { repo: 'xdm', ref: 'master', owner: 'adobe' } },
         logger,
       },
-    )).error);
+    )), {
+      name: 'Error',
+      message: 'Unknown path, cannot fetch content',
+    });
   });
 
   it('Test for missing params', async () => {
-    assert.ok((await fetch(
+    await assert.rejects(() => (fetch(
       {},
       {
         request: {},
         logger,
       },
-    )).error);
+    )));
+  }, {
+    name: 'Error',
+    message: 'Unknown path, cannot fetch content',
   });
 
   it('Test for missing request', async () => {
-    assert.ok((await fetch(
+    await assert.rejects(() => (fetch(
       {},
       { logger },
-    )).error);
-  });
-
-  it('Test for error pass-through', () => {
-    const err = { message: 'this error is mine.' };
-
-    assert.deepEqual(fetch(
-      { error: err },
-      { logger },
-    ), {});
+    )), {
+      name: 'Error',
+      message: 'Request parameters missing',
+    });
   });
 });
 
@@ -202,8 +208,9 @@ describe('Test non-existing content', () => {
     };
 
     await coerce(myaction);
-
-    assert.ok((await fetch({}, myaction)).error);
+    const context = {};
+    await fetch(context, myaction);
+    assert.ok(context.error);
   });
 
   it('Getting XDM README (with missing ref)', async () => {
@@ -217,9 +224,9 @@ describe('Test non-existing content', () => {
     };
 
     await coerce(myaction);
-
-    const result = await fetch({}, myaction);
-    assert.ok(result.content.body);
+    const context = {};
+    await fetch(context, myaction);
+    assert.ok(context.content.body);
   });
 });
 
@@ -247,10 +254,10 @@ describe('Test requests', () => {
     };
 
     await coerce(myaction);
-
-    const result = await fetch({}, myaction);
-    assert.ok(result.content.body);
-    assert.equal(result.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
+    const context = {};
+    await fetch(context, myaction);
+    assert.ok(context.content.body);
+    assert.equal(context.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
   });
 });
 
@@ -259,6 +266,7 @@ describe('Test misbehaved HTTP Responses', () => {
   setupPolly({
     logging: false,
     recordFailedRequests: false,
+    recordIfMissing: false,
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -285,10 +293,10 @@ describe('Test misbehaved HTTP Responses', () => {
     };
 
     await coerce(myaction);
-
-    const result = await fetch({}, myaction);
-    assert.ok(result.error);
-    assert.equal(result.response.status, 502);
+    const context = {};
+    await fetch(context, myaction);
+    assert.ok(context.error);
+    assert.equal(context.response.status, 502);
   });
 
   it('Getting XDM README with ultra-short Timeout', async function shortTimeout() {
@@ -314,16 +322,14 @@ describe('Test misbehaved HTTP Responses', () => {
     };
 
     await coerce(myaction);
-
-    const result = await fetch({}, myaction);
-    assert.ok(result.error);
-    assert.equal(result.response.status, 504);
+    const context = {};
+    await fetch(context, myaction);
+    assert.ok(context.error);
+    assert.equal(context.response.status, 504);
   });
 
   it('Getting XDM README with Backend Timeout', async function badTimeout() {
     const { server } = this.polly;
-
-
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
       .intercept(async (_, res) => {
@@ -341,9 +347,9 @@ describe('Test misbehaved HTTP Responses', () => {
     };
 
     await coerce(myaction);
-
-    const result = await fetch({}, myaction);
-    assert.ok(result.error);
-    assert.equal(result.response.status, 504);
+    const context = {};
+    await fetch(context, myaction);
+    assert.ok(context.error);
+    assert.equal(context.response.status, 504);
   }).timeout(3000);
 });

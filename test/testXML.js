@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { setdefault } = require('@adobe/helix-shared').types;
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const setupPolly = require('@pollyjs/core').setupMocha;
@@ -138,26 +139,27 @@ describe('Testing XML Pipeline', () => {
 
   it('xml.pipe makes HTTP requests', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const cont = context.content;
         // main function
-        const c = content;
-        c.xml = {
+        cont.xml = {
           document: {
             title: {
-              '#text': content.title,
+              '#text': cont.title,
               '@level': 1,
             },
           },
         };
         // assert that pre-processing has happened
-        assert.ok(content.body);
-        assert.ok(content.mdast);
-        assert.ok(content.meta);
-        assert.equal(content.meta.template, 'Medium');
-        assert.equal(content.intro, 'Project Helix');
-        assert.equal(content.title, 'Bill, Welcome to the future');
+        assert.ok(cont.body);
+        assert.ok(cont.mdast);
+        assert.ok(cont.meta);
+        assert.equal(cont.meta.template, 'Medium');
+        assert.equal(cont.intro, 'Project Helix');
+        assert.equal(cont.title, 'Bill, Welcome to the future');
+
         // and return a different status code
-        return { content: c, response: { status: 201 } };
+        setdefault(context, 'response', {}).status = 201;
       },
       {},
       {
@@ -173,18 +175,16 @@ describe('Testing XML Pipeline', () => {
   });
 
   it('xml.pipe can be extended', async () => {
-    const myfunc = ({ content }) => ({
-      content: {
-        xml: {
-          document: {
-            title: {
-              '#text': content.title,
-              '@level': 1,
-            },
+    const myfunc = (context) => {
+      context.content.xml = {
+        document: {
+          title: {
+            '#text': context.content.title,
+            '@level': 1,
           },
         },
-      },
-    });
+      };
+    };
 
     let calledfoo = false;
     let calledbar = false;
@@ -247,7 +247,6 @@ describe('Testing XML Pipeline', () => {
       {
         request: { params },
         secrets,
-        logger,
       },
     );
 
@@ -282,26 +281,23 @@ describe('Testing XML Pipeline', () => {
   });
 
   it('xml.pipe detects ESI tag in XML object', async () => {
-    const result = await pipe(
-      ({ content }) => {
-        const c = content;
-        c.xml = {
-          root: {
-            'esi:include': {
-              '@src': 'foo.xml',
-              '@xmlns:esi': 'http://www.edge-delivery.org/esi/1.0',
-            },
+    const result = await pipe((context) => {
+      context.content.xml = {
+        root: {
+          'esi:include': {
+            '@src': 'foo.xml',
+            '@xmlns:esi': 'http://www.edge-delivery.org/esi/1.0',
           },
-        };
-        return { content: c, response: { status: 201 } };
-      },
-      {},
-      {
-        request: { params },
-        secrets,
-        logger,
-      },
-    );
+        },
+      };
+      setdefault(context, 'response', {}).status = 201;
+    },
+    {},
+    {
+      request: { params },
+      secrets,
+      logger,
+    });
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['X-ESI'], 'enabled');
   });

@@ -14,30 +14,31 @@ const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const { Pipeline } = require('../index.js');
 
-const logger = Logger.getTestLogger({
-  // tune this for debugging
-  level: 'info',
-});
+/* eslint-disable array-callback-return */
+let logger;
 
 describe('Testing Pipeline', () => {
-  it('Executes without logger', (done) => {
-    new Pipeline().run().then(() => done()).catch(done);
+  beforeEach(() => {
+    logger = Logger.getTestLogger({
+      // tune this for debugging
+      level: 'info',
+    });
   });
 
-  it('Executes correct order', (done) => {
+  it('Executes without logger', async () => {
+    await new Pipeline().once(() => {}).run({});
+  });
+
+  it('Executes correct order', async () => {
     const order = [];
-    new Pipeline({ logger })
+    await new Pipeline({ logger })
       .before(() => { order.push('pre0'); })
       .after(() => { order.push('post0'); })
       .before(() => { order.push('pre1'); })
       .after(() => { order.push('post1'); })
       .once(() => { order.push('once'); })
-      .run()
-      .then(() => {
-        assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
-        done();
-      })
-      .catch(done);
+      .run();
+    assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
   });
 
   it('Can be run twice', async () => {
@@ -77,7 +78,6 @@ describe('Testing Pipeline', () => {
 
     // inject explicit extension points
     [first, second, third, fourth].forEach((f) => {
-      // eslint-disable-next-line no-param-reassign
       f.ext = f.name;
     });
 
@@ -116,7 +116,6 @@ describe('Testing Pipeline', () => {
 
     // inject explicit extension points
     [first, second, third, fourth].forEach((f) => {
-      // eslint-disable-next-line no-param-reassign
       f.ext = f.name;
     });
 
@@ -141,18 +140,13 @@ describe('Testing Pipeline', () => {
     assert.deepStrictEqual(order, ['one', 'two', 'middle', 'three', 'four']);
   });
 
-  it('Logs correct names', (done) => {
+  it('Logs correct names', async () => {
     const order = [];
-
     const pre0 = () => order.push('pre0');
-    const post0 = function post0() {
-      order.push('post0');
-    };
-
+    const post0 = () => order.push('post0');
     function noOp() {}
 
     let counter = 0;
-
     const validatinglogger = {
       error: noOp,
       warn: noOp,
@@ -167,33 +161,20 @@ describe('Testing Pipeline', () => {
           assert.ok(obj.function.match(/^before:pre0/));
         }
         if (counter === 2) {
-          assert.ok(obj.function.match(/^before:pre0/));
+          assert.ok(obj.function.match(/^once:anonymous/));
         }
         if (counter === 3) {
-          assert.ok(obj.function.match(/^once:anonymous/));
-        }
-        if (counter === 4) {
-          assert.ok(obj.function.match(/^once:anonymous/));
-        }
-        if (counter === 5) {
-          assert.ok(obj.function.match(/^after:post0/));
-        }
-        if (counter === 6) {
           assert.ok(obj.function.match(/^after:post0/));
         }
       },
     };
 
-    new Pipeline({ logger: validatinglogger })
+    await new Pipeline({ logger: validatinglogger })
       .before(pre0)
       .after(post0)
       .once(() => { order.push('once'); })
-      .run()
-      .then(() => {
-        assert.deepEqual(order, ['pre0', 'once', 'post0']);
-        done();
-      })
-      .catch(done);
+      .run();
+    assert.deepEqual(order, ['pre0', 'once', 'post0']);
   });
 
   it('Disables pre before when', (done) => {
@@ -377,50 +358,47 @@ describe('Testing Pipeline', () => {
       .catch(done);
   });
 
-  it('Executes promises', (done) => {
-    const retval = new Pipeline({ logger })
-      .after(() => Promise.resolve({ foo: 'bar' }))
-      .after((v) => {
+  it('Executes promises', async () => {
+    await new Pipeline({ logger })
+      .once(v => new Promise((resolve) => {
+        setTimeout(() => {
+          v.foo = 'bar';
+          resolve();
+        }, 0.05);
+      })).after((v) => {
         assert.equal(v.foo, 'bar');
       }).run();
-    retval.then((r) => {
-      assert.equal(r.foo, 'bar');
-      done();
-    });
   });
 
-  it('Executes taps', (done) => {
-    new Pipeline({ logger })
-      .before(() => ({ foo: 'bar' }))
-      .after(() => ({ bar: 'baz' }))
-      .every((c, a, i) => {
-        if (i === 1) {
-          done();
-        }
-        return true;
+  it('Executes taps', async () => {
+    let cnt = 0;
+    await new Pipeline({ logger })
+      .before(() => {})
+      .once(() => {})
+      .after(() => {})
+      .every(() => {
+        cnt += 1;
       })
       .run();
+    assert.strictEqual(cnt, 3);
   });
 
-  it('Does not executes taps when conditions fail', (done) => {
-    new Pipeline({ logger })
+  it('Does not executes taps when conditions fail', async () => {
+    let cnt = 0;
+    await new Pipeline({ logger })
       .before(() => ({ foo: 'bar' }))
+      .once(() => {})
       .after(() => ({ bar: 'baz' }))
-      .every((c, a, i) => {
-        if (i === 1) {
-          done(new Error('this is a trap'));
-        }
-        return true;
+      .every(() => {
+        assert.fail('this should not be invoked');
       })
       .when(() => false)
-      .every((c, a, i) => {
-        if (i === 1) {
-          done();
-        }
-        return true;
+      .every(() => {
+        cnt += 1;
       })
       .when(() => true)
       .run();
+    assert.strictEqual(cnt, 3);
   });
 
   it('Ignore error if no error', (done) => {
@@ -443,9 +421,9 @@ describe('Testing Pipeline', () => {
   it('skip functions if context.error', (done) => {
     const order = [];
     new Pipeline({ logger })
-      .before(() => {
+      .before((ctx) => {
         order.push('pre0');
-        return { error: 'stop' };
+        ctx.error = new Error();
       })
       .before(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
@@ -488,9 +466,9 @@ describe('Testing Pipeline', () => {
         throw new Error('stop');
       })
       .before(() => { order.push('pre1'); })
-      .error(() => {
+      .error((ctx) => {
         order.push('error0');
-        return { error: null };
+        ctx.error = null;
       })
       .once(() => { order.push('once'); })
       .after(() => { order.push('post0'); })
@@ -502,5 +480,40 @@ describe('Testing Pipeline', () => {
         done();
       })
       .catch(done);
+  });
+
+  it('handles error in error', async () => {
+    const order = [];
+    await new Pipeline({ logger })
+      .before(() => {
+        order.push('pre0');
+        throw new Error('stop');
+      })
+      .before(() => { order.push('pre1'); })
+      .once(() => { order.push('once'); })
+      .after(() => { order.push('post0'); })
+      .after(() => { order.push('post1'); })
+      .error(() => { throw Error('in error handler'); })
+      .run();
+    const output = await logger.getOutput();
+    assert.deepEqual(order, ['pre0']);
+    assert.ok(output.indexOf('Exception during post-#5/error:anonymous') > 0);
+  });
+
+  it('handles generic pipeline error', async () => {
+    const order = [];
+    await new Pipeline({ logger })
+      .before(() => { order.push('pre1'); })
+      .once({
+        get errorHandler() {
+          throw new Error('generic error');
+        },
+      })
+      .error(() => { order.push('error'); })
+      .run();
+
+    const output = await logger.getOutput();
+    assert.deepEqual(order, ['pre1']);
+    assert.ok(output.indexOf('Error: generic error') > 0);
   });
 });

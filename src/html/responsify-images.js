@@ -29,7 +29,6 @@ const RESOLUTION_SWITCHING = [
 ];
 
 /* Parameter Reassignment is the standard design pattern for Unified */
-/* eslint no-param-reassign: "off" */
 
 function transformer(
   { content: { htast } },
@@ -69,8 +68,6 @@ function transformer(
 
   // the visit function is modifying its argument in place.
   visit(htast);
-
-  return { content: { htast } };
 }
 
 module.exports = transformer;

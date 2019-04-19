@@ -25,7 +25,6 @@ const emit = require('../json/emit-json.js');
 const { selectStatus } = require('../json/set-json-status.js');
 const parseFrontmatter = require('../html/parse-frontmatter.js');
 
-/* eslint no-param-reassign: off */
 /* eslint newline-per-chained-call: off */
 
 const jsonpipe = (cont, payload, action) => {

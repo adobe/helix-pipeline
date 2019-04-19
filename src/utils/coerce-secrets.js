@@ -14,7 +14,6 @@ const ajv = require('./validator');
 function coerce(action) {
   const defaultsetter = ajv(action.logger, { useDefaults: true, coerceTypes: true });
   if (!action.secrets) {
-    /* eslint-disable no-param-reassign */
     action.secrets = {};
   }
   action.logger.debug('Coercing secrets');

@@ -21,9 +21,10 @@ const logger = Logger.getTestLogger({
 });
 
 function callback(body) {
-  const { mdast } = parse({ content: { body } }, { logger }).content;
-  parseFront({ content: { mdast, body } });
-  return mdast;
+  const dat = { content: { body } };
+  parse(dat, { logger });
+  parseFront(dat);
+  return dat.content.mdast;
 }
 
 describe('Test Markdown Parsing', () => {

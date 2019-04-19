@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { deepclone, assertEquals } = require('@adobe/helix-shared').types;
 const rewrite = require('../src/html/static-asset-links');
 const tohast = require('../src/html/html-to-hast');
 const stringify = require('../src/html/stringify-hast');
@@ -23,26 +24,18 @@ const logger = Logger.getTestLogger({
 });
 
 function rw(content) {
-  const hastcontext = tohast({
+  const ctx = {
     response: {
       body: content,
       headers: {
         'Content-Type': 'text/html',
       },
     },
-  });
-
-  const rewritecontext = rewrite({
-    response: {
-      body: content,
-      hast: hastcontext.response.hast,
-      headers: {
-        'Content-Type': 'text/html',
-      },
-    },
-  });
-
-  return stringify(rewritecontext).response.body;
+  };
+  tohast(ctx);
+  rewrite(ctx);
+  stringify(ctx);
+  return ctx.response.body;
 }
 
 describe('Integration Test Static Asset Rewriting', () => {
@@ -73,28 +66,28 @@ describe('Integration Test Static Asset Rewriting', () => {
       },
       logger,
     };
-    const once = ({ content }) => ({
-      response: {
+    const once = (ctx) => {
+      ctx.response = {
         status: 200,
         body: `<html>
   <head>
-    <title>${content.document.body.textContent}</title>
+    <title>${ctx.content.document.body.textContent}</title>
     <script src="index.js"></script>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    ${content.document.body.innerHTML}
+    ${ctx.content.document.body.innerHTML}
     <script>
       alert('ok');
     </script>
   </body>
 </html>`,
-      },
-    });
+      };
+    };
 
-    const res = await pipe(once, context, action);
+    await pipe(once, context, action);
 
-    assert.equal(res.response.body, `<html><head>
+    assert.equal(context.response.body, `<html><head>
     <title>Hello World</title>
     <script src='<esi:include src="index.js.url"/><esi:remove>index.js</esi:remove>'></script>
     <link rel="stylesheet" href='<esi:include src="style.css.url"/><esi:remove>style.css</esi:remove>'>
@@ -116,14 +109,17 @@ describe('Integration Test Static Asset Rewriting', () => {
 
 describe('Test Static Asset Rewriting', () => {
   it('Ignores non-HTML', () => {
-    assert.deepEqual(rewrite({
+    const dat = {
       response: {
         body: '{}',
         headers: {
           'Content-Type': 'application/json',
         },
       },
-    }), {});
+    };
+    const dat2 = deepclone(dat);
+    rewrite(dat);
+    assertEquals(dat, dat2);
   });
 
   it('Load simple HTML', async () => {
