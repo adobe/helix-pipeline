@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const fallback = require('mdast-util-to-hast/lib/handlers/heading');
+const toString = require('mdast-util-to-string');
 const GithubSlugger = require('github-slugger');
 
 /**
@@ -26,18 +27,6 @@ class HeadingHandler {
   }
 
   /**
-   * Gets the text content for the specified heading.
-   * @param {UnistParent~Heading} heading The heading node
-   * @returns {string} The text content for the heading
-   */
-  static getTextContent(heading) {
-    return heading.children
-      .filter(el => el.type === 'text')
-      .map(el => el.value)
-      .join('').trim();
-  }
-
-  /**
    * Reset the heading counter
    */
   reset() {
@@ -50,7 +39,7 @@ class HeadingHandler {
   handler() {
     return (h, node) => {
       // Prepare the heading id
-      const headingIdentifier = this.slugger.slug(HeadingHandler.getTextContent(node));
+      const headingIdentifier = this.slugger.slug(toString(node));
 
       // Inject the id after transformation
       const n = Object.assign({}, node);

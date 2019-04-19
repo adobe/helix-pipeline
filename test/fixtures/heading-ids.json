@@ -59,6 +59,42 @@
       ],
       "depth": 4,
       "type": "heading"
+    },
+    {
+      "children": [
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "Foo"
+            }
+          ],
+          "type": "strong"
+        },
+        {
+          "type": "text",
+          "value": " "
+        },
+        {
+          "children": [
+            {
+              "type": "text",
+              "value": "Bar"
+            }
+          ],
+          "type": "emphasis"
+        },
+        {
+          "type": "text",
+          "value": " "
+        },
+        {
+          "type": "inlineCode",
+          "value": "Baz"
+        }
+      ],
+      "depth": 1,
+      "type": "heading"
     }
   ]
 }
