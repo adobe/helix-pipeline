@@ -35,7 +35,11 @@ const rewriteLinks = require('../html/static-asset-links');
 const tohast = require('../html/html-to-hast');
 const tohtml = require('../html/stringify-hast');
 const addHeaders = require('../html/add-headers');
+<<<<<<< HEAD
 const timing = require('../utils/timing');
+=======
+const sanitize = require('../html/sanitize');
+>>>>>>> refactor(html pipe): Sanitize output using DOMPurify
 
 /* eslint newline-per-chained-call: off */
 
@@ -64,6 +68,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(html).expose('html')
     .before(responsive)
     .once(cont)
+    .after(sanitize)
     .after(type('text/html'))
     .after(cache).when(uncached)
     .after(key)

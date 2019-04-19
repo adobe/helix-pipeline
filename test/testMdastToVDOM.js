@@ -48,7 +48,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     assertTransformerYieldsDocument(
       new VDOM(mdast, action.secrets),
-      '<h1 id="hello-world">Hello World</h1>',
+      '<h1 id="user-content-hello-world">Hello World</h1>',
     );
   });
 
@@ -70,14 +70,14 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'headings.json'));
     assertTransformerYieldsDocument(
       new VDOM(mdast, action.secrets), `
-      <h1 id="heading-1-double-underline">Heading 1 (double-underline)</h1>
-      <h2 id="heading-2-single-underline">Heading 2 (single-underline)</h2>
-      <h1 id="heading-1">Heading 1</h1>
-      <h2 id="heading-2">Heading 2</h2>
-      <h3 id="heading-3">Heading 3</h3>
-      <h4 id="heading-4">Heading 4</h4>
-      <h5 id="heading-5">Heading 5</h5>
-      <h6 id="heading-6">Heading 6</h6>`,
+      <h1 id="user-content-heading-1-double-underline">Heading 1 (double-underline)</h1>
+      <h2 id="user-content-heading-2-single-underline">Heading 2 (single-underline)</h2>
+      <h1 id="user-content-heading-1">Heading 1</h1>
+      <h2 id="user-content-heading-2">Heading 2</h2>
+      <h3 id="user-content-heading-3">Heading 3</h3>
+      <h4 id="user-content-heading-4">Heading 4</h4>
+      <h5 id="user-content-heading-5">Heading 5</h5>
+      <h6 id="user-content-heading-6">Heading 6</h6>`,
     );
   });
 
@@ -97,7 +97,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     transformer.match(({ type }) => type === 'heading', () => '<h1 id="h1">All Headings are the same to me</h1>');
     assertTransformerYieldsDocument(
       transformer,
-      '<h1 id="user-content-h1">All Headings are the same to me</h1>',
+      '<h1 id="h1">All Headings are the same to me</h1>',
     );
   });
 
@@ -108,7 +108,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     assertTransformerYieldsDocument(
       transformer, `
       <div>
-        <a name="user-content-h1"></a>
+        <a name="h1"></a>
         <h1>All Headings are the same to me</h1>
       </div>`,
     );

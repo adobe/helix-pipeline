@@ -143,7 +143,7 @@ describe('Testing Markdown conversion', () => {
 
             Hello World
       `, `
-        <h1 id="hello">Hello</h1>
+        <h1 id="user-content-hello">Hello</h1>
         <pre><code>Hello World\n</code></pre>
     `);
     await assertMd(
@@ -166,10 +166,10 @@ describe('Testing Markdown conversion', () => {
         >
         > bar
       `, `
-        <h1 id="foo">Foo</h1>
+        <h1 id="user-content-foo">Foo</h1>
         <p>bar</p>
         <blockquote>
-        <h1 id="foo-1">Foo</h1>
+        <h1 id="user-content-foo-1">Foo</h1>
         <p>bar</p>
         </blockquote>
       `);
@@ -190,7 +190,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](<foobar)
       `, `
-        <h1 id="foo">Foo</h1>
+        <h1 id="user-content-foo">Foo</h1>
         <p>Hello World [link](&lt;foobar)</p>
     `);
   });
@@ -201,7 +201,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](foo bar)
       `, `
-        <h1 id="foo">Foo</h1>
+        <h1 id="user-content-foo">Foo</h1>
         <p>Hello World [link](foo bar)</p>
     `);
   });
@@ -212,7 +212,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](λ)
       `, `
-        <h1 id="foo">Foo</h1>
+        <h1 id="user-content-foo">Foo</h1>
         <p>Hello World <a href="%CE%BB">link</a></p>
     `);
   });
@@ -288,6 +288,16 @@ describe('Testing Markdown conversion', () => {
           <img alt="Foo">
           <img alt="Bar">
         </p>
+    `);
+  });
+
+  it('XSS escape DOM clobbering attributes', async () => {
+    await assertMd(`
+        # location
+        <a name="anchors">Foo</a>
+      `, `
+        <h1 id="user-content-location">location</h1>
+        <p>Foo</p>
     `);
   });
 });
