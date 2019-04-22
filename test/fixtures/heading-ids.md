@@ -9,3 +9,5 @@
 ### Bar
 
 #### Bar-1
+
+# **Foo** _bar_ `baz`

@@ -64,7 +64,8 @@ describe('Test MDAST to VDOM Transformation', () => {
       <h3 id="baz">Baz</h1>
       <h2 id="qux">Qux</h2>
       <h3 id="bar-1">Bar</h3>
-      <h4 id="bar-1-1">Bar-1</h4>`,
+      <h4 id="bar-1-1">Bar-1</h4>
+      <h1 id="foo-bar-baz"><strong>Foo</strong> <em>Bar</em> <code>Baz</code></h1>`,
     );
   });
 
