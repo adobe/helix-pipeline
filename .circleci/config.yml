@@ -138,6 +138,7 @@ jobs:
       - run: git config --global user.email "circleci@example.com" && git config --global user.name "CircleCi Build"
 
       # send up-to-date markdown back to GitHub
+      - run: git co -- package-lock.json
       - run:
           name: Publish Markdown to GitHub
           command: git pull --no-commit && git add --force docs/* && git commit --allow-empty -m "[ci skip] updating documentation" && git push
