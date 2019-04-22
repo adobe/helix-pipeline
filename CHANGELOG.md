@@ -1,3 +1,10 @@
+## [1.5.3](https://github.com/adobe/helix-pipeline/compare/v1.5.2...v1.5.3) (2019-04-22)
+
+
+### Bug Fixes
+
+* **html pipe:** Generate proper identifiers for complex headings ([#273](https://github.com/adobe/helix-pipeline/issues/273)) ([8c1b447](https://github.com/adobe/helix-pipeline/commit/8c1b447)), closes [#26](https://github.com/adobe/helix-pipeline/issues/26)
+
 ## [1.5.2](https://github.com/adobe/helix-pipeline/compare/v1.5.1...v1.5.2) (2019-04-22)
 
 
