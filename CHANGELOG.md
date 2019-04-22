@@ -1,3 +1,10 @@
+## [1.5.2](https://github.com/adobe/helix-pipeline/compare/v1.5.1...v1.5.2) (2019-04-22)
+
+
+### Bug Fixes
+
+* **package:** update jsdom to version 15.0.0 ([52371f3](https://github.com/adobe/helix-pipeline/commit/52371f3))
+
 ## [1.5.1](https://github.com/adobe/helix-pipeline/compare/v1.5.0...v1.5.1) (2019-04-19)
 
 
