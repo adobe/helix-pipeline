@@ -10,27 +10,49 @@
  * governing permissions and limitations under the License.
  */
 
-function setStatus({ response = {}, error }, { logger }) {
-  // if a status is already default, keep it.
-  if (response.status) {
-    return {};
-  }
-
-  // if there is an error, send a 500
-  if (error) {
-    logger.debug('payload.error -> 500');
-    return {
-      response: {
-        status: 500,
-        body: `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error.trim()}</message></error>`,
-      },
-    };
-  }
-
-  return {
+function setVerboseError(error) {
+  const res = {
     response: {
-      status: 200,
+      status: 500,
+      body: `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error.trim()}</message></error>`,
+      headers: {
+        'Content-Type': 'application/xml',
+      },
     },
   };
+  return res;
 }
+
+function selectStatus(prod) {
+  return ({ response = {}, error }, { logger }) => {
+    // if a status is already default, keep it.
+    if (response.status) {
+      return {};
+    }
+    if (!error) {
+      return {
+        response: {
+          status: 200,
+        },
+      };
+    }
+    // error handling
+    logger.debug('payload.error -> 500');
+    if (prod) {
+      return {
+        response: {
+          status: 500,
+          body: '',
+        },
+      };
+    }
+    return setVerboseError(error);
+  };
+}
+
+function setStatus({ response = {}, error }, { logger }) {
+  return selectStatus(false)({ response, error }, { logger });
+}
+
 module.exports = setStatus;
+module.exports.selectStatus = selectStatus;
