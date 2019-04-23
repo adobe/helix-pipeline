@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/adobe/helix-pipeline/compare/v1.5.3...v1.6.0) (2019-04-23)
+
+
+### Features
+
+* **xml:** suppress error output in production [#276](https://github.com/adobe/helix-pipeline/issues/276) ([8598926](https://github.com/adobe/helix-pipeline/commit/8598926))
+
 ## [1.5.3](https://github.com/adobe/helix-pipeline/compare/v1.5.2...v1.5.3) (2019-04-22)
 
 
