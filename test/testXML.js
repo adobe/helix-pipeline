@@ -239,7 +239,7 @@ describe('Testing XML Pipeline', () => {
     assert.ok(res.response.body.match(/FUTURE!!!/));
   });
 
-  it('xmp.pipe does not overwrite existing respone body', async () => {
+  it('xmp.pipe does not overwrite existing response body', async () => {
     const result = await pipe(
       () => {},
       payload,
