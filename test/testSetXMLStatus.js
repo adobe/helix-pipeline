@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
-const status = require('../src/xml/set-xml-status.js');
+const setStatus = require('../src/xml/set-xml-status.js');
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
@@ -20,30 +20,13 @@ const logger = Logger.getTestLogger({
 });
 
 describe('Test set-xml-status', () => {
-  const error = 'oh, no!';
-
-  it('sets a verbose 500 for an error in dev', () => {
+  it('sets a 500 for an error', () => {
     assert.deepEqual(
-      status.selectStatus(false)({ content: { }, error }, { logger }),
+      setStatus({ content: { }, error: 'oh, no!' }, { logger }),
       {
         response: {
           status: 500,
-          body: `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`,
-          headers: {
-            'Content-Type': 'application/xml',
-          },
-        },
-      },
-    );
-  });
-
-  it('sets a terse 500 for an error in production', () => {
-    assert.deepEqual(
-      status.selectStatus(true)({ content: { }, error }, { logger }),
-      {
-        response: {
-          status: 500,
-          body: '',
+          body: '<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>oh, no!</message></error>',
         },
       },
     );
@@ -51,7 +34,7 @@ describe('Test set-xml-status', () => {
 
   it('keeps an existing status', () => {
     assert.deepEqual(
-      status({
+      setStatus({
         response: {
           status: 201,
         },
@@ -62,7 +45,7 @@ describe('Test set-xml-status', () => {
 
   it('sets a 200 if all good', () => {
     assert.deepEqual(
-      status({
+      setStatus({
         content: {
           xml: {
             root: {},
