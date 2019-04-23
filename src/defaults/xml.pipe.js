@@ -30,6 +30,7 @@ const check = require('../xml/check-xml');
 const parseFrontmatter = require('../html/parse-frontmatter');
 
 /* eslint no-param-reassign: off */
+/* eslint newline-per-chained-call: off */
 
 const xmlpipe = (cont, payload, action) => {
   action.logger = action.logger || log;
@@ -38,21 +39,20 @@ const xmlpipe = (cont, payload, action) => {
   pipe
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
-    .before(fetch)
-    .before(parse)
+    .before(fetch).expose('fetch')
+    .before(parse).expose('parse')
     .before(parseFrontmatter)
     .before(smartypants)
     .before(sections)
-    .before(meta)
+    .before(meta).expose('meta')
     .once(cont)
-    .after(emit)
+    .after(emit).expose('xml')
     .after(type('application/xml'))
     .after(check)
     .after(cache)
     .when(uncached)
     .after(key)
-    .after(flag)
-    .when(esi) // flag ESI when there is ESI in the response
+    .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .error(status);
 
   action.logger.log('debug', 'Running XML pipeline');
