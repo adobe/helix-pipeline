@@ -25,7 +25,7 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
 const type = require('../utils/set-content-type.js');
 const emit = require('../xml/emit-xml.js');
-const status = require('../xml/set-xml-status.js');
+const { selectStatus } = require('../xml/set-xml-status.js');
 const check = require('../xml/check-xml');
 const parseFrontmatter = require('../html/parse-frontmatter');
 
@@ -53,7 +53,7 @@ const xmlpipe = (cont, payload, action) => {
     .when(uncached)
     .after(key)
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
-    .error(status);
+    .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running XML pipeline');
   return pipe.run(payload);
