@@ -11,7 +11,15 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
+const { Logger } = require('@adobe/helix-shared');
 const rewrite = require('../src/html/static-asset-links');
+const { pipe } = require('../src/defaults/html.pipe.js');
+
+
+const logger = Logger.getTestLogger({
+  // tune this for debugging
+  level: 'info',
+});
 
 function rw(content) {
   return rewrite({
@@ -23,6 +31,69 @@ function rw(content) {
     },
   }).response.body;
 }
+
+describe('Integration Test Static Asset Rewriting', () => {
+  let production;
+
+  before('Fake Production Mode', () => {
+    // eslint-disable-next-line no-underscore-dangle
+    production = process.env.__OW_ACTIVATION_ID;
+    // eslint-disable-next-line no-underscore-dangle
+    process.env.__OW_ACTIVATION_ID = 'fake';
+  });
+
+  it('Test static asset rewriting in full pipeline', async () => {
+    const context = {
+      content: {
+        body: 'Hello World',
+      },
+    };
+    const action = {
+      request: {
+        params: {},
+      },
+      logger,
+    };
+    const once = ({ content }) => ({
+      response: {
+        status: 200,
+        body: `<html>
+  <head>
+    <title>${content.document.body.textContent}</title>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    ${content.document.body.innerHTML}
+    <script>
+      alert('ok');
+    </script>
+  </body>
+</html>`,
+      },
+    });
+
+    const res = await pipe(once, context, action);
+
+    assert.equal(res.response.body, `<html><head>
+    <title>Hello World</title>
+    <script src='<esi:include src="index.js.esi"/><esi:remove>index.js</esi:remove>'></script>
+    <link rel="stylesheet" href='<esi:include src="style.css.esi"/><esi:remove>style.css</esi:remove>'>
+  </head>
+  <body>
+    <p>Hello World</p>
+    <script>
+      alert('ok');
+    </script>
+  
+</body></html>`);
+  });
+
+  after('Reset Production Mode', () => {
+    // eslint-disable-next-line no-underscore-dangle
+    process.env.__OW_ACTIVATION_ID = production;
+  });
+});
 
 describe('Test Static Asset Rewriting', () => {
   it('Ignores non-HTML', () => {
