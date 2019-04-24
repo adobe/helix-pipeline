@@ -43,6 +43,10 @@ describe('Test Markdown Parsing', () => {
     assertMatch('headings', callback);
   });
 
+  it('Parses HTML in Markdown', () => {
+    assertMatch('forms', callback);
+  });
+
   it('Does not get confused by thematic breaks', () => {
     assertMatch('confusing', callback);
   });

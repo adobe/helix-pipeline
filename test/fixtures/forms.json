@@ -1,0 +1,31 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Hello "
+        },
+        {
+          "type": "html",
+          "value": "<em>"
+        },
+        {
+          "type": "text",
+          "value": "World"
+        },
+        {
+          "type": "html",
+          "value": "</em>"
+        }
+      ]
+    },
+    {
+      "type": "html",
+      "value": "<form action=\"/cgi-bin/contact\">\n  <input type=\"text\"><label>Message</label>\n</form>"
+    }
+  ]
+}
