@@ -8,7 +8,7 @@
   "scripts": {
     "semantic-release": "semantic-release",
     "commit": "git-cz",
-    "test": "nyc nyc --reporter=lcov mocha --exit",
+    "test": "nyc --reporter=lcov mocha --exit",
     "lint": "npx eslint . && npm run types",
     "types": "npm run docs && node bin/schema2ts.js",
     "docs": "npx jsonschema2md -d src/schemas -o docs",
