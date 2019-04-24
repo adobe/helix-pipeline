@@ -231,7 +231,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](λ)
       `, `
-        <h1 id="foo">Foo</h1>
+        <h1 id="foo-bar">Foo <em>Bar</em></h1>
         <p>Hello World <a href="%CE%BB">link</a></p>
     `);
   });
