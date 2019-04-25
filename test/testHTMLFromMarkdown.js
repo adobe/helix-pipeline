@@ -217,6 +217,30 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
+  it('HTML Block elements', async () => {
+    await assertMd(`
+        # Foo
+
+        <form>
+          <input type="text" name="name"><label for="name">Name</label>
+        </form>
+      `, `
+        <h1 id="foo">Foo</h1>
+        <form><input type="text" name="name"><label for="name">Name</label></form>
+    `);
+  });
+
+  it('HTML inline elements', async () => {
+    await assertMd(`
+        # Foo <em>Bar</em>
+
+        Hello World [link](λ)
+      `, `
+        <h1 id="foo-bar">Foo <em>Bar</em></h1>
+        <p>Hello World <a href="%CE%BB">link</a></p>
+    `);
+  });
+
   it('GFM', async () => {
     await assertMd(`
         Hello World.

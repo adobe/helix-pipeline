@@ -214,7 +214,10 @@ class VDOMTransformer {
    * @returns {string} the corresponding HTML
    */
   static toHTML(mdast, handlers) {
-    return hast2html(mdast2hast(mdast, { handlers }));
+    return hast2html(mdast2hast(mdast, {
+      handlers,
+      allowDangerousHTML: true,
+    }), { allowDangerousHTML: true });
   }
 
   /**

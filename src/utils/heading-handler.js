@@ -11,6 +11,7 @@
  */
 const fallback = require('mdast-util-to-hast/lib/handlers/heading');
 const toString = require('mdast-util-to-string');
+const strip = require('strip-markdown');
 const GithubSlugger = require('github-slugger');
 
 /**
@@ -39,7 +40,7 @@ class HeadingHandler {
   handler() {
     return (h, node) => {
       // Prepare the heading id
-      const headingIdentifier = this.slugger.slug(toString(node));
+      const headingIdentifier = this.slugger.slug(toString(strip()(node)));
 
       // Inject the id after transformation
       const n = Object.assign({}, node);
