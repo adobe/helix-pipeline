@@ -66,6 +66,11 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
+const crequest = {
+  extension: 'html',
+  url: '/test/test.html',
+};
+
 // return only sections that are not hidden
 function nonhidden(section) {
   if (section.meta && section.meta) {
@@ -86,6 +91,7 @@ describe('Integration Test Section Strain Filtering', () => {
         return { response: { body: content.document.body.innerHTML } };
       },
       {
+        request: crequest,
         content: {
           body: `---
 frontmatter: true
@@ -125,6 +131,7 @@ And this one only in strain "B"
 describe('Unit Test Section Strain Filtering', () => {
   it('Works with empty section lists', () => {
     const context = {
+      request: crequest,
       content: {
         sections: [],
       },
@@ -342,6 +349,7 @@ describe('Integration Test A/B Testing', () => {
         return { response: { body: content.document.body.innerHTML } };
       },
       {
+        request: crequest,
         content: {
           body: `---
 frontmatter: true
@@ -393,6 +401,7 @@ Or this one at the same time.
           return { response: { body: content.document.body.innerHTML } };
         },
         {
+          request: crequest,
           content: {
             body: `---
 frontmatter: true

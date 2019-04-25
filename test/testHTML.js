@@ -111,6 +111,12 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
+
+const crequest = {
+  extension: 'html',
+  url: '/test/test.html',
+};
+
 describe('Testing HTML Pipeline', () => {
   setupPolly({
     logging: false,
@@ -139,6 +145,7 @@ describe('Testing HTML Pipeline', () => {
         return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
+        request: crequest,
         content: {
           body: 'Hello World',
         },
@@ -206,6 +213,7 @@ ${content.document.body.innerHTML}`,
     const res = await pipe(
       myfunc,
       {
+        request: crequest,
         content: {
           body: 'Hello World',
         },
@@ -236,6 +244,7 @@ ${content.document.body.innerHTML}`,
         return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
+        request: crequest,
         content: {
           body: fs.readFileSync(path.resolve(__dirname, 'fixtures/index-unmodified.md')).toString(),
         },
@@ -262,6 +271,7 @@ ${content.document.body.innerHTML}`,
         return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
+        request: crequest,
         content: {
           body: fs.readFileSync(path.resolve(__dirname, 'fixtures/index-projecthelixio.md')).toString(),
         },
@@ -288,6 +298,7 @@ ${content.document.body.innerHTML}`,
         return { response: { status: 201, body: content.document.body.innerHTML } };
       },
       {
+        request: crequest,
         content: {
           body: fs.readFileSync(path.resolve(__dirname, 'fixtures/index-modified.md')).toString(),
         },
@@ -306,6 +317,7 @@ ${content.document.body.innerHTML}`,
     const result = await pipe(
       ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
+        request: crequest,
         content: {
           foo: 'Hello World',
         },
@@ -325,6 +337,7 @@ ${content.document.body.innerHTML}`,
     const result = await pipe(
       ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
+        request: crequest,
         content: {
           sections: [{ type: 'notroot' }],
         },
@@ -344,6 +357,7 @@ ${content.document.body.innerHTML}`,
     const result = await pipe(
       ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
+        request: crequest,
         content: {
           sections: [{ type: 'root', custom: 'notallowed' }],
         },
@@ -363,6 +377,7 @@ ${content.document.body.innerHTML}`,
     const result = await pipe(
       ({ content }) => ({ response: { status: 201, body: content.document.body.innerHTML } }),
       {
+        request: crequest,
         content: {
           body: 'Hello World',
         },
@@ -498,7 +513,7 @@ ${content.document.body.innerHTML}`,
           },
         },
       }),
-      {},
+      { request: crequest },
       {
         request: { params },
         secrets,
@@ -524,7 +539,7 @@ ${content.document.body.innerHTML}`,
           },
         },
       }),
-      {},
+      { request: crequest },
       {
         request: { params },
         secrets,
