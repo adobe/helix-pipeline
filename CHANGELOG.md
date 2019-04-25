@@ -1,3 +1,11 @@
+# [1.7.0](https://github.com/adobe/helix-pipeline/compare/v1.6.0...v1.7.0) (2019-04-24)
+
+
+### Features
+
+* **xml:** expose extension points ([01d8926](https://github.com/adobe/helix-pipeline/commit/01d8926)), closes [#268](https://github.com/adobe/helix-pipeline/issues/268)
+* **xml:** expose extension points ([614e351](https://github.com/adobe/helix-pipeline/commit/614e351)), closes [#268](https://github.com/adobe/helix-pipeline/issues/268)
+
 # [1.6.0](https://github.com/adobe/helix-pipeline/compare/v1.5.3...v1.6.0) (2019-04-23)
 
 

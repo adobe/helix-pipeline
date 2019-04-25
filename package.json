@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -8,7 +8,8 @@
   "scripts": {
     "semantic-release": "semantic-release",
     "commit": "git-cz",
-    "test": "nyc nyc --reporter=lcov mocha --exit",
+    "test": "nyc --reporter=text --reporter=lcov --check-coverage --branches 94 --statements 99 --lines 100 mocha",
+    "test-ci": "npm run lint && npm run test && codecov",
     "lint": "npx eslint . && npm run types",
     "types": "npm run docs && node bin/schema2ts.js",
     "docs": "npx jsonschema2md -d src/schemas -o docs",
@@ -39,7 +40,7 @@
     "lint-staged": "^8.1.4",
     "mocha": "^6.1.4",
     "mocha-junit-reporter": "^1.17.0",
-    "nyc": "^14.0.0",
+    "nyc": "^14.1.0",
     "semantic-release": "^15.13.3",
     "snyk": "^1.124.1",
     "unist-builder": "^1.0.3",
@@ -47,7 +48,7 @@
     "unist-util-remove-position": "^1.1.2"
   },
   "dependencies": {
-    "@adobe/helix-shared": "0.10.3",
+    "@adobe/helix-shared": "0.10.4",
     "@adobe/openwhisk-loggly-wrapper": "0.4.2",
     "ajv": "^6.6.2",
     "callsites": "^3.0.0",
