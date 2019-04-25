@@ -20,7 +20,7 @@ function emit({ content, response = {} }, { logger }) {
       logger.debug(`Emitting JSON from ${typeof content.json}`);
       return {
         response: {
-          body: JSON.stringify(content.json),
+          body: JSON.parse(JSON.stringify(content.json)),
         },
       };
     } catch (e) {

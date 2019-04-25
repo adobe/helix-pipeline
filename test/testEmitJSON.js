@@ -31,7 +31,7 @@ const action = {
   logger,
 };
 
-const expectedJSON = '{"root":{"title":"Bill, Welcome to the future"}}';
+const expectedJSON = Object.assign({}, content.json);
 
 describe('Test emit-json', () => {
   it('builds JSON from object', () => {
@@ -56,7 +56,9 @@ describe('Test emit-json', () => {
       response,
     }, action), {
       response: {
-        body: '{"with":{}}',
+        body: {
+          with: {},
+        },
       },
     });
     // JSON.stringify does not like circular structures
@@ -79,7 +81,7 @@ describe('Test emit-json', () => {
 
   it('handles missing response object', () => {
     const output = emit({ content }, action);
-    assert.equal(output.response.body, expectedJSON);
+    assert.deepEqual(output.response.body, expectedJSON);
   });
 
   it('handles missing content object', () => {

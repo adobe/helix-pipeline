@@ -189,7 +189,7 @@ describe('Testing JSON Pipeline', () => {
       never: baz,
     };
 
-    const res = await pipe(
+    const result = await pipe(
       myfunc,
       { },
       {
@@ -203,7 +203,7 @@ describe('Testing JSON Pipeline', () => {
     assert.equal(calledbar, true, 'bar has been called');
     assert.equal(calledbaz, false, 'baz has never been called');
 
-    assert.ok(res.response.body.match(/FUTURE!!!/));
+    assert.ok(result.response.body.root.title.match(/FUTURE!!!/));
   });
 
   it('json.pipe does not overwrite existing response body', async () => {
