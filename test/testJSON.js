@@ -139,4 +139,93 @@ describe('Testing JSON Pipeline', () => {
     assert.equal(result.response.headers['Content-Type'], 'text/plain+json');
     assert.deepEqual(result.response.body, { foo: 'bar' });
   });
+
+  it('json.pipe can be extended', async () => {
+    const myfunc = ({ content }) => ({
+      content: {
+        json: {
+          root: {
+            title: content.title,
+          },
+        },
+      },
+    });
+
+    let calledfoo = false;
+    let calledbar = false;
+    let calledbaz = false;
+    function foo() {
+      assert.equal(calledfoo, false, 'foo has not yet been called');
+      assert.equal(calledbar, false, 'bar has not yet been called');
+      calledfoo = true;
+    }
+
+    function bar() {
+      assert.equal(calledfoo, true, 'foo has been called');
+      assert.equal(calledbar, false, 'bar has not yet been called');
+      calledbar = true;
+    }
+
+    function baz() {
+      calledbaz = true;
+    }
+
+    function shouttitle(p) {
+      const { content } = p;
+      const { title } = content.json.root;
+      content.json.root.title = `${title.toUpperCase()}!!!`;
+      return { content };
+    }
+
+    myfunc.before = {
+      fetch: foo,
+      // before the JSON is built, make sure that
+      // the title is being shouted
+      json: shouttitle,
+    };
+
+    myfunc.after = {
+      meta: bar,
+      never: baz,
+    };
+
+    const res = await pipe(
+      myfunc,
+      { },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal(calledfoo, true, 'foo has been called');
+    assert.equal(calledbar, true, 'bar has been called');
+    assert.equal(calledbaz, false, 'baz has never been called');
+
+    assert.ok(res.response.body.match(/FUTURE!!!/));
+  });
+
+  it('json.pipe does not overwrite existing response body', async () => {
+    const context = {
+      response: {
+        body: JSON.stringify({
+          root: {
+            title: 'foo',
+          },
+        }),
+      },
+    };
+    const result = await pipe(
+      () => {},
+      context,
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal(result.response.body, context.response.body);
+  });
 });
