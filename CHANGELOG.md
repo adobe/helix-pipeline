@@ -1,3 +1,10 @@
+## [1.7.1](https://github.com/adobe/helix-pipeline/compare/v1.7.0...v1.7.1) (2019-04-25)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/helix-shared to version 0.10.4 ([93bb5ee](https://github.com/adobe/helix-pipeline/commit/93bb5ee))
+
 # [1.7.0](https://github.com/adobe/helix-pipeline/compare/v1.6.0...v1.7.0) (2019-04-24)
 
 
