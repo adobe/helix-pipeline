@@ -1,3 +1,18 @@
+# [1.8.0](https://github.com/adobe/helix-pipeline/compare/v1.7.1...v1.8.0) (2019-04-25)
+
+
+### Bug Fixes
+
+* **embed:** provide fallback with esi:remove when esi include fails ([575391d](https://github.com/adobe/helix-pipeline/commit/575391d)), closes [#267](https://github.com/adobe/helix-pipeline/issues/267)
+* **html:** enable (dangerous) HTML in Markdown and pass it through ([93efaf7](https://github.com/adobe/helix-pipeline/commit/93efaf7)), closes [#154](https://github.com/adobe/helix-pipeline/issues/154)
+* **html:** ignore HTML tags when generating IDs for headlines ([bdad96c](https://github.com/adobe/helix-pipeline/commit/bdad96c))
+
+
+### Features
+
+* **embeds:** detect internal embeds ([7af9356](https://github.com/adobe/helix-pipeline/commit/7af9356)), closes [#267](https://github.com/adobe/helix-pipeline/issues/267)
+* **transformer:** enable recursive processing in custom handler functions ([0d5193a](https://github.com/adobe/helix-pipeline/commit/0d5193a))
+
 ## [1.7.1](https://github.com/adobe/helix-pipeline/compare/v1.7.0...v1.7.1) (2019-04-25)
 
 
