@@ -49,6 +49,10 @@
             "description": "Deprecated: the Hypermedia (HAST) AST",
             "meta:status": "deprecated"
         },
+        "json": {
+            "type": "object",
+            "description": "The JSON object to emit."
+        },
         "xml": {
             "type": "object",
             "description": "The XML object to emit. See xmlbuilder-js for syntax."
