@@ -1,3 +1,11 @@
+# [1.9.0](https://github.com/adobe/helix-pipeline/compare/v1.8.0...v1.9.0) (2019-04-25)
+
+
+### Features
+
+* **json:** keep response.body as object ([263b637](https://github.com/adobe/helix-pipeline/commit/263b637))
+* **json:** refactoring json pipeline ([d67cf53](https://github.com/adobe/helix-pipeline/commit/d67cf53)), closes [#230](https://github.com/adobe/helix-pipeline/issues/230) [#269](https://github.com/adobe/helix-pipeline/issues/269) [#280](https://github.com/adobe/helix-pipeline/issues/280)
+
 # [1.8.0](https://github.com/adobe/helix-pipeline/compare/v1.7.1...v1.8.0) (2019-04-25)
 
 
