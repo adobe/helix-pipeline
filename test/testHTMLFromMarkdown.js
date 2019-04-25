@@ -68,6 +68,11 @@ const logger = winston.createLogger({
   ],
 });
 
+const crequest = {
+  extension: 'html',
+  url: '/test/test.html',
+};
+
 /**
  * Assert that a specific html dom is generated from the given markdown
  * using our html pipeline.
@@ -86,7 +91,7 @@ const assertMd = async (md, html) => {
 
   const generated = await pipe(
     fromHTML,
-    { content: { body: multiline(md) } },
+    { content: { body: multiline(md) }, request: crequest },
     {
       logger,
       request: { params },

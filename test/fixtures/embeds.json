@@ -7,35 +7,9 @@
       "children": [
         {
           "type": "text",
-          "value": "Hello \"World\"",
-          "position": {
-            "start": {
-              "line": 1,
-              "column": 3,
-              "offset": 2
-            },
-            "end": {
-              "line": 1,
-              "column": 16,
-              "offset": 15
-            },
-            "indent": []
-          }
+          "value": "Hello \"World\""
         }
-      ],
-      "position": {
-        "start": {
-          "line": 1,
-          "column": 1,
-          "offset": 0
-        },
-        "end": {
-          "line": 1,
-          "column": 16,
-          "offset": 15
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "heading",
@@ -43,262 +17,67 @@
       "children": [
         {
           "type": "text",
-          "value": "Gasby-Style-Embeds",
-          "position": {
-            "start": {
-              "line": 3,
-              "column": 4,
-              "offset": 20
-            },
-            "end": {
-              "line": 3,
-              "column": 22,
-              "offset": 38
-            },
-            "indent": []
-          }
+          "value": "Gatsby-Style-Embeds"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 3,
-          "column": 1,
-          "offset": 17
-        },
-        "end": {
-          "line": 3,
-          "column": 22,
-          "offset": 38
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
           "type": "embed",
-          "position": {
-            "start": {
-              "line": 5,
-              "column": 1,
-              "offset": 40
-            },
-            "end": {
-              "line": 5,
-              "column": 51,
-              "offset": 90
-            },
-            "indent": []
-          },
           "children": [
             {
               "type": "inlineCode",
-              "value": "video: https://www.youtube.com/embed/2Xc9gXyf2G4",
-              "position": {
-                "start": {
-                  "line": 5,
-                  "column": 1,
-                  "offset": 40
-                },
-                "end": {
-                  "line": 5,
-                  "column": 51,
-                  "offset": 90
-                },
-                "indent": []
-              }
+              "value": "video: https://www.youtube.com/embed/2Xc9gXyf2G4"
             }
           ],
           "url": "https://www.youtube.com/embed/2Xc9gXyf2G4"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 5,
-          "column": 1,
-          "offset": 40
-        },
-        "end": {
-          "line": 5,
-          "column": 51,
-          "offset": 90
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
           "type": "text",
-          "value": "is an embed, but",
-          "position": {
-            "start": {
-              "line": 7,
-              "column": 1,
-              "offset": 92
-            },
-            "end": {
-              "line": 7,
-              "column": 17,
-              "offset": 108
-            },
-            "indent": []
-          }
+          "value": "is an embed, but"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 7,
-          "column": 1,
-          "offset": 92
-        },
-        "end": {
-          "line": 7,
-          "column": 17,
-          "offset": 108
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
           "type": "inlineCode",
-          "value": "this",
-          "position": {
-            "start": {
-              "line": 9,
-              "column": 1,
-              "offset": 110
-            },
-            "end": {
-              "line": 9,
-              "column": 7,
-              "offset": 116
-            },
-            "indent": []
-          }
+          "value": "this"
         },
         {
           "type": "text",
-          "value": " is simple inline code and ",
-          "position": {
-            "start": {
-              "line": 9,
-              "column": 7,
-              "offset": 116
-            },
-            "end": {
-              "line": 9,
-              "column": 34,
-              "offset": 143
-            },
-            "indent": []
-          }
+          "value": " is simple inline code and "
         },
         {
           "type": "inlineCode",
-          "value": "video: www.youtube.com",
-          "position": {
-            "start": {
-              "line": 9,
-              "column": 34,
-              "offset": 143
-            },
-            "end": {
-              "line": 9,
-              "column": 58,
-              "offset": 167
-            },
-            "indent": []
-          }
+          "value": "video: www.youtube.com"
         },
         {
           "type": "text",
-          "value": " isn't an embed either.",
-          "position": {
-            "start": {
-              "line": 9,
-              "column": 58,
-              "offset": 167
-            },
-            "end": {
-              "line": 9,
-              "column": 81,
-              "offset": 190
-            },
-            "indent": []
-          }
+          "value": " isn't an embed either."
         }
-      ],
-      "position": {
-        "start": {
-          "line": 9,
-          "column": 1,
-          "offset": 110
-        },
-        "end": {
-          "line": 9,
-          "column": 81,
-          "offset": 190
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
           "type": "inlineCode",
-          "value": "video:    http foo bar",
-          "position": {
-            "start": {
-              "line": 11,
-              "column": 1,
-              "offset": 192
-            },
-            "end": {
-              "line": 11,
-              "column": 25,
-              "offset": 216
-            },
-            "indent": []
-          }
+          "value": "video:    http foo bar"
         },
         {
           "type": "text",
-          "value": " looks interesting, but doesn't work either.",
-          "position": {
-            "start": {
-              "line": 11,
-              "column": 25,
-              "offset": 216
-            },
-            "end": {
-              "line": 11,
-              "column": 69,
-              "offset": 260
-            },
-            "indent": []
-          }
+          "value": " looks interesting, but doesn't work either."
         }
-      ],
-      "position": {
-        "start": {
-          "line": 11,
-          "column": 1,
-          "offset": 192
-        },
-        "end": {
-          "line": 11,
-          "column": 69,
-          "offset": 260
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "heading",
@@ -306,35 +85,9 @@
       "children": [
         {
           "type": "text",
-          "value": "Link + Image-Style Embeds",
-          "position": {
-            "start": {
-              "line": 13,
-              "column": 4,
-              "offset": 265
-            },
-            "end": {
-              "line": 13,
-              "column": 29,
-              "offset": 290
-            },
-            "indent": []
-          }
+          "value": "Link + Image-Style Embeds"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 13,
-          "column": 1,
-          "offset": 262
-        },
-        "end": {
-          "line": 13,
-          "column": 29,
-          "offset": 290
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "embed",
@@ -351,65 +104,13 @@
                   "type": "image",
                   "title": null,
                   "url": "http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg",
-                  "alt": "Audi R8",
-                  "position": {
-                    "start": {
-                      "line": 15,
-                      "column": 2,
-                      "offset": 293
-                    },
-                    "end": {
-                      "line": 15,
-                      "column": 57,
-                      "offset": 348
-                    },
-                    "indent": []
-                  }
+                  "alt": "Audi R8"
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 15,
-                  "column": 1,
-                  "offset": 292
-                },
-                "end": {
-                  "line": 15,
-                  "column": 113,
-                  "offset": 404
-                },
-                "indent": []
-              }
+              ]
             }
-          ],
-          "position": {
-            "start": {
-              "line": 15,
-              "column": 1,
-              "offset": 292
-            },
-            "end": {
-              "line": 15,
-              "column": 113,
-              "offset": 404
-            },
-            "indent": []
-          }
+          ]
         }
       ],
-      "position": {
-        "start": {
-          "line": 15,
-          "column": 1,
-          "offset": 292
-        },
-        "end": {
-          "line": 15,
-          "column": 113,
-          "offset": 404
-        },
-        "indent": []
-      },
       "url": "https://www.youtube.com/watch?v=KOxbO0EI4MA"
     },
     {
@@ -417,20 +118,7 @@
       "children": [
         {
           "type": "text",
-          "value": "is an embed, but ",
-          "position": {
-            "start": {
-              "line": 17,
-              "column": 1,
-              "offset": 406
-            },
-            "end": {
-              "line": 17,
-              "column": 18,
-              "offset": 423
-            },
-            "indent": []
-          }
+          "value": "is an embed, but "
         },
         {
           "type": "link",
@@ -439,103 +127,25 @@
           "children": [
             {
               "type": "text",
-              "value": "this",
-              "position": {
-                "start": {
-                  "line": 17,
-                  "column": 19,
-                  "offset": 424
-                },
-                "end": {
-                  "line": 17,
-                  "column": 23,
-                  "offset": 428
-                },
-                "indent": []
-              }
+              "value": "this"
             }
-          ],
-          "position": {
-            "start": {
-              "line": 17,
-              "column": 18,
-              "offset": 423
-            },
-            "end": {
-              "line": 17,
-              "column": 79,
-              "offset": 484
-            },
-            "indent": []
-          }
+          ]
         },
         {
           "type": "text",
-          "value": " is just a link and ",
-          "position": {
-            "start": {
-              "line": 17,
-              "column": 79,
-              "offset": 484
-            },
-            "end": {
-              "line": 17,
-              "column": 99,
-              "offset": 504
-            },
-            "indent": []
-          }
+          "value": " is just a link and "
         },
         {
           "type": "image",
           "title": null,
           "url": "http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg",
-          "alt": "Audi R8",
-          "position": {
-            "start": {
-              "line": 17,
-              "column": 99,
-              "offset": 504
-            },
-            "end": {
-              "line": 17,
-              "column": 154,
-              "offset": 559
-            },
-            "indent": []
-          }
+          "alt": "Audi R8"
         },
         {
           "type": "text",
-          "value": " is just an image.",
-          "position": {
-            "start": {
-              "line": 17,
-              "column": 154,
-              "offset": 559
-            },
-            "end": {
-              "line": 17,
-              "column": 172,
-              "offset": 577
-            },
-            "indent": []
-          }
+          "value": " is just an image."
         }
-      ],
-      "position": {
-        "start": {
-          "line": 17,
-          "column": 1,
-          "offset": 406
-        },
-        "end": {
-          "line": 17,
-          "column": 172,
-          "offset": 577
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "heading",
@@ -543,35 +153,9 @@
       "children": [
         {
           "type": "text",
-          "value": "Image-Style Embeds",
-          "position": {
-            "start": {
-              "line": 19,
-              "column": 4,
-              "offset": 582
-            },
-            "end": {
-              "line": 19,
-              "column": 22,
-              "offset": 600
-            },
-            "indent": []
-          }
+          "value": "Image-Style Embeds"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 19,
-          "column": 1,
-          "offset": 579
-        },
-        "end": {
-          "line": 19,
-          "column": 22,
-          "offset": 600
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "embed",
@@ -583,50 +167,11 @@
               "type": "image",
               "title": null,
               "url": "https://www.youtube.com/watch?v=KOxbO0EI4MA",
-              "alt": null,
-              "position": {
-                "start": {
-                  "line": 21,
-                  "column": 1,
-                  "offset": 602
-                },
-                "end": {
-                  "line": 21,
-                  "column": 49,
-                  "offset": 650
-                },
-                "indent": []
-              }
+              "alt": null
             }
-          ],
-          "position": {
-            "start": {
-              "line": 21,
-              "column": 1,
-              "offset": 602
-            },
-            "end": {
-              "line": 21,
-              "column": 49,
-              "offset": 650
-            },
-            "indent": []
-          }
+          ]
         }
       ],
-      "position": {
-        "start": {
-          "line": 21,
-          "column": 1,
-          "offset": 602
-        },
-        "end": {
-          "line": 21,
-          "column": 49,
-          "offset": 650
-        },
-        "indent": []
-      },
       "url": "https://www.youtube.com/watch?v=KOxbO0EI4MA"
     },
     {
@@ -634,35 +179,9 @@
       "children": [
         {
           "type": "text",
-          "value": "is an embed, but ",
-          "position": {
-            "start": {
-              "line": 23,
-              "column": 1,
-              "offset": 652
-            },
-            "end": {
-              "line": 23,
-              "column": 18,
-              "offset": 669
-            },
-            "indent": []
-          }
+          "value": "is an embed, but "
         }
-      ],
-      "position": {
-        "start": {
-          "line": 23,
-          "column": 1,
-          "offset": 652
-        },
-        "end": {
-          "line": 23,
-          "column": 18,
-          "offset": 669
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
@@ -671,176 +190,33 @@
           "type": "image",
           "title": null,
           "url": "https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg",
-          "alt": null,
-          "position": {
-            "start": {
-              "line": 25,
-              "column": 1,
-              "offset": 671
-            },
-            "end": {
-              "line": 25,
-              "column": 133,
-              "offset": 803
-            },
-            "indent": []
-          }
+          "alt": null
         },
         {
           "type": "text",
-          "value": " is just an image. Even when ",
-          "position": {
-            "start": {
-              "line": 25,
-              "column": 133,
-              "offset": 803
-            },
-            "end": {
-              "line": 25,
-              "column": 162,
-              "offset": 832
-            },
-            "indent": []
-          }
+          "value": " is just an image. Even when "
         }
-      ],
-      "position": {
-        "start": {
-          "line": 25,
-          "column": 1,
-          "offset": 671
-        },
-        "end": {
-          "line": 25,
-          "column": 162,
-          "offset": 832
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
-          "type": "text",
-          "value": "(",
-          "position": {
-            "start": {
-              "line": 27,
-              "column": 1,
-              "offset": 834
-            },
-            "end": {
-              "line": 27,
-              "column": 2,
-              "offset": 835
-            },
-            "indent": []
-          }
-        },
-        {
-          "type": "link",
+          "type": "image",
           "title": null,
           "url": "https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg",
-          "children": [
-            {
-              "type": "text",
-              "value": "https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg",
-              "position": {
-                "start": {
-                  "line": 27,
-                  "column": 2,
-                  "offset": 835
-                },
-                "end": {
-                  "line": 27,
-                  "column": 129,
-                  "offset": 962
-                },
-                "indent": []
-              }
-            }
-          ],
-          "position": {
-            "start": {
-              "line": 27,
-              "column": 2,
-              "offset": 835
-            },
-            "end": {
-              "line": 27,
-              "column": 129,
-              "offset": 962
-            },
-            "indent": []
-          }
-        },
-        {
-          "type": "text",
-          "value": ")",
-          "position": {
-            "start": {
-              "line": 27,
-              "column": 129,
-              "offset": 962
-            },
-            "end": {
-              "line": 27,
-              "column": 130,
-              "offset": 963
-            },
-            "indent": []
-          }
+          "alt": null
         }
-      ],
-      "position": {
-        "start": {
-          "line": 27,
-          "column": 1,
-          "offset": 834
-        },
-        "end": {
-          "line": 27,
-          "column": 130,
-          "offset": 963
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
           "type": "text",
-          "value": "is on a paragraph of its own.",
-          "position": {
-            "start": {
-              "line": 29,
-              "column": 1,
-              "offset": 965
-            },
-            "end": {
-              "line": 29,
-              "column": 30,
-              "offset": 994
-            },
-            "indent": []
-          }
+          "value": "is on a paragraph of its own."
         }
-      ],
-      "position": {
-        "start": {
-          "line": 29,
-          "column": 1,
-          "offset": 965
-        },
-        "end": {
-          "line": 29,
-          "column": 30,
-          "offset": 994
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "heading",
@@ -848,35 +224,9 @@
       "children": [
         {
           "type": "text",
-          "value": "IA Writer-Style Embeds",
-          "position": {
-            "start": {
-              "line": 31,
-              "column": 4,
-              "offset": 999
-            },
-            "end": {
-              "line": 31,
-              "column": 26,
-              "offset": 1021
-            },
-            "indent": []
-          }
+          "value": "IA Writer-Style Embeds"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 31,
-          "column": 1,
-          "offset": 996
-        },
-        "end": {
-          "line": 31,
-          "column": 26,
-          "offset": 1021
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "embed",
@@ -891,65 +241,13 @@
               "children": [
                 {
                   "type": "text",
-                  "value": "https://www.youtube.com/watch?v=KOxbO0EI4MA",
-                  "position": {
-                    "start": {
-                      "line": 33,
-                      "column": 1,
-                      "offset": 1023
-                    },
-                    "end": {
-                      "line": 33,
-                      "column": 44,
-                      "offset": 1066
-                    },
-                    "indent": []
-                  }
+                  "value": "https://www.youtube.com/watch?v=KOxbO0EI4MA"
                 }
-              ],
-              "position": {
-                "start": {
-                  "line": 33,
-                  "column": 1,
-                  "offset": 1023
-                },
-                "end": {
-                  "line": 33,
-                  "column": 44,
-                  "offset": 1066
-                },
-                "indent": []
-              }
+              ]
             }
-          ],
-          "position": {
-            "start": {
-              "line": 33,
-              "column": 1,
-              "offset": 1023
-            },
-            "end": {
-              "line": 33,
-              "column": 44,
-              "offset": 1066
-            },
-            "indent": []
-          }
+          ]
         }
       ],
-      "position": {
-        "start": {
-          "line": 33,
-          "column": 1,
-          "offset": 1023
-        },
-        "end": {
-          "line": 33,
-          "column": 44,
-          "offset": 1066
-        },
-        "indent": []
-      },
       "url": "https://www.youtube.com/watch?v=KOxbO0EI4MA"
     },
     {
@@ -957,20 +255,7 @@
       "children": [
         {
           "type": "text",
-          "value": "is an embed, but ",
-          "position": {
-            "start": {
-              "line": 35,
-              "column": 1,
-              "offset": 1068
-            },
-            "end": {
-              "line": 35,
-              "column": 18,
-              "offset": 1085
-            },
-            "indent": []
-          }
+          "value": "is an embed, but "
         },
         {
           "type": "link",
@@ -979,67 +264,15 @@
           "children": [
             {
               "type": "text",
-              "value": "https://www.youtube.com/watch?v=KOxbO0EI4MA",
-              "position": {
-                "start": {
-                  "line": 35,
-                  "column": 18,
-                  "offset": 1085
-                },
-                "end": {
-                  "line": 35,
-                  "column": 61,
-                  "offset": 1128
-                },
-                "indent": []
-              }
+              "value": "https://www.youtube.com/watch?v=KOxbO0EI4MA"
             }
-          ],
-          "position": {
-            "start": {
-              "line": 35,
-              "column": 18,
-              "offset": 1085
-            },
-            "end": {
-              "line": 35,
-              "column": 61,
-              "offset": 1128
-            },
-            "indent": []
-          }
+          ]
         },
         {
           "type": "text",
-          "value": " is just a link.",
-          "position": {
-            "start": {
-              "line": 35,
-              "column": 61,
-              "offset": 1128
-            },
-            "end": {
-              "line": 35,
-              "column": 77,
-              "offset": 1144
-            },
-            "indent": []
-          }
+          "value": " is just a link."
         }
-      ],
-      "position": {
-        "start": {
-          "line": 35,
-          "column": 1,
-          "offset": 1068
-        },
-        "end": {
-          "line": 35,
-          "column": 77,
-          "offset": 1144
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "heading",
@@ -1047,105 +280,27 @@
       "children": [
         {
           "type": "text",
-          "value": "Whitelisting",
-          "position": {
-            "start": {
-              "line": 37,
-              "column": 3,
-              "offset": 1148
-            },
-            "end": {
-              "line": 37,
-              "column": 15,
-              "offset": 1160
-            },
-            "indent": []
-          }
+          "value": "Whitelisting"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 37,
-          "column": 1,
-          "offset": 1146
-        },
-        "end": {
-          "line": 37,
-          "column": 15,
-          "offset": 1160
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
           "type": "text",
-          "value": "All embed hostnames must be whitelisted. Therefore, the following are not embeds:",
-          "position": {
-            "start": {
-              "line": 39,
-              "column": 1,
-              "offset": 1162
-            },
-            "end": {
-              "line": 39,
-              "column": 82,
-              "offset": 1243
-            },
-            "indent": []
-          }
+          "value": "All embed hostnames must be whitelisted. Therefore, the following are not embeds:"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 39,
-          "column": 1,
-          "offset": 1162
-        },
-        "end": {
-          "line": 39,
-          "column": 82,
-          "offset": 1243
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
       "children": [
         {
           "type": "inlineCode",
-          "value": "video: https://www.example.com/embed/2Xc9gXyf2G4",
-          "position": {
-            "start": {
-              "line": 41,
-              "column": 1,
-              "offset": 1245
-            },
-            "end": {
-              "line": 41,
-              "column": 51,
-              "offset": 1295
-            },
-            "indent": []
-          }
+          "value": "video: https://www.example.com/embed/2Xc9gXyf2G4"
         }
-      ],
-      "position": {
-        "start": {
-          "line": 41,
-          "column": 1,
-          "offset": 1245
-        },
-        "end": {
-          "line": 41,
-          "column": 51,
-          "offset": 1295
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
@@ -1159,50 +314,11 @@
               "type": "image",
               "title": null,
               "url": "http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg",
-              "alt": "Audi R8",
-              "position": {
-                "start": {
-                  "line": 43,
-                  "column": 2,
-                  "offset": 1298
-                },
-                "end": {
-                  "line": 43,
-                  "column": 57,
-                  "offset": 1353
-                },
-                "indent": []
-              }
+              "alt": "Audi R8"
             }
-          ],
-          "position": {
-            "start": {
-              "line": 43,
-              "column": 1,
-              "offset": 1297
-            },
-            "end": {
-              "line": 43,
-              "column": 113,
-              "offset": 1409
-            },
-            "indent": []
-          }
+          ]
         }
-      ],
-      "position": {
-        "start": {
-          "line": 43,
-          "column": 1,
-          "offset": 1297
-        },
-        "end": {
-          "line": 43,
-          "column": 113,
-          "offset": 1409
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
@@ -1211,35 +327,9 @@
           "type": "image",
           "title": null,
           "url": "https://www.example.com/watch?v=KOxbO0EI4MA",
-          "alt": null,
-          "position": {
-            "start": {
-              "line": 45,
-              "column": 1,
-              "offset": 1411
-            },
-            "end": {
-              "line": 45,
-              "column": 49,
-              "offset": 1459
-            },
-            "indent": []
-          }
+          "alt": null
         }
-      ],
-      "position": {
-        "start": {
-          "line": 45,
-          "column": 1,
-          "offset": 1411
-        },
-        "end": {
-          "line": 45,
-          "column": 49,
-          "offset": 1459
-        },
-        "indent": []
-      }
+      ]
     },
     {
       "type": "paragraph",
@@ -1251,62 +341,255 @@
           "children": [
             {
               "type": "text",
-              "value": "https://www.example.com/watch?v=KOxbO0EI4MA",
-              "position": {
-                "start": {
-                  "line": 47,
-                  "column": 1,
-                  "offset": 1461
-                },
-                "end": {
-                  "line": 47,
-                  "column": 44,
-                  "offset": 1504
-                },
-                "indent": []
-              }
+              "value": "https://www.example.com/watch?v=KOxbO0EI4MA"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Internal Embeds"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "depth": 2,
+      "children": [
+        {
+          "type": "text",
+          "value": "Gatsby-Style-Embeds"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "embed",
+          "children": [
+            {
+              "type": "inlineCode",
+              "value": "embed: foo.md"
             }
           ],
-          "position": {
-            "start": {
-              "line": 47,
-              "column": 1,
-              "offset": 1461
-            },
-            "end": {
-              "line": 47,
-              "column": 44,
-              "offset": 1504
-            },
-            "indent": []
-          }
+          "url": "/docs/foo.embed.html"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "embed",
+          "children": [
+            {
+              "type": "inlineCode",
+              "value": "html: bar.html"
+            }
+          ],
+          "url": "/docs/bar.embed.html"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "inlineCode",
+          "value": "markdowm: /docs/test.md"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "embed",
+          "children": [
+            {
+              "type": "inlineCode",
+              "value": "embed:../index.html"
+            }
+          ],
+          "url": "/index.embed.html"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Are all valid embeds, but "
+        },
+        {
+          "type": "inlineCode",
+          "value": "test: foo.md"
+        },
+        {
+          "type": "text",
+          "value": " isn't one."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "depth": 2,
+      "children": [
+        {
+          "type": "text",
+          "value": "Image-Style Embeds"
+        }
+      ]
+    },
+    {
+      "type": "embed",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "foo.md",
+              "alt": null
+            }
+          ]
         }
       ],
-      "position": {
-        "start": {
-          "line": 47,
-          "column": 1,
-          "offset": 1461
-        },
-        "end": {
-          "line": 47,
-          "column": 44,
-          "offset": 1504
-        },
-        "indent": []
-      }
-    }
-  ],
-  "position": {
-    "start": {
-      "line": 1,
-      "column": 1,
-      "offset": 0
+      "url": "/docs/foo.embed.html"
     },
-    "end": {
-      "line": 47,
-      "column": 44,
-      "offset": 1504
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "is an embed, but "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "foo.png",
+          "alt": null
+        },
+        {
+          "type": "text",
+          "value": " is just an image. Even when "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "foo.png",
+          "alt": null
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "is on a paragraph of its own."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "depth": 2,
+      "children": [
+        {
+          "type": "text",
+          "value": "IA Writer-Style Embeds"
+        }
+      ]
+    },
+    {
+      "type": "embed",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "/foo.md"
+            }
+          ]
+        }
+      ],
+      "url": "/foo.embed.html"
+    },
+    {
+      "type": "embed",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "../foo.html"
+            }
+          ]
+        }
+      ],
+      "url": "/foo.embed.html"
+    },
+    {
+      "type": "embed",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "text",
+              "value": "../readme/docs.html"
+            }
+          ]
+        }
+      ],
+      "url": "/readme/docs.embed.html"
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Are all valid embeds, but"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "/foo.txt"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "isn't one."
+        }
+      ]
     }
-  }
+  ]
 }
