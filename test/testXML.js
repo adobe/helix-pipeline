@@ -120,7 +120,8 @@ const expectedXML = '<?xml version="1.0" encoding="utf-8"?><document><title leve
 describe('Testing XML Pipeline', () => {
   setupPolly({
     logging: false,
-    recordFailedRequests: true,
+    recordFailedRequests: false,
+    recordIfMissing: false,
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
