@@ -56,13 +56,13 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'heading-ids.json'));
     assertTransformerYieldsDocument(
       new VDOM(mdast, action.secrets), `
-      <h1 id="foo">Foo</h1>
-      <h2 id="bar">Bar</h2>
-      <h3 id="baz">Baz</h1>
-      <h2 id="qux">Qux</h2>
-      <h3 id="bar-1">Bar</h3>
-      <h4 id="bar-1-1">Bar-1</h4>
-      <h1 id="foo-bar-baz"><strong>Foo</strong> <em>Bar</em> <code>Baz</code></h1>`,
+      <h1 id="user-content-foo">Foo</h1>
+      <h2 id="user-content-bar">Bar</h2>
+      <h3 id="user-content-baz">Baz</h1>
+      <h2 id="user-content-qux">Qux</h2>
+      <h3 id="user-content-bar-1">Bar</h3>
+      <h4 id="user-content-bar-1-1">Bar-1</h4>
+      <h1 id="user-content-foo-bar-baz"><strong>Foo</strong> <em>Bar</em> <code>Baz</code></h1>`,
     );
   });
 

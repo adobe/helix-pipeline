@@ -12,17 +12,22 @@
 const createDOMPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 
-const helixSanitizationConfig = { ADD_TAGS: ['esi:include'] };
+const helixSanitizationConfig = {
+  ADD_TAGS: ['esi:include', 'esi:remove'],
+  RETURN_DOM: true,
+};
 
-function sanitize({ response }, { logger }) {
+function sanitize({ content }, { logger }) {
   logger.log('debug', 'Sanitizing reponse body to avoid XSS injections.');
 
   const { window } = (new JSDOM(''));
   const DOMPurify = createDOMPurify(window);
-  const sanitizedBody = DOMPurify.sanitize(response.body, helixSanitizationConfig);
+  const sanitizedBody = DOMPurify.sanitize(content.document.body, helixSanitizationConfig);
   return {
-    response: {
-      body: sanitizedBody,
+    content: {
+      document: {
+        body: sanitizedBody,
+      },
     },
   };
 }
