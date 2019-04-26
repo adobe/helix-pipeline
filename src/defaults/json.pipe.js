@@ -16,33 +16,38 @@ const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const type = require('../utils/set-content-type.js');
-const smartypants = require('../html/smartypants');
-const sections = require('../html/split-sections');
-const production = require('../utils/is-production');
+const smartypants = require('../html/smartypants.js');
+const sections = require('../html/split-sections.js');
+const production = require('../utils/is-production.js');
 const dump = require('../utils/dump-context.js');
-const validate = require('../utils/validate');
-const parseFrontmatter = require('../html/parse-frontmatter');
+const validate = require('../utils/validate.js');
+const emit = require('../json/emit-json.js');
+const { selectStatus } = require('../json/set-json-status.js');
+const parseFrontmatter = require('../html/parse-frontmatter.js');
 
 /* eslint no-param-reassign: off */
+/* eslint newline-per-chained-call: off */
 
-const htmlpipe = (cont, payload, action) => {
+const jsonpipe = (cont, payload, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing JSON Pipeline');
   const pipe = new Pipeline(action);
   pipe
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
-    .before(fetch)
-    .before(parse)
+    .before(fetch).expose('fetch')
+    .before(parse).expose('parse')
     .before(parseFrontmatter)
     .before(smartypants)
     .before(sections)
-    .before(meta)
+    .before(meta).expose('meta')
     .once(cont)
-    .after(type('application/json'));
+    .after(emit).expose('json')
+    .after(type('application/json'))
+    .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running JSON pipeline');
   return pipe.run(payload);
 };
 
-module.exports.pipe = htmlpipe;
+module.exports.pipe = jsonpipe;

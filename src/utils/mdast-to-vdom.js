@@ -106,7 +106,23 @@ class VDOMTransformer {
     const handlefn = that.matches(node);
 
     // process the node
-    const result = handlefn(cb, node, parent);
+
+    /**
+     * A function that enables the recursive processing of MDAST child nodes
+     * in handler functions.
+     * @param {function} callback the HAST-constructing callback function
+     * @param {Node} childnode the MDAST child node that should be handled
+     * @param {Node} mdastparent the MDAST parent node, usually the current MDAST node
+     * processed by the handler function
+     * @param {*} hastparent the HAST parent node that the transformed child will be appended to
+     */
+    function handlechild(callback, childnode, mdastparent, hastparent) {
+      if (hastparent && hastparent.children) {
+        hastparent.children.push(VDOMTransformer.handle(callback, childnode, mdastparent, that));
+      }
+    }
+
+    const result = handlefn(cb, node, parent, handlechild);
 
     if (result && typeof result === 'string') {
       return VDOMTransformer.toHTAST(result, cb, node);
@@ -198,7 +214,10 @@ class VDOMTransformer {
    * @returns {string} the corresponding HTML
    */
   static toHTML(mdast, handlers) {
-    return hast2html(mdast2hast(mdast, { handlers }));
+    return hast2html(mdast2hast(mdast, {
+      handlers,
+      allowDangerousHTML: true,
+    }), { allowDangerousHTML: true });
   }
 
   /**

@@ -15,6 +15,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 | Property | Type | Required | Nullable | Default | Defined by |
 |----------|------|----------|----------|---------|------------|
+| [EMBED_SELECTOR](#embed_selector) | `string` | Optional  | No | `"embed"` | Secrets (this schema) |
 | [EMBED_SERVICE](#embed_service) | `string` | Optional  | No | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
 | [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional  | No | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
 | [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional  | No | `1000` | Secrets (this schema) |
@@ -27,6 +28,28 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
 | [XML_PRETTY](#xml_pretty) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
 | `[A-Z0-9_]+` | multiple | Pattern | No |  | Secrets (this schema) |
+
+## EMBED_SELECTOR
+
+Selector to be used when resolving internal embeds.
+
+`EMBED_SELECTOR`
+
+* is optional
+* type: `string`
+* default: `"embed"`
+* defined in this schema
+
+### EMBED_SELECTOR Type
+
+
+`string`
+
+
+
+
+
+
 
 ## EMBED_SERVICE
 

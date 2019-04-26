@@ -1,3 +1,48 @@
+## [1.9.1](https://github.com/adobe/helix-pipeline/compare/v1.9.0...v1.9.1) (2019-04-26)
+
+
+### Bug Fixes
+
+* **package:** update hast-to-hyperscript to version 7.0.0 ([cf3cb50](https://github.com/adobe/helix-pipeline/commit/cf3cb50))
+
+# [1.9.0](https://github.com/adobe/helix-pipeline/compare/v1.8.0...v1.9.0) (2019-04-25)
+
+
+### Features
+
+* **json:** keep response.body as object ([263b637](https://github.com/adobe/helix-pipeline/commit/263b637))
+* **json:** refactoring json pipeline ([d67cf53](https://github.com/adobe/helix-pipeline/commit/d67cf53)), closes [#230](https://github.com/adobe/helix-pipeline/issues/230) [#269](https://github.com/adobe/helix-pipeline/issues/269) [#280](https://github.com/adobe/helix-pipeline/issues/280)
+
+# [1.8.0](https://github.com/adobe/helix-pipeline/compare/v1.7.1...v1.8.0) (2019-04-25)
+
+
+### Bug Fixes
+
+* **embed:** provide fallback with esi:remove when esi include fails ([575391d](https://github.com/adobe/helix-pipeline/commit/575391d)), closes [#267](https://github.com/adobe/helix-pipeline/issues/267)
+* **html:** enable (dangerous) HTML in Markdown and pass it through ([93efaf7](https://github.com/adobe/helix-pipeline/commit/93efaf7)), closes [#154](https://github.com/adobe/helix-pipeline/issues/154)
+* **html:** ignore HTML tags when generating IDs for headlines ([bdad96c](https://github.com/adobe/helix-pipeline/commit/bdad96c))
+
+
+### Features
+
+* **embeds:** detect internal embeds ([7af9356](https://github.com/adobe/helix-pipeline/commit/7af9356)), closes [#267](https://github.com/adobe/helix-pipeline/issues/267)
+* **transformer:** enable recursive processing in custom handler functions ([0d5193a](https://github.com/adobe/helix-pipeline/commit/0d5193a))
+
+## [1.7.1](https://github.com/adobe/helix-pipeline/compare/v1.7.0...v1.7.1) (2019-04-25)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/helix-shared to version 0.10.4 ([93bb5ee](https://github.com/adobe/helix-pipeline/commit/93bb5ee))
+
+# [1.7.0](https://github.com/adobe/helix-pipeline/compare/v1.6.0...v1.7.0) (2019-04-24)
+
+
+### Features
+
+* **xml:** expose extension points ([01d8926](https://github.com/adobe/helix-pipeline/commit/01d8926)), closes [#268](https://github.com/adobe/helix-pipeline/issues/268)
+* **xml:** expose extension points ([614e351](https://github.com/adobe/helix-pipeline/commit/614e351)), closes [#268](https://github.com/adobe/helix-pipeline/issues/268)
+
 # [1.6.0](https://github.com/adobe/helix-pipeline/compare/v1.5.3...v1.6.0) (2019-04-23)
 
 
