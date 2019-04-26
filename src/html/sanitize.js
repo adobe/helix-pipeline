@@ -18,10 +18,10 @@ const helixSanitizationConfig = {
 };
 
 function sanitize({ content }, { logger }) {
-  logger.log('debug', 'Sanitizing reponse body to avoid XSS injections.');
+  logger.log('debug', 'Sanitizing content body to avoid XSS injections.');
 
-  const { window } = (new JSDOM(''));
-  const DOMPurify = createDOMPurify(window);
+  const globalContext = (new JSDOM('')).window;
+  const DOMPurify = createDOMPurify(globalContext);
   const sanitizedBody = DOMPurify.sanitize(content.document.body, helixSanitizationConfig);
   return {
     content: {
