@@ -10,9 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-const unified = require('unified');
-const parse = require('rehype-parse');
-const stringify = require('rehype-stringify');
 const map = require('unist-util-map');
 const Url = require('url-parse');
 
@@ -51,25 +48,14 @@ function links() {
   };
 }
 
-function rewrite({ response: { body, headers } }) {
-  if (headers && headers['Content-Type'] && headers['Content-Type'].match(/html/)) {
-    const doc = unified()
-      .use(parse, {
-        fragment: false,
-      })
-      .use(scripts)
-      .use(links)
-      .use(stringify, {
-        allowParseErrors: true,
-        allowDangerousHTML: true,
-        allowDangerousCharacters: true,
-        quoteSmart: true,
+function rewrite({ response: { hast, headers } }) {
+  if (headers && headers['Content-Type'] && headers['Content-Type'].match(/html/) && hast) {
+    links()(hast);
+    scripts()(hast);
 
-      })
-      .processSync(body);
     return {
       response: {
-        body: doc.contents,
+        hast,
       },
     };
   }

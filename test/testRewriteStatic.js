@@ -13,8 +13,9 @@
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const rewrite = require('../src/html/static-asset-links');
+const tohast = require('../src/html/html-to-hast');
+const stringify = require('../src/html/stringify-hast');
 const { pipe } = require('../src/defaults/html.pipe.js');
-
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
@@ -22,14 +23,26 @@ const logger = Logger.getTestLogger({
 });
 
 function rw(content) {
-  return rewrite({
+  const hastcontext = tohast({
     response: {
       body: content,
       headers: {
         'Content-Type': 'text/html',
       },
     },
-  }).response.body;
+  });
+
+  const rewritecontext = rewrite({
+    response: {
+      body: content,
+      hast: hastcontext.response.hast,
+      headers: {
+        'Content-Type': 'text/html',
+      },
+    },
+  });
+
+  return stringify(rewritecontext).response.body;
 }
 
 describe('Integration Test Static Asset Rewriting', () => {

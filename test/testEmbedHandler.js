@@ -115,6 +115,6 @@ https://www.youtube.com/watch?v=KOxbO0EI4MA
     assert.equal(result.response.body, `<p>Hello World
 Here comes an embed.</p>
 <esi:include src="https://example-embed-service.com/https://www.youtube.com/watch?v=KOxbO0EI4MA"></esi:include>
-<p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w,easy.png?width=1384&amp;auto=webp 1384w,easy.png?width=2288&amp;auto=webp 2288w,easy.png?width=3192&amp;auto=webp 3192w,easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p>`);
+<p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w, easy.png?width=1384&amp;auto=webp 1384w, easy.png?width=2288&amp;auto=webp 2288w, easy.png?width=3192&amp;auto=webp 3192w, easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p>`);
   });
 });
