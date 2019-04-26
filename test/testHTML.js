@@ -11,7 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { Logger, dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { JSDOM } = require('jsdom');
 const fs = require('fs-extra');
 const path = require('path');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
@@ -687,5 +688,39 @@ ${context.content.document.body.innerHTML}`,
       .map(full => fs.existsSync(full))
       .filter(e => !!e);
     assert.notEqual(found.length, 0);
+  });
+
+  it('html.pipe sanitizes author-generated content, but not developer-generated code', async () => {
+    const result = await pipe(
+      ({ content }) => ({
+        response: {
+          status: 200,
+          body: `
+            ${content.document.body.innerHTML}
+            <a href="javascript:alert('XSS')">Baz</a>
+          `,
+        },
+      }),
+      {
+        request: crequest,
+        content: {
+          body: `
+# Foo
+
+[Bar](javascript:alert('XSS'))
+          `,
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(200, result.response.status);
+    assertEquivalentNode(
+      new JSDOM('<h1 id="user-content-foo">Foo</h1><p><a>Bar</a></p><a href="javascript:alert(\'XSS\')">Baz</a>').window.document.body,
+      new JSDOM(result.response.body).window.document.body,
+    );
   });
 });
