@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/adobe/helix-pipeline/compare/v1.9.0...v1.9.1) (2019-04-26)
+
+
+### Bug Fixes
+
+* **package:** update hast-to-hyperscript to version 7.0.0 ([cf3cb50](https://github.com/adobe/helix-pipeline/commit/cf3cb50))
+
 # [1.9.0](https://github.com/adobe/helix-pipeline/compare/v1.8.0...v1.9.0) (2019-04-25)
 
 
