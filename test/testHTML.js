@@ -117,69 +117,6 @@ const crequest = {
   url: '/test/test.html',
 };
 
-describe('Testing HTML Pipeline in Production', () => {
-  let production;
-  before('Fake Production Mode', () => {
-    // eslint-disable-next-line no-underscore-dangle
-    production = process.env.__OW_ACTIVATION_ID;
-    // eslint-disable-next-line no-underscore-dangle
-    process.env.__OW_ACTIVATION_ID = 'fake';
-  });
-
-
-  it('html.pipe adds headers from meta and link tags', async () => {
-    const result = await pipe(
-      ({ content }) => ({
-        response: {
-          status: 201,
-          headers: {
-            Foo: 'bar',
-          },
-          body: `<html>
-  <head>
-    <title>Hello World</title>
-    <meta http-equiv="Expires" content="3000">
-    <meta http-equiv="Foo" content="baz">
-    <meta http-equiv="Exceeds" value="3000">
-    <link rel="next" href="next.html" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="first" href="index.html" />
-    <link rel="previous" src="previous.html" />
-  </head>
-  <body>
-    ${content.document.body.innerHTML}
-  </body>
-</html>`,
-        },
-      }),
-      {
-        request: crequest,
-        content: {
-          body: 'Hello World',
-        },
-      },
-      {
-        request: { params },
-        secrets,
-        logger,
-      },
-    );
-
-    assert.equal(result.response.status, 201);
-    assert.equal(result.response.headers['Content-Type'], 'text/html', 'keeps content-type');
-    assert.equal(result.response.headers['X-ESI'], 'enabled', 'detects ESI');
-    assert.equal(result.response.headers.Expires, '3000', 'allows setting through meta http-equiv');
-    assert.equal(result.response.headers.Exceeds, undefined, 'ignores invalid meta tags');
-    assert.equal(result.response.headers.Foo, 'bar', 'does not override existing headers');
-    assert.equal(result.response.headers.Link, '<next.html>; rel="next",<index.html>; rel="first"', 'allows setting through link');
-  });
-
-  after('Reset Production Mode', () => {
-    // eslint-disable-next-line no-underscore-dangle
-    process.env.__OW_ACTIVATION_ID = production;
-  });
-});
-
 describe('Testing HTML Pipeline', () => {
   setupPolly({
     logging: false,
@@ -391,7 +328,7 @@ ${content.document.body.innerHTML}`,
         logger,
       },
     );
-    assert.ok(result.error);
+    assert.ok(result.error, 'no error reported');
     assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
     assert.equal(result.error.split('\n')[2], '#/additionalProperties should NOT have additional properties - params: "{ additionalProperty: \'foo\' }" - path: .content');
   });
