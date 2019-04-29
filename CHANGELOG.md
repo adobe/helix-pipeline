@@ -1,3 +1,10 @@
+## [1.9.2](https://github.com/adobe/helix-pipeline/compare/v1.9.1...v1.9.2) (2019-04-29)
+
+
+### Bug Fixes
+
+* **package:** update mdast-util-to-hast to version 5.0.0 ([6fd14ab](https://github.com/adobe/helix-pipeline/commit/6fd14ab))
+
 ## [1.9.1](https://github.com/adobe/helix-pipeline/compare/v1.9.0...v1.9.1) (2019-04-26)
 
 
