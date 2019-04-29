@@ -60,10 +60,16 @@ describe('Integration Test Static Asset Rewriting', () => {
       content: {
         body: 'Hello World',
       },
+      request: {
+        extension: 'html',
+        url: '/test.html',
+      },
     };
     const action = {
       request: {
-        params: {},
+        params: {
+          path: 'test.md',
+        },
       },
       logger,
     };
