@@ -42,7 +42,7 @@
     "mocha-junit-reporter": "^1.17.0",
     "nyc": "^14.1.0",
     "semantic-release": "^15.13.3",
-    "snyk": "^1.124.1",
+    "snyk": "^1.154.1",
     "unist-builder": "^1.0.3",
     "unist-util-inspect": "^4.1.3",
     "unist-util-remove-position": "^1.1.2"
