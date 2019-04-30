@@ -31,6 +31,9 @@ const validate = require('../utils/validate');
 const { cache, uncached } = require('../html/shared-cache');
 const embeds = require('../html/find-embeds');
 const parseFrontmatter = require('../html/parse-frontmatter');
+const rewriteLinks = require('../html/static-asset-links');
+const tohast = require('../html/html-to-hast');
+const tohtml = require('../html/stringify-hast');
 
 /* eslint no-param-reassign: off */
 /* eslint newline-per-chained-call: off */
@@ -62,6 +65,9 @@ const htmlpipe = (cont, payload, action) => {
     .after(cache).when(uncached)
     .after(key)
     .after(debug)
+    .after(tohast) // start HTML post-processing
+    .after(rewriteLinks).when(production)
+    .after(tohtml) // end HTML post-processing
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .error(selectStatus(production()));
 
