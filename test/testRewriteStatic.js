@@ -96,8 +96,8 @@ describe('Integration Test Static Asset Rewriting', () => {
 
     assert.equal(res.response.body, `<html><head>
     <title>Hello World</title>
-    <script src='<esi:include src="index.js.esi"/><esi:remove>index.js</esi:remove>'></script>
-    <link rel="stylesheet" href='<esi:include src="style.css.esi"/><esi:remove>style.css</esi:remove>'>
+    <script src='<esi:include src="index.js.url"/><esi:remove>index.js</esi:remove>'></script>
+    <link rel="stylesheet" href='<esi:include src="style.css.url"/><esi:remove>style.css</esi:remove>'>
   </head>
   <body>
     <p>Hello World</p>
@@ -148,7 +148,7 @@ describe('Test Static Asset Rewriting', () => {
   <body>Just normal things
 </body></html>`), `<!doctype html><html><head>
     <title>Normal</title>
-    <script src='<esi:include src="test.js.esi"/><esi:remove>test.js</esi:remove>'></script>
+    <script src='<esi:include src="test.js.url"/><esi:remove>test.js</esi:remove>'></script>
     <script src="keep.js?cached=false"></script>
     <script src="//code.jquery.com/jquery-3.4.0.min.js"></script>
   </head>
@@ -166,7 +166,7 @@ describe('Test Static Asset Rewriting', () => {
   <body>Just normal things
 </body></html>`), `<!doctype html><html><head>
     <title>Normal</title>
-    <link rel="stylesheet foo" href='<esi:include src="test.css.esi"/><esi:remove>test.css</esi:remove>'>
+    <link rel="stylesheet foo" href='<esi:include src="test.css.url"/><esi:remove>test.css</esi:remove>'>
     <link rel="stylesheet" href="keep.css?cached=false">
     <link rel="stylesheet" href="//code.jquery.com/jquery-3.4.0.min.css">
   </head>

@@ -22,7 +22,7 @@ function scripts() {
         const src = new Url(node.properties.src);
         if (src.host === '' && src.query === '' && src.pathname) {
           // eslint-disable-next-line no-param-reassign
-          node.properties.src = `<esi:include src="${src.pathname}.esi"/><esi:remove>${node.properties.src}</esi:remove>`;
+          node.properties.src = `<esi:include src="${src.pathname}.url"/><esi:remove>${node.properties.src}</esi:remove>`;
         }
       }
     });
@@ -41,7 +41,7 @@ function links() {
         const href = new Url(node.properties.href);
         if (href.host === '' && href.query === '' && href.pathname) {
           // eslint-disable-next-line no-param-reassign
-          node.properties.href = `<esi:include src="${href.pathname}.esi"/><esi:remove>${node.properties.href}</esi:remove>`;
+          node.properties.href = `<esi:include src="${href.pathname}.url"/><esi:remove>${node.properties.href}</esi:remove>`;
         }
       }
     });
