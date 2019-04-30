@@ -1,3 +1,18 @@
+# [1.10.0](https://github.com/adobe/helix-pipeline/compare/v1.9.2...v1.10.0) (2019-04-30)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/helix-shared to version 0.10.5 ([54709a9](https://github.com/adobe/helix-pipeline/commit/54709a9))
+* **static:** change extension from .esi to .esi ([a936918](https://github.com/adobe/helix-pipeline/commit/a936918))
+
+
+### Features
+
+* **html:** enable HAST parsing and serialization of HTML responses ([224c665](https://github.com/adobe/helix-pipeline/commit/224c665)), closes [#285](https://github.com/adobe/helix-pipeline/issues/285)
+* **html:** rewrite relative asset references to ESI resources ([dce696e](https://github.com/adobe/helix-pipeline/commit/dce696e)), closes [#267](https://github.com/adobe/helix-pipeline/issues/267)
+* **html:** rewrite static asset references to ESI includes that provide stable URLs ([aa2538f](https://github.com/adobe/helix-pipeline/commit/aa2538f)), closes [#224](https://github.com/adobe/helix-pipeline/issues/224)
+
 ## [1.9.2](https://github.com/adobe/helix-pipeline/compare/v1.9.1...v1.9.2) (2019-04-29)
 
 
