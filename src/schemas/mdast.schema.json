@@ -48,7 +48,8 @@
         "footnote",
         "footnoteReference",
         "embed",
-        "section"
+        "section",
+        "null"
       ],
       "meta:enum": {
         "root": "The root node, representing a document or section",

@@ -69,6 +69,7 @@ class VDOMTransformer {
     this.match('embed', embed(options));
     this.match('link', link(options));
     this.match('section', section(options));
+    this.match('null', () => {});
   }
 
   /**

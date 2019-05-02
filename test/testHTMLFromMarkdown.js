@@ -241,7 +241,7 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
-  it.only('HTML sections', async () => {
+  it('HTML sections', async () => {
     await assertMd(`
 # First Section
 
@@ -255,8 +255,7 @@ describe('Testing Markdown conversion', () => {
 
 Hello World [link](λ)
       `, `
-        <h1 id="foo-bar">Foo <em>Bar</em></h1>
-        <p>Hello World <a href="%CE%BB">link</a></p>
+      <body><section><h1 id="first-section">First Section</h1></section><section><h1 id="second-section">Second Section</h1></section><section><h1 id="third-section">Third Section</h1><p>Hello World <a href="%CE%BB">link</a></p></section></body>
     `);
   });
 

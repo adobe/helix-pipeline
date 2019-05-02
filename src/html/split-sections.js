@@ -40,6 +40,10 @@ function split({ content: { mdast = { children: [] } } }) {
       return section(between(mdast, index, end));
     });
 
+  // FIXME: dirty hack until we disable pipeline merging
+  for (let i = sections.length; i < mdast.children.length; i += 1) {
+    sections.push({ type: 'null' });
+  }
   return { content: { sections, mdast: { children: sections } } };
 }
 

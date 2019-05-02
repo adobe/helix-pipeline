@@ -27,7 +27,7 @@
           }
         },
         "type": {
-          "enum": ["root", "section"],
+          "enum": ["root", "section", "null"],
           "description": "The MDAST node type. Each section can be treated as a standalone document."
         },
         "position": {
