@@ -22,6 +22,7 @@ const HeadingHandler = require('./heading-handler');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
 const link = require('./link-handler');
+const section = require('./section-handler');
 const types = require('../schemas/mdast.schema.json').properties.type.enum;
 
 /**
@@ -67,6 +68,7 @@ class VDOMTransformer {
     this.match('image', image(options));
     this.match('embed', embed(options));
     this.match('link', link(options));
+    this.match('section', section(options));
   }
 
   /**

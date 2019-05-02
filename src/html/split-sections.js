@@ -15,7 +15,7 @@ const _ = require('lodash/fp');
 
 function section(children) {
   return {
-    type: 'root',
+    type: 'section',
     children,
   };
 }
@@ -40,7 +40,7 @@ function split({ content: { mdast = { children: [] } } }) {
       return section(between(mdast, index, end));
     });
 
-  return { content: { sections } };
+  return { content: { sections, mdast: { children: sections } } };
 }
 
 module.exports = split;

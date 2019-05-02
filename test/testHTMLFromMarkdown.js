@@ -241,6 +241,25 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
+  it.only('HTML sections', async () => {
+    await assertMd(`
+# First Section
+
+---
+
+# Second Section
+
+---
+
+# Third Section
+
+Hello World [link](λ)
+      `, `
+        <h1 id="foo-bar">Foo <em>Bar</em></h1>
+        <p>Hello World <a href="%CE%BB">link</a></p>
+    `);
+  });
+
   it('GFM', async () => {
     await assertMd(`
         Hello World.
