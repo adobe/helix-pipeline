@@ -143,7 +143,7 @@ describe('Testing Markdown conversion', () => {
 
             Hello World
       `, `
-        <h1 id="user-content-hello">Hello</h1>
+        <h1 id="hello">Hello</h1>
         <pre><code>Hello World\n</code></pre>
     `);
     await assertMd(
@@ -166,10 +166,10 @@ describe('Testing Markdown conversion', () => {
         >
         > bar
       `, `
-        <h1 id="user-content-foo">Foo</h1>
+        <h1 id="foo">Foo</h1>
         <p>bar</p>
         <blockquote>
-        <h1 id="user-content-foo-1">Foo</h1>
+        <h1 id="foo-1">Foo</h1>
         <p>bar</p>
         </blockquote>
       `);
@@ -190,7 +190,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](<foobar)
       `, `
-        <h1 id="user-content-foo">Foo</h1>
+        <h1 id="foo">Foo</h1>
         <p>Hello World [link](&lt;foobar)</p>
     `);
   });
@@ -201,7 +201,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](foo bar)
       `, `
-        <h1 id="user-content-foo">Foo</h1>
+        <h1 id="foo">Foo</h1>
         <p>Hello World [link](foo bar)</p>
     `);
   });
@@ -212,7 +212,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](λ)
       `, `
-        <h1 id="user-content-foo">Foo</h1>
+        <h1 id="foo">Foo</h1>
         <p>Hello World <a href="%CE%BB">link</a></p>
     `);
   });
@@ -225,7 +225,7 @@ describe('Testing Markdown conversion', () => {
           <input type="text" name="fieldName"><label for="fieldName">Name</label>
         </form>
       `, `
-        <h1 id="user-content-foo">Foo</h1>
+        <h1 id="foo">Foo</h1>
         <form><input type="text" name="fieldName"><label for="fieldName">Name</label></form>
     `);
   });
@@ -236,7 +236,7 @@ describe('Testing Markdown conversion', () => {
 
         Hello World [link](λ)
       `, `
-        <h1 id="user-content-foo-bar">Foo <em>Bar</em></h1>
+        <h1 id="foo-bar">Foo <em>Bar</em></h1>
         <p>Hello World <a href="%CE%BB">link</a></p>
     `);
   });
@@ -296,8 +296,22 @@ describe('Testing Markdown conversion', () => {
         # location
         <a name="anchors">Foo</a>
       `, `
-        <h1 id="user-content-location">location</h1>
+        <h1 id="location">location</h1>
         <p><a>Foo</a></p>
+    `);
+  });
+
+  it('Accept custom elements and attributes', async () => {
+    await assertMd(`
+        # Foo
+        Bar
+        <baz-qux corge-grault="garply">Waldo</baz-qux>
+      `, `
+        <h1 id="foo">Foo</h1>
+        <p>Bar</p>
+        <p>
+          <baz-qux corge-grault="garply">Waldo</baz-qux>
+        </p>
     `);
   });
 });

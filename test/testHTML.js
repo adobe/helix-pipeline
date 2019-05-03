@@ -719,8 +719,8 @@ ${context.content.document.body.innerHTML}`,
     );
     assert.equal(200, result.response.status);
     assertEquivalentNode(
-      new JSDOM('<h1 id="user-content-foo">Foo</h1><p><a>Bar</a></p><a href="javascript:alert(\'XSS\')">Baz</a>').window.document.body,
       new JSDOM(result.response.body).window.document.body,
+      new JSDOM('<h1 id="foo">Foo</h1><p><a>Bar</a></p><a href="javascript:alert(\'XSS\')">Baz</a>').window.document.body,
     );
   });
 });

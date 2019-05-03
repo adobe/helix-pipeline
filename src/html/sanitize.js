@@ -13,15 +13,61 @@ const createDOMPurify = require('dompurify');
 const { JSDOM } = require('jsdom');
 
 const helixSanitizationConfig = {
-  ADD_TAGS: ['esi:include', 'esi:remove'],
+  // Allowing all ESI tags, see: https://www.w3.org/TR/esi-lang
+  ADD_TAGS: [
+    'esi:try',
+    'esi:attempt',
+    'esi:except',
+
+    'esi:choose',
+    'esi:when',
+    'esi:otherwise',
+
+    'esi:include',
+    'esi:inline',
+    'esi:remove',
+
+    'esi:vars',
+    'esi:comment',
+  ],
   RETURN_DOM: true,
 };
+
+const CUSTOM_NAME_REGEX = /^\w+-\w+$/;
+
+/**
+ * Allow custom elements to be retained by the sanitization.
+ *
+ * @param {Object} DOMPurify the DOMPurify instance
+ */
+function allowCustomElements(DOMPurify) {
+  DOMPurify.addHook('uponSanitizeElement', (node, data) => {
+    if (node.nodeName && node.nodeName.match(CUSTOM_NAME_REGEX)) {
+      data.allowedTags[data.tagName] = true; // eslint-disable-line no-param-reassign
+    }
+  });
+}
+
+/**
+ * Allow custom attributes to be retained by the sanitization.
+ *
+ * @param {Object} DOMPurify the DOMPurify instance
+ */
+function allowCustomAttributes(DOMPurify) {
+  DOMPurify.addHook('uponSanitizeAttribute', (node, data) => {
+    if (data.attrName && data.attrName.match(CUSTOM_NAME_REGEX)) {
+      data.allowedAttributes[data.attrName] = true; // eslint-disable-line no-param-reassign
+    }
+  });
+}
 
 function sanitize({ content }, { logger }) {
   logger.log('debug', 'Sanitizing content body to avoid XSS injections.');
 
   const globalContext = (new JSDOM('')).window;
   const DOMPurify = createDOMPurify(globalContext);
+  allowCustomElements(DOMPurify);
+  allowCustomAttributes(DOMPurify);
   const sanitizedBody = DOMPurify.sanitize(content.document.body, helixSanitizationConfig);
   return {
     content: {

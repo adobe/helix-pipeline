@@ -45,7 +45,7 @@ class HeadingHandler {
       // Inject the id after transformation
       const n = Object.assign({}, node);
       const el = fallback(h, n);
-      el.properties.id = el.properties.id || `user-content-${headingIdentifier}`;
+      el.properties.id = el.properties.id || headingIdentifier;
       return el;
     };
   }
