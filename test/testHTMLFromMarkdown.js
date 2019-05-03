@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const winston = require('winston');
 const { JSDOM } = require('jsdom');
-const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
+const { eq } = require('@adobe/helix-shared').types;
 const { multiline } = require('@adobe/helix-shared').string;
 const { pipe } = require('../src/defaults/html.pipe.js');
 
@@ -98,7 +98,7 @@ const assertMd = async (md, html) => {
     },
   );
 
-  assertEquivalentNode(
+  eq(
     new JSDOM(generated.response.body).window.document.body,
     new JSDOM(html).window.document.body,
   );
