@@ -11,9 +11,11 @@
  */
 const yaml = require('js-yaml');
 const { cloneDeep } = require('lodash');
+const { pipe, identity } = require('@adobe/helix-shared').functional;
+const { type, size } = require('@adobe/helix-shared').types;
 const {
-  join, map, zipLeast2, pipe, list, lookahead, filter, enumerate,
-  identity, range, size, type, reject,
+  join, map, zipLeast2, list, lookahead, filter, enumerate,
+  range, reject,
 } = require('@adobe/helix-shared').sequence;
 
 const { assign } = Object;
