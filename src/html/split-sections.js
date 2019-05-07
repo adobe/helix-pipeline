@@ -26,25 +26,29 @@ function split({ content: { mdast = { children: [] } } }) {
   // then get their index in the list of children
     .map(node => mdast.children.indexOf(node));
 
-  // find pairwise permutations of spaces between blocks
-  // include the very start and end of the document
-  const starts = [0, ...dividers];
-  const ends = [...dividers, mdast.children.length];
-  const sections = _.zip(starts, ends)
-  // but filter out empty section
-    .filter(([start, end]) => start !== end)
-  // then return all nodes that are in between
-    .map(([start, end]) => {
-    // skip 'thematicBreak' nodes
-      const index = mdast.children[start].type === 'thematicBreak' ? start + 1 : start;
-      return section(between(mdast, index, end));
-    });
+  if (dividers.length) {
+    // find pairwise permutations of spaces between blocks
+    // include the very start and end of the document
+    const starts = [0, ...dividers];
+    const ends = [...dividers, mdast.children.length];
+    const sections = _.zip(starts, ends)
+    // but filter out empty section
+      .filter(([start, end]) => start !== end)
+    // then return all nodes that are in between
+      .map(([start, end]) => {
+      // skip 'thematicBreak' nodes
+        const index = mdast.children[start].type === 'thematicBreak' ? start + 1 : start;
+        return section(between(mdast, index, end));
+      });
 
-  // FIXME: dirty hack until we disable pipeline merging
-  for (let i = sections.length; i < mdast.children.length; i += 1) {
-    sections.push({ type: 'null' });
+    // FIXME: dirty hack until we disable pipeline merging
+    for (let i = sections.length; i < mdast.children.length; i += 1) {
+      sections.push({ type: 'null' });
+    }
+    return { content: { sections, mdast: { children: sections } } };
+  } else {
+    return { content: { sections: [], mdast } };
   }
-  return { content: { sections, mdast: { children: sections } } };
 }
 
 module.exports = split;
