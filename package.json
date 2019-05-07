@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "1.9.1",
+  "version": "1.10.1",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -43,13 +43,13 @@
     "mocha-junit-reporter": "^1.17.0",
     "nyc": "^14.1.0",
     "semantic-release": "^15.13.3",
-    "snyk": "^1.124.1",
+    "snyk": "^1.155.0",
     "unist-builder": "^1.0.3",
     "unist-util-inspect": "^4.1.3",
     "unist-util-remove-position": "^1.1.2"
   },
   "dependencies": {
-    "@adobe/helix-shared": "0.10.4",
+    "@adobe/helix-shared": "^1.1.0",
     "@adobe/openwhisk-loggly-wrapper": "0.4.2",
     "ajv": "^6.6.2",
     "callsites": "^3.0.0",
@@ -62,7 +62,7 @@
     "js-yaml": "^3.13.1",
     "jsdom": "^15.0.0",
     "lodash": "^4.17.11",
-    "mdast-util-to-hast": "^4.0.0",
+    "mdast-util-to-hast": "^5.0.0",
     "mdast-util-to-string": "^1.0.4",
     "mdurl": "^1.0.1",
     "micromatch": "^4.0.0",
@@ -80,6 +80,7 @@
     "unist-util-map": "^1.0.4",
     "unist-util-select": "^2.0.0",
     "uri-js": "^4.2.2",
+    "url-parse": "^1.4.6",
     "winston": "^3.0.0",
     "xml2js": "^0.4.19",
     "xmlbuilder": "^12.0.0"

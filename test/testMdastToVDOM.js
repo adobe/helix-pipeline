@@ -16,7 +16,7 @@ const path = require('path');
 const h = require('hyperscript');
 const { Logger } = require('@adobe/helix-shared');
 const { JSDOM } = require('jsdom');
-const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
+const { eq } = require('@adobe/helix-shared').types;
 const VDOM = require('../').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
@@ -28,15 +28,12 @@ const logger = Logger.getTestLogger({
 const action = { logger };
 
 const assertTransformerYieldsDocument = (transformer, expected) => {
-  assertEquivalentNode(
-    transformer.getDocument(),
-    new JSDOM(expected).window.document,
-  );
+  eq(transformer.getDocument(), new JSDOM(expected).window.document);
 
   // Reset the transformer between the 2 calls to avoid leakages in the tests
   transformer.reset();
 
-  assertEquivalentNode(
+  eq(
     transformer.getNode('section'),
     new JSDOM(`<section>${expected}</section>`).window.document.body.firstChild,
   );
