@@ -83,7 +83,7 @@
     "url-parse": "^1.4.6",
     "winston": "^3.0.0",
     "xml2js": "^0.4.19",
-    "xmlbuilder": "^12.0.0"
+    "xmlbuilder": "^13.0.0"
   },
   "snyk": true,
   "lint-staged": {
