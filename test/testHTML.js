@@ -163,6 +163,132 @@ describe('Testing HTML Pipeline', () => {
     assert.equal(result.response.body, '<p>Hello World</p>');
   });
 
+  it('html.pipe keeps proper ESI tags', async () => {
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.equal(content.body, 'Hello World');
+        // and return a different status code
+        return {
+          response: {
+            status: 201, body: `<html>
+<head><title>ESI-Test</title><head>
+<body>
+<div>
+<esi:include src="foo.html"></esi:include>
+</div>
+</body>
+</html>`,
+          },
+        };
+      },
+      {
+        request: crequest,
+        content: {
+          body: 'Hello World',
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(result.response.body, `<html><head><title>ESI-Test</title>
+</head><body>
+<div>
+<esi:include src="foo.html"></esi:include>
+</div>
+
+</body></html>`);
+  });
+
+  it('html.pipe keeps self-closing ESI tags', async () => {
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.equal(content.body, 'Hello World');
+        // and return a different status code
+        return {
+          response: {
+            status: 201, body: `<html>
+<head><title>ESI-Test</title><head>
+<body>
+<div>
+<esi:include src="foo.html" />
+</div>
+</body>
+</html>`,
+          },
+        };
+      },
+      {
+        request: crequest,
+        content: {
+          body: 'Hello World',
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(result.response.body, `<html><head><title>ESI-Test</title>
+</head><body>
+<div>
+<esi:include src="foo.html">
+</esi:include></div>
+
+</body></html>`);
+  });
+
+
+  it('html.pipe keeps double ESI tags', async () => {
+    const result = await pipe(
+      ({ content }) => {
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.equal(content.body, 'Hello World');
+        // and return a different status code
+        return {
+          response: {
+            status: 201, body: `<html>
+<head><title>ESI-Test</title><head>
+<body>
+<div>
+<esi:include src="foo.html"></esi:include>
+<esi:include src="bar.html"></esi:include>
+</div>
+</body>
+</html>`,
+          },
+        };
+      },
+      {
+        request: crequest,
+        content: {
+          body: 'Hello World',
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+    assert.equal(result.response.body, `<html><head><title>ESI-Test</title>
+</head><body>
+<div>
+<esi:include src="foo.html"></esi:include>
+<esi:include src="bar.html"></esi:include>
+</div>
+
+</body></html>`);
+  });
+
   it('html.pipe can be extended', async () => {
     const myfunc = ({ content }) => ({
       response: {
