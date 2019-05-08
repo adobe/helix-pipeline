@@ -454,7 +454,7 @@ ${content.document.body.innerHTML}`,
         logger,
       },
     );
-    assert.ok(result.error);
+    assert.ok(result.error, 'no error reported');
     assert.equal(result.error.split('\n')[1], 'Error: Invalid Context at step 0: ');
     assert.equal(result.error.split('\n')[2], '#/additionalProperties should NOT have additional properties - params: "{ additionalProperty: \'foo\' }" - path: .content');
   });
