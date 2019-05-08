@@ -11,7 +11,7 @@
  */
 function section() {
   return function handler(h, node, _, handlechild) {
-    const sectionnode = h(node, 'section', {});
+    const sectionnode = h(node, 'div', { class: 'section' });
     if (node.children && node.children.length) {
       node.children.forEach(childnode => handlechild(h, childnode, node, sectionnode));
     }
