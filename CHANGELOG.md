@@ -1,3 +1,10 @@
+# [1.11.0](https://github.com/adobe/helix-pipeline/compare/v1.10.2...v1.11.0) (2019-05-08)
+
+
+### Features
+
+* **html:** enable setting of HTTP headers through link and meta HTML tags ([32e4494](https://github.com/adobe/helix-pipeline/commit/32e4494)), closes [#122](https://github.com/adobe/helix-pipeline/issues/122)
+
 ## [1.10.2](https://github.com/adobe/helix-pipeline/compare/v1.10.1...v1.10.2) (2019-05-08)
 
 
