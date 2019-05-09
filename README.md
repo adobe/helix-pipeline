@@ -40,7 +40,7 @@ A pipeline builder can be created by creating a CommonJS module that exports a f
 
 - `cont`: the main function that will be executed as a continuation of the pipeline
 - `payload`: the [payload](./docs/context.schema.md) (aka context) that is accumulated during the pipeline. 
-- `action`: the [action](./docs/action.schema.md) that servers as holder for extra pipeline invocation argument.
+- `action`: the [action](./docs/action.schema.md) that serves as holder for extra pipeline invocation argument.
 
 This project's main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:
 
