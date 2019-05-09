@@ -66,7 +66,7 @@ const htmlpipe = (cont, payload, action) => {
     .after(cache).when(uncached)
     .after(key)
     .after(debug)
-    .after(tohast) // start HTML post-processing
+    .after(tohast).expose('hast') // start HTML post-processing
     .after(rewriteLinks).when(production)
     .after(addHeaders)
     .after(tohtml) // end HTML post-processing
