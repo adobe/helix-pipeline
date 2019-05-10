@@ -11,7 +11,7 @@
  */
 const client = require('request-promise-native');
 const URI = require('uri-js');
-const { bail } = require('../helper');
+const { bail, safebail } = require('../helper');
 
 function uri(root, owner, repo, ref, path) {
   const rootURI = URI.parse(root);
@@ -97,6 +97,10 @@ async function fetch(
     };
   } catch (e) {
     if (e && e.statusCode && e.statusCode === 404) {
+      if (path.match(/^\/?404\.(md|html)$/)) {
+        // Passing status 200 since we'll first have tried 400.html with a 404
+        return safebail(logger, `Could not find Markdown at ${options.uri}`, e, 200);
+      }
       return bail(logger, `Could not find Markdown at ${options.uri}`, e, 404);
     } else if ((e && e.response && e.response.elapsedTime && e.response.elapsedTime > timeout) || (e && e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT'))) {
       // return gateway timeout

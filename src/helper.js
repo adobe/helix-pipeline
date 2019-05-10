@@ -16,10 +16,23 @@ function bail(logger, message, error, status = 500) {
     error: Object.assign({ message }, error),
     response: {
       status,
+      body: `<esi:include src="/${status}.html"></esi:include>`,
+      headers: {
+        'Content-Type': 'text/html',
+      },
     },
+  };
+}
+
+function safebail(logger, message, error, status = 500) {
+  logger.error(message);
+  return {
+    error: Object.assign({ message }, error),
+    response: { status },
   };
 }
 
 module.exports = {
   bail,
+  safebail,
 };
