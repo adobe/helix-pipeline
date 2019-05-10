@@ -221,6 +221,23 @@ describe('Test non-existing content', () => {
     const result = await fetch({}, myaction);
     assert.ok(result.content.body);
   });
+
+  it('Getting missing 404.md', async () => {
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: '', path: '404.md', owner: 'adobe',
+        },
+      },
+      logger,
+    };
+
+    await coerce(myaction);
+
+    const result = await fetch({}, myaction);
+    assert.ok(result.error);
+    assert.equal(result.response.body, undefined);
+  });
 });
 
 describe('Test requests', () => {
