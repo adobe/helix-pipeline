@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/adobe/helix-pipeline/compare/v1.11.0...v1.12.0) (2019-05-10)
+
+
+### Features
+
+* **html:** introduce new hast extension point ([#324](https://github.com/adobe/helix-pipeline/issues/324)) ([325a6b9](https://github.com/adobe/helix-pipeline/commit/325a6b9)), closes [#319](https://github.com/adobe/helix-pipeline/issues/319)
+
 # [1.11.0](https://github.com/adobe/helix-pipeline/compare/v1.10.2...v1.11.0) (2019-05-08)
 
 
