@@ -63,7 +63,7 @@
     "js-yaml": "^3.13.1",
     "jsdom": "^15.0.0",
     "lodash": "^4.17.11",
-    "mdast-util-to-hast": "^5.0.0",
+    "mdast-util-to-hast": "^6.0.0",
     "mdast-util-to-string": "^1.0.4",
     "mdurl": "^1.0.1",
     "micromatch": "^4.0.0",
