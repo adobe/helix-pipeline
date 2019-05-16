@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { deepclone } = require('@adobe/helix-shared').types;
 const _ = require('lodash');
 const debug = require('../src/html/output-debug');
 
@@ -46,19 +47,22 @@ describe('Test outputDebug', () => {
   it('Testing no debug', () => {
     const payload = getPayload();
     payload.request.params.debug = false;
-    assert.deepEqual(debug(payload, { logger }), payload);
+    debug(payload, { logger });
+    assert.deepEqual(payload, deepclone(payload));
   });
 
   it('Testing simple payload', () => {
     const payload = getPayload();
     const expected = computeExpectedOutput(payload);
-    assert.deepEqual(debug(payload, { logger }), expected);
+    debug(payload, { logger });
+    assert.deepEqual(payload, expected);
   });
 
   it('Testing upper case body tag', () => {
     const payload = getPayload();
     payload.response.body = payload.response.body.toUpperCase();
     const expected = computeExpectedOutput(payload);
-    assert.deepEqual(debug(payload, { logger }), expected);
+    debug(payload, { logger });
+    assert.deepEqual(payload, expected);
   });
 });

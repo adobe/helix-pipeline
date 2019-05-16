@@ -9,26 +9,29 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+
+const { merge } = require('lodash');
+
 /**
  * Detects if ESI tags are used in the repose body. Intended to be used as
  * a predicate in the pipeline construction.
  * @param {Context} param0 the pipeline payload
  */
 function esi({ response }) {
-  return response && response.body && /<esi:include/.test(response.body);
+  return Boolean(response && response.body && /<esi:include/.test(response.body));
 }
 
 /**
  * Flags the response as containing ESI by adding the `X-ESI: enabled` header
  */
-function flag() {
-  return {
+function flag(context) {
+  merge(context, {
     response: {
       headers: {
         'X-ESI': 'enabled',
       },
     },
-  };
+  });
 }
 
 module.exports = {

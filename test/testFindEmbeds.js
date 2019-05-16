@@ -34,13 +34,17 @@ const action = {
 };
 
 function mdast(body) {
-  const parsed = parse({ content: { body } }, { logger });
-  return embeds({ content: parsed.content, request: { extension: 'html', url: '/docs/index.html' } }, action).content.mdast;
+  const dat = { content: { body }, request: { extension: 'html', url: '/docs/index.html' } };
+  parse(dat, { logger });
+  embeds(dat, action);
+  return dat.content.mdast;
 }
 
 function context(body) {
-  const parsed = parse({ content: { body } }, { logger });
-  return embeds({ content: parsed.content, request: { extension: 'html', url: '/docs/index.html' } }, action);
+  const dat = { content: { body }, request: { extension: 'html', url: '/docs/index.html' } };
+  parse(dat, { logger });
+  embeds(dat, action);
+  return dat;
 }
 
 describe('Test Embed Detection Processing', () => {

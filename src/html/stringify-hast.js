@@ -11,8 +11,8 @@
  */
 const serialize = require('hast-util-to-html');
 
-function stringify({ response: { hast } }) {
-  const body = serialize(hast, {
+function stringify(context) {
+  context.response.body = serialize(context.response.hast, {
     allowParseErrors: true,
     allowDangerousHTML: true,
     allowDangerousCharacters: true,
@@ -21,12 +21,6 @@ function stringify({ response: { hast } }) {
       useNamedReferences: true,
     },
   });
-
-  return {
-    response: {
-      body,
-    },
-  };
 }
 
 module.exports = stringify;

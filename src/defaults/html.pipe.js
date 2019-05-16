@@ -18,7 +18,7 @@ const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
 const responsive = require('../html/responsify-images.js');
 const type = require('../utils/set-content-type.js');
-const { selectStatus } = require('../html/set-status.js');
+const selectStatus = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
 const sections = require('../html/split-sections');
 const { selectstrain, selecttest } = require('../utils/conditional-sections');
@@ -36,7 +36,6 @@ const tohast = require('../html/html-to-hast');
 const tohtml = require('../html/stringify-hast');
 const addHeaders = require('../html/add-headers');
 
-/* eslint no-param-reassign: off */
 /* eslint newline-per-chained-call: off */
 
 function hascontent({ content }) {
@@ -71,7 +70,7 @@ const htmlpipe = (cont, payload, action) => {
     .after(addHeaders)
     .after(tohtml) // end HTML post-processing
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
-    .error(selectStatus(production()));
+    .error(selectStatus);
 
   action.logger.log('debug', 'Running HTML pipeline');
   return pipe.run(payload);

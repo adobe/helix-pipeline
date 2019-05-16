@@ -10,26 +10,23 @@
  * governing permissions and limitations under the License.
  */
 
-function emit({ content, response = {} }, { logger }) {
+const { setdefault } = require('@adobe/helix-shared').types;
+
+function emit(context, { logger }) {
+  const content = setdefault(context, 'content', {});
+  const response = setdefault(context, 'response', {});
+
   if (response.body) {
     logger.debug('Response body already exists');
-    return {};
+    return;
   }
-  if (content && content.json) {
-    try {
-      logger.debug(`Emitting JSON from ${typeof content.json}`);
-      return {
-        response: {
-          body: JSON.parse(JSON.stringify(content.json)),
-        },
-      };
-    } catch (e) {
-      logger.error(`Error building JSON: ${e}`);
-      return {};
-    }
+  if (!content.json) {
+    logger.debug('No JSON to emit');
+    return;
   }
-  logger.debug('No JSON to emit');
-  return {};
+
+  logger.debug(`Emitting JSON from ${typeof content.json}`);
+  response.body = JSON.parse(JSON.stringify(content.json));
 }
 
 module.exports = emit;

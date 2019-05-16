@@ -10,9 +10,21 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
-const status = require('../src/xml/set-xml-status.js');
+const { assertEquals } = require('@adobe/helix-shared').types;
+const selectStatus_ = require('../src/xml/set-xml-status.js');
+
+const selectStatus = inProduction => (context, env) => {
+  // Mocking whether we are in production or not
+  const old = process.env.__OW_ACTIVATION_ID;
+  try {
+    process.env.__OW_ACTIVATION_ID = inProduction ? 'mocked' : '';
+    selectStatus_(context, env);
+    return context;
+  } finally {
+    process.env.__OW_ACTIVATION_ID = old;
+  }
+};
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
@@ -23,58 +35,36 @@ describe('Test set-xml-status', () => {
   const error = 'oh, no!';
 
   it('sets a verbose 500 for an error in dev', () => {
-    assert.deepEqual(
-      status.selectStatus(false)({ content: { }, error }, { logger }),
-      {
-        response: {
-          status: 500,
-          body: `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`,
-          headers: {
-            'Content-Type': 'application/xml',
-          },
-        },
-      },
-    );
+    const ctx = selectStatus(false)({ content: { }, error }, { logger });
+    assertEquals(ctx.response.status, 500);
+    assertEquals(ctx.response.body, `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`);
+    assertEquals(ctx.response.headers['Content-Type'], 'application/xml');
   });
 
   it('sets a terse 500 for an error in production', () => {
-    assert.deepEqual(
-      status.selectStatus(true)({ content: { }, error }, { logger }),
-      {
-        response: {
-          status: 500,
-          body: '',
-        },
-      },
-    );
+    const ctx = selectStatus(true)({ content: { }, error }, { logger });
+    assertEquals(ctx.response.status, 500);
+    assertEquals(ctx.response.body, '');
   });
 
   it('keeps an existing status', () => {
-    assert.deepEqual(
-      status({
-        response: {
-          status: 201,
-        },
-      }, { logger }),
-      {},
-    );
+    const ctx = selectStatus(false)({
+      response: {
+        status: 201,
+      },
+    }, { logger });
+    assertEquals(ctx.response.status, 201);
   });
 
   it('sets a 200 if all good', () => {
-    assert.deepEqual(
-      status({
-        content: {
-          xml: {
-            root: {},
-          },
+    const ctx = selectStatus(false)({
+      content: {
+        xml: {
+          root: {},
         },
       },
-      { logger }),
-      {
-        response: {
-          status: 200,
-        },
-      },
-    );
+    },
+    { logger });
+    assertEquals(ctx.response.status, 200);
   });
 });

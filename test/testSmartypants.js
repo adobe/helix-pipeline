@@ -21,12 +21,22 @@ const logger = Logger.getTestLogger({
 });
 
 function callback(body) {
-  const parsed = parse({ content: { body } }, { logger });
-  return smartypants(parsed, { logger }).content.mdast;
+  const data = { content: { body } };
+  parse(data, { logger });
+  smartypants(data, { logger });
+  return data.content.mdast;
 }
 
 describe('Test Smartypants Processing', () => {
   it('Parses markdown with formatting', () => {
     assertMatch('smartypants', callback);
+  });
+
+  it('does not throw error if mdast is missing', () => {
+    smartypants({
+      content: {
+        html: '<html></html>',
+      },
+    });
   });
 });

@@ -48,18 +48,12 @@ function links() {
   };
 }
 
-function rewrite({ response: { hast, headers } }) {
-  if (headers && headers['Content-Type'] && headers['Content-Type'].match(/html/) && hast) {
-    links()(hast);
-    scripts()(hast);
-
-    return {
-      response: {
-        hast,
-      },
-    };
+function rewrite(context) {
+  const res = context.response;
+  if ((res.headers['Content-Type'] || '').match(/html/) && res.hast) {
+    links()(res.hast);
+    scripts()(res.hast);
   }
-  return {};
 }
 
 module.exports = rewrite;

@@ -10,8 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
+/* eslint-disable no-await-in-loop */
+
 const _ = require('lodash/fp');
 const callsites = require('callsites');
+const { enumerate, iter } = require('@adobe/helix-shared').sequence;
 const coerce = require('./utils/coerce-secrets');
 
 const noOp = () => {};
@@ -262,14 +265,12 @@ class Pipeline {
   }
 
   /**
-   * Sets an error function. The error function is executed if the `context` contains an `error`
-   * object.
+   * Sets an error function. The error function is executed when an error is encountered.
    * @param {pipelineFunction} f the error function.
    * @return {Pipeline} this;
    */
   error(f) {
     this.describe(f);
-
     const wrapped = errorWrapper(f);
     // ensure proper alias
     wrapped.alias = f.alias;
@@ -290,17 +291,11 @@ class Pipeline {
     if (f.alias) {
       return f.alias;
     }
-    if (!f.alias && f.name) {
-      // eslint-disable-next-line no-param-reassign
-      f.alias = f.name;
-    } else if (!f.name && !f.alias) {
-      // eslint-disable-next-line no-param-reassign
-      f.alias = 'anonymous';
-    }
+
+    f.alias = f.name || f.ext || 'anonymous';
 
     const [current, injector, caller] = callsites();
     if (current.getFunctionName() === 'describe') {
-      // eslint-disable-next-line no-param-reassign
       f.alias = `${injector.getFunctionName()}:${f.alias} from ${caller.getFileName()}:${caller.getLineNumber()}`;
     }
 
@@ -314,66 +309,88 @@ class Pipeline {
    * context.
    */
   async run(context = {}) {
+    const { logger } = this._action;
+
     // register all custom attachers to the pipeline
     this.attach(this._oncef);
+
+    const getident = (fn, classifier, idx) => `${classifier}-#${idx}/${this.describe(fn)}`;
+
     /**
-     * Reduction function used to process the pipeline functions and merge the context parameters.
-     * @param {Object} currContext Accumulated context
-     * @param {pipelineFunction} currFunction Function that is currently "reduced"
-     * @param {number} index index of the function in the given array
-     * @returns {Promise} Promise resolving to the new value of the accumulator
+     * Executes the taps of the current function.
+     * @param {Function[]} taps the taps
+     * @param {string} fnIdent the name of the function
+     * @param {number} fnIdx the current idx of the function
      */
-    const merge = async (currContext, currFunction, index) => {
-      const skip = (!currContext.error) === (!!currFunction.errorHandler);
-
-      // log the function that is being called and the parameters of the function
-      this._action.logger.silly(skip ? 'skipping ' : 'processing ', {
-        function: this.describe(currFunction),
-        index,
-        params: currContext,
-      });
-
-      if (skip) {
-        return currContext;
-      }
-
-      // copy the pipeline payload into a new object to avoid modifications
-      // TODO: Better way of write-protecting the args for tapped functions; this may lead
-      // to weird bugs in user's code because modification seems to work but in
-      // fact the modification results are ignored; this one also has the draw
-      // TODO: This is also inefficient
-      // TODO: This also only works for objects and arrays; any data of custom type (e.g. DOM)
-      // is overwritten
-      const mergedargs = _.merge({}, currContext);
-      const tapresults = this._taps.map((f) => {
+    const execTaps = async (taps, fnIdent, fnIdx) => {
+      for (const [idx, t] of iter(taps)) {
+        const ident = getident(t, 'tap', idx);
+        logger.silly(`exec ${ident} before ${fnIdent}`);
         try {
-          return f(mergedargs, this._action, index);
+          await t(context, this._action, fnIdx);
         } catch (e) {
-          return Promise.reject(e);
+          logger.error(`Exception during ${ident}:\n${e.stack}`);
+          throw e;
         }
-      });
-
-      return Promise.all(tapresults)
-        .then(() => Promise.resolve(currFunction(mergedargs, this._action))
-          .then((value) => {
-            const result = currFunction.does_mutate ? mergedargs : _.merge(currContext, value);
-            this._action.logger.silly('received ', { function: this.describe(currFunction), result });
-            return result;
-          })).catch((e) => {
-          // tapping failed
-          this._action.logger.error(`tapping failed: ${e.stack}`);
-          return {
-            error: `${currContext.error || ''}\n${e.stack || ''}`,
-          };
-        });
+      }
     };
 
-    // go over inner.pres (those that run before), inner.oncef (the function that runs once)
-    // and inner.posts (those that run after) – reduce using the merge function and return
-    // the resolved value
-    return [...this._pres, this._oncef, ...this._posts]
-      .filter(e => typeof e === 'function')
-      .reduce(async (ctx, fn, index) => merge(await ctx, fn, index), context);
+    /**
+     * Executes the pipeline functions
+     * @param {Function[]} fns the functions
+     * @param {number} startIdx offset of the function's index in the entire pipeline.
+     * @param {string} classifier type of function (for logging)
+     */
+    const execFns = async (fns, startIdx, classifier) => {
+      for (const [i, f] of enumerate(fns)) {
+        const idx = i + startIdx;
+        const ident = getident(f, classifier, idx);
+
+        // skip if error and no error handler (or no error and error handler)
+        if ((!context.error) === (!!f.errorHandler)) {
+          logger.silly(`skip ${ident}`, {
+            function: this.describe(f),
+          });
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+
+        try {
+          await execTaps(enumerate(this._taps), ident, idx);
+        } catch (e) {
+          if (!context.error) {
+            context.error = e;
+          }
+        }
+        if (context.error && !f.errorHandler) {
+          // eslint-disable-next-line no-continue
+          continue;
+        }
+        try {
+          logger.silly(`exec ${ident}`, {
+            function: this.describe(f),
+          });
+          await f(context, this._action);
+        } catch (e) {
+          logger.error(`Exception during ${ident}:\n${e.stack}`);
+          if (!context.error) {
+            context.error = e;
+          }
+        }
+      }
+    };
+
+    try {
+      await execFns(this._pres, 0, 'pre');
+      await execFns([this._oncef], this._pres.length, 'once');
+      await execFns(this._posts, this._pres.length + 1, 'post');
+    } catch (e) {
+      logger.error(`Unexpected error during pipeline execution: \n${e.stack}`);
+      if (!context.error) {
+        context.error = e;
+      }
+    }
+    return context;
   }
 }
 

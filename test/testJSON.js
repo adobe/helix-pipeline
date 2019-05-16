@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { setdefault } = require('@adobe/helix-shared').types;
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const setupPolly = require('@pollyjs/core').setupMocha;
@@ -88,7 +89,9 @@ describe('Testing JSON Pipeline', () => {
 
   it('json.pipe makes HTTP requests', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
+        const res = setdefault(context, 'response', {});
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.ok(content.body);
@@ -98,7 +101,8 @@ describe('Testing JSON Pipeline', () => {
         assert.equal(content.intro, 'Project Helix');
         assert.equal(content.title, 'Bill, Welcome to the future');
         // and return a different status code
-        return { response: { status: 201, body: { foo: 'bar' } } };
+        res.status = 201;
+        res.body = { foo: 'bar' };
       },
       {},
       {
@@ -115,7 +119,9 @@ describe('Testing JSON Pipeline', () => {
 
   it('json.pipe keeps Mime-Type', async () => {
     const result = await pipe(
-      ({ content }) => {
+      (context) => {
+        const { content } = context;
+        const res = setdefault(context, 'response', {});
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         assert.ok(content.body);
@@ -125,7 +131,9 @@ describe('Testing JSON Pipeline', () => {
         assert.equal(content.intro, 'Project Helix');
         assert.equal(content.title, 'Bill, Welcome to the future');
         // and return a different status code
-        return { response: { status: 201, body: { foo: 'bar' }, headers: { 'Content-Type': 'text/plain+json' } } };
+        res.status = 201;
+        res.body = { foo: 'bar' };
+        setdefault(res, 'headers', {})['Content-Type'] = 'text/plain+json';
       },
       {},
       {
@@ -141,15 +149,13 @@ describe('Testing JSON Pipeline', () => {
   });
 
   it('json.pipe can be extended', async () => {
-    const myfunc = ({ content }) => ({
-      content: {
-        json: {
-          root: {
-            title: content.title,
-          },
+    const myfunc = (context) => {
+      context.content.json = {
+        root: {
+          title: context.content.title,
         },
-      },
-    });
+      };
+    };
 
     let calledfoo = false;
     let calledbar = false;
@@ -174,7 +180,6 @@ describe('Testing JSON Pipeline', () => {
       const { content } = p;
       const { title } = content.json.root;
       content.json.root.title = `${title.toUpperCase()}!!!`;
-      return { content };
     }
 
     myfunc.before = {

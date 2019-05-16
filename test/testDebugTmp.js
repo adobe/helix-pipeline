@@ -15,11 +15,8 @@ const assert = require('assert');
 const dumper = require('../src/utils/dump-context.js');
 
 describe('Test Temp Context Dumper', () => {
-  it('Creates a temp directory', (done) => {
-    dumper({ foo: 'bar' }, {}, 0).then((file) => {
-      assert.ok(fs.existsSync(file));
-      assert.deepEqual(fs.readJSONSync(file), { foo: 'bar' });
-      done();
-    });
-  });
+  it('Creates a temp directory', () => dumper({ foo: 'bar' }, {}, 0).then((file) => {
+    assert.ok(fs.existsSync(file));
+    assert.deepEqual(fs.readJSONSync(file), { foo: 'bar' });
+  }));
 });

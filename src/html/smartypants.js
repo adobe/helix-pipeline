@@ -13,17 +13,16 @@ const retext = require('retext');
 const map = require('unist-util-map');
 const smartypants = require('retext-smartypants');
 
-function reformat({ content: { mdast } }) {
+function reformat({ content }) {
+  if (!content.mdast) {
+    return;
+  }
   const smart = retext().use(smartypants);
-
-  map(mdast, (node) => {
+  map(content.mdast, (node) => {
     if (node.type === 'text') {
-      // eslint-disable-next-line no-param-reassign
       node.value = smart.processSync(node.value).contents;
     }
   });
-
-  return { content: { mdast } };
 }
 
 module.exports = reformat;

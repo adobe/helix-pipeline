@@ -32,11 +32,11 @@ const logger = winston.createLogger({
 });
 
 const procMd = (md) => {
-  const body = multiline(md);
-  const { mdast: orig } = parseMd({ content: { body } }, { logger }).content;
-  const proc = cloneDeep(orig);
-  parseFront({ content: { mdast: proc, body } });
-  return { orig, proc };
+  const dat = { content: { body: multiline(md) } };
+  parseMd(dat, { logger });
+  const orig = cloneDeep(dat.content.mdast);
+  parseFront(dat);
+  return { orig, proc: dat.content.mdast };
 };
 
 const ck = (wat, md, ast) => {
@@ -46,7 +46,6 @@ const ck = (wat, md, ast) => {
     const nodes = flattenTree(proc,
       (node, recurse) => concat([node], recurse(node.children || [])));
     each(nodes, (node) => {
-      /* eslint-disable-next-line no-param-reassign */
       delete node.position;
     });
     assert.deepStrictEqual(proc.children, yaml.safeLoad(ast));

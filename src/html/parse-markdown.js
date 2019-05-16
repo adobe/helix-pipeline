@@ -11,12 +11,14 @@
  */
 const unified = require('unified');
 const remark = require('remark-parse');
+const { setdefault } = require('@adobe/helix-shared').types;
 
-function parseMarkdown({ content: { body = '' } = {} }, { logger }) {
+function parseMarkdown(context, { logger }) {
+  const content = setdefault(context, 'content', {});
+  const body = setdefault(content, 'body', '');
+
   logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
-  const preprocessor = unified().use(remark);
-  const mdast = preprocessor.parse(body);
-  return { content: { mdast } };
+  content.mdast = unified().use(remark).parse(body);
 }
 
 module.exports = parseMarkdown;

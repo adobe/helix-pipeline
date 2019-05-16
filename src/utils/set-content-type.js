@@ -9,21 +9,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+const { setdefault } = require('@adobe/helix-shared').types;
 
 function type(mime) {
-  return function setmime({ response }, { logger }) {
-    if (!(response && response.headers && response.headers['Content-Type'])) {
-      logger.debug(`Setting content type header to ${mime}`);
-      return {
-        response: {
-          headers: {
-            'Content-Type': mime,
-          },
-        },
-      };
-    }
-    logger.debug('Keeping existing content type header');
-    return { response };
+  return function setmime(context) {
+    const res = setdefault(context, 'response', {});
+    const head = setdefault(res, 'headers', {});
+    setdefault(head, 'Content-Type', mime);
   };
 }
 

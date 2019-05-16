@@ -11,28 +11,25 @@
  */
 
 const builder = require('xmlbuilder');
+const { setdefault } = require('@adobe/helix-shared').types;
 
-function emit({ content, response = {} }, { secrets, logger }) {
-  if (response.body) {
+function emit(context, { secrets, logger }) {
+  const cont = setdefault(context, 'content', {});
+  const res = setdefault(context, 'response', {});
+
+  if (res.body) {
     logger.debug('Response body already exists');
-    return {};
+    return;
   }
-  if (content.xml) {
-    try {
-      logger.debug(`Emitting XML from ${typeof content.xml}`);
-      const xml = builder.create(content.xml, { encoding: 'utf-8' });
-      return {
-        response: {
-          body: xml.end({ pretty: !!secrets.XML_PRETTY }),
-        },
-      };
-    } catch (e) {
-      logger.error(`Error building XML: ${e}`);
-      return {};
-    }
+
+  if (!cont.xml) {
+    logger.debug('No XML to emit');
+    return;
   }
-  logger.debug('No XML to emit');
-  return {};
+
+  logger.debug(`Emitting XML from ${typeof cont.xml}`);
+  const xml = builder.create(cont.xml, { encoding: 'utf-8' });
+  res.body = xml.end({ pretty: !!secrets.XML_PRETTY });
 }
 
 module.exports = emit;

@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { deepclone } = require('@adobe/helix-shared').types;
 const emit = require('../src/xml/emit-xml');
 
 const logger = Logger.getTestLogger({
@@ -45,33 +46,35 @@ const expectedPrettyXML = '<?xml version="1.0" encoding="utf-8"?>\n<document>\n 
 
 describe('Test emit-xml', () => {
   it('builds XML from object', () => {
-    const output = emit(payload, action);
-    assert.deepEqual(output.response.body, expectedXML);
+    const data = deepclone(payload);
+    emit(data, action);
+    assert.deepEqual(data.response.body, expectedXML);
   });
 
   it('builds pretty XML from object', () => {
+    const data = deepclone(payload);
     action.secrets.XML_PRETTY = true;
-    const output = emit(payload, action);
-    assert.deepEqual(output.response.body, expectedPrettyXML);
+    emit(data, action);
+    assert.deepEqual(data.response.body, expectedPrettyXML);
     action.secrets.XML_PRETTY = false;
   });
 
   it('does nothing if no XML object specified', () => {
-    assert.deepEqual(emit({ content: {}, response: {} }, action), {});
-  });
-
-  it('fails gracefully in case of invalid object', () => {
-    // xml contains unexpected value which will break xmlbuilder-js
-    assert.deepEqual(emit({ content: { xml: function bla() {} }, response: {} }, action), {});
+    const data = { content: {}, response: {} };
+    emit(data, action);
+    assert.deepEqual(data, { content: {}, response: {} });
   });
 
   it('keeps existing response body', () => {
     payload.response.body = expectedXML;
-    assert.deepEqual(emit(payload, action), {});
+    const data = deepclone(payload);
+    emit(data, action);
+    assert.deepEqual(data, payload);
   });
 
   it('handles missing response object', () => {
-    const output = emit({ content }, action);
-    assert.deepEqual(output.response.body, expectedXML);
+    const data = { content };
+    emit(data, action);
+    assert.deepEqual(data.response.body, expectedXML);
   });
 });

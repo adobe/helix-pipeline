@@ -12,14 +12,9 @@
 const unified = require('unified');
 const parse = require('rehype-parse');
 
-function tohast({ response: { body } }) {
-  const fragment = !body.match(/<html/i);
-  const hast = unified().use(parse, { fragment }).parse(body);
-  return {
-    response: {
-      hast,
-    },
-  };
+function tohast({ response }) {
+  const fragment = !response.body.match(/<html/i);
+  response.hast = unified().use(parse, { fragment }).parse(response.body);
 }
 
 module.exports = tohast;

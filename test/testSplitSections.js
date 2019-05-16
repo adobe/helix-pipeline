@@ -22,9 +22,11 @@ const logger = Logger.getTestLogger({
 });
 
 function callback(body) {
-  const parsed = parse({ content: { body } }, { logger });
-  parseFront({ content: { mdast: parsed.content.mdast, body } });
-  return split(parsed, { logger }).content.sections;
+  const data = { content: { body } };
+  parse(data, { logger });
+  parseFront(data);
+  split(data, { logger });
+  return data.content.sections;
 }
 
 describe('Test Section Splitting', () => {

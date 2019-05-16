@@ -10,49 +10,33 @@
  * governing permissions and limitations under the License.
  */
 
-function setVerboseError(error) {
-  const res = {
-    response: {
-      status: 500,
-      body: `<html><body><h1>500</h1><pre>${error}</pre></body></html>`,
-      headers: {
-        'Content-Type': 'text/html',
-      },
-    },
-  };
-  return res;
-}
+const { setdefault } = require('@adobe/helix-shared').types;
+const isProduction = require('../utils/is-production');
 
-function selectStatus(prod) {
-  return ({ response = {}, error }, { logger }) => {
-    // if a status is already default, keep it.
-    if (response.status) {
-      return {};
-    }
-    if (!error) {
-      return {
-        response: {
-          status: 200,
-        },
-      };
-    }
-    // error handling
-    logger.debug('payload.error -> 500');
-    if (prod) {
-      return {
-        response: {
-          status: 500,
-          body: '',
-        },
-      };
-    }
-    return setVerboseError(error);
-  };
-}
+const selectStatus = (context, { logger }) => {
+  const res = setdefault(context, 'response', {});
+  const headers = setdefault(res, 'headers', {});
+  const err = context.error;
 
-function setStatus({ response = {}, error }, { logger }) {
-  return selectStatus(false)({ response, error }, { logger });
-}
+  // if a status is already default, keep it.
+  if (res.status) {
+    return;
+  }
 
-module.exports = setStatus;
-module.exports.selectStatus = selectStatus;
+  if (!err) {
+    res.status = 200;
+    return;
+  }
+
+  // error handling
+  logger.debug('payload.error -> 500');
+  res.status = 500;
+  res.body = '';
+
+  if (!isProduction()) {
+    res.body = `<html><body><h1>500</h1><pre>${err}</pre></body></html>`;
+    headers['Content-Type'] = 'text/html';
+  }
+};
+
+module.exports = selectStatus;
