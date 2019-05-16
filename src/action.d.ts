@@ -121,6 +121,10 @@ export interface Secrets {
    */
   EMBED_SERVICE?: string;
   /**
+   * Selector to be used when resolving internal embeds.
+   */
+  EMBED_SELECTOR?: string;
+  /**
    * Minimum physical width of responsive images to generate
    */
   IMAGES_MIN_SIZE?: number;

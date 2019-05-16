@@ -25,9 +25,10 @@ A pipeline consists of following main parts:
 - post-processing functions
 - error handling functions
 
-Each step of the pipeline is processing a single payload object, that will slowly accumulate the `return` values of the functions above through `Object.assign`.
+Each step of the pipeline is processing a single context object, which eventually can be used to
+return the http response.
 
-See below for the anatomy of a payload.
+See below for the anatomy of the context.
 
 Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g.
 
@@ -39,7 +40,7 @@ Typically, there is one pipeline for each content type supported and pipeline ar
 A pipeline builder can be created by creating a CommonJS module that exports a function `pipe` which accepts following arguments and returns a Pipeline function.
 
 - `cont`: the main function that will be executed as a continuation of the pipeline
-- `payload`: the [payload](./docs/context.schema.md) (aka context) that is accumulated during the pipeline. 
+- `context`: the [context](./docs/context.schema.md) (formerly known as payload) that is accumulated during the pipeline. 
 - `action`: the [action](./docs/action.schema.md) that serves as holder for extra pipeline invocation argument.
 
 This project's main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:
@@ -78,7 +79,7 @@ Examples of possible template names include:
 
 ### (Optional) The Wrapper Function
 
-Sometimes it is necessary to pre-process the payload in a template-specific fashion. This wrapper function (often called "Pre-JS" for brevity sake) allows the full transformation of the pipeline's payload.
+Sometimes it is necessary to pre-process the context in a template-specific fashion. This wrapper function (often called "Pre-JS" for brevity sake) allows the full transformation of the pipeline's context.
 
 Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:
 
@@ -92,25 +93,25 @@ A simple implementation of a wrapper function would look like this:
 // All wrapper functions must export `pre`
 // The functions takes following arguments:
 // - `cont` (the continuation function, i.e. the main template function)
-// - `payload` (the payload of the pipeline)
+// - `context` (the context of the pipeline)
 // - `action` (the action of the pipeline)
-module.exports.pre = (cont, payload, action) => {
-    const {request, content, response} = payload;
+module.exports.pre = (cont, context, action) => {
+    const {request, content, response} = context;
     
-    // modifying the payload content before invoking the main function
+    // modifying the context content before invoking the main function
     content.hello = 'World';
-    const modifiedpayload = {request, content, response};
+    const modifiedcontext = {request, content, response};
 
-    // invoking the main function with the new payload. Capturing the response
-    // payload for further modification
+    // invoking the main function with the new context. Capturing the response
+    // context for further modification
 
-    const responsepayload = cont(modifiedpayload, action);
+    const responsecontext = cont(modifiedcontext, action);
 
-    // Adding a value to the payload response
-    const modifiedresponse = modifiedpayload.response;
+    // Adding a value to the context response
+    const modifiedresponse = modifiedcontext.response;
     modifiedresponse.hello = 'World';
 
-    return Object.assign(modifiedpayload, modifiedresponse);
+    return Object.assign(modifiedcontext, modifiedresponse);
 }
 ```
 
@@ -204,7 +205,7 @@ All functions that are using the `before` and `after` extension points need to f
 A more complex example of using these extension points to implement custom markdown content nodes and handle 404 errors can be found in the [helix-cli integration tests](https://github.com/adobe/helix-cli/blob/master/test/integration/src/html.pre.js).
 
 
-## Anatomy of the Payload
+## Anatomy of the Context
 
 Following main properties exist:
 

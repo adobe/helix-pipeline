@@ -161,6 +161,12 @@ export interface Content {
     [k: string]: any;
   };
   /**
+   * The JSON object to emit.
+   */
+  json?: {
+    [k: string]: any;
+  };
+  /**
    * The XML object to emit. See xmlbuilder-js for syntax.
    */
   xml?: {
@@ -332,6 +338,12 @@ export interface Response {
    */
   status?: number;
   body?: {
+    [k: string]: any;
+  };
+  /**
+   * The Hypertext AST of the reponse body
+   */
+  hast?: {
     [k: string]: any;
   };
   /**
