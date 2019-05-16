@@ -1,3 +1,24 @@
+# [2.0.0](https://github.com/adobe/helix-pipeline/compare/v1.12.1...v2.0.0) (2019-05-16)
+
+
+### Bug Fixes
+
+* **pipe:** Do not filter out non-functions before running the pipeline ([083d902](https://github.com/adobe/helix-pipeline/commit/083d902))
+
+
+### Features
+
+* **pipe:** Simplify pipeline step executor ([2cbfe58](https://github.com/adobe/helix-pipeline/commit/2cbfe58)), closes [#228](https://github.com/adobe/helix-pipeline/issues/228) [#223](https://github.com/adobe/helix-pipeline/issues/223)
+
+
+### BREAKING CHANGES
+
+* **pipe:** return value from pipeline functions are no longer merged into the context
+
+NOTE: Most of the functional changes live in src/pipeline.js;
+most other changes are just refactoring the rest of the code
+base to utilize the changes there.
+
 ## [1.12.1](https://github.com/adobe/helix-pipeline/compare/v1.12.0...v1.12.1) (2019-05-14)
 
 
