@@ -28,6 +28,7 @@ const emit = require('../xml/emit-xml.js');
 const selectStatus = require('../xml/set-xml-status.js');
 const check = require('../xml/check-xml');
 const parseFrontmatter = require('../html/parse-frontmatter');
+const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
 
@@ -35,9 +36,11 @@ const xmlpipe = (cont, payload, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing XML Pipeline');
   const pipe = new Pipeline(action);
+  const timer = timing();
   pipe
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
+    .every(timer.update)
     .before(fetch).expose('fetch')
     .before(parse).expose('parse')
     .before(parseFrontmatter)
@@ -52,6 +55,7 @@ const xmlpipe = (cont, payload, action) => {
     .when(uncached)
     .after(key)
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
+    .after(timer.report)
     .error(selectStatus);
 
   action.logger.log('debug', 'Running XML pipeline');
