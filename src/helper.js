@@ -12,10 +12,15 @@
 
 function bail(logger, message, error, status = 500) {
   logger.error(message);
+
   return {
     error: Object.assign({ message }, error),
     response: {
       status,
+      headers: {
+        'X-SEQ-DEBUG': `Note over AdobeIORuntime: Error - ${message} - ${status}`,
+      },
+
     },
   };
 }

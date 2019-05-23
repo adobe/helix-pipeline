@@ -12,7 +12,7 @@
 
 const { selectAll } = require('hast-util-select');
 
-function addHeaders({ response: { headers, hast } }) {
+function addHeaders({ response: { headers, hast, status } }) {
   const linkheaders = selectAll('link[rel][href]', hast).reduce((h, { properties: { href, rel } }) => {
     if (!href.match(/<esi:include/)) {
       // eslint-disable-next-line no-param-reassign
@@ -31,6 +31,8 @@ function addHeaders({ response: { headers, hast } }) {
     }
     return h;
   }, linkheaders);
+
+  metaheaders['X-SEQ-DEBUG'] = `${(metaheaders['X-SEQ-DEBUG'] || '')}Note over AdobeIORuntime: Status: ${status || 200}\\\\n`;
 
   return {
     response: {

@@ -27,22 +27,34 @@ function selectStatus(prod) {
   return ({ response = {}, error }, { logger }) => {
     // if a status is already default, keep it.
     if (response.status) {
-      return {};
+      const headers = response.headers || {};
+      headers['X-SEQ-DEBUG'] = `${(headers['X-SEQ-DEBUG'] || '')}Note over AdobeIORuntime: Status (from previous): ${response.status}}\\\\n`;
+      return {
+        response: {
+          headers,
+        },
+      };
     }
     if (!error) {
+      const headers = response.headers || {};
+      headers['X-SEQ-DEBUG'] = `${(headers['X-SEQ-DEBUG'] || '')}Note over AdobeIORuntime: Status: 200}\\\\n`;
       return {
         response: {
           status: 200,
+          headers,
         },
       };
     }
     // error handling
     logger.debug('payload.error -> 500');
     if (prod) {
+      const headers = response.headers || {};
+      headers['X-SEQ-DEBUG'] = `${(headers['X-SEQ-DEBUG'] || '')}Note over AdobeIORuntime: Status: 500}\\\\n`;
       return {
         response: {
           status: 500,
           body: '',
+          headers,
         },
       };
     }

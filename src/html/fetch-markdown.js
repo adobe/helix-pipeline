@@ -42,6 +42,7 @@ async function fetch(
     secrets = {},
     request,
     logger,
+    response = {},
   },
 ) {
   if (!request || !request.params) {
@@ -87,12 +88,17 @@ async function fetch(
     time: true,
   };
   logger.debug(`fetching Markdown from ${options.uri}`);
+  const headers = response.headers || {};
+  headers['X-SEQ-DEBUG'] = `${(headers['X-SEQ-DEBUG'] || '')}AdobeIORuntime->GitHub: Trying to fetch - ${options.uri}\\\\n`;
   try {
-    const response = await client(options);
+    const resp = await client(options);
     return {
       content: {
-        body: response,
+        body: resp,
         sources: [...sources, options.uri],
+      },
+      response: {
+        headers,
       },
     };
   } catch (e) {
