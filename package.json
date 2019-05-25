@@ -57,7 +57,7 @@
     "fs-extra": "^8.0.0",
     "github-slugger": "^1.2.1",
     "hast-to-hyperscript": "^7.0.0",
-    "hast-util-select": "^3.0.0",
+    "hast-util-select": "^3.0.1",
     "hast-util-to-html": "^5.0.0",
     "hyperscript": "^2.0.2",
     "js-yaml": "^3.13.1",
