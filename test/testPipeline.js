@@ -497,7 +497,7 @@ describe('Testing Pipeline', () => {
       .run();
     const output = await logger.getOutput();
     assert.deepEqual(order, ['pre0']);
-    assert.ok(output.indexOf('Exception during post-#5/error:anonymous') > 0);
+    assert.ok(output.indexOf('Exception during #05/error:anonymous') > 0);
   });
 
   it('handles generic pipeline error', async () => {

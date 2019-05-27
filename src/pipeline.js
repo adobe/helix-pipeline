@@ -231,6 +231,7 @@ class Pipeline {
         return args[0];
       };
       wrappedfunc.alias = lastfunc.alias;
+      wrappedfunc.title = lastfunc.title;
       wrappedfunc.ext = lastfunc.ext;
       this._last.push(wrappedfunc);
     } else {
@@ -274,6 +275,7 @@ class Pipeline {
     const wrapped = errorWrapper(f);
     // ensure proper alias
     wrapped.alias = f.alias;
+    wrapped.title = f.title;
     this._last.push(wrapped);
     return this;
   }
@@ -289,17 +291,17 @@ class Pipeline {
   // eslint-disable-next-line class-methods-use-this
   describe(f) {
     if (f.alias) {
-      return f.alias;
+      return;
     }
 
     f.alias = f.name || f.ext || 'anonymous';
+    f.title = f.alias;
 
     const [current, injector, caller] = callsites();
-    if (current.getFunctionName() === 'describe') {
-      f.alias = `${injector.getFunctionName()}:${f.alias} from ${caller.getFileName()}:${caller.getLineNumber()}`;
+    if (current.getFunctionName() === 'describe' && caller) {
+      f.title = `${injector.getFunctionName()}:${f.alias}`;
+      f.alias = `${f.title} from ${caller.getFileName()}:${caller.getLineNumber()}`;
     }
-
-    return f.alias;
   }
 
   /**
@@ -314,8 +316,6 @@ class Pipeline {
     // register all custom attachers to the pipeline
     this.attach(this._oncef);
 
-    const getident = (fn, classifier, idx) => `${classifier}-#${idx}/${this.describe(fn)}`;
-
     /**
      * Executes the taps of the current function.
      * @param {Function[]} taps the taps
@@ -324,10 +324,10 @@ class Pipeline {
      */
     const execTaps = async (taps, fnIdent, fnIdx) => {
       for (const [idx, t] of iter(taps)) {
-        const ident = getident(t, 'tap', idx);
-        logger.silly(`exec ${ident} before ${fnIdent}`);
+        const ident = `#${String(fnIdx).padStart(2, '0')}/${fnIdent}/tap-#${idx}`;
+        logger.silly(`exec ${ident}`);
         try {
-          await t(context, this._action, fnIdx);
+          await t(context, this._action, fnIdx, fnIdent);
         } catch (e) {
           logger.error(`Exception during ${ident}:\n${e.stack}`);
           throw e;
@@ -338,25 +338,22 @@ class Pipeline {
     /**
      * Executes the pipeline functions
      * @param {Function[]} fns the functions
-     * @param {number} startIdx offset of the function's index in the entire pipeline.
-     * @param {string} classifier type of function (for logging)
      */
-    const execFns = async (fns, startIdx, classifier) => {
-      for (const [i, f] of enumerate(fns)) {
-        const idx = i + startIdx;
-        const ident = getident(f, classifier, idx);
+    const execFns = async (fns) => {
+      for (const [idx, f] of enumerate(fns)) {
+        const ident = `#${String(idx).padStart(2, '0')}/${f.alias}`;
 
         // skip if error and no error handler (or no error and error handler)
         if ((!context.error) === (!!f.errorHandler)) {
           logger.silly(`skip ${ident}`, {
-            function: this.describe(f),
+            function: f.alias,
           });
           // eslint-disable-next-line no-continue
           continue;
         }
 
         try {
-          await execTaps(enumerate(this._taps), ident, idx);
+          await execTaps(enumerate(this._taps), f.title, idx);
         } catch (e) {
           if (!context.error) {
             context.error = e;
@@ -368,7 +365,7 @@ class Pipeline {
         }
         try {
           logger.silly(`exec ${ident}`, {
-            function: this.describe(f),
+            function: f.alias,
           });
           await f(context, this._action);
         } catch (e) {
@@ -381,9 +378,7 @@ class Pipeline {
     };
 
     try {
-      await execFns(this._pres, 0, 'pre');
-      await execFns([this._oncef], this._pres.length, 'once');
-      await execFns(this._posts, this._pres.length + 1, 'post');
+      await execFns([...this._pres, this._oncef, ...this._posts]);
     } catch (e) {
       logger.error(`Unexpected error during pipeline execution: \n${e.stack}`);
       if (!context.error) {
