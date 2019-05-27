@@ -35,6 +35,7 @@ const rewriteLinks = require('../html/static-asset-links');
 const tohast = require('../html/html-to-hast');
 const tohtml = require('../html/stringify-hast');
 const addHeaders = require('../html/add-headers');
+const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
 
@@ -46,9 +47,11 @@ const htmlpipe = (cont, payload, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = new Pipeline(action);
+  const timer = timing();
   pipe
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
+    .every(timer.update)
     .before(fetch).expose('fetch').when(hascontent)
     .before(parse).expose('parse')
     .before(parseFrontmatter)
@@ -70,6 +73,7 @@ const htmlpipe = (cont, payload, action) => {
     .after(addHeaders)
     .after(tohtml) // end HTML post-processing
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
+    .after(timer.report)
     .error(selectStatus);
 
   action.logger.log('debug', 'Running HTML pipeline');

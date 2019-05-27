@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/adobe/helix-pipeline/compare/v2.0.0...v2.1.0) (2019-05-27)
+
+
+### Features
+
+* **pipe:** add timing information and clean up function name reporting ([#334](https://github.com/adobe/helix-pipeline/issues/334)) ([bf6c779](https://github.com/adobe/helix-pipeline/commit/bf6c779)), closes [#333](https://github.com/adobe/helix-pipeline/issues/333)
+
 # [2.0.0](https://github.com/adobe/helix-pipeline/compare/v1.12.1...v2.0.0) (2019-05-16)
 
 

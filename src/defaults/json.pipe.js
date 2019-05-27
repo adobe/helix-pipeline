@@ -24,6 +24,7 @@ const validate = require('../utils/validate.js');
 const emit = require('../json/emit-json.js');
 const { selectStatus } = require('../json/set-json-status.js');
 const parseFrontmatter = require('../html/parse-frontmatter.js');
+const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
 
@@ -31,9 +32,11 @@ const jsonpipe = (cont, payload, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing JSON Pipeline');
   const pipe = new Pipeline(action);
+  const timer = timing();
   pipe
     .every(dump).when(() => !production())
     .every(validate).when(() => !production())
+    .every(timer.update)
     .before(fetch).expose('fetch')
     .before(parse).expose('parse')
     .before(parseFrontmatter)
@@ -43,6 +46,7 @@ const jsonpipe = (cont, payload, action) => {
     .once(cont)
     .after(emit).expose('json')
     .after(type('application/json'))
+    .after(timer.report)
     .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running JSON pipeline');
