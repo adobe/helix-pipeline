@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/adobe/helix-pipeline/compare/v2.1.0...v2.1.1) (2019-05-27)
+
+
+### Bug Fixes
+
+* **package:** update hast-util-select to version 3.0.1 ([dfd589e](https://github.com/adobe/helix-pipeline/commit/dfd589e))
+
 # [2.1.0](https://github.com/adobe/helix-pipeline/compare/v2.0.0...v2.1.0) (2019-05-27)
 
 
