@@ -692,15 +692,15 @@ ${context.content.document.body.innerHTML}`,
 
   it('html.pipe sanitizes author-generated content, but not developer-generated code', async () => {
     const result = await pipe(
-      ({ content }) => ({
-        response: {
+      (context) => {
+        context.response = {
           status: 200,
           body: `
-            ${content.document.body.innerHTML}
+            ${context.content.document.body.innerHTML}
             <a href="javascript:alert('XSS')">Baz</a>
           `,
-        },
-      }),
+        };
+      },
       {
         request: crequest,
         content: {
