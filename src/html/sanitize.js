@@ -69,13 +69,7 @@ function sanitize({ content }, { logger }) {
   allowCustomElements(DOMPurify);
   allowCustomAttributes(DOMPurify);
   const sanitizedBody = DOMPurify.sanitize(content.document.body, helixSanitizationConfig);
-  return {
-    content: {
-      document: {
-        body: sanitizedBody,
-      },
-    },
-  };
+  content.document.body = sanitizedBody;
 }
 
 module.exports = sanitize;
