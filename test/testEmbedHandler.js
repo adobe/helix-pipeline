@@ -11,7 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { Logger, dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { JSDOM } = require('jsdom');
 const embed = require('../src/utils/embed-handler');
 const { pipe } = require('../src/defaults/html.pipe.js');
 const coerce = require('../src/utils/coerce-secrets');
@@ -121,11 +122,16 @@ https://www.youtube.com/watch?v=KOxbO0EI4MA
 
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/html');
-    assert.equal(result.response.body, `<p>Hello World
-Here comes an embed.</p>
-<esi:include src="https://example-embed-service.com/https://www.youtube.com/watch?v=KOxbO0EI4MA"></esi:include>
-<esi:remove><p><a href="https://www.youtube.com/watch?v=KOxbO0EI4MA">https://www.youtube.com/watch?v=KOxbO0EI4MA</a></p></esi:remove>
-<p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w, easy.png?width=1384&amp;auto=webp 1384w, easy.png?width=2288&amp;auto=webp 2288w, easy.png?width=3192&amp;auto=webp 3192w, easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p>`);
+    assertEquivalentNode(
+      new JSDOM(result.response.body).window.document.body,
+      new JSDOM(`
+        <p>Hello World
+        Here comes an embed.</p>
+        <esi:include src="https://example-embed-service.com/https://www.youtube.com/watch?v=KOxbO0EI4MA"></esi:include>
+        <esi:remove><p><a href="https://www.youtube.com/watch?v=KOxbO0EI4MA">https://www.youtube.com/watch?v=KOxbO0EI4MA</a></p></esi:remove>
+        <p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w, easy.png?width=1384&amp;auto=webp 1384w, easy.png?width=2288&amp;auto=webp 2288w, easy.png?width=3192&amp;auto=webp 3192w, easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p>
+      `).window.document.body,
+    );
   });
 
   it('html.pipe processes internal embeds', async () => {
@@ -154,10 +160,15 @@ Here comes an embed.
 
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/html');
-    assert.equal(result.response.body, `<p>Hello World
-Here comes an embed.</p>
-<esi:include src="/test/foo.embed.html"></esi:include>
-<esi:remove><p>./foo.md</p></esi:remove>
-<p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w, easy.png?width=1384&amp;auto=webp 1384w, easy.png?width=2288&amp;auto=webp 2288w, easy.png?width=3192&amp;auto=webp 3192w, easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p>`);
+    assertEquivalentNode(
+      new JSDOM(result.response.body).window.document.body,
+      new JSDOM(`
+        <p>Hello World
+        Here comes an embed.</p>
+        <esi:include src="/test/foo.embed.html"></esi:include>
+        <esi:remove><p>./foo.md</p></esi:remove>
+        <p><img src="easy.png" alt="Easy!" srcset="easy.png?width=480&amp;auto=webp 480w, easy.png?width=1384&amp;auto=webp 1384w, easy.png?width=2288&amp;auto=webp 2288w, easy.png?width=3192&amp;auto=webp 3192w, easy.png?width=4096&amp;auto=webp 4096w" sizes="100vw"></p>
+      `).window.document.body,
+    );
   });
 });

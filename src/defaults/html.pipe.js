@@ -36,6 +36,7 @@ const tohast = require('../html/html-to-hast');
 const tohtml = require('../html/stringify-hast');
 const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
+const sanitize = require('../html/sanitize');
 
 /* eslint newline-per-chained-call: off */
 
@@ -63,6 +64,7 @@ const htmlpipe = (cont, payload, action) => {
     .before(selecttest)
     .before(html).expose('html')
     .before(responsive)
+    .before(sanitize)
     .once(cont)
     .after(type('text/html'))
     .after(cache).when(uncached)

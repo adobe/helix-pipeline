@@ -222,11 +222,11 @@ describe('Testing Markdown conversion', () => {
         # Foo
 
         <form>
-          <input type="text" name="name"><label for="name">Name</label>
+          <input type="text" name="fieldName"><label for="fieldName">Name</label>
         </form>
       `, `
         <h1 id="foo">Foo</h1>
-        <form><input type="text" name="name"><label for="name">Name</label></form>
+        <form><input type="text" name="fieldName"><label for="fieldName">Name</label></form>
     `);
   });
 
@@ -265,5 +265,53 @@ describe('Testing Markdown conversion', () => {
           </tbody>
         </table>
       `);
+  });
+
+  it('XSS escape href attribute on links', async () => {
+    await assertMd(`
+        [Foo](javascript://%0Dalert('XSS!'))
+        [Bar](javascript:alert('XSS!'))
+      `, `
+        <p>
+          <a>Foo</a>
+          <a>Bar</a>
+        </p>
+    `);
+  });
+
+  it('XSS escape href in images', async () => {
+    await assertMd(`
+        ![Foo](javascript://%0Dalert('XSS!'))
+        ![Bar](javascript:alert('XSS!'))
+      `, `
+        <p>
+          <img alt="Foo">
+          <img alt="Bar">
+        </p>
+    `);
+  });
+
+  it('XSS escape DOM clobbering attributes', async () => {
+    await assertMd(`
+        # location
+        <a name="anchors">Foo</a>
+      `, `
+        <h1 id="location">location</h1>
+        <p><a>Foo</a></p>
+    `);
+  });
+
+  it('Accept custom elements and attributes', async () => {
+    await assertMd(`
+        # Foo
+        Bar
+        <baz-qux corge-grault="garply">Waldo</baz-qux>
+      `, `
+        <h1 id="foo">Foo</h1>
+        <p>Bar</p>
+        <p>
+          <baz-qux corge-grault="garply">Waldo</baz-qux>
+        </p>
+    `);
   });
 });
