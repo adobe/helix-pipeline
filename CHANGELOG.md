@@ -1,3 +1,18 @@
+# [2.2.0](https://github.com/adobe/helix-pipeline/compare/v2.1.1...v2.2.0) (2019-05-29)
+
+
+### Bug Fixes
+
+* **html pipe:** Fix merge conflict ([6abb218](https://github.com/adobe/helix-pipeline/commit/6abb218)), closes [#253](https://github.com/adobe/helix-pipeline/issues/253)
+* **html pipe:** Sanitize generated markdown to avoid XSS attacks ([e2d7963](https://github.com/adobe/helix-pipeline/commit/e2d7963)), closes [#253](https://github.com/adobe/helix-pipeline/issues/253)
+* **html pipe:** Sanitize generated markdown to avoid XSS attacks ([8c55d0d](https://github.com/adobe/helix-pipeline/commit/8c55d0d)), closes [#253](https://github.com/adobe/helix-pipeline/issues/253)
+
+
+### Features
+
+* **html pipe:** add support for anchors on headings ([65430d4](https://github.com/adobe/helix-pipeline/commit/65430d4)), closes [#26](https://github.com/adobe/helix-pipeline/issues/26)
+* **html pipe:** Allow custom elements and attributes in markdown ([247a6b9](https://github.com/adobe/helix-pipeline/commit/247a6b9)), closes [#253](https://github.com/adobe/helix-pipeline/issues/253)
+
 ## [2.1.1](https://github.com/adobe/helix-pipeline/compare/v2.1.0...v2.1.1) (2019-05-27)
 
 
