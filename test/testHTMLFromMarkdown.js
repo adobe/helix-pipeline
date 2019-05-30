@@ -10,7 +10,8 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const winston = require('winston');
+const assert = require('assert');
+const { Logger } = require('@adobe/helix-shared');
 const { JSDOM } = require('jsdom');
 const { eq } = require('@adobe/helix-shared').types;
 const { multiline } = require('@adobe/helix-shared').string;
@@ -57,15 +58,9 @@ const params = {
   selector: 'md',
 };
 
-const logger = winston.createLogger({
+const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'debug',
-  // and turn this on if you want the output
-  silent: true,
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
+  level: 'info',
 });
 
 const crequest = {
@@ -85,9 +80,12 @@ const crequest = {
  * @param {String} html The html we expect to be generated.
  */
 const assertMd = async (md, html) => {
-  const fromHTML = ({ content }) => (
-    { response: { status: 201, body: content.document.body.innerHTML } }
-  );
+  const fromHTML = (context) => {
+    context.response = {
+      status: 201,
+      body: context.content.document.body.innerHTML,
+    };
+  };
 
   const generated = await pipe(
     fromHTML,
@@ -98,33 +96,28 @@ const assertMd = async (md, html) => {
     },
   );
 
-  eq(
-    new JSDOM(generated.response.body).window.document.body,
-    new JSDOM(html).window.document.body,
-  );
-};
-
-/**
- * Test a specific markdown feature.
- *
- * This is just a wrapper calling it and then issuing a single
- * assertMd.
- *
- * @param {String} desc The description passed to it.
- * @param {String} md The markdown passed to the pipeline.
- * @param {String} html The html that is expected to be generated.
- */
-const itMd = (desc, md, html) => {
-  it(desc, async () => {
-    await assertMd(md, html);
-  });
+  // check equality of the dom, but throw assertion based on strings to visualize difference.
+  const act = new JSDOM(generated.response.body);
+  const exp = new JSDOM(html);
+  if (!eq(act.window.document.body, exp.window.document.body)) {
+    assert.equal(act.serialize(), exp.serialize());
+  }
 };
 
 describe('Testing Markdown conversion', () => {
-  itMd('Renders empty markdown', '', '');
-  itMd('Renders single paragraph', // Regression #157
-    'Hello World.',
-    '<p>Hello World.</p>');
+  it('Renders empty markdown', async () => {
+    await assertMd(
+      '',
+      '',
+    );
+  });
+
+  it('Renders single paragraph', async () => {
+    await assertMd(
+      'Hello World.',
+      '<p>Hello World.</p>',
+    );
+  });
 
   it('Code blocks with lang', async () => {
     await assertMd(
@@ -296,22 +289,21 @@ describe('Testing Markdown conversion', () => {
         # location
         <a name="anchors">Foo</a>
       `, `
-        <h1 id="location">location</h1>
+        <h1>location</h1>
         <p><a>Foo</a></p>
     `);
   });
 
   it('Accept custom elements and attributes', async () => {
+    // note that the remark-parser needs to be reconfigured to support custom block elements:
+    // { blocks: [ '.+' ] } or similar. currently, those are treated as inline elements.
     await assertMd(`
         # Foo
         Bar
         <baz-qux corge-grault="garply">Waldo</baz-qux>
       `, `
         <h1 id="foo">Foo</h1>
-        <p>Bar</p>
-        <p>
-          <baz-qux corge-grault="garply">Waldo</baz-qux>
-        </p>
+        <p>Bar <baz-qux corge-grault="garply">Waldo</baz-qux></p>
     `);
   });
 });
