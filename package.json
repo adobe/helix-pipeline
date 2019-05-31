@@ -59,7 +59,7 @@
     "github-slugger": "^1.2.1",
     "hast-util-select": "^3.0.1",
     "hast-to-hyperscript": "^7.0.1",
-    "hast-util-to-html": "^5.0.1",
+    "hast-util-to-html": "^6.0.1",
     "hyperscript": "^2.0.2",
     "js-yaml": "^3.13.1",
     "jsdom": "^15.0.0",
