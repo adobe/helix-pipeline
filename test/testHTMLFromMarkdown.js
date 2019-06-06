@@ -319,7 +319,7 @@ describe('Testing Markdown conversion', () => {
           <a>Bar</a>
         </p>
     `, {
-      HLX_SANITIZE_DOM: true,
+      SANITIZE_DOM: true,
     });
   });
 
@@ -333,7 +333,7 @@ describe('Testing Markdown conversion', () => {
           <img alt="Bar">
         </p>
     `, {
-      HLX_SANITIZE_DOM: true,
+      SANITIZE_DOM: true,
     });
   });
 
@@ -345,7 +345,7 @@ describe('Testing Markdown conversion', () => {
         <h1>location</h1>
         <p><a>Foo</a></p>
     `, {
-      HLX_SANITIZE_DOM: true,
+      SANITIZE_DOM: true,
     });
   });
 
@@ -360,7 +360,7 @@ describe('Testing Markdown conversion', () => {
         <h1 id="foo">Foo</h1>
         <p>Bar <baz-qux corge-grault="garply">Waldo</baz-qux></p>
     `, {
-      HLX_SANITIZE_DOM: true,
+      SANITIZE_DOM: true,
     });
   });
 });
