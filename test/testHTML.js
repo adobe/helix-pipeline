@@ -713,7 +713,7 @@ ${context.content.document.body.innerHTML}`,
       },
       {
         request: { params },
-        secrets,
+        secrets: Object.assign({ HLX_SANITIZE_DOM: true }, secrets),
         logger,
       },
     );

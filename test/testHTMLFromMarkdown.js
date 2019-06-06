@@ -78,8 +78,9 @@ const crequest = {
  *
  * @param {String} md The markdown to convert to html.
  * @param {String} html The html we expect to be generated.
+ * @param {*} secrets additional secrets to add to the action
  */
-const assertMd = async (md, html) => {
+const assertMd = async (md, html, secrets = {}) => {
   const fromHTML = (context) => {
     context.response = {
       status: 201,
@@ -93,6 +94,7 @@ const assertMd = async (md, html) => {
     {
       logger,
       request: { params },
+      secrets,
     },
   );
 
@@ -295,6 +297,18 @@ describe('Testing Markdown conversion', () => {
       `);
   });
 
+  it('XSS escape href attribute on links disabled by default', async () => {
+    await assertMd(`
+        [Foo](javascript://%0Dalert('XSS!'))
+        [Bar](javascript:alert('XSS!'))
+      `, `
+        <p>
+          <a href="javascript://%0Dalert('XSS!')">Foo</a>
+          <a href="javascript:alert('XSS!')">Bar</a>
+        </p>
+    `);
+  });
+
   it('XSS escape href attribute on links', async () => {
     await assertMd(`
         [Foo](javascript://%0Dalert('XSS!'))
@@ -304,7 +318,9 @@ describe('Testing Markdown conversion', () => {
           <a>Foo</a>
           <a>Bar</a>
         </p>
-    `);
+    `, {
+      HLX_SANITIZE_DOM: true,
+    });
   });
 
   it('XSS escape href in images', async () => {
@@ -316,7 +332,9 @@ describe('Testing Markdown conversion', () => {
           <img alt="Foo">
           <img alt="Bar">
         </p>
-    `);
+    `, {
+      HLX_SANITIZE_DOM: true,
+    });
   });
 
   it('XSS escape DOM clobbering attributes', async () => {
@@ -326,7 +344,9 @@ describe('Testing Markdown conversion', () => {
       `, `
         <h1>location</h1>
         <p><a>Foo</a></p>
-    `);
+    `, {
+      HLX_SANITIZE_DOM: true,
+    });
   });
 
   it('Accept custom elements and attributes', async () => {
@@ -339,6 +359,8 @@ describe('Testing Markdown conversion', () => {
       `, `
         <h1 id="foo">Foo</h1>
         <p>Bar <baz-qux corge-grault="garply">Waldo</baz-qux></p>
-    `);
+    `, {
+      HLX_SANITIZE_DOM: true,
+    });
   });
 });
