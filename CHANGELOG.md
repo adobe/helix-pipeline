@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/adobe/helix-pipeline/compare/v2.3.0...v2.4.0) (2019-06-06)
+
+
+### Features
+
+* **pipe:** use jsdom everywhere ([479cc8a](https://github.com/adobe/helix-pipeline/commit/479cc8a)), closes [#337](https://github.com/adobe/helix-pipeline/issues/337) [#336](https://github.com/adobe/helix-pipeline/issues/336)
+
 # [2.3.0](https://github.com/adobe/helix-pipeline/compare/v2.2.0...v2.3.0) (2019-06-06)
 
 
