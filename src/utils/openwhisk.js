@@ -71,11 +71,11 @@ function extractClientRequest(action) {
 }
 
 /**
- * Creates an response for the OpenWhisk Web-Action from the pipeline payload.
- * @param {Object} payload Pipeline payload.
+ * Creates an response for the OpenWhisk Web-Action from the pipeline context
+ * @param {Object} context Pipeline context.
  * @returns {Object} OpenWhisk response
  */
-async function createActionResponse(payload) {
+async function createActionResponse(context) {
   const {
     response: {
       status,
@@ -83,7 +83,7 @@ async function createActionResponse(payload) {
       body = headers['Content-Type'] === 'application/json' ? {} : '',
     } = {},
     error,
-  } = payload;
+  } = context;
   return {
     statusCode: status || (error ? 500 : 200),
     headers,
@@ -117,7 +117,7 @@ function extractActionContext(params) {
     }
   });
 
-  // extract content (will be added to payload)
+  // extract content (will be added to context)
   delete disclosed.content;
 
   // setup action
@@ -144,16 +144,16 @@ async function runPipeline(cont, pipe, actionParams) {
     // create action context
     const action = extractActionContext(params);
 
-    // payload is initially empty
+    // context is initially empty
     // todo: think of adding the adaptOWRequestHere, too
-    const payload = {
+    const context = {
       request: extractClientRequest(action),
     };
     if (params.content) {
-      // pass content param from request to payload
-      payload.content = params.content;
+      // pass content param from request to context
+      context.content = params.content;
     }
-    return pipe(cont, payload, action);
+    return pipe(cont, context, action);
   }
   return createActionResponse(await owwrapper(runner, actionParams));
 }

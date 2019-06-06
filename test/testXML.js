@@ -110,7 +110,7 @@ const secrets = {
   XML_PRETTY: false,
 };
 
-const payload = {
+const testContext = {
   response: {
     body: '<?xml version="1.0" encoding="utf-8"?><test />',
   },
@@ -243,27 +243,27 @@ describe('Testing XML Pipeline', () => {
   it('xmp.pipe does not overwrite existing response body', async () => {
     const result = await pipe(
       () => {},
-      payload,
+      testContext,
       {
         request: { params },
         secrets,
       },
     );
 
-    assert.equal(result.response.body, payload.response.body);
+    assert.equal(result.response.body, testContext.response.body);
   });
 
   it('xmp.pipe uses default logger if none provided', async () => {
     const result = await pipe(
       () => {},
-      payload,
+      testContext,
       {
         request: { params },
         secrets,
       },
     );
 
-    assert.equal(result.response.body, payload.response.body);
+    assert.equal(result.response.body, testContext.response.body);
   });
 
   it('xml.pipe serves 404 for non existent content', async () => {

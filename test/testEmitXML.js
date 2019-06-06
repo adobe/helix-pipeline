@@ -31,7 +31,7 @@ const content = {
   },
 };
 
-const payload = {
+const context = {
   content,
   response: {},
 };
@@ -46,13 +46,13 @@ const expectedPrettyXML = '<?xml version="1.0" encoding="utf-8"?>\n<document>\n 
 
 describe('Test emit-xml', () => {
   it('builds XML from object', () => {
-    const data = deepclone(payload);
+    const data = deepclone(context);
     emit(data, action);
     assert.deepEqual(data.response.body, expectedXML);
   });
 
   it('builds pretty XML from object', () => {
-    const data = deepclone(payload);
+    const data = deepclone(context);
     action.secrets.XML_PRETTY = true;
     emit(data, action);
     assert.deepEqual(data.response.body, expectedPrettyXML);
@@ -66,10 +66,10 @@ describe('Test emit-xml', () => {
   });
 
   it('keeps existing response body', () => {
-    payload.response.body = expectedXML;
-    const data = deepclone(payload);
+    context.response.body = expectedXML;
+    const data = deepclone(context);
     emit(data, action);
-    assert.deepEqual(data, payload);
+    assert.deepEqual(data, context);
   });
 
   it('handles missing response object', () => {

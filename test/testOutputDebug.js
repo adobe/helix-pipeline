@@ -22,7 +22,7 @@ const logger = Logger.getTestLogger({
 });
 
 describe('Test outputDebug', () => {
-  function getPayload() {
+  function getContext() {
     return {
       request: {
         params: {
@@ -35,34 +35,34 @@ describe('Test outputDebug', () => {
     };
   }
 
-  function computeExpectedOutput(payload) {
-    const p = _.merge({}, payload);
+  function computeExpectedOutput(context) {
+    const p = _.merge({}, context);
     const { body } = p.response;
     delete p.response.body;
-    const debugScript = debug.DEBUG_TEMPLATE.replace(/PAYLOAD_JSON/, JSON.stringify(p));
+    const debugScript = debug.DEBUG_TEMPLATE.replace(/CONTEXT_JSON/, JSON.stringify(p));
     p.response.body = body.replace(/<\/body>/i, `${debugScript}</body>`);
     return p;
   }
 
   it('Testing no debug', () => {
-    const payload = getPayload();
-    payload.request.params.debug = false;
-    debug(payload, { logger });
-    assert.deepEqual(payload, deepclone(payload));
+    const context = getContext();
+    context.request.params.debug = false;
+    debug(context, { logger });
+    assert.deepEqual(context, deepclone(context));
   });
 
-  it('Testing simple payload', () => {
-    const payload = getPayload();
-    const expected = computeExpectedOutput(payload);
-    debug(payload, { logger });
-    assert.deepEqual(payload, expected);
+  it('Testing simple context', () => {
+    const context = getContext();
+    const expected = computeExpectedOutput(context);
+    debug(context, { logger });
+    assert.deepEqual(context, expected);
   });
 
   it('Testing upper case body tag', () => {
-    const payload = getPayload();
-    payload.response.body = payload.response.body.toUpperCase();
-    const expected = computeExpectedOutput(payload);
-    debug(payload, { logger });
-    assert.deepEqual(payload, expected);
+    const context = getContext();
+    context.response.body = context.response.body.toUpperCase();
+    const expected = computeExpectedOutput(context);
+    debug(context, { logger });
+    assert.deepEqual(context, expected);
   });
 });

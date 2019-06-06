@@ -19,7 +19,7 @@ const logger = Logger.getTestLogger({
   level: 'info',
 });
 
-const payload = {
+const context = {
   response: {
     headers: {
       'Content-Type': 'text/plain',
@@ -39,7 +39,7 @@ describe('Test set-content-type', () => {
   });
 
   it('keeps existing content type', () => {
-    type('text/html')(payload, { logger });
-    assert.strictEqual(payload.response.headers['Content-Type'], 'text/plain');
+    type('text/html')(context, { logger });
+    assert.strictEqual(context.response.headers['Content-Type'], 'text/plain');
   });
 });

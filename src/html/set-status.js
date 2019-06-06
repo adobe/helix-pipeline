@@ -29,7 +29,7 @@ const selectStatus = (context, { logger }) => {
   }
 
   // error handling
-  logger.debug('payload.error -> 500');
+  logger.debug('context.error -> 500');
   res.status = 500;
   res.body = '';
 

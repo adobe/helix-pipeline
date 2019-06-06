@@ -29,7 +29,7 @@ function setStatus(context, { logger }) {
     return;
   }
 
-  logger.debug('payload.error -> 500');
+  logger.debug('context.error -> 500');
   res.status = 500;
   res.body = '';
 
