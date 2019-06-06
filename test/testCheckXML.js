@@ -19,7 +19,7 @@ const logger = Logger.getTestLogger({
   level: 'info',
 });
 
-const payload = {
+const context = {
   response: {
     headers: {
       'Content-Type': 'text/plain',
@@ -30,20 +30,20 @@ const payload = {
 
 describe('Test check-xml', () => {
   it('validates proper XML', () => {
-    check(payload, { logger });
+    check(context, { logger });
   });
 
   it('throws error on improper XML', () => {
-    payload.response.body = '<?xml version="1.0" encoding="utf-8"?><parent><child /></root>';
+    context.response.body = '<?xml version="1.0" encoding="utf-8"?><parent><child /></root>';
     try {
-      check(payload, { logger });
+      check(context, { logger });
     } catch (e) {
       assert.ok(e);
     }
   });
 
   it('does nothing with empty response body', () => {
-    payload.response.body = '';
-    check(payload, { logger });
+    context.response.body = '';
+    check(context, { logger });
   });
 });

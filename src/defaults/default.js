@@ -18,14 +18,14 @@ const Pipeline = require('../pipeline.js');
  * - calling a continuation function
  * - wrapping the response in a friendly response format
  * @param {Function} next the continuation function
- * @param {Object} payload the initial payload
- * @param {Object} action the Openwhish action
+ * @param {Object} context the initial context
+ * @param {Object} action the OpenWhisk action
  * @returns {Function} a function to execute.
  */
-function pipe(next, payload, action) {
+function pipe(next, context, action) {
   const mypipeline = new Pipeline(action);
   mypipeline.once(next);
-  return mypipeline.run(payload);
+  return mypipeline.run(context);
 }
 
 /**

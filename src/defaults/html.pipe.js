@@ -44,7 +44,7 @@ function hascontent({ content }) {
   return !(content !== undefined && content.body !== undefined);
 }
 
-const htmlpipe = (cont, payload, action) => {
+const htmlpipe = (cont, context, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing HTML Pipeline');
   const pipe = new Pipeline(action);
@@ -81,7 +81,7 @@ const htmlpipe = (cont, payload, action) => {
     .error(selectStatus);
 
   action.logger.log('debug', 'Running HTML pipeline');
-  return pipe.run(payload);
+  return pipe.run(context);
 };
 
 module.exports.pipe = htmlpipe;

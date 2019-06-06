@@ -15,7 +15,7 @@ const { merge } = require('lodash');
 /**
  * Detects if ESI tags are used in the repose body. Intended to be used as
  * a predicate in the pipeline construction.
- * @param {Context} param0 the pipeline payload
+ * @param {Context} param0 the pipeline context
  */
 function esi({ response }) {
   return Boolean(response && response.body && /<esi:include/.test(response.body));

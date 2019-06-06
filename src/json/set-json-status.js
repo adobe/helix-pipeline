@@ -40,7 +40,7 @@ function selectStatus(prod) {
       };
     }
     // error handling
-    logger.debug('payload.error -> 500');
+    logger.debug('context.error -> 500');
     if (prod) {
       return {
         response: {

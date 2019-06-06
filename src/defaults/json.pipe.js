@@ -28,7 +28,7 @@ const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
 
-const jsonpipe = (cont, payload, action) => {
+const jsonpipe = (cont, context, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing JSON Pipeline');
   const pipe = new Pipeline(action);
@@ -50,7 +50,7 @@ const jsonpipe = (cont, payload, action) => {
     .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running JSON pipeline');
-  return pipe.run(payload);
+  return pipe.run(context);
 };
 
 module.exports.pipe = jsonpipe;

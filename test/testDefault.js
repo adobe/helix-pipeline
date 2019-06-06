@@ -27,16 +27,16 @@ describe('Testing Default Pipeline', () => {
   });
 
   it('creates and runs the default pipeline', async () => {
-    const out = await pipe((payload, action) => {
-      payload.body = `test. payload: ${payload.title} action: ${action.title}`;
+    const out = await pipe((context, action) => {
+      context.body = `test. context: ${context.title} action: ${action.title}`;
     }, {
-      title: 'my payload',
+      title: 'my context',
     }, {
       title: 'my action',
     });
     assert.deepStrictEqual(out, {
-      body: 'test. payload: my payload action: my action',
-      title: 'my payload',
+      body: 'test. context: my context action: my action',
+      title: 'my context',
     });
   });
 });

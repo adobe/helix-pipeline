@@ -32,7 +32,7 @@ const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
 
-const xmlpipe = (cont, payload, action) => {
+const xmlpipe = (cont, context, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing XML Pipeline');
   const pipe = new Pipeline(action);
@@ -59,7 +59,7 @@ const xmlpipe = (cont, payload, action) => {
     .error(selectStatus);
 
   action.logger.log('debug', 'Running XML pipeline');
-  return pipe.run(payload);
+  return pipe.run(context);
 };
 
 module.exports.pipe = xmlpipe;

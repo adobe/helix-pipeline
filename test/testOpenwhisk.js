@@ -225,10 +225,10 @@ describe('Testing OpenWhisk adapter', () => {
       SECRET: '1234',
     };
     let action = {};
-    let payload = {};
+    let context = {};
     await runPipeline((p, a) => {
       action = a;
-      payload = p;
+      context = p;
     }, pipe, params);
 
     assert.deepEqual(action.request, {
@@ -249,7 +249,7 @@ describe('Testing OpenWhisk adapter', () => {
 
     assert.deepEqual(action.secrets.SECRET, '1234');
 
-    assert.deepEqual(payload, {
+    assert.deepEqual(context, {
       request: {
         params: {
           a: '42',
@@ -269,7 +269,7 @@ describe('Testing OpenWhisk adapter', () => {
     });
   });
 
-  it('openwhisk adds JSON content from post request to payload', async () => {
+  it('openwhisk adds JSON content from post request to context', async () => {
     const params = {
       __ow_headers: {
         'content-type': 'application/json',
@@ -277,17 +277,17 @@ describe('Testing OpenWhisk adapter', () => {
       __ow_logger: log,
       __ow_method: 'post',
     };
-    let payload = {};
+    let context = {};
 
-    // passes JSON content from post request to payload
+    // passes JSON content from post request to context
     params.content = {
       body: '# Foo',
     };
 
     await runPipeline((p) => {
-      payload = p;
+      context = p;
     }, pipe, params);
 
-    assert.deepEqual(payload.content, params.content);
+    assert.deepEqual(context.content, params.content);
   });
 });
