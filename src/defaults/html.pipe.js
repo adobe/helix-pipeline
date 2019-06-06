@@ -44,6 +44,10 @@ function hascontent({ content }) {
   return !(content !== undefined && content.body !== undefined);
 }
 
+function paranoid(context, action) {
+  return action && action.secrets && !!action.secrets.HLX_SANITIZE_DOM;
+}
+
 const htmlpipe = (cont, context, action) => {
   action.logger = action.logger || log;
   action.logger.log('debug', 'Constructing HTML Pipeline');
@@ -66,7 +70,7 @@ const htmlpipe = (cont, context, action) => {
     // todo: responsive used to operate on the htast, therefore ignored if content.document was used
     // todo: there is similar logic in the image-handler during jsdom creation....
     // .before(responsive)
-    .before(sanitize)
+    .before(sanitize).when(paranoid)
     .once(cont)
     .after(type('text/html'))
     .after(cache).when(uncached)
