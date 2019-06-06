@@ -45,7 +45,7 @@ function hascontent({ content }) {
 }
 
 function paranoid(context, action) {
-  return action && action.secrets && !!action.secrets.HLX_SANITIZE_DOM;
+  return action && action.secrets && !!action.secrets.SANITIZE_DOM;
 }
 
 const htmlpipe = (cont, context, action) => {
