@@ -25,6 +25,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [IMAGES_SIZE_STEPS](#images_size_steps) | `integer` | Optional  | No | `4` | Secrets (this schema) |
 | [REPO_API_ROOT](#repo_api_root) | `string` | Optional  | No | `"https://api.github.com/"` | Secrets (this schema) |
 | [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional  | No | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
+| [SANITIZE_DOM](#sanitize_dom) | `boolean` | Optional  | No | `false` | Secrets (this schema) |
 | [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
 | [XML_PRETTY](#xml_pretty) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
 | `[A-Z0-9_]+` | multiple | Pattern | No |  | Secrets (this schema) |
@@ -246,6 +247,28 @@ The Base URL for retrieving raw text files from GitHub
 
 * format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
 
+
+
+
+
+
+## SANITIZE_DOM
+
+Sanitize the HTML output to guard against XSS attacks. 
+
+**Note:** this flag applies a pretty aggressive DOM filtering that will strip out a lot of HTML that your authors might find useful. The setting is meant for processing truly untrusted inputs, such as comments in a social media site.
+
+`SANITIZE_DOM`
+
+* is optional
+* type: `boolean`
+* default: `false`
+* defined in this schema
+
+### SANITIZE_DOM Type
+
+
+`boolean`
 
 
 
