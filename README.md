@@ -359,9 +359,8 @@ Instead of the select-statement, you can also provide a function that returns `t
 
 The second argument to `match` is a node-generating function that should return one of the following three options:
 
-1. an [HAST](https://github.com/syntax-tree/hast) (Hypertext Abstract Syntax Tree) node
-2. a DOM [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)
-3. a `String` containing HTML tags.
+1. a DOM [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)
+2. a `String` containing HTML tags.
 
 ```javascript
 vdom.match('link', (_, node) => {
