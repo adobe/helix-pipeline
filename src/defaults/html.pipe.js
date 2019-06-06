@@ -16,7 +16,7 @@ const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
-const responsive = require('../html/responsify-images.js');
+// const responsive = require('../html/responsify-images.js');
 const type = require('../utils/set-content-type.js');
 const selectStatus = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
@@ -32,8 +32,8 @@ const { cache, uncached } = require('../html/shared-cache');
 const embeds = require('../html/find-embeds');
 const parseFrontmatter = require('../html/parse-frontmatter');
 const rewriteLinks = require('../html/static-asset-links');
-const tohast = require('../html/html-to-hast');
-const tohtml = require('../html/stringify-hast');
+const tovdom = require('../html/html-to-vdom');
+const tohtml = require('../html/stringify-response');
 const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
 const sanitize = require('../html/sanitize');
@@ -63,18 +63,20 @@ const htmlpipe = (cont, payload, action) => {
     .before(selectstrain)
     .before(selecttest)
     .before(html).expose('html')
-    .before(responsive)
+    // todo: responsive used to operate on the htast, therefore ignored if content.document was used
+    // todo: there is similar logic in the image-handler during jsdom creation....
+    // .before(responsive)
     .before(sanitize)
     .once(cont)
     .after(type('text/html'))
     .after(cache).when(uncached)
     .after(key)
-    .after(debug)
-    .after(tohast).expose('hast') // start HTML post-processing
+    .after(tovdom).expose('post') // start HTML post-processing
     .after(rewriteLinks).when(production)
     .after(addHeaders)
     .after(tohtml) // end HTML post-processing
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
+    .after(debug)
     .after(timer.report)
     .error(selectStatus);
 

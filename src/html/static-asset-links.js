@@ -10,49 +10,37 @@
  * governing permissions and limitations under the License.
  */
 
-const map = require('unist-util-map');
 const Url = require('url-parse');
 
-function scripts() {
-  return function transformer(tree) {
-    map(tree, (node) => {
-      if (node.tagName === 'script'
-        && node.properties
-        && node.properties.src) {
-        const src = new Url(node.properties.src);
-        if (src.host === '' && src.query === '' && src.pathname) {
-          // eslint-disable-next-line no-param-reassign
-          node.properties.src = `<esi:include src="${src.pathname}.url"/><esi:remove>${node.properties.src}</esi:remove>`;
-        }
+function scripts(document) {
+  document.querySelectorAll('script').forEach((script) => {
+    if (script.src) {
+      const src = new Url(script.src);
+      if (src.host === '' && src.query === '' && src.pathname) {
+        // eslint-disable-next-line no-param-reassign
+        script.src = `<esi:include src="${src.pathname}.url"/><esi:remove>${script.src}</esi:remove>`;
       }
-    });
-  };
+    }
+  });
 }
 
-function links() {
-  return function transformer(tree) {
-    map(tree, (node) => {
-      if (node.tagName === 'link'
-        && node.properties
-        && node.properties.rel
-        && Array.isArray(node.properties.rel)
-        && node.properties.rel.indexOf('stylesheet') !== -1
-        && node.properties.href) {
-        const href = new Url(node.properties.href);
-        if (href.host === '' && href.query === '' && href.pathname) {
-          // eslint-disable-next-line no-param-reassign
-          node.properties.href = `<esi:include src="${href.pathname}.url"/><esi:remove>${node.properties.href}</esi:remove>`;
-        }
+function links(document) {
+  document.querySelectorAll('link').forEach((link) => {
+    if (link.rel.indexOf('stylesheet') >= 0 && link.href) {
+      const href = new Url(link.href);
+      if (href.host === '' && href.query === '' && href.pathname) {
+        // eslint-disable-next-line no-param-reassign
+        link.href = `<esi:include src="${href.pathname}.url"/><esi:remove>${link.href}</esi:remove>`;
       }
-    });
-  };
+    }
+  });
 }
 
 function rewrite(context) {
   const res = context.response;
-  if ((res.headers['Content-Type'] || '').match(/html/) && res.hast) {
-    links()(res.hast);
-    scripts()(res.hast);
+  if ((res.headers['Content-Type'] || '').match(/html/) && res.document) {
+    links(res.document);
+    scripts(res.document);
   }
 }
 

@@ -23,7 +23,6 @@ The content as retrieved from the repository and enriched in the pipeline.
 |----------|------|----------|----------|------------|
 | [body](#body) | `string` | Optional  | No | Content (this schema) |
 | [document](#document) | `object` | Optional  | No | Content (this schema) |
-| [htast](#htast) | `object` | Optional  | No | Content (this schema) |
 | [image](#image) | `string` | Optional  | No | Content (this schema) |
 | [intro](#intro) | `string` | Optional  | No | Content (this schema) |
 | [json](#json) | `object` | Optional  | No | Content (this schema) |
@@ -66,30 +65,6 @@ The DOM-compatible representation of the document's inner HTML
 * defined in this schema
 
 ### document Type
-
-
-`object` with following properties:
-
-
-| Property | Type | Required |
-|----------|------|----------|
-
-
-
-
-
-
-## htast
-
-Deprecated: the Hypermedia (HAST) AST
-
-`htast`
-
-* is optional
-* type: `object`
-* defined in this schema
-
-### htast Type
 
 
 `object` with following properties:

@@ -9,12 +9,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const unified = require('unified');
-const parse = require('rehype-parse');
+const { JSDOM } = require('jsdom');
 
-function tohast({ response }) {
-  const fragment = !response.body.match(/<html/i);
-  response.hast = unified().use(parse, { fragment }).parse(response.body);
+function tovdom({ response }) {
+  // todo: check content type ?
+  if (!response.document && 'body' in response) {
+    if (response.body.match(/<html/i)) {
+      // generate document
+      const dom = new JSDOM(response.body);
+      response.document = dom.window.document;
+      response.document.serialize = dom.serialize.bind(dom);
+    } else {
+      response.document = new JSDOM(`<html><body>${response.body}</body></html>`).window.document;
+      response.document.serialize = () => response.document.body.innerHTML;
+    }
+    delete response.body;
+  }
 }
 
-module.exports = tohast;
+module.exports = tovdom;

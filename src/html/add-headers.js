@@ -10,33 +10,22 @@
  * governing permissions and limitations under the License.
  */
 
-const { selectAll } = require('hast-util-select');
-
-function addHeaders({ response: { headers, hast } }) {
-  const linkheaders = selectAll('link[rel][href]', hast).reduce((h, { properties: { href, rel } }) => {
-    if (!href.match(/<esi:include/)) {
-      // eslint-disable-next-line no-param-reassign
-      h.Link = `${h.Link ? `${h.Link},` : ''
-      }<${href}>; rel="${rel}"`;
+function addHeaders({ response: { headers, document } }) {
+  const linkHeader = [];
+  document.querySelectorAll('link').forEach(({ href, rel }) => {
+    if (href && rel && !href.match(/<esi:include/)) {
+      linkHeader.push(`<${href}>; rel="${rel}"`);
     }
-    return h;
-  }, headers);
+  });
+  if (linkHeader.length > 0) {
+    headers.Link = linkHeader.join();
+  }
 
-  const metaheaders = selectAll('meta[http-equiv][content]', hast).reduce((h, { properties: { httpEquiv, content } }) => {
-    const name = httpEquiv;
-    const value = content;
-    if (!h[name]) {
-      // eslint-disable-next-line no-param-reassign
-      h[name] = value;
+  document.querySelectorAll('meta').forEach(({ httpEquiv, content }) => {
+    if (httpEquiv && content && !headers[httpEquiv]) {
+      headers[httpEquiv] = content;
     }
-    return h;
-  }, linkheaders);
-
-  return {
-    response: {
-      headers: metaheaders,
-    },
-  };
+  });
 }
 
 module.exports = addHeaders;

@@ -223,6 +223,16 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
+  it('HTML comments', async () => {
+    // note that the sanitizer strips out the comments
+    await assertMd(`
+        # Foo
+        <!-- bla -->
+      `, `
+        <h1 id="foo">Foo</h1>
+      `);
+  });
+
   it('HTML inline elements', async () => {
     await assertMd(`
         # Foo <em>Bar</em>
@@ -231,6 +241,31 @@ describe('Testing Markdown conversion', () => {
       `, `
         <h1 id="foo-bar">Foo <em>Bar</em></h1>
         <p>Hello World <a href="%CE%BB">link</a></p>
+    `);
+  });
+
+  it('HTML incomplete inline elements', async () => {
+    await assertMd(`
+        # Foo Bar</em>
+      `, `
+        <h1>500</h1><pre>Error: no matching inline element found for </pre>
+    `);
+  });
+
+  it('HTML nested inline elements', async () => {
+    await assertMd(`
+        # Foo <em>Bar <strong>Important</strong></em>
+      `, `
+        <h1 id="foo-bar-important">Foo <em>Bar <strong>Important</strong></em></h1>
+    `);
+  });
+
+  it.skip('HTML nested inline elements and markup', async () => {
+    // this is not supported yet. ideally the mdast-to-dom is done directly and not via hast.
+    await assertMd(`
+        # Foo <em>Bar **Important**</em>
+      `, `
+        <h1 id="foo-bar">Foo <em>Bar</em></h1>
     `);
   });
 

@@ -28,13 +28,6 @@ class HeadingHandler {
   }
 
   /**
-   * Reset the heading counter
-   */
-  reset() {
-    this.slugger.reset();
-  }
-
-  /**
    * Returns the handler function
    */
   handler() {

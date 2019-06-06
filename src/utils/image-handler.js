@@ -36,15 +36,15 @@ function image({
   IMAGES_MAX_SIZE,
   IMAGES_SIZE_STEPS,
   IMAGES_SIZES,
-}) {
+} = {}) {
   const widths = {
     from: parseInt(IMAGES_MIN_SIZE, 10),
     to: parseInt(IMAGES_MAX_SIZE, 10),
     steps: parseInt(IMAGES_SIZE_STEPS, 10),
   };
 
+  const sizes = IMAGES_SIZES ? IMAGES_SIZES.split(',') : [];
 
-  const sizes = IMAGES_SIZES.split(',');
   /* Transform an image. */
   return function handler(h, node) {
     const srcurl = url.parse(node.url);
@@ -52,12 +52,15 @@ function image({
       return fallback(h, node);
     }
 
-    const srcset = makewidths(widths).map(width => `${srcurl.path}?width=${width}&auto=webp ${width}w`).join();
-
-
     const props = {
-      src: normalize(node.url), alt: node.alt, srcset, sizes: sizes.join(', '),
+      src: normalize(node.url),
+      alt: node.alt,
     };
+
+    if (sizes.length > 0) {
+      props.srcset = makewidths(widths).map(width => `${srcurl.path}?width=${width}&auto=webp ${width}w`).join(',');
+      props.sizes = sizes.join(', ');
+    }
 
     if (node.title !== null && node.title !== undefined) {
       props.title = node.title;

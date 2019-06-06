@@ -14,10 +14,8 @@
 const { selectAll } = require('unist-util-select');
 const defaultHandlers = require('mdast-util-to-hast/lib/handlers');
 const mdast2hast = require('mdast-util-to-hast');
-const hast2html = require('hast-util-to-html');
-const unified = require('unified');
-const parse = require('rehype-parse');
 const { JSDOM } = require('jsdom');
+const toDOM = require('./hast-util-to-dom');
 const HeadingHandler = require('./heading-handler');
 const image = require('./image-handler');
 const embed = require('./embed-handler');
@@ -25,18 +23,13 @@ const link = require('./link-handler');
 const types = require('../schemas/mdast.schema.json').properties.type.enum;
 
 /**
- * @typedef {function(parent, tagname, attributes, children)} handlerFunction
- * @param parent {Node} the root node to append the new dom node to
- * @param tagname {string} name of the new tag
- * @param attributes {object} HTML attributes as key-value pairs
- * @param children {Node[]} list of children
+ * @typedef {function(parent, tagName, attributes, children)} handlerFunction
+ * @param {Node} parent the root node to append the new dom node to
+ * @param {string} tagName name of the new tag
+ * @param {object} attributes HTML attributes as key-value pairs
+ * @param {Node[]} children list of children
  */
-/**
- * @typedef {object} srcsetspec
- * @param {number} from smallest possible size
- * @param {number} to largest possible size
- * @param {number} steps number of steps
- */
+
 /**
  * Utility class that transforms an MDAST (Markdown) node into a (virtual) DOM
  * representation of the same content.
@@ -46,8 +39,10 @@ class VDOMTransformer {
    * Initializes the transformer with a Markdown document or fragment of a document
    * @param {Node} mdast the markdown AST node to start the transformation from.
    * @param {object} options options for custom transformers
-   * @param {string[]} options.sizes a list of size media queries
-   * @param {(number[]|srcsetspec)} a list of image widths to generate
+   * @param {string[]} options.IMAGES_SIZES a list of size media queries
+   * @param {number} options.IMAGES_MIN_SIZE from smallest possible size
+   * @param {number} options.IMAGES_MAX_SIZE to largest possible size
+   * @param {number} options.IMAGES_SIZE_STEPS steps number of steps
    */
   constructor(mdast, options) {
     this._matchers = [];
@@ -67,26 +62,21 @@ class VDOMTransformer {
     this.match('image', image(options));
     this.match('embed', embed(options));
     this.match('link', link(options));
-  }
-
-  /**
-   * Turns a string of HTML into proper HTAST nodes, using a given root (HTAST) node
-   * and a callback function that constructs the HTAST nodes
-   * @private
-   * @param {string} htmlstr the HTML to convert
-   * @param {handlerFunction} cb the DOM building function
-   * @param {Node} node parent node to attach new nodes to
-   * @returns {Node} the new DOM node
-   */
-  static toHTAST(htmlstr, cb, node) {
-    // we parse the string to HTAST
-    const htast = unified().use(parse, { fragment: true }).parse(htmlstr);
-    /* h(node, tagName, props, children) */
-    if (htast.children.length === 1) {
-      const child = htast.children[0];
-      return cb(node, child.tagName, child.properties, child.children);
-    }
-    return cb(node, 'div', {}, htast.children);
+    this.match('html', (h, node) => {
+      if (node.value.startsWith('<!--')) {
+        return h.augment(node, {
+          type: 'comment',
+          value: node.value.substring(4, node.value.length - 3),
+        });
+      }
+      this._hasRaw = true;
+      const frag = JSDOM.fragment(node.value);
+      return h.augment(node, {
+        type: 'raw',
+        value: frag,
+        html: node.value,
+      });
+    });
   }
 
   /**
@@ -123,11 +113,10 @@ class VDOMTransformer {
     }
 
     const result = handlefn(cb, node, parent, handlechild);
-
     if (result && typeof result === 'string') {
-      return VDOMTransformer.toHTAST(result, cb, node);
+      throw new Error('returning string from a handler is not supported yet.');
     } else if (result && typeof result === 'object' && result.outerHTML) {
-      return VDOMTransformer.toHTAST(result.outerHTML, cb, node);
+      throw new Error('returning a DOM element from a handler is not supported yet.');
     }
     return result;
   }
@@ -161,9 +150,7 @@ class VDOMTransformer {
    */
   match(matcher, processor) {
     const matchfn = typeof matcher === 'function' ? matcher : VDOMTransformer.matchfn(this._root, matcher);
-
     this._matchers.push([matchfn, processor]);
-
     return this;
   }
 
@@ -176,18 +163,15 @@ class VDOMTransformer {
   matches(node) {
     // go through all matchers to find processors where matchfn matches
     // start with most recently added processors
-    const processors = this._matchers.slice(0).reverse()
-      .filter(([matchfn, processor]) => {
-        if (matchfn(node)) {
-          return processor;
-        }
-        return false;
-      })
-      .map(([_, processor]) => processor);
+    for (let i = this._matchers.length - 1; i >= 0; i -= 1) {
+      const [matchfn, processor] = this._matchers[i];
+      if (matchfn(node)) {
+        // return the first processor that matches
+        return processor;
+      }
+    }
     // add the fallback processors
-    processors.push(VDOMTransformer.default(node));
-    // return the first processor that matches
-    return processors[0];
+    return VDOMTransformer.default(node);
   }
 
   /**
@@ -208,16 +192,39 @@ class VDOMTransformer {
   }
 
   /**
-   * Transfroms an MDAST node into an HTML string. mdast-util-to-hast handlers can be specified.
-   * @param {Node} ast the MDAST root node
-   * @param {*} handlers the mdast-util-to-hast handlers for the transformation
-   * @returns {string} the corresponding HTML
+   * Tries to sanitize inline HTML elements. The remark parser creates `raw` nodes for html.
+   * In case of inline html, those are not closed elements. since we generated the DOM already
+   * in the HTML handler, we get incomplete fragments, missing the inner HTML. This method tries
+   * to fix this. It doesn't support inner markdown-elements, though.
+   *
+   * @param {object} node HAST node
    */
-  static toHTML(mdast, handlers) {
-    return hast2html(mdast2hast(mdast, {
-      handlers,
-      allowDangerousHTML: true,
-    }), { allowDangerousHTML: true });
+  static sanitizeInlineHTML(node) {
+    const stack = [];
+    for (let i = 0; i < node.children.length; i += 1) {
+      const child = node.children[i];
+      if (child.type === 'raw') {
+        if (child.value.firstElementChild === null) {
+          if (stack.length === 0) {
+            throw new Error(`no matching inline element found for ${child.html}`);
+          } else {
+            const last = stack.pop();
+            let html = '';
+            for (let j = last; j <= i; j += 1) {
+              html += node.children[j].html || node.children[j].value;
+            }
+            node.children[last].value = JSDOM.fragment(html);
+            node.children[last].html = html;
+            node.children.splice(last + 1, i - last);
+            i = last;
+          }
+        } else {
+          stack.push(i);
+        }
+      } else if (child.children && child.children.length) {
+        VDOMTransformer.sanitizeInlineHTML(child);
+      }
+    }
   }
 
   /**
@@ -225,26 +232,35 @@ class VDOMTransformer {
    * @returns {Document} a full DOM document
    */
   getDocument() {
-    // mdast -> hast; hast -> html -> DOM using JSDOM
-    return new JSDOM(VDOMTransformer.toHTML(this._root, this._handlers)).window.document;
-  }
+    // mdast -> hast; hast -> DOM using JSDOM
+    const hast = mdast2hast(this._root, {
+      handlers: this._handlers,
+      allowDangerousHTML: true,
+    });
 
-  /**
-   * Turns the MDAST into a DOM-node-like structure using JSDOM
-   * @param {string} tag the tag of the container node
-   * @returns {Node} a DOM node containing the HTML-processed MDAST
-   */
-  getNode(tag = 'div') {
-    // create a JSDOM object with the hast surrounded by the provided tag
-    return new JSDOM(`<${tag}>${VDOMTransformer.toHTML(this._root, this._handlers)}</${tag}>`).window.document.body.firstChild;
-  }
+    if (this._hasRaw) {
+      VDOMTransformer.sanitizeInlineHTML(hast);
+    }
 
-  /**
-   * Resets the transformer to avoid leakages between sequential transformations
-   */
-  reset() {
-    // Reset the heading handler so that id uniqueness is guarateed and reset
-    this._headingHandler.reset();
+    const dom = new JSDOM();
+    const doc = dom.window.document;
+    const frag = toDOM(doc, hast, { fragment: true });
+
+    if (frag.nodeName === '#document') {
+      // this only happens if it's an empty markdown document, so just ignore
+    } else {
+      doc.body.appendChild(frag);
+    }
+
+    // add convenience function to serialize entire document. this is to make it similar to the
+    // document created in html-to-vdom.
+    doc.serialize = dom.serialize.bind(dom);
+
+    // this is a bit a hack to pass the JSDOM instance along, so that other module can use it.
+    // this ensures that other modules can parse documents and fragments that are compatible
+    // with this document
+    doc.JSDOM = JSDOM;
+    return doc;
   }
 }
 
