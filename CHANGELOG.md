@@ -1,3 +1,10 @@
+# [2.5.0](https://github.com/adobe/helix-pipeline/compare/v2.4.0...v2.5.0) (2019-06-06)
+
+
+### Features
+
+* **html-pipe:** disable sanitizer by default ([876b743](https://github.com/adobe/helix-pipeline/commit/876b743)), closes [#356](https://github.com/adobe/helix-pipeline/issues/356)
+
 # [2.4.0](https://github.com/adobe/helix-pipeline/compare/v2.3.0...v2.4.0) (2019-06-06)
 
 
