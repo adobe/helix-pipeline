@@ -155,12 +155,6 @@ export interface Content {
     [k: string]: any;
   };
   /**
-   * Deprecated: the Hypermedia (HAST) AST
-   */
-  htast?: {
-    [k: string]: any;
-  };
-  /**
    * The JSON object to emit.
    */
   json?: {
@@ -341,9 +335,9 @@ export interface Response {
     [k: string]: any;
   };
   /**
-   * The Hypertext AST of the reponse body
+   * The DOM-compatible representation of the response document
    */
-  hast?: {
+  document?: {
     [k: string]: any;
   };
   /**

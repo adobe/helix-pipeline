@@ -13,7 +13,9 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const h = require('hyperscript');
+const h = require('hastscript');
+const hy = require('hyperscript');
+const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const { JSDOM } = require('jsdom');
 const { eq } = require('@adobe/helix-shared').types;
@@ -28,15 +30,12 @@ const logger = Logger.getTestLogger({
 const action = { logger };
 
 const assertTransformerYieldsDocument = (transformer, expected) => {
-  eq(transformer.getDocument(), new JSDOM(expected).window.document);
-
-  // Reset the transformer between the 2 calls to avoid leakages in the tests
-  transformer.reset();
-
-  eq(
-    transformer.getNode('section'),
-    new JSDOM(`<section>${expected}</section>`).window.document.body.firstChild,
-  );
+  // check equality of the dom, but throw assertion based on strings to visualize difference.
+  const act = transformer.getDocument();
+  const dom = new JSDOM(expected);
+  if (!eq(act, dom.window.document)) {
+    assert.equal(act.serialize(), dom.serialize());
+  }
 };
 
 describe('Test MDAST to VDOM Transformation', () => {
@@ -84,7 +83,7 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Custom Text Matcher Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     const transformer = new VDOM(mdast, action.secrets);
-    transformer.match('heading', () => '<h1>All Headings are the same to me</h1>');
+    transformer.match('heading', () => h('h1', 'All Headings are the same to me'));
     assertTransformerYieldsDocument(
       transformer,
       '<h1>All Headings are the same to me</h1>',
@@ -94,7 +93,7 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Programmatic Matcher Function', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     const transformer = new VDOM(mdast, action.secrets);
-    transformer.match(({ type }) => type === 'heading', () => '<h1>All Headings are the same to me</h1>');
+    transformer.match(({ type }) => type === 'heading', () => h('h1', 'All Headings are the same to me'));
     assertTransformerYieldsDocument(
       transformer,
       '<h1>All Headings are the same to me</h1>',
@@ -104,14 +103,47 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Custom Text Matcher with Multiple Elements', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     const transformer = new VDOM(mdast, action.secrets);
-    transformer.match('heading', () => '<a name="h1"></a><h1>All Headings are the same to me</h1>');
+    transformer.match('heading', () => [h('a', { name: 'h1' }), h('h1', 'All Headings are the same to me')]);
     assertTransformerYieldsDocument(
       transformer, `
-      <div>
-        <a name="h1"></a>
-        <h1>All Headings are the same to me</h1>
-      </div>`,
+          <a name="h1"></a>
+          <h1>All Headings are the same to me</h1>
+        `,
     );
+  });
+
+  it('Custom Matcher returns string fails', () => {
+    const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
+    const transformer = new VDOM(mdast, action.secrets);
+    transformer.match('heading', () => '<h1>All Headings are the same to me</h1>');
+    try {
+      assertTransformerYieldsDocument(
+        transformer, `
+          <a name="h1"></a>
+          <h1>All Headings are the same to me</h1>
+        `,
+      );
+      assert.fail();
+    } catch (e) {
+      assert.equal(e.message, 'returning string from a handler is not supported yet.');
+    }
+  });
+
+  it('Custom Matcher returns vdom fails', () => {
+    const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
+    const transformer = new VDOM(mdast, action.secrets);
+    transformer.match('heading', () => hy('div'));
+    try {
+      assertTransformerYieldsDocument(
+        transformer, `
+          <a name="h1"></a>
+          <h1>All Headings are the same to me</h1>
+        `,
+      );
+      assert.fail();
+    } catch (e) {
+      assert.equal(e.message, 'returning a DOM element from a handler is not supported yet.');
+    }
   });
 
   it('Custom link handler with VDOM Nodes', () => {
@@ -160,14 +192,9 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Custom link handler does not interfere with link rewriting', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'paragraph.json'));
     const transformer = new VDOM(mdast, action.secrets);
-    transformer.match('link[url^="http"]', (_, node) => {
-      const res = h(
-        'a',
-        { href: node.url, rel: 'nofollow' },
-        node.children.map(({ value }) => value),
-      );
-      return res;
-    });
+    transformer.match('link[url^="http"]', (_, node) => h(
+      'a', { href: node.url, rel: 'nofollow' }, node.children.map(({ value }) => value),
+    ));
     assertTransformerYieldsDocument(
       transformer, `
         <p>

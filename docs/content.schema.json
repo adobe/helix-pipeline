@@ -44,11 +44,6 @@
             "type": "object",
             "description": "The DOM-compatible representation of the document's inner HTML"
         },
-        "htast": {
-            "type": "object",
-            "description": "Deprecated: the Hypermedia (HAST) AST",
-            "meta:status": "deprecated"
-        },
         "json": {
             "type": "object",
             "description": "The JSON object to emit."

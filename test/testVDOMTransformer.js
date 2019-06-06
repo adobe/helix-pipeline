@@ -16,14 +16,22 @@ const all = require('mdast-util-to-hast/lib/all');
 const wrap = require('mdast-util-to-hast/lib/wrap');
 const VDOMTransformer = require('../src/utils/mdast-to-vdom');
 
-describe('Test VDOMTransformer#toHTML', () => {
+function toHTML(mdast, handlers = {}) {
+  const transformer = new VDOMTransformer(mdast);
+  Object.keys(handlers).forEach((key) => {
+    transformer._handlers[key] = handlers[key];
+  });
+  return transformer.getDocument().body.innerHTML;
+}
+
+describe('Test VDOMTransformer#getDocument', () => {
   it('empty node', async () => {
-    const html = VDOMTransformer.toHTML({ type: 'root' });
+    const html = toHTML({ type: 'root' });
     assert.equal(html, '');
   });
 
   it('paragraph node', async () => {
-    const html = VDOMTransformer.toHTML({
+    const html = toHTML({
       type: 'root',
       children: [{
         type: 'paragraph',
@@ -37,7 +45,7 @@ describe('Test VDOMTransformer#toHTML', () => {
   });
 
   it('image node', async () => {
-    const html = VDOMTransformer.toHTML({
+    const html = toHTML({
       type: 'root',
       children: [{
         type: 'image',
@@ -48,7 +56,7 @@ describe('Test VDOMTransformer#toHTML', () => {
   });
 
   it('h1 node', async () => {
-    const html = VDOMTransformer.toHTML({
+    const html = toHTML({
       type: 'root',
       children: [{
         type: 'heading',
@@ -59,11 +67,11 @@ describe('Test VDOMTransformer#toHTML', () => {
         }],
       }],
     });
-    assert.equal(html, '<h1>The title content</h1>');
+    assert.equal(html, '<h1 id="the-title-content">The title content</h1>');
   });
 
   it('complex node', async () => {
-    const html = VDOMTransformer.toHTML({
+    const html = toHTML({
       type: 'root',
       children: [{
         type: 'heading',
@@ -83,11 +91,11 @@ describe('Test VDOMTransformer#toHTML', () => {
         url: 'url.html',
       }],
     });
-    assert.equal(html, '<h1>The title content</h1>\n<p>This is a paragraph.</p>\n<img src="url.html">');
+    assert.equal(html, '<h1 id="the-title-content">The title content</h1>\n<p>This is a paragraph.</p>\n<img src="url.html">');
   });
 
   it('custom handler', async () => {
-    const html = VDOMTransformer.toHTML({
+    const html = toHTML({
       type: 'root',
       children: [{
         type: 'paragraph',
@@ -105,7 +113,7 @@ describe('Test VDOMTransformer#toHTML', () => {
   });
 
   it('multiple custom handlers', async () => {
-    const html = VDOMTransformer.toHTML({
+    const html = toHTML({
       type: 'root',
       children: [{
         type: 'list',

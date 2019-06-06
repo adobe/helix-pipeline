@@ -14,8 +14,8 @@ const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const { deepclone, assertEquals } = require('@adobe/helix-shared').types;
 const rewrite = require('../src/html/static-asset-links');
-const tohast = require('../src/html/html-to-hast');
-const stringify = require('../src/html/stringify-hast');
+const tovdom = require('../src/html/html-to-vdom');
+const stringify = require('../src/html/stringify-response');
 const { pipe } = require('../src/defaults/html.pipe.js');
 
 const logger = Logger.getTestLogger({
@@ -23,7 +23,7 @@ const logger = Logger.getTestLogger({
   level: 'info',
 });
 
-function rw(content) {
+function rw(content, action) {
   const ctx = {
     response: {
       body: content,
@@ -32,9 +32,9 @@ function rw(content) {
       },
     },
   };
-  tohast(ctx);
-  rewrite(ctx);
-  stringify(ctx);
+  tovdom(ctx, action);
+  rewrite(ctx, action);
+  stringify(ctx, action);
   return ctx.response.body;
 }
 
@@ -89,8 +89,8 @@ describe('Integration Test Static Asset Rewriting', () => {
 
     assert.equal(context.response.body, `<html><head>
     <title>Hello World</title>
-    <script src='<esi:include src="index.js.url"/><esi:remove>index.js</esi:remove>'></script>
-    <link rel="stylesheet" href='<esi:include src="style.css.url"/><esi:remove>style.css</esi:remove>'>
+    <script src="<esi:include src=&quot;index.js.url&quot;/><esi:remove>index.js</esi:remove>"></script>
+    <link rel="stylesheet" href="<esi:include src=&quot;style.css.url&quot;/><esi:remove>style.css</esi:remove>">
   </head>
   <body>
     <p>Hello World</p>
@@ -127,7 +127,7 @@ describe('Test Static Asset Rewriting', () => {
     <title>Normal</title>
   </head>
   <body>Just normal things
-</body></html>`), `<!doctype html><html><head>
+</body></html>`, { logger }), `<!DOCTYPE html><html><head>
     <title>Normal</title>
   </head>
   <body>Just normal things
@@ -135,16 +135,16 @@ describe('Test Static Asset Rewriting', () => {
   });
 
   it('ESI include script tags HTML', async () => {
-    assert.equal(rw(`<!doctype html><html><head>
+    assert.equal(rw(`<!DOCTYPE html><html><head>
     <title>Normal</title>
     <script src="test.js"></script>
     <script src="keep.js?cached=false"></script>
     <script src="//code.jquery.com/jquery-3.4.0.min.js"></script>
   </head>
   <body>Just normal things
-</body></html>`), `<!doctype html><html><head>
+</body></html>`, { logger }), `<!DOCTYPE html><html><head>
     <title>Normal</title>
-    <script src='<esi:include src="test.js.url"/><esi:remove>test.js</esi:remove>'></script>
+    <script src="<esi:include src=&quot;test.js.url&quot;/><esi:remove>test.js</esi:remove>"></script>
     <script src="keep.js?cached=false"></script>
     <script src="//code.jquery.com/jquery-3.4.0.min.js"></script>
   </head>
@@ -153,16 +153,16 @@ describe('Test Static Asset Rewriting', () => {
   });
 
   it('ESI include link tags HTML', async () => {
-    assert.equal(rw(`<!doctype html><html><head>
+    assert.equal(rw(`<!DOCTYPE html><html><head>
     <title>Normal</title>
     <link rel="stylesheet foo" href="test.css">
     <link rel="stylesheet" href="keep.css?cached=false">
     <link rel="stylesheet" href="//code.jquery.com/jquery-3.4.0.min.css">
   </head>
   <body>Just normal things
-</body></html>`), `<!doctype html><html><head>
+</body></html>`, { logger }), `<!DOCTYPE html><html><head>
     <title>Normal</title>
-    <link rel="stylesheet foo" href='<esi:include src="test.css.url"/><esi:remove>test.css</esi:remove>'>
+    <link rel="stylesheet foo" href="<esi:include src=&quot;test.css.url&quot;/><esi:remove>test.css</esi:remove>">
     <link rel="stylesheet" href="keep.css?cached=false">
     <link rel="stylesheet" href="//code.jquery.com/jquery-3.4.0.min.css">
   </head>

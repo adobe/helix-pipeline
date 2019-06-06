@@ -9,15 +9,12 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const tohtast = require('mdast-util-to-hast');
 const VDOMTransformer = require('../utils/mdast-to-vdom');
 
 function html({ content, request }, { logger, secrets }) {
   const { mdast } = content;
   logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
   const extension = request && request.extension ? request.extension : 'html';
-  // do we still need this?
-  content.htast = tohtast(mdast);
   content.document = new VDOMTransformer(mdast, Object.assign({ extension }, secrets))
     .getDocument();
 }

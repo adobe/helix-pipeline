@@ -15,7 +15,7 @@
  */
 const URI = require('uri-js');
 
-function embed({ EMBED_SERVICE }) {
+function embed({ EMBED_SERVICE } = {}) {
   return function handler(h, node, _, handlechild) {
     const { url } = node;
     const props = {

@@ -34,9 +34,9 @@
                 }
             ]
         },
-        "hast": {
+        "document": {
             "type": "object",
-            "description": "The Hypertext AST of the reponse body"
+            "description": "The DOM-compatible representation of the response document"
         },
         "headers": {
             "description": "The HTTP headers of the response",

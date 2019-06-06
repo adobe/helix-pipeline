@@ -16,7 +16,7 @@ The HTTP response object
 | Property | Type | Required | Nullable | Defined by |
 |----------|------|----------|----------|------------|
 | [body](#body) | complex | Optional  | No | Response (this schema) |
-| [hast](#hast) | `object` | Optional  | No | Response (this schema) |
+| [document](#document) | `object` | Optional  | No | Response (this schema) |
 | [headers](#headers) | complex | Optional  | No | Response (this schema) |
 | [status](#status) | `integer` | Optional  | No | Response (this schema) |
 
@@ -54,17 +54,17 @@ The HTTP response object
 
 
 
-## hast
+## document
 
-The Hypertext AST of the reponse body
+The DOM-compatible representation of the response document
 
-`hast`
+`document`
 
 * is optional
 * type: `object`
 * defined in this schema
 
-### hast Type
+### document Type
 
 
 `object` with following properties:

@@ -31,43 +31,32 @@ const RESOLUTION_SWITCHING = [
 /* Parameter Reassignment is the standard design pattern for Unified */
 
 function transformer(
-  { content: { htast } },
+  { content: { document } },
   {
     RESOLUTIONS = RESOLUTION_SWITCHING,
     logger,
   },
 ) {
-  logger.debug(`Making images responsive in ${typeof htast}`);
+  logger.debug(`Making images responsive in ${typeof document}`);
 
-  function visit(node) {
-    if (node.type === 'element' && node.tagName === 'img') {
-      const src = String(node.properties.src);
+  document.querySelectorAll('img').forEach((img) => {
+    const { src } = img;
 
-      logger.debug(`Making image ${src} responsive`);
+    logger.debug(`Making image ${src} responsive`);
 
-      node.properties.src = `${src}?width=320`;
+    img.src = `${src}?width=320`;
 
-      const srcset = [];
-      const sizes = [];
+    const srcset = [];
+    const sizes = [];
 
-      RESOLUTIONS.forEach((e) => {
-        srcset.push(`${src}?width=${e.width} ${e.width}w`);
-        sizes.push(`${(e.maxWidth ? `(max-width: ${e.maxWidth}px) ` : '') + e.size}vw`);
-      });
+    RESOLUTIONS.forEach((e) => {
+      srcset.push(`${src}?width=${e.width} ${e.width}w`);
+      sizes.push(`${(e.maxWidth ? `(max-width: ${e.maxWidth}px) ` : '') + e.size}vw`);
+    });
 
-      node.properties.srcset = srcset.join(', ');
-      node.properties.sizes = sizes.join(', ');
-    }
-
-    if (node.children) {
-      node.children.forEach((e) => {
-        visit(e);
-      });
-    }
-  }
-
-  // the visit function is modifying its argument in place.
-  visit(htast);
+    img.setAttribute('srcset', srcset.join(', '));
+    img.setAttribute('size', sizes.join(', '));
+  });
 }
 
 module.exports = transformer;
