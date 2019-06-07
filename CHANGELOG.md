@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/adobe/helix-pipeline/compare/v2.5.0...v2.5.1) (2019-06-07)
+
+
+### Bug Fixes
+
+* **esi:** use single quotes for esi tags ([#364](https://github.com/adobe/helix-pipeline/issues/364)) ([5c1d971](https://github.com/adobe/helix-pipeline/commit/5c1d971)), closes [#363](https://github.com/adobe/helix-pipeline/issues/363)
+
 # [2.5.0](https://github.com/adobe/helix-pipeline/compare/v2.4.0...v2.5.0) (2019-06-06)
 
 
