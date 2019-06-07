@@ -1,4 +1,4 @@
-# Contributing to Hypermedia Pipeline
+# Contributing to Helix Pipeline
 
 This project is an Open Development/Inner Source project and welcomes contributions from everyone who finds it useful or lacking.
 
