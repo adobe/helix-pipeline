@@ -18,7 +18,7 @@ function scripts(document) {
       const src = new Url(script.src);
       if (src.host === '' && src.query === '' && src.pathname) {
         // eslint-disable-next-line no-param-reassign
-        script.src = `<esi:include src="${src.pathname}.url"/><esi:remove>${script.src}</esi:remove>`;
+        script.src = `<esi:include src='${src.pathname}.url'/><esi:remove>${script.src}</esi:remove>`;
       }
     }
   });
@@ -30,7 +30,7 @@ function links(document) {
       const href = new Url(link.href);
       if (href.host === '' && href.query === '' && href.pathname) {
         // eslint-disable-next-line no-param-reassign
-        link.href = `<esi:include src="${href.pathname}.url"/><esi:remove>${link.href}</esi:remove>`;
+        link.href = `<esi:include src='${href.pathname}.url'/><esi:remove>${link.href}</esi:remove>`;
       }
     }
   });
