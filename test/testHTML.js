@@ -723,4 +723,47 @@ ${context.content.document.body.innerHTML}`,
       new JSDOM('<h1 id="foo">Foo</h1><p><a>Bar</a></p><a href="javascript:alert(\'XSS\')">Baz</a>').window.document.body,
     );
   });
+
+  it('html.pipe creates proper esi includes for css and scripts', async () => {
+    // emulate production environment
+    process.env.__OW_ACTIVATION_ID = '1234';
+    try {
+      const result = await pipe(
+        (context) => {
+          context.response = {
+            status: 200,
+            body: `
+              <html>
+              <head>
+                  <link rel="stylesheet" href="/dist/bootstrap.min.css"/>
+                  <script src="/dist/scripts.js"></script>
+              </head>
+              ${context.content.document.body.outerHTML}
+              </html>
+            `,
+          };
+        },
+        {
+          request: crequest,
+          content: {
+            body: '# Foo',
+          },
+        },
+        {
+          request: { params },
+          logger,
+        },
+      );
+      assert.equal(200, result.response.status);
+      assertEquivalentNode(
+        new JSDOM(result.response.body).window.document,
+        new JSDOM(`<html><head>
+            <link rel="stylesheet" href="<esi:include src='/dist/bootstrap.min.css.url'/><esi:remove>/dist/bootstrap.min.css</esi:remove>">
+            <script src="<esi:include src='/dist/scripts.js.url'/><esi:remove>/dist/scripts.js</esi:remove>"></script>
+            </head><body><h1 id="foo">Foo</h1></body></html>`).window.document,
+      );
+    } finally {
+      delete process.env.__OW_ACTIVATION_ID;
+    }
+  });
 });
