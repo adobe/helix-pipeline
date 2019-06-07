@@ -232,7 +232,6 @@ also see [request schema](./docs/request.schema.md)
   - `intro`: a plain-text introduction or description
   - `type`: the content type of the document
   - `image`: the URL of the first image in the document
-- `htast`: the HTML AST
 - `document`: a DOM-compatible [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) representation of the (HTML) document ([see below](#contentdocument-in-detail))
 - `sections[]`: The main sections of the document, as an enhanced MDAST ([see below](#contentsections-in-detail))
 - `html`: a string of the content rendered as HTML
