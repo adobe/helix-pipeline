@@ -713,7 +713,7 @@ ${context.content.document.body.innerHTML}`,
       },
       {
         request: { params },
-        secrets: Object.assign(secrets, { SANITIZE_DOM: true }),
+        secrets: Object.assign({}, secrets, { SANITIZE_DOM: true }),
         logger,
       },
     );
