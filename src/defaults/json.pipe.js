@@ -34,7 +34,7 @@ const jsonpipe = (cont, context, action) => {
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
-    .every(dump).when(() => !production())
+    .every(dump.record)
     .every(validate).when(() => !production())
     .every(timer.update)
     .before(fetch).expose('fetch')
@@ -47,6 +47,7 @@ const jsonpipe = (cont, context, action) => {
     .after(emit).expose('json')
     .after(type('application/json'))
     .after(timer.report)
+    .error(dump.report)
     .error(selectStatus(production()));
 
   action.logger.log('debug', 'Running JSON pipeline');

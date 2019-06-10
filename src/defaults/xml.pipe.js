@@ -38,7 +38,7 @@ const xmlpipe = (cont, context, action) => {
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
-    .every(dump).when(() => !production())
+    .every(dump.record)
     .every(validate).when(() => !production())
     .every(timer.update)
     .before(fetch).expose('fetch')
@@ -56,6 +56,7 @@ const xmlpipe = (cont, context, action) => {
     .after(key)
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .after(timer.report)
+    .error(dump.report)
     .error(selectStatus);
 
   action.logger.log('debug', 'Running XML pipeline');
