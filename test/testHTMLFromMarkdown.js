@@ -363,4 +363,29 @@ describe('Testing Markdown conversion', () => {
       SANITIZE_DOM: true,
     });
   });
+
+  it('Unwraps hero images', async () => {
+    await assertMd(`
+        ![Foo](/bar.png)
+      `, `
+        <img sizes="100vw" srcset="/bar.png?width=480&amp;auto=webp 480w,/bar.png?width=1384&amp;auto=webp 1384w,/bar.png?width=2288&amp;auto=webp 2288w,/bar.png?width=3192&amp;auto=webp 3192w,/bar.png?width=4096&amp;auto=webp 4096w"  src="/bar.png" alt="Foo"/>
+    `, {
+      SANITIZE_DOM: true,
+    });
+  });
+
+  it('Leaves regular images inside paragraphs', async () => {
+    await assertMd(`
+        # Baz
+
+        ![Foo](/bar.png)
+      `, `
+        <h1 id="baz">Baz</h1>
+        <p>
+          <img sizes="100vw" srcset="/bar.png?width=480&amp;auto=webp 480w,/bar.png?width=1384&amp;auto=webp 1384w,/bar.png?width=2288&amp;auto=webp 2288w,/bar.png?width=3192&amp;auto=webp 3192w,/bar.png?width=4096&amp;auto=webp 4096w"  src="/bar.png" alt="Foo"/>
+        </p>
+    `, {
+      SANITIZE_DOM: true,
+    });
+  });
 });
