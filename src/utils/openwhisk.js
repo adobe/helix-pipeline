@@ -84,12 +84,16 @@ async function createActionResponse(context) {
     } = {},
     error,
   } = context;
-  return {
+  const ret = {
     statusCode: status || (error ? 500 : 200),
     headers,
     body,
-    error: error ? (error.stack || error) : undefined, // workaround for https://github.com/apache/incubator-openwhisk-runtime-nodejs/issues/63
   };
+  if (error) {
+    // don't set the 'error' property, otherwise openwhisk treats this as application error
+    ret.errorMessage = String(error);
+  }
+  return ret;
 }
 
 /**

@@ -31,9 +31,13 @@ describe('Testing OpenWhisk adapter', () => {
       },
     };
     const out = await createActionResponse(inp);
-    assert.strictEqual(out.statusCode, 301);
-    assert.strictEqual(out.headers.Location, 'https://example.com');
-    assert.strictEqual(out.body, null);
+    assert.deepEqual(out, {
+      body: null,
+      headers: {
+        Location: 'https://example.com',
+      },
+      statusCode: 301,
+    });
   });
 
   it('createActionResponse provides reasonable defaults for JSON', async () => {
@@ -43,10 +47,13 @@ describe('Testing OpenWhisk adapter', () => {
       },
     };
     const out = await createActionResponse(inp);
-    assert.strictEqual(out.statusCode, 200);
-    assert.strictEqual(out.headers.Location, undefined);
-    assert.strictEqual(out.headers['Content-Type'], 'application/json');
-    assert.deepStrictEqual(out.body, {});
+    assert.deepEqual(out, {
+      body: {},
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      statusCode: 200,
+    });
   });
 
   it('createActionResponse provides reasonable defaults for plain text', async () => {
@@ -59,30 +66,28 @@ describe('Testing OpenWhisk adapter', () => {
       },
     };
     const out = await createActionResponse(inp);
-    assert.strictEqual(out.statusCode, 200);
-    assert.strictEqual(out.headers.Location, undefined);
-    assert.strictEqual(out.headers['Content-Type'], 'text/plain');
-    assert.deepStrictEqual(out.body, '');
+    assert.deepEqual(out, {
+      body: '',
+      headers: {
+        'Content-Type': 'text/plain',
+      },
+      statusCode: 200,
+    });
   });
 
-  it('createActionResponse propagates error', async () => {
+  it('createActionResponse propagates error with no http status to openwhisk', async () => {
     const inp = {
       error: new Error('boom!'),
     };
     const out = await createActionResponse(inp);
-    assert.strictEqual(out.statusCode, 500);
-    assert.ok(typeof out.error !== 'undefined');
-  });
-
-  it('createActionResponse provides reasonable defaults in case of error', async () => {
-    const inp = {
-      error: new Error('boom!'),
-    };
-    const out = await createActionResponse(inp);
-    assert.strictEqual(out.statusCode, 500);
-    assert.ok(typeof out.error !== 'undefined');
-    assert.strictEqual(out.headers['Content-Type'], 'application/json');
-    assert.deepStrictEqual(out.body, {});
+    assert.deepEqual(out, {
+      body: {},
+      errorMessage: 'Error: boom!',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      statusCode: 500,
+    });
   });
 
   it('createActionResponse keeps response intact in case of error', async () => {
@@ -98,11 +103,15 @@ describe('Testing OpenWhisk adapter', () => {
       error: new Error('Forbidden'),
     };
     const out = await createActionResponse(inp);
-    assert.strictEqual(out.statusCode, 403);
-    assert.ok(typeof out.error !== 'undefined');
-    assert.strictEqual(out.headers.Location, 'https://example.com');
-    assert.strictEqual(out.headers['Content-Type'], 'text/plain');
-    assert.strictEqual(out.body, 'Forbidden');
+    assert.deepEqual(out, {
+      body: 'Forbidden',
+      errorMessage: 'Error: Forbidden',
+      headers: {
+        'Content-Type': 'text/plain',
+        Location: 'https://example.com',
+      },
+      statusCode: 403,
+    });
   });
 
   it('Pipeline errors are propagated to action response', async () => {
@@ -112,8 +121,14 @@ describe('Testing OpenWhisk adapter', () => {
       foo.bar = 'boom!';
     }, pipe, {});
 
-    assert.strictEqual(out.statusCode, 500);
-    assert.ok(typeof out.error !== 'undefined');
+    assert.deepEqual(out, {
+      body: {},
+      errorMessage: 'ReferenceError: foo is not defined',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      statusCode: 500,
+    });
   });
 
   it('extractClientRequest needs to parse params parameter', () => {
