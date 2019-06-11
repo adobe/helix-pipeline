@@ -13,6 +13,7 @@
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
 const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
+const { readFile } = require('fs').promises;
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -162,8 +163,51 @@ async function runPipeline(cont, pipe, actionParams) {
   return createActionResponse(await owwrapper(runner, actionParams));
 }
 
+const actionRoot = () => {
+  // ... TODO
+};
+
+let _config;
+const actionConfig = async () => {
+  if (!_config) {
+    _config = await readFile('config.json');
+  }
+  return _config;
+};
+
+const fetchAndRender = async (file, store, req, _available) => {
+  const available = _available || new Set(await store.listFiles());
+
+  if (available.has(file)) {
+    const body = await store.loadFile(file); // TODO: Potentially insecure
+    return {
+      statusCode: 200,
+      body
+  }
+
+  if (file.match('\.html') && available.has(file.replace(/html$/, 'md'))) {
+    const md = await store.loadFile(file.replace(/html$/, 'md'));
+    const template = require(`${actionRoot}/html-template.js`);
+    return template.main(md);
+  }
+
+  const cfg = await actionConfig();
+  for (const diridx of cfg.directoryIndex || ['index.html']) {
+    const alt = path.join(file, diridx);
+    const res = await fetchAndRender(alt, store, available);
+    if (res.statusCode === 200) {
+      return res;
+    }
+  }
+
+  return { statusCode: 404 };
+};
+
 module.exports = {
   runPipeline,
   extractClientRequest,
   createActionResponse,
+  actionRoot,
+  actionConfig,
+
 };
