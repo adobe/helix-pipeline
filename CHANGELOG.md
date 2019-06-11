@@ -1,3 +1,10 @@
+## [3.2.2](https://github.com/adobe/helix-pipeline/compare/v3.2.1...v3.2.2) (2019-06-11)
+
+
+### Bug Fixes
+
+* **openwhisk:** never set the 'error' property of the response. ([5fc020a](https://github.com/adobe/helix-pipeline/commit/5fc020a)), closes [#369](https://github.com/adobe/helix-pipeline/issues/369)
+
 ## [3.2.1](https://github.com/adobe/helix-pipeline/compare/v3.2.0...v3.2.1) (2019-06-11)
 
 
