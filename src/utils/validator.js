@@ -11,7 +11,6 @@
  */
 /* eslint-disable no-underscore-dangle */
 const Ajv = require('ajv');
-const path = require('path');
 const hash = require('object-hash');
 const util = require('util');
 
@@ -20,31 +19,29 @@ const _ajv = {};
 function ajv(logger, options = {}) {
   if (!_ajv[hash(options)]) {
     logger.debug(`initializing ajv ${JSON.stringify(options)}`);
-    const schemadir = path.resolve(__dirname, '..', 'schemas');
     const validator = new Ajv(Object.assign({ allErrors: true, verbose: true }, options));
     // compromise: in order to avoid async code here
     // (which would complicate pipeline implementation considerably)
     // we're using static file names and synchronous reads/requires (#134)
-    const schemaFiles = [
-      `${schemadir}/action.schema.json`,
-      `${schemadir}/content.schema.json`,
-      `${schemadir}/context.schema.json`,
-      `${schemadir}/mdast.schema.json`,
-      `${schemadir}/meta.schema.json`,
-      `${schemadir}/position.schema.json`,
-      `${schemadir}/rawrequest.schema.json`,
-      `${schemadir}/request.schema.json`,
-      `${schemadir}/response.schema.json`,
-      `${schemadir}/secrets.schema.json`,
-      `${schemadir}/section.schema.json`,
-      `${schemadir}/textcoordinates.schema.json`,
-    ];
-    schemaFiles.forEach((schemaFile) => {
+    // using constants in the require functions allows packagers to include the schemas.
+    [
       /* eslint-disable global-require */
-      /* eslint-disable import/no-dynamic-require */
-      const schemaData = require(schemaFile);
+      require('../schemas/action.schema.json'),
+      require('../schemas/content.schema.json'),
+      require('../schemas/context.schema.json'),
+      require('../schemas/mdast.schema.json'),
+      require('../schemas/meta.schema.json'),
+      require('../schemas/position.schema.json'),
+      require('../schemas/rawrequest.schema.json'),
+      require('../schemas/request.schema.json'),
+      require('../schemas/response.schema.json'),
+      require('../schemas/secrets.schema.json'),
+      require('../schemas/section.schema.json'),
+      require('../schemas/textcoordinates.schema.json'),
+      /* eslint-enable global-require */
+    ].forEach((schemaData) => {
       validator.addSchema(schemaData);
-      logger.debug(`- ${schemaData.$id}  (${path.basename(schemaFile)})`);
+      logger.debug(`- ${schemaData.$id}`);
     });
 
     validator.enhancedErrorsText = function enhancedErrorsText(errs, opts = {}) {
