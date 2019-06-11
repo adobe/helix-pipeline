@@ -18,6 +18,7 @@ const path = require('path');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const setupPolly = require('@pollyjs/core').setupMocha;
+const { runPipeline } = require('../src/utils/openwhisk.js');
 const { pipe } = require('../src/defaults/html.pipe.js');
 const dump = require('../src/utils/dump-context.js');
 
@@ -627,7 +628,30 @@ ${context.content.document.body.innerHTML}`,
     );
 
     const res = result.response;
-    assert.equal(res.status, 404);
+    assert.deepEqual(res, {
+      headers: {},
+      status: 404,
+    });
+  });
+
+  it('html.pipe via pipeline fetch errors are propagated to action response', async () => {
+    const out = await runPipeline((context) => {
+      context.response = {
+        document: context.content.document,
+      };
+    }, pipe, {
+      owner: 'adobe',
+      repo: 'helix-pipeline',
+      ref: 'master',
+      path: 'not-existent.md',
+    });
+
+    assert.deepEqual(out, {
+      body: '',
+      errorMessage: 'StatusCodeError: 404 - "404: Not Found\\n"',
+      headers: {},
+      statusCode: 404,
+    });
   });
 
   it('html.pipe keeps existing headers', async () => {
