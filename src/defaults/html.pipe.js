@@ -31,7 +31,7 @@ const validate = require('../utils/validate');
 const { cache, uncached } = require('../html/shared-cache');
 const embeds = require('../html/find-embeds');
 const parseFrontmatter = require('../html/parse-frontmatter');
-const unwrapHeroImages = require('../html/unwrap-sole-images');
+const unwrapSoleImages = require('../html/unwrap-sole-images');
 const rewriteLinks = require('../html/static-asset-links');
 const tovdom = require('../html/html-to-vdom');
 const tohtml = require('../html/stringify-response');
@@ -65,7 +65,7 @@ const htmlpipe = (cont, context, action) => {
     .before(smartypants)
     .before(sections)
     .before(meta).expose('meta')
-    .before(unwrapHeroImages)
+    .before(unwrapSoleImages)
     .before(selectstrain)
     .before(selecttest)
     .before(html).expose('html')
