@@ -1,3 +1,10 @@
+## [3.2.1](https://github.com/adobe/helix-pipeline/compare/v3.2.0...v3.2.1) (2019-06-11)
+
+
+### Bug Fixes
+
+* **validator:** avoid dynamic require ([#372](https://github.com/adobe/helix-pipeline/issues/372)) ([4a71148](https://github.com/adobe/helix-pipeline/commit/4a71148)), closes [#371](https://github.com/adobe/helix-pipeline/issues/371)
+
 ## [2.5.1](https://github.com/adobe/helix-pipeline/compare/v2.5.0...v2.5.1) (2019-06-07)
 
 
