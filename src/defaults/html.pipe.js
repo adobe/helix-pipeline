@@ -54,7 +54,7 @@ const htmlpipe = (cont, context, action) => {
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
-    .every(dump).when(() => !production())
+    .every(dump.record)
     .every(validate).when(() => !production())
     .every(timer.update)
     .before(fetch).expose('fetch').when(hascontent)
@@ -82,6 +82,7 @@ const htmlpipe = (cont, context, action) => {
     .after(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .after(debug)
     .after(timer.report)
+    .error(dump.report)
     .error(selectStatus);
 
   action.logger.log('debug', 'Running HTML pipeline');

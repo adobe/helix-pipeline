@@ -110,15 +110,19 @@ const secrets = {
   XML_PRETTY: false,
 };
 
-const testContext = {
-  response: {
-    body: '<?xml version="1.0" encoding="utf-8"?><test />',
-  },
-};
-
 const expectedXML = '<?xml version="1.0" encoding="utf-8"?><document><title level="1">Bill, Welcome to the future</title></document>';
 
 describe('Testing XML Pipeline', () => {
+  let testContext;
+
+  beforeEach(() => {
+    testContext = {
+      response: {
+        body: '<?xml version="1.0" encoding="utf-8"?><test />',
+      },
+    };
+  });
+
   setupPolly({
     logging: false,
     recordFailedRequests: false,

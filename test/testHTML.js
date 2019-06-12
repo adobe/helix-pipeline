@@ -20,7 +20,6 @@ const FSPersister = require('@pollyjs/persister-fs');
 const setupPolly = require('@pollyjs/core').setupMocha;
 const { runPipeline } = require('../src/utils/openwhisk.js');
 const { pipe } = require('../src/defaults/html.pipe.js');
-const dump = require('../src/utils/dump-context.js');
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
@@ -681,7 +680,13 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
   });
 
-  it('html.pipe produces debug dumps', async () => {
+  it('html.pipe produces debug dumps in memory', async () => {
+    const action = {
+      request: { params },
+      secrets,
+      logger,
+    };
+
     const result = await pipe(
       (context) => {
         context.response = {
@@ -693,25 +698,49 @@ ${context.content.document.body.innerHTML}`,
           },
         };
       },
-      { request: crequest },
       {
-        request: { params },
-        secrets,
-        logger,
+        content: {
+          body: '# foo',
+        },
+        request: crequest,
       },
+      action,
     );
-
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/plain');
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
+    assert.ok(action.debug.contextDumps.length > 0);
+    assert.equal(action.debug.dumpDir, undefined);
+  });
 
-    const dir = await dump({}, {}, -1);
-    const outdir = path.dirname(dir);
+  it('html.pipe produces debug dumps on disk for error', async () => {
+    const action = {
+      request: { params },
+      secrets,
+      logger,
+    };
+
+    const result = await pipe(
+      () => {
+        throw Error('boom');
+      },
+      {
+        content: {
+          body: '# foo',
+        },
+        request: crequest,
+      },
+      action,
+    );
+    assert.equal(result.response.status, 500);
+
+    const outdir = action.debug.dumpDir;
     const found = fs.readdirSync(outdir)
       .map(file => path.resolve(outdir, file))
       .map(full => fs.existsSync(full))
       .filter(e => !!e);
-    assert.notEqual(found.length, 0);
+    // the last step, `report`, is not written to disk.
+    assert.equal(found.length + 1, action.debug.contextDumps.length);
   });
 
   it('html.pipe sanitizes author-generated content, but not developer-generated code', async () => {
