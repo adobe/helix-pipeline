@@ -92,6 +92,9 @@ async function createActionResponse(context) {
   if (error) {
     // don't set the 'error' property, otherwise openwhisk treats this as application error
     ret.errorMessage = String(error);
+    if (error.stack) {
+      ret.errorStack = String(error.stack);
+    }
   }
   return ret;
 }
