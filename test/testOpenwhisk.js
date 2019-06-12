@@ -80,6 +80,8 @@ describe('Testing OpenWhisk adapter', () => {
       error: new Error('boom!'),
     };
     const out = await createActionResponse(inp);
+    assert.ok(out.errorStack.startsWith('Error: boom!'));
+    delete out.errorStack;
     assert.deepEqual(out, {
       body: {},
       errorMessage: 'Error: boom!',
@@ -103,6 +105,8 @@ describe('Testing OpenWhisk adapter', () => {
       error: new Error('Forbidden'),
     };
     const out = await createActionResponse(inp);
+    assert.ok(out.errorStack.startsWith('Error: Forbidden'));
+    delete out.errorStack;
     assert.deepEqual(out, {
       body: 'Forbidden',
       errorMessage: 'Error: Forbidden',
@@ -121,6 +125,8 @@ describe('Testing OpenWhisk adapter', () => {
       foo.bar = 'boom!';
     }, pipe, {});
 
+    assert.ok(out.errorStack.startsWith('ReferenceError: foo is not defined'));
+    delete out.errorStack;
     assert.deepEqual(out, {
       body: {},
       errorMessage: 'ReferenceError: foo is not defined',
