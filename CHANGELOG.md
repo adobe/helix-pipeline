@@ -1,3 +1,10 @@
+# [3.4.0](https://github.com/adobe/helix-pipeline/compare/v3.3.0...v3.4.0) (2019-06-12)
+
+
+### Features
+
+* **error:** add response.errorStack for additional information. ([#375](https://github.com/adobe/helix-pipeline/issues/375)) ([e7a264b](https://github.com/adobe/helix-pipeline/commit/e7a264b)), closes [#374](https://github.com/adobe/helix-pipeline/issues/374)
+
 # [3.3.0](https://github.com/adobe/helix-pipeline/compare/v3.2.2...v3.3.0) (2019-06-12)
 
 
