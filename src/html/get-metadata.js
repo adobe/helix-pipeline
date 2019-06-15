@@ -19,13 +19,14 @@ const {
 
 function yaml(section) {
   const yamls = selectAll('yaml', section);
-  section.meta = obj(flat(map(yamls, ({ payload }) => payload)));
+  section.data = section.data || {};
+  section.data.meta = obj(flat(map(yamls, ({ payload }) => payload)));
   return section;
 }
 
 function title(section) {
   const header = select('heading', section);
-  section.title = header ? plain(header) : '';
+  section.data.title = header ? plain(header) : '';
 }
 
 function intro(section) {
@@ -36,7 +37,7 @@ function intro(section) {
     }
     return true;
   })[0];
-  section.intro = para ? plain(para) : '';
+  section.data.intro = para ? plain(para) : '';
 }
 
 function image(section) {
@@ -44,7 +45,7 @@ function image(section) {
   // TODO: get a better measure of prominence than "first"
   const img = select('image', section);
   if (img) {
-    section.image = img.url;
+    section.data.image = img.url;
   }
 }
 
@@ -132,35 +133,35 @@ function sectiontype(section) {
   }
 
   const typecounter = children.reduce(reducer, {});
-  section.types = constructTypes(typecounter);
+  section.data.types = constructTypes(typecounter);
 }
 
 function fallback(section) {
   if (section.intro && !section.title) {
-    section.title = section.intro;
+    section.data.title = section.intro;
   } else if (section.title && !section.intro) {
-    section.intro = section.title;
+    section.data.intro = section.title;
   }
 }
 
 function getmetadata({ content }, { logger }) {
-  const { sections } = content;
-  if (!sections) {
+  const { mdast: { children } } = content;
+  if (!children) {
     content.meta = {};
     return;
   }
 
-  logger.debug(`Parsing Markdown Metadata from ${sections.length} sections`);
+  logger.debug(`Parsing Markdown Metadata from ${children.length} sections`);
 
   each([yaml, title, intro, image, sectiontype, fallback], (fn) => {
-    each(sections, fn);
+    each(children, fn);
   });
 
-  const img = sections.filter(section => section.image)[0];
+  const img = children.filter(section => section.image)[0];
 
-  content.meta = empty(sections) ? {} : sections[0].meta;
-  content.title = empty(sections) ? '' : sections[0].title;
-  content.intro = empty(sections) ? '' : sections[0].intro;
+  content.meta = empty(children) ? {} : children[0].meta;
+  content.title = empty(children) ? '' : children[0].title;
+  content.intro = empty(children) ? '' : children[0].intro;
   content.image = img ? img.image : undefined;
 }
 
