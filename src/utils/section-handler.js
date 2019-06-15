@@ -21,7 +21,7 @@ const wrap = require('mdast-util-to-hast/lib/wrap');
  * @returns {string} The tag name for the section. Defaults to {@code div}.
  */
 function getTageName(section) {
-  return (section.data && section.data.meta && section.data.meta.tagName) || 'div';
+  return (section.meta && section.meta.tagName) || 'div';
 }
 
 /**
@@ -31,7 +31,7 @@ function getTageName(section) {
  * @returns {string} The class name for the section. Defaults to {@code hlx-section}.
  */
 function getClass(section) {
-  return (section.data && section.data.meta && section.data.meta.className) || 'hlx-section';
+  return (section.meta && section.meta.className) || 'hlx-section';
 }
 
 /**
@@ -41,8 +41,8 @@ function getClass(section) {
  * @returns {string} A space-separated list of section types, or {@code null} if none desired.
  */
 function getTypes(node) {
-  const outputTags = node.data && node.data.meta && node.data.meta.types === true;
-  const types = (outputTags && node.data.types) || null;
+  const outputTags = node.meta && node.meta.types === true;
+  const types = (outputTags && node.types) || null;
   return types ? types.join(' ') : null;
 }
 
@@ -51,7 +51,7 @@ function sectionHandler() {
     const n = Object.assign({}, node);
 
     // we have a section that is not the document root, so wrap it in the desired tag
-    if (parent && parent.type === 'root') {
+    if (parent && parent.type === 'root' && parent.children.length > 1) {
       const tagName = getTageName(n);
       const props = { class: getClass(n), 'data-hlx-types': getTypes(n) };
       const children = wrap(all(h, n), true);

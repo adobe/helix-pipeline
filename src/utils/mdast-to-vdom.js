@@ -57,7 +57,7 @@ class VDOMTransformer {
     this.match('heading', this._headingHandler.handler());
     this.match('embed', embed(options));
     this.match('link', link(options));
-    this.match('root', section(options));
+    this.match('section', section(options));
     this.match('html', (h, node) => {
       if (node.value.startsWith('<!--')) {
         return h.augment(node, {

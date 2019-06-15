@@ -47,7 +47,8 @@
                 "imageReference",
                 "footnote",
                 "footnoteReference",
-                "embed"
+                "embed",
+                "section"
             ],
             "meta:enum": {
                 "root": "The root node, representing a document or section",
@@ -76,15 +77,21 @@
                 "imageReference": "A pointer to an image",
                 "footnote": "A footnote",
                 "footnoteReference": "A reference to a footnote",
-                "embed": "Content embedded from another page, identified by the `url` attribute."
+                "embed": "Content embedded from another page, identified by the `url` attribute.",
+                "section": "The extracted sections of the document"
             },
             "description": "The node type of the MDAST node"
         },
         "children": {
             "type": "array",
-            "items": {
-                "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
-            }
+            "oneOf": [
+                {
+                    "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+                },
+                {
+                    "$ref": "https://ns.adobe.com/helix/pipeline/section#/definitions/section"
+                }
+            ]
         },
         "position": {
             "$ref": "https://ns.adobe.com/helix/pipeline/position"
