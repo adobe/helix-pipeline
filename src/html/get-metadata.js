@@ -19,10 +19,7 @@ const {
 
 function yaml(section) {
   const yamls = selectAll('yaml', section);
-  section.meta = Object.assign(
-    { type: section.type },
-    obj(flat(map(yamls, ({ payload }) => payload))),
-  );
+  section.meta = Object.assign({}, obj(flat(map(yamls, ({ payload }) => payload))));
   return section;
 }
 
