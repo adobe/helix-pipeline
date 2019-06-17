@@ -78,7 +78,7 @@
         "footnote": "A footnote",
         "footnoteReference": "A reference to a footnote",
         "embed": "Content embedded from another page, identified by the `url` attribute.",
-        "section": "The extracted sections of the document"
+        "section": "A section within the document. Sections serve as a high-level structure of a single markdown document and can have their own section-specific front matter metadata."
       },
       "description": "The node type of the MDAST node"
     },

@@ -12,7 +12,7 @@
 
 const between = require('unist-util-find-all-between');
 const { selectAll } = require('unist-util-select');
-const { flat, obj, map } = require('@adobe/helix-shared').sequence;
+const { flat, obj, map } = require('ferrum');
 const _ = require('lodash/fp');
 
 // Compute the meta information for the section

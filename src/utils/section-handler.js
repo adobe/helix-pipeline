@@ -14,36 +14,74 @@ const fallback = require('mdast-util-to-hast/lib/handlers/root');
 const all = require('mdast-util-to-hast/lib/all');
 const wrap = require('mdast-util-to-hast/lib/wrap');
 
+const DEFAULT_SECTION_TAG = 'div';
+const DEFAULT_SECTION_CLASS = 'hlx-Section';
+const SYSTEM_META_PROPERTIES = ['class', 'meta', 'tagname', 'types'];
+
 /**
  * Get the tag name for the specified section.
  *
  * @param {Node} section The MDAST section to get the tag name for
  * @returns {string} The tag name for the section. Defaults to {@code div}.
  */
-function getTageName(section) {
-  return (section.meta && section.meta.tagName) || 'div';
-}
-
-/**
- * Get the class name for the specified section.
- *
- * @param {Node} section The MDAST section to get the class name for
- * @returns {string} The class name for the section. Defaults to {@code hlx-section}.
- */
-function getClass(section) {
-  return (section.meta && section.meta.className) || 'hlx-section';
+function getTagName(section) {
+  return (section.meta && section.meta.tagname) || DEFAULT_SECTION_TAG;
 }
 
 /**
  * Get the types for the specified section.
  *
  * @param {Node} section The MDAST section to get the types for
- * @returns {string} A space-separated list of section types, or {@code null} if none desired.
+ * @returns {string[]} A list of section types.
  */
 function getTypes(node) {
   const outputTags = node.meta && node.meta.types === true;
-  const types = (outputTags && node.types) || null;
-  return types ? types.join(' ') : null;
+  const types = (outputTags && node.types) || [];
+  return types;
+}
+
+/**
+ * Formats the `type` attribute of the section, using following patterns:
+ * 1. has-<type> becomes `has<Type>`
+ * 2. is-<type>-only becomes `is<Type>Only`
+ * 3. is-<type1>-<type2>-<type3> becomes `is<Type1><Type2><Type3>`
+ * 4. nb-<type>-<nb_occurences> becomes `nb<Type><Nb_Occurences>`
+ * @param {*} section
+ */
+function formatType(type) {
+  return type.replace(/-([\w])/g, g => g[1].toUpperCase());
+}
+
+/**
+ * Get the class name for the specified section.
+ *
+ * @param {Node} section The MDAST section to get the class name for
+ * @returns {string} A space-seperated list of class names for the section.
+ *    Defaults to {@code hlx-section}.
+ */
+function getClass(section) {
+  const sectionClass = (section.meta && section.meta.class) || DEFAULT_SECTION_CLASS;
+  const sectionTypes = getTypes(section).map(type => formatType(type));
+  const sectionTypesClasses = sectionTypes.map(type => `${sectionClass}--${type}`);
+  return [].concat(sectionClass, sectionTypesClasses).join(' ');
+}
+
+/**
+ * Get the meta attributes for the specified section.
+ *
+ * @param {Node} section The MDAST section to get the class name for
+ * @returns {string} The class name for the section. Defaults to {@code hlx-section}.
+ */
+function getMeta(section) {
+  let metaKeys = [];
+  if (section.meta.meta === true) {
+    metaKeys = Object.keys(section.meta)
+      .filter(prop => SYSTEM_META_PROPERTIES.indexOf(prop) === -1);
+  }
+  return metaKeys.reduce((props, key) => {
+    props[`data-hlx-${key}`] = section.meta[key];
+    return props;
+  }, {});
 }
 
 function sectionHandler() {
@@ -52,8 +90,8 @@ function sectionHandler() {
 
     // we have a section that is not the document root, so wrap it in the desired tag
     if (parent && parent.type === 'root' && parent.children.length > 1) {
-      const tagName = getTageName(n);
-      const props = { class: getClass(n), 'data-hlx-types': getTypes(n) };
+      const tagName = getTagName(n);
+      const props = Object.assign({ class: getClass(n) }, getMeta(n));
       const children = wrap(all(h, n), true);
       return h(node, tagName, props, children);
     }

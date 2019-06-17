@@ -23,7 +23,7 @@ A node in the Markdown AST
 | [align](#align) | `enum[]` | Optional  | No | MDAST (this schema) |
 | [alt](#alt) | `string` | Optional  | Yes | MDAST (this schema) |
 | [checked](#checked) | `boolean` | Optional  | Yes | MDAST (this schema) |
-| [children](#children) | MDAST | Optional  | No | MDAST (this schema) |
+| [children](#children) | `array` | Optional  | No | MDAST (this schema) |
 | [data](#data) | `object` | Optional  | No | MDAST (this schema) |
 | [depth](#depth) | `integer` | Optional  | No | MDAST (this schema) |
 | [identifier](#identifier) | `string` | Optional  | No | MDAST (this schema) |
@@ -139,18 +139,13 @@ A checked field can be present. It represents whether the item is done (when tru
 `children`
 
 * is optional
-* type: MDAST
+* type: `array`
 * defined in this schema
 
 ### children Type
 
 
-Array type: MDAST
-
-All items must be of the type:
-* [MDAST](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
-
-
+Array type: `array`
 
 
 
@@ -473,6 +468,7 @@ The value of this property **must** be equal to one of the [known values below](
 | `footnote` | A footnote |
 | `footnoteReference` | A reference to a footnote |
 | `embed` | Content embedded from another page, identified by the `url` attribute. |
+| `section` | A section within the document. Sections serve as a high-level structure of a single markdown document and can have their own section-specific front matter metadata. |
 | `listItem` |  |
 
 

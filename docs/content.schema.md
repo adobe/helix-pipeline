@@ -29,7 +29,6 @@ The content as retrieved from the repository and enriched in the pipeline.
 | [json](#json) | `object` | Optional  | No | Content (this schema) |
 | [mdast](#mdast) | MDAST | Optional  | No | Content (this schema) |
 | [meta](#meta) | `object` | Optional  | No | Content (this schema) |
-| [sections](#sections) | Section | Optional  | No | Content (this schema) |
 | [sources](#sources) | `string[]` | Optional  | No | Content (this schema) |
 | [title](#title) | `string` | Optional  | No | Content (this schema) |
 | [xml](#xml) | `object` | Optional  | No | Content (this schema) |
@@ -206,31 +205,6 @@ Extracted metadata from the frontmatter of the document
 
 | Property | Type | Required |
 |----------|------|----------|
-
-
-
-
-
-
-## sections
-
-The extracted sections of the document
-
-`sections`
-
-* is optional
-* type: Section
-* defined in this schema
-
-### sections Type
-
-
-Array type: Section
-
-All items must be of the type:
-* [Section](section.schema.md) – `https://ns.adobe.com/helix/pipeline/section`
-
-
 
 
 

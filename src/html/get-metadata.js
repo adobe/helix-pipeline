@@ -19,7 +19,7 @@ const {
 
 function yaml(section) {
   const yamls = selectAll('yaml', section);
-  section.meta = Object.assign({}, obj(flat(map(yamls, ({ payload }) => payload))));
+  section.meta = obj(flat(map(yamls, ({ payload }) => payload)));
   return section;
 }
 
@@ -145,7 +145,7 @@ function fallback(section) {
 
 function getmetadata({ content }, { logger }) {
   const { mdast: { children } } = content;
-  const sections = children.filter(node => node.type === 'root');
+  const sections = children.filter(node => node.type === 'section');
   if (!sections) {
     content.meta = {};
     return;
