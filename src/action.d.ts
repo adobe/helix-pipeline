@@ -132,23 +132,17 @@ export interface Secrets {
    * Timeout for outgoing HTTP requests in milliseconds
    */
   HTTP_TIMEOUT?: number;
-  /**
-   * Maximum physical with of responsive images to generate
-   */
-  IMAGES_MAX_SIZE?: number;
-  /**
-   * Number of intermediary size steps to create per image
-   */
-  IMAGES_SIZE_STEPS?: number;
-  /**
-   * Value for the `sizes` attribute of generated responsive images
-   */
-  IMAGES_SIZES?: string;
   TEST_BOOLEAN?: boolean;
   /**
    * Print XML with line breaks and indentation
    */
   XML_PRETTY?: boolean;
+  /**
+   * Sanitize the HTML output to guard against XSS attacks.
+   *
+   * **Note:** this flag applies a pretty aggressive DOM filtering that will strip out a lot of HTML that your authors might find useful. The setting is meant for processing truly untrusted inputs, such as comments in a social media site.
+   */
+  SANITIZE_DOM?: boolean;
   /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".

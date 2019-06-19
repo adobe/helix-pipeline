@@ -16,7 +16,6 @@ const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
-// const responsive = require('../html/responsify-images.js');
 const type = require('../utils/set-content-type.js');
 const selectStatus = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
@@ -69,9 +68,6 @@ const htmlpipe = (cont, context, action) => {
     .before(selectstrain)
     .before(selecttest)
     .before(html).expose('html')
-    // todo: responsive used to operate on the htast, therefore ignored if content.document was used
-    // todo: there is similar logic in the image-handler during jsdom creation....
-    // .before(responsive)
     .before(sanitize).when(paranoid)
     .once(cont)
     .after(type('text/html'))

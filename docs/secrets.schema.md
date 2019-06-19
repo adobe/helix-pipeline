@@ -19,10 +19,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [EMBED_SERVICE](#embed_service) | `string` | Optional  | No | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
 | [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional  | No | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
 | [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional  | No | `1000` | Secrets (this schema) |
-| [IMAGES_MAX_SIZE](#images_max_size) | `integer` | Optional  | No | `4096` | Secrets (this schema) |
 | [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional  | No | `480` | Secrets (this schema) |
-| [IMAGES_SIZES](#images_sizes) | `string` | Optional  | No | `"100vw"` | Secrets (this schema) |
-| [IMAGES_SIZE_STEPS](#images_size_steps) | `integer` | Optional  | No | `4` | Secrets (this schema) |
 | [REPO_API_ROOT](#repo_api_root) | `string` | Optional  | No | `"https://api.github.com/"` | Secrets (this schema) |
 | [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional  | No | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
 | [SANITIZE_DOM](#sanitize_dom) | `boolean` | Optional  | No | `false` | Secrets (this schema) |
@@ -118,28 +115,6 @@ Timeout for outgoing HTTP requests in milliseconds
 
 
 
-## IMAGES_MAX_SIZE
-
-Maximum physical with of responsive images to generate
-
-`IMAGES_MAX_SIZE`
-
-* is optional
-* type: `integer`
-* default: `4096`
-* defined in this schema
-
-### IMAGES_MAX_SIZE Type
-
-
-`integer`
-
-
-
-
-
-
-
 ## IMAGES_MIN_SIZE
 
 Minimum physical width of responsive images to generate
@@ -152,50 +127,6 @@ Minimum physical width of responsive images to generate
 * defined in this schema
 
 ### IMAGES_MIN_SIZE Type
-
-
-`integer`
-
-
-
-
-
-
-
-## IMAGES_SIZES
-
-Value for the `sizes` attribute of generated responsive images
-
-`IMAGES_SIZES`
-
-* is optional
-* type: `string`
-* default: `"100vw"`
-* defined in this schema
-
-### IMAGES_SIZES Type
-
-
-`string`
-
-
-
-
-
-
-
-## IMAGES_SIZE_STEPS
-
-Number of intermediary size steps to create per image
-
-`IMAGES_SIZE_STEPS`
-
-* is optional
-* type: `integer`
-* default: `4`
-* defined in this schema
-
-### IMAGES_SIZE_STEPS Type
 
 
 `integer`

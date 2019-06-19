@@ -17,7 +17,6 @@ const mdast2hast = require('mdast-util-to-hast');
 const { JSDOM } = require('jsdom');
 const toDOM = require('./hast-util-to-dom');
 const HeadingHandler = require('./heading-handler');
-const image = require('./image-handler');
 const embed = require('./embed-handler');
 const link = require('./link-handler');
 const types = require('../schemas/mdast.schema.json').properties.type.enum;
@@ -39,10 +38,6 @@ class VDOMTransformer {
    * Initializes the transformer with a Markdown document or fragment of a document
    * @param {Node} mdast the markdown AST node to start the transformation from.
    * @param {object} options options for custom transformers
-   * @param {string[]} options.IMAGES_SIZES a list of size media queries
-   * @param {number} options.IMAGES_MIN_SIZE from smallest possible size
-   * @param {number} options.IMAGES_MAX_SIZE to largest possible size
-   * @param {number} options.IMAGES_SIZE_STEPS steps number of steps
    */
   constructor(mdast, options) {
     this._matchers = [];
@@ -59,7 +54,6 @@ class VDOMTransformer {
 
     this._headingHandler = new HeadingHandler(options);
     this.match('heading', this._headingHandler.handler());
-    this.match('image', image(options));
     this.match('embed', embed(options));
     this.match('link', link(options));
     this.match('html', (h, node) => {
