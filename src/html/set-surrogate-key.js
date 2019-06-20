@@ -9,10 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const crypto = require('crypto');
 const { type } = require('@adobe/helix-shared').types;
 const { map, join } = require('@adobe/helix-shared').sequence;
 const { setdefault } = require('@adobe/helix-shared').types;
+const { computeSurrogateKey } = require('@adobe/helix-shared').utils;
 
 function key(context, { logger }) {
   const cont = setdefault(context, 'content', {});
@@ -26,11 +26,7 @@ function key(context, { logger }) {
   }
 
   logger.debug('Setting Surrogate-Key header');
-  headers['Surrogate-Key'] = join(' ')(map(cont.sources, (uri) => {
-    const hash = crypto.createHash('sha256');
-    hash.update(uri);
-    return hash.digest('base64');
-  }));
+  headers['Surrogate-Key'] = join(' ')(map(cont.sources, computeSurrogateKey));
 }
 
 module.exports = key;
