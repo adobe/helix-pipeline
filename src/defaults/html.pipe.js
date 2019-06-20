@@ -37,6 +37,7 @@ const tohtml = require('../html/stringify-response');
 const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
 const sanitize = require('../html/sanitize');
+const resolveRef = require('../utils/resolve-ref');
 
 /* eslint newline-per-chained-call: off */
 
@@ -57,6 +58,7 @@ const htmlpipe = (cont, context, action) => {
     .every(dump.record)
     .every(validate).when(() => !production())
     .every(timer.update)
+    .before(resolveRef).expose('resolve').when(hascontent)
     .before(fetch).expose('fetch').when(hascontent)
     .before(parse).expose('parse')
     .before(parseFrontmatter)

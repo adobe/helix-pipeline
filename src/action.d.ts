@@ -144,6 +144,10 @@ export interface Secrets {
    */
   SANITIZE_DOM?: boolean;
   /**
+   * API endpoint or action name to the service that resolves github refs to commit SHAs.
+   */
+  RESOLVE_GITREF_SERVICE?: string;
+  /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".
    */
