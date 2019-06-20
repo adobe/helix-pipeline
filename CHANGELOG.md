@@ -1,3 +1,10 @@
+# [3.6.0](https://github.com/adobe/helix-pipeline/compare/v3.5.0...v3.6.0) (2019-06-20)
+
+
+### Features
+
+* **pipe:** Remove image responsifier ([#381](https://github.com/adobe/helix-pipeline/issues/381)) ([69223a4](https://github.com/adobe/helix-pipeline/commit/69223a4)), closes [#380](https://github.com/adobe/helix-pipeline/issues/380)
+
 # [3.5.0](https://github.com/adobe/helix-pipeline/compare/v3.4.0...v3.5.0) (2019-06-17)
 
 
