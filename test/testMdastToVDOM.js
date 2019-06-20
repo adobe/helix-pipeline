@@ -202,9 +202,7 @@ describe('Test MDAST to VDOM Transformation', () => {
               rel="nofollow">External link</a>:
             the parsed
             <a href="/mdast.html" title="My title">
-              <img src="/dist/img/ipad.png" alt="ipad"
-                   srcset="/dist/img/ipad.png?width=480&amp;auto=webp 480w,/dist/img/ipad.png?width=1384&amp;auto=webp 1384w,/dist/img/ipad.png?width=2288&amp;auto=webp 2288w,/dist/img/ipad.png?width=3192&amp;auto=webp 3192w,/dist/img/ipad.png?width=4096&amp;auto=webp 4096w"
-                   sizes="100vw">
+              <img src="/dist/img/ipad.png" alt="ipad">
             </a>
         </p>`,
     );

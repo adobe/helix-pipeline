@@ -35,14 +35,6 @@ describe('Test Coercing Secrets', () => {
     assert.equal(action.secrets.REPO_RAW_ROOT, 'https://raw.githubusercontent.com/');
   });
 
-  it('Defaults have correct types (number)', async () => {
-    const action = { logger };
-    await coerce(action);
-    assert.ok(action.secrets.IMAGES_MAX_SIZE);
-    assert.equal(action.secrets.IMAGES_MAX_SIZE, 4096);
-    assert.equal(typeof action.secrets.IMAGES_MAX_SIZE, 'number');
-  });
-
   it('Defaults have correct types (boolean)', async () => {
     const action = { logger };
     await coerce(action);
@@ -54,12 +46,5 @@ describe('Test Coercing Secrets', () => {
     await coerce(action);
     assert.equal(action.secrets.TEST_BOOLEAN, false);
     assert.equal(typeof action.secrets.TEST_BOOLEAN, 'boolean');
-  });
-
-  it('Secrets have correct types (number)', async () => {
-    const action = { logger, secrets: { IMAGES_MAX_SIZE: '4000' } };
-    await coerce(action);
-    assert.equal(action.secrets.IMAGES_MAX_SIZE, 4000);
-    assert.equal(typeof action.secrets.IMAGES_MAX_SIZE, 'number');
   });
 });

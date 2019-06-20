@@ -561,7 +561,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.headers['Cache-Control'], 's-maxage=604800');
     assert.equal(res.headers['Surrogate-Key'], 'h/WhVujl+n6KANwYWB57fhkvjfzzACeSawAAndzWdK0=');
     assert.equal(res.body[0], '<');
-    assert.ok(res.body.match(/srcset/));
+    assert.ok(res.body.match(/<img/));
   });
 
   it('html.pipe makes HTTP requests and falls back to master', async () => {
@@ -606,7 +606,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.headers['Cache-Control'], 's-maxage=604800');
     assert.equal(res.headers['Surrogate-Key'], 'h/WhVujl+n6KANwYWB57fhkvjfzzACeSawAAndzWdK0=');
     assert.equal(res.body[0], '<');
-    assert.ok(res.body.match(/srcset/));
+    assert.ok(res.body.match(/<img/));
   });
 
   it('html.pipe serves 404 for non existent content', async () => {
