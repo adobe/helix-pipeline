@@ -22,6 +22,7 @@ The content as retrieved from the repository and enriched in the pipeline.
 | Property | Type | Required | Nullable | Defined by |
 |----------|------|----------|----------|------------|
 | [body](#body) | `string` | Optional  | No | Content (this schema) |
+| [data](#data) | `object` | Optional  | No | Content (this schema) |
 | [document](#document) | `object` | Optional  | No | Content (this schema) |
 | [image](#image) | `string` | Optional  | No | Content (this schema) |
 | [intro](#intro) | `string` | Optional  | No | Content (this schema) |
@@ -48,6 +49,30 @@ The content body of the retrieved source document
 
 `string`
 
+
+
+
+
+
+
+## data
+
+Custom object that can hold any user defined data.
+
+`data`
+
+* is optional
+* type: `object`
+* defined in this schema
+
+### data Type
+
+
+`object` with following properties:
+
+
+| Property | Type | Required |
+|----------|------|----------|
 
 
 

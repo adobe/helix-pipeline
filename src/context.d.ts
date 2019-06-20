@@ -184,6 +184,12 @@ export interface Content {
    * Path (can be relative) to the first image in the document
    */
   image?: string;
+  /**
+   * Custom object that can hold any user defined data.
+   */
+  data?: {
+    [k: string]: any;
+  };
 }
 /**
  * A node in the Markdown AST
