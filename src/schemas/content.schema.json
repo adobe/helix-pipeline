@@ -63,6 +63,10 @@
     },
     "image": {
       "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image"
+    },
+    "data": {
+      "type": "object",
+      "description": "Custom object that can hold any user defined data."
     }
   }
 }
