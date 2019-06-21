@@ -22,6 +22,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional  | No | `480` | Secrets (this schema) |
 | [REPO_API_ROOT](#repo_api_root) | `string` | Optional  | No | `"https://api.github.com/"` | Secrets (this schema) |
 | [REPO_RAW_ROOT](#repo_raw_root) | `string` | Optional  | No | `"https://raw.githubusercontent.com/"` | Secrets (this schema) |
+| [RESOLVE_GITREF_SERVICE](#resolve_gitref_service) | `string` | Optional  | No | `""` | Secrets (this schema) |
 | [SANITIZE_DOM](#sanitize_dom) | `boolean` | Optional  | No | `false` | Secrets (this schema) |
 | [TEST_BOOLEAN](#test_boolean) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
 | [XML_PRETTY](#xml_pretty) | `boolean` | Optional  | No | `true` | Secrets (this schema) |
@@ -177,6 +178,28 @@ The Base URL for retrieving raw text files from GitHub
 `string`
 
 * format: `uri` – Uniformous Resource Identifier (according to [RFC3986](http://tools.ietf.org/html/rfc3986))
+
+
+
+
+
+
+## RESOLVE_GITREF_SERVICE
+
+API endpoint or action name to the service that resolves github refs to commit SHAs.
+
+`RESOLVE_GITREF_SERVICE`
+
+* is optional
+* type: `string`
+* default: `""`
+* defined in this schema
+
+### RESOLVE_GITREF_SERVICE Type
+
+
+`string`
+
 
 
 
