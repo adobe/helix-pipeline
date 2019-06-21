@@ -84,14 +84,16 @@
         },
         "children": {
             "type": "array",
-            "oneOf": [
-                {
-                    "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
-                },
-                {
-                    "$ref": "https://ns.adobe.com/helix/pipeline/section#/definitions/section"
-                }
-            ]
+            "items": {
+                "oneOf": [
+                    {
+                        "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+                    },
+                    {
+                        "$ref": "https://ns.adobe.com/helix/pipeline/section#/definitions/section"
+                    }
+                ]
+            }
         },
         "position": {
             "$ref": "https://ns.adobe.com/helix/pipeline/position"
@@ -158,13 +160,6 @@
             ],
             "description": "For code, a lang field can be present. It represents the language of computer code being marked up."
         },
-        "meta": {
-            "type": [
-                "null",
-                "string"
-            ],
-            "description": "For code, if lang is present, a meta field can be present. It represents custom information relating to the node."
-        },
         "identifier": {
             "type": "string",
             "description": "For associations, an identifier field must be present. It can match an identifier field on another node."
@@ -178,12 +173,41 @@
             "format": "uri-reference",
             "description": "For resources, an url field must be present. It represents a URL to the referenced resource."
         },
+        "meta": {
+            "type": [
+                "null",
+                "object"
+            ],
+            "description": "Extracted metadata from the frontmatter of the document"
+        },
         "title": {
             "type": [
-                "string",
-                "null"
+                "null",
+                "string"
             ],
-            "description": "For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip."
+            "description": "Extracted title of the document"
+        },
+        "intro": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "description": "Extracted first paragraph of the document"
+        },
+        "image": {
+            "type": [
+                "null",
+                "string"
+            ],
+            "format": "uri-reference",
+            "description": "Path (can be relative) to the first image in the document"
+        },
+        "types": {
+            "type": "array",
+            "description": "The inferred class names for the section",
+            "items": {
+                "type": "string"
+            }
         },
         "alt": {
             "type": [
