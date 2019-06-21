@@ -1,3 +1,12 @@
+# [3.7.0](https://github.com/adobe/helix-pipeline/compare/v3.6.0...v3.7.0) (2019-06-21)
+
+
+### Features
+
+* **caching:** use computeSurrogateKey from helix-shared ([1ad6d9b](https://github.com/adobe/helix-pipeline/commit/1ad6d9b)), closes [#385](https://github.com/adobe/helix-pipeline/issues/385)
+* **fetch:** resolve github ref to commit sha ([#384](https://github.com/adobe/helix-pipeline/issues/384)) ([a917b27](https://github.com/adobe/helix-pipeline/commit/a917b27)), closes [#382](https://github.com/adobe/helix-pipeline/issues/382)
+* **schema:** Add context.content.data ([a3c5003](https://github.com/adobe/helix-pipeline/commit/a3c5003)), closes [#378](https://github.com/adobe/helix-pipeline/issues/378)
+
 # [3.6.0](https://github.com/adobe/helix-pipeline/compare/v3.5.0...v3.6.0) (2019-06-20)
 
 
