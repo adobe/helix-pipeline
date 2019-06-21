@@ -1,3 +1,10 @@
+## [3.7.1](https://github.com/adobe/helix-pipeline/compare/v3.7.0...v3.7.1) (2019-06-21)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/openwhisk-loggly-wrapper to version 0.4.3 ([01ac087](https://github.com/adobe/helix-pipeline/commit/01ac087))
+
 # [3.7.0](https://github.com/adobe/helix-pipeline/compare/v3.6.0...v3.7.0) (2019-06-21)
 
 
