@@ -83,8 +83,8 @@ describe('Integration Test Section Strain Filtering', () => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         const { content } = context;
-        logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
-        assert.equal(content.sections.filter(nonhidden).length, 3);
+        logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
+        assert.equal(content.mdast.children.filter(nonhidden).length, 3);
         setdefault(context, 'response', {}).body = content.document.body.innerHTML;
       },
       {
@@ -130,7 +130,9 @@ describe('Unit Test Section Strain Filtering', () => {
     const context = {
       request: crequest,
       content: {
-        sections: [],
+        mdast: {
+          children: [],
+        },
       },
     };
     const action = {
@@ -147,11 +149,13 @@ describe('Unit Test Section Strain Filtering', () => {
   it('Filters sections based on strain', () => {
     const context = {
       content: {
-        sections: [
-          { meta: { strain: 'test' } },
-          { meta: { strain: 'test' } },
-          { meta: { strain: 'no-test' } },
-        ],
+        mdast: {
+          children: [
+            { meta: { strain: 'test' } },
+            { meta: { strain: 'test' } },
+            { meta: { strain: 'no-test' } },
+          ],
+        },
       },
     };
     const action = {
@@ -163,17 +167,19 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     selectstrain(context, action);
-    assert.equal(context.content.sections.filter(nonhidden).length, 2);
+    assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
   it('Filters sections based on strain (array)', () => {
     const context = {
       content: {
-        sections: [
-          { meta: { strain: 'test' } },
-          { meta: { strain: ['test', 'no-test'] } },
-          { meta: { strain: 'no-test' } },
-        ],
+        mdast: {
+          children: [
+            { meta: { strain: 'test' } },
+            { meta: { strain: ['test', 'no-test'] } },
+            { meta: { strain: 'no-test' } },
+          ],
+        },
       },
     };
     const action = {
@@ -185,17 +191,19 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     selectstrain(context, action);
-    assert.equal(context.content.sections.filter(nonhidden).length, 2);
+    assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
   it('Keeps sections without a strain', () => {
     const context = {
       content: {
-        sections: [
-          { meta: { strain: 'test' } },
-          { meta: { strain: ['test', 'no-test'] } },
-          { meta: {} },
-        ],
+        mdast: {
+          children: [
+            { meta: { strain: 'test' } },
+            { meta: { strain: ['test', 'no-test'] } },
+            { meta: {} },
+          ],
+        },
       },
     };
     const action = {
@@ -207,17 +215,19 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     selectstrain(context, action);
-    assert.equal(context.content.sections.filter(nonhidden).length, 2);
+    assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
   it('Keeps sections without metadata', () => {
     const context = {
       content: {
-        sections: [
-          { meta: { strain: 'test' } },
-          { meta: { strain: ['test', 'no-test'] } },
-          {},
-        ],
+        mdast: {
+          children: [
+            { meta: { strain: 'test' } },
+            { meta: { strain: ['test', 'no-test'] } },
+            {},
+          ],
+        },
       },
     };
     const action = {
@@ -229,45 +239,47 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     selectstrain(context, action);
-    assert.equal(context.content.sections.filter(nonhidden).length, 2);
+    assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
 
   it('Filters strain a', () => {
     const context = {
       content: {
-        sections: [{
-          type: 'root',
-          children: [],
-          title: 'This is an easy test.',
-          types: ['has-paragraph', 'has-only-paragraph'],
-          intro: 'This is an easy test.',
-          meta: { frontmatter: true },
+        mdast: {
+          children: [{
+            type: 'root',
+            children: [],
+            title: 'This is an easy test.',
+            types: ['has-paragraph', 'has-only-paragraph'],
+            intro: 'This is an easy test.',
+            meta: { frontmatter: true },
+          },
+          {
+            type: 'root',
+            children: [],
+            title: 'These two sections should always be shown',
+            types: ['has-paragraph', 'has-only-paragraph'],
+            intro: 'These two sections should always be shown',
+            meta: {},
+          },
+          {
+            type: 'root',
+            children: [],
+            title: 'But this one only in strain “A”',
+            types: ['has-paragraph', 'has-only-paragraph'],
+            intro: 'But this one only in strain “A”',
+            meta: { strain: 'a' },
+          },
+          {
+            type: 'root',
+            children: [],
+            title: 'And this one only in strain “B”',
+            types: ['has-paragraph', 'has-only-paragraph'],
+            intro: 'And this one only in strain “B”',
+            meta: { strain: 'b' },
+          }],
         },
-        {
-          type: 'root',
-          children: [],
-          title: 'These two sections should always be shown',
-          types: ['has-paragraph', 'has-only-paragraph'],
-          intro: 'These two sections should always be shown',
-          meta: {},
-        },
-        {
-          type: 'root',
-          children: [],
-          title: 'But this one only in strain “A”',
-          types: ['has-paragraph', 'has-only-paragraph'],
-          intro: 'But this one only in strain “A”',
-          meta: { strain: 'a' },
-        },
-        {
-          type: 'root',
-          children: [],
-          title: 'And this one only in strain “B”',
-          types: ['has-paragraph', 'has-only-paragraph'],
-          intro: 'And this one only in strain “B”',
-          meta: { strain: 'b' },
-        }],
       },
     };
     const action = {
@@ -279,8 +291,8 @@ describe('Unit Test Section Strain Filtering', () => {
       logger,
     };
     selectstrain(context, action);
-    assert.equal(context.content.sections.filter(nonhidden).length, 3);
-    assert.equal(context.content.sections.filter(nonhidden)[0].meta.hidden, false);
+    assert.equal(context.content.mdast.children.filter(nonhidden).length, 3);
+    assert.equal(context.content.mdast.children.filter(nonhidden)[0].meta.hidden, false);
   });
 });
 
@@ -339,9 +351,9 @@ describe('Integration Test A/B Testing', () => {
         const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
-        assert.equal(content.sections.filter(nonhidden).length, 3);
-        assert.equal(content.sections.filter(nonhidden)[2].meta.test, 'a');
+        logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
+        assert.equal(content.mdast.children.filter(nonhidden).length, 3);
+        assert.equal(content.mdast.children.filter(nonhidden)[2].meta.test, 'a');
         setdefault(context, 'response', {}).body = content.document.body.innerHTML;
       },
       {
@@ -390,11 +402,11 @@ Or this one at the same time.
           const { content } = context;
           // this is the main function (normally it would be the template function)
           // but we use it to assert that pre-processing has happened
-          logger.debug(`Found ${content.sections.filter(nonhidden).length} nonhidden sections`);
-          assert.equal(content.sections.filter(nonhidden).length, 3);
+          logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
+          assert.equal(content.mdast.children.filter(nonhidden).length, 3);
           // remember what was selected
           /* eslint-disable-next-line prefer-destructuring */
-          selected = content.sections.filter(nonhidden)[2];
+          selected = content.mdast.children.filter(nonhidden)[2];
           setdefault(context, 'response', {}).body = content.document.body.innerHTML;
         },
         {
@@ -441,7 +453,7 @@ Or that one at the same time, because they are both part of an A/B test.
     // format, section metadata, the mdast format or the input above, you probably
     // want to change one of these values until you find one that *happens* to work
     // again...
-    assert.notDeepEqual(await runpipe('foo'), await runpipe('bang'));
+    assert.notDeepEqual(await runpipe('foo'), await runpipe('bar'));
     assert.deepEqual(await runpipe('baz'), await runpipe('baz'));
   });
 });

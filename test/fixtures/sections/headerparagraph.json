@@ -1,47 +1,45 @@
-[
-  {
-    "types": [
-      "has-text",
-      "has-heading",
-      "nb-text-1",
-      "nb-heading-1",
-      "is-text-heading",
-      "is-text"
-    ],
-    "intro": "This is a paragraph.",
-    "title": "Header and one paragraph",
-    "meta": {},
-    "type": "root",
-    "children": [
-      {
-        "type": "heading",
-        "depth": 1,
-        "children": [
-          {
-            "type": "text",
-            "value": "Header and one paragraph"
-          }
-        ],
-        "data": {
-          "types": [
-            "is-heading"
-          ]
+{
+  "types": [
+    "has-text",
+    "has-heading",
+    "nb-text-1",
+    "nb-heading-1",
+    "is-text-heading",
+    "is-text"
+  ],
+  "intro": "This is a paragraph.",
+  "title": "Header and one paragraph",
+  "meta": {},
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Header and one paragraph"
         }
-      },
-      {
-        "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "This is a paragraph."
-          }
-        ],
-        "data": {
-          "types": [
-            "is-text"
-          ]
-        }
+      ],
+      "data": {
+        "types": [
+          "is-heading"
+        ]
       }
-    ]
-  }
-]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "This is a paragraph."
+        }
+      ],
+      "data": {
+        "types": [
+          "is-text"
+        ]
+      }
+    }
+  ]
+}

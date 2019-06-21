@@ -1,29 +1,27 @@
-[
-  {
-    "title": "This is only a paragraph.",
-    "types": [
-      "has-text",
-      "nb-text-1",
-      "has-only-text"
-    ],
-    "intro": "This is only a paragraph.",
-    "meta": {},
-    "type": "root",
-    "children": [
-      {
-        "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "This is only a paragraph."
-          }
-        ],
-        "data": {
-          "types": [
-            "is-text"
-          ]
+{
+  "title": "This is only a paragraph.",
+  "types": [
+    "has-text",
+    "nb-text-1",
+    "has-only-text"
+  ],
+  "intro": "This is only a paragraph.",
+  "meta": {},
+  "type": "root",
+  "children": [
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "This is only a paragraph."
         }
+      ],
+      "data": {
+        "types": [
+          "is-text"
+        ]
       }
-    ]
-  }
-]
+    }
+  ]
+}

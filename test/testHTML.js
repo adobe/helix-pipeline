@@ -465,7 +465,9 @@ ${context.content.document.body.innerHTML}`,
       {
         request: crequest,
         content: {
-          sections: [{ type: 'notroot' }],
+          mdast: {
+            type: 'notroot',
+          },
         },
       },
       {
@@ -476,7 +478,7 @@ ${context.content.document.body.innerHTML}`,
     );
     assert.ok(result.error);
     assert(result.error.stack.includes('Error: Invalid Context'));
-    assert(result.error.stack.includes('should be equal to constant'));
+    assert(result.error.stack.includes('should be equal to one of the allowed values'));
   });
 
   it('html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid', async () => {
@@ -486,7 +488,9 @@ ${context.content.document.body.innerHTML}`,
       }, {
         request: crequest,
         content: {
-          sections: [{ type: 'root', custom: 'notallowed' }],
+          mdast: {
+            children: [{ type: 'root', custom: 'notallowed' }],
+          },
         },
       },
       {

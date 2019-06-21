@@ -30,7 +30,7 @@ function title(section) {
 
 function intro(section) {
   const para = selectAll('paragraph', section).filter((p) => {
-    if ((p.children.length === 0)
+    if ((!p.children || p.children.length === 0)
         || (p.children.length === 1 && p.children[0].type === 'image')) {
       return false;
     }
@@ -144,11 +144,10 @@ function fallback(section) {
 }
 
 function getmetadata({ content }, { logger }) {
-  const { mdast: { children } } = content;
-  const sections = children.filter(node => node.type === 'section');
-  if (!sections) {
-    content.meta = {};
-    return;
+  const { mdast: { children = [] } } = content;
+  let sections = children.filter(node => node.type === 'section');
+  if (!sections.length) {
+    sections = [content.mdast];
   }
 
   logger.debug(`Parsing Markdown Metadata from ${sections.length} sections`);

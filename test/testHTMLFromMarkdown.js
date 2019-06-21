@@ -388,4 +388,60 @@ describe('Testing Markdown conversion', () => {
       SANITIZE_DOM: true,
     });
   });
+
+  it('Exposes section meta data', async () => {
+    await assertMd(`
+        ---
+        foo: bar
+        ---
+
+        # Foo
+
+        ---
+        baz: qux
+        class: qux-section
+        ---
+
+        # Baz
+
+        ---
+        corge: grault
+        tagname: section
+        ---
+
+        # Corge
+
+        ---
+        garply: waldo
+        meta: true
+        ---
+
+        # Garply
+
+        ---
+        fred: plugh
+        types: true
+        ---
+
+        # Fred
+      `, `
+        <div class="hlx-section">
+          <h1 id="foo">Foo</h1>
+        </div>
+        <div class="qux-section">
+          <h1 id="baz">Baz</h1>
+        </div>
+        <section class="hlx-section">
+          <h1 id="corge">Corge</h1>
+        </section>
+        <div class="hlx-section" data-hlx-garply="waldo">
+          <h1 id="garply">Garply</h1>
+        </div>
+        <div class="hlx-section has-heading nb-heading-1 has-only-heading">
+          <h1 id="fred">Fred</h1>
+        </div>
+    `, {
+      SANITIZE_DOM: true,
+    });
+  });
 });

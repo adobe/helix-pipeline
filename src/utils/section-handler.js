@@ -9,13 +9,11 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-const fallback = require('mdast-util-to-hast/lib/handlers/root');
 const all = require('mdast-util-to-hast/lib/all');
 const wrap = require('mdast-util-to-hast/lib/wrap');
 
 const DEFAULT_SECTION_TAG = 'div';
-const DEFAULT_SECTION_CLASS = 'hlx-Section';
+const DEFAULT_SECTION_CLASS = 'hlx-section';
 const SYSTEM_META_PROPERTIES = ['class', 'meta', 'tagname', 'types'];
 
 /**
@@ -41,18 +39,6 @@ function getTypes(node) {
 }
 
 /**
- * Formats the `type` attribute of the section, using following patterns:
- * 1. has-<type> becomes `has<Type>`
- * 2. is-<type>-only becomes `is<Type>Only`
- * 3. is-<type1>-<type2>-<type3> becomes `is<Type1><Type2><Type3>`
- * 4. nb-<type>-<nb_occurences> becomes `nb<Type><Nb_Occurences>`
- * @param {*} section
- */
-function formatType(type) {
-  return type.replace(/-([\w])/g, g => g[1].toUpperCase());
-}
-
-/**
  * Get the class name for the specified section.
  *
  * @param {Node} section The MDAST section to get the class name for
@@ -61,9 +47,8 @@ function formatType(type) {
  */
 function getClass(section) {
   const sectionClass = (section.meta && section.meta.class) || DEFAULT_SECTION_CLASS;
-  const sectionTypes = getTypes(section).map(type => formatType(type));
-  const sectionTypesClasses = sectionTypes.map(type => `${sectionClass}--${type}`);
-  return [].concat(sectionClass, sectionTypesClasses).join(' ');
+  const sectionTypes = getTypes(section);
+  return [sectionClass, ...sectionTypes].join(' ');
 }
 
 /**
@@ -85,18 +70,13 @@ function getMeta(section) {
 }
 
 function sectionHandler() {
-  return function handler(h, node, parent) {
+  return function handler(h, node) {
     const n = Object.assign({}, node);
 
-    // we have a section that is not the document root, so wrap it in the desired tag
-    if (parent && parent.type === 'root' && parent.children.length > 1) {
-      const tagName = getTagName(n);
-      const props = Object.assign({ class: getClass(n) }, getMeta(n));
-      const children = wrap(all(h, n), true);
-      return h(node, tagName, props, children);
-    }
-
-    return fallback(h, n);
+    const tagName = getTagName(n);
+    const props = Object.assign({ class: getClass(n) }, getMeta(n));
+    const children = wrap(all(h, n), true);
+    return h(node, tagName, props, children);
   };
 }
 

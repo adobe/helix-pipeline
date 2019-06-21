@@ -1,112 +1,110 @@
-[
-  {
-    "types": [
-      "has-list",
-      "has-heading",
-      "nb-list-1",
-      "nb-heading-1",
-      "is-list-heading",
-      "is-list"
-    ],
-    "intro": "list item 1",
-    "title": "Header and a list",
-    "meta": {},
-    "type": "root",
-    "children": [
-      {
-        "type": "heading",
-        "depth": 1,
-        "children": [
-          {
-            "type": "text",
-            "value": "Header and a list"
-          }
-        ],
-        "data": {
-          "types": [
-            "is-heading"
-          ]
+{
+  "types": [
+    "has-list",
+    "has-heading",
+    "nb-list-1",
+    "nb-heading-1",
+    "is-list-heading",
+    "is-list"
+  ],
+  "intro": "list item 1",
+  "title": "Header and a list",
+  "meta": {},
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Header and a list"
         }
-      },
-      {
-        "type": "list",
-        "ordered": false,
-        "start": null,
-        "spread": false,
-        "children": [
-          {
-            "type": "listItem",
-            "spread": false,
-            "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "list item 1"
-                  }
-                ],
-                "data": {
-                  "types": [
-                    "is-text"
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "type": "listItem",
-            "spread": false,
-            "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "list item 2"
-                  }
-                ],
-                "data": {
-                  "types": [
-                    "is-text"
-                  ]
-                }
-              }
-            ]
-          },
-          {
-            "type": "listItem",
-            "spread": false,
-            "checked": null,
-            "children": [
-              {
-                "type": "paragraph",
-                "children": [
-                  {
-                    "type": "text",
-                    "value": "list item 3"
-                  }
-                ],
-                "data": {
-                  "types": [
-                    "is-text"
-                  ]
-                }
-              }
-            ]
-          }
-        ],
-        "data": {
-          "types": [
-            "has-text",
-            "nb-text-3",
-            "has-only-text",
-            "is-list"
-          ]
-        }
+      ],
+      "data": {
+        "types": [
+          "is-heading"
+        ]
       }
-    ]
-  }
-]
+    },
+    {
+      "type": "list",
+      "ordered": false,
+      "start": null,
+      "spread": false,
+      "children": [
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "list item 1"
+                }
+              ],
+              "data": {
+                "types": [
+                  "is-text"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "list item 2"
+                }
+              ],
+              "data": {
+                "types": [
+                  "is-text"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "list item 3"
+                }
+              ],
+              "data": {
+                "types": [
+                  "is-text"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "data": {
+        "types": [
+          "has-text",
+          "nb-text-3",
+          "has-only-text",
+          "is-list"
+        ]
+      }
+    }
+  ]
+}

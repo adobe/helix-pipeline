@@ -1,67 +1,65 @@
-[
-  {
-    "types": [
-      "has-image",
-      "has-text",
-      "has-heading",
-      "nb-image-1",
-      "nb-text-1",
-      "nb-heading-1",
-      "is-image-text-heading",
-      "is-image-text",
-      "is-image"
-    ],
-    "image": "./helix_logo.png",
-    "intro": "This is a paragraph.",
-    "title": "Header, a paragraph and one image",
-    "meta": {},
-    "type": "root",
-    "children": [
-      {
-        "type": "heading",
-        "depth": 1,
-        "children": [
-          {
-            "type": "text",
-            "value": "Header, a paragraph and one image"
-          }
-        ],
-        "data": {
-          "types": [
-            "is-heading"
-          ]
+{
+  "types": [
+    "has-image",
+    "has-text",
+    "has-heading",
+    "nb-image-1",
+    "nb-text-1",
+    "nb-heading-1",
+    "is-image-text-heading",
+    "is-image-text",
+    "is-image"
+  ],
+  "image": "./helix_logo.png",
+  "intro": "This is a paragraph.",
+  "title": "Header, a paragraph and one image",
+  "meta": {},
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Header, a paragraph and one image"
         }
-      },
-      {
-        "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "This is a paragraph."
-          }
-        ],
-        "data": {
-          "types": [
-            "is-text"
-          ]
-        }
-      },
-      {
-        "type": "paragraph",
-        "children": [
-          {
-            "type": "image",
-            "title": null,
-            "url": "./helix_logo.png",
-            "alt": "helix-logo"
-          }
-        ],
-        "data": {
-          "types": [
-            "has-image"
-          ]
-        }
+      ],
+      "data": {
+        "types": [
+          "is-heading"
+        ]
       }
-    ]
-  }
-]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "This is a paragraph."
+        }
+      ],
+      "data": {
+        "types": [
+          "is-text"
+        ]
+      }
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "./helix_logo.png",
+          "alt": "helix-logo"
+        }
+      ],
+      "data": {
+        "types": [
+          "has-image"
+        ]
+      }
+    }
+  ]
+}

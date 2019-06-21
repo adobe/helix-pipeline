@@ -1,50 +1,48 @@
-[
-  {
-    "intro": "Header and one image",
-    "types": [
-      "has-image",
-      "has-heading",
-      "nb-image-1",
-      "nb-heading-1",
-      "is-image-heading",
-      "is-image"
-    ],
-    "image": "./helix_logo.png",
-    "title": "Header and one image",
-    "meta": {},
-    "type": "root",
-    "children": [
-      {
-        "type": "heading",
-        "depth": 1,
-        "children": [
-          {
-            "type": "text",
-            "value": "Header and one image"
-          }
-        ],
-        "data": {
-          "types": [
-            "is-heading"
-          ]
+{
+  "intro": "Header and one image",
+  "types": [
+    "has-image",
+    "has-heading",
+    "nb-image-1",
+    "nb-heading-1",
+    "is-image-heading",
+    "is-image"
+  ],
+  "image": "./helix_logo.png",
+  "title": "Header and one image",
+  "meta": {},
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Header and one image"
         }
-      },
-      {
-        "type": "paragraph",
-        "children": [
-          {
-            "type": "image",
-            "title": null,
-            "url": "./helix_logo.png",
-            "alt": "helix-logo"
-          }
-        ],
-        "data": {
-          "types": [
-            "has-image"
-          ]
-        }
+      ],
+      "data": {
+        "types": [
+          "is-heading"
+        ]
       }
-    ]
-  }
-]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "./helix_logo.png",
+          "alt": "helix-logo"
+        }
+      ],
+      "data": {
+        "types": [
+          "has-image"
+        ]
+      }
+    }
+  ]
+}

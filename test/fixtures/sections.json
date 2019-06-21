@@ -1,6 +1,9 @@
 [
   {
-    "type": "root",
+    "type": "section",
+    "meta": {
+      "title": "foo"
+    },
     "children": [{
         "type": "yaml",
         "payload": {
@@ -130,11 +133,16 @@
     ]
   },
   {
-    "type": "root",
+    "type": "section",
+    "meta": {
+      "class": "section",
+      "tagname": "section"
+    },
     "children": [{
         "type": "yaml",
         "payload": {
-          "class": "section"
+          "class": "section",
+          "tagname": "section"
         }
       },
       {
@@ -305,11 +313,18 @@
     ]
   },
   {
-    "type": "root",
+    "type": "section",
+    "meta": {
+      "class": "code",
+      "meta": true,
+      "bar": "baz"
+    },
     "children": [{
         "type": "yaml",
         "payload": {
-          "class": "code"
+          "class": "code",
+          "meta": true,
+          "bar": "baz"
         }
       },
       {
@@ -472,7 +487,8 @@
     ]
   },
   {
-    "type": "root",
+    "type": "section",
+    "meta": {},
     "children": [{
         "type": "heading",
         "depth": 3,

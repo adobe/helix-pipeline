@@ -1,30 +1,28 @@
-[
-  {
-    "intro": "Header only",
-    "types": [
-      "has-heading",
-      "nb-heading-1",
-      "has-only-heading"
-    ],
-    "title": "Header only",
-    "meta": {},
-    "type": "root",
-    "children": [
-      {
-        "type": "heading",
-        "depth": 1,
-        "children": [
-          {
-            "type": "text",
-            "value": "Header only"
-          }
-        ],
-        "data": {
-          "types": [
-            "is-heading"
-          ]
+{
+  "intro": "Header only",
+  "types": [
+    "has-heading",
+    "nb-heading-1",
+    "has-only-heading"
+  ],
+  "title": "Header only",
+  "meta": {},
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Header only"
         }
+      ],
+      "data": {
+        "types": [
+          "is-heading"
+        ]
       }
-    ]
-  }
-]
+    }
+  ]
+}

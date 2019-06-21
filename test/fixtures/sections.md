@@ -18,6 +18,7 @@ It uses reducers and continuations to create a simple processing pipeline that c
 
 ---
 class: section
+tagname: section
 ---
 
 ## Anatomy of a Pipeline
@@ -41,6 +42,8 @@ Typically, there is one pipeline for each content type supported and pipeline ar
 
 ---
 class: code
+meta: true
+bar: baz
 ---
 
 

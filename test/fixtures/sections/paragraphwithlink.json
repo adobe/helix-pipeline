@@ -1,48 +1,46 @@
-[
-  {
-    "title": "This is a paragraph with a link!",
-    "types": [
-      "has-text",
-      "has-link",
-      "nb-text-2",
-      "nb-link-1",
-      "is-text-link",
-      "is-text"
-    ],
-    "intro": "This is a paragraph with a link!",
-    "meta": {},
-    "type": "root",
-    "children": [
-      {
-        "type": "paragraph",
-        "children": [
-          {
-            "type": "text",
-            "value": "This is a paragraph with a "
-          },
-          {
-            "type": "link",
-            "title": null,
-            "url": "/index.html",
-            "children": [
-              {
-                "type": "text",
-                "value": "link"
-              }
-            ]
-          },
-          {
-            "type": "text",
-            "value": "!"
-          }
-        ],
-        "data": {
-          "types": [
-            "is-text",
-            "has-link"
+{
+  "title": "This is a paragraph with a link!",
+  "types": [
+    "has-text",
+    "has-link",
+    "nb-text-2",
+    "nb-link-1",
+    "is-text-link",
+    "is-text"
+  ],
+  "intro": "This is a paragraph with a link!",
+  "meta": {},
+  "type": "root",
+  "children": [
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "This is a paragraph with a "
+        },
+        {
+          "type": "link",
+          "title": null,
+          "url": "/index.html",
+          "children": [
+            {
+              "type": "text",
+              "value": "link"
+            }
           ]
+        },
+        {
+          "type": "text",
+          "value": "!"
         }
+      ],
+      "data": {
+        "types": [
+          "is-text",
+          "has-link"
+        ]
       }
-    ]
-  }
-]
+    }
+  ]
+}
