@@ -14,6 +14,7 @@ A node in the Markdown AST
 
 * MDAST `https://ns.adobe.com/helix/pipeline/mdast`
   * [Position](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
+  * [Meta](meta.schema.md) `https://ns.adobe.com/helix/pipeline/meta`
 
 
 # MDAST Properties
@@ -329,7 +330,6 @@ For code, a lang field can be present. It represents the language of computer co
 
 ## meta
 
-Extracted metadata from the frontmatter of the document
 
 `meta`
 
@@ -345,6 +345,164 @@ Extracted metadata from the frontmatter of the document
 
 | Property | Type | Required |
 |----------|------|----------|
+| `class`| string | Optional |
+| `image`| string | Optional |
+| `intro`| string | Optional |
+| `meta`| boolean | Optional |
+| `tagname`| string | Optional |
+| `title`| string | Optional |
+| `types`| boolean | Optional |
+
+
+
+#### class
+
+The CSS class to use for the section instead of the default `hlx-section` one
+
+`class`
+
+* is optional
+* type: `string`
+
+##### class Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### image
+
+Path (can be relative) to the first image in the document
+
+`image`
+
+* is optional
+* type: `string`
+
+##### image Type
+
+
+`string`
+
+* format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
+
+
+
+
+
+
+
+
+#### intro
+
+Extracted first paragraph of the document
+
+`intro`
+
+* is optional
+* type: `string`
+
+##### intro Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### meta
+
+When set to `true`, will output the additional meta properties as data attributes (i.e. `'foo = bar'` will become `data-hlx-foo='bar'`)
+
+`meta`
+
+* is optional
+* type: `boolean`
+
+##### meta Type
+
+
+`boolean`
+
+
+
+
+
+
+
+#### tagname
+
+The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+
+`tagname`
+
+* is optional
+* type: `string`
+
+##### tagname Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### title
+
+Extracted title of the document
+
+`title`
+
+* is optional
+* type: `string`
+
+##### title Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### types
+
+When set to `true`, will output the section types as additional CSS classes (i.e. `class='hlx-section has-image has-heading'`)
+
+`types`
+
+* is optional
+* type: `boolean`
+
+##### types Type
+
+
+`boolean`
+
+
+
+
 
 
 

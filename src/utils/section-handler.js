@@ -13,7 +13,8 @@ const all = require('mdast-util-to-hast/lib/all');
 const wrap = require('mdast-util-to-hast/lib/wrap');
 
 const DEFAULT_SECTION_TAG = 'div';
-const DEFAULT_SECTION_CLASS = 'hlx-section';
+const HELIX_NAMESPACE = 'hlx';
+const DEFAULT_SECTION_CLASS = `${HELIX_NAMESPACE}-section`;
 const SYSTEM_META_PROPERTIES = ['class', 'meta', 'tagname', 'types'];
 
 /**
@@ -64,7 +65,7 @@ function getMeta(section) {
       .filter(prop => SYSTEM_META_PROPERTIES.indexOf(prop) === -1);
   }
   return metaKeys.reduce((props, key) => {
-    props[`data-hlx-${key}`] = section.meta[key];
+    props[`data-${HELIX_NAMESPACE}-${key}`] = section.meta[key];
     return props;
   }, {});
 }
@@ -76,6 +77,7 @@ function sectionHandler() {
     const tagName = getTagName(n);
     const props = Object.assign({ class: getClass(n) }, getMeta(n));
     const children = wrap(all(h, n), true);
+
     return h(node, tagName, props, children);
   };
 }

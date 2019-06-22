@@ -154,8 +154,7 @@
       "description": "For resources, an url field must be present. It represents a URL to the referenced resource."
     },
     "meta": {
-      "type": ["null", "object"],
-      "description": "Extracted metadata from the frontmatter of the document"
+      "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"
     },
     "title": {
       "type": ["null", "string"],

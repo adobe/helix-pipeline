@@ -17,7 +17,7 @@ const _ = require('lodash/fp');
 
 // Compute the meta information for the section
 function computeMeta(section) {
-  return Object.assign({}, obj(flat(map(selectAll('yaml', section), ({ payload }) => payload))));
+  return obj(flat(map(selectAll('yaml', section), ({ payload }) => payload)));
 }
 
 function split({ content }) {
@@ -48,7 +48,8 @@ function split({ content }) {
       return section;
     });
 
-  if (content.mdast.children.length === 1 && content.mdast.children[0].type === 'section') { // unwrap sole section
+  // unwrap sole section directly on the root
+  if (content.mdast.children.length === 1 && content.mdast.children[0].type === 'section') {
     content.mdast.children = content.mdast.children[0].children;
   }
 }

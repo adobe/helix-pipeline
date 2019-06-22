@@ -9,27 +9,20 @@ A section in a markdown document
 
 | Abstract | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Defined In |
 |----------|------------|--------|--------------|-------------------|-----------------------|------------|
-| Can be instantiated | Yes | Experimental | No | Forbidden | Permitted | [section.schema.json](section.schema.json) |
-## Schema Hierarchy
+| Cannot be instantiated | Yes | Experimental | No | Forbidden | Permitted | [section.schema.json](section.schema.json) |
 
-* Section `https://ns.adobe.com/helix/pipeline/section`
-  * [Position](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
-  * [Meta](meta.schema.md) `https://ns.adobe.com/helix/pipeline/meta`
+# Section Definitions
 
-
-# Section Properties
-
-| Property | Type | Required | Nullable | Defined by |
-|----------|------|----------|----------|------------|
-| [children](#children) | MDAST | Optional  | No | Section (this schema) |
-| [image](#image) | `string` | Optional  | No | [Meta](meta.schema.md#image) |
-| [intro](#intro) | `string` | Optional  | No | [Meta](meta.schema.md#intro) |
-| [meta](#meta) | `object` | Optional  | No | [Meta](meta.schema.md#meta) |
-| [position](#position) | Position | Optional  | No | Section (this schema) |
-| [title](#title) | `string` | Optional  | No | [Meta](meta.schema.md#title) |
-| [type](#type) | `const` | Optional  | No | Section (this schema) |
-| [types](#types) | `string[]` | Optional  | No | Section (this schema) |
-| `*` | any | Additional | Yes | this schema *allows* additional properties |
+| Property | Type | Group |
+|----------|------|-------|
+| [children](#children) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
+| [image](#image) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
+| [intro](#intro) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
+| [meta](#meta) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
+| [position](#position) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
+| [title](#title) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
+| [type](#type) | `const` | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
+| [types](#types) | `string[]` | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
 
 ## children
 
@@ -38,16 +31,16 @@ The AST nodes making up the section. Section dividers are not included.
 `children`
 
 * is optional
-* type: MDAST
+* type: reference
 * defined in this schema
 
 ### children Type
 
 
-Array type: MDAST
+Array type: reference
 
 All items must be of the type:
-* [MDAST](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
+* []() – `https://ns.adobe.com/helix/pipeline/mdast`
 
 
 
@@ -58,21 +51,17 @@ All items must be of the type:
 
 ## image
 
-Path (can be relative) to the first image in the document
 
 `image`
 
 * is optional
-* type: `string`
-* defined in [Meta](meta.schema.md#image)
+* type: reference
+* defined in this schema
 
 ### image Type
 
 
-`string`
-
-* format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
-
+* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image`
 
 
 
@@ -80,20 +69,17 @@ Path (can be relative) to the first image in the document
 
 ## intro
 
-Extracted first paragraph of the document
 
 `intro`
 
 * is optional
-* type: `string`
-* defined in [Meta](meta.schema.md#intro)
+* type: reference
+* defined in this schema
 
 ### intro Type
 
 
-`string`
-
-
+* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro`
 
 
 
@@ -101,23 +87,17 @@ Extracted first paragraph of the document
 
 ## meta
 
-Extracted metadata from the frontmatter of the document
 
 `meta`
 
 * is optional
-* type: `object`
-* defined in [Meta](meta.schema.md#meta)
+* type: reference
+* defined in this schema
 
 ### meta Type
 
 
-`object` with following properties:
-
-
-| Property | Type | Required |
-|----------|------|----------|
-
+* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta`
 
 
 
@@ -129,13 +109,13 @@ Extracted metadata from the frontmatter of the document
 `position`
 
 * is optional
-* type: Position
+* type: reference
 * defined in this schema
 
 ### position Type
 
 
-* [Position](position.schema.md) – `https://ns.adobe.com/helix/pipeline/position`
+* []() – `https://ns.adobe.com/helix/pipeline/position`
 
 
 
@@ -143,20 +123,17 @@ Extracted metadata from the frontmatter of the document
 
 ## title
 
-Extracted title of the document
 
 `title`
 
 * is optional
-* type: `string`
-* defined in [Meta](meta.schema.md#title)
+* type: reference
+* defined in this schema
 
 ### title Type
 
 
-`string`
-
-
+* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title`
 
 
 
@@ -207,20 +184,4 @@ All items must be of the type:
 
 
 
-
-
-
-**All** of the following *requirements* need to be fulfilled.
-
-
-#### Requirement 1
-
-
-* []() – `#/definitions/section`
-
-
-#### Requirement 2
-
-
-* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta`
 

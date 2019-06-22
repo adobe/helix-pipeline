@@ -46,7 +46,7 @@
             "description": "The XML object to emit. See xmlbuilder-js for syntax."
         },
         "meta": {
-            "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta"
+            "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"
         },
         "title": {
             "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title"

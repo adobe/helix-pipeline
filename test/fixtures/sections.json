@@ -2,12 +2,14 @@
   {
     "type": "section",
     "meta": {
-      "title": "foo"
+      "title": "foo",
+      "types": true
     },
     "children": [{
         "type": "yaml",
         "payload": {
-          "title": "foo"
+          "title": "foo",
+          "types": true
         }
       },
       {
