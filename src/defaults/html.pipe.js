@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const { Pipeline } = require('../../index.js');
-const { log } = require('./default.js');
+const { log, isErrorStep } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
 const parse = require('../html/parse-markdown.js');
@@ -57,7 +57,7 @@ const htmlpipe = (cont, context, action) => {
   const timer = timing();
   pipe
     .every(dump.record)
-    .every(validate).when(() => !production())
+    .every(validate).when((...args) => !production() && !isErrorStep(args.pop()))
     .every(timer.update)
     .use(resolveRef).expose('resolve').when(hascontent)
     .use(fetch).expose('fetch').when(hascontent)
