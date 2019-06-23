@@ -11,7 +11,6 @@
  */
 const { select, selectAll } = require('unist-util-select');
 const plain = require('mdast-util-to-string');
-const { empty } = require('@adobe/helix-shared').types;
 const {
   flat, obj, map, each,
 } = require('@adobe/helix-shared').sequence;
@@ -158,9 +157,9 @@ function getmetadata({ content }, { logger }) {
 
   const img = sections.filter(section => section.image)[0];
 
-  content.meta = empty(sections) ? {} : sections[0].meta;
-  content.title = empty(sections) ? '' : sections[0].title;
-  content.intro = empty(sections) ? '' : sections[0].intro;
+  content.meta = sections[0].meta;
+  content.title = sections[0].title;
+  content.intro = sections[0].intro;
   content.image = img ? img.image : undefined;
 }
 

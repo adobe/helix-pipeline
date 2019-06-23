@@ -17,7 +17,11 @@ const map = require('unist-util-map');
  * @param {object} request The content request
  */
 function unwrap({ content }) {
-  content.sections.forEach((section) => {
+  let sections = content.mdast.children.filter(node => node.type === 'section');
+  if (!sections.length) {
+    sections = [content.mdast];
+  }
+  sections.forEach((section) => {
     map(section, (node, index, parent) => {
       if (node.type === 'paragraph' // If we have a paragraph
           && parent.type === 'root' // … in a top section
