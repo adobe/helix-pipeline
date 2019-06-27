@@ -1,3 +1,10 @@
+## [3.7.3](https://github.com/adobe/helix-pipeline/compare/v3.7.2...v3.7.3) (2019-06-27)
+
+
+### Bug Fixes
+
+* **embed:** use new versioned embed API endpoint ([dfe3011](https://github.com/adobe/helix-pipeline/commit/dfe3011))
+
 ## [3.7.2](https://github.com/adobe/helix-pipeline/compare/v3.7.1...v3.7.2) (2019-06-25)
 
 
