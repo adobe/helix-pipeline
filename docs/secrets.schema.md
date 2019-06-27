@@ -16,7 +16,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | Property | Type | Required | Nullable | Default | Defined by |
 |----------|------|----------|----------|---------|------------|
 | [EMBED_SELECTOR](#embed_selector) | `string` | Optional  | No | `"embed"` | Secrets (this schema) |
-| [EMBED_SERVICE](#embed_service) | `string` | Optional  | No | `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"` | Secrets (this schema) |
+| [EMBED_SERVICE](#embed_service) | `string` | Optional  | No | `"https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1"` | Secrets (this schema) |
 | [EMBED_WHITELIST](#embed_whitelist) | `string` | Optional  | No | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"` | Secrets (this schema) |
 | [HTTP_TIMEOUT](#http_timeout) | `integer` | Optional  | No | `1000` | Secrets (this schema) |
 | [IMAGES_MIN_SIZE](#images_min_size) | `integer` | Optional  | No | `480` | Secrets (this schema) |
@@ -58,7 +58,7 @@ URL of an Embed Service that takes the appended URL and returns an embeddable HT
 
 * is optional
 * type: `string`
-* default: `"https://adobeioruntime.net/api/v1/web/helix/default/embed/"`
+* default: `"https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1"`
 * defined in this schema
 
 ### EMBED_SERVICE Type
