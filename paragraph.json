@@ -1,13 +1,4 @@
 {
-  "title": "This is only a paragraph.",
-  "intro": "This is only a paragraph.",
-  "meta": {
-    "types": [
-      "has-text",
-      "nb-text-1",
-      "has-only-text"
-    ]  
-  },
   "type": "root",
   "children": [
     {
@@ -24,5 +15,14 @@
         ]
       }
     }
-  ]
+  ],
+  "meta": {
+    "types": [
+      "has-text",
+      "nb-text-1",
+      "has-only-text"
+    ]
+  },
+  "title": "This is only a paragraph.",
+  "intro": "This is only a paragraph."
 }

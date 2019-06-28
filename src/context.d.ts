@@ -168,10 +168,6 @@ export interface MDAST {
       }
     | {
         /**
-         * The inferred class names for the section
-         */
-        types?: string[];
-        /**
          * The MDAST node type. Each section can be treated as a standalone document.
          */
         type?: {
@@ -182,10 +178,9 @@ export interface MDAST {
          * The AST nodes making up the section. Section dividers are not included.
          */
         children?: MDAST[];
-        /**
-         * When set to `true`, will output the additional meta properties as data attributes (i.e. `'foo = bar'` will become `data-hlx-foo='bar'`)
-         */
-        meta?: boolean;
+        meta?: null | {
+          [k: string]: any;
+        };
         /**
          * Extracted title of the document
          */

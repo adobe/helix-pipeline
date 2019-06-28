@@ -59,7 +59,7 @@ describe('Test getMetadata', () => {
       },
     };
     getmetadata(dat, { logger });
-    assert.deepEqual(dat.content.meta, {});
+    assert.deepEqual(dat.content.meta, { types: [] });
   });
 
   it('getmetadata does not fail with empty sections', () => {
@@ -74,18 +74,21 @@ describe('Test getMetadata', () => {
     };
     getmetadata(dat, { logger });
     assert.deepEqual(dat.content, {
-      meta: {},
+      meta: {
+        types: [],
+      },
       title: '',
       intro: '',
       image: undefined,
       mdast: {
         children: [],
         position: {},
-        meta: {},
+        meta: {
+          types: [],
+        },
         type: '',
         title: '',
         intro: '',
-        types: [],
       },
     });
   });

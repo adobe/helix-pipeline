@@ -25,8 +25,8 @@ function unwrap({ content }) {
     map(section, (node, index, parent) => {
       if (node.type === 'paragraph' // If we have a paragraph
           && parent.type === 'root' // … in a top section
-          && parent.types.includes('has-only-image') // … that only has images
-          && parent.types.includes('nb-image-1')) { // … and actually only 1 of them
+          && parent.meta.types.includes('has-only-image') // … that only has images
+          && parent.meta.types.includes('nb-image-1')) { // … and actually only 1 of them
         // … then consider it a hero image, and unwrap from the paragraph
         const position = content.mdast.children.indexOf(node);
         const [img] = content.mdast.children[position].children;

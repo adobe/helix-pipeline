@@ -1,16 +1,4 @@
 {
-  "intro": "list item 1",
-  "title": "Header and a list",
-  "meta": {
-    "types": [
-      "has-list",
-      "has-heading",
-      "nb-list-1",
-      "nb-heading-1",
-      "is-list-heading",
-      "is-list"
-    ]
-  },
   "type": "root",
   "children": [
     {
@@ -107,5 +95,17 @@
         ]
       }
     }
-  ]
+  ],
+  "meta": {
+    "types": [
+      "has-list",
+      "has-heading",
+      "nb-list-1",
+      "nb-heading-1",
+      "is-list-heading",
+      "is-list"
+    ]
+  },
+  "title": "Header and a list",
+  "intro": "list item 1"
 }

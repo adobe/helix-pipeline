@@ -30,13 +30,12 @@
                     "type": "string",
                     "description": "The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)"
                 },
-                "meta": {
-                    "type": "boolean",
-                    "description": "When set to `true`, will output the additional meta properties as data attributes (i.e. `'foo = bar'` will become `data-hlx-foo='bar'`)"
-                },
                 "types": {
-                    "type": "boolean",
-                    "description": "When set to `true`, will output the section types as additional CSS classes (i.e. `class='hlx-section has-image has-heading'`)"
+                    "type": "array",
+                    "description": "The inferred class names for the section",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "title": {
                     "type": "string",

@@ -392,7 +392,7 @@ describe('Testing Markdown conversion', () => {
   it('Exposes section meta data', async () => {
     await assertMd(`
         ---
-        foo: bar
+        title: foo
         ---
 
         # Foo
@@ -405,40 +405,61 @@ describe('Testing Markdown conversion', () => {
         # Baz
 
         ---
-        corge: grault
         tagname: section
         ---
 
         # Corge
 
         ---
-        garply: waldo
-        meta: true
+        data-meta: true
         ---
 
         # Garply
 
         ---
-        fred: plugh
-        types: true
+        data-hlx-types: [fred, plugh]
         ---
 
         # Fred
       `, `
-        <div class="hlx-section">
+        <div class="hlx-section" title="foo" data-hlx-types="has-heading nb-heading-1 has-only-heading">
           <h1 id="foo">Foo</h1>
         </div>
-        <div class="qux-section">
+        <div class="hlx-section qux-section" data-baz="qux" data-hlx-types="has-heading nb-heading-1 has-only-heading">
           <h1 id="baz">Baz</h1>
         </div>
-        <section class="hlx-section">
+        <section class="hlx-section" data-hlx-types="has-heading nb-heading-1 has-only-heading">
           <h1 id="corge">Corge</h1>
         </section>
-        <div class="hlx-section" data-hlx-garply="waldo">
+        <div class="hlx-section" data-meta data-hlx-types="has-heading nb-heading-1 has-only-heading">
           <h1 id="garply">Garply</h1>
         </div>
-        <div class="hlx-section has-heading nb-heading-1 has-only-heading">
+        <div class="hlx-section" data-hlx-types="fred plugh">
           <h1 id="fred">Fred</h1>
+        </div>
+    `, {
+      SANITIZE_DOM: true,
+    });
+  });
+
+  it('Filters out hlx-* class and data-hlx-* attributes in production', async () => {
+    process.env.__OW_ACTIVATION_ID = '1234';
+    await assertMd(`
+        ---
+
+        # Foo
+
+        ---
+        data-hlx-types: [bar, baz]
+        ---
+
+        # Bar
+      `, `
+        <div>
+          <h1 id="foo">Foo</h1>
+        </div>
+        <div>
+          <h1 id="bar">Bar</h1>
         </div>
     `, {
       SANITIZE_DOM: true,

@@ -453,7 +453,7 @@ Or that one at the same time, because they are both part of an A/B test.
     // format, section metadata, the mdast format or the input above, you probably
     // want to change one of these values until you find one that *happens* to work
     // again...
-    assert.notDeepEqual(await runpipe('foo'), await runpipe('bar'));
+    assert.notDeepEqual(await runpipe('foo'), await runpipe('qux'));
     assert.deepEqual(await runpipe('baz'), await runpipe('baz'));
   });
 });

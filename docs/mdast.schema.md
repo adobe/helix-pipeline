@@ -348,10 +348,9 @@ For code, a lang field can be present. It represents the language of computer co
 | `class`| string | Optional |
 | `image`| string | Optional |
 | `intro`| string | Optional |
-| `meta`| boolean | Optional |
 | `tagname`| string | Optional |
 | `title`| string | Optional |
-| `types`| boolean | Optional |
+| `types`| array | Optional |
 
 
 
@@ -422,26 +421,6 @@ Extracted first paragraph of the document
 
 
 
-#### meta
-
-When set to `true`, will output the additional meta properties as data attributes (i.e. `'foo = bar'` will become `data-hlx-foo='bar'`)
-
-`meta`
-
-* is optional
-* type: `boolean`
-
-##### meta Type
-
-
-`boolean`
-
-
-
-
-
-
-
 #### tagname
 
 The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
@@ -488,17 +467,26 @@ Extracted title of the document
 
 #### types
 
-When set to `true`, will output the section types as additional CSS classes (i.e. `class='hlx-section has-image has-heading'`)
+The inferred class names for the section
 
 `types`
 
 * is optional
-* type: `boolean`
+* type: `string[]`
+
 
 ##### types Type
 
 
-`boolean`
+Array type: `string[]`
+
+All items must be of the type:
+`string`
+
+
+
+
+
 
 
 

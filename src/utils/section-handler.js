@@ -12,10 +12,16 @@
 const all = require('mdast-util-to-hast/lib/all');
 const wrap = require('mdast-util-to-hast/lib/wrap');
 
+const HELIX_NAMESPACE = 'hlx-';
 const DEFAULT_SECTION_TAG = 'div';
-const HELIX_NAMESPACE = 'hlx';
-const DEFAULT_SECTION_CLASS = `${HELIX_NAMESPACE}-section`;
-const SYSTEM_META_PROPERTIES = ['class', 'meta', 'tagname', 'types'];
+const DEFAULT_SECTION_CLASS = `${HELIX_NAMESPACE}section`;
+const SYSTEM_META_PROPERTIES = ['tagname'];
+const SYSTEM_HTML_ATTRIBUTES = ['types'];
+const GLOBAL_HTML_ATTRIBUTES = [
+  'accesskey', 'autocapitalize', 'class', 'contenteditable', 'contextmenu', 'dir', 'draggable', 'dropzone', 'hidden',
+  'id', 'inputmode', 'is', 'itemid', 'itemprop', 'itemref', 'itemscope', 'itemtype', 'lang', 'slot', 'spellcheck',
+  'style', 'tabindex', 'title', 'translate',
+];
 
 /**
  * Get the tag name for the specified section.
@@ -27,47 +33,26 @@ function getTagName(section) {
   return (section.meta && section.meta.tagname) || DEFAULT_SECTION_TAG;
 }
 
-/**
- * Get the types for the specified section.
- *
- * @param {Node} section The MDAST section to get the types for
- * @returns {string[]} A list of section types.
- */
-function getTypes(node) {
-  const outputTags = node.meta && node.meta.types === true;
-  const types = (outputTags && node.types) || [];
-  return types;
+function toHtmlAttribute(value) {
+  return Array.isArray(value) ? value.join(' ') : value;
 }
 
-/**
- * Get the class name for the specified section.
- *
- * @param {Node} section The MDAST section to get the class name for
- * @returns {string} A space-seperated list of class names for the section.
- *    Defaults to {@code hlx-section}.
- */
-function getClass(section) {
-  const sectionClass = (section.meta && section.meta.class) || DEFAULT_SECTION_CLASS;
-  const sectionTypes = getTypes(section);
-  return [sectionClass, ...sectionTypes].join(' ');
-}
-
-/**
- * Get the meta attributes for the specified section.
- *
- * @param {Node} section The MDAST section to get the class name for
- * @returns {string} The class name for the section. Defaults to {@code hlx-section}.
- */
-function getMeta(section) {
-  let metaKeys = [];
-  if (section.meta.meta === true) {
-    metaKeys = Object.keys(section.meta)
-      .filter(prop => SYSTEM_META_PROPERTIES.indexOf(prop) === -1);
-  }
-  return metaKeys.reduce((props, key) => {
-    props[`data-${HELIX_NAMESPACE}-${key}`] = section.meta[key];
-    return props;
-  }, {});
+function getAttributes(section) {
+  const attributeKeys = Object.keys(section.meta);
+  // Add system properties as data-hlx-*
+  const attributes = attributeKeys
+    .filter(k => SYSTEM_HTML_ATTRIBUTES.indexOf(k) > -1)
+    .reduce((result, attr) => Object.assign(result, { [`data-${HELIX_NAMESPACE}${attr}`]: toHtmlAttribute(section.meta[attr]) }), {});
+  return attributeKeys
+    .filter(k => [...SYSTEM_HTML_ATTRIBUTES, ...SYSTEM_META_PROPERTIES].indexOf(k) === -1)
+    .reduce((result, attr) => {
+      // Add invalid HTML attributes as data-*
+      if (GLOBAL_HTML_ATTRIBUTES.indexOf(attr) === -1 && !attr.startsWith('data-')) {
+        return Object.assign(result, { [`data-${attr}`]: toHtmlAttribute(section.meta[attr]) });
+      }
+      // Add valid HTML attributes
+      return Object.assign(result, { [attr]: toHtmlAttribute(section.meta[attr]) });
+    }, attributes);
 }
 
 function sectionHandler() {
@@ -75,7 +60,8 @@ function sectionHandler() {
     const n = Object.assign({}, node);
 
     const tagName = getTagName(n);
-    const props = Object.assign({ class: getClass(n) }, getMeta(n));
+    const props = getAttributes(n);
+    props.class = props.class ? `${DEFAULT_SECTION_CLASS} ${props.class}` : DEFAULT_SECTION_CLASS;
     const children = wrap(all(h, n), true);
 
     return h(node, tagName, props, children);

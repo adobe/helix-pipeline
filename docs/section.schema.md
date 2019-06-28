@@ -22,7 +22,6 @@ A section in a markdown document
 | [position](#position) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
 | [title](#title) | reference | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
 | [type](#type) | `const` | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
-| [types](#types) | `string[]` | `https://ns.adobe.com/helix/pipeline/section#/definitions/section` |
 
 ## children
 
@@ -97,7 +96,7 @@ All items must be of the type:
 ### meta Type
 
 
-* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta`
+* []() – `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta`
 
 
 
@@ -154,33 +153,6 @@ The value of this property **must** be equal to:
 ```json
 "root"
 ```
-
-
-
-
-
-## types
-
-The inferred class names for the section
-
-`types`
-
-* is optional
-* type: `string[]`
-* defined in this schema
-
-### types Type
-
-
-Array type: `string[]`
-
-All items must be of the type:
-`string`
-
-
-
-
-
 
 
 
