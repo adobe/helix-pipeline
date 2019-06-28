@@ -87,7 +87,7 @@ describe('Test Embed Handler', () => {
 
 
     embed(action.secrets)((_, tagname, parameters, children) => {
-      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/default/embed/https://www.example.com/');
+      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1https://www.example.com/');
       assert.equal(children, undefined);
       assert.equal(tagname, 'esi:include');
     }, node);
