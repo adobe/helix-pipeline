@@ -72,7 +72,7 @@
     "remark-parse": "^6.0.0",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5",
-    "retext": "^6.0.0",
+    "retext": "^7.0.0",
     "retext-smartypants": "^3.0.1",
     "strip-markdown": "^3.0.3",
     "unified": "^8.0.0",
