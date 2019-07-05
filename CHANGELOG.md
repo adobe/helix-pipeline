@@ -1,3 +1,19 @@
+# [4.0.0](https://github.com/adobe/helix-pipeline/compare/v3.7.4...v4.0.0) (2019-07-05)
+
+
+### Features
+
+* **html pipe:** Default pipeline should include <section/>s ([#379](https://github.com/adobe/helix-pipeline/issues/379)) ([27ad875](https://github.com/adobe/helix-pipeline/commit/27ad875)), closes [adobe/helix-cli#1037](https://github.com/adobe/helix-cli/issues/1037) [#279](https://github.com/adobe/helix-pipeline/issues/279)
+
+
+### BREAKING CHANGES
+
+* **html pipe:** - Remove `context.content.sections` and move the sections directly under
+`context.content.mdast`
+- Adjust json schemas accordingly
+- Move the section yaml meta info to `<node>.meta`
+- Move the section types to the mdast `<node>.meta.types`
+
 ## [3.7.4](https://github.com/adobe/helix-pipeline/compare/v3.7.3...v3.7.4) (2019-07-04)
 
 
