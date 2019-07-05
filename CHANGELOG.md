@@ -1,3 +1,10 @@
+## [3.7.4](https://github.com/adobe/helix-pipeline/compare/v3.7.3...v3.7.4) (2019-07-04)
+
+
+### Bug Fixes
+
+* **security:** .snyk, package.json & package-lock.json to reduce vulnerabilities ([#398](https://github.com/adobe/helix-pipeline/issues/398)) ([851c48f](https://github.com/adobe/helix-pipeline/commit/851c48f))
+
 ## [3.7.3](https://github.com/adobe/helix-pipeline/compare/v3.7.2...v3.7.3) (2019-06-27)
 
 
