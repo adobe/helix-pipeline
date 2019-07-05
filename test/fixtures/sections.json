@@ -1,10 +1,15 @@
 [
   {
-    "type": "root",
+    "type": "section",
+    "meta": {
+      "title": "foo",
+      "types": true
+    },
     "children": [{
         "type": "yaml",
         "payload": {
-          "title": "foo"
+          "title": "foo",
+          "types": true
         }
       },
       {
@@ -130,11 +135,16 @@
     ]
   },
   {
-    "type": "root",
+    "type": "section",
+    "meta": {
+      "class": "section",
+      "tagname": "section"
+    },
     "children": [{
         "type": "yaml",
         "payload": {
-          "class": "section"
+          "class": "section",
+          "tagname": "section"
         }
       },
       {
@@ -305,11 +315,18 @@
     ]
   },
   {
-    "type": "root",
+    "type": "section",
+    "meta": {
+      "class": "code",
+      "meta": true,
+      "bar": "baz"
+    },
     "children": [{
         "type": "yaml",
         "payload": {
-          "class": "code"
+          "class": "code",
+          "meta": true,
+          "bar": "baz"
         }
       },
       {
@@ -472,7 +489,8 @@
     ]
   },
   {
-    "type": "root",
+    "type": "section",
+    "meta": {},
     "children": [{
         "type": "heading",
         "depth": 3,

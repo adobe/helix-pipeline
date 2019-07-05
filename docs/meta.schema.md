@@ -15,10 +15,33 @@ Content and Section Metadata Properties
 
 | Property | Type | Group |
 |----------|------|-------|
+| [class](#class) | `string` | `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta` |
 | [image](#image) | `string` | `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta` |
 | [intro](#intro) | `string` | `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta` |
-| [meta](#meta) | `object` | `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta` |
+| [tagname](#tagname) | `string` | `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta` |
 | [title](#title) | `string` | `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta` |
+| [types](#types) | `string[]` | `https://ns.adobe.com/helix/pipeline/meta#/definitions/meta` |
+
+## class
+
+The CSS class to use for the section instead of the default `hlx-section` one
+
+`class`
+
+* is optional
+* type: `string`
+* defined in this schema
+
+### class Type
+
+
+`string`
+
+
+
+
+
+
 
 ## image
 
@@ -63,24 +86,21 @@ Extracted first paragraph of the document
 
 
 
-## meta
+## tagname
 
-Extracted metadata from the frontmatter of the document
+The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
 
-`meta`
+`tagname`
 
 * is optional
-* type: `object`
+* type: `string`
 * defined in this schema
 
-### meta Type
+### tagname Type
 
 
-`object` with following properties:
+`string`
 
-
-| Property | Type | Required |
-|----------|------|----------|
 
 
 
@@ -101,6 +121,33 @@ Extracted title of the document
 
 
 `string`
+
+
+
+
+
+
+
+## types
+
+The inferred class names for the section
+
+`types`
+
+* is optional
+* type: `string[]`
+* defined in this schema
+
+### types Type
+
+
+Array type: `string[]`
+
+All items must be of the type:
+`string`
+
+
+
 
 
 

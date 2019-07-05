@@ -1,16 +1,4 @@
 {
-  "intro": "This is a paragraph.",
-  "title": "Header and one paragraph",
-  "meta": {
-    "types": [
-      "has-text",
-      "has-heading",
-      "nb-text-1",
-      "nb-heading-1",
-      "is-text-heading",
-      "is-text"
-    ]
-  },
   "type": "root",
   "children": [
     {
@@ -42,5 +30,17 @@
         ]
       }
     }
-  ]
+  ],
+  "meta": {
+    "types": [
+      "has-text",
+      "has-heading",
+      "nb-text-1",
+      "nb-heading-1",
+      "is-text-heading",
+      "is-text"
+    ]
+  },
+  "title": "Header and one paragraph",
+  "intro": "This is a paragraph."
 }

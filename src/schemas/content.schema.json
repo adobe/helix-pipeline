@@ -33,13 +33,6 @@
     "mdast": {
       "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
     },
-    "sections": {
-      "type": "array",
-      "description": "The extracted sections of the document",
-      "items": {
-        "$ref": "https://ns.adobe.com/helix/pipeline/section"
-      }
-    },
     "document": {
       "type": "object",
       "description": "The DOM-compatible representation of the document's inner HTML"
@@ -53,7 +46,7 @@
       "description": "The XML object to emit. See xmlbuilder-js for syntax."
     },
     "meta": {
-      "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta"
+      "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"
     },
     "title": {
       "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title"

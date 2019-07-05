@@ -1,16 +1,4 @@
 {
-  "title": "This is a paragraph with a link!",
-  "intro": "This is a paragraph with a link!",
-  "meta": {
-    "types": [
-      "has-text",
-      "has-link",
-      "nb-text-2",
-      "nb-link-1",
-      "is-text-link",
-      "is-text"
-    ]
-  },
   "type": "root",
   "children": [
     {
@@ -43,5 +31,17 @@
         ]
       }
     }
-  ]
+  ],
+  "meta": {
+    "types": [
+      "has-text",
+      "has-link",
+      "nb-text-2",
+      "nb-link-1",
+      "is-text-link",
+      "is-text"
+    ]
+  },
+  "title": "This is a paragraph with a link!",
+  "intro": "This is a paragraph with a link!"
 }

@@ -11,7 +11,14 @@
  */
 
 const between = require('unist-util-find-all-between');
+const { selectAll } = require('unist-util-select');
+const { flat, obj, map } = require('ferrum');
 const _ = require('lodash/fp');
+
+// Compute the meta information for the section
+function computeMeta(section) {
+  return obj(flat(map(selectAll('yaml', section), ({ payload }) => payload)));
+}
 
 function split({ content }) {
   const { mdast } = content;
@@ -25,18 +32,26 @@ function split({ content }) {
   // include the very start and end of the document
   const starts = [0, ...dividers];
   const ends = [...dividers, mdast.children.length];
-  content.sections = _.zip(starts, ends)
+
+  content.mdast.children = _.zip(starts, ends)
   // but filter out empty section
     .filter(([start, end]) => start !== end)
   // then return all nodes that are in between
     .map(([start, end]) => {
     // skip 'thematicBreak' nodes
       const index = mdast.children[start].type === 'thematicBreak' ? start + 1 : start;
-      return {
-        type: 'root',
+      const section = {
+        type: 'section',
         children: between(mdast, index, end),
       };
+      section.meta = computeMeta(section);
+      return section;
     });
+
+  // unwrap sole section directly on the root
+  if (content.mdast.children.length === 1 && content.mdast.children[0].type === 'section') {
+    content.mdast.children = content.mdast.children[0].children;
+  }
 }
 
 module.exports = split;

@@ -1,14 +1,4 @@
 {
-  "title": "helix-logo\nhelix-logo",
-  "image": "./helix_logo.png",
-  "intro": "helix-logo\nhelix-logo",
-  "meta": {
-    "types": [
-      "has-image",
-      "nb-image-2",
-      "has-only-image"
-    ]
-  },
   "type": "root",
   "children": [
     {
@@ -37,5 +27,15 @@
         ]
       }
     }
-  ]
+  ],
+  "meta": {
+    "types": [
+      "has-image",
+      "nb-image-2",
+      "has-only-image"
+    ]
+  },
+  "title": "helix-logo\nhelix-logo",
+  "intro": "helix-logo\nhelix-logo",
+  "image": "./helix_logo.png"
 }

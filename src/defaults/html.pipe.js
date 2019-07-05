@@ -37,6 +37,7 @@ const tohtml = require('../html/stringify-response');
 const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
 const sanitize = require('../html/sanitize');
+const removeHlxProps = require('../html/removeHlxProps');
 const resolveRef = require('../utils/resolve-ref');
 
 /* eslint newline-per-chained-call: off */
@@ -76,6 +77,7 @@ const htmlpipe = (cont, context, action) => {
     .after(cache).when(uncached)
     .after(key)
     .after(tovdom).expose('post') // start HTML post-processing
+    .after(removeHlxProps).when(() => production())
     .after(rewriteLinks).when(production)
     .after(addHeaders)
     .after(tohtml) // end HTML post-processing

@@ -1,17 +1,4 @@
 {
-  "intro": "Header and one image",
-  "image": "./helix_logo.png",
-  "title": "Header and one image",
-  "meta": {
-    "types": [
-      "has-image",
-      "has-heading",
-      "nb-image-1",
-      "nb-heading-1",
-      "is-image-heading",
-      "is-image"
-    ]
-  },
   "type": "root",
   "children": [
     {
@@ -45,5 +32,18 @@
         ]
       }
     }
-  ]
+  ],
+  "meta": {
+    "types": [
+      "has-image",
+      "has-heading",
+      "nb-image-1",
+      "nb-heading-1",
+      "is-image-heading",
+      "is-image"
+    ]
+  },
+  "title": "Header and one image",
+  "intro": "Header and one image",
+  "image": "./helix_logo.png"
 }

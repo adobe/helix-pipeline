@@ -17,10 +17,25 @@
     "description": "Content and Section Metadata Properties",
     "definitions": {
         "meta": {
+            "type": [
+                "null",
+                "object"
+            ],
             "properties": {
-                "meta": {
-                    "type": "object",
-                    "description": "Extracted metadata from the frontmatter of the document"
+                "class": {
+                    "type": "string",
+                    "description": "The CSS class to use for the section instead of the default `hlx-section` one"
+                },
+                "tagname": {
+                    "type": "string",
+                    "description": "The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)"
+                },
+                "types": {
+                    "type": "array",
+                    "description": "The inferred class names for the section",
+                    "items": {
+                        "type": "string"
+                    }
                 },
                 "title": {
                     "type": "string",

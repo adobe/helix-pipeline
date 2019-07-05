@@ -29,7 +29,7 @@ function callback(body) {
   parseFront(dat);
   split(dat, { logger });
   getmetadata(dat, { logger });
-  return dat.content.sections;
+  return dat.content.mdast;
 }
 
 const SECTIONS_BLOCS = [
@@ -55,36 +55,16 @@ describe('Test getMetadata', () => {
   it('getmetadata does not fail with "empty" mdast', () => {
     const dat = {
       content: {
-        sections: [],
-        mdast: {
-          children: [],
-          position: {},
-          type: '',
-        },
+        mdast: {},
       },
     };
     getmetadata(dat, { logger });
-    assert.deepEqual(dat.content.meta, {});
-  });
-
-  it('getmetadata does not fail with missing sections', () => {
-    const dat = {
-      content: {
-        mdast: {
-          children: [],
-          position: {},
-          type: '',
-        },
-      },
-    };
-    getmetadata(dat, { logger });
-    assert.deepEqual(dat.content.meta, {});
+    assert.deepEqual(dat.content.meta, { types: [] });
   });
 
   it('getmetadata does not fail with empty sections', () => {
     const dat = {
       content: {
-        sections: [{}],
         mdast: {
           children: [],
           position: {},
@@ -94,20 +74,21 @@ describe('Test getMetadata', () => {
     };
     getmetadata(dat, { logger });
     assert.deepEqual(dat.content, {
-      sections: [{
-        meta: {},
-        title: '',
-        intro: '',
+      meta: {
         types: [],
-      }],
-      meta: {},
+      },
       title: '',
       intro: '',
       image: undefined,
       mdast: {
         children: [],
         position: {},
+        meta: {
+          types: [],
+        },
         type: '',
+        title: '',
+        intro: '',
       },
     });
   });

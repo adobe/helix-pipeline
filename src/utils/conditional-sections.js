@@ -15,10 +15,10 @@ const { setdefault, type } = require('@adobe/helix-shared').types;
 const { each } = require('@adobe/helix-shared').sequence;
 
 function selectstrain(context, { request, logger }) {
-  const cont = setdefault(context, 'content', {});
+  const cont = setdefault(context, 'content', { mdast: {} });
   const params = request.params || {};
   const { strain } = params;
-  const { sections } = cont;
+  const sections = cont.mdast.children;
 
   if (!strain || !sections) {
     return;
@@ -70,10 +70,10 @@ function pick(groups = {}, strain = 'default') {
 }
 
 function selecttest(context, { request }) {
-  const cont = setdefault(context, 'content', {});
+  const cont = setdefault(context, 'content', { mdast: {} });
   const params = request.params || {};
   const { strain } = params;
-  const { sections } = cont;
+  const sections = cont.mdast.children;
 
   if (!strain || !sections) {
     return;

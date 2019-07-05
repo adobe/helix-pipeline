@@ -11,7 +11,6 @@
  */
 const { select, selectAll } = require('unist-util-select');
 const plain = require('mdast-util-to-string');
-const { empty } = require('@adobe/helix-shared').types;
 const {
   flat, obj, map, each,
 } = require('@adobe/helix-shared').sequence;
@@ -30,7 +29,7 @@ function title(section) {
 
 function intro(section) {
   const para = selectAll('paragraph', section).filter((p) => {
-    if ((p.children.length === 0)
+    if ((!p.children || p.children.length === 0)
         || (p.children.length === 1 && p.children[0].type === 'image')) {
       return false;
     }
@@ -81,7 +80,7 @@ function sectiontype(section) {
   function reducer(counter, node) {
     const { type, children: pChildren } = node;
 
-    node.data = Object.assign({ types: [] }, node.data);
+    node.meta = Object.assign({ types: [] }, node.meta);
 
     if (type === 'yaml') {
       return counter;
@@ -101,8 +100,8 @@ function sectiontype(section) {
           // paragraph with type text "is" a text
           prefix = 'is';
         }
-        if (!node.data.types.includes(`${prefix}-${p.type}`)) {
-          node.data.types.push(`${prefix}-${p.type}`);
+        if (!node.meta.types.includes(`${prefix}-${p.type}`)) {
+          node.meta.types.push(`${prefix}-${p.type}`);
         }
         const mycount = mycounter[p.type] || 0;
         mycounter[p.type] = mycount + 1;
@@ -115,14 +114,14 @@ function sectiontype(section) {
       pChildren.forEach((listitem) => {
         listtypecounter = listitem.children.reduce(reducer, listtypecounter);
       });
-      constructTypes(listtypecounter).forEach(item => node.data.types.push(item));
+      constructTypes(listtypecounter).forEach(item => node.meta.types.push(item));
     }
 
     if (Object.keys(mycounter).length === 0) {
       // was really a paragraph, only text inside
       const mycount = mycounter[type] || 0;
       mycounter[type] = mycount + 1;
-      node.data.types.push(`is-${type}`);
+      node.meta.types.push(`is-${type}`);
     }
 
     Object.keys(counter).forEach((key) => {
@@ -132,7 +131,7 @@ function sectiontype(section) {
   }
 
   const typecounter = children.reduce(reducer, {});
-  section.types = constructTypes(typecounter);
+  section.meta.types = constructTypes(typecounter);
 }
 
 function fallback(section) {
@@ -144,10 +143,10 @@ function fallback(section) {
 }
 
 function getmetadata({ content }, { logger }) {
-  const { sections } = content;
-  if (!sections) {
-    content.meta = {};
-    return;
+  const { mdast: { children = [] } } = content;
+  let sections = children.filter(node => node.type === 'section');
+  if (!sections.length) {
+    sections = [content.mdast];
   }
 
   logger.debug(`Parsing Markdown Metadata from ${sections.length} sections`);
@@ -158,9 +157,9 @@ function getmetadata({ content }, { logger }) {
 
   const img = sections.filter(section => section.image)[0];
 
-  content.meta = empty(sections) ? {} : sections[0].meta;
-  content.title = empty(sections) ? '' : sections[0].title;
-  content.intro = empty(sections) ? '' : sections[0].intro;
+  content.meta = sections[0].meta;
+  content.title = sections[0].title;
+  content.intro = sections[0].intro;
   content.image = img ? img.image : undefined;
 }
 

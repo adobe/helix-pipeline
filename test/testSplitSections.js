@@ -26,7 +26,7 @@ function callback(body) {
   parse(data, { logger });
   parseFront(data);
   split(data, { logger });
-  return data.content.sections;
+  return data.content.mdast.children;
 }
 
 describe('Test Section Splitting', () => {

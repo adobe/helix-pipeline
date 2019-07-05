@@ -14,6 +14,7 @@ A node in the Markdown AST
 
 * MDAST `https://ns.adobe.com/helix/pipeline/mdast`
   * [Position](position.schema.md) `https://ns.adobe.com/helix/pipeline/position`
+  * [Meta](meta.schema.md) `https://ns.adobe.com/helix/pipeline/meta`
 
 
 # MDAST Properties
@@ -23,13 +24,15 @@ A node in the Markdown AST
 | [align](#align) | `enum[]` | Optional  | No | MDAST (this schema) |
 | [alt](#alt) | `string` | Optional  | Yes | MDAST (this schema) |
 | [checked](#checked) | `boolean` | Optional  | Yes | MDAST (this schema) |
-| [children](#children) | MDAST | Optional  | No | MDAST (this schema) |
+| [children](#children) | `array` | Optional  | No | MDAST (this schema) |
 | [data](#data) | `object` | Optional  | No | MDAST (this schema) |
 | [depth](#depth) | `integer` | Optional  | No | MDAST (this schema) |
 | [identifier](#identifier) | `string` | Optional  | No | MDAST (this schema) |
+| [image](#image) | `string` | Optional  | Yes | MDAST (this schema) |
+| [intro](#intro) | `string` | Optional  | Yes | MDAST (this schema) |
 | [label](#label) | `string` | Optional  | No | MDAST (this schema) |
 | [lang](#lang) | `string` | Optional  | Yes | MDAST (this schema) |
-| [meta](#meta) | `string` | Optional  | Yes | MDAST (this schema) |
+| [meta](#meta) | `object` | Optional  | Yes | MDAST (this schema) |
 | [ordered](#ordered) | `boolean` | Optional  | No | MDAST (this schema) |
 | [payload](#payload) | `object` | Optional  | No | MDAST (this schema) |
 | [position](#position) | Position | Optional  | No | MDAST (this schema) |
@@ -38,6 +41,7 @@ A node in the Markdown AST
 | [start](#start) | `integer` | Optional  | Yes | MDAST (this schema) |
 | [title](#title) | `string` | Optional  | Yes | MDAST (this schema) |
 | [type](#type) | `enum` | Optional  | No | MDAST (this schema) |
+| [types](#types) | `string[]` | Optional  | No | MDAST (this schema) |
 | [url](#url) | `string` | Optional  | No | MDAST (this schema) |
 | [value](#value) | `string` | Optional  | No | MDAST (this schema) |
 
@@ -139,17 +143,32 @@ A checked field can be present. It represents whether the item is done (when tru
 `children`
 
 * is optional
-* type: MDAST
+* type: `array`
 * defined in this schema
 
 ### children Type
 
 
-Array type: MDAST
+Array type: `array`
 
 All items must be of the type:
-* [MDAST](mdast.schema.md) – `https://ns.adobe.com/helix/pipeline/mdast`
 
+**One** of the following *conditions* need to be fulfilled.
+
+
+#### Condition 1
+
+
+* []() – `https://ns.adobe.com/helix/pipeline/mdast`
+
+
+#### Condition 2
+
+
+* []() – `https://ns.adobe.com/helix/pipeline/section#/definitions/section`
+
+
+  
 
 
 
@@ -224,6 +243,49 @@ For associations, an identifier field must be present. It can match an identifie
 
 
 
+## image
+
+Path (can be relative) to the first image in the document
+
+`image`
+
+* is optional
+* type: `string`
+* defined in this schema
+
+### image Type
+
+
+`string`, nullable
+
+* format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
+
+
+
+
+
+
+## intro
+
+Extracted first paragraph of the document
+
+`intro`
+
+* is optional
+* type: `string`
+* defined in this schema
+
+### intro Type
+
+
+`string`, nullable
+
+
+
+
+
+
+
 ## label
 
 For associations, a label field can be present. It represents the original value of the normalised identifier field.
@@ -268,18 +330,166 @@ For code, a lang field can be present. It represents the language of computer co
 
 ## meta
 
-For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
 
 `meta`
 
 * is optional
-* type: `string`
+* type: `object`
 * defined in this schema
 
 ### meta Type
 
 
-`string`, nullable
+`object`, nullable, with following properties:
+
+
+| Property | Type | Required |
+|----------|------|----------|
+| `class`| string | Optional |
+| `image`| string | Optional |
+| `intro`| string | Optional |
+| `tagname`| string | Optional |
+| `title`| string | Optional |
+| `types`| array | Optional |
+
+
+
+#### class
+
+The CSS class to use for the section instead of the default `hlx-section` one
+
+`class`
+
+* is optional
+* type: `string`
+
+##### class Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### image
+
+Path (can be relative) to the first image in the document
+
+`image`
+
+* is optional
+* type: `string`
+
+##### image Type
+
+
+`string`
+
+* format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
+
+
+
+
+
+
+
+
+#### intro
+
+Extracted first paragraph of the document
+
+`intro`
+
+* is optional
+* type: `string`
+
+##### intro Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### tagname
+
+The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+
+`tagname`
+
+* is optional
+* type: `string`
+
+##### tagname Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### title
+
+Extracted title of the document
+
+`title`
+
+* is optional
+* type: `string`
+
+##### title Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### types
+
+The inferred class names for the section
+
+`types`
+
+* is optional
+* type: `string[]`
+
+
+##### types Type
+
+
+Array type: `string[]`
+
+All items must be of the type:
+`string`
+
+
+
+
+
+
+
+
 
 
 
@@ -412,7 +622,7 @@ Starting item of the list
 
 ## title
 
-For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip.
+Extracted title of the document
 
 `title`
 
@@ -473,7 +683,35 @@ The value of this property **must** be equal to one of the [known values below](
 | `footnote` | A footnote |
 | `footnoteReference` | A reference to a footnote |
 | `embed` | Content embedded from another page, identified by the `url` attribute. |
+| `section` | A section within the document. Sections serve as a high-level structure of a single markdown document and can have their own section-specific front matter metadata. |
 | `listItem` |  |
+
+
+
+
+## types
+
+The inferred class names for the section
+
+`types`
+
+* is optional
+* type: `string[]`
+* defined in this schema
+
+### types Type
+
+
+Array type: `string[]`
+
+All items must be of the type:
+`string`
+
+
+
+
+
+
 
 
 

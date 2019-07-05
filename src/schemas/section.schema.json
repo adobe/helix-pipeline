@@ -19,13 +19,6 @@
     "section": {
       "additionalProperties": false,
       "properties": {
-        "types": {
-          "type": "array",
-          "description": "The inferred class names for the section",
-          "items": {
-            "type": "string"
-          }
-        },
         "type": {
           "const": "root",
           "description": "The MDAST node type. Each section can be treated as a standalone document."
@@ -41,7 +34,7 @@
           }
         },
         "meta": {
-          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/meta"
+          "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"
         },
         "title": {
           "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title"
@@ -54,9 +47,5 @@
         }
       }
     }
-  },
-  "allOf": [
-    {"$ref": "#/definitions/section"},
-    {"$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"}
-  ]
+  }
 }

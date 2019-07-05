@@ -28,8 +28,7 @@ The content as retrieved from the repository and enriched in the pipeline.
 | [intro](#intro) | `string` | Optional  | No | Content (this schema) |
 | [json](#json) | `object` | Optional  | No | Content (this schema) |
 | [mdast](#mdast) | MDAST | Optional  | No | Content (this schema) |
-| [meta](#meta) | `object` | Optional  | No | Content (this schema) |
-| [sections](#sections) | Section | Optional  | No | Content (this schema) |
+| [meta](#meta) | `object` | Optional  | Yes | Content (this schema) |
 | [sources](#sources) | `string[]` | Optional  | No | Content (this schema) |
 | [title](#title) | `string` | Optional  | No | Content (this schema) |
 | [xml](#xml) | `object` | Optional  | No | Content (this schema) |
@@ -190,7 +189,6 @@ The JSON object to emit.
 
 ## meta
 
-Extracted metadata from the frontmatter of the document
 
 `meta`
 
@@ -201,34 +199,155 @@ Extracted metadata from the frontmatter of the document
 ### meta Type
 
 
-`object` with following properties:
+`object`, nullable, with following properties:
 
 
 | Property | Type | Required |
 |----------|------|----------|
+| `class`| string | Optional |
+| `image`| string | Optional |
+| `intro`| string | Optional |
+| `tagname`| string | Optional |
+| `title`| string | Optional |
+| `types`| array | Optional |
 
 
 
+#### class
 
+The CSS class to use for the section instead of the default `hlx-section` one
 
-
-## sections
-
-The extracted sections of the document
-
-`sections`
+`class`
 
 * is optional
-* type: Section
-* defined in this schema
+* type: `string`
 
-### sections Type
+##### class Type
 
 
-Array type: Section
+`string`
+
+
+
+
+
+
+
+
+
+#### image
+
+Path (can be relative) to the first image in the document
+
+`image`
+
+* is optional
+* type: `string`
+
+##### image Type
+
+
+`string`
+
+* format: `uri-reference` – URI Reference (according to [RFC3986](https://tools.ietf.org/html/rfc3986))
+
+
+
+
+
+
+
+
+#### intro
+
+Extracted first paragraph of the document
+
+`intro`
+
+* is optional
+* type: `string`
+
+##### intro Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### tagname
+
+The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+
+`tagname`
+
+* is optional
+* type: `string`
+
+##### tagname Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### title
+
+Extracted title of the document
+
+`title`
+
+* is optional
+* type: `string`
+
+##### title Type
+
+
+`string`
+
+
+
+
+
+
+
+
+
+#### types
+
+The inferred class names for the section
+
+`types`
+
+* is optional
+* type: `string[]`
+
+
+##### types Type
+
+
+Array type: `string[]`
 
 All items must be of the type:
-* [Section](section.schema.md) – `https://ns.adobe.com/helix/pipeline/section`
+`string`
+
+
+
+
+
+
+
 
 
 

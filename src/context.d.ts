@@ -11,65 +11,6 @@
  */
 
 /**
- * A section in a markdown document
- */
-export type Section = {
-  /**
-   * The inferred class names for the section
-   */
-  types?: string[];
-  /**
-   * The MDAST node type. Each section can be treated as a standalone document.
-   */
-  type?: {
-    [k: string]: any;
-  };
-  position?: Position;
-  /**
-   * The AST nodes making up the section. Section dividers are not included.
-   */
-  children?: MDAST[];
-  /**
-   * Extracted metadata from the frontmatter of the document
-   */
-  meta?: {
-    [k: string]: any;
-  };
-  /**
-   * Extracted title of the document
-   */
-  title?: string;
-  /**
-   * Extracted first paragraph of the document
-   */
-  intro?: string;
-  /**
-   * Path (can be relative) to the first image in the document
-   */
-  image?: string;
-} & {
-  /**
-   * Extracted metadata from the frontmatter of the document
-   */
-  meta?: {
-    [k: string]: any;
-  };
-  /**
-   * Extracted title of the document
-   */
-  title?: string;
-  /**
-   * Extracted first paragraph of the document
-   */
-  intro?: string;
-  /**
-   * Path (can be relative) to the first image in the document
-   */
-  image?: string;
-  [k: string]: any;
-};
-
-/**
  * The context thingie.
  */
 export interface Context {
@@ -145,10 +86,6 @@ export interface Content {
   body?: string;
   mdast?: MDAST;
   /**
-   * The extracted sections of the document
-   */
-  sections?: Section[];
-  /**
    * The DOM-compatible representation of the document's inner HTML
    */
   document?: {
@@ -166,10 +103,7 @@ export interface Content {
   xml?: {
     [k: string]: any;
   };
-  /**
-   * Extracted metadata from the frontmatter of the document
-   */
-  meta?: {
+  meta?: null | {
     [k: string]: any;
   };
   /**
@@ -226,10 +160,40 @@ export interface MDAST {
     | "imageReference"
     | "footnote"
     | "footnoteReference"
-    | "embed";
-  children?: {
-    [k: string]: any;
-  }[];
+    | "embed"
+    | "section";
+  children?: (
+    | {
+        [k: string]: any;
+      }
+    | {
+        /**
+         * The MDAST node type. Each section can be treated as a standalone document.
+         */
+        type?: {
+          [k: string]: any;
+        };
+        position?: Position;
+        /**
+         * The AST nodes making up the section. Section dividers are not included.
+         */
+        children?: MDAST[];
+        meta?: null | {
+          [k: string]: any;
+        };
+        /**
+         * Extracted title of the document
+         */
+        title?: string;
+        /**
+         * Extracted first paragraph of the document
+         */
+        intro?: string;
+        /**
+         * Path (can be relative) to the first image in the document
+         */
+        image?: string;
+      })[];
   position?: Position;
   /**
    * The string value of the node, if it is a terminal node.
@@ -270,10 +234,6 @@ export interface MDAST {
    */
   lang?: null | string;
   /**
-   * For code, if lang is present, a meta field can be present. It represents custom information relating to the node.
-   */
-  meta?: null | string;
-  /**
    * For associations, an identifier field must be present. It can match an identifier field on another node.
    */
   identifier?: string;
@@ -285,10 +245,25 @@ export interface MDAST {
    * For resources, an url field must be present. It represents a URL to the referenced resource.
    */
   url?: string;
+  meta?: null | {
+    [k: string]: any;
+  };
   /**
-   * For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip.
+   * Extracted title of the document
    */
-  title?: string | null;
+  title?: null | string;
+  /**
+   * Extracted first paragraph of the document
+   */
+  intro?: null | string;
+  /**
+   * Path (can be relative) to the first image in the document
+   */
+  image?: null | string;
+  /**
+   * The inferred class names for the section
+   */
+  types?: string[];
   /**
    * An alt field should be present. It represents equivalent content for environments that cannot represent the node as intended.
    */

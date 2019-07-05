@@ -47,7 +47,8 @@
         "imageReference",
         "footnote",
         "footnoteReference",
-        "embed"
+        "embed",
+        "section"
       ],
       "meta:enum": {
         "root": "The root node, representing a document or section",
@@ -76,14 +77,22 @@
         "imageReference": "A pointer to an image",
         "footnote": "A footnote",
         "footnoteReference": "A reference to a footnote",
-        "embed": "Content embedded from another page, identified by the `url` attribute."
+        "embed": "Content embedded from another page, identified by the `url` attribute.",
+        "section": "A section within the document. Sections serve as a high-level structure of a single markdown document and can have their own section-specific front matter metadata."
       },
       "description": "The node type of the MDAST node"
     },
     "children": {
       "type": "array",
       "items": {
-        "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+        "oneOf": [
+          {
+              "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+          },
+          {
+              "$ref": "https://ns.adobe.com/helix/pipeline/section#/definitions/section"
+          }
+        ]
       }
     },
     "position": {
@@ -131,10 +140,6 @@
       "type": ["null", "string"],
       "description": "For code, a lang field can be present. It represents the language of computer code being marked up."
     },
-    "meta": {
-      "type": ["null", "string"],
-      "description": "For code, if lang is present, a meta field can be present. It represents custom information relating to the node."
-    },
     "identifier": {
       "type": "string",
       "description": "For associations, an identifier field must be present. It can match an identifier field on another node."
@@ -148,9 +153,28 @@
       "format": "uri-reference",
       "description": "For resources, an url field must be present. It represents a URL to the referenced resource."
     },
+    "meta": {
+      "$ref": "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"
+    },
     "title": {
-      "type": ["string", "null"],
-      "description": "For resources, a title field can be present. It represents advisory information for the resource, such as would be appropriate for a tooltip."
+      "type": ["null", "string"],
+      "description": "Extracted title of the document"
+    },
+    "intro": {
+      "type": ["null", "string"],
+      "description": "Extracted first paragraph of the document"
+    },
+    "image": {
+      "type": ["null", "string"],
+      "format": "uri-reference",
+      "description": "Path (can be relative) to the first image in the document"
+    },
+    "types": {
+      "type": "array",
+      "description": "The inferred class names for the section",
+      "items": {
+        "type": "string"
+      }
     },
     "alt": {
       "type": ["string", "null"],

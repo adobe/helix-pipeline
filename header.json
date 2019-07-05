@@ -1,13 +1,4 @@
 {
-  "intro": "Header only",
-  "title": "Header only",
-  "meta": {
-    "types": [
-      "has-heading",
-      "nb-heading-1",
-      "has-only-heading"
-    ]
-  },
   "type": "root",
   "children": [
     {
@@ -25,5 +16,14 @@
         ]
       }
     }
-  ]
+  ],
+  "meta": {
+    "types": [
+      "has-heading",
+      "nb-heading-1",
+      "has-only-heading"
+    ]
+  },
+  "title": "Header only",
+  "intro": "Header only"
 }
