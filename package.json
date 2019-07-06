@@ -86,7 +86,7 @@
     "winston": "^3.0.0",
     "xml2js": "^0.4.19",
     "xmlbuilder": "^13.0.0",
-    "snyk": "^1.192.0"
+    "snyk": "^1.192.3"
   },
   "snyk": true,
   "lint-staged": {
