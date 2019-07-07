@@ -103,3 +103,5 @@ patch:
         patched: '2019-07-04T03:38:19.257Z'
     - nyc > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
         patched: '2019-07-04T03:38:19.257Z'
+    - ferrum > lodash:
+        patched: '2019-07-06T03:34:20.805Z'
