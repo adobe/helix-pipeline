@@ -17,7 +17,7 @@ const yaml = require('js-yaml');
 const { multiline } = require('@adobe/helix-shared').string;
 const {
   flattenTree, concat, each,
-} = require('@adobe/helix-shared').sequence;
+} = require('ferrum');
 const parseMd = require('../src/html/parse-markdown');
 const parseFront = require('../src/html/parse-frontmatter');
 

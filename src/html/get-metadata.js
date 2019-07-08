@@ -13,7 +13,7 @@ const { select, selectAll } = require('unist-util-select');
 const plain = require('mdast-util-to-string');
 const {
   flat, obj, map, each,
-} = require('@adobe/helix-shared').sequence;
+} = require('ferrum');
 
 
 function yaml(section) {

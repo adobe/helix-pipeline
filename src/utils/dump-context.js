@@ -12,7 +12,7 @@
 
 const path = require('path');
 const fs = require('fs-extra');
-const { setdefault } = require('@adobe/helix-shared').types;
+const { setdefault } = require('ferrum');
 
 
 /**

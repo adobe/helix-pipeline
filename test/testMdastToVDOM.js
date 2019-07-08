@@ -17,8 +17,8 @@ const h = require('hastscript');
 const hy = require('hyperscript');
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
+const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const { JSDOM } = require('jsdom');
-const { eq } = require('@adobe/helix-shared').types;
 const VDOM = require('../').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
@@ -33,9 +33,7 @@ const assertTransformerYieldsDocument = (transformer, expected) => {
   // check equality of the dom, but throw assertion based on strings to visualize difference.
   const act = transformer.getDocument();
   const dom = new JSDOM(expected);
-  if (!eq(act, dom.window.document)) {
-    assert.equal(act.serialize(), dom.serialize());
-  }
+  assertEquivalentNode(act, dom.window.document);
 };
 
 describe('Test MDAST to VDOM Transformation', () => {

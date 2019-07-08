@@ -10,11 +10,10 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const { JSDOM } = require('jsdom');
-const { eq } = require('@adobe/helix-shared').types;
 const { multiline } = require('@adobe/helix-shared').string;
+const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const { pipe } = require('../src/defaults/html.pipe.js');
 
 const params = {
@@ -101,9 +100,7 @@ const assertMd = async (md, html, secrets = {}) => {
   // check equality of the dom, but throw assertion based on strings to visualize difference.
   const act = new JSDOM(generated.response.body);
   const exp = new JSDOM(html);
-  if (!eq(act.window.document.body, exp.window.document.body)) {
-    assert.equal(act.serialize(), exp.serialize());
-  }
+  assertEquivalentNode(act.window.document.body, exp.window.document.body);
 };
 
 describe('Testing Markdown conversion', () => {

@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
-const { deepclone } = require('@adobe/helix-shared').types;
+const { deepclone } = require('ferrum');
 const _ = require('lodash');
 const debug = require('../src/html/output-debug');
 

@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 const { Logger } = require('@adobe/helix-shared');
-const { assertEquals } = require('@adobe/helix-shared').types;
+const { assertEquals } = require('ferrum');
 const selectStatus_ = require('../src/xml/set-xml-status.js');
 
 const selectStatus = inProduction => (context, env) => {

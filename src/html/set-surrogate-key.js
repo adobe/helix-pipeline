@@ -9,9 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { type } = require('@adobe/helix-shared').types;
-const { map, join } = require('@adobe/helix-shared').sequence;
-const { setdefault } = require('@adobe/helix-shared').types;
+const { type } = require('ferrum');
+const { map, join, setdefault } = require('ferrum');
 const { computeSurrogateKey } = require('@adobe/helix-shared').utils;
 
 function key(context, { logger }) {

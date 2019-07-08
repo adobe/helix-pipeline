@@ -11,7 +11,7 @@
  */
 
 const builder = require('xmlbuilder');
-const { setdefault } = require('@adobe/helix-shared').types;
+const { setdefault } = require('ferrum');
 
 function emit(context, { secrets, logger }) {
   const cont = setdefault(context, 'content', {});

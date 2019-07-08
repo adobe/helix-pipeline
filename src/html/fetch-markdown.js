@@ -12,7 +12,7 @@
 const { inspect } = require('util');
 const client = require('request-promise-native');
 const URI = require('uri-js');
-const { setdefault } = require('@adobe/helix-shared').types;
+const { setdefault } = require('ferrum');
 
 function uri(root, owner, repo, ref, path) {
   const rootURI = URI.parse(root);

@@ -11,7 +11,7 @@
  */
 const unified = require('unified');
 const remark = require('remark-parse');
-const { setdefault } = require('@adobe/helix-shared').types;
+const { setdefault } = require('ferrum');
 
 function parseMarkdown(context, { logger }) {
   const content = setdefault(context, 'content', {});

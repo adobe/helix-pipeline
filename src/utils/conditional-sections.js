@@ -11,8 +11,7 @@
  */
 
 const hash = require('object-hash');
-const { setdefault, type } = require('@adobe/helix-shared').types;
-const { each } = require('@adobe/helix-shared').sequence;
+const { setdefault, type, each } = require('ferrum');
 
 function selectstrain(context, { request, logger }) {
   const cont = setdefault(context, 'content', { mdast: {} });

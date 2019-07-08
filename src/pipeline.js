@@ -14,7 +14,7 @@
 
 const _ = require('lodash/fp');
 const callsites = require('callsites');
-const { enumerate, iter } = require('@adobe/helix-shared').sequence;
+const { enumerate, iter } = require('ferrum');
 const coerce = require('./utils/coerce-secrets');
 
 const noOp = () => {};

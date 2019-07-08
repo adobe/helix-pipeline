@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-const { setdefault } = require('@adobe/helix-shared').types;
+const { setdefault } = require('ferrum');
 const isProduction = require('../utils/is-production');
 
 const selectStatus = (context, { logger }) => {

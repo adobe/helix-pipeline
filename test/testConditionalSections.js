@@ -13,7 +13,7 @@
 
 const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
-const { setdefault } = require('@adobe/helix-shared').types;
+const { setdefault } = require('ferrum');
 const { pipe } = require('../src/defaults/html.pipe.js');
 const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
 
