@@ -57,7 +57,7 @@
     "callsites": "^3.0.0",
     "clone": "^2.1.2",
     "dompurify": "^1.0.10",
-    "ferrum": "^0.1.0",
+    "ferrum": "^1.2.0",
     "fs-extra": "^8.0.0",
     "github-slugger": "^1.2.1",
     "js-yaml": "^3.13.1",
