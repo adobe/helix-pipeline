@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/adobe/helix-pipeline/compare/v4.0.0...v4.0.1) (2019-07-10)
+
+
+### Bug Fixes
+
+* Migrate to ferrum ([86496c3](https://github.com/adobe/helix-pipeline/commit/86496c3))
+
 # [4.0.0](https://github.com/adobe/helix-pipeline/compare/v3.7.4...v4.0.0) (2019-07-05)
 
 
