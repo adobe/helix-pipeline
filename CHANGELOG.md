@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/adobe/helix-pipeline/compare/v4.0.1...v4.0.2) (2019-07-12)
+
+
+### Bug Fixes
+
+* **package:** update dependencies to address lodash security issues ([#410](https://github.com/adobe/helix-pipeline/issues/410)) ([b3d25ff](https://github.com/adobe/helix-pipeline/commit/b3d25ff))
+
 ## [4.0.1](https://github.com/adobe/helix-pipeline/compare/v4.0.0...v4.0.1) (2019-07-10)
 
 
