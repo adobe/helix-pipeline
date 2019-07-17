@@ -74,7 +74,7 @@
     "retext-smartypants": "^3.0.3",
     "snyk": "^1.193.0",
     "strip-markdown": "^3.0.4",
-    "unified": "^8.2.0",
+    "unified": "^8.3.2",
     "unist-util-find-all-between": "^1.0.4",
     "unist-util-map": "^1.0.5",
     "unist-util-select": "^2.0.2",
