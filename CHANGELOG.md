@@ -1,3 +1,10 @@
+## [4.0.5](https://github.com/adobe/helix-pipeline/compare/v4.0.4...v4.0.5) (2019-07-18)
+
+
+### Bug Fixes
+
+* **pipe:** ensure request.headers is present ([#421](https://github.com/adobe/helix-pipeline/issues/421)) ([91aa8e4](https://github.com/adobe/helix-pipeline/commit/91aa8e4)), closes [#413](https://github.com/adobe/helix-pipeline/issues/413)
+
 ## [4.0.4](https://github.com/adobe/helix-pipeline/compare/v4.0.3...v4.0.4) (2019-07-18)
 
 
