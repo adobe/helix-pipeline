@@ -1,3 +1,10 @@
+## [4.0.4](https://github.com/adobe/helix-pipeline/compare/v4.0.3...v4.0.4) (2019-07-18)
+
+
+### Bug Fixes
+
+* **pipeline:** ignore warning for git-resolve against localhost ([#420](https://github.com/adobe/helix-pipeline/issues/420)) ([50b0730](https://github.com/adobe/helix-pipeline/commit/50b0730)), closes [#418](https://github.com/adobe/helix-pipeline/issues/418)
+
 ## [4.0.3](https://github.com/adobe/helix-pipeline/compare/v4.0.2...v4.0.3) (2019-07-18)
 
 
