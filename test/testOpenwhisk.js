@@ -14,6 +14,7 @@
 const assert = require('assert');
 const {
   createActionResponse,
+  extractActionContext,
   extractClientRequest,
   runPipeline,
 } = require('../src/utils/openwhisk.js');
@@ -134,6 +135,56 @@ describe('Testing OpenWhisk adapter', () => {
         'Content-Type': 'application/json',
       },
       statusCode: 500,
+    });
+  });
+
+  it('extractActionContext creates valid object', () => {
+    const params = {
+      __ow_headers: {
+        Host: 'example.com',
+      },
+      __ow_logger: log,
+      __ow_method: 'get',
+      path: '/test.md',
+      extension: 'html',
+      selector: 'print.preview',
+      params: 'a=42&b=green',
+      rootPath: '/docs',
+      SECRET: '1234',
+    };
+
+    const out = extractActionContext(params);
+    assert.deepEqual(out, {
+      logger: log,
+      request: {
+        headers: {
+          Host: 'example.com',
+        },
+        method: 'get',
+        params: {
+          extension: 'html',
+          params: 'a=42&b=green',
+          path: '/test.md',
+          rootPath: '/docs',
+          selector: 'print.preview',
+        },
+      },
+      secrets: {
+        SECRET: '1234',
+      },
+    });
+  });
+
+  it('extractActionContext creates valid object with minimal params', () => {
+    const out = extractActionContext({});
+    assert.deepEqual(out, {
+      logger: undefined,
+      request: {
+        headers: {},
+        method: 'get',
+        params: {},
+      },
+      secrets: {},
     });
   });
 

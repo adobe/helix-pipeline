@@ -132,8 +132,8 @@ function extractActionContext(params) {
     secrets,
     request: {
       params: disclosed,
-      headers: __ow_headers,
-      method: __ow_method,
+      headers: __ow_headers || {},
+      method: __ow_method || 'get',
     },
     logger: __ow_logger,
   };
@@ -167,6 +167,7 @@ async function runPipeline(cont, pipe, actionParams) {
 
 module.exports = {
   runPipeline,
+  extractActionContext,
   extractClientRequest,
   createActionResponse,
 };
