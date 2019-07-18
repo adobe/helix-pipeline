@@ -120,7 +120,7 @@ describe('Test resolve git ref', () => {
     });
     await resolveRef({}, {
       secrets: {
-        REPO_RAW_ROOT: 'https://localhost:1234/',
+        REPO_RAW_ROOT: 'https://bitbucket.org/',
         RESOLVE_GITREF_SERVICE,
       },
       logger,
@@ -129,7 +129,47 @@ describe('Test resolve git ref', () => {
       },
     });
     const out = await logger.getOutput();
-    assert.ok(out.indexOf('unable to resolve ref to non-github repository: https://localhost:1234/') > 0);
+    assert.ok(out.indexOf('unable to resolve ref to non-github repository: https://bitbucket.org/') > 0);
+  });
+
+  it('Resolve ignores if non github REPO_RAW_ROOT but ignores error for localhost.', async () => {
+    const logger = Logger.getTestLogger({
+      level: 'debug',
+    });
+    const action = {
+      secrets: {
+        REPO_RAW_ROOT: 'https://localhost:1234/',
+        RESOLVE_GITREF_SERVICE,
+      },
+      logger,
+      request: {
+        params: {},
+      },
+    };
+    await resolveRef({}, action);
+    const out = await logger.getOutput();
+    assert.ok(out.indexOf('unable to resolve ref to non-github repository: https://localhost:1234/') < 0);
+    assert.equal(action.request.params.ref, undefined);
+  });
+
+  it('Resolve ignores if non github REPO_RAW_ROOT but ignores error for 127.0.0.1.', async () => {
+    const logger = Logger.getTestLogger({
+      level: 'debug',
+    });
+    const action = {
+      secrets: {
+        REPO_RAW_ROOT: 'https://127.0.0.1:1234/',
+        RESOLVE_GITREF_SERVICE,
+      },
+      logger,
+      request: {
+        params: {},
+      },
+    };
+    await resolveRef({}, action);
+    const out = await logger.getOutput();
+    assert.ok(out.indexOf('unable to resolve ref to non-github repository: https://127.0.0.1:1234/') < 0);
+    assert.equal(action.request.params.ref, undefined);
   });
 
   it('Resolve ignores if RESOLVE_GITREF_SERVICE is missing.', async () => {

@@ -68,7 +68,9 @@ async function resolveRef(context, { secrets = {}, request, logger }) {
   }
   const rootURI = URI.parse(secrets.REPO_RAW_ROOT);
   if (rootURI.host !== 'raw.github.com' && rootURI.host !== 'raw.githubusercontent.com') {
-    logger.warn(`unable to resolve ref to non-github repository: ${secrets.REPO_RAW_ROOT}`);
+    if (rootURI.host !== 'localhost' && rootURI.host !== '127.0.0.1') {
+      logger.warn(`unable to resolve ref to non-github repository: ${secrets.REPO_RAW_ROOT}`);
+    }
     return;
   }
 
