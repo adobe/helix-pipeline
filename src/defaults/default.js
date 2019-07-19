@@ -44,15 +44,10 @@ const log = winston.createLogger({
   ],
 });
 
-function isErrorStep(stepName) {
-  return stepName && stepName.split(':')[0] === 'error';
-}
-
 const defaults = {
   pipe,
   pre,
   log,
-  isErrorStep,
 };
 
 module.exports = defaults;
