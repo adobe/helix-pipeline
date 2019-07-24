@@ -72,7 +72,7 @@
     "request-promise-native": "^1.0.7",
     "retext": "^7.0.0",
     "retext-smartypants": "^3.0.3",
-    "snyk": "^1.193.2",
+    "snyk": "^2.0.0",
     "strip-markdown": "^3.0.4",
     "unified": "^8.3.2",
     "unist-util-find-all-between": "^1.0.4",
