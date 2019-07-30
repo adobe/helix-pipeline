@@ -139,6 +139,7 @@ CDN or default parameters set during creation of the action.
 | Property       | Type   | Required |
 | -------------- | ------ | -------- |
 | `__ow_headers` | object | Optional |
+| `branch`       | string | Optional |
 | `owner`        | string | Optional |
 | `path`         | string | Optional |
 | `ref`          | string | Optional |
@@ -162,6 +163,19 @@ Deprecated: The original OpenWhisk request headers
 | Property | Type | Required |
 | -------- | ---- | -------- |
 
+
+#### branch
+
+Name of the branch or tag. defaults back to the value of 'ref' if missing.
+
+`branch`
+
+- is optional
+- type: `string`
+
+##### branch Type
+
+`string`
 
 #### owner
 

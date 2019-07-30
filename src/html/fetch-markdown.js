@@ -53,7 +53,7 @@ async function fetch(context, { secrets = {}, request, logger }) {
 
   // get required request parameters
   const {
-    owner, repo, path,
+    owner, repo, path, branch,
   } = request.params;
 
   let { ref } = request.params;
@@ -86,7 +86,11 @@ async function fetch(context, { secrets = {}, request, logger }) {
   logger.debug(`fetching Markdown from ${options.uri}`);
   try {
     content.body = await client(options);
-    setdefault(content, 'sources', []).push(options.uri);
+    if (branch && branch !== ref) {
+      setdefault(content, 'sources', []).push(uri(rootPath, owner, repo, branch, path));
+    } else {
+      setdefault(content, 'sources', []).push(options.uri);
+    }
   } catch (e) {
     if (e.statusCode === 404) {
       logger.error(`Could not find Markdown at ${options.uri}`);

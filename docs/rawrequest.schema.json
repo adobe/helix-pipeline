@@ -78,6 +78,10 @@
                             "type": "string",
                             "description": "Name of the branch or tag or the SHA of the commit"
                         },
+                        "branch": {
+                            "type": "string",
+                            "description": "Name of the branch or tag. defaults back to the value of 'ref' if missing."
+                        },
                         "path": {
                             "type": "string",
                             "description": "Path to the requested (Markdown) file",
