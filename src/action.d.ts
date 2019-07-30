@@ -57,6 +57,10 @@ export type RawRequest = {
      */
     ref?: string;
     /**
+     * Name of the branch or tag. defaults back to the value of 'ref' if missing.
+     */
+    branch?: string;
+    /**
      * Path to the requested (Markdown) file
      */
     path?: string;
