@@ -1,3 +1,10 @@
+## [4.0.6](https://github.com/adobe/helix-pipeline/compare/v4.0.5...v4.0.6) (2019-07-30)
+
+
+### Bug Fixes
+
+* **cache:** compute surrogate-key based on branch ([61712c5](https://github.com/adobe/helix-pipeline/commit/61712c5)), closes [#430](https://github.com/adobe/helix-pipeline/issues/430)
+
 ## [4.0.5](https://github.com/adobe/helix-pipeline/compare/v4.0.4...v4.0.5) (2019-07-18)
 
 
