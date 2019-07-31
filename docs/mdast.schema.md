@@ -108,7 +108,7 @@ indeterminate or not applicable (when null or not present).
 
 ### checked Type
 
-`boolean`, nullable
+`boolean` , nullable
 
 ## children
 
@@ -421,7 +421,7 @@ contains two or more children (when true), or not (when false or not present).
 
 ### spread Type
 
-`boolean`, nullable
+`boolean` , nullable
 
 ## start
 
