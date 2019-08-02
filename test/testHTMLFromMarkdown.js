@@ -361,7 +361,7 @@ describe('Testing Markdown conversion', () => {
     });
   });
 
-  it('Unwraps hero images', async () => {
+  it('Unwraps hero images in the document root', async () => {
     await assertMd(`
         ![Foo](/bar.png)
       `, `
@@ -371,7 +371,7 @@ describe('Testing Markdown conversion', () => {
     });
   });
 
-  it('Unwraps hero images', async () => {
+  it('Unwraps hero images in sections', async () => {
     await assertMd(`
         # Foo
 
