@@ -371,6 +371,26 @@ describe('Testing Markdown conversion', () => {
     });
   });
 
+  it('Unwraps hero images', async () => {
+    await assertMd(`
+        # Foo
+
+        ---
+
+        ![Bar](/baz.png)
+
+      `, `
+        <div class="hlx-section" data-hlx-types="has-heading nb-heading-1 has-only-heading">
+          <h1 id="foo">Foo</h1>
+        </div>
+        <div class="hlx-section" data-hlx-types="has-image nb-image-1 has-only-image">
+          <img src="/baz.png" alt="Bar"/>
+        </div>
+    `, {
+      SANITIZE_DOM: true,
+    });
+  });
+
   it('Leaves regular images inside paragraphs', async () => {
     await assertMd(`
         # Baz

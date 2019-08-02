@@ -24,13 +24,14 @@ function unwrap({ content }) {
   sections.forEach((section) => {
     map(section, (node, index, parent) => {
       if (node.type === 'paragraph' // If we have a paragraph
-          && parent.type === 'root' // … in a top section
+          && (parent.type === 'root' // … in the document root
+            || parent.type === 'section') // … or in a section
           && parent.meta.types.includes('has-only-image') // … that only has images
           && parent.meta.types.includes('nb-image-1')) { // … and actually only 1 of them
         // … then consider it a hero image, and unwrap from the paragraph
-        const position = content.mdast.children.indexOf(node);
-        const [img] = content.mdast.children[position].children;
-        content.mdast.children[position] = img;
+        const position = parent.children.indexOf(node);
+        const [img] = parent.children[position].children;
+        parent.children[position] = img;
       }
     });
   });
