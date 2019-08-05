@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/adobe/helix-pipeline/compare/v4.0.6...v4.1.0) (2019-08-05)
+
+
+### Features
+
+* **html pipe:** Unwrap hero images ([9f244ef](https://github.com/adobe/helix-pipeline/commit/9f244ef)), closes [#dbcf627](https://github.com/adobe/helix-pipeline/issues/dbcf627) [#338](https://github.com/adobe/helix-pipeline/issues/338)
+
 ## [4.0.6](https://github.com/adobe/helix-pipeline/compare/v4.0.5...v4.0.6) (2019-07-30)
 
 
