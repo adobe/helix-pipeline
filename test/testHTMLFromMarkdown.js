@@ -361,11 +361,31 @@ describe('Testing Markdown conversion', () => {
     });
   });
 
-  it('Unwraps hero images', async () => {
+  it('Unwraps hero images in the document root', async () => {
     await assertMd(`
         ![Foo](/bar.png)
       `, `
         <img src="/bar.png" alt="Foo"/>
+    `, {
+      SANITIZE_DOM: true,
+    });
+  });
+
+  it('Unwraps hero images in sections', async () => {
+    await assertMd(`
+        # Foo
+
+        ---
+
+        ![Bar](/baz.png)
+
+      `, `
+        <div class="hlx-section" data-hlx-types="has-heading nb-heading-1 has-only-heading">
+          <h1 id="foo">Foo</h1>
+        </div>
+        <div class="hlx-section" data-hlx-types="has-image nb-image-1 has-only-image">
+          <img src="/baz.png" alt="Bar"/>
+        </div>
     `, {
       SANITIZE_DOM: true,
     });
