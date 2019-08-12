@@ -97,7 +97,7 @@ async function fetch(context, { secrets = {}, request, logger }) {
       setdefault(context, 'response', {}).status = 404;
     } else if ((e.response && e.response.elapsedTime && e.response.elapsedTime > timeout) || (e.cause && e.cause.code && (e.cause.code === 'ESOCKETTIMEDOUT' || e.cause.code === 'ETIMEDOUT'))) {
       // return gateway timeout
-      logger.error(`Gateway timout of ${timeout} milliseconds exceeded for ${options.uri}`);
+      logger.error(`Gateway timeout of ${timeout} milliseconds exceeded for ${options.uri}`);
       setdefault(context, 'response', {}).status = 504;
     } else {
       logger.error(`Error while fetching Markdown from ${options.uri} with the following `
