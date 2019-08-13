@@ -94,15 +94,12 @@ class TypeMatcher {
       // get the type for each node, skip everything that's not a node or
       // doesn't have a type
       const childtypes = section.children
-        ? section.children.map(node => node.type).filter(type => !!type)
+        ? section.children.map((node) => node.type).filter((type) => !!type)
         : [];
       const matchedtypes = this.matches(childtypes);
       const oldtypes = section.types && Array.isArray(section.types) ? section.types : [];
 
-      return Object.assign({
-        types: [...matchedtypes, ...oldtypes],
-
-      }, section);
+      return { types: [...matchedtypes, ...oldtypes], ...section };
     });
     if (mapped.length === 1) {
       return mapped[0];

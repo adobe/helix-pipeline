@@ -14,7 +14,7 @@ const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const selectStatus_ = require('../src/html/set-status.js');
 
-const selectStatus = inProduction => (context, env) => {
+const selectStatus = (inProduction) => (context, env) => {
   // Mocking whether we are in production or not
   const old = process.env.__OW_ACTIVATION_ID;
   try {

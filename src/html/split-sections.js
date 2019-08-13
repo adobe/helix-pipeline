@@ -24,9 +24,9 @@ function split({ content }) {
   const { mdast } = content;
 
   // filter all children that are either yaml or break blocks
-  const dividers = mdast.children.filter(node => node.type === 'yaml' || node.type === 'thematicBreak')
+  const dividers = mdast.children.filter((node) => node.type === 'yaml' || node.type === 'thematicBreak')
   // then get their index in the list of children
-    .map(node => mdast.children.indexOf(node));
+    .map((node) => mdast.children.indexOf(node));
 
   // find pairwise permutations of spaces between blocks
   // include the very start and end of the document

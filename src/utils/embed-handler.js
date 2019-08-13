@@ -26,7 +26,7 @@ function embed({ EMBED_SERVICE } = {}) {
 
     if (node.children && node.children.length) {
       const rem = h(node, 'esi:remove', {});
-      node.children.forEach(childnode => handlechild(h, childnode, node, rem));
+      node.children.forEach((childnode) => handlechild(h, childnode, node, rem));
       retval.push(rem);
     }
 

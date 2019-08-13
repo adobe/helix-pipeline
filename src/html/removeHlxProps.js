@@ -13,16 +13,16 @@ function clean({ response }) {
   response.document.querySelectorAll('[class]').forEach((el) => {
     // Remove all `hlx-*` classes on the elements
     el.classList.value.split(' ')
-      .filter(cls => cls.indexOf('hlx-') === 0)
-      .forEach(cls => el.classList.remove(cls));
+      .filter((cls) => cls.indexOf('hlx-') === 0)
+      .forEach((cls) => el.classList.remove(cls));
     if (!el.classList.length) {
       el.removeAttribute('class');
     }
 
     // Remove all `data-hlx-*` attributes on these elements
     Object.keys(el.dataset)
-      .filter(key => key.match(/^hlx[A-Z]/))
-      .forEach(key => delete el.dataset[key]);
+      .filter((key) => key.match(/^hlx[A-Z]/))
+      .forEach((key) => delete el.dataset[key]);
   });
 }
 

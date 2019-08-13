@@ -17,7 +17,7 @@ const map = require('unist-util-map');
  * @param {object} request The content request
  */
 function unwrap({ content }) {
-  let sections = content.mdast.children.filter(node => node.type === 'section');
+  let sections = content.mdast.children.filter((node) => node.type === 'section');
   if (!sections.length) {
     sections = [content.mdast];
   }

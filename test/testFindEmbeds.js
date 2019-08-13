@@ -72,7 +72,7 @@ describe('Find Embeds #unit', () => {
       'embed: ?foo=bar',
       'embed: foo.txt',
     ]
-      .forEach(t => assert.ok(!embeds.internalGatsbyEmbed(t, base, 'html', 'md'), `${t} should be invalid`));
+      .forEach((t) => assert.ok(!embeds.internalGatsbyEmbed(t, base, 'html', 'md'), `${t} should be invalid`));
 
     ['embed: foo.md',
       'html: foo.md',
@@ -82,7 +82,7 @@ describe('Find Embeds #unit', () => {
       'embed: ../foo.html',
       'embed: /foo.html',
       'embed: ../docs/rocks/../foo.html']
-      .forEach(t => assert.ok(embeds.internalGatsbyEmbed(t, base, 'html', 'md'), `${t} should be valid`));
+      .forEach((t) => assert.ok(embeds.internalGatsbyEmbed(t, base, 'html', 'md'), `${t} should be valid`));
   });
 
   it('internalIaEmbed', () => {
@@ -100,7 +100,7 @@ describe('Find Embeds #unit', () => {
       u('paragraph', [
         u('text', {}, ' foo.md'),
       ]),
-    ].forEach(t => assert.ok(!embeds.internalIaEmbed(t, base, 'html', 'md'), `Expected invalid:\n${inspect(t)}`));
+    ].forEach((t) => assert.ok(!embeds.internalIaEmbed(t, base, 'html', 'md'), `Expected invalid:\n${inspect(t)}`));
     [
       u('paragraph', [
         u('text', {}, '/foo.md'),
@@ -117,7 +117,7 @@ describe('Find Embeds #unit', () => {
       u('paragraph', [
         u('text', {}, '../help/foo.md'),
       ]),
-    ].forEach(t => assert.ok(embeds.internalIaEmbed(t, base, 'html', 'md'), `Expected valid:\n${inspect(t)}`));
+    ].forEach((t) => assert.ok(embeds.internalIaEmbed(t, base, 'html', 'md'), `Expected valid:\n${inspect(t)}`));
   });
 
   it('internalImgEmbed', () => {
@@ -125,7 +125,7 @@ describe('Find Embeds #unit', () => {
       u('paragraph', [
         u('image', { url: 'test.png' }),
       ]),
-    ].forEach(t => assert.ok(!embeds.internalImgEmbed(t, base, 'html', 'md'), `Expected invalid:\n${inspect(t)}`));
+    ].forEach((t) => assert.ok(!embeds.internalImgEmbed(t, base, 'html', 'md'), `Expected invalid:\n${inspect(t)}`));
     [
       u('paragraph', [
         u('image', { url: 'test.md' }),
@@ -136,6 +136,6 @@ describe('Find Embeds #unit', () => {
       u('paragraph', [
         u('image', { url: '../readme/test.html' }),
       ]),
-    ].forEach(t => assert.ok(embeds.internalImgEmbed(t, base, 'html', 'md'), `Expected valid:\n${inspect(t)}`));
+    ].forEach((t) => assert.ok(embeds.internalImgEmbed(t, base, 'html', 'md'), `Expected valid:\n${inspect(t)}`));
   });
 });

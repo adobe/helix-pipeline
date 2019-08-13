@@ -15,7 +15,7 @@ const uri = require('uri-js');
 
 function link({ extension = 'html' } = {}) {
   return function handler(h, node) {
-    const n = Object.assign({}, node);
+    const n = { ...node };
     const uriParts = uri.parse(n.url);
     if (!uriParts.scheme && uriParts.path) {
       uriParts.path = uriParts.path.replace(/\.md$/, `.${extension}`);

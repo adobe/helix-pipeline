@@ -32,7 +32,7 @@ const action = {
   logger,
 };
 
-const expectedJSON = Object.assign({}, content.json);
+const expectedJSON = { ...content.json };
 
 describe('Test emit-json', () => {
   it('builds JSON from object', () => {

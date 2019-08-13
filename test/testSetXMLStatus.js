@@ -14,7 +14,7 @@ const { Logger } = require('@adobe/helix-shared');
 const { assertEquals } = require('ferrum');
 const selectStatus_ = require('../src/xml/set-xml-status.js');
 
-const selectStatus = inProduction => (context, env) => {
+const selectStatus = (inProduction) => (context, env) => {
   // Mocking whether we are in production or not
   const old = process.env.__OW_ACTIVATION_ID;
   try {

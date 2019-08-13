@@ -115,7 +115,7 @@ async function report(context, action) {
     return;
   }
   await ensureDumpDir(context, action);
-  await Promise.all(action.debug.contextDumps.map(info => writeDump(context, action, info)));
+  await Promise.all(action.debug.contextDumps.map((info) => writeDump(context, action, info)));
 }
 
 module.exports = {

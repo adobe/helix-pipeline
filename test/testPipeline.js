@@ -360,7 +360,7 @@ describe('Testing Pipeline', () => {
 
   it('Executes promises', async () => {
     await new Pipeline({ logger })
-      .once(v => new Promise((resolve) => {
+      .once((v) => new Promise((resolve) => {
         setTimeout(() => {
           v.foo = 'bar';
           resolve();

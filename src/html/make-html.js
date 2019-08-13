@@ -15,7 +15,7 @@ function html({ content, request }, { logger, secrets }) {
   const { mdast } = content;
   logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
   const extension = request && request.extension ? request.extension : 'html';
-  content.document = new VDOMTransformer(mdast, Object.assign({ extension }, secrets))
+  content.document = new VDOMTransformer(mdast, ({ extension, ...secrets }))
     .getDocument();
 }
 

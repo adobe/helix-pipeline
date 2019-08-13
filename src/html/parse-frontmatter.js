@@ -130,24 +130,24 @@ const { assign } = Object;
 const findFrontmatter = (mdast, str) => {
   // We do a lot of stuff with regexps here
   const hspace = '[^\\S\\n\\r]'; // Horizontal space
-  const re = x => new RegExp(x);
+  const re = (x) => new RegExp(x);
 
   // Access the markdown source of a markdown ast element
-  const start = idx => mdast.children[idx].position.start.offset;
-  const end = idx => mdast.children[idx].position.end.offset;
-  const nodeStr = idx => str.slice(start(idx), end(idx));
+  const start = (idx) => mdast.children[idx].position.start.offset;
+  const end = (idx) => mdast.children[idx].position.end.offset;
+  const nodeStr = (idx) => str.slice(start(idx), end(idx));
 
   // Identifying MDAST nodes which are potential fences (but later
   // still need to be checked more thoroughly)
-  const isHead2 = n => n.type === 'heading' && n.depth === 2;
-  const isHr = n => n.type === 'thematicBreak';
-  const isPotential = n => isHead2(n) || isHr(n);
+  const isHead2 = (n) => n.type === 'heading' && n.depth === 2;
+  const isHr = (n) => n.type === 'thematicBreak';
+  const isPotential = (n) => isHead2(n) || isHr(n);
 
   // Classifiers for fences: Lets us distinguish actual fences
   // from headers and horizontal rules which should not be altered:
-  const decentHead = n => n.after && isHead2(n.nod);
-  const decentHr = n => n.after && n.before;
-  const toIgnore = n => !n || decentHead(n) || decentHr(n);
+  const decentHead = (n) => n.after && isHead2(n.nod);
+  const decentHr = (n) => n.after && n.before;
+  const toIgnore = (n) => !n || decentHead(n) || decentHr(n);
 
   const procwarnigns = map(([fst, last]) => {
     const src = str.slice(fst.offStart, last === null ? undefined : last.offEnd);

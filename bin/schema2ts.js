@@ -52,5 +52,5 @@ const options = {
  */`,
 };
 
-compileFromFile('docs/context.schema.json', options).then(ts => writeFileSync('src/context.d.ts', ts));
-compileFromFile('docs/action.schema.json', options).then(ts => writeFileSync('src/action.d.ts', ts));
+compileFromFile('docs/context.schema.json', options).then((ts) => writeFileSync('src/context.d.ts', ts));
+compileFromFile('docs/action.schema.json', options).then((ts) => writeFileSync('src/action.d.ts', ts));

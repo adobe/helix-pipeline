@@ -19,7 +19,7 @@ const _ajv = {};
 function ajv(logger, options = {}) {
   if (!_ajv[hash(options)]) {
     logger.debug(`initializing ajv ${JSON.stringify(options)}`);
-    const validator = new Ajv(Object.assign({ allErrors: true, verbose: true }, options));
+    const validator = new Ajv({ allErrors: true, verbose: true, ...options });
     // compromise: in order to avoid async code here
     // (which would complicate pipeline implementation considerably)
     // we're using static file names and synchronous reads/requires (#134)

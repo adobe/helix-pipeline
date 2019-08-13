@@ -569,7 +569,7 @@ ${context.content.document.body.innerHTML}`,
   });
 
   it('html.pipe makes HTTP requests and falls back to master', async () => {
-    const myparams = Object.assign({}, params);
+    const myparams = { ...params };
     delete myparams.ref;
 
     const result = await pipe(
@@ -614,7 +614,7 @@ ${context.content.document.body.innerHTML}`,
   });
 
   it('html.pipe makes HTTP requests and prefers branch param for surrogate computationr', async () => {
-    const myparams = Object.assign({}, params);
+    const myparams = { ...params };
     myparams.branch = 'mybranch';
 
     const result = await pipe(
@@ -787,9 +787,9 @@ ${context.content.document.body.innerHTML}`,
 
     const outdir = action.debug.dumpDir;
     const found = fs.readdirSync(outdir)
-      .map(file => path.resolve(outdir, file))
-      .map(full => fs.existsSync(full))
-      .filter(e => !!e);
+      .map((file) => path.resolve(outdir, file))
+      .map((full) => fs.existsSync(full))
+      .filter((e) => !!e);
     // the last step, `report`, is not written to disk.
     assert.equal(found.length + 1, action.debug.contextDumps.length);
   });
@@ -817,7 +817,7 @@ ${context.content.document.body.innerHTML}`,
       },
       {
         request: { params },
-        secrets: Object.assign({}, secrets, { SANITIZE_DOM: true }),
+        secrets: { ...secrets, SANITIZE_DOM: true },
         logger,
       },
     );

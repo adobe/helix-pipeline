@@ -73,7 +73,7 @@ const wrap = (document) => {
       el = document.createElement('html');
     }
 
-    return appendAll(el, children, Object.assign({ fragment, namespace }, options));
+    return appendAll(el, children, { fragment, namespace, ...options });
   }
 
   // Create a `doctype`.

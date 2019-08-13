@@ -23,7 +23,7 @@ describe('Test Check for Production Environment', () => {
   });
 
   it('Detects production environment in uncooperative situations', () => {
-    const oldenv = Object.assign({}, process.env);
+    const oldenv = { ...process.env };
 
     // trying to reproduce a really odd exception we are seeing in production.
     process.env = {

@@ -90,7 +90,7 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
 
 function embed(uri, node, whitelist = '', warn = () => {}) {
   if (mm.some(uri.host, whitelist.split(','))) {
-    const children = [Object.assign({}, node)];
+    const children = [{ ...node }];
     node.type = 'embed';
     node.children = children;
     node.url = URI.serialize(uri);
@@ -103,7 +103,7 @@ function embed(uri, node, whitelist = '', warn = () => {}) {
 }
 
 function internalembed(uri, node, extension) {
-  const children = [Object.assign({}, node)];
+  const children = [{ ...node }];
   node.type = 'embed';
   node.children = children;
   node.url = p.resolve(p.dirname(uri.path), p.basename(uri.path, p.extname(uri.path)) + extension);

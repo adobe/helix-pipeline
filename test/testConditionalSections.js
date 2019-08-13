@@ -73,11 +73,11 @@ const crequest = {
 };
 
 // return only sections that are not hidden
-const nonhidden = section => !section.meta.hidden;
+const nonhidden = (section) => !section.meta.hidden;
 
 describe('Integration Test Section Strain Filtering', () => {
   it('html.pipe sees only selected section', async () => {
-    const myparams = Object.assign({ strain: 'a' }, params);
+    const myparams = { strain: 'a', ...params };
     const result = await pipe(
       (context) => {
         // this is the main function (normally it would be the template function)
@@ -345,7 +345,7 @@ describe('Pick among possible candidate sections #unit', () => {
 
 describe('Integration Test A/B Testing', () => {
   it('html.pipe sees only one variant', async () => {
-    const myparams = Object.assign({ strain: 'default' }, params);
+    const myparams = { strain: 'default', ...params };
     const result = await pipe(
       (context) => {
         const { content } = context;
@@ -396,7 +396,7 @@ Or this one at the same time.
   it('variant in html.pipe differs from strain to strain', async () => {
     async function runpipe(strain) {
       let selected = {};
-      const myparams = Object.assign({ strain }, params);
+      const myparams = { strain, ...params };
       const result = await pipe(
         (context) => {
           const { content } = context;

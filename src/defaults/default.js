@@ -33,7 +33,7 @@ function pipe(next, context, action) {
  * @param {Function} cont the continuation function
  * @returns {Function} the wrapped main function
  */
-const pre = cont => cont;
+const pre = (cont) => cont;
 
 const log = winston.createLogger({
   level: 'debug',

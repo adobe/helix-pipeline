@@ -51,7 +51,7 @@ describe('Test Type Matcher Util', () => {
     assert.deepEqual(new TypeMatcher(sections[0])
       .match('heading', 'has-heading')
       .match('paragraph', 'has-paragraph')
-      .match(types => types.length >= 3, 'long')
+      .match((types) => types.length >= 3, 'long')
       .process().types, ['has-heading', 'has-paragraph', 'long']);
   });
 
@@ -59,7 +59,7 @@ describe('Test Type Matcher Util', () => {
     const matchedsections = new TypeMatcher(sections)
       .match('heading', 'has-heading')
       .match('paragraph', 'has-paragraph')
-      .match(types => types.length >= 3, 'long')
+      .match((types) => types.length >= 3, 'long')
       .process();
     assert.equal(matchedsections.length, 4);
     assert.ok(matchedsections[0].types);

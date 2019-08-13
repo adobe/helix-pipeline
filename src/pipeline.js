@@ -104,10 +104,10 @@ class Pipeline {
         return;
       }
       if (ext && ext.before && typeof ext.before === 'object') {
-        Object.keys(ext.before).map(key => this.attach.before(key, ext.before[key]));
+        Object.keys(ext.before).map((key) => this.attach.before(key, ext.before[key]));
       }
       if (ext && ext.after && typeof ext.after === 'object') {
-        Object.keys(ext.after).map(key => this.attach.after(key, ext.after[key]));
+        Object.keys(ext.after).map((key) => this.attach.after(key, ext.after[key]));
       }
       this.sealed = true;
     };
@@ -124,9 +124,9 @@ class Pipeline {
       // matches the provided name by searching the list of pre and
       // post functions
       const foundpres = this._pres
-        .findIndex(pre => pre && pre.ext && pre.ext === name);
+        .findIndex((pre) => pre && pre.ext && pre.ext === name);
       const foundposts = this._posts
-        .findIndex(post => post && post.ext && post.ext === name);
+        .findIndex((post) => post && post.ext && post.ext === name);
 
       // if something has been found in either lists, insert the
       // new function into the list, with the correct offset
@@ -249,7 +249,7 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   unless(predicate) {
-    const inverse = args => !predicate(args);
+    const inverse = (args) => !predicate(args);
     return this.when(inverse);
   }
 

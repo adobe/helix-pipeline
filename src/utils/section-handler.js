@@ -41,10 +41,10 @@ function getAttributes(section) {
   const attributeKeys = Object.keys(section.meta);
   // Add system properties as data-hlx-*
   const attributes = attributeKeys
-    .filter(k => SYSTEM_HTML_ATTRIBUTES.indexOf(k) > -1)
+    .filter((k) => SYSTEM_HTML_ATTRIBUTES.indexOf(k) > -1)
     .reduce((result, attr) => Object.assign(result, { [`data-${HELIX_NAMESPACE}${attr}`]: toHtmlAttribute(section.meta[attr]) }), {});
   return attributeKeys
-    .filter(k => [...SYSTEM_HTML_ATTRIBUTES, ...SYSTEM_META_PROPERTIES].indexOf(k) === -1)
+    .filter((k) => [...SYSTEM_HTML_ATTRIBUTES, ...SYSTEM_META_PROPERTIES].indexOf(k) === -1)
     .reduce((result, attr) => {
       // Add invalid HTML attributes as data-*
       if (GLOBAL_HTML_ATTRIBUTES.indexOf(attr) === -1 && !attr.startsWith('data-')) {
@@ -57,7 +57,7 @@ function getAttributes(section) {
 
 function sectionHandler() {
   return function handler(h, node) {
-    const n = Object.assign({}, node);
+    const n = { ...node };
 
     const tagName = getTagName(n);
     const props = getAttributes(n);

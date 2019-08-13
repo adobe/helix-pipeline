@@ -19,7 +19,7 @@ const validate = require('../src/utils/validate.js');
 function cleanUp(json) {
   if (json) {
     if (json.map) {
-      return json.map(node => removePosition(node, true));
+      return json.map((node) => removePosition(node, true));
     }
     return removePosition(json, true);
   }

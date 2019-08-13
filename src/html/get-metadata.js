@@ -52,8 +52,8 @@ function image(section) {
  * @param {Object} typecounter Type as a key, number of occurences as value
  */
 function constructTypes(typecounter) {
-  const types = Object.keys(typecounter).map(type => `has-${type}`); // has-{type}
-  types.push(...Object.keys(typecounter).map(type => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
+  const types = Object.keys(typecounter).map((type) => `has-${type}`); // has-{type}
+  types.push(...Object.keys(typecounter).map((type) => `nb-${type}-${typecounter[type]}`)); // nb-{type}-{nb-occurences}
   if (Object.keys(typecounter).length === 1) {
     types.push(`has-only-${Object.keys(typecounter)[0]}`);
   } else {
@@ -80,7 +80,7 @@ function sectiontype(section) {
   function reducer(counter, node) {
     const { type, children: pChildren } = node;
 
-    node.meta = Object.assign({ types: [] }, node.meta);
+    node.meta = { types: [], ...node.meta };
 
     if (type === 'yaml') {
       return counter;
@@ -114,7 +114,7 @@ function sectiontype(section) {
       pChildren.forEach((listitem) => {
         listtypecounter = listitem.children.reduce(reducer, listtypecounter);
       });
-      constructTypes(listtypecounter).forEach(item => node.meta.types.push(item));
+      constructTypes(listtypecounter).forEach((item) => node.meta.types.push(item));
     }
 
     if (Object.keys(mycounter).length === 0) {
@@ -144,7 +144,7 @@ function fallback(section) {
 
 function getmetadata({ content }, { logger }) {
   const { mdast: { children = [] } } = content;
-  let sections = children.filter(node => node.type === 'section');
+  let sections = children.filter((node) => node.type === 'section');
   if (!sections.length) {
     sections = [content.mdast];
   }
@@ -155,7 +155,7 @@ function getmetadata({ content }, { logger }) {
     each(sections, fn);
   });
 
-  const img = sections.filter(section => section.image)[0];
+  const img = sections.filter((section) => section.image)[0];
 
   content.meta = sections[0].meta;
   content.title = sections[0].title;
