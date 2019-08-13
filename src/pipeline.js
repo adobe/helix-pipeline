@@ -69,10 +69,8 @@ function errorWrapper(fn) {
 */
 
 /**
- * Pipeline that allows to execute a list of functions in order. The pipeline consists of 3
- * major function lists: `pre`, `once` and, `post`. the functions added to the `pre` list are
- * processed first, then the `once` function and finally the `post` functions.
- * Using `when` and `unless` allows to conditionally execute the previously define function.
+ * Pipeline that allows to execute a list of functions in the order they have been added.
+ * Using `when` and `unless` allows to conditionally execute the previously defined function.
  * @class
  */
 class Pipeline {
@@ -90,12 +88,10 @@ class Pipeline {
 
     // function chain that was defined last. used for `when` and `unless`
     this._last = null;
-    // functions that are executed first
-    this._pres = [];
     // function that is executed once
     this._oncef = null;
-    // functions that are executed after
-    this._posts = [];
+    // step functions to execute
+    this._steps = [];
     // functions that are executed before each step
     this._taps = [];
 
@@ -109,6 +105,9 @@ class Pipeline {
       if (ext && ext.after && typeof ext.after === 'object') {
         Object.keys(ext.after).map((key) => this.attach.after(key, ext.after[key]));
       }
+      if (ext && ext.replace && typeof ext.replace === 'object') {
+        Object.keys(ext.replace).map((key) => this.attach.replace(key, ext.replace[key]));
+      }
       this.sealed = true;
     };
 
@@ -116,27 +115,23 @@ class Pipeline {
      * Registers an extension to the pipeline.
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
-     * @param {integer} before - where to insert the new function (true = before, false = after)
+     * @param {integer} offset - where to insert the new function (-1: replace, 0: before, 1: after)
      */
-    const attachGeneric = (name, f, before) => {
-      const offset = before ? 0 : 1;
+    const attachGeneric = (name, f, offset) => {
       // find the index of the function where the resolved ext name
-      // matches the provided name by searching the list of pre and
-      // post functions
-      const foundpres = this._pres
-        .findIndex((pre) => pre && pre.ext && pre.ext === name);
-      const foundposts = this._posts
-        .findIndex((post) => post && post.ext && post.ext === name);
+      // matches the provided name by searching the list of step functions
+      const foundstep = this._steps
+        .findIndex((step) => step && step.ext && step.ext === name);
 
-      // if something has been found in either lists, insert the
+      // if something has been found in the list, insert the
       // new function into the list, with the correct offset
-      if (foundpres !== -1) {
-        this._pres.splice(foundpres + offset, 0, f);
-      }
-      if (foundposts !== -1) {
-        this._posts.splice(foundposts + offset, 0, f);
-      }
-      if (foundpres === -1 && foundposts === -1) {
+      if (foundstep !== -1) {
+        if (offset === -1) {
+          this._steps.splice(foundstep, 1, f);
+        } else {
+          this._steps.splice(foundstep + offset, 0, f);
+        }
+      } else {
         this._action.logger.warn(`Unknown extension point ${name}`);
       }
     };
@@ -147,7 +142,7 @@ class Pipeline {
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
      */
-    this.attach.before = (name, f) => attachGeneric.bind(this)(name, f, true);
+    this.attach.before = (name, f) => attachGeneric.bind(this)(name, f, 0);
     /**
      * Registers an extension to the pipeline. The function `f` will be run in
      * the pipeline after the function called `name` will be executed. If `name`
@@ -155,31 +150,47 @@ class Pipeline {
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
      */
-    this.attach.after = (name, f) => attachGeneric.bind(this)(name, f, false);
+    this.attach.after = (name, f) => attachGeneric.bind(this)(name, f, 1);
+    /**
+     * Registers an extension to the pipeline. The function `f` will be executed in
+     * the pipeline instead of the function called `name`. If `name` does not exist,
+     * `f` will never be executed.
+     * @param {String} name - name of the extension point (typically the function name).
+     * @param {pipelineFunction} f - a new pipeline step that will replace `name`.
+     */
+    this.attach.replace = (name, f) => attachGeneric.bind(this)(name, f, -1);
   }
 
   /**
-   * Adds a processing function to the `pre` list to this pipeline.
-   * @param {pipelineFunction} f function to add to the `post` list
+   * Adds a processing function to the `step` list of this pipeline.
+   * @param {pipelineFunction} f function to add to the `step` list
    * @returns {Pipeline} this
+   */
+  use(f) {
+    this.describe(f);
+    this._steps.push(f);
+    this._last = this._steps;
+    return this;
+  }
+
+  /**
+   * Adds a processing function to the `pre` list of this pipeline.
+   * @param {pipelineFunction} f function to add to the `pre` list
+   * @returns {Pipeline} this
+   * @deprecated Call use() instead
    */
   before(f) {
-    this.describe(f);
-    this._pres.push(f);
-    this._last = this._pres;
-    return this;
+    return this.use(f);
   }
 
   /**
-   * Adds a processing function to the `pre` list to this pipeline.
+   * Adds a processing function to the `post` list of this pipeline.
    * @param {pipelineFunction} f function to add to the `post` list
    * @returns {Pipeline} this
+   * @deprecated Call use() instead
    */
   after(f) {
-    this.describe(f);
-    this._posts.push(f);
-    this._last = this._posts;
-    return this;
+    return this.use(f);
   }
 
   /**
@@ -204,7 +215,7 @@ class Pipeline {
   }
 
   /**
-   * Adds a condition to the previously defined `pre` or `post` function. The previously defined
+   * Adds a condition to the previously defined `step` function. The previously defined
    * function will only be executed if the predicate evaluates to something truthy or returns a
    * Promise that resolves to something truthy.
    * @param {function(context)} predicate Predicate function.
@@ -241,7 +252,7 @@ class Pipeline {
   }
 
   /**
-   * Adds a condition to the previously defined `pre` or `post` function. The previously defined
+   * Adds a condition to the previously defined `step` function. The previously defined
    * function will only be executed if the predicate evaluates to something not-truthy or returns a
    * Promise that resolves to something not-truthy.
    * @param {function(context)} predicate Predicate function.
@@ -259,10 +270,8 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   once(f) {
-    this.describe(f);
     this._oncef = f;
-    this._last = this._posts;
-    return this;
+    return this.use(f);
   }
 
   /**
@@ -305,7 +314,7 @@ class Pipeline {
   }
 
   /**
-   * Runs the pipline processor be executing the `pre`, `once`, and `post` functions in order.
+   * Runs the pipline processor be executing the `step` functions in order.
    * @param {Context} context Pipeline context
    * @returns {Promise<Context>} Promise that resolves to the final result of the accumulated
    * context.
@@ -378,7 +387,7 @@ class Pipeline {
     };
 
     try {
-      await execFns([...this._pres, this._oncef, ...this._posts]);
+      await execFns([...this._steps]);
     } catch (e) {
       logger.error(`Unexpected error during pipeline execution: \n${e.stack}`);
       if (!context.error) {
