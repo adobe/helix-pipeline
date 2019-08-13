@@ -292,11 +292,9 @@ describe('Testing Pipeline', () => {
         .run()
         .then(() => {
           assert.fail('when after once should fail.');
-          // done();
         });
     } catch (err) {
       assert.equal(err.toString(), 'Error: when() needs function to operate on.');
-      // done();
     }
   });
 
