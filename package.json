@@ -13,7 +13,8 @@
     "types": "npm run docs && node bin/schema2ts.js",
     "docs": "npx jsonschema2md -d src/schemas -o docs",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "npm run snyk-protect",
+    "commit": "git-cz"
   },
   "author": "",
   "license": "Apache-2.0",
@@ -51,6 +52,8 @@
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
+    "commitizen": "^4.0.1",
+    "cz-conventional-changelog": "^3.0.2",
     "dompurify": "^1.0.11",
     "ferrum": "^1.2.0",
     "fs-extra": "^8.1.0",
@@ -88,6 +91,9 @@
     "*.js": "eslint"
   },
   "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
     "ghooks": {
       "pre-commit": "npx lint-staged"
     }
