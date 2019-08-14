@@ -33,10 +33,10 @@ describe('Testing Pipeline', () => {
     const order = [];
     await new Pipeline({ logger })
       .use(() => { order.push('pre0'); })
-      .before(() => { order.push('pre1'); }) // test deprecated before()
+      .use(() => { order.push('pre1'); })
       .once(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
-      .after(() => { order.push('post1'); }) // test deprecated after()
+      .use(() => { order.push('post1'); })
       .run();
     assert.deepEqual(order, ['pre0', 'pre1', 'once', 'post0', 'post1']);
   });

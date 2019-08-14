@@ -126,10 +126,15 @@ class Pipeline {
       // if something has been found in the list, insert the
       // new function into the list, with the correct offset
       if (foundstep !== -1) {
-        if (offset === -1) {
+        if (offset < 0) {
+          // replace
           this._steps.splice(foundstep, 1, f);
+        } else if (offset > 0) {
+          // insert after
+          this._steps.splice(foundstep + 1, 0, f);
         } else {
-          this._steps.splice(foundstep + offset, 0, f);
+          // insert before (default)
+          this._steps.splice(foundstep, 0, f);
         }
       } else {
         this._action.logger.warn(`Unknown extension point ${name}`);
@@ -171,26 +176,6 @@ class Pipeline {
     this._steps.push(f);
     this._last = this._steps;
     return this;
-  }
-
-  /**
-   * Adds a processing function to the `pre` list of this pipeline.
-   * @param {pipelineFunction} f function to add to the `pre` list
-   * @returns {Pipeline} this
-   * @deprecated Call use() instead
-   */
-  before(f) {
-    return this.use(f);
-  }
-
-  /**
-   * Adds a processing function to the `post` list of this pipeline.
-   * @param {pipelineFunction} f function to add to the `post` list
-   * @returns {Pipeline} this
-   * @deprecated Call use() instead
-   */
-  after(f) {
-    return this.use(f);
   }
 
   /**
