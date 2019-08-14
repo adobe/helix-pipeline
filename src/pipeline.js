@@ -387,7 +387,7 @@ class Pipeline {
     };
 
     try {
-      await execFns([...this._steps]);
+      await execFns(this._steps);
     } catch (e) {
       logger.error(`Unexpected error during pipeline execution: \n${e.stack}`);
       if (!context.error) {
