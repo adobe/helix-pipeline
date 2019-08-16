@@ -115,7 +115,7 @@ class Pipeline {
      * Registers an extension to the pipeline.
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
-     * @param {integer} offset - where to insert the new function (-1: replace, 0: before, 1: after)
+     * @param {integer} offset - where to insert the new function (-1: before, 0: replace, 1: after)
      */
     const attachGeneric = (name, f, offset) => {
       // find the index of the function where the resolved ext name
@@ -126,7 +126,7 @@ class Pipeline {
       // if something has been found in the list, insert the
       // new function into the list, with the correct offset
       if (foundstep !== -1) {
-        if (offset < 0) {
+        if (offset === 0) {
           // replace
           this._steps.splice(foundstep, 1, f);
         } else if (offset > 0) {
@@ -147,7 +147,7 @@ class Pipeline {
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will be injected relative to `name`.
      */
-    this.attach.before = (name, f) => attachGeneric.bind(this)(name, f, 0);
+    this.attach.before = (name, f) => attachGeneric.bind(this)(name, f, -1);
     /**
      * Registers an extension to the pipeline. The function `f` will be run in
      * the pipeline after the function called `name` will be executed. If `name`
@@ -163,7 +163,7 @@ class Pipeline {
      * @param {String} name - name of the extension point (typically the function name).
      * @param {pipelineFunction} f - a new pipeline step that will replace `name`.
      */
-    this.attach.replace = (name, f) => attachGeneric.bind(this)(name, f, -1);
+    this.attach.replace = (name, f) => attachGeneric.bind(this)(name, f, 0);
   }
 
   /**
