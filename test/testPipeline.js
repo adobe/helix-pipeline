@@ -100,7 +100,7 @@ describe('Testing Pipeline', () => {
     assert.deepStrictEqual(order, ['one', 'two', 'middle', 'three', '4']);
   });
 
-  it('Can be extended using shorthand syntax', async () => {
+  it('Can be extended (once) using shorthand syntax', async () => {
     const order = [];
 
     const first = function first() {
@@ -144,13 +144,22 @@ describe('Testing Pipeline', () => {
       fourth: newFourth,
     };
 
-    const pipe = new Pipeline({ logger })
+    const pipe1 = new Pipeline({ logger })
       .use(second)
       .use(middle)
       .use(third);
 
-    await pipe.run();
+    await pipe1.run();
     assert.deepStrictEqual(order, ['one', 'two', 'middle', 'three', '4']);
+
+    const pipe2 = new Pipeline({ logger });
+    pipe2.use(middle);
+    try {
+      pipe2.use(middle);
+      assert.fail('only one step function can add extensions');
+    } catch (e) {
+      // ignore expected error
+    }
   });
 
   it('Logs correct names', async () => {
