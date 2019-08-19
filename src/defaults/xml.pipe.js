@@ -47,7 +47,7 @@ const xmlpipe = (cont, context, action) => {
     .use(smartypants)
     .use(sections)
     .use(meta).expose('meta')
-    .once(cont)
+    .use(cont)
     .use(emit).expose('xml')
     .use(type('application/xml'))
     .use(check)

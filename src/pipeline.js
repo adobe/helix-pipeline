@@ -88,7 +88,7 @@ class Pipeline {
 
     // function chain that was defined last. used for `when` and `unless`
     this._last = null;
-    // function that is executed once
+    // function that is executed once and can register extensions
     this._oncef = null;
     // step functions to execute
     this._steps = [];
@@ -96,9 +96,6 @@ class Pipeline {
     this._taps = [];
 
     this.attach = (ext) => {
-      if (this.sealed) {
-        return;
-      }
       if (ext && ext.before && typeof ext.before === 'object') {
         Object.keys(ext.before).map((key) => this.attach.before(key, ext.before[key]));
       }
@@ -108,7 +105,6 @@ class Pipeline {
       if (ext && ext.replace && typeof ext.replace === 'object') {
         Object.keys(ext.replace).map((key) => this.attach.replace(key, ext.replace[key]));
       }
-      this.sealed = true;
     };
 
     /**
@@ -175,6 +171,13 @@ class Pipeline {
     this.describe(f);
     this._steps.push(f);
     this._last = this._steps;
+    // check for extensions
+    if (f && (f.before || f.replace || f.after)) {
+      if (typeof this._oncef === 'function') {
+        throw new Error(`Step '${this._oncef.alias}' already registered extensions for this pipeline, refusing to add more with '${f.alias}'.`);
+      }
+      this._oncef = f;
+    }
     return this;
   }
 
@@ -247,16 +250,6 @@ class Pipeline {
   unless(predicate) {
     const inverse = (args) => !predicate(args);
     return this.when(inverse);
-  }
-
-  /**
-   * Sets the `once` processing function.
-   * @param {pipelineFunction} f the `once` function to set
-   * @returns {Pipeline} this
-   */
-  once(f) {
-    this._oncef = f;
-    return this.use(f);
   }
 
   /**

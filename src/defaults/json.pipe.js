@@ -43,7 +43,7 @@ const jsonpipe = (cont, context, action) => {
     .use(smartypants)
     .use(sections)
     .use(meta).expose('meta')
-    .once(cont)
+    .use(cont)
     .use(emit).expose('json')
     .use(type('application/json'))
     .use(timer.report)

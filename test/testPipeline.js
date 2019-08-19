@@ -26,7 +26,7 @@ describe('Testing Pipeline', () => {
   });
 
   it('Executes without logger', async () => {
-    await new Pipeline().once(() => {}).run({});
+    await new Pipeline().use(() => {}).run({});
   });
 
   it('Executes correct order', async () => {
@@ -34,7 +34,7 @@ describe('Testing Pipeline', () => {
     await new Pipeline({ logger })
       .use(() => { order.push('pre0'); })
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run();
@@ -46,7 +46,7 @@ describe('Testing Pipeline', () => {
     const pipe = new Pipeline({ logger })
       .use(() => { order.push('pre0'); })
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); });
 
@@ -87,7 +87,7 @@ describe('Testing Pipeline', () => {
 
     const pipe = new Pipeline({ logger })
       .use(second)
-      .once(() => {
+      .use(() => {
         order.push('middle');
       })
       .use(third);
@@ -146,7 +146,7 @@ describe('Testing Pipeline', () => {
 
     const pipe = new Pipeline({ logger })
       .use(second)
-      .once(middle)
+      .use(middle)
       .use(third);
 
     await pipe.run();
@@ -184,7 +184,7 @@ describe('Testing Pipeline', () => {
 
     await new Pipeline({ logger: validatinglogger })
       .use(pre0)
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(post0)
       .run();
     assert.deepEqual(order, ['pre0', 'once', 'post0']);
@@ -197,7 +197,7 @@ describe('Testing Pipeline', () => {
       .use(() => { order.push('disabled'); })
       .when(() => false)
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run()
@@ -215,7 +215,7 @@ describe('Testing Pipeline', () => {
       .use(() => { order.push('enabled'); })
       .when(() => true)
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run()
@@ -233,7 +233,7 @@ describe('Testing Pipeline', () => {
       .use(() => { order.push('disabled'); })
       .when(() => Promise.resolve(false))
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run()
@@ -252,7 +252,7 @@ describe('Testing Pipeline', () => {
       .use(() => { order.push('enabled'); })
       .when(() => Promise.resolve(true))
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run()
@@ -268,7 +268,7 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .use(() => { order.push('pre0'); })
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('disabled'); })
       .when(() => false)
@@ -286,7 +286,7 @@ describe('Testing Pipeline', () => {
       const order = [];
       new Pipeline({ logger })
         .use(() => { order.push('pre0'); })
-        .once(() => { order.push('once'); })
+        .use(() => { order.push('once'); })
         .when(() => false)
         .use(() => { order.push('post1'); })
         .run()
@@ -322,7 +322,7 @@ describe('Testing Pipeline', () => {
       .use(() => { order.push('disabled'); })
       .unless(() => true)
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run()
@@ -340,7 +340,7 @@ describe('Testing Pipeline', () => {
       .use(() => { order.push('enabled'); })
       .when(() => true)
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run()
@@ -358,7 +358,7 @@ describe('Testing Pipeline', () => {
       .use(() => { order.push('enabled'); })
       .unless(() => false)
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .run()
@@ -371,7 +371,7 @@ describe('Testing Pipeline', () => {
 
   it('Executes promises', async () => {
     await new Pipeline({ logger })
-      .once((v) => new Promise((resolve) => {
+      .use((v) => new Promise((resolve) => {
         setTimeout(() => {
           v.foo = 'bar';
           resolve();
@@ -385,7 +385,7 @@ describe('Testing Pipeline', () => {
     let cnt = 0;
     await new Pipeline({ logger })
       .use(() => {})
-      .once(() => {})
+      .use(() => {})
       .use(() => {})
       .every(() => {
         cnt += 1;
@@ -398,7 +398,7 @@ describe('Testing Pipeline', () => {
     let cnt = 0;
     await new Pipeline({ logger })
       .use(() => ({ foo: 'bar' }))
-      .once(() => {})
+      .use(() => {})
       .use(() => ({ bar: 'baz' }))
       .every(() => {
         assert.fail('this should not be invoked');
@@ -417,7 +417,7 @@ describe('Testing Pipeline', () => {
     new Pipeline({ logger })
       .use(() => { order.push('pre0'); })
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .error(() => { order.push('error'); })
@@ -437,7 +437,7 @@ describe('Testing Pipeline', () => {
         ctx.error = new Error();
       })
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .error(() => { order.push('error'); })
@@ -457,7 +457,7 @@ describe('Testing Pipeline', () => {
         throw new Error('stop');
       })
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .error(() => { order.push('error'); })
@@ -481,7 +481,7 @@ describe('Testing Pipeline', () => {
         order.push('error0');
         ctx.error = null;
       })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .error(() => { order.push('error1'); })
@@ -501,7 +501,7 @@ describe('Testing Pipeline', () => {
         throw new Error('stop');
       })
       .use(() => { order.push('pre1'); })
-      .once(() => { order.push('once'); })
+      .use(() => { order.push('once'); })
       .use(() => { order.push('post0'); })
       .use(() => { order.push('post1'); })
       .error(() => { throw Error('in error handler'); })
@@ -515,7 +515,7 @@ describe('Testing Pipeline', () => {
     const order = [];
     await new Pipeline({ logger })
       .use(() => { order.push('pre1'); })
-      .once({
+      .use({
         get errorHandler() {
           throw new Error('generic error');
         },

@@ -54,7 +54,7 @@ module.exports.pipe = function(cont, context, action) {
 
     return pipeline()
         .use(adjustContent)
-        .once(cont)            // required: execute the continuation function
+        .use(cont)            // execute the continuation function
         .use(cleanupContent)
 }
 ```

@@ -72,7 +72,7 @@ const htmlpipe = (cont, context, action) => {
     .use(selecttest)
     .use(html).expose('html')
     .use(sanitize).when(paranoid)
-    .once(cont)
+    .use(cont)
     .use(type('text/html'))
     .use(cache).when(uncached)
     .use(key)
