@@ -95,18 +95,6 @@ class Pipeline {
     // functions that are executed before each step
     this._taps = [];
 
-    this.attach = (ext) => {
-      if (ext && ext.before && typeof ext.before === 'object') {
-        Object.keys(ext.before).map((key) => this.attach.before(key, ext.before[key]));
-      }
-      if (ext && ext.after && typeof ext.after === 'object') {
-        Object.keys(ext.after).map((key) => this.attach.after(key, ext.after[key]));
-      }
-      if (ext && ext.replace && typeof ext.replace === 'object') {
-        Object.keys(ext.replace).map((key) => this.attach.replace(key, ext.replace[key]));
-      }
-    };
-
     /**
      * Registers an extension to the pipeline.
      * @param {String} name - name of the extension point (typically the function name).
@@ -250,6 +238,48 @@ class Pipeline {
   unless(predicate) {
     const inverse = (args) => !predicate(args);
     return this.when(inverse);
+  }
+
+  /**
+   * Attaches custom extensions to the pipeline. The expected argument is an object
+   * with a <code>before</code> object, an <code>after</code> object, and/or
+   * a <code>replace</code> object as its properties.
+   * Each of these objects can have keys that correspond to the named extension points
+   * defined for the pipeline, with the function to execute as values. For example:
+   * <pre>
+   * {
+   *   before: {
+   *     fetch: (context, action) => {
+   *       // do something before the fetch step
+   *       return context;
+   *     }
+   *   }
+   *   replace: {
+   *     html: (context, action) => {
+   *       // do this instead of the default html step
+   *       return context;
+   *     }
+   *   }
+   *   after: {
+   *     meta: (context, action) => {
+   *       // do something after the meta step
+   *       return context;
+   *     }
+   *   }
+   * }
+   * </pre>
+   * @param {Object} ext The extension object
+   */
+  attach(ext) {
+    if (ext && ext.before && typeof ext.before === 'object') {
+      Object.keys(ext.before).map((key) => this.attach.before(key, ext.before[key]));
+    }
+    if (ext && ext.after && typeof ext.after === 'object') {
+      Object.keys(ext.after).map((key) => this.attach.after(key, ext.after[key]));
+    }
+    if (ext && ext.replace && typeof ext.replace === 'object') {
+      Object.keys(ext.replace).map((key) => this.attach.replace(key, ext.replace[key]));
+    }
   }
 
   /**
