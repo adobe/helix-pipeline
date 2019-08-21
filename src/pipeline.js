@@ -88,8 +88,8 @@ class Pipeline {
 
     // function chain that was defined last. used for `when` and `unless`
     this._last = null;
-    // function that is executed once and can register extensions
-    this._oncef = null;
+    // object with the custom functions to attach to the pipeline
+    this._attachments = null;
     // step functions to execute
     this._steps = [];
     // functions that are executed before each step
@@ -161,10 +161,10 @@ class Pipeline {
     this._last = this._steps;
     // check for extensions
     if (f && (f.before || f.replace || f.after)) {
-      if (typeof this._oncef === 'function') {
-        throw new Error(`Step '${this._oncef.alias}' already registered extensions for this pipeline, refusing to add more with '${f.alias}'.`);
+      if (typeof this._attachments === 'function') {
+        throw new Error(`Step '${this._attachments.alias}' already registered extensions for this pipeline, refusing to add more with '${f.alias}'.`);
       }
-      this._oncef = f;
+      this._attachments = f;
     }
     return this;
   }
@@ -268,17 +268,17 @@ class Pipeline {
    *   }
    * }
    * </pre>
-   * @param {Object} ext The extension object
+   * @param {Object} att The object containing the attachments
    */
-  attach(ext) {
-    if (ext && ext.before && typeof ext.before === 'object') {
-      Object.keys(ext.before).map((key) => this.attach.before(key, ext.before[key]));
+  attach(att) {
+    if (att && att.before && typeof att.before === 'object') {
+      Object.keys(att.before).map((key) => this.attach.before(key, att.before[key]));
     }
-    if (ext && ext.after && typeof ext.after === 'object') {
-      Object.keys(ext.after).map((key) => this.attach.after(key, ext.after[key]));
+    if (att && att.after && typeof att.after === 'object') {
+      Object.keys(att.after).map((key) => this.attach.after(key, att.after[key]));
     }
-    if (ext && ext.replace && typeof ext.replace === 'object') {
-      Object.keys(ext.replace).map((key) => this.attach.replace(key, ext.replace[key]));
+    if (att && att.replace && typeof att.replace === 'object') {
+      Object.keys(att.replace).map((key) => this.attach.replace(key, att.replace[key]));
     }
   }
 
@@ -331,7 +331,7 @@ class Pipeline {
     const { logger } = this._action;
 
     // register all custom attachers to the pipeline
-    this.attach(this._oncef);
+    this.attach(this._attachments);
 
     /**
      * Executes the taps of the current function.
