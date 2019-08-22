@@ -1,3 +1,19 @@
+# [5.0.0](https://github.com/adobe/helix-pipeline/compare/v4.1.0...v5.0.0) (2019-08-22)
+
+
+### Features
+
+* **pipe:** uniform steps ([#377](https://github.com/adobe/helix-pipeline/issues/377)) ([7d9f701](https://github.com/adobe/helix-pipeline/commit/7d9f701))
+
+
+### BREAKING CHANGES
+
+* **pipe:** removed before(), once() and after() methods in favor of use()
+- added new uniform method pipe.use()
+- added new method pipe.attach.replace() to replace pipeline steps
+- pipe.attach() now public API, accepts object with before, replace and after keys
+- removed methods before(), once() and after()
+
 # [4.1.0](https://github.com/adobe/helix-pipeline/compare/v4.0.6...v4.1.0) (2019-08-05)
 
 
