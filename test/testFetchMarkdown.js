@@ -259,6 +259,34 @@ describe('Test requests', () => {
     assert.ok(context.content.body);
     assert.equal(context.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
   });
+
+  it('Getting XDM README with GitHub token', async function testToken() {
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
+        },
+      },
+      logger,
+      secrets: {
+        GITHUB_TOKEN: 'mytesttoken',
+      },
+    };
+
+    let authHeader = '';
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
+      .intercept((_, res) => res.sendStatus(200))
+      .on('request', (req) => {
+        authHeader = req.headers.Authorization;
+      });
+
+    await coerce(myaction);
+    const context = {};
+    await fetch(context, myaction);
+    assert.equal(authHeader, 'token mytesttoken');
+  });
 });
 
 
