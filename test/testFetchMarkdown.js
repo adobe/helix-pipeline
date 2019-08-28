@@ -260,11 +260,11 @@ describe('Test requests', () => {
     assert.equal(context.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
   });
 
-  it('Getting XDM README with GitHub token', async function testToken() {
+  it('Getting README from private repo with GitHub token', async function testToken() {
     const myaction = {
       request: {
         params: {
-          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
+          repo: 'helix-example', ref: 'master', path: 'README.md', owner: 'rofe',
         },
       },
       logger,
@@ -276,7 +276,7 @@ describe('Test requests', () => {
     let authHeader = '';
     const { server } = this.polly;
     server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
+      .get('https://raw.githubusercontent.com/rofe/helix-example/master/README.md')
       .intercept((_, res) => res.sendStatus(200))
       .on('request', (req) => {
         authHeader = req.headers.Authorization;
@@ -285,7 +285,7 @@ describe('Test requests', () => {
     await coerce(myaction);
     const context = {};
     await fetch(context, myaction);
-    assert.equal(authHeader, 'token mytesttoken');
+    assert.equal(authHeader, `token ${myaction.secrets.GITHUB_TOKEN}`);
   });
 });
 
