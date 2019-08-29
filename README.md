@@ -53,13 +53,13 @@ module.exports.pipe = function(cont, context, action) {
     action.logger.log("debug", "Constructing Custom Pipeline");
 
     return pipeline()
-        .use(adjustContent)
-        .use(cont)            // execute the continuation function
-        .use(cleanupContent)
+        .before(adjustContent)
+        .once(cont)            // required: execute the continuation function
+        .after(cleanupContent)
 }
 ```
 
-In a typical pipeline, you will add additional processing steps as `.use(require('some-module'))`.
+In a typical pipeline, you will add additional processing steps as `.before(require('some-module'))` or as `.after(require('some-module'))`.
 
 ### The Main Function
 
@@ -138,11 +138,11 @@ Example:
 
 ```js
 new pipeline()
-  .use(doSomething)
-  .use(render)
-  .use(cleanup)
+  .before(doSomething)
+  .once(render)
+  .after(cleanup)
   .error(handleError)
-  .use(done);
+  .after(done);
 ```
 
 If in the above example, the `doSomething` causes an error, subsequently, `render` and `cleanup` will not be invoked. but `handleError` will. If `handleError` clears the error state (i.e. sets `context.error = null`), the `done` function will be invoked again.
@@ -151,16 +151,16 @@ If in the above example, none of the functions causes an error, the `handleError
 
 ### Extension Points
 
-In addition to the (optional) wrapper function which can be invoked prior to the `once` function, pipeline creators can expose named extension points. These extension points allow users of a pipeline to inject additional functions that will be called right before, right after or instead of an extension point. To keep the extension points independent from the implementation (i.e. the name of the function), pipeline authors should use the `expose(name)` function to expose a particular extension point.
+In addition to the (optional) wrapper function which can be invoked prior to the `once` function, pipeline creators can expose named extension points. These extension points allow users of a pipeline to inject additional functions that will be called right before or right after an extension point. To keep the extension points independent from the implementation (i.e. the name of the function), pipeline authors should use the `expose(name)` function to expose a particular extension point.
 
 Example:
 
 ```js
 new pipeline()
-  .use(doSomething).expose('init')
-  .use(render)
-  .use(cleanup).expose('cleanup')
-  .use(done);
+  .before(doSomething).expose('init')
+  .once(render)
+  .after(cleanup).expose('cleanup')
+  .after(done);
 ```
 
 In this example, two extension points, `init` and `cleanup` have been defined. Note how the name of the extension point can be the same as the name of the function (i.e. `cleanup`), but does not have to be the same (i.e. `init` vs. `doSomething`).
@@ -181,7 +181,6 @@ The easiest way to use extension points is by expanding on the [Wrapper Function
 
 - a `before` object
 - an `after` object
-- a `replace` object
 
 Each of these objects can have keys that correspond to the named extension points defined for the pipeline.
 
@@ -197,12 +196,6 @@ module.exports.before = {
 module.exports.after = {
   fetch: (context, action) => {
     // will get called after the "fetch" pipeline step
-  }
-}
-
-module.exports.replace = {
-  meta: (context, action) => {
-    // will get called instead of the "meta" pipeline step
   }
 }
 ```
