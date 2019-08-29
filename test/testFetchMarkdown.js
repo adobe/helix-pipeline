@@ -234,6 +234,7 @@ describe('Test requests', () => {
   setupPolly({
     logging: false,
     recordFailedRequests: false,
+    recordIfMissing: false,
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -264,7 +265,7 @@ describe('Test requests', () => {
     const myaction = {
       request: {
         params: {
-          repo: 'helix-example', ref: 'master', path: 'README.md', owner: 'rofe',
+          repo: 'project-helix', ref: 'master', path: 'README.md', owner: 'adobe',
         },
       },
       logger,
@@ -276,8 +277,8 @@ describe('Test requests', () => {
     let authHeader = '';
     const { server } = this.polly;
     server
-      .get('https://raw.githubusercontent.com/rofe/helix-example/master/README.md')
-      .intercept((_, res) => res.sendStatus(200))
+      .get('https://raw.githubusercontent.com/adobe/project-helix/master/README.md')
+      // .intercept((_, res) => res.sendStatus(200))
       .on('request', (req) => {
         authHeader = req.headers.Authorization;
       });
