@@ -1,10 +1,3 @@
-## [5.0.1](https://github.com/adobe/helix-pipeline/compare/v5.0.0...v5.0.1) (2019-08-29)
-
-
-### Bug Fixes
-
-* **dependencies:** npm audit fix ([d4c4f32](https://github.com/adobe/helix-pipeline/commit/d4c4f32))
-
 # [5.0.0](https://github.com/adobe/helix-pipeline/compare/v4.1.0...v5.0.0) (2019-08-22)
 
 

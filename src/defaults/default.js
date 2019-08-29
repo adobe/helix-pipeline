@@ -24,7 +24,7 @@ const Pipeline = require('../pipeline.js');
  */
 function pipe(next, context, action) {
   const mypipeline = new Pipeline(action);
-  mypipeline.once(next);
+  mypipeline.use(next);
   return mypipeline.run(context);
 }
 
