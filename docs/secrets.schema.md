@@ -17,6 +17,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [EMBED_SELECTOR](#embed_selector)                 | `string`  | Optional | No       | `"embed"`                                                               | Secrets (this schema) |
 | [EMBED_SERVICE](#embed_service)                   | `string`  | Optional | No       | `"https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1"` | Secrets (this schema) |
 | [EMBED_WHITELIST](#embed_whitelist)               | `string`  | Optional | No       | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"`               | Secrets (this schema) |
+| [GITHUB_TOKEN](#github_token)                     | `string`  | Optional | No       | `""`                                                                    | Secrets (this schema) |
 | [HTTP_TIMEOUT](#http_timeout)                     | `integer` | Optional | No       | `1000`                                                                  | Secrets (this schema) |
 | [IMAGES_MIN_SIZE](#images_min_size)               | `integer` | Optional | No       | `480`                                                                   | Secrets (this schema) |
 | [REPO_API_ROOT](#repo_api_root)                   | `string`  | Optional | No       | `"https://api.github.com/"`                                             | Secrets (this schema) |
@@ -70,6 +71,22 @@ allow all embeds (potentially insecure)
 - defined in this schema
 
 ### EMBED_WHITELIST Type
+
+`string`
+
+## GITHUB_TOKEN
+
+GitHub access token to use while fetching markdown. See
+https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line.
+
+`GITHUB_TOKEN`
+
+- is optional
+- type: `string`
+- default: `""`
+- defined in this schema
+
+### GITHUB_TOKEN Type
 
 `string`
 
