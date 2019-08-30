@@ -1,3 +1,10 @@
+# [5.1.0](https://github.com/adobe/helix-pipeline/compare/v5.0.1...v5.1.0) (2019-08-30)
+
+
+### Features
+
+* **fetch:** support authenticated github access ([#72](https://github.com/adobe/helix-pipeline/issues/72)) ([#445](https://github.com/adobe/helix-pipeline/issues/445)) ([2cc1c75](https://github.com/adobe/helix-pipeline/commit/2cc1c75))
+
 ## [5.0.1](https://github.com/adobe/helix-pipeline/compare/v5.0.0...v5.0.1) (2019-08-29)
 
 
