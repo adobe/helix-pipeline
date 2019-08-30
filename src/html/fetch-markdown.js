@@ -86,8 +86,7 @@ async function fetch(context, { secrets = {}, request, logger }) {
   // if there is a github token, send it in the Authorization header
   const token = secrets.GITHUB_TOKEN || (request.headers ? request.headers['x-github-token'] : '');
   if (token) {
-    options.headers = options.headers || {};
-    options.headers.Authorization = `token ${token}`;
+    setdefault(options, 'headers', {}).Authorization = `token ${token}`;
   }
 
   logger.debug(`fetching Markdown from ${options.uri}`);
