@@ -83,6 +83,14 @@ async function fetch(context, { secrets = {}, request, logger }) {
     time: true,
   };
 
+  // if there is a github token, send it in the Authorization header
+  const token = secrets.GITHUB_TOKEN || (request.headers ? request.headers['x-github-token'] : '');
+  if (token) {
+    setdefault(options, 'headers', {
+      Authorization: `token ${token}`,
+    });
+  }
+
   logger.debug(`fetching Markdown from ${options.uri}`);
   try {
     content.body = await client(options);

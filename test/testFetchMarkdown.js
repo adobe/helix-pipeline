@@ -203,6 +203,7 @@ describe('Test non-existing content', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'nobody',
         },
+        headers: {},
       },
       logger,
     };
@@ -219,6 +220,7 @@ describe('Test non-existing content', () => {
         params: {
           repo: 'xdm', ref: '', path: 'README.md', owner: 'adobe',
         },
+        headers: {},
       },
       logger,
     };
@@ -234,6 +236,12 @@ describe('Test requests', () => {
   setupPolly({
     logging: false,
     recordFailedRequests: false,
+    recordIfMissing: false,
+    matchRequestsBy: {
+      headers: {
+        exclude: ['authorization'],
+      },
+    },
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -249,6 +257,7 @@ describe('Test requests', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
+        headers: {},
       },
       logger,
     };
@@ -258,6 +267,43 @@ describe('Test requests', () => {
     await fetch(context, myaction);
     assert.ok(context.content.body);
     assert.equal(context.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
+  });
+
+  it('Getting README from private repo with GitHub token', async function testToken() {
+    const myaction = {
+      request: {
+        params: {
+          repo: 'project-helix', ref: 'master', path: 'README.md', owner: 'adobe',
+        },
+        headers: {},
+      },
+      logger,
+      secrets: {},
+    };
+
+    const token = 'undisclosed-token';
+    let authHeader = '';
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/adobe/project-helix/master/README.md')
+      .on('request', (req) => {
+        authHeader = req.headers.Authorization;
+      });
+
+    await coerce(myaction);
+    const context = {};
+
+    // test with GitHub token from action.secrets
+    myaction.secrets.GITHUB_TOKEN = token;
+    await fetch(context, myaction);
+    assert.equal(authHeader, `token ${token}`, 'GitHub token from action.secrets.GITHUB_TOKEN used');
+    myaction.secrets.GITHUB_TOKEN = '';
+    authHeader = '';
+
+    // test with GitHub token from request headers
+    myaction.request.headers['x-github-token'] = token;
+    await fetch(context, myaction);
+    assert.equal(authHeader, `token ${token}`, 'GitHub token from request headers["x-github-token"] used');
   });
 });
 
@@ -288,6 +334,7 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
+        headers: {},
       },
       logger,
     };
@@ -314,6 +361,7 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
+        headers: {},
       },
       logger,
       secrets: {
@@ -342,6 +390,7 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
+        headers: {},
       },
       logger,
     };
