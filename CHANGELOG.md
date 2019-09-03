@@ -1,3 +1,10 @@
+# [5.2.0](https://github.com/adobe/helix-pipeline/compare/v5.1.0...v5.2.0) (2019-09-03)
+
+
+### Features
+
+* **pipe:** turn off error-suppression in production when X-Debug: true ([#207](https://github.com/adobe/helix-pipeline/issues/207)) ([1af3061](https://github.com/adobe/helix-pipeline/commit/1af3061))
+
 # [5.1.0](https://github.com/adobe/helix-pipeline/compare/v5.0.1...v5.1.0) (2019-08-30)
 
 

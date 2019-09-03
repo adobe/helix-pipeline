@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
