@@ -88,7 +88,7 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
   return false;
 }
 
-function embed(uri, node, whitelist = '', warn = () => {}) {
+function embed(uri, node, whitelist = '', debug = () => {}) {
   if (mm.some(uri.host, whitelist.split(','))) {
     const children = [{ ...node }];
     node.type = 'embed';
@@ -98,7 +98,7 @@ function embed(uri, node, whitelist = '', warn = () => {}) {
       delete node.value;
     }
   } else {
-    warn(`Whitelist forbids embedding of URL: ${URI.serialize(uri)}`);
+    debug(`Whitelist forbids embedding of URL: ${URI.serialize(uri)}`);
   }
 }
 
