@@ -49,6 +49,26 @@ describe('Test set-json-status', () => {
     );
   });
 
+  it('sets a verbose 500 for an error in production if x-debug header is present', () => {
+    const request = {
+      headers: {
+        'x-debug': 'true',
+      },
+    };
+    assert.deepEqual(
+      status.selectStatus(true)({ content: { }, error }, { logger, request }),
+      {
+        response: {
+          status: 500,
+          body: `{"status":500,"statusText":"${error}"}`,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        },
+      },
+    );
+  });
+
   it('keeps an existing status', () => {
     assert.deepEqual(
       status({

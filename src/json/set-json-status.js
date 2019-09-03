@@ -10,6 +10,8 @@
  * governing permissions and limitations under the License.
  */
 
+const { setdefault } = require('ferrum');
+
 function setVerboseError(error) {
   const res = {
     response: {
@@ -27,7 +29,7 @@ function setVerboseError(error) {
 }
 
 function selectStatus(prod) {
-  return ({ response = {}, error }, { logger }) => {
+  return ({ response = {}, error }, { logger, request = {} }) => {
     // if a status is already default, keep it.
     if (response.status) {
       return {};
@@ -41,7 +43,7 @@ function selectStatus(prod) {
     }
     // error handling
     logger.debug('context.error -> 500');
-    if (prod) {
+    if (prod && !setdefault(request, 'headers', {})['x-debug']) {
       return {
         response: {
           status: 500,
