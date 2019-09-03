@@ -47,6 +47,18 @@ describe('Test set-status', () => {
     assert.strictEqual(data.response.body, '');
   });
 
+  it('sets a verbose 500 for an error in production if x-debug header is present', () => {
+    const request = {
+      headers: {
+        'x-debug': 'true',
+      },
+    };
+    const data = selectStatus(true)({ content: { html: '<html></html>' }, error }, { logger, request });
+    assert.strictEqual(data.response.status, 500);
+    assert.strictEqual(data.response.body, `<html><body><h1>500</h1><pre>${error}</pre></body></html>`);
+    assert.strictEqual(data.response.headers['Content-Type'], 'text/html');
+  });
+
   it('keeps an existing status', () => {
     const data = selectStatus(true)({ response: { status: 201 } }, { logger });
     assert.strictEqual(data.response.status, 201);

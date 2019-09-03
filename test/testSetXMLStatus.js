@@ -47,6 +47,18 @@ describe('Test set-xml-status', () => {
     assertEquals(ctx.response.body, '');
   });
 
+  it('sets a verbose 500 for an error in production if x-debug header is present', () => {
+    const request = {
+      headers: {
+        'x-debug': 'true',
+      },
+    };
+    const ctx = selectStatus(true)({ content: { }, error }, { logger, request });
+    assertEquals(ctx.response.status, 500);
+    assertEquals(ctx.response.body, `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`);
+    assertEquals(ctx.response.headers['Content-Type'], 'application/xml');
+  });
+
   it('keeps an existing status', () => {
     const ctx = selectStatus(false)({
       response: {

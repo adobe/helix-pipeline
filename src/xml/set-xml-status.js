@@ -13,7 +13,7 @@
 const { setdefault } = require('ferrum');
 const isProduction = require('../utils/is-production');
 
-function setStatus(context, { logger }) {
+function setStatus(context, { logger, request = {} }) {
   const res = setdefault(context, 'response', {});
   const headers = setdefault(res, 'headers', {});
   const err = context.error;
@@ -33,7 +33,7 @@ function setStatus(context, { logger }) {
   res.status = 500;
   res.body = '';
 
-  if (!isProduction()) {
+  if (!isProduction() || setdefault(request, 'headers', {})['x-debug']) {
     res.body = `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${err.trim()}</message></error>`;
     headers['Content-Type'] = 'application/xml';
   }
