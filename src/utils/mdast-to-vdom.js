@@ -42,10 +42,11 @@ class VDOMTransformer {
    */
   constructor(mdast, options) {
     this._matchers = [];
-    this._root = mdast;
+    this._handlers = {};
+    this._options = {};
+
     // go over all handlers that have been defined
 
-    this._handlers = {};
     const that = this;
     // use our own handle function for every known node type
     types.map((type) => {
@@ -53,11 +54,20 @@ class VDOMTransformer {
       return true;
     });
 
-    this._headingHandler = new HeadingHandler(options);
+    if (mdast) {
+      this.withMdast(mdast);
+    }
+    this.withOptions(options);
+  }
+
+  withOptions(options = {}) {
+    this._options = Object.assign(this._options, options);
+
+    this._headingHandler = new HeadingHandler(this._options);
     this.match('heading', this._headingHandler.handler());
-    this.match('embed', embed(options));
-    this.match('link', link(options));
-    this.match('section', section(options));
+    this.match('embed', embed(this._options));
+    this.match('link', link(this._options));
+    this.match('section', section(this._options));
     this.match('html', (h, node) => {
       if (node.value.startsWith('<!--')) {
         return h.augment(node, {
@@ -73,6 +83,15 @@ class VDOMTransformer {
         html: node.value,
       });
     });
+
+    return this;
+  }
+
+  withMdast(mdast) {
+    this._root = mdast;
+
+
+    return this;
   }
 
   /**
@@ -161,7 +180,7 @@ class VDOMTransformer {
     // start with most recently added processors
     for (let i = this._matchers.length - 1; i >= 0; i -= 1) {
       const [matchfn, processor] = this._matchers[i];
-      if (matchfn(node)) {
+      if (matchfn(node, this._root)) {
         // return the first processor that matches
         return processor;
       }
@@ -179,11 +198,8 @@ class VDOMTransformer {
    * for nodes matching the pattern
    */
   static matchfn(ast, pattern) {
-    // get all nodes that match the pattern
-    const matches = selectAll(pattern, ast);
-    return function match(node) {
-      // return true if the given node is in the found set
-      return matches.indexOf(node) >= 0;
+    return function match(node, myast = ast) {
+      return selectAll(pattern, myast).indexOf(node) >= 0;
     };
   }
 

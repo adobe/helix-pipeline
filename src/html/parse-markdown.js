@@ -12,13 +12,20 @@
 const unified = require('unified');
 const remark = require('remark-parse');
 const { setdefault } = require('ferrum');
+const VDOMTransformer = require('../utils/mdast-to-vdom');
 
-function parseMarkdown(context, { logger }) {
+function parseMarkdown(context, action) {
   const content = setdefault(context, 'content', {});
   const body = setdefault(content, 'body', '');
 
-  logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
+  const request = setdefault(context, 'request', {});
+  const extension = setdefault(request, 'extension', 'html');
+
+  action.logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
   content.mdast = unified().use(remark).parse(body);
+  // initialize transformer
+  action.transformer = new VDOMTransformer()
+    .withOptions({ extension, ...action.secrets });
 }
 
 module.exports = parseMarkdown;
