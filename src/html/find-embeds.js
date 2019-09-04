@@ -118,11 +118,11 @@ function find({ content: { mdast }, request: { extension, url } },
   const contentext = p.extname(path);
   map(mdast, (node) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger.warn);
+      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger.debug);
     } else if (node.type === 'paragraph' && iaEmbed(node)) {
-      embed(iaEmbed(node), node, EMBED_WHITELIST, logger.warn);
+      embed(iaEmbed(node), node, EMBED_WHITELIST, logger.debug);
     } else if (node.type === 'paragraph' && imgEmbed(node)) {
-      embed(imgEmbed(node), node, EMBED_WHITELIST, logger.warn);
+      embed(imgEmbed(node), node, EMBED_WHITELIST, logger.debug);
     } else if (node.type === 'inlineCode'
       && internalGatsbyEmbed(node.value, url, contentext, resourceext)) {
       internalembed(internalGatsbyEmbed(node.value, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
