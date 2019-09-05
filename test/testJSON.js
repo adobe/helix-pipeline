@@ -72,7 +72,8 @@ const secrets = {
 describe('Testing JSON Pipeline', () => {
   setupPolly({
     logging: false,
-    recordFailedRequests: true,
+    recordFailedRequests: false,
+    recordIfMissing: false,
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -85,6 +86,26 @@ describe('Testing JSON Pipeline', () => {
   it('json.pipe is a function', () => {
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');
+  });
+
+  it('json.pipe uses default logger if none provided', async () => {
+    const context = {
+      content: {
+        json: {
+          foo: 'bar',
+        },
+      },
+    };
+    const result = await pipe(
+      () => {},
+      context,
+      {
+        request: { params },
+        secrets,
+      },
+    );
+    assert.equal(result.response.headers['Content-Type'], 'application/json');
+    assert.deepEqual(result.response.body, context.content.json);
   });
 
   it('json.pipe makes HTTP requests', async () => {
