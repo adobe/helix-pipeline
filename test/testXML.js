@@ -244,7 +244,7 @@ describe('Testing XML Pipeline', () => {
     assert.ok(res.response.body.match(/FUTURE!!!/));
   });
 
-  it('xmp.pipe does not overwrite existing response body', async () => {
+  it('xml.pipe does not overwrite existing response body', async () => {
     const result = await pipe(
       () => {},
       testContext,
@@ -257,7 +257,7 @@ describe('Testing XML Pipeline', () => {
     assert.equal(result.response.body, testContext.response.body);
   });
 
-  it('xmp.pipe uses default logger if none provided', async () => {
+  it('xml.pipe uses default logger if none provided', async () => {
     const result = await pipe(
       () => {},
       testContext,
