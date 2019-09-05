@@ -1,3 +1,10 @@
+## [5.2.1](https://github.com/adobe/helix-pipeline/compare/v5.2.0...v5.2.1) (2019-09-05)
+
+
+### Bug Fixes
+
+* **package:** update @adobe/helix-shared to version 3.0.0 ([91a4a59](https://github.com/adobe/helix-pipeline/commit/91a4a59))
+
 # [5.2.0](https://github.com/adobe/helix-pipeline/compare/v5.1.0...v5.2.0) (2019-09-03)
 
 
