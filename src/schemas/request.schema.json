@@ -87,6 +87,13 @@
           { "type": "array", "items": { "type": "string" } }
         ]
       }
+    },
+    "queryString": {
+      "type": "string",
+      "description": "The original query string",
+      "examples": [
+        "?parameter1=foo&parameter2=bar"
+      ]
     }
   }
 }
