@@ -150,6 +150,7 @@ const findFrontmatter = (mdast, str) => {
   const toIgnore = (n) => !n || decentHead(n) || decentHr(n);
 
   const procwarnigns = map(([fst, last]) => {
+    console.log('procwarnings', fst, last);
     const src = str.slice(fst.offStart, last === null ? undefined : last.offEnd);
 
     const warn = (cause, prosa) => ({
@@ -173,7 +174,7 @@ const findFrontmatter = (mdast, str) => {
         'Found ambigous frontmatter fence: No empty line after the block! '
           + 'Make sure your frontmatter blocks contain no empty lines '
           + 'and your horizontal rules have an empty line before AND after them.');
-    } else if (src.match(re(`\\n${hspace}*\\n`))) {
+    } else if (src.match(re(`\\n${hspace}*\\n`)) && fst.idx > 0) {
       return warn(null,
         'Found ambigous frontmatter fence: Block contains empty line! '
           + 'Make sure your frontmatter blocks contain no empty lines '
@@ -285,7 +286,7 @@ const parseFrontmatter = ({ content = {} }) => {
       const cnt = block.end - block.start + 1;
       mdast.children.splice(block.start + off, cnt, dat);
       off += -cnt + 1; // cnt removed, 1 inserted
-    } else {
+    } else if (false) {
       const { warning, source, start } = block;
       const fst = mdast.children[start + off];
 
