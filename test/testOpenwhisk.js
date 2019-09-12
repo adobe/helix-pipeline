@@ -241,7 +241,7 @@ describe('Testing OpenWhisk adapter', () => {
       url: '/api/general/index.html?a=42&b=green',
       path: '/api/general/index.html',
       rootPath: '/api/general',
-      queryString: 'a=42&b=green',
+      queryString: '?a=42&b=green',
       pathInfo: '/index.html',
       selector: '',
     });
@@ -335,7 +335,7 @@ describe('Testing OpenWhisk adapter', () => {
         method: 'get',
         path: '/docs/test.print.preview.html',
         extension: 'html',
-        queryString: 'a=42&b=green',
+        queryString: '?a=42&b=green',
         selector: 'print.preview',
         url: '/docs/test.print.preview.html?a=42&b=green',
         rootPath: '/docs',

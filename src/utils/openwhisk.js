@@ -66,7 +66,7 @@ function extractClientRequest(action) {
     selector: request.params.selector || '',
     url: `${reqPath}${query}`,
     rootPath: request.params.rootPath,
-    queryString: request.params.params,
+    queryString: query,
     pathInfo,
   };
 }
