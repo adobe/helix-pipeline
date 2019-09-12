@@ -10,16 +10,17 @@
  * governing permissions and limitations under the License.
  */
 const retext = require('retext');
-const map = require('unist-util-map');
+const map = require('unist-util-visit');
 const smartypants = require('retext-smartypants');
+
+const smart = retext().use(smartypants);
 
 function reformat({ content }) {
   if (!content.mdast) {
     return;
   }
-  const smart = retext().use(smartypants);
   map(content.mdast, (node) => {
-    if (node.type === 'text') {
+    if (node.type === 'text' && node.value.match(/(--)|(\.\.\.)|(['"`])/)) {
       node.value = smart.processSync(node.value).contents;
     }
   });

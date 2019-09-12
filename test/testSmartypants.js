@@ -32,6 +32,12 @@ describe('Test Smartypants Processing', () => {
     assertMatch('smartypants', callback);
   });
 
+  it('Parses markdown with formatting', () => {
+    for (let i = 0; i < 50; i += 1) {
+      assertMatch('smart-example', callback);
+    }
+  });
+
   it('does not throw error if mdast is missing', () => {
     smartypants({
       content: {

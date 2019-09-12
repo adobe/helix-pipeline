@@ -79,6 +79,7 @@
     "unist-util-find-all-between": "^1.0.6",
     "unist-util-map": "^1.0.5",
     "unist-util-select": "^2.0.2",
+    "unist-util-visit": "^2.0.0",
     "uri-js": "^4.2.2",
     "url-parse": "^1.4.6",
     "web-namespaces": "^1.1.3",
