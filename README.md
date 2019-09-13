@@ -319,7 +319,9 @@ It can be used in scenarios where:
 
 #### Getting Started
 
-Load the `VDOM` helper through:
+In most cases, you can simply access a pre-configured transformer from the `action.transformer` property. It will be available in the pipeline after the `parse` step and used in the `html` step, so registering `after.parse` and `before.html` are the ideal points to adjust the generated HTML.
+
+Alternatively, load the `VDOM` helper through:
 
 ```javascript
 const VDOM = require('@adobe/helix-pipeline').utils.vdom;
@@ -333,6 +335,8 @@ content.document = new VDOM(content.mdast).getDocument();
 
 This replaces `content.document` with a re-rendered representation of the Markdown AST. It can be used when changes to `content.mdast` have been made.
 
+When using `action.transformer`, this manual invocation is not required.
+
 ```javascript
 content.document = new VDOM(content.sections[0]).getDocument();
 ```
@@ -344,22 +348,20 @@ This uses only the content of the first section to render the document.
 Nodes in the Markdown AST can be matched in two ways: either using a [select](https://www.npmjs.com/package/unist-util-select)-statement or using a predicate function.
 
 ```javascript
-const vdom = new VDOM(content.mdast);
-vdom.match('heading', () => '<h1>This text replaces your heading</h1>');
+action.transformer.match('heading', () => '<h1>This text replaces your heading</h1>');
 content.document = vdom.getDocument();
 ```
 
 Every node with the type `heading` will be rendered as `<h1>This text replaces your heading</h1>`;
 
 ```javascript
-const vdom = new VDOM(content.mdast);
-vdom.match(function test(node) {
+action.transformer.match(function test(node) {
   return node.type === 'heading';
 }, () => '<h1>This text replaces your heading</h1>');
 content.document = vdom.getDocument();
 ```
 
-Instead of the select-statement, you can also provide a function that returns `true` or `false`. The two examples above will have the same behavior.
+Instead of the select-statement, you can also provide a predicate function that returns `true` or `false`. The two examples above will have the same behavior.
 
 #### Creating DOM Nodes
 
@@ -369,7 +371,7 @@ The second argument to `match` is a node-generating function that should return 
 2. a `String` containing HTML tags.
 
 ```javascript
-vdom.match('link', (_, node) => {
+action.transformer.match('link', (_, node) => {
   return {
     type: 'element',
     tagName: 'a',
@@ -392,7 +394,7 @@ Above: injecting `rel="nofollow"` using HTAST.
 ```javascript
 const h = require('hyperscript');
 
-vdom.match('link', (_, node) => h(
+action.transformer.match('link', (_, node) => h(
     'a',
     { href: node.url, rel: 'nofollow' },
     node.children.map(({ value }) => value),
@@ -402,57 +404,33 @@ vdom.match('link', (_, node) => h(
 Above: doing the same using [Hyperscript](https://github.com/hyperhype/hyperscript) (which creates DOM elements) is notably shorter.
 
 ```javascript
-vdom.match('link', (_, node) => 
+action.transformer.match('link', (_, node) => 
   `<a href="${node.url}" rel="nofollow">$(node.children.map(({ value }) => value)).join('')</a>`;
 ```
 
 Above: Plain `String`s can be constructed using String Templates in ES6 for the same result.
 
-#### Creating Responsive Images
+#### Dealing with Child Nodes
 
-The VDOM Utility is prepared to create `srcset` and `sizes` attributes for responsive images. By default, five different resolutions ranging from `480w` to `4096w` will be generated. To create truly effective responsive images, some knowledge of the desired layout of the page, and hence some configuration is required.
-
-`utils.vdom` provides two configuration options:
-
-1. Define what physical image widths are made available with `widths`
-2. Define which images get loaded with `sizes`
-
-Both configuration options get passed to an optional `options` argument for the `VDOM` constructor:
-
+The examples above have only been processing terminal nodes (or almost terminal nodes). In reality, you need to make sure that all child nodes of the matched node are processed too. For this, the signature of the handler function provides you with a `handlechild` function.
 
 ```javascript
-const widths;
-const sizes;
-content.document = new VDOM(content.mdast, {widths, sizes}).getDocument();
+// match all "emphasis" nodes
+action.transformer.match('emphasis', (h, node, _, handlechild) => {
+  // create a new HTML tag <i class="its-not-semantic…">
+  const i = h(node, 'i', { className: 'its-not-semantic-html-but-i-like-it' });
+  // make sure all child nodes of the markdown node are processed
+  node.children.forEach((childnode) => handlechild(h, childnode, node, i));
+  // return the i HTML element
+  return i;
+});
 ```
 
-`widths` is either an array of possible image widths (positive integer values) or a `widthpec` that looks like this:
-
-```javascript
-const widths = {
-  from: 320,
-  to: 9600,
-  steps: 10
-};
-const sizes;
-content.document = new VDOM(content.mdast, {widths, sizes}).getDocument();
-```
-
-Responsive images will be generated on the fly and only when requested, so the only cost involved with increasing the number of `steps` is the length of the resultant `srcset` attribute.
-
-In order to define what images get loaded, the `sizes` attribute must be set. In HTML, sizes is a comma-separated list of pairs of media queries and length expressions. For `util.vdom`, the setting is an array of these pairs.
-
-```javascript
-const widths;
-const sizes = [
-  '(min-width: 36em) 33.3vw',
-  '(min-width: 48em) calc(.333 * (100vw - 12em))',
-  '100vw'
-];
-content.document = new VDOM(content.mdast, {widths, sizes}).getDocument();
-```
-
-This gives you fine-grained control over the image widths that are made available and will get loaded by browsers based on the width of the browser window. With `util.vdom` you can have different settings per page- or section-type.
+The `handlechild` function is called with:
+- `h`: a DOM-node producing function
+- `childnode`: the child node to be processed
+- `node`: the parent node of the node to be processed (usually the current node)
+- `i`: the DOM node will be the new parent node for newly created DOM nodes
 
 ### Infer Content Types with `utils.types`
 

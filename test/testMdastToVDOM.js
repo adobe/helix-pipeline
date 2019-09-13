@@ -44,7 +44,7 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Simple MDAST Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'simple.json'));
     assertTransformerYieldsDocument(
-      new VDOM(mdast, action.secrets),
+      new VDOM(mdast, action.secrets), // .withOptions(action.secrets),
       '<h1 id="hello-world">Hello World</h1>',
     );
   });
