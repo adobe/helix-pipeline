@@ -1,3 +1,10 @@
+## [5.5.1](https://github.com/adobe/helix-pipeline/compare/v5.5.0...v5.5.1) (2019-09-13)
+
+
+### Bug Fixes
+
+* **all pipe:** reduce schema validation error reporting ([#391](https://github.com/adobe/helix-pipeline/issues/391)) ([c9e75f5](https://github.com/adobe/helix-pipeline/commit/c9e75f5)), closes [#92](https://github.com/adobe/helix-pipeline/issues/92)
+
 # [5.5.0](https://github.com/adobe/helix-pipeline/compare/v5.4.0...v5.5.0) (2019-09-13)
 
 
