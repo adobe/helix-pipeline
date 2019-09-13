@@ -57,7 +57,7 @@ const htmlpipe = (cont, context, action) => {
   const timer = timing();
   pipe
     .every(dump.record)
-    .every(validate).when(ctx => !production() && !ctx.error)
+    .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
     .use(resolveRef).expose('resolve').when(hascontent)
     .use(fetch).expose('fetch').when(hascontent)
