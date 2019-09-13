@@ -1,3 +1,11 @@
+# [5.5.0](https://github.com/adobe/helix-pipeline/compare/v5.4.0...v5.5.0) (2019-09-13)
+
+
+### Features
+
+* **pipe:** added queryString property ([91708ed](https://github.com/adobe/helix-pipeline/commit/91708ed))
+* **pipe:** followed specs for query string ([db48552](https://github.com/adobe/helix-pipeline/commit/db48552))
+
 # [5.4.0](https://github.com/adobe/helix-pipeline/compare/v5.3.1...v5.4.0) (2019-09-13)
 
 
