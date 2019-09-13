@@ -18,6 +18,7 @@ const {
 } = require('ferrum');
 
 const { assign } = Object;
+const production = require('../utils/is-production');
 
 /**
  * Given an mdast tree and it's text representation, this finds all
@@ -150,7 +151,6 @@ const findFrontmatter = (mdast, str) => {
   const toIgnore = (n) => !n || decentHead(n) || decentHr(n);
 
   const procwarnigns = map(([fst, last]) => {
-    console.log('procwarnings', fst, last);
     const src = str.slice(fst.offStart, last === null ? undefined : last.offEnd);
 
     const warn = (cause, prosa) => ({
@@ -259,7 +259,7 @@ const findFrontmatter = (mdast, str) => {
 
 class FrontmatterParsingError extends Error {}
 
-const parseFrontmatter = ({ content = {} }) => {
+const parseFrontmatter = ({ content = {} }, { logger }) => {
   const { mdast, body } = content;
 
   if (!mdast || !body) {
@@ -286,7 +286,7 @@ const parseFrontmatter = ({ content = {} }) => {
       const cnt = block.end - block.start + 1;
       mdast.children.splice(block.start + off, cnt, dat);
       off += -cnt + 1; // cnt removed, 1 inserted
-    } else if (false) {
+    } else {
       const { warning, source, start } = block;
       const fst = mdast.children[start + off];
 
@@ -302,7 +302,11 @@ const parseFrontmatter = ({ content = {} }) => {
         join('\n'),
       );
 
-      throw new FrontmatterParsingError(`${warning}\n${sourceref}`);
+      const err = new FrontmatterParsingError(`${warning}\n${sourceref}`);
+      if (!production()) {
+        logger.warn(err);
+      }
+      logger.debug(err);
     }
   }
 };
