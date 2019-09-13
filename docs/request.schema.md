@@ -12,17 +12,18 @@ The HTTP Request
 
 # Request Properties
 
-| Property                | Type     | Required | Nullable | Defined by            |
-| ----------------------- | -------- | -------- | -------- | --------------------- |
-| [extension](#extension) | `string` | Optional | No       | Request (this schema) |
-| [headers](#headers)     | complex  | Optional | No       | Request (this schema) |
-| [method](#method)       | `string` | Optional | No       | Request (this schema) |
-| [params](#params)       | `object` | Optional | No       | Request (this schema) |
-| [path](#path)           | `string` | Optional | No       | Request (this schema) |
-| [pathInfo](#pathinfo)   | `string` | Optional | No       | Request (this schema) |
-| [rootPath](#rootpath)   | `string` | Optional | No       | Request (this schema) |
-| [selector](#selector)   | `string` | Optional | No       | Request (this schema) |
-| [url](#url)             | `string` | Optional | No       | Request (this schema) |
+| Property                    | Type     | Required | Nullable | Defined by            |
+| --------------------------- | -------- | -------- | -------- | --------------------- |
+| [extension](#extension)     | `string` | Optional | No       | Request (this schema) |
+| [headers](#headers)         | complex  | Optional | No       | Request (this schema) |
+| [method](#method)           | `string` | Optional | No       | Request (this schema) |
+| [params](#params)           | `object` | Optional | No       | Request (this schema) |
+| [path](#path)               | `string` | Optional | No       | Request (this schema) |
+| [pathInfo](#pathinfo)       | `string` | Optional | No       | Request (this schema) |
+| [queryString](#querystring) | `string` | Optional | No       | Request (this schema) |
+| [rootPath](#rootpath)       | `string` | Optional | No       | Request (this schema) |
+| [selector](#selector)       | `string` | Optional | No       | Request (this schema) |
+| [url](#url)                 | `string` | Optional | No       | Request (this schema) |
 
 ## extension
 
@@ -151,6 +152,26 @@ The part of the client path that is relative to the rootPath
 
 ```json
 "/general/index.nav.html"
+```
+
+## queryString
+
+The original query string
+
+`queryString`
+
+- is optional
+- type: `string`
+- defined in this schema
+
+### queryString Type
+
+`string`
+
+### queryString Example
+
+```json
+"?parameter1=foo&parameter2=bar"
 ```
 
 ## rootPath
