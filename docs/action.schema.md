@@ -18,12 +18,13 @@ Tracks the OpenWhisk action invocation
 
 # Action Properties
 
-| Property            | Type        | Required | Nullable | Defined by           |
-| ------------------- | ----------- | -------- | -------- | -------------------- |
-| [debug](#debug)     | `object`    | Optional | No       | Action (this schema) |
-| [logger](#logger)   | `object`    | Optional | No       | Action (this schema) |
-| [request](#request) | Raw Request | Optional | No       | Action (this schema) |
-| [secrets](#secrets) | Secrets     | Optional | No       | Action (this schema) |
+| Property                    | Type        | Required | Nullable | Defined by           |
+| --------------------------- | ----------- | -------- | -------- | -------------------- |
+| [debug](#debug)             | `object`    | Optional | No       | Action (this schema) |
+| [logger](#logger)           | `object`    | Optional | No       | Action (this schema) |
+| [request](#request)         | Raw Request | Optional | No       | Action (this schema) |
+| [secrets](#secrets)         | Secrets     | Optional | No       | Action (this schema) |
+| [transformer](#transformer) | `object`    | Optional | No       | Action (this schema) |
 
 ## debug
 
@@ -84,3 +85,21 @@ A [Winston](https://github.com/winstonjs/winston) logger instance.
 ### secrets Type
 
 - [Secrets](secrets.schema.md) – `https://ns.adobe.com/helix/pipeline/secrets`
+
+## transformer
+
+A VDOMTransformer instance
+
+`transformer`
+
+- is optional
+- type: `object`
+- defined in this schema
+
+### transformer Type
+
+`object` with following properties:
+
+| Property | Type | Required |
+| -------- | ---- | -------- |
+

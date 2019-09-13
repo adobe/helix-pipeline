@@ -31,6 +31,10 @@
         },
         "secrets": {
             "$ref": "https://ns.adobe.com/helix/pipeline/secrets"
+        },
+        "transformer": {
+            "type": "object",
+            "description": "A VDOMTransformer instance"
         }
     }
 }
