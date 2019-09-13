@@ -76,7 +76,7 @@
     "snyk": "^1.216.0",
     "strip-markdown": "^3.1.0",
     "unified": "^8.3.2",
-    "unist-util-find-all-between": "^1.0.6",
+    "unist-util-find-all-between": "^2.0.0",
     "unist-util-map": "^1.0.5",
     "unist-util-select": "^2.0.2",
     "unist-util-visit": "^2.0.0",
