@@ -1,3 +1,10 @@
+## [5.3.1](https://github.com/adobe/helix-pipeline/compare/v5.3.0...v5.3.1) (2019-09-13)
+
+
+### Bug Fixes
+
+* **package:** update dompurify to version 2.0.0 ([afd2d3b](https://github.com/adobe/helix-pipeline/commit/afd2d3b))
+
 # [5.3.0](https://github.com/adobe/helix-pipeline/compare/v5.2.1...v5.3.0) (2019-09-12)
 
 
