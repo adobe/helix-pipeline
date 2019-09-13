@@ -35,7 +35,7 @@ const jsonpipe = (cont, context, action) => {
   const timer = timing();
   pipe
     .every(dump.record)
-    .every(validate).when(() => !production())
+    .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
     .use(fetch).expose('fetch')
     .use(parse).expose('parse')
