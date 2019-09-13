@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/adobe/helix-pipeline/compare/v5.3.1...v5.4.0) (2019-09-13)
+
+
+### Features
+
+* **pipeline:** expose vdom transformer in action ([2df18b9](https://github.com/adobe/helix-pipeline/commit/2df18b9)), closes [#325](https://github.com/adobe/helix-pipeline/issues/325)
+
 ## [5.3.1](https://github.com/adobe/helix-pipeline/compare/v5.3.0...v5.3.1) (2019-09-13)
 
 
