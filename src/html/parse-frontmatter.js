@@ -167,17 +167,17 @@ const findFrontmatter = (mdast, str) => {
     if (!fst.before) {
       return warn(null,
         'Found ambigous frontmatter fence: No empty line before the block! '
-          + 'Make sure your frontmatter blocks contain no empty lines '
+          + 'Make sure your mid-document YAML blocks contain no empty lines '
           + 'and your horizontal rules have an empty line before AND after them.');
     } else if (!last.after) {
       return warn(null,
         'Found ambigous frontmatter fence: No empty line after the block! '
-          + 'Make sure your frontmatter blocks contain no empty lines '
+          + 'Make sure your mid-document YAML blocks contain no empty lines '
           + 'and your horizontal rules have an empty line before AND after them.');
     } else if (src.match(re(`\\n${hspace}*\\n`)) && fst.idx > 0) {
       return warn(null,
         'Found ambigous frontmatter fence: Block contains empty line! '
-          + 'Make sure your frontmatter blocks contain no empty lines '
+          + 'Make sure your mid-document YAML blocks contain no empty lines '
           + 'and your horizontal rules have an empty line before AND after them.');
     }
 
