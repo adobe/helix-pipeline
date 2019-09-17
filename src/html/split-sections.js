@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-const between = require('unist-util-find-all-between');
 const { selectAll } = require('unist-util-select');
 const { flat, obj, map } = require('ferrum');
 const _ = require('lodash/fp');
@@ -42,7 +41,7 @@ function split({ content }) {
       const index = mdast.children[start].type === 'thematicBreak' ? start + 1 : start;
       const section = {
         type: 'section',
-        children: between(mdast, index, end),
+        children: mdast.children.slice(index, end),
       };
       section.meta = computeMeta(section);
       return section;
