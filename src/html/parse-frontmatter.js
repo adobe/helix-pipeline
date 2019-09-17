@@ -18,6 +18,7 @@ const {
 } = require('ferrum');
 
 const { assign } = Object;
+const production = require('../utils/is-production');
 
 /**
  * Given an mdast tree and it's text representation, this finds all
@@ -166,17 +167,17 @@ const findFrontmatter = (mdast, str) => {
     if (!fst.before) {
       return warn(null,
         'Found ambigous frontmatter fence: No empty line before the block! '
-          + 'Make sure your frontmatter blocks contain no empty lines '
+          + 'Make sure your mid-document YAML blocks contain no empty lines '
           + 'and your horizontal rules have an empty line before AND after them.');
     } else if (!last.after) {
       return warn(null,
         'Found ambigous frontmatter fence: No empty line after the block! '
-          + 'Make sure your frontmatter blocks contain no empty lines '
+          + 'Make sure your mid-document YAML blocks contain no empty lines '
           + 'and your horizontal rules have an empty line before AND after them.');
-    } else if (src.match(re(`\\n${hspace}*\\n`))) {
+    } else if (src.match(re(`\\n${hspace}*\\n`)) && fst.idx > 0) {
       return warn(null,
         'Found ambigous frontmatter fence: Block contains empty line! '
-          + 'Make sure your frontmatter blocks contain no empty lines '
+          + 'Make sure your mid-document YAML blocks contain no empty lines '
           + 'and your horizontal rules have an empty line before AND after them.');
     }
 
@@ -258,7 +259,7 @@ const findFrontmatter = (mdast, str) => {
 
 class FrontmatterParsingError extends Error {}
 
-const parseFrontmatter = ({ content = {} }) => {
+const parseFrontmatter = ({ content = {} }, { logger }) => {
   const { mdast, body } = content;
 
   if (!mdast || !body) {
@@ -301,7 +302,11 @@ const parseFrontmatter = ({ content = {} }) => {
         join('\n'),
       );
 
-      throw new FrontmatterParsingError(`${warning}\n${sourceref}`);
+      const err = new FrontmatterParsingError(`${warning}\n${sourceref}`);
+      if (!production()) {
+        logger.warn(err);
+      }
+      logger.debug(err);
     }
   }
 };

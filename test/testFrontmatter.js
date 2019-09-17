@@ -23,6 +23,8 @@ const parseFront = require('../src/html/parse-frontmatter');
 
 const { FrontmatterParsingError } = parseFront;
 
+let warning;
+
 const logger = winston.createLogger({
   silent: true,
   format: winston.format.simple(),
@@ -35,7 +37,7 @@ const procMd = (md) => {
   const dat = { content: { body: multiline(md) } };
   parseMd(dat, { logger });
   const orig = cloneDeep(dat.content.mdast);
-  parseFront(dat);
+  parseFront(dat, { logger });
   return { orig, proc: dat.content.mdast };
 };
 
@@ -61,11 +63,20 @@ const ckNop = (wat, md) => {
 
 const ckErr = (wat, body) => {
   it(`${wat} should raise exception`, () => {
-    assert.throws(() => procMd(body), FrontmatterParsingError);
+    procMd(body);
+    assert.ok(warning instanceof FrontmatterParsingError, 'No Frontmatter Parsing Error logged');
   });
 };
 
 describe('parseFrontmatter', () => {
+  beforeEach(() => {
+    warning = undefined;
+
+    logger.warn = (msg) => {
+      warning = msg;
+    };
+  });
+
   // NOPs
   ckNop('Empty document', '');
   ckNop('Just some text', 'Foo');
@@ -199,21 +210,55 @@ describe('parseFrontmatter', () => {
 
       delta
     `);
-  ckErr('frontmatter with empty line', `
+  ck('frontmatter at the start of the document with empty line', `
       ---
       hello: 42
 
       world: 13
       ---
+    `, `
+    - type: yaml
+      payload:
+        hello: 42
+        world: 13
     `);
-  ckErr('frontmatter with empty line filled with space', `
+
+  ckErr('frontmatter in the middle of the document with empty line', `
+    This is normal.
+
+    Really normal stuff.
+
+    ---
+    hello: 42
+
+    world: 13
+    ---
+  `);
+
+  ck('frontmatter at the start of the document with empty line filled with space', `
       ---
       hello: 42
 
       world: 13
       ---
+    `, `
+    - type: yaml
+      payload:
+        hello: 42
+        world: 13
     `);
 
+  ckErr('frontmatter in the middle of the document with empty line filled with space', `
+    This is normal.
+
+    Really normal stuff.
+
+    ---
+    hello: 42
+
+    world: 13
+    ---
+  `);
   // Good values
 
   ck('Entire doc is frontmatter', `

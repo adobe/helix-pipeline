@@ -26,7 +26,7 @@ const logger = Logger.getTestLogger({
 function callback(body) {
   const dat = { content: { body } };
   parse(dat, { logger });
-  parseFront(dat);
+  parseFront(dat, { logger });
   split(dat, { logger });
   getmetadata(dat, { logger });
   return dat.content.mdast;
