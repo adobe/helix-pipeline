@@ -1,3 +1,11 @@
+## [5.5.2](https://github.com/adobe/helix-pipeline/compare/v5.5.1...v5.5.2) (2019-09-17)
+
+
+### Bug Fixes
+
+* **frontmatter:** frontmatter parser should warn in case of ambiguities ([abdf01d](https://github.com/adobe/helix-pipeline/commit/abdf01d)), closes [#441](https://github.com/adobe/helix-pipeline/issues/441)
+* **frontmatter:** relax frontmatter parsing ([d0eab95](https://github.com/adobe/helix-pipeline/commit/d0eab95))
+
 ## [5.5.1](https://github.com/adobe/helix-pipeline/compare/v5.5.0...v5.5.1) (2019-09-13)
 
 
