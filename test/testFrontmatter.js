@@ -261,6 +261,23 @@ describe('parseFrontmatter', () => {
   `);
   // Good values
 
+  ck('trieloff/helix-demo/foo.md',
+    `---
+title: Foo bar hey.
+
+---
+# More?
+
+> Is there more?
+
+There is more.
+
+Let's edit this page.`, `
+    - type: yaml
+      payload:
+        title: Foo bar hey.
+  `);
+
   ck('Entire doc is frontmatter', `
     ---
     foo: 42
