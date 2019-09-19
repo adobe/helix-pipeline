@@ -46,6 +46,14 @@ const production = require('../utils/is-production');
  *   arrays are not considered to be frontmatter in this context
  * - The thematic break must be made up of three dashes
  *
+ * For frontmatter blocks at the beginning of the document, the rules are a bit
+ * looser, as there is less risk of confusion:
+ * - There must be the start or end of the document or an empty line (`\n\n`)
+ *   before and after the frontmatter block
+ * - The yaml must yield an object (as in key-value pairs); strings, numbers or
+ *   arrays are not considered to be frontmatter in this context
+ * - The thematic break must be made up of three dashes
+ *
  * Note that most of the information required to asses these properties
  * is not contained in the mdast itself, which is why this algorithm requires
  * access to the original markdown string. (The mdast is an Abstract Syntax Tree,
