@@ -73,6 +73,7 @@
     "request-promise-native": "^1.0.7",
     "retext": "^7.0.0",
     "retext-smartypants": "^3.0.3",
+    "sinon": "^7.5.0",
     "snyk": "^1.216.0",
     "strip-markdown": "^3.1.0",
     "unified": "^8.3.2",

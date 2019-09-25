@@ -11,9 +11,11 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
+const sinon = require('sinon');
 const builder = require('unist-builder');
 const all = require('mdast-util-to-hast/lib/all');
 const wrap = require('mdast-util-to-hast/lib/wrap');
+const defaultHandlers = require('mdast-util-to-hast/lib/handlers');
 const VDOMTransformer = require('../src/utils/mdast-to-vdom');
 
 function toHTML(mdast, handlers = {}) {
@@ -145,5 +147,77 @@ describe('Test VDOMTransformer#getDocument', () => {
       },
     });
     assert.equal(html, '<ol>\n<li>ITEM 1</li>\n<li>ITEM 2</li>\n</ol>');
+  });
+});
+
+describe('Test VDomTransformer static methods', () => {
+  const mdast = {
+    type: 'root',
+    children: [{
+      type: 'heading',
+      depth: 1,
+      children: [{
+        type: 'text',
+        value: 'The title content',
+      }, {
+        type: 'html',
+        value: '<p>The Cloud-native Helix Services process',
+      },
+      ],
+    }],
+  };
+
+  const correctHandler = defaultHandlers[mdast.type];
+  const mockVT = sinon.createStubInstance(VDOMTransformer);
+
+  it('static handle function returns function', () => {
+    mockVT.matches.returns(() => true);
+    const res = VDOMTransformer.handle('a', 'b', 'c', mockVT);
+    assert.equal(res, true);
+  });
+
+  it('static handle function fails when result is string', () => {
+    mockVT.matches.returns(() => 'Helix');
+    const handle = VDOMTransformer.handle.bind('a', 'b', 'c', mockVT);
+    assert.throws(handle, 'returning string from a handler is not supported yet.');
+  });
+
+  it('static handle throws when result is Dom object', () => {
+    const result = { outerHTML: 'Helix' };
+    mockVT.matches.returns(() => result);
+    const handle = VDOMTransformer.handle.bind('a', 'b', 'c', mockVT);
+    assert.throws(handle, 'returning a DOM element from a handler is not supported yet.');
+  });
+
+  it('static default returns correct default handler', async () => {
+    const handler = VDOMTransformer.default(mdast);
+    assert.equal(handler, correctHandler);
+  });
+
+  it('Matchfn returns correct matches', async () => {
+    const rootMatch = VDOMTransformer.matchfn(mdast, 'root');
+    const headingMatch = VDOMTransformer.matchfn(mdast, 'heading');
+    const textMatch = VDOMTransformer.matchfn(mdast, 'text');
+
+    assert.equal(rootMatch(mdast), true);
+    assert.equal(headingMatch(mdast.children[0]), true);
+    assert.equal(textMatch(mdast.children[0].children[0]), true);
+  });
+
+  it('Sanitize fails when matching inline not found', async () => {
+    const html = toHTML.bind(mdast);
+    assert.throws(html, 'no matching inline element found for Random Header</h2>');
+  });
+
+  it('Sanitize creates proper closing tag', () => {
+    const customMdast = {
+      type: 'root',
+      children: [{
+        type: 'html',
+        value: '<p>The Cloud-native Helix Services process',
+      }],
+    };
+    const html = toHTML(customMdast);
+    assert.equal(html, '<p>The Cloud-native Helix Services process</p>');
   });
 });
