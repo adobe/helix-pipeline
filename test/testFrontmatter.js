@@ -267,16 +267,16 @@ title: Foo bar hey.
 
 ---
 # More?
-
-> Is there more?
-
-There is more.
-
-Let's edit this page.`, `
-    - type: yaml
-      payload:
-        title: Foo bar hey.
-  `);
+`, `
+- type: yaml
+  payload:
+    title: Foo bar hey.
+- type: heading
+  depth: 1
+  children:
+    - type: text
+      value: More?
+`);
 
   ck('Entire doc is frontmatter', `
     ---
