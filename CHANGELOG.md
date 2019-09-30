@@ -1,3 +1,11 @@
+## [5.5.3](https://github.com/adobe/helix-pipeline/compare/v5.5.2...v5.5.3) (2019-09-30)
+
+
+### Bug Fixes
+
+* **dependencies:** fix vulnerable handlebars dependency ([118749c](https://github.com/adobe/helix-pipeline/commit/118749c))
+* **deps:** bump vulnerable dompurify dependency ([8c348ed](https://github.com/adobe/helix-pipeline/commit/8c348ed))
+
 ## [5.5.2](https://github.com/adobe/helix-pipeline/compare/v5.5.1...v5.5.2) (2019-09-17)
 
 
