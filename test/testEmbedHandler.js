@@ -96,6 +96,40 @@ describe('Test Embed Handler', () => {
 
 
 describe('Integration Test with Embeds', () => {
+  it('html.pipe does not blow up "embeds" from Helix Not Slides when seeing mailto links', async () => {
+    const result = await pipe(
+      (context) => {
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
+      },
+      {
+        request: crequest,
+        content: {
+          body: `![](https://raw.githubusercontent.com/trieloff/not-slides/master/01.jpg)
+
+# Bending your Brain for Serverless Success
+
+[Lars Trieloff](mailto:trieloff@adobe.com)`,
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers['Content-Type'], 'text/html');
+    assertEquivalentNode(
+      result.response.document.body,
+      new JSDOM(`
+      <body><p><img src="https://raw.githubusercontent.com/trieloff/not-slides/master/01.jpg"></p>
+      <h1 id="bending-your-brain-for-serverless-success">Bending your Brain for Serverless Success</h1>
+      <p><a href="mailto:trieloff@adobe.com">Lars Trieloff</a></p></body>
+      `).window.document.body,
+    );
+  });
+
   it('html.pipe processes embeds', async () => {
     const result = await pipe(
       (context) => {
