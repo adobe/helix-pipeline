@@ -181,7 +181,7 @@ const findFrontmatter = (mdast, str) => {
           + 'and your horizontal rules have an empty line before AND after them.');
     }
 
-    const txt = str.slice(fst.offEnd, last === null ? undefined : last.offStart);
+    const txt = str.slice(fst.offEnd, !last ? undefined : last.offStart);
     let data;
     try {
       data = yaml.safeLoad(txt);
