@@ -96,7 +96,7 @@ describe('Test Embed Handler', () => {
 
 
 describe('Integration Test with Embeds', () => {
-  it.only('html.pipe does not blow up "embeds" from Helix Not Slides when seeing mailto links', async () => {
+  it('html.pipe does not blow up "embeds" from Helix Not Slides when seeing mailto links', async () => {
     const result = await pipe(
       (context) => {
         context.response = { status: 201, body: context.content.document.body.innerHTML };
