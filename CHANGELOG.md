@@ -1,3 +1,10 @@
+## [5.5.4](https://github.com/adobe/helix-pipeline/compare/v5.5.3...v5.5.4) (2019-09-30)
+
+
+### Bug Fixes
+
+* **pipeline:** repair mailto link handling in embed processing ([0c52e5a](https://github.com/adobe/helix-pipeline/commit/0c52e5a))
+
 ## [5.5.3](https://github.com/adobe/helix-pipeline/compare/v5.5.2...v5.5.3) (2019-09-30)
 
 
