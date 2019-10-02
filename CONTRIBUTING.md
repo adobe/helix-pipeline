@@ -18,20 +18,20 @@ For other contributors, a maintainer of the project has to approve the pull requ
 
 # Before You Contribute
 
-* Check that there is an existing issue in GitHub issues
-* Check if there are other pull requests that might overlap or conflict with your intended contribution
+* Check that there is an existing issue in GitHub issues.
+* Check if there are other pull requests that might overlap or conflict with your intended contribution.
 
 # How to Contribute
 
-1. Fork the repository
-2. Make some changes on a branch on your fork
-3. Create a pull request from your branch
+1. Fork the repository.
+2. Make some changes on a branch on your fork.
+3. Create a pull request from your branch.
 
 In your pull request, outline:
 
-* What the changes intend
-* How they change the existing code
-* If (and what) they breaks
+* What the changes intend.
+* How they change the existing code.
+* If (and what) they breaks.
 * Start the pull request with the GitHub issue ID, e.g. #123
 
 Lastly, please follow the [pull request template](PULL_REQUEST_TEMPLATE.md) when submitting a pull request!

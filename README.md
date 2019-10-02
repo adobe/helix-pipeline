@@ -19,14 +19,13 @@ It uses reducers and continuations to create a simple processing pipeline that c
 
 A pipeline consists of following main parts:
 
-- pre-processing functions
-- the main response generating function
-- an optional wrapper function
-- post-processing functions
-- error handling functions
+- pre-processing functions.
+- the main response generating function.
+- an optional wrapper function.
+- post-processing functions.
+- error handling functions.
 
-Each step of the pipeline is processing a single context object, which eventually can be used to
-return the http response.
+Each step of the pipeline is processing a single context object, which eventually can be used to return the http response.
 
 See below for the anatomy of the context.
 
@@ -39,7 +38,7 @@ Typically, there is one pipeline for each content type supported and pipeline ar
 
 A pipeline builder can be created by creating a CommonJS module that exports a function `pipe` which accepts following arguments and returns a Pipeline function.
 
-- `cont`: the main function that will be executed as a continuation of the pipeline
+- `cont`: the main function that will be executed as a continuation of the pipeline.
 - `context`: the [context](./docs/context.schema.md) (formerly known as payload) that is accumulated during the pipeline. 
 - `action`: the [action](./docs/action.schema.md) that serves as holder for extra pipeline invocation argument.
 
@@ -71,10 +70,10 @@ Typically, there is one template (and thus one main function) for each content v
 
 Examples of possible template names include:
 
-- `html.jsx` (compiled to `html.js`) – default for the HTML pipeline
-- `html.navigation.jst` (compiled to `html.navigation.js`) – renders the navigation
-- `dropdown.json.js` (not compiled) – creates pure JSON output
-- `dropdown.html.htl` (compiled to `dropdown.html.js`) – renders the dropdown component
+- `html.jsx` (compiled to `html.js`) – default for the HTML pipeline.
+- `html.navigation.jst` (compiled to `html.navigation.js`) – renders the navigation.
+- `dropdown.json.js` (not compiled) – creates pure JSON output.
+- `dropdown.html.htl` (compiled to `dropdown.html.js`) – renders the dropdown component.
 
 
 ### (Optional) The Wrapper Function
@@ -83,9 +82,9 @@ Sometimes it is necessary to pre-process the context in a template-specific fash
 
 Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:
 
-1. presentation (in the main function, often expressed in declarative templates)
-2. business logic (in the wrapper function, often expressed in imperative code)
-3. content-type specific implementation (in the pipeline, expressed in functional code)
+1. presentation (in the main function, often expressed in declarative templates).
+2. business logic (in the wrapper function, often expressed in imperative code).
+3. content-type specific implementation (in the pipeline, expressed in functional code).
 
 A simple implementation of a wrapper function would look like this:
 
@@ -119,15 +118,15 @@ module.exports.pre = (cont, context, action) => {
 
 Pre-Processing functions are meant to:
 
-- parse and process request parameters
-- fetch and parse the requested content
-- transform the requested content
+- parse and process request parameters.
+- fetch and parse the requested content.
+- transform the requested content.
 
 ### Post-Processing Functions
 
 Post-Processing functions are meant to:
 
-- process and transform the response
+- process and transform the response.
 
 ### Error Handlers
 
@@ -169,19 +168,19 @@ In this example, two extension points, `init` and `cleanup` have been defined. N
 
 The creation of extension points is the responsibility of the pipeline author, but in order to standardize extension points, the following common names have been established:
 
-- `fetch` for the pipeline step that retrieves raw content, i.e. a Markdown document
-- `parse` for the pipeline step that parses the raw content and transforms it into a document structure such as a Markdown AST
-- `meta` for the pipeline step that extracts metadata from the content structure
-- `html` for the pipeline step that turns the Markdown document into a (HTML) DOM
-- `esi` for the pipeline step that scans the generated output for ESI markers and sets appropriate headers
+- `fetch` for the pipeline step that retrieves raw content, i.e. a Markdown document.
+- `parse` for the pipeline step that parses the raw content and transforms it into a document structure such as a Markdown AST.
+- `meta` for the pipeline step that extracts metadata from the content structure.
+- `html` for the pipeline step that turns the Markdown document into a (HTML) DOM.
+- `esi` for the pipeline step that scans the generated output for ESI markers and sets appropriate headers.
 
 #### Using Extension Points
 
 The easiest way to use extension points is by expanding on the [Wrapper Function described above](#optional-the-wrapper-function). Instead of just exporting a `pre` function, the wrapper can also export:
 
-- a `before` object
-- an `after` object
-- a `replace` object
+- a `before` object.
+- an `after` object.
+- a `replace` object.
 
 Each of these objects can have keys that correspond to the named extension points defined for the pipeline.
 
@@ -221,42 +220,42 @@ Following main properties exist:
 - `response`
 - `error`
 
-also see [context schema](./docs/context.schema.md)
+also see [context schema](./docs/context.schema.md).
 
 ### The `request` object
 
-- `params`: a map of request parameters
-- `headers`: a map of HTTP headers
+- `params`: a map of request parameters.
+- `headers`: a map of HTTP headers.
 
-also see [request schema](./docs/request.schema.md)
+also see [request schema](./docs/request.schema.md).
 
 ### The `content` object
 
-- `body`: the unparsed content body as a `string`
-- `mdast`: the parsed [Markdown AST](https://github.com/syntax-tree/mdast)
-- `meta`: a map metadata properties, including
-  - `title`: title of the document
-  - `intro`: a plain-text introduction or description
-  - `type`: the content type of the document
-  - `image`: the URL of the first image in the document
-- `document`: a DOM-compatible [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) representation of the (HTML) document ([see below](#contentdocument-in-detail))
-- `sections[]`: The main sections of the document, as an enhanced MDAST ([see below](#contentsections-in-detail))
-- `html`: a string of the content rendered as HTML
-- `children`: an array of top-level elements of the HTML-rendered content
+- `body`: the unparsed content body as a `string`.
+- `mdast`: the parsed [Markdown AST](https://github.com/syntax-tree/mdast).
+- `meta`: a map metadata properties, including:
+  - `title`: title of the document.
+  - `intro`: a plain-text introduction or description.
+  - `type`: the content type of the document.
+  - `image`: the URL of the first image in the document.
+- `document`: a DOM-compatible [`Document`](https://developer.mozilla.org/en-US/docs/Web/API/Document) representation of the (HTML) document ([see below](#contentdocument-in-detail)).
+- `sections[]`: The main sections of the document, as an enhanced MDAST ([see below](#contentsections-in-detail)).
+- `html`: a string of the content rendered as HTML.
+- `children`: an array of top-level elements of the HTML-rendered content.
 
-also see [content schema](./docs/content.schema.md)
+also see [content schema](./docs/content.schema.md).
 
 ### `content.document` in Detail
 
 For developers that prefer using the rendered HTML over the input Markdown AST, `content.document` provides a representation of the rendered HTML that is API-compatible to the `window.document` object you would find in a browser.
 
-The most common way of using it is probably calling `content.document.innerHTML`, which gives the full HTML of the page, but other functions like
+The most common way of using it is probably calling `content.document.innerHTML`, which gives the full HTML of the page, but other functions like:
 
 - `content.document.getElementsByClassName`
 - `content.document.querySelector`
 - `content.document.querySelectorAll`
 
-are also available. Please note that some functions like
+are also available. Please note that some functions like:
 
 - `content.document.getElementsByClassName`
 - `content.document.getElementByID`
@@ -276,24 +275,24 @@ The `types` property is an array of string values that describes the type of the
 - `has-<type>`: for each type of content that occurs at least once in the section, e.g. has-heading
 - `has-only-<type>`: for sections that only have content of a single type, e.g. has-only-image
 - `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-text-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
-- `nb-<type>-<occurences>`: number of occurences of each type in the section
+- `nb-<type>-<occurences>`: number of occurences of each type in the section.
 
 Each section has additional content-derived metadata properties, in particular:
 
-- `title`: the value of the first headline in the section
-- `intro`: the value of the first paragraph in the section
-- `image`: the URL of the first image in the section
-- `meta`: the parsed YAML metadata of the section (as an object)
+- `title`: the value of the first headline in the section.
+- `intro`: the value of the first paragraph in the section.
+- `image`: the URL of the first image in the section.
+- `meta`: the parsed YAML metadata of the section (as an object).
 
 
 
 ### The `response` object
 
-- `body`: the unparsed response body as a `string`
-- `headers`: a map of HTTP response headers
-- `status`: the HTTP status code
+- `body`: the unparsed response body as a `string`.
+- `headers`: a map of HTTP response headers.
+- `status`: the HTTP status code.
 
-also see [response schema](./docs/response.schema.md)
+also see [response schema](./docs/response.schema.md).
 
 ### The `error` object
 
@@ -301,9 +300,9 @@ This object is only set when there has been an error during pipeline processing.
 
 Alternatively, steps can attempt to handle the `error` object, for instance by generating a formatted error message and leaving it in `response.body`.
 
-The only known property in `error` is
+The only known property in `error` is:
 
-- `message`: the error message
+- `message`: the error message.
 
 ## Utilities
 
@@ -313,9 +312,9 @@ The only known property in `error` is
 
 It can be used in scenarios where:
 
-- you need to represent only a `section` of the document in HTML
-- you have made changes to `content.mdast` and want them reflected in HTML
-- you want to customize the HTML output for certain Markdown elements
+- you need to represent only a `section` of the document in HTML.
+- you have made changes to `content.mdast` and want them reflected in HTML.
+- you want to customize the HTML output for certain Markdown elements.
 
 #### Getting Started
 
@@ -367,7 +366,7 @@ Instead of the select-statement, you can also provide a predicate function that 
 
 The second argument to `match` is a node-generating function that should return one of the following three options:
 
-1. a DOM [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node)
+1. a DOM [Node](https://developer.mozilla.org/en-US/docs/Web/API/Node).
 2. a `String` containing HTML tags.
 
 ```javascript
@@ -427,10 +426,10 @@ action.transformer.match('emphasis', (h, node, _, handlechild) => {
 ```
 
 The `handlechild` function is called with:
-- `h`: a DOM-node producing function
-- `childnode`: the child node to be processed
-- `node`: the parent node of the node to be processed (usually the current node)
-- `i`: the DOM node will be the new parent node for newly created DOM nodes
+- `h`: a DOM-node producing function.
+- `childnode`: the child node to be processed.
+- `node`: the parent node of the node to be processed (usually the current node).
+- `i`: the DOM node will be the new parent node for newly created DOM nodes.
 
 ### Infer Content Types with `utils.types`
 
@@ -449,13 +448,13 @@ In the example above, all sections that have a `heading` as the first child will
 
 ##### Content Expression Language
 
-* `^heading` – the first element is a `heading`
-* `paragraph$` – the last element is a `paragraph`
-* `heading image+` – a `heading` followed by one or more `image`s
-* `heading? image` – an optional `heading` followed by one `image`
-* `heading paragraph* image` – a `heading` followed by any number of `paragraph`s (also no paragraphs at all), followed by an `image`
-* `(paragraph|list)` – a `paragraph` or a `list`
-* `^heading (image paragraph)+$` – one `heading`, followed by pairs of `image` and `paragraph`, but at least one
+* `^heading` – the first element is a `heading`.
+* `paragraph$` – the last element is a `paragraph`.
+* `heading image+` – a `heading` followed by one or more `image`s.
+* `heading? image` – an optional `heading` followed by one `image`.
+* `heading paragraph* image` – a `heading` followed by any number of `paragraph`s (also no paragraphs at all), followed by an `image`.
+* `(paragraph|list)` – a `paragraph` or a `list`.
+* `^heading (image paragraph)+$` – one `heading`, followed by pairs of `image` and `paragraph`, but at least one.
 
 ### Inspecting the Pipeline Context
 
