@@ -19,7 +19,8 @@ function parseMarkdown(context, action) {
   const body = setdefault(content, 'body', '');
 
   const request = setdefault(context, 'request', {});
-  const extension = setdefault(request, 'extension', 'html');
+  if (!request.extension) request.extension = 'html';
+  const { extension } = request;
 
   action.logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
   content.mdast = unified().use(remark).parse(body);
