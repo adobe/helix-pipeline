@@ -30,7 +30,7 @@ return the http response.
 
 See below for the anatomy of the context.
 
-Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g.
+Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g.:
 
 - `html.pipe.js` – creates HTML documents with the `text/html` content-type
 - `json.pipe.js` – creates JSON documents with the `application/json` content-type
@@ -185,7 +185,7 @@ The easiest way to use extension points is by expanding on the [Wrapper Function
 
 Each of these objects can have keys that correspond to the named extension points defined for the pipeline.
 
-Example
+Example:
 
 ```js
 module.exports.before = {
@@ -275,7 +275,7 @@ The `types` property is an array of string values that describes the type of the
 
 - `has-<type>`: for each type of content that occurs at least once in the section, e.g. has-heading
 - `has-only-<type>`: for sections that only have content of a single type, e.g. has-only-image
-- `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-text-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
+- `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance, a gallery with a heading and description would be `is-image-text-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
 - `nb-<type>-<occurrences>`: number of occurrences of each type in the section
 
 Each section has additional content-derived metadata properties, in particular:
