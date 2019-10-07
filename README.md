@@ -17,7 +17,7 @@ It uses reducers and continuations to create a simple processing pipeline that c
 
 ## Anatomy of a Pipeline
 
-A pipeline consists of following main parts:
+A pipeline consists of the following main parts:
 
 - pre-processing functions.
 - the main response generating function.
@@ -36,11 +36,11 @@ Typically, there is one pipeline for each content type supported and pipeline ar
 
 ### Building a Pipeline
 
-A pipeline builder can be created by creating a CommonJS module that exports a function `pipe` which accepts following arguments and returns a Pipeline function.
+A pipeline builder can be created by creating a CommonJS module that exports a function `pipe` which accepts the following arguments and returns a Pipeline function.
 
 - `cont`: the main function that will be executed as a continuation of the pipeline.
 - `context`: the [context](./docs/context.schema.md) (formerly known as payload) that is accumulated during the pipeline. 
-- `action`: the [action](./docs/action.schema.md) that serves as holder for extra pipeline invocation argument.
+- `action`: the [action](./docs/action.schema.md) that serves as a holder for extra pipeline invocation argument.
 
 This project's main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:
 
@@ -90,7 +90,7 @@ A simple implementation of a wrapper function would look like this:
 
 ```javascript
 // All wrapper functions must export `pre`
-// The functions takes following arguments:
+// The functions takes the following arguments:
 // - `cont` (the continuation function, i.e. the main template function)
 // - `context` (the context of the pipeline)
 // - `action` (the action of the pipeline)
@@ -276,6 +276,7 @@ The `types` property is an array of string values that describes the type of the
 - `has-only-<type>`: for sections that only have content of a single type, e.g. has-only-image
 - `is-<type-1>-<type-2>-<type3>`, `is-<type-1>-<type-2>`, and `is-<type-1>` for the top 3 most frequent types of children in the section. For instance a gallery with a heading and description would be `is-image-text-heading`. You can infer additional types using [`utils.types`](#infer-content-types-with-utilstypes).
 - `nb-<type>-<occurences>`: number of occurences of each type in the section.
+
 
 Each section has additional content-derived metadata properties, in particular:
 

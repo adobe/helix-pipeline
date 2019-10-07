@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
+const assert = require('assert');
 const { Logger } = require('@adobe/helix-shared');
 const parse = require('../src/html/parse-markdown');
 const parseFront = require('../src/html/parse-frontmatter');
@@ -54,5 +55,44 @@ describe('Test Markdown Parsing', () => {
 
   it('Does not get confused by grayscale', () => {
     assertMatch('grayscale', callback);
+  });
+});
+
+describe('Test Markdown Setting Context', () => {
+  it('Sets default context objects', () => {
+    const context = {};
+    parse(context, { logger });
+    assert.equal(typeof context.content, 'object');
+    assert.equal(context.content.body, '');
+    assert.equal(typeof context.request, 'object');
+    assert.equal(context.request.extension, 'html');
+  });
+
+  it('Does not override values', () => {
+    const context = {
+      content: {
+        body: 'custombody',
+        extra: 'extraprop',
+      },
+      request: {
+        extension: 'customext',
+        extra: 'extraprop',
+      },
+    };
+    parse(context, { logger });
+    assert.equal(context.content.body, 'custombody');
+    assert.equal(context.content.extra, 'extraprop');
+    assert.equal(context.request.extension, 'customext');
+    assert.equal(context.request.extra, 'extraprop');
+  });
+
+  it('Does handle empty extension case', () => {
+    const context = {
+      request: {
+        extension: '',
+      },
+    };
+    parse(context, { logger });
+    assert.equal(context.request.extension, 'html');
   });
 });

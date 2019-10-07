@@ -1,3 +1,10 @@
+## [5.5.5](https://github.com/adobe/helix-pipeline/compare/v5.5.4...v5.5.5) (2019-10-03)
+
+
+### Bug Fixes
+
+* **parse:** fix empty extension case and add tests ([#473](https://github.com/adobe/helix-pipeline/issues/473)) ([a9810bc](https://github.com/adobe/helix-pipeline/commit/a9810bc))
+
 ## [5.5.4](https://github.com/adobe/helix-pipeline/compare/v5.5.3...v5.5.4) (2019-09-30)
 
 
