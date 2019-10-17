@@ -6,6 +6,36 @@ This project provides helper functions and default implementations for creating 
 
 It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia.
 
+Table of Contents
+=================
+   * [Status](#status)
+      * [Anatomy of a Pipeline](#anatomy-of-a-pipeline)
+         * [Building a Pipeline](#building-a-pipeline)
+         * [The Main Function](#the-main-function)
+         * [(Optional) The Wrapper Function](#optional-the-wrapper-function)
+         * [Pre-Processing Functions](#pre-processing-functions)
+         * [Post-Processing Functions](#post-processing-functions)
+         * [Error Handlers](#error-handlers)
+         * [Extension Points](#extension-points)
+            * [Common Extension Points](#common-extension-points)
+            * [Using Extension Points](#using-extension-points)
+      * [Anatomy of the Context](#anatomy-of-the-context)
+         * [The request object](#the-request-object)
+         * [The content object](#the-content-object)
+         * [content.document in Detail](#contentdocument-in-detail)
+         * [content.sections in Detail](#contentsections-in-detail)
+         * [The response object](#the-response-object)
+         * [The error object](#the-error-object)
+      * [Utilities](#utilities)
+         * [Generate a Virtual DOM with utils.vdom](#generate-a-virtual-dom-with-utilsvdom)
+            * [Getting Started](#getting-started)
+            * [Simple Transformations](#simple-transformations)
+            * [Matching Nodes](#matching-nodes)
+            * [Creating DOM Nodes](#creating-dom-nodes)
+            * [Dealing with Child Nodes](#dealing-with-child-nodes)
+         * [Infer Content Types with utils.types](#infer-content-types-with-utilstypes)
+               * [Content Expression Language](#content-expression-language)
+         * [Inspecting the Pipeline Context](#inspecting-the-pipeline-context)
 # Status
 
 [![codecov](https://img.shields.io/codecov/c/github/adobe/helix-pipeline.svg)](https://codecov.io/gh/adobe/helix-pipeline)
