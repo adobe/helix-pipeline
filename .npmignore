@@ -2,7 +2,6 @@
 .eslint*
 .git*
 .nyc_output
-.snyk
 .vscode
 adobe-helix-*
 logs
