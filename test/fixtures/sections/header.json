@@ -2,11 +2,7 @@
   "intro": "Header only",
   "title": "Header only",
   "meta": {
-    "types": [
-      "has-heading",
-      "nb-heading-1",
-      "has-only-heading"
-    ]
+    "types": ["has-heading", "nb-heading-1", "has-only-heading"]
   },
   "type": "root",
   "children": [
@@ -20,9 +16,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-heading"
-        ]
+        "types": ["is-heading"]
       }
     }
   ]

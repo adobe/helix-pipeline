@@ -23,9 +23,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-heading"
-        ]
+        "types": ["is-heading"]
       }
     },
     {
@@ -37,9 +35,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-text"
-        ]
+        "types": ["is-text"]
       }
     }
   ]

@@ -27,9 +27,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-heading"
-        ]
+        "types": ["is-heading"]
       }
     },
     {
@@ -41,9 +39,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-text"
-        ]
+        "types": ["is-text"]
       }
     },
     {
@@ -67,9 +63,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "has-image"
-        ]
+        "types": ["has-image"]
       }
     }
   ]

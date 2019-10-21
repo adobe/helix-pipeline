@@ -1,47 +1,59 @@
 {
   "type": "root",
-  "children": [{
-      "type": "heading",
-      "depth": 1,
-      "children": [{
-        "type": "text",
-        "value": "Hypermedia Pipeline"
-      }]
-    },
-    {
-      "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines."
-      }]
-    },
-    {
-      "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia."
-      }]
-    },
+  "children": [
     {
       "type": "heading",
       "depth": 1,
-      "children": [{
-        "type": "text",
-        "value": "Status"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Hypermedia Pipeline"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
+          "type": "text",
+          "value": "This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Status"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
           "type": "link",
           "title": null,
           "url": "https://codecov.io/gh/adobe/hypermedia-pipeline",
-          "children": [{
-            "type": "image",
-            "title": null,
-            "url": "https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg",
-            "alt": "codecov"
-          }]
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/codecov/c/github/adobe/hypermedia-pipeline.svg",
+              "alt": "codecov"
+            }
+          ]
         },
         {
           "type": "text",
@@ -51,12 +63,14 @@
           "type": "link",
           "title": null,
           "url": "https://circleci.com/gh/adobe/parcel-plugin-htl",
-          "children": [{
-            "type": "image",
-            "title": null,
-            "url": "https://img.shields.io/circleci/project/github/adobe/hypermedia-pipeline.svg",
-            "alt": "CircleCI"
-          }]
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/circleci/project/github/adobe/hypermedia-pipeline.svg",
+              "alt": "CircleCI"
+            }
+          ]
         },
         {
           "type": "text",
@@ -66,12 +80,14 @@
           "type": "link",
           "title": null,
           "url": "https://github.com/adobe/hypermedia-pipeline/blob/master/LICENSE.txt",
-          "children": [{
-            "type": "image",
-            "title": null,
-            "url": "https://img.shields.io/github/license/adobe/hypermedia-pipeline.svg",
-            "alt": "GitHub license"
-          }]
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/github/license/adobe/hypermedia-pipeline.svg",
+              "alt": "GitHub license"
+            }
+          ]
         },
         {
           "type": "text",
@@ -81,12 +97,14 @@
           "type": "link",
           "title": null,
           "url": "https://github.com/adobe/hypermedia-pipeline/issues",
-          "children": [{
-            "type": "image",
-            "title": null,
-            "url": "https://img.shields.io/github/issues/adobe/hypermedia-pipeline.svg",
-            "alt": "GitHub issues"
-          }]
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/github/issues/adobe/hypermedia-pipeline.svg",
+              "alt": "GitHub issues"
+            }
+          ]
         },
         {
           "type": "text",
@@ -96,12 +114,14 @@
           "type": "link",
           "title": null,
           "url": "https://www.npmjs.com/package/@adobe/hypermedia-pipeline",
-          "children": [{
-            "type": "image",
-            "title": null,
-            "url": "https://img.shields.io/npm/dw/@adobe/hypermedia-pipeline.svg",
-            "alt": "npm"
-          }]
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://img.shields.io/npm/dw/@adobe/hypermedia-pipeline.svg",
+              "alt": "npm"
+            }
+          ]
         },
         {
           "type": "text",
@@ -111,88 +131,112 @@
           "type": "link",
           "title": null,
           "url": "https://greenkeeper.io/",
-          "children": [{
-            "type": "image",
-            "title": null,
-            "url": "https://badges.greenkeeper.io/adobe/hypermedia-pipeline.svg",
-            "alt": "Greenkeeper badge"
-          }]
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://badges.greenkeeper.io/adobe/hypermedia-pipeline.svg",
+              "alt": "Greenkeeper badge"
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 2,
-      "children": [{
-        "type": "text",
-        "value": "Anatomy of a Pipeline"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Anatomy of a Pipeline"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "A pipeline consists of following main parts:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "A pipeline consists of following main parts:"
+        }
+      ]
     },
     {
       "type": "list",
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "pre-processing functions"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "pre-processing functions"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "the main response generating function"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "the main response generating function"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "an optional wrapper function"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "an optional wrapper function"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "post-processing functions"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "post-processing functions"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "Each step of the pipeline is processing a single payload object, that will slowly accumulate the "
         },
@@ -216,86 +260,100 @@
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "See below for the anatomy of a payload."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "See below for the anatomy of a payload."
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Typically, there is one pipeline for each content type supported and pipeline are identified by file name, e.g."
+        }
+      ]
     },
     {
       "type": "list",
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "html.pipe.js"
-              },
-              {
-                "type": "text",
-                "value": " – creates HTML documents with the "
-              },
-              {
-                "type": "inlineCode",
-                "value": "text/html"
-              },
-              {
-                "type": "text",
-                "value": " content-type"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "html.pipe.js"
+                },
+                {
+                  "type": "text",
+                  "value": " – creates HTML documents with the "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "text/html"
+                },
+                {
+                  "type": "text",
+                  "value": " content-type"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "json.pipe.js"
-              },
-              {
-                "type": "text",
-                "value": " – creates JSON documents with the "
-              },
-              {
-                "type": "inlineCode",
-                "value": "application/json"
-              },
-              {
-                "type": "text",
-                "value": " content-type"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "json.pipe.js"
+                },
+                {
+                  "type": "text",
+                  "value": " – creates JSON documents with the "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "application/json"
+                },
+                {
+                  "type": "text",
+                  "value": " content-type"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
-        "type": "text",
-        "value": "Building a Pipeline"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Building a Pipeline"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "A pipeline builder can be created by creating a CommonJS module that exports a function "
         },
@@ -314,103 +372,120 @@
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
-          "type": "listItem",
-          "spread": false,
-          "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "cont"
-              },
-              {
-                "type": "text",
-                "value": ": the main function that will be executed as a continuation of the pipeline"
-              }
-            ]
-          }]
-        },
+      "children": [
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "params"
-              },
-              {
-                "type": "text",
-                "value": ": a map of parameters that are interpreted at runtime"
-              }
-            ]
-          }]
-        },
-        {
-          "type": "listItem",
-          "spread": false,
-          "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "secrets"
-              },
-              {
-                "type": "text",
-                "value": ": a map of protected configuration parameters like API keys that should be handled with care. By convention, all keys in "
-              },
-              {
-                "type": "inlineCode",
-                "value": "secret"
-              },
-              {
-                "type": "text",
-                "value": " are in ALL_CAPS_SNAKE_CASE."
-              }
-            ]
-          }]
-        },
-        {
-          "type": "listItem",
-          "spread": false,
-          "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "logger"
-              },
-              {
-                "type": "text",
-                "value": ": a "
-              },
-              {
-                "type": "link",
-                "title": null,
-                "url": "https://www.github.com/winstonjs/winston",
-                "children": [{
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "cont"
+                },
+                {
                   "type": "text",
-                  "value": "Winston"
-                }]
-              },
-              {
-                "type": "text",
-                "value": " logger"
-              }
-            ]
-          }]
+                  "value": ": the main function that will be executed as a continuation of the pipeline"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "params"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of parameters that are interpreted at runtime"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "secrets"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of protected configuration parameters like API keys that should be handled with care. By convention, all keys in "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "secret"
+                },
+                {
+                  "type": "text",
+                  "value": " are in ALL_CAPS_SNAKE_CASE."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "logger"
+                },
+                {
+                  "type": "text",
+                  "value": ": a "
+                },
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://www.github.com/winstonjs/winston",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "Winston"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "value": " logger"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "This project’s main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "This project’s main entry provides a helper function for pipeline construction and a few helper functions, so that a basic pipeline can be constructed like this:"
+        }
+      ]
     },
     {
       "type": "code",
@@ -420,7 +495,8 @@
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "In a typical pipeline, you will add additional processing steps as "
         },
@@ -445,14 +521,17 @@
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
-        "type": "text",
-        "value": "The Main Function"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "The Main Function"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "The main function is typically a pure function that converts the "
         },
@@ -492,14 +571,17 @@
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "In most scenarios, the main function is compiled from a template in a templating language like HTL, JST, or JSX."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "In most scenarios, the main function is compiled from a template in a templating language like HTL, JST, or JSX."
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "Typically, there is one template (and thus one main function) for each content variation of the file type. Content variations are identified by a selector (the piece of the file name before the file extension, e.g. in "
         },
@@ -523,181 +605,217 @@
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Examples of possible template names include:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Examples of possible template names include:"
+        }
+      ]
     },
     {
       "type": "list",
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "html.jsx"
-              },
-              {
-                "type": "text",
-                "value": " (compiled to "
-              },
-              {
-                "type": "inlineCode",
-                "value": "html.js"
-              },
-              {
-                "type": "text",
-                "value": ") – default for the HTML pipeline"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "html.jsx"
+                },
+                {
+                  "type": "text",
+                  "value": " (compiled to "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "html.js"
+                },
+                {
+                  "type": "text",
+                  "value": ") – default for the HTML pipeline"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "html.navigation.jst"
-              },
-              {
-                "type": "text",
-                "value": " (compiled to "
-              },
-              {
-                "type": "inlineCode",
-                "value": "html.navigation.js"
-              },
-              {
-                "type": "text",
-                "value": ") – renders the navigation"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "html.navigation.jst"
+                },
+                {
+                  "type": "text",
+                  "value": " (compiled to "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "html.navigation.js"
+                },
+                {
+                  "type": "text",
+                  "value": ") – renders the navigation"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "dropdown.json.js"
-              },
-              {
-                "type": "text",
-                "value": " (not compiled) – creates pure JSON output"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "dropdown.json.js"
+                },
+                {
+                  "type": "text",
+                  "value": " (not compiled) – creates pure JSON output"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "dropdown.html.htl"
-              },
-              {
-                "type": "text",
-                "value": " (compiled to "
-              },
-              {
-                "type": "inlineCode",
-                "value": "dropdown.html.js"
-              },
-              {
-                "type": "text",
-                "value": ") – renders the dropdown component"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "dropdown.html.htl"
+                },
+                {
+                  "type": "text",
+                  "value": " (compiled to "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "dropdown.html.js"
+                },
+                {
+                  "type": "text",
+                  "value": ") – renders the dropdown component"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
-        "type": "text",
-        "value": "(Optional) The Wrapper Function"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "(Optional) The Wrapper Function"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Sometimes it is neccessary to pre-process the payload in a template-specific fashion. This wrapper function (often called “Pre-JS” for brevity sake) allows the full transformation of the pipeline’s payload."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Sometimes it is neccessary to pre-process the payload in a template-specific fashion. This wrapper function (often called “Pre-JS” for brevity sake) allows the full transformation of the pipeline’s payload."
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Compared to the pipeline-specific pre-processing functions which handle the request, content, and response, the focus of the wrapper function is implementing business logic needed for the main template function. This allows for a clean separation between:"
+        }
+      ]
     },
     {
       "type": "list",
       "ordered": true,
       "start": 1,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "presentation (in the main function, often expressed in declarative templates)"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "presentation (in the main function, often expressed in declarative templates)"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "business logic (in the wrapper function, often expressed in imperative code)"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "business logic (in the wrapper function, often expressed in imperative code)"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "content-type specific implementation (in the pipeline, expressed in functional code)"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "content-type specific implementation (in the pipeline, expressed in functional code)"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "A simple implementation of a wrapper function would look like this:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "A simple implementation of a wrapper function would look like this:"
+        }
+      ]
     },
     {
       "type": "code",
@@ -708,180 +826,233 @@
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
-        "type": "text",
-        "value": "Pre-Processing Functions"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Pre-Processing Functions"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Pre-Processing functions are meant to:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Pre-Processing functions are meant to:"
+        }
+      ]
     },
     {
       "type": "list",
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "parse and process request parameters"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "parse and process request parameters"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "fetch and parse the requested content"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "fetch and parse the requested content"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "transform the requested content"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "transform the requested content"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
-        "type": "text",
-        "value": "Post-Processing Functions"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Post-Processing Functions"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Post-Processing functions are meant to:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Post-Processing functions are meant to:"
+        }
+      ]
     },
     {
       "type": "list",
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
-        "type": "listItem",
-        "spread": false,
-        "checked": null,
-        "children": [{
-          "type": "paragraph",
-          "children": [{
-            "type": "text",
-            "value": "process and transform the response"
-          }]
-        }]
-      }]
+      "children": [
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "process and transform the response"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "heading",
       "depth": 2,
-      "children": [{
-        "type": "text",
-        "value": "Anatomy of the Payload"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Anatomy of the Payload"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Following main properties exist:"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Following main properties exist:"
+        }
+      ]
     },
     {
       "type": "list",
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "inlineCode",
-              "value": "request"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "request"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "inlineCode",
-              "value": "content"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "content"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "inlineCode",
-              "value": "response"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "response"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "inlineCode",
-              "value": "context"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "context"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "inlineCode",
-              "value": "error"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "error"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "The "
         },
@@ -900,46 +1071,54 @@
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "params"
-              },
-              {
-                "type": "text",
-                "value": ": a map of request parameters"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "params"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of request parameters"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "headers"
-              },
-              {
-                "type": "text",
-                "value": ": a map of HTTP headers"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "headers"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of HTTP headers"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "The "
         },
@@ -958,60 +1137,71 @@
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
-          "type": "listItem",
-          "spread": false,
-          "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "body"
-              },
-              {
-                "type": "text",
-                "value": ": the unparsed content body as a "
-              },
-              {
-                "type": "inlineCode",
-                "value": "string"
-              }
-            ]
-          }]
-        },
+      "children": [
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "mdast"
-              },
-              {
-                "type": "text",
-                "value": ": the parsed "
-              },
-              {
-                "type": "link",
-                "title": null,
-                "url": "https://github.com/syntax-tree/mdast",
-                "children": [{
-                  "type": "text",
-                  "value": "Markdown AST"
-                }]
-              }
-            ]
-          }]
-        },
-        {
-          "type": "listItem",
-          "spread": false,
-          "checked": null,
-          "children": [{
+          "children": [
+            {
               "type": "paragraph",
-              "children": [{
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "body"
+                },
+                {
+                  "type": "text",
+                  "value": ": the unparsed content body as a "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "string"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "mdast"
+                },
+                {
+                  "type": "text",
+                  "value": ": the parsed "
+                },
+                {
+                  "type": "link",
+                  "title": null,
+                  "url": "https://github.com/syntax-tree/mdast",
+                  "children": [
+                    {
+                      "type": "text",
+                      "value": "Markdown AST"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
                   "type": "inlineCode",
                   "value": "meta"
                 },
@@ -1026,56 +1216,66 @@
               "ordered": false,
               "start": null,
               "spread": false,
-              "children": [{
+              "children": [
+                {
                   "type": "listItem",
                   "spread": false,
                   "checked": null,
-                  "children": [{
-                    "type": "paragraph",
-                    "children": [{
-                        "type": "inlineCode",
-                        "value": "title"
-                      },
-                      {
-                        "type": "text",
-                        "value": ": title of the document"
-                      }
-                    ]
-                  }]
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "inlineCode",
+                          "value": "title"
+                        },
+                        {
+                          "type": "text",
+                          "value": ": title of the document"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "listItem",
                   "spread": false,
                   "checked": null,
-                  "children": [{
-                    "type": "paragraph",
-                    "children": [{
-                        "type": "inlineCode",
-                        "value": "intro"
-                      },
-                      {
-                        "type": "text",
-                        "value": ": a plain-text introduction or description"
-                      }
-                    ]
-                  }]
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "inlineCode",
+                          "value": "intro"
+                        },
+                        {
+                          "type": "text",
+                          "value": ": a plain-text introduction or description"
+                        }
+                      ]
+                    }
+                  ]
                 },
                 {
                   "type": "listItem",
                   "spread": false,
                   "checked": null,
-                  "children": [{
-                    "type": "paragraph",
-                    "children": [{
-                        "type": "inlineCode",
-                        "value": "type"
-                      },
-                      {
-                        "type": "text",
-                        "value": ": the content type of the document"
-                      }
-                    ]
-                  }]
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "children": [
+                        {
+                          "type": "inlineCode",
+                          "value": "type"
+                        },
+                        {
+                          "type": "text",
+                          "value": ": the content type of the document"
+                        }
+                      ]
+                    }
+                  ]
                 }
               ]
             }
@@ -1085,59 +1285,69 @@
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "htast"
-              },
-              {
-                "type": "text",
-                "value": ": the HTML AST"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "htast"
+                },
+                {
+                  "type": "text",
+                  "value": ": the HTML AST"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "html"
-              },
-              {
-                "type": "text",
-                "value": ": a string of the content rendered as HTML"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "html"
+                },
+                {
+                  "type": "text",
+                  "value": ": a string of the content rendered as HTML"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "children"
-              },
-              {
-                "type": "text",
-                "value": ": an array of top-level elements of the HTML-rendered content"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "children"
+                },
+                {
+                  "type": "text",
+                  "value": ": an array of top-level elements of the HTML-rendered content"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "The "
         },
@@ -1156,67 +1366,78 @@
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "body"
-              },
-              {
-                "type": "text",
-                "value": ": the unparsed response body as a "
-              },
-              {
-                "type": "inlineCode",
-                "value": "string"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "body"
+                },
+                {
+                  "type": "text",
+                  "value": ": the unparsed response body as a "
+                },
+                {
+                  "type": "inlineCode",
+                  "value": "string"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "headers"
-              },
-              {
-                "type": "text",
-                "value": ": a map of HTTP response headers"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "headers"
+                },
+                {
+                  "type": "text",
+                  "value": ": a map of HTTP response headers"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-                "type": "inlineCode",
-                "value": "status"
-              },
-              {
-                "type": "text",
-                "value": ": the HTTP status code"
-              }
-            ]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "status"
+                },
+                {
+                  "type": "text",
+                  "value": ": the HTTP status code"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "The "
         },
@@ -1232,15 +1453,18 @@
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "TBD: used for stuff that is neither content, request, or response"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "TBD: used for stuff that is neither content, request, or response"
+        }
+      ]
     },
     {
       "type": "heading",
       "depth": 3,
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "The "
         },
@@ -1256,7 +1480,8 @@
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "This object is only set when there has been an error during pipeline processing. Any step in the pipeline may set the "
         },
@@ -1280,7 +1505,8 @@
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "Alternatively, steps can attempt to handle the "
         },
@@ -1304,7 +1530,8 @@
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "The only known property in "
         },
@@ -1323,23 +1550,28 @@
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
-        "type": "listItem",
-        "spread": false,
-        "checked": null,
-        "children": [{
-          "type": "paragraph",
-          "children": [{
-              "type": "inlineCode",
-              "value": "message"
-            },
+      "children": [
+        {
+          "type": "listItem",
+          "spread": false,
+          "checked": null,
+          "children": [
             {
-              "type": "text",
-              "value": ": the error message"
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "inlineCode",
+                  "value": "message"
+                },
+                {
+                  "type": "text",
+                  "value": ": the error message"
+                }
+              ]
             }
           ]
-        }]
-      }]
+        }
+      ]
     }
   ]
 }

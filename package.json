@@ -9,7 +9,7 @@
     "semantic-release": "semantic-release",
     "test": "nyc --reporter=text --reporter=lcov --check-coverage --branches 94 --statements 99 --lines 100 mocha",
     "test-ci": "npm run lint && npm run test && codecov",
-    "lint": "npx eslint . && npm run types",
+    "lint": "npx prettier --write '**/*.json' && npx eslint . && npm run types",
     "types": "npm run docs && node bin/schema2ts.js",
     "docs": "npx jsonschema2md -d src/schemas -o docs",
     "commit": "git-cz"

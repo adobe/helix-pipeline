@@ -1,36 +1,45 @@
 {
   "type": "root",
-  "children": [{
+  "children": [
+    {
       "type": "html",
       "value": "<!--\n  ~ Licensed to the Apache Software Foundation (ASF) under one or more\n  ~ contributor license agreements.  See the NOTICE file distributed with\n  ~ this work for additional information regarding copyright ownership.\n  ~ The ASF licenses this file to You under the Apache License, Version 2.0\n  ~ (the \"License\"); you may not use this file except in compliance with\n  ~ the License.  You may obtain a copy of the License at\n  ~\n  ~      http://www.apache.org/licenses/LICENSE-2.0\n  ~\n  ~ Unless required by applicable law or agreed to in writing, software\n  ~ distributed under the License is distributed on an \"AS IS\" BASIS,\n  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n  ~ See the License for the specific language governing permissions and\n  ~ limitations under the License.\n  -->"
     },
     {
       "type": "heading",
       "depth": 1,
-      "children": [{
-        "type": "text",
-        "value": "Grayscale"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Grayscale"
+        }
+      ]
     },
     {
       "type": "heading",
       "depth": 2,
-      "children": [{
-        "type": "text",
-        "value": "A free, responsive, one page Bootstrap theme created by Start Bootstrap."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "A free, responsive, one page Bootstrap theme created by Start Bootstrap."
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "link",
-        "title": null,
-        "url": "#about",
-        "children": [{
-          "type": "text",
-          "value": "Get Started"
-        }]
-      }]
+      "children": [
+        {
+          "type": "link",
+          "title": null,
+          "url": "#about",
+          "children": [
+            {
+              "type": "text",
+              "value": "Get Started"
+            }
+          ]
+        }
+      ]
     },
     {
       "type": "thematicBreak"
@@ -38,14 +47,17 @@
     {
       "type": "heading",
       "depth": 2,
-      "children": [{
-        "type": "text",
-        "value": "Built with Bootstrap 4"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Built with Bootstrap 4"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "text",
           "value": "Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be                         yours right now, simply download the template on "
         },
@@ -53,10 +65,12 @@
           "type": "link",
           "title": null,
           "url": "http://startbootstrap.com/template-overviews/grayscale/",
-          "children": [{
-            "type": "text",
-            "value": "the preview page"
-          }]
+          "children": [
+            {
+              "type": "text",
+              "value": "the preview page"
+            }
+          ]
         },
         {
           "type": "text",
@@ -66,12 +80,14 @@
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "image",
-        "title": null,
-        "url": "/dist/img/ipad.png",
-        "alt": "ipad"
-      }]
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "/dist/img/ipad.png",
+          "alt": "ipad"
+        }
+      ]
     },
     {
       "type": "thematicBreak"
@@ -79,26 +95,32 @@
     {
       "type": "heading",
       "depth": 4,
-      "children": [{
-        "type": "text",
-        "value": "Shoreline"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Shoreline"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "image",
-        "title": null,
-        "url": "/dist/img/bg-masthead.jpg",
-        "alt": "bg-masthead"
-      }]
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "/dist/img/bg-masthead.jpg",
+          "alt": "bg-masthead"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!"
+        }
+      ]
     },
     {
       "type": "thematicBreak"
@@ -106,26 +128,32 @@
     {
       "type": "heading",
       "depth": 4,
-      "children": [{
-        "type": "text",
-        "value": "Misty"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Misty"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "image",
-        "title": null,
-        "url": "/dist/img/demo-image-01.jpg",
-        "alt": "demo-image-01.jpg"
-      }]
+      "children": [
+        {
+          "type": "image",
+          "title": null,
+          "url": "/dist/img/demo-image-01.jpg",
+          "alt": "demo-image-01.jpg"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "An example of where you can put an image of a project, or anything else, along with a description."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "An example of where you can put an image of a project, or anything else, along with a description."
+        }
+      ]
     },
     {
       "type": "thematicBreak"
@@ -133,14 +161,17 @@
     {
       "type": "heading",
       "depth": 4,
-      "children": [{
-        "type": "text",
-        "value": "Mountains"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Mountains"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
+      "children": [
+        {
           "type": "image",
           "title": null,
           "url": "/dist/img/demo-image-02.jpg",
@@ -158,10 +189,12 @@
     {
       "type": "heading",
       "depth": 2,
-      "children": [{
-        "type": "text",
-        "value": "Subscribe to receive updates!"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Subscribe to receive updates!"
+        }
+      ]
     },
     {
       "type": "html",
@@ -175,41 +208,54 @@
       "ordered": false,
       "start": null,
       "spread": false,
-      "children": [{
+      "children": [
+        {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "Address: 4923 Market Street, Orlando FL"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Address: 4923 Market Street, Orlando FL"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "Email: hello@yourdomain.com"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Email: hello@yourdomain.com"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "listItem",
           "spread": false,
           "checked": null,
-          "children": [{
-            "type": "paragraph",
-            "children": [{
-              "type": "text",
-              "value": "Phone: +1 (555) 902-8832"
-            }]
-          }]
+          "children": [
+            {
+              "type": "paragraph",
+              "children": [
+                {
+                  "type": "text",
+                  "value": "Phone: +1 (555) 902-8832"
+                }
+              ]
+            }
+          ]
         }
       ]
     }

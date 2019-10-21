@@ -21,46 +21,32 @@
     "url": {
       "type": "string",
       "description": "The path and request parameters of the client request URL",
-      "examples": [
-        "/docs/api/general/index.nav.html?a=1"
-      ]
+      "examples": ["/docs/api/general/index.nav.html?a=1"]
     },
     "path": {
       "type": "string",
       "description": "The path of the client request URL",
-      "examples": [
-        "/docs/api/general/index.nav.html"
-      ]
+      "examples": ["/docs/api/general/index.nav.html"]
     },
     "pathInfo": {
       "type": "string",
       "description": "The part of the client path that is relative to the rootPath",
-      "examples": [
-        "/general/index.nav.html"
-      ]
+      "examples": ["/general/index.nav.html"]
     },
     "rootPath": {
       "type": "string",
       "description": "The request root path of the current strain.",
-      "examples": [
-        "/docs/api"
-      ]
+      "examples": ["/docs/api"]
     },
     "selector": {
       "type": "string",
       "description": "The selector (sub-type indicator)",
-      "examples": [
-        "",
-        "nav"
-      ]
+      "examples": ["", "nav"]
     },
     "extension": {
       "type": "string",
       "description": "The extension of the requested resource",
-      "examples": [
-        "html",
-        "json"
-      ]
+      "examples": ["html", "json"]
     },
     "method": {
       "type": "string",
@@ -91,9 +77,7 @@
     "queryString": {
       "type": "string",
       "description": "The original query string",
-      "examples": [
-        "?parameter1=foo&parameter2=bar"
-      ]
+      "examples": ["?parameter1=foo&parameter2=bar"]
     }
   }
 }

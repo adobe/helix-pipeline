@@ -71,7 +71,7 @@
               "description": "Owner of the GitHub repository. This is the name of a user or organization."
             },
             "repo": {
-              "type":"string",
+              "type": "string",
               "description": "Repository where content originates"
             },
             "ref": {
@@ -85,16 +85,12 @@
             "path": {
               "type": "string",
               "description": "Path to the requested (Markdown) file",
-              "examples": [
-                "/general/index.md"
-              ]
+              "examples": ["/general/index.md"]
             },
             "rootPath": {
               "type": "string",
               "description": "The request root path of the current strain.",
-              "examples": [
-                "/docs/api"
-              ]
+              "examples": ["/docs/api"]
             },
             "strain": {
               "type": "string",
@@ -109,7 +105,5 @@
       }
     }
   },
-  "allOf": [
-    {"$ref": "#/definitions/rawrequest"}
-  ]
+  "allOf": [{ "$ref": "#/definitions/rawrequest" }]
 }

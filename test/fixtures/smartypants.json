@@ -1,19 +1,24 @@
 {
   "type": "root",
-  "children": [{
+  "children": [
+    {
       "type": "heading",
       "depth": 1,
-      "children": [{
-        "type": "text",
-        "value": "Hello “World”"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Hello “World”"
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "This is — excuse my French — awesome!"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "This is — excuse my French — awesome!"
+        }
+      ]
     }
   ]
 }

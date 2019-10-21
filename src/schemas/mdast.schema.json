@@ -87,10 +87,10 @@
       "items": {
         "oneOf": [
           {
-              "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
+            "$ref": "https://ns.adobe.com/helix/pipeline/mdast"
           },
           {
-              "$ref": "https://ns.adobe.com/helix/pipeline/section#/definitions/section"
+            "$ref": "https://ns.adobe.com/helix/pipeline/section#/definitions/section"
           }
         ]
       }
@@ -201,8 +201,8 @@
         }
       },
       "hName": {
-         "description": "May be use to override the element’s tag-name",
-         "type": ["null", "string"]
+        "description": "May be use to override the element’s tag-name",
+        "type": ["null", "string"]
       },
       "hProperties": {
         "description": "May be used to define extra DOM element properties",

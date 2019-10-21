@@ -1,12 +1,15 @@
 {
   "type": "root",
-  "children": [{
+  "children": [
+    {
       "type": "heading",
       "depth": 1,
-      "children": [{
-        "type": "text",
-        "value": "I'm built to confuse"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "I'm built to confuse"
+        }
+      ]
     },
     {
       "type": "yaml",
@@ -16,57 +19,69 @@
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "There will be two thematic breaks next."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "There will be two thematic breaks next."
+        }
+      ]
     },
     {
       "type": "thematicBreak"
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "That was the first one"
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "That was the first one"
+        }
+      ]
     },
     {
       "type": "thematicBreak"
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "This was the second one."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "This was the second one."
+        }
+      ]
     },
     {
       "type": "thematicBreak"
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "And here is another one."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "And here is another one."
+        }
+      ]
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "The end."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "The end."
+        }
+      ]
     },
     {
       "type": "thematicBreak"
     },
     {
       "type": "paragraph",
-      "children": [{
-        "type": "text",
-        "value": "Really."
-      }]
+      "children": [
+        {
+          "type": "text",
+          "value": "Really."
+        }
+      ]
     }
   ]
 }

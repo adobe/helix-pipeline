@@ -16,7 +16,7 @@ const check = require("../src/xml/check-xml");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: "info"
+  level: `info`
 });
 
 const context = {

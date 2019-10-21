@@ -40,9 +40,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -54,9 +52,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -68,9 +64,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -83,9 +77,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -191,10 +183,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "has-link",
-              "is-text"
-            ]
+            "types": ["has-link", "is-text"]
           }
         }
       ]
@@ -239,9 +228,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -253,9 +240,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -278,9 +263,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
@@ -299,9 +282,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
@@ -320,9 +301,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
@@ -341,21 +320,14 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
             }
           ],
           "meta": {
-            "types": [
-              "has-text",
-              "nb-text-4",
-              "has-only-text",
-              "is-list"
-            ]
+            "types": ["has-text", "nb-text-4", "has-only-text", "is-list"]
           }
         },
         {
@@ -383,10 +355,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         }
       ]
@@ -395,11 +364,7 @@
       "title": "This section has a paragraph, but no title.",
       "intro": "This section has a paragraph, but no title.",
       "meta": {
-        "types": [
-          "has-text",
-          "nb-text-2",
-          "has-only-text"
-        ]  
+        "types": ["has-text", "nb-text-2", "has-only-text"]
       },
       "type": "section",
       "children": [
@@ -412,9 +377,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -426,9 +389,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         }
       ]
@@ -437,11 +398,7 @@
       "intro": "This section has a title, but no paragraph",
       "title": "This section has a title, but no paragraph",
       "meta": {
-        "types": [
-          "has-heading",
-          "nb-heading-1",
-          "has-only-heading"
-        ]  
+        "types": ["has-heading", "nb-heading-1", "has-only-heading"]
       },
       "type": "section",
       "children": [
@@ -455,9 +412,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         }
       ]
@@ -473,7 +428,7 @@
           "nb-text-2",
           "is-text-list",
           "is-text"
-        ]  
+        ]
       },
       "type": "section",
       "children": [
@@ -486,9 +441,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -500,9 +453,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -537,10 +488,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -571,10 +519,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -636,9 +581,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -658,10 +601,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         },
         {
@@ -688,10 +628,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -714,10 +651,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -748,10 +682,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -789,11 +720,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text",
-                      "has-link"
-                    ]
+                    "types": ["has-inlineCode", "is-text", "has-link"]
                   }
                 }
               ]
@@ -823,9 +750,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -833,9 +758,7 @@
           "lang": "javascript",
           "value": "// the pipeline itself\nconst pipeline = require(\"@adobe/hypermedia-pipeline\");\n// helper functions and log\nconst { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');\n\nmodule.exports.pipe = function(cont, params, secrets, logger = log) {\n    logger.log(\"debug\", \"Constructing Custom Pipeline\");\n\n    return pipeline()\n        .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload\n        .once(cont)            // required: execute the continuation function\n        .post(adaptOWResponse) // optional: turns the Payload into an OpenWhisk-style response\n}",
           "meta": {
-            "types": [
-              "is-code"
-            ]
+            "types": ["is-code"]
           }
         },
         {
@@ -863,10 +786,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         }
       ]
@@ -903,9 +823,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -949,10 +867,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         },
         {
@@ -964,9 +879,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -994,10 +907,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         },
         {
@@ -1009,9 +919,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -1046,10 +954,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1080,10 +985,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1106,10 +1008,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1140,10 +1039,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1171,9 +1067,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -1185,9 +1079,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -1199,9 +1091,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -1224,9 +1114,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
@@ -1245,9 +1133,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
@@ -1266,21 +1152,14 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
             }
           ],
           "meta": {
-            "types": [
-              "has-text",
-              "nb-text-3",
-              "has-only-text",
-              "is-list"
-            ]
+            "types": ["has-text", "nb-text-3", "has-only-text", "is-list"]
           }
         },
         {
@@ -1292,9 +1171,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -1302,9 +1179,7 @@
           "lang": "javascript",
           "value": "// All wrapper functions must export `pre`\n// The functions takes following arguments:\n// - `cont` (the continuation function, i.e. the main template function)\n// - `payload` (the payload of the pipeline)\nmodule.exports.pre = (cont, payload) => {\n    const {request, content, context, response} = payload;\n    \n    // modifying the payload content before invoking the main function\n    content.hello = 'World';\n    const modifiedpayload = {request, content, context, response};\n\n    // invoking the main function with the new payload. Capturing the response\n    // payload for further modification\n\n    const responsepayload = cont(modifiedpayload);\n\n    // Adding a value to the payload response\n    const modifiedresponse = modifiedpayload.response;\n    modifiedresponse.hello = 'World';\n\n    return Object.assign(modifiedpayload, modifiedresponse);\n}",
           "meta": {
-            "types": [
-              "is-code"
-            ]
+            "types": ["is-code"]
           }
         },
         {
@@ -1317,9 +1192,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -1331,9 +1204,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -1356,9 +1227,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
@@ -1377,9 +1246,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
@@ -1398,21 +1265,14 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
             }
           ],
           "meta": {
-            "types": [
-              "has-text",
-              "nb-text-3",
-              "has-only-text",
-              "is-list"
-            ]
+            "types": ["has-text", "nb-text-3", "has-only-text", "is-list"]
           }
         },
         {
@@ -1425,9 +1285,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -1439,9 +1297,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -1464,21 +1320,14 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "is-text"
-                    ]
+                    "types": ["is-text"]
                   }
                 }
               ]
             }
           ],
           "meta": {
-            "types": [
-              "has-text",
-              "nb-text-1",
-              "has-only-text",
-              "is-list"
-            ]
+            "types": ["has-text", "nb-text-1", "has-only-text", "is-list"]
           }
         },
         {
@@ -1491,9 +1340,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -1505,9 +1352,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -1530,9 +1375,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode"
-                    ]
+                    "types": ["has-inlineCode"]
                   }
                 }
               ]
@@ -1551,9 +1394,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode"
-                    ]
+                    "types": ["has-inlineCode"]
                   }
                 }
               ]
@@ -1572,9 +1413,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode"
-                    ]
+                    "types": ["has-inlineCode"]
                   }
                 }
               ]
@@ -1593,9 +1432,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode"
-                    ]
+                    "types": ["has-inlineCode"]
                   }
                 }
               ]
@@ -1614,9 +1451,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode"
-                    ]
+                    "types": ["has-inlineCode"]
                   }
                 }
               ]
@@ -1649,9 +1484,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -1678,10 +1511,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1704,10 +1534,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1743,9 +1570,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -1776,10 +1601,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1813,11 +1635,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text",
-                      "has-link"
-                    ]
+                    "types": ["has-inlineCode", "is-text", "has-link"]
                   }
                 }
               ]
@@ -1840,10 +1658,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 },
                 {
@@ -1870,10 +1685,7 @@
                             }
                           ],
                           "meta": {
-                            "types": [
-                              "has-inlineCode",
-                              "is-text"
-                            ]
+                            "types": ["has-inlineCode", "is-text"]
                           }
                         }
                       ]
@@ -1896,10 +1708,7 @@
                             }
                           ],
                           "meta": {
-                            "types": [
-                              "has-inlineCode",
-                              "is-text"
-                            ]
+                            "types": ["has-inlineCode", "is-text"]
                           }
                         }
                       ]
@@ -1922,10 +1731,7 @@
                             }
                           ],
                           "meta": {
-                            "types": [
-                              "has-inlineCode",
-                              "is-text"
-                            ]
+                            "types": ["has-inlineCode", "is-text"]
                           }
                         }
                       ]
@@ -1963,10 +1769,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -1989,10 +1792,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -2015,10 +1815,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -2059,9 +1856,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -2092,10 +1887,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -2118,10 +1910,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -2144,10 +1933,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]
@@ -2183,9 +1969,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -2197,9 +1981,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text"
-            ]
+            "types": ["is-text"]
           }
         },
         {
@@ -2220,9 +2002,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-heading"
-            ]
+            "types": ["is-heading"]
           }
         },
         {
@@ -2250,10 +2030,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         },
         {
@@ -2281,10 +2058,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         },
         {
@@ -2304,10 +2078,7 @@
             }
           ],
           "meta": {
-            "types": [
-              "is-text",
-              "has-inlineCode"
-            ]
+            "types": ["is-text", "has-inlineCode"]
           }
         },
         {
@@ -2334,10 +2105,7 @@
                     }
                   ],
                   "meta": {
-                    "types": [
-                      "has-inlineCode",
-                      "is-text"
-                    ]
+                    "types": ["has-inlineCode", "is-text"]
                   }
                 }
               ]

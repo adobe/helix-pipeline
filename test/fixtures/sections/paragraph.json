@@ -2,11 +2,7 @@
   "title": "This is only a paragraph.",
   "intro": "This is only a paragraph.",
   "meta": {
-    "types": [
-      "has-text",
-      "nb-text-1",
-      "has-only-text"
-    ]  
+    "types": ["has-text", "nb-text-1", "has-only-text"]
   },
   "type": "root",
   "children": [
@@ -19,9 +15,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-text"
-        ]
+        "types": ["is-text"]
       }
     }
   ]

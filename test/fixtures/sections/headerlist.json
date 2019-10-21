@@ -23,9 +23,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-heading"
-        ]
+        "types": ["is-heading"]
       }
     },
     {
@@ -48,9 +46,7 @@
                 }
               ],
               "meta": {
-                "types": [
-                  "is-text"
-                ]
+                "types": ["is-text"]
               }
             }
           ]
@@ -69,9 +65,7 @@
                 }
               ],
               "meta": {
-                "types": [
-                  "is-text"
-                ]
+                "types": ["is-text"]
               }
             }
           ]
@@ -90,21 +84,14 @@
                 }
               ],
               "meta": {
-                "types": [
-                  "is-text"
-                ]
+                "types": ["is-text"]
               }
             }
           ]
         }
       ],
       "meta": {
-        "types": [
-          "has-text",
-          "nb-text-3",
-          "has-only-text",
-          "is-list"
-        ]
+        "types": ["has-text", "nb-text-3", "has-only-text", "is-list"]
       }
     }
   ]

@@ -37,10 +37,7 @@
         }
       ],
       "meta": {
-        "types": [
-          "is-text",
-          "has-link"
-        ]
+        "types": ["is-text", "has-link"]
       }
     }
   ]

@@ -1,6 +1,7 @@
 {
   "type": "root",
-  "children": [{
+  "children": [
+    {
       "children": [
         {
           "type": "text",
