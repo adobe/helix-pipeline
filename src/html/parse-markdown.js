@@ -9,24 +9,30 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const unified = require('unified');
-const remark = require('remark-parse');
-const { setdefault } = require('ferrum');
-const VDOMTransformer = require('../utils/mdast-to-vdom');
+const unified = require("unified");
+const remark = require("remark-parse");
+const { setdefault } = require("ferrum");
+const VDOMTransformer = require("../utils/mdast-to-vdom");
 
 function parseMarkdown(context, action) {
-  const content = setdefault(context, 'content', {});
-  const body = setdefault(content, 'body', '');
+  const content = setdefault(context, "content", {});
+  const body = setdefault(content, "body", "");
 
-  const request = setdefault(context, 'request', {});
-  if (!request.extension) request.extension = 'html';
+  const request = setdefault(context, "request", {});
+  if (!request.extension) request.extension = "html";
   const { extension } = request;
 
-  action.logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
-  content.mdast = unified().use(remark).parse(body);
+  action.logger.debug(
+    `Parsing markdown from request body starting with ${body.split("\n")[0]}`
+  );
+  content.mdast = unified()
+    .use(remark)
+    .parse(body);
   // initialize transformer
-  action.transformer = new VDOMTransformer()
-    .withOptions({ extension, ...action.secrets });
+  action.transformer = new VDOMTransformer().withOptions({
+    extension,
+    ...action.secrets
+  });
 }
 
 module.exports = parseMarkdown;

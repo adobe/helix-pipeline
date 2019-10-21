@@ -9,10 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const fallback = require('mdast-util-to-hast/lib/handlers/heading');
-const toString = require('mdast-util-to-string');
-const strip = require('strip-markdown');
-const GithubSlugger = require('github-slugger');
+const fallback = require("mdast-util-to-hast/lib/handlers/heading");
+const toString = require("mdast-util-to-string");
+const strip = require("strip-markdown");
+const GithubSlugger = require("github-slugger");
 
 /**
  * Utility class injects heading identifiers during the MDAST to VDOM transformation.

@@ -10,24 +10,24 @@
  * governing permissions and limitations under the License.
  */
 
-const { setdefault, pairs, foldl } = require('ferrum');
+const { setdefault, pairs, foldl } = require("ferrum");
 
 function uncached({ response }) {
-  return !(response && response.headers && response.headers['Cache-Control']);
+  return !(response && response.headers && response.headers["Cache-Control"]);
 }
 
 function cache(context) {
-  const res = setdefault(context, 'response', {});
-  const headers = setdefault(res, 'headers', {});
+  const res = setdefault(context, "response", {});
+  const headers = setdefault(res, "headers", {});
   const directives = {
-    's-maxage': 30 * 24 * 3600, // serve from cache (without revalidation) for 30 days
-    'stale-while-revalidate': 365 * 24 * 3600, // serve stale (while revalidating in background) for a year
+    "s-maxage": 30 * 24 * 3600, // serve from cache (without revalidation) for 30 days
+    "stale-while-revalidate": 365 * 24 * 3600 // serve stale (while revalidating in background) for a year
   };
 
-  headers['Cache-Control'] = foldl(
+  headers["Cache-Control"] = foldl(
     pairs(directives),
-    '',
-    (a, [key, value]) => `${a + (a ? ', ' : '') + key}=${value}`,
+    "",
+    (a, [key, value]) => `${a + (a ? ", " : "") + key}=${value}`
   );
 }
 

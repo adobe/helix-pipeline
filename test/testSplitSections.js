@@ -10,15 +10,15 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
-const parse = require('../src/html/parse-markdown');
-const split = require('../src/html/split-sections');
-const parseFront = require('../src/html/parse-frontmatter');
-const { assertMatch } = require('./markdown-utils');
+const { Logger } = require("@adobe/helix-shared");
+const parse = require("../src/html/parse-markdown");
+const split = require("../src/html/split-sections");
+const parseFront = require("../src/html/parse-frontmatter");
+const { assertMatch } = require("./markdown-utils");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 function callback(body) {
@@ -29,8 +29,8 @@ function callback(body) {
   return data.content.mdast.children;
 }
 
-describe('Test Section Splitting', () => {
-  it('Parses markdown with sections', () => {
-    assertMatch('sections', callback);
+describe("Test Section Splitting", () => {
+  it("Parses markdown with sections", () => {
+    assertMatch("sections", callback);
   });
 });

@@ -103,6 +103,12 @@ export interface Action {
     [k: string]: any;
   };
   secrets?: Secrets;
+  /**
+   * A VDOMTransformer instance
+   */
+  transformer?: {
+    [k: string]: any;
+  };
 }
 /**
  * Secrets passed into the pipeline such as API Keys or configuration settings.
@@ -151,6 +157,10 @@ export interface Secrets {
    * API endpoint or action name to the service that resolves github refs to commit SHAs.
    */
   RESOLVE_GITREF_SERVICE?: string;
+  /**
+   * GitHub access token to use while fetching markdown. See https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line.
+   */
+  GITHUB_TOKEN?: string;
   /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".

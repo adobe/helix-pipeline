@@ -10,15 +10,15 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const selectStatus_ = require('../src/html/set-status.js');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const selectStatus_ = require("../src/html/set-status.js");
 
-const selectStatus = (inProduction) => (context, env) => {
+const selectStatus = inProduction => (context, env) => {
   // Mocking whether we are in production or not
   const old = process.env.__OW_ACTIVATION_ID;
   try {
-    process.env.__OW_ACTIVATION_ID = inProduction ? 'mocked' : '';
+    process.env.__OW_ACTIVATION_ID = inProduction ? "mocked" : "";
     selectStatus_(context, env);
     return context;
   } finally {
@@ -28,44 +28,62 @@ const selectStatus = (inProduction) => (context, env) => {
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
-describe('Test set-status', () => {
-  const error = 'oh, no!';
+describe("Test set-status", () => {
+  const error = "oh, no!";
 
-  it('sets a verbose 500 for an error in dev', () => {
-    const data = selectStatus(false)({ content: { html: '<html></html>' }, error }, { logger });
+  it("sets a verbose 500 for an error in dev", () => {
+    const data = selectStatus(false)(
+      { content: { html: "<html></html>" }, error },
+      { logger }
+    );
     assert.strictEqual(data.response.status, 500);
-    assert.strictEqual(data.response.body, `<html><body><h1>500</h1><pre>${error}</pre></body></html>`);
-    assert.strictEqual(data.response.headers['Content-Type'], 'text/html');
+    assert.strictEqual(
+      data.response.body,
+      `<html><body><h1>500</h1><pre>${error}</pre></body></html>`
+    );
+    assert.strictEqual(data.response.headers["Content-Type"], "text/html");
   });
 
-  it('sets a terse 500 for an error in production', () => {
-    const data = selectStatus(true)({ content: { html: '<html></html>' }, error }, { logger });
+  it("sets a terse 500 for an error in production", () => {
+    const data = selectStatus(true)(
+      { content: { html: "<html></html>" }, error },
+      { logger }
+    );
     assert.strictEqual(data.response.status, 500);
-    assert.strictEqual(data.response.body, '');
+    assert.strictEqual(data.response.body, "");
   });
 
-  it('sets a verbose 500 for an error in production if x-debug header is present', () => {
+  it("sets a verbose 500 for an error in production if x-debug header is present", () => {
     const request = {
       headers: {
-        'x-debug': 'true',
-      },
+        "x-debug": "true"
+      }
     };
-    const data = selectStatus(true)({ content: { html: '<html></html>' }, error }, { logger, request });
+    const data = selectStatus(true)(
+      { content: { html: "<html></html>" }, error },
+      { logger, request }
+    );
     assert.strictEqual(data.response.status, 500);
-    assert.strictEqual(data.response.body, `<html><body><h1>500</h1><pre>${error}</pre></body></html>`);
-    assert.strictEqual(data.response.headers['Content-Type'], 'text/html');
+    assert.strictEqual(
+      data.response.body,
+      `<html><body><h1>500</h1><pre>${error}</pre></body></html>`
+    );
+    assert.strictEqual(data.response.headers["Content-Type"], "text/html");
   });
 
-  it('keeps an existing status', () => {
+  it("keeps an existing status", () => {
     const data = selectStatus(true)({ response: { status: 201 } }, { logger });
     assert.strictEqual(data.response.status, 201);
   });
 
-  it('sets a 200 if all good', () => {
-    const data = selectStatus(true)({ content: { html: '<html></html>' } }, { logger });
+  it("sets a 200 if all good", () => {
+    const data = selectStatus(true)(
+      { content: { html: "<html></html>" } },
+      { logger }
+    );
     assert.strictEqual(data.response.status, 200);
   });
 });

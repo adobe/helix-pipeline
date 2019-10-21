@@ -11,8 +11,8 @@
  */
 
 /* eslint-disable camelcase,no-underscore-dangle */
-const querystring = require('querystring');
-const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
+const querystring = require("querystring");
+const owwrapper = require("@adobe/openwhisk-loggly-wrapper");
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -20,18 +20,20 @@ const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
  */
 function buildPath(req) {
   const p = req.params;
-  const rootPath = p.rootPath || '';
-  let path = p.path || '/';
-  const dot = path.lastIndexOf('.');
+  const rootPath = p.rootPath || "";
+  let path = p.path || "/";
+  const dot = path.lastIndexOf(".");
   if (dot !== -1) {
     path = path.substring(0, dot);
   }
-  const sel = p.selector ? `.${p.selector}` : '';
-  const ext = `.${p.extension || 'html'}`;
+  const sel = p.selector ? `.${p.selector}` : "";
+  const ext = `.${p.extension || "html"}`;
 
   // workaround for https://github.com/adobe/helix-pipeline/issues/254 until `contentRoot` is
   // supplied. remove the repo-root-path prefix
-  const contentRoot = req.headers ? (req.headers['x-repo-root-path'] || '').replace(/\/*$/, '') : '';
+  const contentRoot = req.headers
+    ? (req.headers["x-repo-root-path"] || "").replace(/\/*$/, "")
+    : "";
   if (contentRoot && path.startsWith(contentRoot)) {
     path = path.substring(contentRoot.length);
   }
@@ -51,23 +53,25 @@ function extractClientRequest(action) {
     return {};
   }
   const reqPath = buildPath(request);
-  let pathInfo = reqPath.replace(/\/*$/, '');
+  let pathInfo = reqPath.replace(/\/*$/, "");
   if (`${pathInfo}/`.startsWith(`${request.params.rootPath}/`)) {
     pathInfo = pathInfo.substring(request.params.rootPath.length);
   }
-  const query = request.params.params ? `?${request.params.params}` : '';
+  const query = request.params.params ? `?${request.params.params}` : "";
   return {
     // the edge encodes the client request parameters into the `params` param ;-)
-    params: request.params.params ? querystring.parse(request.params.params) : {},
+    params: request.params.params
+      ? querystring.parse(request.params.params)
+      : {},
     headers: request.headers,
     method: request.method,
     path: reqPath,
-    extension: request.params.extension || '',
-    selector: request.params.selector || '',
+    extension: request.params.extension || "",
+    selector: request.params.selector || "",
     url: `${reqPath}${query}`,
     rootPath: request.params.rootPath,
     queryString: query,
-    pathInfo,
+    pathInfo
   };
 }
 
@@ -80,15 +84,15 @@ async function createActionResponse(context) {
   const {
     response: {
       status,
-      headers = { 'Content-Type': 'application/json' },
-      body = headers['Content-Type'] === 'application/json' ? {} : '',
+      headers = { "Content-Type": "application/json" },
+      body = headers["Content-Type"] === "application/json" ? {} : ""
     } = {},
-    error,
+    error
   } = context;
   const ret = {
     statusCode: status || (error ? 500 : 200),
     headers,
-    body,
+    body
   };
   if (error) {
     // don't set the 'error' property, otherwise openwhisk treats this as application error
@@ -109,16 +113,11 @@ async function createActionResponse(context) {
  * @returns {Object} The pipeline action context.
  */
 function extractActionContext(params) {
-  const {
-    __ow_headers,
-    __ow_method,
-    __ow_logger,
-    ...disclosed
-  } = params;
+  const { __ow_headers, __ow_method, __ow_logger, ...disclosed } = params;
 
   // extract secrets
   const secrets = {};
-  Object.keys(disclosed).forEach((key) => {
+  Object.keys(disclosed).forEach(key => {
     if (key.match(/^[A-Z0-9_]+$/)) {
       secrets[key] = disclosed[key];
       delete disclosed[key];
@@ -134,9 +133,9 @@ function extractActionContext(params) {
     request: {
       params: disclosed,
       headers: __ow_headers || {},
-      method: __ow_method || 'get',
+      method: __ow_method || "get"
     },
-    logger: __ow_logger,
+    logger: __ow_logger
   };
 }
 
@@ -155,13 +154,17 @@ async function runPipeline(cont, pipe, actionParams) {
     // context is initially empty
     // todo: think of adding the adaptOWRequestHere, too
     const context = {
-      request: extractClientRequest(action),
+      request: extractClientRequest(action)
     };
     if (params.content) {
       // pass content param from request to context
       context.content = params.content;
     }
-    return pipe(cont, context, action);
+    return pipe(
+      cont,
+      context,
+      action
+    );
   }
   return createActionResponse(await owwrapper(runner, actionParams));
 }
@@ -170,5 +173,5 @@ module.exports = {
   runPipeline,
   extractActionContext,
   extractClientRequest,
-  createActionResponse,
+  createActionResponse
 };

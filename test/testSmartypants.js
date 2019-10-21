@@ -10,14 +10,14 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
-const parse = require('../src/html/parse-markdown');
-const smartypants = require('../src/html/smartypants');
-const { assertMatch } = require('./markdown-utils');
+const { Logger } = require("@adobe/helix-shared");
+const parse = require("../src/html/parse-markdown");
+const smartypants = require("../src/html/smartypants");
+const { assertMatch } = require("./markdown-utils");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 function callback(body) {
@@ -27,22 +27,22 @@ function callback(body) {
   return data.content.mdast;
 }
 
-describe('Test Smartypants Processing', () => {
-  it('Parses markdown with formatting', () => {
-    assertMatch('smartypants', callback);
+describe("Test Smartypants Processing", () => {
+  it("Parses markdown with formatting", () => {
+    assertMatch("smartypants", callback);
   });
 
-  it('Parses markdown with formatting', () => {
+  it("Parses markdown with formatting", () => {
     for (let i = 0; i < 50; i += 1) {
-      assertMatch('smart-example', callback);
+      assertMatch("smart-example", callback);
     }
   });
 
-  it('does not throw error if mdast is missing', () => {
+  it("does not throw error if mdast is missing", () => {
     smartypants({
       content: {
-        html: '<html></html>',
-      },
+        html: "<html></html>"
+      }
     });
   });
 });

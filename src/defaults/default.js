@@ -9,8 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const winston = require('winston');
-const Pipeline = require('../pipeline.js');
+const winston = require("winston");
+const Pipeline = require("../pipeline.js");
 
 /**
  * Constructs a pipeline function that is capable of
@@ -33,21 +33,21 @@ function pipe(next, context, action) {
  * @param {Function} cont the continuation function
  * @returns {Function} the wrapped main function
  */
-const pre = (cont) => cont;
+const pre = cont => cont;
 
 const log = winston.createLogger({
-  level: 'debug',
+  level: "debug",
   format: winston.format.simple(),
   transports: [
     new winston.transports.Console(),
-    new winston.transports.File({ filename: 'logs/pipeline.log' }),
-  ],
+    new winston.transports.File({ filename: "logs/pipeline.log" })
+  ]
 });
 
 const defaults = {
   pipe,
   pre,
-  log,
+  log
 };
 
 module.exports = defaults;

@@ -10,10 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const fallback = require('mdast-util-to-hast/lib/handlers/link');
-const uri = require('uri-js');
+const fallback = require("mdast-util-to-hast/lib/handlers/link");
+const uri = require("uri-js");
 
-function link({ extension = 'html' } = {}) {
+function link({ extension = "html" } = {}) {
   return function handler(h, node) {
     const n = { ...node };
     const uriParts = uri.parse(n.url);

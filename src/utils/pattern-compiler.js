@@ -18,10 +18,12 @@
  * the high-level pattern.
  */
 function compile(pattern) {
-  const expression = new RegExp(pattern
-    .replace(/(\w+)/g, '($1·)') // always match whole words
-    .replace(/ /g, '') // remove spaces
-    .toString());
+  const expression = new RegExp(
+    pattern
+      .replace(/(\w+)/g, "($1·)") // always match whole words
+      .replace(/ /g, "") // remove spaces
+      .toString()
+  );
   // console.log('=> ' + expression);
   return expression;
 }
@@ -34,7 +36,7 @@ function compile(pattern) {
  * @returns true if the list matches the pattern
  */
 function match(list, pattern) {
-  const str = `${list.join('·')}·`;
+  const str = `${list.join("·")}·`;
   // console.log('-> ' + str);
   const matches = !!compile(pattern).test(str);
   // console.log(matches);
@@ -43,5 +45,5 @@ function match(list, pattern) {
 
 module.exports = {
   compile,
-  match,
+  match
 };

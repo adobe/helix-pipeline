@@ -10,19 +10,19 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const production = require('../src/utils/is-production');
+const assert = require("assert");
+const production = require("../src/utils/is-production");
 
-describe('Test Check for Production Environment', () => {
-  it('Detects production environment', () => {
+describe("Test Check for Production Environment", () => {
+  it("Detects production environment", () => {
     // eslint-disable-next-line no-underscore-dangle
-    process.env.__OW_ACTIVATION_ID = 'foo';
+    process.env.__OW_ACTIVATION_ID = "foo";
     assert.ok(production());
     // eslint-disable-next-line no-underscore-dangle
     delete process.env.__OW_ACTIVATION_ID;
   });
 
-  it('Detects production environment in uncooperative situations', () => {
+  it("Detects production environment in uncooperative situations", () => {
     const oldenv = { ...process.env };
 
     // trying to reproduce a really odd exception we are seeing in production.
@@ -31,7 +31,7 @@ describe('Test Check for Production Environment', () => {
       get __OW_ACTIVATION_ID() {
         // eslint-disable-next-line no-underscore-dangle
         return null.__OW_ACTIVATION_ID;
-      },
+      }
     };
 
     assert.ok(production());
@@ -39,7 +39,7 @@ describe('Test Check for Production Environment', () => {
     process.env = oldenv;
   });
 
-  it('Detects non-production environment', () => {
+  it("Detects non-production environment", () => {
     assert.ok(!production());
   });
 });

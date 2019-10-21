@@ -10,4 +10,4 @@
  * governing permissions and limitations under the License.
  */
 
-module.exports.pre = require('./default').pre;
+module.exports.pre = require("./default").pre;

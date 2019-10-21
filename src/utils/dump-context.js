@@ -10,10 +10,9 @@
  * governing permissions and limitations under the License.
  */
 
-const path = require('path');
-const fs = require('fs-extra');
-const { setdefault } = require('ferrum');
-
+const path = require("path");
+const fs = require("fs-extra");
+const { setdefault } = require("ferrum");
 
 /**
  * Returns {@code true} if context dumps should never be written to disk.
@@ -30,19 +29,19 @@ function disableDisk() {
  * @returns {string} a timestamp string
  */
 function tstamp(now) {
-  let retstr = '';
-  retstr += (`${now.getFullYear()}`).padStart(4, '0');
-  retstr += (`${now.getUTCMonth()}`).padStart(2, '0');
-  retstr += (`${now.getUTCDate()}`).padStart(2, '0');
-  retstr += '-';
+  let retstr = "";
+  retstr += `${now.getFullYear()}`.padStart(4, "0");
+  retstr += `${now.getUTCMonth()}`.padStart(2, "0");
+  retstr += `${now.getUTCDate()}`.padStart(2, "0");
+  retstr += "-";
 
-  retstr += (`${now.getUTCHours()}`).padStart(2, '0');
-  retstr += (`${now.getUTCMinutes()}`).padStart(2, '0');
-  retstr += '-';
+  retstr += `${now.getUTCHours()}`.padStart(2, "0");
+  retstr += `${now.getUTCMinutes()}`.padStart(2, "0");
+  retstr += "-";
 
-  retstr += (`${now.getUTCSeconds()}`).padStart(2, '0');
-  retstr += '.';
-  retstr += (`${now.getUTCMilliseconds()}`).padStart(4, '0');
+  retstr += `${now.getUTCSeconds()}`.padStart(2, "0");
+  retstr += ".";
+  retstr += `${now.getUTCMilliseconds()}`.padStart(4, "0");
 
   return retstr;
 }
@@ -57,10 +56,17 @@ async function ensureDumpDir(context, action) {
     return;
   }
   const stamp = tstamp(new Date());
-  const id = (context.request && context.request.headers && context.request.headers['x-openwhisk-activation-id']) || '';
-  const pathStr = context.request && context.request.path ? context.request.path.replace(/\//g, '-').substring(1) : '';
+  const id =
+    (context.request &&
+      context.request.headers &&
+      context.request.headers["x-openwhisk-activation-id"]) ||
+    "";
+  const pathStr =
+    context.request && context.request.path
+      ? context.request.path.replace(/\//g, "-").substring(1)
+      : "";
   const dirName = `context_dump_${stamp}_${pathStr}_${id}`;
-  action.debug.dumpDir = path.resolve(process.cwd(), 'logs', 'debug', dirName);
+  action.debug.dumpDir = path.resolve(process.cwd(), "logs", "debug", dirName);
   await fs.ensureDir(action.debug.dumpDir);
   action.logger.info(`Writing context dumps to: ${action.debug.dumpDir}`);
 }
@@ -76,7 +82,7 @@ async function writeDump(context, action, info) {
   const fileName = `context-${stamp}-step-${info.index}-${info.name}.json`;
   info.file = path.resolve(action.debug.dumpDir, fileName);
   action.logger.silly(`writing context dump ${fileName}`);
-  return fs.writeFile(info.file, info.json, 'utf-8');
+  return fs.writeFile(info.file, info.json, "utf-8");
 }
 
 /**
@@ -90,16 +96,16 @@ async function writeDump(context, action, info) {
  * @param {string} name The name of the current pipeline step
  */
 async function record(context, action, index, name) {
-  const debug = setdefault(action, 'debug', { contextDumps: [] });
+  const debug = setdefault(action, "debug", { contextDumps: [] });
   const info = {
     index,
-    name: name ? name.split(':').pop() : 'undef',
+    name: name ? name.split(":").pop() : "undef",
     time: new Date(),
-    json: JSON.stringify(context, null, 2),
+    json: JSON.stringify(context, null, 2)
   };
   debug.contextDumps.push(info);
 
-  if (action.logger.level === 'silly' && !disableDisk()) {
+  if (action.logger.level === "silly" && !disableDisk()) {
     await ensureDumpDir(context, action);
     await writeDump(context, action, info);
   }
@@ -111,14 +117,16 @@ async function record(context, action, index, name) {
  * @param {*} action Pipeline action
  */
 async function report(context, action) {
-  if (action.logger.level === 'silly' || disableDisk()) {
+  if (action.logger.level === "silly" || disableDisk()) {
     return;
   }
   await ensureDumpDir(context, action);
-  await Promise.all(action.debug.contextDumps.map((info) => writeDump(context, action, info)));
+  await Promise.all(
+    action.debug.contextDumps.map(info => writeDump(context, action, info))
+  );
 }
 
 module.exports = {
   record,
-  report,
+  report
 };

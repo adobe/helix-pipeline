@@ -10,17 +10,17 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const parse = require('../src/html/parse-markdown');
-const split = require('../src/html/split-sections');
-const parseFront = require('../src/html/parse-frontmatter');
-const { assertMatchDir } = require('./markdown-utils');
-const getmetadata = require('../src/html/get-metadata');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const parse = require("../src/html/parse-markdown");
+const split = require("../src/html/split-sections");
+const parseFront = require("../src/html/parse-frontmatter");
+const { assertMatchDir } = require("./markdown-utils");
+const getmetadata = require("../src/html/get-metadata");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 function callback(body) {
@@ -33,63 +33,63 @@ function callback(body) {
 }
 
 const SECTIONS_BLOCS = [
-  'header',
-  'paragraph',
-  'paragraphwithlink',
-  '2images',
-  'headerparagraph',
-  'headerlist',
-  'headerimage',
-  'headerparaimage',
-  'headerpara2images',
-  'complex',
+  "header",
+  "paragraph",
+  "paragraphwithlink",
+  "2images",
+  "headerparagraph",
+  "headerlist",
+  "headerimage",
+  "headerparaimage",
+  "headerpara2images",
+  "complex"
 ];
 
-describe('Test getMetadata', () => {
-  SECTIONS_BLOCS.forEach((block) => {
+describe("Test getMetadata", () => {
+  SECTIONS_BLOCS.forEach(block => {
     it(`indvidual section block: ${block}`, () => {
-      assertMatchDir('sections', block, callback);
+      assertMatchDir("sections", block, callback);
     });
   });
 
   it('getmetadata does not fail with "empty" mdast', () => {
     const dat = {
       content: {
-        mdast: {},
-      },
+        mdast: {}
+      }
     };
     getmetadata(dat, { logger });
     assert.deepEqual(dat.content.meta, { types: [] });
   });
 
-  it('getmetadata does not fail with empty sections', () => {
+  it("getmetadata does not fail with empty sections", () => {
     const dat = {
       content: {
         mdast: {
           children: [],
           position: {},
-          type: '',
-        },
-      },
+          type: ""
+        }
+      }
     };
     getmetadata(dat, { logger });
     assert.deepEqual(dat.content, {
       meta: {
-        types: [],
+        types: []
       },
-      title: '',
-      intro: '',
+      title: "",
+      intro: "",
       image: undefined,
       mdast: {
         children: [],
         position: {},
         meta: {
-          types: [],
+          types: []
         },
-        type: '',
-        title: '',
-        intro: '',
-      },
+        type: "",
+        title: "",
+        intro: ""
+      }
     });
   });
 });

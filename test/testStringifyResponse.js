@@ -10,99 +10,120 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { JSDOM } = require('jsdom');
-const { Logger } = require('@adobe/helix-shared');
-const stringify = require('../src/html/stringify-response');
+const assert = require("assert");
+const { JSDOM } = require("jsdom");
+const { Logger } = require("@adobe/helix-shared");
+const stringify = require("../src/html/stringify-response");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
-describe('Testing stringify pipeline step', () => {
-  it('document can be transformed', () => {
-    const dom = new JSDOM('<html><head><title>Foo</title></head><body>bar</body></html>');
+describe("Testing stringify pipeline step", () => {
+  it("document can be transformed", () => {
+    const dom = new JSDOM(
+      "<html><head><title>Foo</title></head><body>bar</body></html>"
+    );
     dom.window.document.serialize = dom.serialize.bind(dom);
     const context = {
       response: {
-        document: dom.window.document,
-      },
+        document: dom.window.document
+      }
     };
     stringify(context, { logger });
-    assert.equal(context.response.body, '<html><head><title>Foo</title></head><body>bar</body></html>');
+    assert.equal(
+      context.response.body,
+      "<html><head><title>Foo</title></head><body>bar</body></html>"
+    );
   });
 
-  it('document without serialize function can be transformed', () => {
-    const dom = new JSDOM('<html><head><title>Foo</title></head><body>bar</body></html>');
+  it("document without serialize function can be transformed", () => {
+    const dom = new JSDOM(
+      "<html><head><title>Foo</title></head><body>bar</body></html>"
+    );
     const context = {
       response: {
-        document: dom.window.document,
-      },
+        document: dom.window.document
+      }
     };
     stringify(context, { logger });
-    assert.equal(context.response.body, '<html><head><title>Foo</title></head><body>bar</body></html>');
+    assert.equal(
+      context.response.body,
+      "<html><head><title>Foo</title></head><body>bar</body></html>"
+    );
   });
 
-  it('document with doctype can be transformed', () => {
-    const dom = new JSDOM('<!DOCTYPE html><html><head><title>Foo</title></head><body>bar</body></html>');
+  it("document with doctype can be transformed", () => {
+    const dom = new JSDOM(
+      "<!DOCTYPE html><html><head><title>Foo</title></head><body>bar</body></html>"
+    );
     const context = {
       response: {
-        document: dom.window.document,
-      },
+        document: dom.window.document
+      }
     };
     stringify(context, { logger });
-    assert.equal(context.response.body, '<!DOCTYPE html><html><head><title>Foo</title></head><body>bar</body></html>');
+    assert.equal(
+      context.response.body,
+      "<!DOCTYPE html><html><head><title>Foo</title></head><body>bar</body></html>"
+    );
   });
 
-  it('document body can be transformed', () => {
-    const dom = new JSDOM('<html><head><title>Foo</title></head><body>bar</body></html>');
+  it("document body can be transformed", () => {
+    const dom = new JSDOM(
+      "<html><head><title>Foo</title></head><body>bar</body></html>"
+    );
     const context = {
       response: {
-        document: dom.window.document.body,
-      },
+        document: dom.window.document.body
+      }
     };
     stringify(context, { logger });
-    assert.equal(context.response.body, 'bar');
+    assert.equal(context.response.body, "bar");
   });
 
-  it('response body takes precedence over document can be transformed', () => {
-    const dom = new JSDOM('<html><head><title>Foo</title></head><body>bar</body></html>');
+  it("response body takes precedence over document can be transformed", () => {
+    const dom = new JSDOM(
+      "<html><head><title>Foo</title></head><body>bar</body></html>"
+    );
     dom.window.document.serialize = dom.serialize.bind(dom);
     const context = {
       response: {
-        body: 'foobar',
-        document: dom.window.document,
-      },
+        body: "foobar",
+        document: dom.window.document
+      }
     };
     stringify(context, { logger });
-    assert.equal(context.response.body, 'foobar');
+    assert.equal(context.response.body, "foobar");
   });
 
-  it('throws error if neither body or document is present in the response', () => {
+  it("throws error if neither body or document is present in the response", () => {
     const context = {
-      response: {
-      },
+      response: {}
     };
     try {
       stringify(context, { logger });
       assert.fail();
     } catch (e) {
-      assert.equal('no response', e.message);
+      assert.equal("no response", e.message);
     }
   });
 
-  it('throws error if document is not serializable', () => {
+  it("throws error if document is not serializable", () => {
     const context = {
       response: {
-        document: {},
-      },
+        document: {}
+      }
     };
     try {
       stringify(context, { logger });
       assert.fail();
     } catch (e) {
-      assert.equal('unexpected context.response.document: [object Object]', e.message);
+      assert.equal(
+        "unexpected context.response.document: [object Object]",
+        e.message
+      );
     }
   });
 });

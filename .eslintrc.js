@@ -12,16 +12,16 @@
 
 module.exports = {
   root: true,
-  extends: '@adobe/helix',
+  extends: "@adobe/helix",
   rules: {
     // Allow while (true) infinite loops
-    'no-constant-condition': ["error", { "checkLoops": false }],
+    "no-constant-condition": ["error", { checkLoops: false }],
 
     // Quite useful to mark values as unused
-    'no-underscore-dangle': 'off',
+    "no-underscore-dangle": "off",
 
     // We have quite a lot of use cases where assignment to function
     // parameters is definitely desirable
-    'no-param-reassign': 'off',
+    "no-param-reassign": "off"
   }
 };

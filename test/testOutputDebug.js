@@ -10,28 +10,28 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { deepclone } = require('ferrum');
-const _ = require('lodash');
-const debug = require('../src/html/output-debug');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const { deepclone } = require("ferrum");
+const _ = require("lodash");
+const debug = require("../src/html/output-debug");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
-describe('Test outputDebug', () => {
+describe("Test outputDebug", () => {
   function getContext() {
     return {
       request: {
         params: {
-          debug: true,
-        },
+          debug: true
+        }
       },
       response: {
-        body: '<html><body></body></html>',
-      },
+        body: "<html><body></body></html>"
+      }
     };
   }
 
@@ -39,26 +39,29 @@ describe('Test outputDebug', () => {
     const p = _.merge({}, context);
     const { body } = p.response;
     delete p.response.body;
-    const debugScript = debug.DEBUG_TEMPLATE.replace(/CONTEXT_JSON/, JSON.stringify(p));
+    const debugScript = debug.DEBUG_TEMPLATE.replace(
+      /CONTEXT_JSON/,
+      JSON.stringify(p)
+    );
     p.response.body = body.replace(/<\/body>/i, `${debugScript}</body>`);
     return p;
   }
 
-  it('Testing no debug', () => {
+  it("Testing no debug", () => {
     const context = getContext();
     context.request.params.debug = false;
     debug(context, { logger });
     assert.deepEqual(context, deepclone(context));
   });
 
-  it('Testing simple context', () => {
+  it("Testing simple context", () => {
     const context = getContext();
     const expected = computeExpectedOutput(context);
     debug(context, { logger });
     assert.deepEqual(context, expected);
   });
 
-  it('Testing upper case body tag', () => {
+  it("Testing upper case body tag", () => {
     const context = getContext();
     context.response.body = context.response.body.toUpperCase();
     const expected = computeExpectedOutput(context);

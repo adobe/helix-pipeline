@@ -10,55 +10,55 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const link = require('../src/utils/link-handler');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const link = require("../src/utils/link-handler");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
-const action = { logger, secrets: { } };
+const action = { logger, secrets: {} };
 
-describe('Test Link Handler', () => {
+describe("Test Link Handler", () => {
   // test link rewriting
   [
     {
-      title: 'Rewrites .md extension to .html',
-      originalUrl: '/test.md',
-      expectedUrl: '/test.html',
+      title: "Rewrites .md extension to .html",
+      originalUrl: "/test.md",
+      expectedUrl: "/test.html"
     },
     {
-      title: 'Does not alter URL with non .md extension',
-      originalUrl: '/test.png',
-      expectedUrl: '/test.png',
+      title: "Does not alter URL with non .md extension",
+      originalUrl: "/test.png",
+      expectedUrl: "/test.png"
     },
     {
-      title: 'Does not lose query string while rewriting',
-      originalUrl: '/test.md?bla',
-      expectedUrl: '/test.html?bla',
+      title: "Does not lose query string while rewriting",
+      originalUrl: "/test.md?bla",
+      expectedUrl: "/test.html?bla"
     },
     {
-      title: 'Does not lose hash while rewriting',
-      originalUrl: '/test.md#bla',
-      expectedUrl: '/test.html#bla',
+      title: "Does not lose hash while rewriting",
+      originalUrl: "/test.md#bla",
+      expectedUrl: "/test.html#bla"
     },
     {
-      title: 'Ignores URL with protocol',
-      originalUrl: 'https://www.example.com/test.md',
-      expectedUrl: 'https://www.example.com/test.md',
-    },
-  ].forEach((testCase) => {
+      title: "Ignores URL with protocol",
+      originalUrl: "https://www.example.com/test.md",
+      expectedUrl: "https://www.example.com/test.md"
+    }
+  ].forEach(testCase => {
     it(testCase.title, () => {
       const node = {
-        type: 'link',
-        url: testCase.originalUrl,
+        type: "link",
+        url: testCase.originalUrl
       };
 
       link(action.secrets)((_, tagName, parameters) => {
         assert.equal(parameters.href, testCase.expectedUrl);
-        assert.equal(tagName, 'a');
+        assert.equal(tagName, "a");
       }, node);
     });
   });

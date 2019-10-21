@@ -10,14 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-const { setdefault } = require('ferrum');
-const isProduction = require('../utils/is-production');
+const { setdefault } = require("ferrum");
+const isProduction = require("../utils/is-production");
 
 function setStatus(context, { logger, request = {} }) {
-  const res = setdefault(context, 'response', {});
-  const headers = setdefault(res, 'headers', {});
+  const res = setdefault(context, "response", {});
+  const headers = setdefault(res, "headers", {});
   const err = context.error;
-
 
   // if a status is already default, keep it.
   if (res.status) {
@@ -29,13 +28,13 @@ function setStatus(context, { logger, request = {} }) {
     return;
   }
 
-  logger.debug('context.error -> 500');
+  logger.debug("context.error -> 500");
   res.status = 500;
-  res.body = '';
+  res.body = "";
 
-  if (!isProduction() || setdefault(request, 'headers', {})['x-debug']) {
+  if (!isProduction() || setdefault(request, "headers", {})["x-debug"]) {
     res.body = `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${err.trim()}</message></error>`;
-    headers['Content-Type'] = 'application/xml';
+    headers["Content-Type"] = "application/xml";
   }
 }
 

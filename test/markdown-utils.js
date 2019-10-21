@@ -10,16 +10,16 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const fs = require('fs-extra');
-const path = require('path');
-const removePosition = require('unist-util-remove-position');
-const validate = require('../src/utils/validate.js');
+const assert = require("assert");
+const fs = require("fs-extra");
+const path = require("path");
+const removePosition = require("unist-util-remove-position");
+const validate = require("../src/utils/validate.js");
 
 function cleanUp(json) {
   if (json) {
     if (json.map) {
-      return json.map((node) => removePosition(node, true));
+      return json.map(node => removePosition(node, true));
     }
     return removePosition(json, true);
   }
@@ -35,17 +35,21 @@ const nopLogger = {
   info: noOp,
   verbose: noOp,
   error: noOp,
-  level: 'error',
+  level: "error"
 };
 
 function context(dir, name, cb) {
-  const mddoc = fs.readFileSync(path.resolve(__dirname, 'fixtures', dir, `${name}.md`)).toString();
+  const mddoc = fs
+    .readFileSync(path.resolve(__dirname, "fixtures", dir, `${name}.md`))
+    .toString();
   const out = cb(mddoc);
   return out;
 }
 
 function assertMatchDir(dir, name, cb) {
-  const mdast = cleanUp(fs.readJsonSync(path.resolve(__dirname, 'fixtures', dir, `${name}.json`)));
+  const mdast = cleanUp(
+    fs.readJsonSync(path.resolve(__dirname, "fixtures", dir, `${name}.json`))
+  );
   const out = cleanUp(context(dir, name, cb));
 
   try {
@@ -67,13 +71,13 @@ function assertValidDir(dir, name, cb, done) {
 }
 
 module.exports.assertMatch = function assertMatch(name, cb) {
-  assertMatchDir('', name, cb);
+  assertMatchDir("", name, cb);
 };
 
 module.exports.assertMatchDir = assertMatchDir;
 
 module.exports.assertValid = function assertValid(name, cb, done) {
-  assertValidDir('', name, cb, done);
+  assertValidDir("", name, cb, done);
 };
 
 module.exports.assertValidDir = assertValidDir;

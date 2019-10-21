@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const map = require('unist-util-map');
+const map = require("unist-util-map");
 
 /**
  * Unwraps hero images to avoid the unnecessary paragraph.
@@ -17,17 +17,20 @@ const map = require('unist-util-map');
  * @param {object} request The content request
  */
 function unwrap({ content }) {
-  let sections = content.mdast.children.filter((node) => node.type === 'section');
+  let sections = content.mdast.children.filter(node => node.type === "section");
   if (!sections.length) {
     sections = [content.mdast];
   }
-  sections.forEach((section) => {
+  sections.forEach(section => {
     map(section, (node, index, parent) => {
-      if (node.type === 'paragraph' // If we have a paragraph
-          && (parent.type === 'root' // … in the document root
-            || parent.type === 'section') // … or in a section
-          && parent.meta.types.includes('has-only-image') // … that only has images
-          && parent.meta.types.includes('nb-image-1')) { // … and actually only 1 of them
+      if (
+        node.type === "paragraph" && // If we have a paragraph
+        (parent.type === "root" || // … in the document root
+          parent.type === "section") && // … or in a section
+        parent.meta.types.includes("has-only-image") && // … that only has images
+        parent.meta.types.includes("nb-image-1")
+      ) {
+        // … and actually only 1 of them
         // … then consider it a hero image, and unwrap from the paragraph
         const position = parent.children.indexOf(node);
         const [img] = parent.children[position].children;

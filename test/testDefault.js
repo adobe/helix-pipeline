@@ -11,32 +11,32 @@
  */
 /* eslint-env mocha */
 
-const assert = require('assert');
+const assert = require("assert");
 
-const {
-  pipe,
-  pre,
-  log,
-} = require('../index.js').defaults;
+const { pipe, pre, log } = require("../index.js").defaults;
 
-describe('Testing Default Pipeline', () => {
-  it('Default Pipeline can be loaded', () => {
-    assert.ok(pipe, 'no default pipeline found');
-    assert.ok(pre, 'no default pre.js found');
-    assert.ok(log, 'no logger found');
+describe("Testing Default Pipeline", () => {
+  it("Default Pipeline can be loaded", () => {
+    assert.ok(pipe, "no default pipeline found");
+    assert.ok(pre, "no default pre.js found");
+    assert.ok(log, "no logger found");
   });
 
-  it('creates and runs the default pipeline', async () => {
-    const out = await pipe((context, action) => {
-      context.body = `test. context: ${context.title} action: ${action.title}`;
-    }, {
-      title: 'my context',
-    }, {
-      title: 'my action',
-    });
+  it("creates and runs the default pipeline", async () => {
+    const out = await pipe(
+      (context, action) => {
+        context.body = `test. context: ${context.title} action: ${action.title}`;
+      },
+      {
+        title: "my context"
+      },
+      {
+        title: "my action"
+      }
+    );
     assert.deepStrictEqual(out, {
-      body: 'test. context: my context action: my action',
-      title: 'my context',
+      body: "test. context: my context action: my action",
+      title: "my context"
     });
   });
 });

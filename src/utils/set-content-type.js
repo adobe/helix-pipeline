@@ -9,13 +9,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { setdefault } = require('ferrum');
+const { setdefault } = require("ferrum");
 
 function type(mime) {
   return function setmime(context) {
-    const res = setdefault(context, 'response', {});
-    const head = setdefault(res, 'headers', {});
-    setdefault(head, 'Content-Type', mime);
+    const res = setdefault(context, "response", {});
+    const head = setdefault(res, "headers", {});
+    setdefault(head, "Content-Type", mime);
   };
 }
 

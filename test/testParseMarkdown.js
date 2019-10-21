@@ -10,15 +10,15 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const parse = require('../src/html/parse-markdown');
-const parseFront = require('../src/html/parse-frontmatter');
-const { assertMatch } = require('./markdown-utils');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const parse = require("../src/html/parse-markdown");
+const parseFront = require("../src/html/parse-frontmatter");
+const { assertMatch } = require("./markdown-utils");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 function callback(body) {
@@ -28,71 +28,71 @@ function callback(body) {
   return dat.content.mdast;
 }
 
-describe('Test Markdown Parsing', () => {
-  it('Parses simple markdown', () => {
-    assertMatch('simple', callback);
+describe("Test Markdown Parsing", () => {
+  it("Parses simple markdown", () => {
+    assertMatch("simple", callback);
   });
 
-  it('Parses example markdown', () => {
-    assertMatch('example', callback);
+  it("Parses example markdown", () => {
+    assertMatch("example", callback);
   });
 
-  it('Parses frontmatter markdown', () => {
-    assertMatch('frontmatter', callback);
+  it("Parses frontmatter markdown", () => {
+    assertMatch("frontmatter", callback);
   });
 
-  it('Parses headings correctly', () => {
-    assertMatch('headings', callback);
+  it("Parses headings correctly", () => {
+    assertMatch("headings", callback);
   });
 
-  it('Parses HTML in Markdown', () => {
-    assertMatch('forms', callback);
+  it("Parses HTML in Markdown", () => {
+    assertMatch("forms", callback);
   });
 
-  it('Does not get confused by thematic breaks', () => {
-    assertMatch('confusing', callback);
+  it("Does not get confused by thematic breaks", () => {
+    assertMatch("confusing", callback);
   });
 
-  it('Does not get confused by grayscale', () => {
-    assertMatch('grayscale', callback);
+  it("Does not get confused by grayscale", () => {
+    assertMatch("grayscale", callback);
   });
 });
 
-describe('Test Markdown Setting Context', () => {
-  it('Sets default context objects', () => {
+describe("Test Markdown Setting Context", () => {
+  it("Sets default context objects", () => {
     const context = {};
     parse(context, { logger });
-    assert.equal(typeof context.content, 'object');
-    assert.equal(context.content.body, '');
-    assert.equal(typeof context.request, 'object');
-    assert.equal(context.request.extension, 'html');
+    assert.equal(typeof context.content, "object");
+    assert.equal(context.content.body, "");
+    assert.equal(typeof context.request, "object");
+    assert.equal(context.request.extension, "html");
   });
 
-  it('Does not override values', () => {
+  it("Does not override values", () => {
     const context = {
       content: {
-        body: 'custombody',
-        extra: 'extraprop',
+        body: "custombody",
+        extra: "extraprop"
       },
       request: {
-        extension: 'customext',
-        extra: 'extraprop',
-      },
+        extension: "customext",
+        extra: "extraprop"
+      }
     };
     parse(context, { logger });
-    assert.equal(context.content.body, 'custombody');
-    assert.equal(context.content.extra, 'extraprop');
-    assert.equal(context.request.extension, 'customext');
-    assert.equal(context.request.extra, 'extraprop');
+    assert.equal(context.content.body, "custombody");
+    assert.equal(context.content.extra, "extraprop");
+    assert.equal(context.request.extension, "customext");
+    assert.equal(context.request.extra, "extraprop");
   });
 
-  it('Does handle empty extension case', () => {
+  it("Does handle empty extension case", () => {
     const context = {
       request: {
-        extension: '',
-      },
+        extension: ""
+      }
     };
     parse(context, { logger });
-    assert.equal(context.request.extension, 'html');
+    assert.equal(context.request.extension, "html");
   });
 });

@@ -11,11 +11,11 @@
  */
 function stringify({ response }, { logger }) {
   if (response.body) {
-    logger.debug('stringify: ignoring already defined context.response.body');
+    logger.debug("stringify: ignoring already defined context.response.body");
     return;
   }
   if (!response.document) {
-    throw Error('no response');
+    throw Error("no response");
   }
   const doc = response.document;
   if (doc.serialize) {

@@ -10,48 +10,50 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { deepclone } = require('ferrum');
-const emit = require('../src/xml/emit-xml');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const { deepclone } = require("ferrum");
+const emit = require("../src/xml/emit-xml");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 const content = {
   xml: {
     document: {
       title: {
-        '#text': 'Bill, Welcome to the future',
-        '@level': 1,
-      },
-    },
-  },
+        "#text": "Bill, Welcome to the future",
+        "@level": 1
+      }
+    }
+  }
 };
 
 const context = {
   content,
-  response: {},
+  response: {}
 };
 
 const action = {
-  secrets: { },
-  logger,
+  secrets: {},
+  logger
 };
 
-const expectedXML = '<?xml version="1.0" encoding="utf-8"?><document><title level="1">Bill, Welcome to the future</title></document>';
-const expectedPrettyXML = '<?xml version="1.0" encoding="utf-8"?>\n<document>\n  <title level="1">Bill, Welcome to the future</title>\n</document>';
+const expectedXML =
+  '<?xml version="1.0" encoding="utf-8"?><document><title level="1">Bill, Welcome to the future</title></document>';
+const expectedPrettyXML =
+  '<?xml version="1.0" encoding="utf-8"?>\n<document>\n  <title level="1">Bill, Welcome to the future</title>\n</document>';
 
-describe('Test emit-xml', () => {
-  it('builds XML from object', () => {
+describe("Test emit-xml", () => {
+  it("builds XML from object", () => {
     const data = deepclone(context);
     emit(data, action);
     assert.deepEqual(data.response.body, expectedXML);
   });
 
-  it('builds pretty XML from object', () => {
+  it("builds pretty XML from object", () => {
     const data = deepclone(context);
     action.secrets.XML_PRETTY = true;
     emit(data, action);
@@ -59,20 +61,20 @@ describe('Test emit-xml', () => {
     action.secrets.XML_PRETTY = false;
   });
 
-  it('does nothing if no XML object specified', () => {
+  it("does nothing if no XML object specified", () => {
     const data = { content: {}, response: {} };
     emit(data, action);
     assert.deepEqual(data, { content: {}, response: {} });
   });
 
-  it('keeps existing response body', () => {
+  it("keeps existing response body", () => {
     context.response.body = expectedXML;
     const data = deepclone(context);
     emit(data, action);
     assert.deepEqual(data, context);
   });
 
-  it('handles missing response object', () => {
+  it("handles missing response object", () => {
     const data = { content };
     emit(data, action);
     assert.deepEqual(data.response.body, expectedXML);

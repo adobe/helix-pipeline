@@ -9,23 +9,23 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { type } = require('ferrum');
-const { map, join, setdefault } = require('ferrum');
-const { computeSurrogateKey } = require('@adobe/helix-shared').utils;
+const { type } = require("ferrum");
+const { map, join, setdefault } = require("ferrum");
+const { computeSurrogateKey } = require("@adobe/helix-shared").utils;
 
 function key(context, { logger }) {
-  const cont = setdefault(context, 'content', {});
-  const res = setdefault(context, 'response', {});
-  const headers = setdefault(res, 'headers', {});
+  const cont = setdefault(context, "content", {});
+  const res = setdefault(context, "response", {});
+  const headers = setdefault(res, "headers", {});
 
   // somebody already set a surrogate key
-  if (headers['Surrogate-Key'] || !(type(cont.sources) === Array)) {
-    logger.debug('Keeping existing Surrogate-Key header');
+  if (headers["Surrogate-Key"] || !(type(cont.sources) === Array)) {
+    logger.debug("Keeping existing Surrogate-Key header");
     return;
   }
 
-  logger.debug('Setting Surrogate-Key header');
-  headers['Surrogate-Key'] = join(' ')(map(cont.sources, computeSurrogateKey));
+  logger.debug("Setting Surrogate-Key header");
+  headers["Surrogate-Key"] = join(" ")(map(cont.sources, computeSurrogateKey));
 }
 
 module.exports = key;

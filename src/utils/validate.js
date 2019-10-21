@@ -9,17 +9,27 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const ajv = require('./validator');
+const ajv = require("./validator");
 
 function validate(context, action, index) {
   const validator = ajv(action.logger);
-  const cvalid = validator.validate('https://ns.adobe.com/helix/pipeline/context', context);
+  const cvalid = validator.validate(
+    "https://ns.adobe.com/helix/pipeline/context",
+    context
+  );
   if (!cvalid) {
-    throw new Error(`Invalid Context at step ${index}: \n${validator.enhancedErrorsText()}`);
+    throw new Error(
+      `Invalid Context at step ${index}: \n${validator.enhancedErrorsText()}`
+    );
   }
-  const avalid = validator.validate('https://ns.adobe.com/helix/pipeline/action', action);
+  const avalid = validator.validate(
+    "https://ns.adobe.com/helix/pipeline/action",
+    action
+  );
   if (!avalid) {
-    throw new Error(`Invalid Action at step ${index}: \n${validator.enhancedErrorsText()}`);
+    throw new Error(
+      `Invalid Action at step ${index}: \n${validator.enhancedErrorsText()}`
+    );
   }
 }
 

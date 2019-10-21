@@ -12,10 +12,10 @@
 
 /* eslint-disable no-await-in-loop */
 
-const _ = require('lodash/fp');
-const callsites = require('callsites');
-const { enumerate, iter } = require('ferrum');
-const coerce = require('./utils/coerce-secrets');
+const _ = require("lodash/fp");
+const callsites = require("callsites");
+const { enumerate, iter } = require("ferrum");
+const coerce = require("./utils/coerce-secrets");
 
 const noOp = () => {};
 const nopLogger = {
@@ -26,7 +26,7 @@ const nopLogger = {
   info: noOp,
   verbose: noOp,
   error: noOp,
-  level: 'error',
+  level: "error"
 };
 
 /**
@@ -56,7 +56,7 @@ function errorWrapper(fn) {
  * @param {Context} context Pipeline execution context that is passed along
  * @param {Action} action Pipeline action define during construction
  * @return {Promise<Context>} Promise which resolves to a parameters to be added to the context.
-*/
+ */
 
 /**
  * Tap function
@@ -66,7 +66,7 @@ function errorWrapper(fn) {
  * @param {Context} context Pipeline execution context that is passed along
  * @param {Action} action Pipeline action define during construction
  * @param {number} index index of the function invocation order
-*/
+ */
 
 /**
  * Pipeline that allows to execute a list of functions in the order they have been added.
@@ -82,7 +82,7 @@ class Pipeline {
     this._action = action;
     this._action.logger = action.logger || nopLogger;
 
-    this._action.logger.debug('Creating pipeline');
+    this._action.logger.debug("Creating pipeline");
 
     coerce(this._action);
 
@@ -104,8 +104,9 @@ class Pipeline {
     const attachGeneric = (name, f, offset) => {
       // find the index of the function where the resolved ext name
       // matches the provided name by searching the list of step functions
-      const foundstep = this._steps
-        .findIndex((step) => step && step.ext && step.ext === name);
+      const foundstep = this._steps.findIndex(
+        step => step && step.ext && step.ext === name
+      );
 
       // if something has been found in the list, insert the
       // new function into the list, with the correct offset
@@ -161,8 +162,10 @@ class Pipeline {
     this._last = this._steps;
     // check for extensions
     if (f && (f.before || f.replace || f.after)) {
-      if (typeof this._attachments === 'function') {
-        throw new Error(`Step '${this._attachments.alias}' already registered extensions for this pipeline, refusing to add more with '${f.alias}'.`);
+      if (typeof this._attachments === "function") {
+        throw new Error(
+          `Step '${this._attachments.alias}' already registered extensions for this pipeline, refusing to add more with '${f.alias}'.`
+        );
       }
       this._attachments = f;
     }
@@ -206,7 +209,7 @@ class Pipeline {
         const result = predicate(...args);
         // check if predicate returns a promise like result
         if (_.isFunction(result.then)) {
-          return result.then((predResult) => {
+          return result.then(predResult => {
             if (predResult) {
               return lastfunc(...args);
             }
@@ -222,7 +225,7 @@ class Pipeline {
       wrappedfunc.ext = lastfunc.ext;
       this._last.push(wrappedfunc);
     } else {
-      throw new Error('when() needs function to operate on.');
+      throw new Error("when() needs function to operate on.");
     }
     return this;
   }
@@ -236,7 +239,7 @@ class Pipeline {
    * @returns {Pipeline} this
    */
   unless(predicate) {
-    const inverse = (args) => !predicate(args);
+    const inverse = args => !predicate(args);
     return this.when(inverse);
   }
 
@@ -271,14 +274,18 @@ class Pipeline {
    * @param {Object} att The object containing the attachments
    */
   attach(att) {
-    if (att && att.before && typeof att.before === 'object') {
-      Object.keys(att.before).map((key) => this.attach.before(key, att.before[key]));
+    if (att && att.before && typeof att.before === "object") {
+      Object.keys(att.before).map(key =>
+        this.attach.before(key, att.before[key])
+      );
     }
-    if (att && att.after && typeof att.after === 'object') {
-      Object.keys(att.after).map((key) => this.attach.after(key, att.after[key]));
+    if (att && att.after && typeof att.after === "object") {
+      Object.keys(att.after).map(key => this.attach.after(key, att.after[key]));
     }
-    if (att && att.replace && typeof att.replace === 'object') {
-      Object.keys(att.replace).map((key) => this.attach.replace(key, att.replace[key]));
+    if (att && att.replace && typeof att.replace === "object") {
+      Object.keys(att.replace).map(key =>
+        this.attach.replace(key, att.replace[key])
+      );
     }
   }
 
@@ -311,13 +318,15 @@ class Pipeline {
       return;
     }
 
-    f.alias = f.name || f.ext || 'anonymous';
+    f.alias = f.name || f.ext || "anonymous";
     f.title = f.alias;
 
     const [current, injector, caller] = callsites();
-    if (current.getFunctionName() === 'describe' && caller) {
+    if (current.getFunctionName() === "describe" && caller) {
       f.title = `${injector.getFunctionName()}:${f.alias}`;
-      f.alias = `${f.title} from ${caller.getFileName()}:${caller.getLineNumber()}`;
+      f.alias = `${
+        f.title
+      } from ${caller.getFileName()}:${caller.getLineNumber()}`;
     }
   }
 
@@ -341,7 +350,10 @@ class Pipeline {
      */
     const execTaps = async (taps, fnIdent, fnIdx) => {
       for (const [idx, t] of iter(taps)) {
-        const ident = `#${String(fnIdx).padStart(2, '0')}/${fnIdent}/tap-#${idx}`;
+        const ident = `#${String(fnIdx).padStart(
+          2,
+          "0"
+        )}/${fnIdent}/tap-#${idx}`;
         logger.silly(`exec ${ident}`);
         try {
           await t(context, this._action, fnIdx, fnIdent);
@@ -356,14 +368,14 @@ class Pipeline {
      * Executes the pipeline functions
      * @param {Function[]} fns the functions
      */
-    const execFns = async (fns) => {
+    const execFns = async fns => {
       for (const [idx, f] of enumerate(fns)) {
-        const ident = `#${String(idx).padStart(2, '0')}/${f.alias}`;
+        const ident = `#${String(idx).padStart(2, "0")}/${f.alias}`;
 
         // skip if error and no error handler (or no error and error handler)
-        if ((!context.error) === (!!f.errorHandler)) {
+        if (!context.error === !!f.errorHandler) {
           logger.silly(`skip ${ident}`, {
-            function: f.alias,
+            function: f.alias
           });
           // eslint-disable-next-line no-continue
           continue;
@@ -382,7 +394,7 @@ class Pipeline {
         }
         try {
           logger.silly(`exec ${ident}`, {
-            function: f.alias,
+            function: f.alias
           });
           await f(context, this._action);
         } catch (e) {

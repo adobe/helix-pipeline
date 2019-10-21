@@ -10,15 +10,15 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
-const { assertEquals } = require('ferrum');
-const selectStatus_ = require('../src/xml/set-xml-status.js');
+const { Logger } = require("@adobe/helix-shared");
+const { assertEquals } = require("ferrum");
+const selectStatus_ = require("../src/xml/set-xml-status.js");
 
-const selectStatus = (inProduction) => (context, env) => {
+const selectStatus = inProduction => (context, env) => {
   // Mocking whether we are in production or not
   const old = process.env.__OW_ACTIVATION_ID;
   try {
-    process.env.__OW_ACTIVATION_ID = inProduction ? 'mocked' : '';
+    process.env.__OW_ACTIVATION_ID = inProduction ? "mocked" : "";
     selectStatus_(context, env);
     return context;
   } finally {
@@ -28,55 +28,66 @@ const selectStatus = (inProduction) => (context, env) => {
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
-describe('Test set-xml-status', () => {
-  const error = 'oh, no!';
+describe("Test set-xml-status", () => {
+  const error = "oh, no!";
 
-  it('sets a verbose 500 for an error in dev', () => {
-    const ctx = selectStatus(false)({ content: { }, error }, { logger });
+  it("sets a verbose 500 for an error in dev", () => {
+    const ctx = selectStatus(false)({ content: {}, error }, { logger });
     assertEquals(ctx.response.status, 500);
-    assertEquals(ctx.response.body, `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`);
-    assertEquals(ctx.response.headers['Content-Type'], 'application/xml');
+    assertEquals(
+      ctx.response.body,
+      `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`
+    );
+    assertEquals(ctx.response.headers["Content-Type"], "application/xml");
   });
 
-  it('sets a terse 500 for an error in production', () => {
-    const ctx = selectStatus(true)({ content: { }, error }, { logger });
+  it("sets a terse 500 for an error in production", () => {
+    const ctx = selectStatus(true)({ content: {}, error }, { logger });
     assertEquals(ctx.response.status, 500);
-    assertEquals(ctx.response.body, '');
+    assertEquals(ctx.response.body, "");
   });
 
-  it('sets a verbose 500 for an error in production if x-debug header is present', () => {
+  it("sets a verbose 500 for an error in production if x-debug header is present", () => {
     const request = {
       headers: {
-        'x-debug': 'true',
-      },
+        "x-debug": "true"
+      }
     };
-    const ctx = selectStatus(true)({ content: { }, error }, { logger, request });
+    const ctx = selectStatus(true)({ content: {}, error }, { logger, request });
     assertEquals(ctx.response.status, 500);
-    assertEquals(ctx.response.body, `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`);
-    assertEquals(ctx.response.headers['Content-Type'], 'application/xml');
+    assertEquals(
+      ctx.response.body,
+      `<?xml version="1.0" encoding="utf-8"?><error><code>500</code><message>${error}</message></error>`
+    );
+    assertEquals(ctx.response.headers["Content-Type"], "application/xml");
   });
 
-  it('keeps an existing status', () => {
-    const ctx = selectStatus(false)({
-      response: {
-        status: 201,
+  it("keeps an existing status", () => {
+    const ctx = selectStatus(false)(
+      {
+        response: {
+          status: 201
+        }
       },
-    }, { logger });
+      { logger }
+    );
     assertEquals(ctx.response.status, 201);
   });
 
-  it('sets a 200 if all good', () => {
-    const ctx = selectStatus(false)({
-      content: {
-        xml: {
-          root: {},
-        },
+  it("sets a 200 if all good", () => {
+    const ctx = selectStatus(false)(
+      {
+        content: {
+          xml: {
+            root: {}
+          }
+        }
       },
-    },
-    { logger });
+      { logger }
+    );
     assertEquals(ctx.response.status, 200);
   });
 });

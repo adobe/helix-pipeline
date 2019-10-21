@@ -17,7 +17,7 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@adobe/eslint-config-helix": "1.1.0",
+    "@adobe/eslint-config-helix": "https://github.com/adobe/helix-eslint-config.git#prettier",
     "@adobe/jsonschema2md": "3.3.1",
     "@pollyjs/adapter-fetch": "2.6.3",
     "@pollyjs/adapter-node-http": "2.6.3",

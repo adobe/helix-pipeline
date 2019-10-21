@@ -10,31 +10,32 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const check = require('../src/xml/check-xml');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const check = require("../src/xml/check-xml");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 const context = {
   response: {
     headers: {
-      'Content-Type': 'text/plain',
+      "Content-Type": "text/plain"
     },
-    body: '<?xml version="1.0" encoding="utf-8"?><parent><child /></parent>',
-  },
+    body: '<?xml version="1.0" encoding="utf-8"?><parent><child /></parent>'
+  }
 };
 
-describe('Test check-xml', () => {
-  it('validates proper XML', () => {
+describe("Test check-xml", () => {
+  it("validates proper XML", () => {
     check(context, { logger });
   });
 
-  it('throws error on improper XML', () => {
-    context.response.body = '<?xml version="1.0" encoding="utf-8"?><parent><child /></root>';
+  it("throws error on improper XML", () => {
+    context.response.body =
+      '<?xml version="1.0" encoding="utf-8"?><parent><child /></root>';
     try {
       check(context, { logger });
     } catch (e) {
@@ -42,8 +43,8 @@ describe('Test check-xml', () => {
     }
   });
 
-  it('does nothing with empty response body', () => {
-    context.response.body = '';
+  it("does nothing with empty response body", () => {
+    context.response.body = "";
     check(context, { logger });
   });
 });

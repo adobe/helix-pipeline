@@ -11,81 +11,90 @@
  */
 /* eslint-env mocha */
 
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { setdefault } = require('ferrum');
-const { pipe } = require('../src/defaults/html.pipe.js');
-const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const { setdefault } = require("ferrum");
+const { pipe } = require("../src/defaults/html.pipe.js");
+const {
+  selectstrain,
+  testgroups,
+  pick
+} = require("../src/utils/conditional-sections");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 const params = {
-  path: '/hello.md',
-  __ow_method: 'get',
-  owner: 'trieloff',
+  path: "/hello.md",
+  __ow_method: "get",
+  owner: "trieloff",
   __ow_headers: {
-    'X-Forwarded-Port': '443',
-    'X-CDN-Request-Id': '2a208a89-e071-44cf-aee9-220880da4c1e',
-    'Fastly-Client': '1',
-    'X-Forwarded-Host': 'runtime.adobe.io',
-    'Upgrade-Insecure-Requests': '1',
-    Host: 'controller-a',
-    Connection: 'close',
-    'Fastly-SSL': '1',
-    'X-Request-Id': 'RUss5tPdgOfw74a68aNc24FeTipGpVfW',
-    'X-Branch': 'master',
-    'Accept-Language': 'en-US, en;q=0.9, de;q=0.8',
-    'X-Forwarded-Proto': 'https',
-    'Fastly-Orig-Accept-Encoding': 'gzip',
-    'X-Varnish': '267021320',
-    DNT: '1',
-    'X-Forwarded-For':
-      '192.147.117.11, 157.52.92.27, 23.235.46.33, 10.64.221.107',
-    'X-Host': 'www.primordialsoup.life',
+    "X-Forwarded-Port": "443",
+    "X-CDN-Request-Id": "2a208a89-e071-44cf-aee9-220880da4c1e",
+    "Fastly-Client": "1",
+    "X-Forwarded-Host": "runtime.adobe.io",
+    "Upgrade-Insecure-Requests": "1",
+    Host: "controller-a",
+    Connection: "close",
+    "Fastly-SSL": "1",
+    "X-Request-Id": "RUss5tPdgOfw74a68aNc24FeTipGpVfW",
+    "X-Branch": "master",
+    "Accept-Language": "en-US, en;q=0.9, de;q=0.8",
+    "X-Forwarded-Proto": "https",
+    "Fastly-Orig-Accept-Encoding": "gzip",
+    "X-Varnish": "267021320",
+    DNT: "1",
+    "X-Forwarded-For":
+      "192.147.117.11, 157.52.92.27, 23.235.46.33, 10.64.221.107",
+    "X-Host": "www.primordialsoup.life",
     Accept:
-      'text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8',
-    'X-Real-IP': '10.64.221.107',
-    'X-Forwarded-Server': 'cache-lcy19249-LCY, cache-iad2127-IAD',
-    'Fastly-Client-IP': '192.147.117.11',
-    'Perf-Br-Req-In': '1529585370.116',
-    'X-Timer': 'S1529585370.068237,VS0,VS0',
-    'Fastly-FF':
-      'dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19249-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19227-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2127-IAD, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2133-IAD',
-    'Accept-Encoding': 'gzip',
-    'User-Agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36',
+      "text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8",
+    "X-Real-IP": "10.64.221.107",
+    "X-Forwarded-Server": "cache-lcy19249-LCY, cache-iad2127-IAD",
+    "Fastly-Client-IP": "192.147.117.11",
+    "Perf-Br-Req-In": "1529585370.116",
+    "X-Timer": "S1529585370.068237,VS0,VS0",
+    "Fastly-FF":
+      "dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19249-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19227-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2127-IAD, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2133-IAD",
+    "Accept-Encoding": "gzip",
+    "User-Agent":
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36"
   },
-  repo: 'soupdemo',
-  ref: 'master',
-  selector: 'md',
+  repo: "soupdemo",
+  ref: "master",
+  selector: "md"
 };
 
 const secrets = {
-  REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
+  REPO_RAW_ROOT: "https://raw.githubusercontent.com/"
 };
 
 const crequest = {
-  extension: 'html',
-  url: '/test/test.html',
+  extension: "html",
+  url: "/test/test.html"
 };
 
 // return only sections that are not hidden
-const nonhidden = (section) => !section.meta.hidden;
+const nonhidden = section => !section.meta.hidden;
 
-describe('Integration Test Section Strain Filtering', () => {
-  it('html.pipe sees only selected section', async () => {
-    const myparams = { strain: 'a', ...params };
+describe("Integration Test Section Strain Filtering", () => {
+  it("html.pipe sees only selected section", async () => {
+    const myparams = { strain: "a", ...params };
     const result = await pipe(
-      (context) => {
+      context => {
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
         const { content } = context;
-        logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
+        logger.debug(
+          `Found ${
+            content.mdast.children.filter(nonhidden).length
+          } nonhidden sections`
+        );
         assert.equal(content.mdast.children.filter(nonhidden).length, 3);
-        setdefault(context, 'response', {}).body = content.document.body.innerHTML;
+        setdefault(context, "response", {}).body =
+          content.document.body.innerHTML;
       },
       {
         request: crequest,
@@ -112,249 +121,283 @@ strain: b
 
 And this one only in strain "B"
 
-`,
-        },
+`
+        }
       },
       {
         request: { params: myparams },
         secrets,
-        logger,
-      },
+        logger
+      }
     );
     assert.equal(result.error, null);
   });
 });
 
-describe('Unit Test Section Strain Filtering', () => {
-  it('Works with empty section lists', () => {
+describe("Unit Test Section Strain Filtering", () => {
+  it("Works with empty section lists", () => {
     const context = {
       request: crequest,
       content: {
         mdast: {
-          children: [],
-        },
-      },
+          children: []
+        }
+      }
     };
     const action = {
       logger,
       request: {
         params: {
-          strain: 'empty',
-        },
-      },
+          strain: "empty"
+        }
+      }
     };
     selectstrain(context, action);
   });
 
-  it('Filters sections based on strain', () => {
+  it("Filters sections based on strain", () => {
     const context = {
       content: {
         mdast: {
           children: [
-            { meta: { strain: 'test' } },
-            { meta: { strain: 'test' } },
-            { meta: { strain: 'no-test' } },
-          ],
-        },
-      },
+            { meta: { strain: "test" } },
+            { meta: { strain: "test" } },
+            { meta: { strain: "no-test" } }
+          ]
+        }
+      }
     };
     const action = {
       request: {
         params: {
-          strain: 'test',
-        },
+          strain: "test"
+        }
       },
-      logger,
+      logger
     };
     selectstrain(context, action);
     assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
-  it('Filters sections based on strain (array)', () => {
+  it("Filters sections based on strain (array)", () => {
     const context = {
       content: {
         mdast: {
           children: [
-            { meta: { strain: 'test' } },
-            { meta: { strain: ['test', 'no-test'] } },
-            { meta: { strain: 'no-test' } },
-          ],
-        },
-      },
+            { meta: { strain: "test" } },
+            { meta: { strain: ["test", "no-test"] } },
+            { meta: { strain: "no-test" } }
+          ]
+        }
+      }
     };
     const action = {
       request: {
         params: {
-          strain: 'test',
-        },
+          strain: "test"
+        }
       },
-      logger,
+      logger
     };
     selectstrain(context, action);
     assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
-  it('Keeps sections without a strain', () => {
+  it("Keeps sections without a strain", () => {
     const context = {
       content: {
         mdast: {
           children: [
-            { meta: { strain: 'test' } },
-            { meta: { strain: ['test', 'no-test'] } },
-            { meta: {} },
-          ],
-        },
-      },
+            { meta: { strain: "test" } },
+            { meta: { strain: ["test", "no-test"] } },
+            { meta: {} }
+          ]
+        }
+      }
     };
     const action = {
       request: {
         params: {
-          strain: 'no-test',
-        },
+          strain: "no-test"
+        }
       },
-      logger,
+      logger
     };
     selectstrain(context, action);
     assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
-  it('Keeps sections without metadata', () => {
+  it("Keeps sections without metadata", () => {
     const context = {
       content: {
         mdast: {
           children: [
-            { meta: { strain: 'test' } },
-            { meta: { strain: ['test', 'no-test'] } },
-            {},
-          ],
-        },
-      },
+            { meta: { strain: "test" } },
+            { meta: { strain: ["test", "no-test"] } },
+            {}
+          ]
+        }
+      }
     };
     const action = {
       request: {
         params: {
-          strain: 'no-test',
-        },
+          strain: "no-test"
+        }
       },
-      logger,
+      logger
     };
     selectstrain(context, action);
     assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
-
-  it('Filters strain a', () => {
+  it("Filters strain a", () => {
     const context = {
       content: {
         mdast: {
-          children: [{
-            type: 'root',
-            children: [],
-            title: 'This is an easy test.',
-            types: ['has-paragraph', 'has-only-paragraph'],
-            intro: 'This is an easy test.',
-            meta: { frontmatter: true },
-          },
-          {
-            type: 'root',
-            children: [],
-            title: 'These two sections should always be shown',
-            types: ['has-paragraph', 'has-only-paragraph'],
-            intro: 'These two sections should always be shown',
-            meta: {},
-          },
-          {
-            type: 'root',
-            children: [],
-            title: 'But this one only in strain “A”',
-            types: ['has-paragraph', 'has-only-paragraph'],
-            intro: 'But this one only in strain “A”',
-            meta: { strain: 'a' },
-          },
-          {
-            type: 'root',
-            children: [],
-            title: 'And this one only in strain “B”',
-            types: ['has-paragraph', 'has-only-paragraph'],
-            intro: 'And this one only in strain “B”',
-            meta: { strain: 'b' },
-          }],
-        },
-      },
+          children: [
+            {
+              type: "root",
+              children: [],
+              title: "This is an easy test.",
+              types: ["has-paragraph", "has-only-paragraph"],
+              intro: "This is an easy test.",
+              meta: { frontmatter: true }
+            },
+            {
+              type: "root",
+              children: [],
+              title: "These two sections should always be shown",
+              types: ["has-paragraph", "has-only-paragraph"],
+              intro: "These two sections should always be shown",
+              meta: {}
+            },
+            {
+              type: "root",
+              children: [],
+              title: "But this one only in strain “A”",
+              types: ["has-paragraph", "has-only-paragraph"],
+              intro: "But this one only in strain “A”",
+              meta: { strain: "a" }
+            },
+            {
+              type: "root",
+              children: [],
+              title: "And this one only in strain “B”",
+              types: ["has-paragraph", "has-only-paragraph"],
+              intro: "And this one only in strain “B”",
+              meta: { strain: "b" }
+            }
+          ]
+        }
+      }
     };
     const action = {
       request: {
         params: {
-          strain: 'a',
-        },
+          strain: "a"
+        }
       },
-      logger,
+      logger
     };
     selectstrain(context, action);
     assert.equal(context.content.mdast.children.filter(nonhidden).length, 3);
-    assert.equal(context.content.mdast.children.filter(nonhidden)[0].meta.hidden, false);
+    assert.equal(
+      context.content.mdast.children.filter(nonhidden)[0].meta.hidden,
+      false
+    );
   });
 });
 
-describe('Select Sections for Testing #unit', () => {
-  it('Works with empty section lists', () => {
+describe("Select Sections for Testing #unit", () => {
+  it("Works with empty section lists", () => {
     assert.deepEqual(testgroups(), {});
   });
 
-  it('Works with single test variants', () => {
-    assert.deepEqual(Object.keys(testgroups([
-      { meta: { test: 'a', title: 'a' } },
-      { meta: { test: 'a', title: 'b' } },
-      {},
-    ])), ['a']);
+  it("Works with single test variants", () => {
+    assert.deepEqual(
+      Object.keys(
+        testgroups([
+          { meta: { test: "a", title: "a" } },
+          { meta: { test: "a", title: "b" } },
+          {}
+        ])
+      ),
+      ["a"]
+    );
   });
 
-  it('Works with multiple test variants', () => {
-    assert.deepEqual(Object.keys(testgroups([
-      { meta: { test: 'a', title: 'a' } },
-      { meta: { test: 'a', title: 'b' } },
-      { meta: { test: 'b', title: 'A' } },
-      { meta: { test: 'b', title: 'A' } },
-      {},
-    ])), ['a', 'b']);
+  it("Works with multiple test variants", () => {
+    assert.deepEqual(
+      Object.keys(
+        testgroups([
+          { meta: { test: "a", title: "a" } },
+          { meta: { test: "a", title: "b" } },
+          { meta: { test: "b", title: "A" } },
+          { meta: { test: "b", title: "A" } },
+          {}
+        ])
+      ),
+      ["a", "b"]
+    );
   });
 });
 
-describe('Pick among possible candidate sections #unit', () => {
-  it('Works with empty candidate lists', () => {
+describe("Pick among possible candidate sections #unit", () => {
+  it("Works with empty candidate lists", () => {
     assert.deepEqual(pick(), {});
   });
 
-  it('Picks a candidate for each group', () => {
-    assert.deepEqual(pick({
-      a: [1, 2, 3],
-      b: [4, 5, 6],
-    }), { a: 2, b: 5 });
+  it("Picks a candidate for each group", () => {
+    assert.deepEqual(
+      pick({
+        a: [1, 2, 3],
+        b: [4, 5, 6]
+      }),
+      { a: 2, b: 5 }
+    );
   });
 
-  it('Picks a different candidate for each strain', () => {
-    assert.notDeepEqual(pick({
-      a: [1, 2, 3],
-      b: [4, 5, 6],
-    }, 'zap'), pick({
-      a: [1, 2, 3],
-      b: [4, 5, 6],
-    }, 'zip'));
+  it("Picks a different candidate for each strain", () => {
+    assert.notDeepEqual(
+      pick(
+        {
+          a: [1, 2, 3],
+          b: [4, 5, 6]
+        },
+        "zap"
+      ),
+      pick(
+        {
+          a: [1, 2, 3],
+          b: [4, 5, 6]
+        },
+        "zip"
+      )
+    );
   });
 });
 
-describe('Integration Test A/B Testing', () => {
-  it('html.pipe sees only one variant', async () => {
-    const myparams = { strain: 'default', ...params };
+describe("Integration Test A/B Testing", () => {
+  it("html.pipe sees only one variant", async () => {
+    const myparams = { strain: "default", ...params };
     const result = await pipe(
-      (context) => {
+      context => {
         const { content } = context;
         // this is the main function (normally it would be the template function)
         // but we use it to assert that pre-processing has happened
-        logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
+        logger.debug(
+          `Found ${
+            content.mdast.children.filter(nonhidden).length
+          } nonhidden sections`
+        );
         assert.equal(content.mdast.children.filter(nonhidden).length, 3);
-        assert.equal(content.mdast.children.filter(nonhidden)[2].meta.test, 'a');
-        setdefault(context, 'response', {}).body = content.document.body.innerHTML;
+        assert.equal(
+          content.mdast.children.filter(nonhidden)[2].meta.test,
+          "a"
+        );
+        setdefault(context, "response", {}).body =
+          content.document.body.innerHTML;
       },
       {
         request: crequest,
@@ -381,33 +424,38 @@ test: a
 
 Or this one at the same time.
 
-`,
-        },
+`
+        }
       },
       {
         request: { params: myparams },
         secrets,
-        logger,
-      },
+        logger
+      }
     );
     assert.equal(result.error, null);
   });
 
-  it('variant in html.pipe differs from strain to strain', async () => {
+  it("variant in html.pipe differs from strain to strain", async () => {
     async function runpipe(strain) {
       let selected = {};
       const myparams = { strain, ...params };
       const result = await pipe(
-        (context) => {
+        context => {
           const { content } = context;
           // this is the main function (normally it would be the template function)
           // but we use it to assert that pre-processing has happened
-          logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
+          logger.debug(
+            `Found ${
+              content.mdast.children.filter(nonhidden).length
+            } nonhidden sections`
+          );
           assert.equal(content.mdast.children.filter(nonhidden).length, 3);
           // remember what was selected
           /* eslint-disable-next-line prefer-destructuring */
           selected = content.mdast.children.filter(nonhidden)[2];
-          setdefault(context, 'response', {}).body = content.document.body.innerHTML;
+          setdefault(context, "response", {}).body =
+            content.document.body.innerHTML;
         },
         {
           request: crequest,
@@ -434,14 +482,14 @@ test: a
 
 Or that one at the same time, because they are both part of an A/B test.
 
-`,
-          },
+`
+          }
         },
         {
           request: { params: myparams },
           secrets,
-          logger,
-        },
+          logger
+        }
       );
       assert.equal(result.error, null);
       return selected;
@@ -453,7 +501,7 @@ Or that one at the same time, because they are both part of an A/B test.
     // format, section metadata, the mdast format or the input above, you probably
     // want to change one of these values until you find one that *happens* to work
     // again...
-    assert.notDeepEqual(await runpipe('foo'), await runpipe('qux'));
-    assert.deepEqual(await runpipe('baz'), await runpipe('baz'));
+    assert.notDeepEqual(await runpipe("foo"), await runpipe("qux"));
+    assert.deepEqual(await runpipe("baz"), await runpipe("baz"));
   });
 });

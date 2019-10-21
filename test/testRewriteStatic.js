@@ -10,17 +10,17 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { deepclone, assertEquals } = require('ferrum');
-const rewrite = require('../src/html/static-asset-links');
-const tovdom = require('../src/html/html-to-vdom');
-const stringify = require('../src/html/stringify-response');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const { deepclone, assertEquals } = require("ferrum");
+const rewrite = require("../src/html/static-asset-links");
+const tovdom = require("../src/html/html-to-vdom");
+const stringify = require("../src/html/stringify-response");
+const { pipe } = require("../src/defaults/html.pipe.js");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 function rw(content, action) {
@@ -28,9 +28,9 @@ function rw(content, action) {
     response: {
       body: content,
       headers: {
-        'Content-Type': 'text/html',
-      },
-    },
+        "Content-Type": "text/html"
+      }
+    }
   };
   tovdom(ctx, action);
   rewrite(ctx, action);
@@ -38,35 +38,35 @@ function rw(content, action) {
   return ctx.response.body;
 }
 
-describe('Integration Test Static Asset Rewriting', () => {
+describe("Integration Test Static Asset Rewriting", () => {
   let production;
 
-  before('Fake Production Mode', () => {
+  before("Fake Production Mode", () => {
     // eslint-disable-next-line no-underscore-dangle
     production = process.env.__OW_ACTIVATION_ID;
     // eslint-disable-next-line no-underscore-dangle
-    process.env.__OW_ACTIVATION_ID = 'fake';
+    process.env.__OW_ACTIVATION_ID = "fake";
   });
 
-  it('Test static asset rewriting in full pipeline', async () => {
+  it("Test static asset rewriting in full pipeline", async () => {
     const context = {
       content: {
-        body: 'Hello World',
+        body: "Hello World"
       },
       request: {
-        extension: 'html',
-        url: '/test.html',
-      },
+        extension: "html",
+        url: "/test.html"
+      }
     };
     const action = {
       request: {
         params: {
-          path: 'test.md',
-        },
+          path: "test.md"
+        }
       },
-      logger,
+      logger
     };
-    const once = (ctx) => {
+    const once = ctx => {
       ctx.response = {
         status: 200,
         body: `<html>
@@ -81,13 +81,19 @@ describe('Integration Test Static Asset Rewriting', () => {
       alert('ok');
     </script>
   </body>
-</html>`,
+</html>`
       };
     };
 
-    await pipe(once, context, action);
+    await pipe(
+      once,
+      context,
+      action
+    );
 
-    assert.equal(context.response.body, `<html><head>
+    assert.equal(
+      context.response.body,
+      `<html><head>
     <title>Hello World</title>
     <script src="<esi:include src='index.js.url'/><esi:remove>index.js</esi:remove>"></script>
     <link rel="stylesheet" href="<esi:include src='style.css.url'/><esi:remove>style.css</esi:remove>">
@@ -98,75 +104,94 @@ describe('Integration Test Static Asset Rewriting', () => {
       alert('ok');
     </script>
   
-</body></html>`);
+</body></html>`
+    );
   });
 
-  after('Reset Production Mode', () => {
+  after("Reset Production Mode", () => {
     // eslint-disable-next-line no-underscore-dangle
     process.env.__OW_ACTIVATION_ID = production;
   });
 });
 
-describe('Test Static Asset Rewriting', () => {
-  it('Ignores non-HTML', () => {
+describe("Test Static Asset Rewriting", () => {
+  it("Ignores non-HTML", () => {
     const dat = {
       response: {
-        body: '{}',
+        body: "{}",
         headers: {
-          'Content-Type': 'application/json',
-        },
-      },
+          "Content-Type": "application/json"
+        }
+      }
     };
     const dat2 = deepclone(dat);
     rewrite(dat);
     assertEquals(dat, dat2);
   });
 
-  it('Load simple HTML', async () => {
-    assert.equal(rw(`<!doctype html><html><head>
+  it("Load simple HTML", async () => {
+    assert.equal(
+      rw(
+        `<!doctype html><html><head>
     <title>Normal</title>
   </head>
   <body>Just normal things
-</body></html>`, { logger }), `<!DOCTYPE html><html><head>
+</body></html>`,
+        { logger }
+      ),
+      `<!DOCTYPE html><html><head>
     <title>Normal</title>
   </head>
   <body>Just normal things
-</body></html>`);
+</body></html>`
+    );
   });
 
-  it('ESI include script tags HTML', async () => {
-    assert.equal(rw(`<!DOCTYPE html><html><head>
+  it("ESI include script tags HTML", async () => {
+    assert.equal(
+      rw(
+        `<!DOCTYPE html><html><head>
     <title>Normal</title>
     <script src="test.js"></script>
     <script src="keep.js?cached=false"></script>
     <script src="//code.jquery.com/jquery-3.4.0.min.js"></script>
   </head>
   <body>Just normal things
-</body></html>`, { logger }), `<!DOCTYPE html><html><head>
+</body></html>`,
+        { logger }
+      ),
+      `<!DOCTYPE html><html><head>
     <title>Normal</title>
     <script src="<esi:include src='test.js.url'/><esi:remove>test.js</esi:remove>"></script>
     <script src="keep.js?cached=false"></script>
     <script src="//code.jquery.com/jquery-3.4.0.min.js"></script>
   </head>
   <body>Just normal things
-</body></html>`);
+</body></html>`
+    );
   });
 
-  it('ESI include link tags HTML', async () => {
-    assert.equal(rw(`<!DOCTYPE html><html><head>
+  it("ESI include link tags HTML", async () => {
+    assert.equal(
+      rw(
+        `<!DOCTYPE html><html><head>
     <title>Normal</title>
     <link rel="stylesheet foo" href="test.css">
     <link rel="stylesheet" href="keep.css?cached=false">
     <link rel="stylesheet" href="//code.jquery.com/jquery-3.4.0.min.css">
   </head>
   <body>Just normal things
-</body></html>`, { logger }), `<!DOCTYPE html><html><head>
+</body></html>`,
+        { logger }
+      ),
+      `<!DOCTYPE html><html><head>
     <title>Normal</title>
     <link rel="stylesheet foo" href="<esi:include src='test.css.url'/><esi:remove>test.css</esi:remove>">
     <link rel="stylesheet" href="keep.css?cached=false">
     <link rel="stylesheet" href="//code.jquery.com/jquery-3.4.0.min.css">
   </head>
   <body>Just normal things
-</body></html>`);
+</body></html>`
+    );
   });
 });

@@ -9,9 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const retext = require('retext');
-const map = require('unist-util-visit');
-const smartypants = require('retext-smartypants');
+const retext = require("retext");
+const map = require("unist-util-visit");
+const smartypants = require("retext-smartypants");
 
 const smart = retext().use(smartypants);
 
@@ -19,8 +19,8 @@ function reformat({ content }) {
   if (!content.mdast) {
     return;
   }
-  map(content.mdast, (node) => {
-    if (node.type === 'text' && node.value.match(/(--)|(\.\.\.)|(['"`])/)) {
+  map(content.mdast, node => {
+    if (node.type === "text" && node.value.match(/(--)|(\.\.\.)|(['"`])/)) {
       node.value = smart.processSync(node.value).contents;
     }
   });

@@ -10,61 +10,78 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const fs = require('fs-extra');
-const path = require('path');
-const assert = require('assert');
-const TypeMatcher = require('../src/utils/match-section-types');
+const fs = require("fs-extra");
+const path = require("path");
+const assert = require("assert");
+const TypeMatcher = require("../src/utils/match-section-types");
 
+describe("Test Type Matcher Util", () => {
+  const sections = fs.readJSONSync(
+    path.resolve(__dirname, "fixtures", "sections.json")
+  );
 
-describe('Test Type Matcher Util', () => {
-  const sections = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'sections.json'));
-
-  it('TypeMatcher works with empty input', () => {
+  it("TypeMatcher works with empty input", () => {
     assert.deepEqual(new TypeMatcher(null).process(), []);
     assert.deepEqual(new TypeMatcher().process(), []);
     assert.deepEqual(new TypeMatcher([]).process(), []);
-    assert.deepEqual(new TypeMatcher([
-      { type: 'root' },
-    ]).process(), { type: 'root', types: [] });
+    assert.deepEqual(new TypeMatcher([{ type: "root" }]).process(), {
+      type: "root",
+      types: []
+    });
   });
 
-  it('TypeMatcher returns empty array if no matchers are registered', () => {
-    assert.deepEqual(new TypeMatcher(sections[0])
-      .process().types, []);
+  it("TypeMatcher returns empty array if no matchers are registered", () => {
+    assert.deepEqual(new TypeMatcher(sections[0]).process().types, []);
   });
 
-  it('TypeMatcher matches simple expressions', () => {
-    assert.deepEqual(new TypeMatcher(sections[0])
-      .match('heading', 'has-heading')
-      .process().types, ['has-heading']);
+  it("TypeMatcher matches simple expressions", () => {
+    assert.deepEqual(
+      new TypeMatcher(sections[0]).match("heading", "has-heading").process()
+        .types,
+      ["has-heading"]
+    );
   });
 
-  it('TypeMatcher matches multiple expressions', () => {
-    assert.deepEqual(new TypeMatcher(sections[0])
-      .match('heading', 'has-heading')
-      .match('paragraph', 'has-paragraph')
-      .match('impossible', 'has-impossible')
-      .process().types, ['has-heading', 'has-paragraph']);
+  it("TypeMatcher matches multiple expressions", () => {
+    assert.deepEqual(
+      new TypeMatcher(sections[0])
+        .match("heading", "has-heading")
+        .match("paragraph", "has-paragraph")
+        .match("impossible", "has-impossible")
+        .process().types,
+      ["has-heading", "has-paragraph"]
+    );
   });
 
-  it('TypeMatcher can match with functions', () => {
-    assert.deepEqual(new TypeMatcher(sections[0])
-      .match('heading', 'has-heading')
-      .match('paragraph', 'has-paragraph')
-      .match((types) => types.length >= 3, 'long')
-      .process().types, ['has-heading', 'has-paragraph', 'long']);
+  it("TypeMatcher can match with functions", () => {
+    assert.deepEqual(
+      new TypeMatcher(sections[0])
+        .match("heading", "has-heading")
+        .match("paragraph", "has-paragraph")
+        .match(types => types.length >= 3, "long")
+        .process().types,
+      ["has-heading", "has-paragraph", "long"]
+    );
   });
 
-  it('TypeMatcher can match with functions', () => {
+  it("TypeMatcher can match with functions", () => {
     const matchedsections = new TypeMatcher(sections)
-      .match('heading', 'has-heading')
-      .match('paragraph', 'has-paragraph')
-      .match((types) => types.length >= 3, 'long')
+      .match("heading", "has-heading")
+      .match("paragraph", "has-paragraph")
+      .match(types => types.length >= 3, "long")
       .process();
     assert.equal(matchedsections.length, 4);
     assert.ok(matchedsections[0].types);
     assert.ok(matchedsections[1].types);
-    assert.deepEqual(matchedsections[2].types, ['has-heading', 'has-paragraph', 'long']);
-    assert.deepEqual(matchedsections[3].types, ['has-heading', 'has-paragraph', 'long']);
+    assert.deepEqual(matchedsections[2].types, [
+      "has-heading",
+      "has-paragraph",
+      "long"
+    ]);
+    assert.deepEqual(matchedsections[3].types, [
+      "has-heading",
+      "has-paragraph",
+      "long"
+    ]);
   });
 });

@@ -12,10 +12,8 @@
 
 function html({ content }, { logger, transformer }) {
   const { mdast } = content;
-  logger.log('debug', `Turning Markdown into HTML from ${typeof mdast}`);
-  content.document = transformer
-    .withMdast(mdast)
-    .getDocument();
+  logger.log("debug", `Turning Markdown into HTML from ${typeof mdast}`);
+  content.document = transformer.withMdast(mdast).getDocument();
 }
 
 module.exports = html;

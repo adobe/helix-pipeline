@@ -22,11 +22,11 @@
 
 /* eslint-disable header/header */
 
-const ns = require('web-namespaces');
-const info = require('property-information');
+const ns = require("web-namespaces");
+const info = require("property-information");
 
 /* istanbul ignore next */
-const wrap = (document) => {
+const wrap = document => {
   // Add all children.
   function appendAll(node, children, options) {
     const childrenLength = children.length;
@@ -51,12 +51,12 @@ const wrap = (document) => {
     for (let i = 0; i < childrenLength; i += 1) {
       const { tagName, properties = {} } = children[i];
 
-      if (tagName === 'html') {
+      if (tagName === "html") {
         // If we have a root HTML node, we don’t need to render as a fragment.
         rootIsDocument = true;
 
         // Take namespace of the first child.
-        if (typeof optionsNamespace === 'undefined') {
+        if (typeof optionsNamespace === "undefined") {
           namespace = properties.xmlns || ns.html;
         }
       }
@@ -66,11 +66,11 @@ const wrap = (document) => {
     let el;
 
     if (rootIsDocument) {
-      el = document.implementation.createDocument(namespace, '', null);
+      el = document.implementation.createDocument(namespace, "", null);
     } else if (fragment) {
       el = document.createDocumentFragment();
     } else {
-      el = document.createElement('html');
+      el = document.createElement("html");
     }
 
     return appendAll(el, children, { fragment, namespace, ...options });
@@ -79,9 +79,9 @@ const wrap = (document) => {
   // Create a `doctype`.
   function doctype(node) {
     return document.implementation.createDocumentType(
-      node.name || 'html',
-      node.public || '',
-      node.system || '',
+      node.name || "html",
+      node.public || "",
+      node.system || ""
     );
   }
 
@@ -99,10 +99,11 @@ const wrap = (document) => {
   function element(node, options) {
     const { namespace } = options;
     // TODO: use `g` in SVG space.
-    const { tagName = 'div', properties = {}, children = [] } = node;
-    const el = typeof namespace !== 'undefined'
-      ? document.createElementNS(namespace, tagName)
-      : document.createElement(tagName);
+    const { tagName = "div", properties = {}, children = [] } = node;
+    const el =
+      typeof namespace !== "undefined"
+        ? document.createElementNS(namespace, tagName)
+        : document.createElement(tagName);
 
     // Add HTML attributes.
     const props = Object.keys(properties);
@@ -121,7 +122,7 @@ const wrap = (document) => {
         overloadedBoolean,
         // `number`,
         // `defined`,
-        commaSeparated,
+        commaSeparated
         // `spaceSeparated`,
         // `commaOrSpaceSeparated`,
       } = info.find(info.html, key);
@@ -129,24 +130,24 @@ const wrap = (document) => {
       let value = properties[key];
 
       if (Array.isArray(value)) {
-        value = value.join(commaSeparated ? ', ' : ' ');
+        value = value.join(commaSeparated ? ", " : " ");
       }
 
       if (mustUseProperty) {
         el[property] = value;
       }
 
-      if (boolean || (overloadedBoolean && typeof value === 'boolean')) {
+      if (boolean || (overloadedBoolean && typeof value === "boolean")) {
         if (value) {
-          el.setAttribute(attribute, '');
+          el.setAttribute(attribute, "");
         } else {
           el.removeAttribute(attribute);
         }
       } else if (booleanish) {
         el.setAttribute(attribute, value);
       } else if (value === true) {
-        el.setAttribute(attribute, '');
-      } else if (value || value === 0 || value === '') {
+        el.setAttribute(attribute, "");
+      } else if (value || value === 0 || value === "") {
         el.setAttribute(attribute, value);
       }
     }
@@ -161,17 +162,17 @@ const wrap = (document) => {
 
   function transform(node, options) {
     switch (node.type) {
-      case 'root':
+      case "root":
         return root(node, options);
-      case 'text':
+      case "text":
         return text(node);
-      case 'element':
+      case "element":
         return element(node, options);
-      case 'doctype':
+      case "doctype":
         return doctype(node);
-      case 'comment':
+      case "comment":
         return comment(node);
-      case 'raw':
+      case "raw":
         return raw(node);
       default:
         return element(node, options);

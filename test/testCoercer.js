@@ -11,40 +11,43 @@
  */
 /* eslint-env mocha */
 
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const coerce = require('../src/utils/coerce-secrets');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const coerce = require("../src/utils/coerce-secrets");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
-describe('Test Coercing Secrets', () => {
-  it('Secrets will be created', async () => {
+describe("Test Coercing Secrets", () => {
+  it("Secrets will be created", async () => {
     const action = { logger };
     await coerce(action);
     assert.ok(action.secrets);
-    assert.equal(typeof action.secrets, 'object');
+    assert.equal(typeof action.secrets, "object");
   });
 
-  it('Defaults have correct values', async () => {
+  it("Defaults have correct values", async () => {
     const action = { logger };
     await coerce(action);
     assert.ok(action.secrets.REPO_RAW_ROOT);
-    assert.equal(action.secrets.REPO_RAW_ROOT, 'https://raw.githubusercontent.com/');
+    assert.equal(
+      action.secrets.REPO_RAW_ROOT,
+      "https://raw.githubusercontent.com/"
+    );
   });
 
-  it('Defaults have correct types (boolean)', async () => {
+  it("Defaults have correct types (boolean)", async () => {
     const action = { logger };
     await coerce(action);
-    assert.equal(typeof action.secrets.TEST_BOOLEAN, 'boolean');
+    assert.equal(typeof action.secrets.TEST_BOOLEAN, "boolean");
   });
 
-  it('Secrets have correct types (boolean)', async () => {
-    const action = { logger, secrets: { TEST_BOOLEAN: 'false' } };
+  it("Secrets have correct types (boolean)", async () => {
+    const action = { logger, secrets: { TEST_BOOLEAN: "false" } };
     await coerce(action);
     assert.equal(action.secrets.TEST_BOOLEAN, false);
-    assert.equal(typeof action.secrets.TEST_BOOLEAN, 'boolean');
+    assert.equal(typeof action.secrets.TEST_BOOLEAN, "boolean");
   });
 });

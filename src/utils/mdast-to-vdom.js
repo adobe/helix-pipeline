@@ -11,16 +11,16 @@
  */
 
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
-const { selectAll } = require('unist-util-select');
-const defaultHandlers = require('mdast-util-to-hast/lib/handlers');
-const mdast2hast = require('mdast-util-to-hast');
-const { JSDOM } = require('jsdom');
-const toDOM = require('./hast-util-to-dom');
-const HeadingHandler = require('./heading-handler');
-const embed = require('./embed-handler');
-const link = require('./link-handler');
-const section = require('./section-handler');
-const types = require('../schemas/mdast.schema.json').properties.type.enum;
+const { selectAll } = require("unist-util-select");
+const defaultHandlers = require("mdast-util-to-hast/lib/handlers");
+const mdast2hast = require("mdast-util-to-hast");
+const { JSDOM } = require("jsdom");
+const toDOM = require("./hast-util-to-dom");
+const HeadingHandler = require("./heading-handler");
+const embed = require("./embed-handler");
+const link = require("./link-handler");
+const section = require("./section-handler");
+const types = require("../schemas/mdast.schema.json").properties.type.enum;
 
 /**
  * @typedef {function(parent, tagName, attributes, children)} handlerFunction
@@ -49,8 +49,9 @@ class VDOMTransformer {
 
     const that = this;
     // use our own handle function for every known node type
-    types.map((type) => {
-      this._handlers[type] = (cb, node, parent) => VDOMTransformer.handle(cb, node, parent, that);
+    types.map(type => {
+      this._handlers[type] = (cb, node, parent) =>
+        VDOMTransformer.handle(cb, node, parent, that);
       return true;
     });
 
@@ -64,23 +65,23 @@ class VDOMTransformer {
     this._options = Object.assign(this._options, options);
 
     this._headingHandler = new HeadingHandler(this._options);
-    this.match('heading', this._headingHandler.handler());
-    this.match('embed', embed(this._options));
-    this.match('link', link(this._options));
-    this.match('section', section(this._options));
-    this.match('html', (h, node) => {
-      if (node.value.startsWith('<!--')) {
+    this.match("heading", this._headingHandler.handler());
+    this.match("embed", embed(this._options));
+    this.match("link", link(this._options));
+    this.match("section", section(this._options));
+    this.match("html", (h, node) => {
+      if (node.value.startsWith("<!--")) {
         return h.augment(node, {
-          type: 'comment',
-          value: node.value.substring(4, node.value.length - 3),
+          type: "comment",
+          value: node.value.substring(4, node.value.length - 3)
         });
       }
       this._hasRaw = true;
       const frag = JSDOM.fragment(node.value);
       return h.augment(node, {
-        type: 'raw',
+        type: "raw",
         value: frag,
-        html: node.value,
+        html: node.value
       });
     });
 
@@ -89,7 +90,6 @@ class VDOMTransformer {
 
   withMdast(mdast) {
     this._root = mdast;
-
 
     return this;
   }
@@ -123,15 +123,19 @@ class VDOMTransformer {
      */
     function handlechild(callback, childnode, mdastparent, hastparent) {
       if (hastparent && hastparent.children) {
-        hastparent.children.push(VDOMTransformer.handle(callback, childnode, mdastparent, that));
+        hastparent.children.push(
+          VDOMTransformer.handle(callback, childnode, mdastparent, that)
+        );
       }
     }
 
     const result = handlefn(cb, node, parent, handlechild);
-    if (result && typeof result === 'string') {
-      throw new Error('returning string from a handler is not supported yet.');
-    } else if (result && typeof result === 'object' && result.outerHTML) {
-      throw new Error('returning a DOM element from a handler is not supported yet.');
+    if (result && typeof result === "string") {
+      throw new Error("returning string from a handler is not supported yet.");
+    } else if (result && typeof result === "object" && result.outerHTML) {
+      throw new Error(
+        "returning a DOM element from a handler is not supported yet."
+      );
     }
     return result;
   }
@@ -164,7 +168,10 @@ class VDOMTransformer {
    * @returns {VDOMTransformer} this, enabling chaining
    */
   match(matcher, processor) {
-    const matchfn = typeof matcher === 'function' ? matcher : VDOMTransformer.matchfn(this._root, matcher);
+    const matchfn =
+      typeof matcher === "function"
+        ? matcher
+        : VDOMTransformer.matchfn(this._root, matcher);
     this._matchers.push([matchfn, processor]);
     return this;
   }
@@ -215,13 +222,15 @@ class VDOMTransformer {
     const stack = [];
     for (let i = 0; i < node.children.length; i += 1) {
       const child = node.children[i];
-      if (child.type === 'raw') {
+      if (child.type === "raw") {
         if (child.value.firstElementChild === null) {
           if (stack.length === 0) {
-            throw new Error(`no matching inline element found for ${child.html}`);
+            throw new Error(
+              `no matching inline element found for ${child.html}`
+            );
           } else {
             const last = stack.pop();
-            let html = '';
+            let html = "";
             for (let j = last; j <= i; j += 1) {
               html += node.children[j].html || node.children[j].value;
             }
@@ -247,7 +256,7 @@ class VDOMTransformer {
     // mdast -> hast; hast -> DOM using JSDOM
     const hast = mdast2hast(this._root, {
       handlers: this._handlers,
-      allowDangerousHTML: true,
+      allowDangerousHTML: true
     });
 
     if (this._hasRaw) {
@@ -258,7 +267,7 @@ class VDOMTransformer {
     const doc = dom.window.document;
     const frag = toDOM(doc, hast, { fragment: true });
 
-    if (frag.nodeName === '#document') {
+    if (frag.nodeName === "#document") {
       // this only happens if it's an empty markdown document, so just ignore
     } else {
       doc.body.appendChild(frag);

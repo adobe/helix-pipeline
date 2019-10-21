@@ -10,9 +10,9 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-disable no-underscore-dangle */
-const Ajv = require('ajv');
-const hash = require('object-hash');
-const util = require('util');
+const Ajv = require("ajv");
+const hash = require("object-hash");
+const util = require("util");
 
 const _ajv = {};
 
@@ -26,46 +26,57 @@ function ajv(logger, options = {}) {
     // using constants in the require functions allows packagers to include the schemas.
     [
       /* eslint-disable global-require */
-      require('../schemas/action.schema.json'),
-      require('../schemas/content.schema.json'),
-      require('../schemas/context.schema.json'),
-      require('../schemas/mdast.schema.json'),
-      require('../schemas/meta.schema.json'),
-      require('../schemas/position.schema.json'),
-      require('../schemas/rawrequest.schema.json'),
-      require('../schemas/request.schema.json'),
-      require('../schemas/response.schema.json'),
-      require('../schemas/secrets.schema.json'),
-      require('../schemas/section.schema.json'),
-      require('../schemas/textcoordinates.schema.json'),
+      require("../schemas/action.schema.json"),
+      require("../schemas/content.schema.json"),
+      require("../schemas/context.schema.json"),
+      require("../schemas/mdast.schema.json"),
+      require("../schemas/meta.schema.json"),
+      require("../schemas/position.schema.json"),
+      require("../schemas/rawrequest.schema.json"),
+      require("../schemas/request.schema.json"),
+      require("../schemas/response.schema.json"),
+      require("../schemas/secrets.schema.json"),
+      require("../schemas/section.schema.json"),
+      require("../schemas/textcoordinates.schema.json")
       /* eslint-enable global-require */
-    ].forEach((schemaData) => {
+    ].forEach(schemaData => {
       validator.addSchema(schemaData);
       logger.debug(`- ${schemaData.$id}`);
     });
 
-    validator.enhancedErrorsText = function enhancedErrorsText(errs, opts = {}) {
+    validator.enhancedErrorsText = function enhancedErrorsText(
+      errs,
+      opts = {}
+    ) {
       const errors = errs || this.errors;
-      if (!errors) return 'No errors';
+      if (!errors) return "No errors";
 
-      const separator = opts.separator === undefined ? '\n' : opts.separator;
+      const separator = opts.separator === undefined ? "\n" : opts.separator;
 
-      let text = '';
-      errors.forEach((err) => {
+      let text = "";
+      errors.forEach(err => {
         if (err) {
           if (err.data && err.data.type) {
             text += `${err.data.type}${err.schemaPath} ${err.message} - path: ${err.dataPath}${separator}`;
-          } else if (typeof err.data !== 'object') {
-            text += `${err.schemaPath} ${err.message} - params: ${JSON.stringify(util.inspect(err.params))} - value: ${err.data} - path: ${err.dataPath}${separator}`;
+          } else if (typeof err.data !== "object") {
+            text += `${err.schemaPath} ${
+              err.message
+            } - params: ${JSON.stringify(util.inspect(err.params))} - value: ${
+              err.data
+            } - path: ${err.dataPath}${separator}`;
           } else {
-            text += `${err.schemaPath} ${err.message} - params: ${JSON.stringify(util.inspect(err.params))} - path: ${err.dataPath}${separator}`;
+            text += `${err.schemaPath} ${
+              err.message
+            } - params: ${JSON.stringify(util.inspect(err.params))} - path: ${
+              err.dataPath
+            }${separator}`;
           }
         }
       });
       return text.slice(0, -separator.length);
     }.bind(validator);
 
-    logger.debug('ajv initialized');
+    logger.debug("ajv initialized");
     _ajv[hash(options)] = validator;
   }
   return _ajv[hash(options)];

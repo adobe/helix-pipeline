@@ -36,8 +36,8 @@ function create() {
    */
   function update(context, action, idx, name) {
     times.push({
-      name: name ? name.split(':').pop() : 'undef',
-      time: process.hrtime(),
+      name: name ? name.split(":").pop() : "undef",
+      time: process.hrtime()
     });
   }
 
@@ -53,20 +53,19 @@ function create() {
     const metrics = [];
     for (let i = 0; i < times.length - 1; i += 1) {
       const d = delta(times[i + 1].time, times[i].time);
-      metrics.push(`p${String(i).padStart(2, '0')};dur=${d};desc=${times[i].name}`);
+      metrics.push(
+        `p${String(i).padStart(2, "0")};dur=${d};desc=${times[i].name}`
+      );
     }
-    const timing = metrics.join(' ,');
+    const timing = metrics.join(" ,");
     logger.debug(`timing: ${timing}`);
 
-    context.response.headers['Server-Timing'] = [
-      timing,
-      `total;dur=${total}`,
-    ];
+    context.response.headers["Server-Timing"] = [timing, `total;dur=${total}`];
   }
 
   return {
     update,
-    report,
+    report
   };
 }
 

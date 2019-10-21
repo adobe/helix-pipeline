@@ -10,18 +10,18 @@
  * governing permissions and limitations under the License.
  */
 
-const { setdefault } = require('ferrum');
+const { setdefault } = require("ferrum");
 
 function emit(context, { logger }) {
-  const content = setdefault(context, 'content', {});
-  const response = setdefault(context, 'response', {});
+  const content = setdefault(context, "content", {});
+  const response = setdefault(context, "response", {});
 
   if (response.body) {
-    logger.debug('Response body already exists');
+    logger.debug("Response body already exists");
     return;
   }
   if (!content.json) {
-    logger.debug('No JSON to emit');
+    logger.debug("No JSON to emit");
     return;
   }
 

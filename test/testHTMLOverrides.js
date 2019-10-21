@@ -10,69 +10,68 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const { pipe } = require("../src/defaults/html.pipe.js");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 const params = {
-  path: '/hello.md',
-  __ow_method: 'get',
-  owner: 'trieloff',
+  path: "/hello.md",
+  __ow_method: "get",
+  owner: "trieloff",
   __ow_headers: {
-    'X-Forwarded-Port': '443',
-    'X-CDN-Request-Id': '2a208a89-e071-44cf-aee9-220880da4c1e',
-    'Fastly-Client': '1',
-    'X-Forwarded-Host': 'runtime.adobe.io',
-    'Upgrade-Insecure-Requests': '1',
-    Host: 'controller-a',
-    Connection: 'close',
-    'Fastly-SSL': '1',
-    'X-Request-Id': 'RUss5tPdgOfw74a68aNc24FeTipGpVfW',
-    'X-Branch': 'master',
-    'Accept-Language': 'en-US, en;q=0.9, de;q=0.8',
-    'X-Forwarded-Proto': 'https',
-    'Fastly-Orig-Accept-Encoding': 'gzip',
-    'X-Varnish': '267021320',
-    DNT: '1',
-    'X-Forwarded-For':
-      '192.147.117.11, 157.52.92.27, 23.235.46.33, 10.64.221.107',
-    'X-Host': 'www.primordialsoup.life',
+    "X-Forwarded-Port": "443",
+    "X-CDN-Request-Id": "2a208a89-e071-44cf-aee9-220880da4c1e",
+    "Fastly-Client": "1",
+    "X-Forwarded-Host": "runtime.adobe.io",
+    "Upgrade-Insecure-Requests": "1",
+    Host: "controller-a",
+    Connection: "close",
+    "Fastly-SSL": "1",
+    "X-Request-Id": "RUss5tPdgOfw74a68aNc24FeTipGpVfW",
+    "X-Branch": "master",
+    "Accept-Language": "en-US, en;q=0.9, de;q=0.8",
+    "X-Forwarded-Proto": "https",
+    "Fastly-Orig-Accept-Encoding": "gzip",
+    "X-Varnish": "267021320",
+    DNT: "1",
+    "X-Forwarded-For":
+      "192.147.117.11, 157.52.92.27, 23.235.46.33, 10.64.221.107",
+    "X-Host": "www.primordialsoup.life",
     Accept:
-      'text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8',
-    'X-Real-IP': '10.64.221.107',
-    'X-Forwarded-Server': 'cache-lcy19249-LCY, cache-iad2127-IAD',
-    'Fastly-Client-IP': '192.147.117.11',
-    'Perf-Br-Req-In': '1529585370.116',
-    'X-Timer': 'S1529585370.068237,VS0,VS0',
-    'Fastly-FF':
-      'dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19249-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19227-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2127-IAD, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2133-IAD',
-    'Accept-Encoding': 'gzip',
-    'User-Agent':
-      'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36',
+      "text/html, application/xhtml+xml, application/xml;q=0.9, image/webp, image/apng, */*;q=0.8",
+    "X-Real-IP": "10.64.221.107",
+    "X-Forwarded-Server": "cache-lcy19249-LCY, cache-iad2127-IAD",
+    "Fastly-Client-IP": "192.147.117.11",
+    "Perf-Br-Req-In": "1529585370.116",
+    "X-Timer": "S1529585370.068237,VS0,VS0",
+    "Fastly-FF":
+      "dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19249-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!LCY!cache-lcy19227-LCY, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2127-IAD, dc/x3e9z8KMmlHLQr8BEvVMmTcpl3y2YY5y6gjSJa3g=!IAD!cache-iad2133-IAD",
+    "Accept-Encoding": "gzip",
+    "User-Agent":
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36"
   },
-  repo: 'soupdemo',
-  ref: 'master',
-  selector: 'md',
+  repo: "soupdemo",
+  ref: "master",
+  selector: "md"
 };
 
 const secrets = {
-  REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
+  REPO_RAW_ROOT: "https://raw.githubusercontent.com/"
 };
-
 
 const crequest = {
-  extension: 'html',
-  url: '/test/test.html',
+  extension: "html",
+  url: "/test/test.html"
 };
 
-describe('Testing HTML Pipeline Overrides', () => {
-  it('html.pipe adds headers from meta and link tags', async () => {
-    const myfunc = (context) => {
+describe("Testing HTML Pipeline Overrides", () => {
+  it("html.pipe adds headers from meta and link tags", async () => {
+    const myfunc = context => {
       context.response = {
         body: `<html>
 <head>
@@ -81,22 +80,26 @@ describe('Testing HTML Pipeline Overrides', () => {
 <body>
   ${context.content.document.body.innerHTML}
 </body>
-</html>`,
+</html>`
       };
     };
 
     myfunc.after = {
       parse: (_, action) => {
         // match all "emphasis" nodes
-        action.transformer.match('emphasis', (h, node, _, handlechild) => {
+        action.transformer.match("emphasis", (h, node, _, handlechild) => {
           // create a new HTML tag <i class="its-not-semantic…">
-          const i = h(node, 'i', { className: 'its-not-semantic-html-but-i-like-it' });
+          const i = h(node, "i", {
+            className: "its-not-semantic-html-but-i-like-it"
+          });
           // make sure all child nodes of the markdown node are processed
-          node.children.forEach((childnode) => handlechild(h, childnode, node, i));
+          node.children.forEach(childnode =>
+            handlechild(h, childnode, node, i)
+          );
           // return the i HTML element
           return i;
         });
-      },
+      }
     };
 
     const result = await pipe(
@@ -104,16 +107,20 @@ describe('Testing HTML Pipeline Overrides', () => {
       {
         request: crequest,
         content: {
-          body: 'Hello _World_',
-        },
+          body: "Hello _World_"
+        }
       },
       {
         request: { params },
         secrets,
-        logger,
-      },
+        logger
+      }
     );
 
-    assert.ok(result.response.body.match(/<i class="its-not-semantic-html-but-i-like-it">World<\/i>/));
+    assert.ok(
+      result.response.body.match(
+        /<i class="its-not-semantic-html-but-i-like-it">World<\/i>/
+      )
+    );
   });
 });

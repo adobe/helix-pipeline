@@ -10,12 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
-const { setdefault } = require('ferrum');
-const isProduction = require('../utils/is-production');
+const { setdefault } = require("ferrum");
+const isProduction = require("../utils/is-production");
 
 const selectStatus = (context, { logger, request = {} }) => {
-  const res = setdefault(context, 'response', {});
-  const headers = setdefault(res, 'headers', {});
+  const res = setdefault(context, "response", {});
+  const headers = setdefault(res, "headers", {});
   const err = context.error;
 
   // if a status is already default, keep it.
@@ -29,13 +29,13 @@ const selectStatus = (context, { logger, request = {} }) => {
   }
 
   // error handling
-  logger.debug('context.error -> 500');
+  logger.debug("context.error -> 500");
   res.status = 500;
-  res.body = '';
+  res.body = "";
 
-  if (!isProduction() || setdefault(request, 'headers', {})['x-debug']) {
+  if (!isProduction() || setdefault(request, "headers", {})["x-debug"]) {
     res.body = `<html><body><h1>500</h1><pre>${err}</pre></body></html>`;
-    headers['Content-Type'] = 'text/html';
+    headers["Content-Type"] = "text/html";
   }
 };
 

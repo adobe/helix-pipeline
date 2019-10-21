@@ -9,17 +9,22 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const DEBUG_TEMPLATE = '<script>console.group(\'context\');console.log(CONTEXT_JSON);console.groupEnd();</script>';
+const DEBUG_TEMPLATE =
+  "<script>console.group('context');console.log(CONTEXT_JSON);console.groupEnd();</script>";
 
 function debug(context, { logger }) {
-  const isDebug = context.request && context.request.params && (context.request.params.debug === true || context.request.params.debug === 'true');
+  const isDebug =
+    context.request &&
+    context.request.params &&
+    (context.request.params.debug === true ||
+      context.request.params.debug === "true");
   const hasBody = context.response && context.response.body;
 
   if (!isDebug || !hasBody) {
     return;
   }
 
-  logger.debug('Adding debug script');
+  logger.debug("Adding debug script");
   // backup body
   const { body } = context.response;
 
@@ -27,7 +32,10 @@ function debug(context, { logger }) {
   // and causes rendering issues of the script
   delete context.response.body;
 
-  const debugScript = DEBUG_TEMPLATE.replace(/CONTEXT_JSON/, JSON.stringify(context));
+  const debugScript = DEBUG_TEMPLATE.replace(
+    /CONTEXT_JSON/,
+    JSON.stringify(context)
+  );
   // inject debug script before the closing body tag
   context.response.body = body.replace(/<\/body>/i, `${debugScript}</body>`);
 }

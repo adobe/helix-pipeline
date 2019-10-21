@@ -9,15 +9,21 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const ajv = require('./validator');
+const ajv = require("./validator");
 
 function coerce(action) {
-  const defaultsetter = ajv(action.logger, { useDefaults: true, coerceTypes: true });
+  const defaultsetter = ajv(action.logger, {
+    useDefaults: true,
+    coerceTypes: true
+  });
   if (!action.secrets) {
     action.secrets = {};
   }
-  action.logger.debug('Coercing secrets');
-  defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
+  action.logger.debug("Coercing secrets");
+  defaultsetter.validate(
+    "https://ns.adobe.com/helix/pipeline/secrets",
+    action.secrets
+  );
 }
 
 module.exports = coerce;

@@ -10,132 +10,135 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
-const assert = require('assert');
-const u = require('unist-builder');
-const inspect = require('unist-util-inspect');
-const parse = require('../src/html/parse-markdown');
-const embeds = require('../src/html/find-embeds');
-const { assertMatch, assertValid } = require('./markdown-utils');
-const coerce = require('../src/utils/coerce-secrets');
+const { Logger } = require("@adobe/helix-shared");
+const assert = require("assert");
+const u = require("unist-builder");
+const inspect = require("unist-util-inspect");
+const parse = require("../src/html/parse-markdown");
+const embeds = require("../src/html/find-embeds");
+const { assertMatch, assertValid } = require("./markdown-utils");
+const coerce = require("../src/utils/coerce-secrets");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 const action = {
   logger,
   request: {
     params: {
-      path: '/index.md',
-    },
-  },
+      path: "/index.md"
+    }
+  }
 };
 
 function mdast(body) {
-  const dat = { content: { body }, request: { extension: 'html', url: '/docs/index.html' } };
+  const dat = {
+    content: { body },
+    request: { extension: "html", url: "/docs/index.html" }
+  };
   parse(dat, { logger });
   embeds(dat, action);
   return dat.content.mdast;
 }
 
 function context(body) {
-  const dat = { content: { body }, request: { extension: 'html', url: '/docs/index.html' } };
+  const dat = {
+    content: { body },
+    request: { extension: "html", url: "/docs/index.html" }
+  };
   parse(dat, { logger });
   embeds(dat, action);
   return dat;
 }
 
-describe('Test Embed Detection Processing', () => {
-  before('Coerce defaults', async () => {
+describe("Test Embed Detection Processing", () => {
+  before("Coerce defaults", async () => {
     await coerce(action);
   });
 
-  it('Parses markdown with embeds', () => {
-    assertMatch('embeds', mdast);
+  it("Parses markdown with embeds", () => {
+    assertMatch("embeds", mdast);
   });
 });
 
-describe('Validate Embed Examples In Pipeline', () => {
-  it('Markdown with embeds yields valid context', (done) => {
-    assertValid('embeds', context, done);
+describe("Validate Embed Examples In Pipeline", () => {
+  it("Markdown with embeds yields valid context", done => {
+    assertValid("embeds", context, done);
   });
 });
 
-describe('Find Embeds #unit', () => {
-  const base = '/docs/index.html';
+describe("Find Embeds #unit", () => {
+  const base = "/docs/index.html";
 
-  it('internalGatsbyEmbed', () => {
-    ['foo: foo.md',
-      'embed:',
-      'embed: ?foo=bar',
-      'embed: foo.txt',
-    ]
-      .forEach((t) => assert.ok(!embeds.internalGatsbyEmbed(t, base, 'html', 'md'), `${t} should be invalid`));
+  it("internalGatsbyEmbed", () => {
+    ["foo: foo.md", "embed:", "embed: ?foo=bar", "embed: foo.txt"].forEach(t =>
+      assert.ok(
+        !embeds.internalGatsbyEmbed(t, base, "html", "md"),
+        `${t} should be invalid`
+      )
+    );
 
-    ['embed: foo.md',
-      'html: foo.md',
-      'markdown: foo.md',
-      'embed:markdown.md',
-      'embed: foo.html',
-      'embed: ../foo.html',
-      'embed: /foo.html',
-      'embed: ../docs/rocks/../foo.html']
-      .forEach((t) => assert.ok(embeds.internalGatsbyEmbed(t, base, 'html', 'md'), `${t} should be valid`));
+    [
+      "embed: foo.md",
+      "html: foo.md",
+      "markdown: foo.md",
+      "embed:markdown.md",
+      "embed: foo.html",
+      "embed: ../foo.html",
+      "embed: /foo.html",
+      "embed: ../docs/rocks/../foo.html"
+    ].forEach(t =>
+      assert.ok(
+        embeds.internalGatsbyEmbed(t, base, "html", "md"),
+        `${t} should be valid`
+      )
+    );
   });
 
-  it('internalIaEmbed', () => {
+  it("internalIaEmbed", () => {
     [
-      u('paragraph', [
-        u('text', {}, 'I\'m just a text. Don\'t mind me.'),
-      ]),
-      u('paragraph', [
-        u('text', {}, '/foo.md'),
-        u('text', {}, '/foo.md'),
-      ]),
-      u('paragraph', [
-        u('text', {}, '/foo.txt'),
-      ]),
-      u('paragraph', [
-        u('text', {}, ' foo.md'),
-      ]),
-    ].forEach((t) => assert.ok(!embeds.internalIaEmbed(t, base, 'html', 'md'), `Expected invalid:\n${inspect(t)}`));
+      u("paragraph", [u("text", {}, "I'm just a text. Don't mind me.")]),
+      u("paragraph", [u("text", {}, "/foo.md"), u("text", {}, "/foo.md")]),
+      u("paragraph", [u("text", {}, "/foo.txt")]),
+      u("paragraph", [u("text", {}, " foo.md")])
+    ].forEach(t =>
+      assert.ok(
+        !embeds.internalIaEmbed(t, base, "html", "md"),
+        `Expected invalid:\n${inspect(t)}`
+      )
+    );
     [
-      u('paragraph', [
-        u('text', {}, '/foo.md'),
-      ]),
-      u('paragraph', [
-        u('text', {}, '/foo.html'),
-      ]),
-      u('paragraph', [
-        u('text', {}, '../foo.md'),
-      ]),
-      u('paragraph', [
-        u('text', {}, '/readme/foo.md'),
-      ]),
-      u('paragraph', [
-        u('text', {}, '../help/foo.md'),
-      ]),
-    ].forEach((t) => assert.ok(embeds.internalIaEmbed(t, base, 'html', 'md'), `Expected valid:\n${inspect(t)}`));
+      u("paragraph", [u("text", {}, "/foo.md")]),
+      u("paragraph", [u("text", {}, "/foo.html")]),
+      u("paragraph", [u("text", {}, "../foo.md")]),
+      u("paragraph", [u("text", {}, "/readme/foo.md")]),
+      u("paragraph", [u("text", {}, "../help/foo.md")])
+    ].forEach(t =>
+      assert.ok(
+        embeds.internalIaEmbed(t, base, "html", "md"),
+        `Expected valid:\n${inspect(t)}`
+      )
+    );
   });
 
-  it('internalImgEmbed', () => {
+  it("internalImgEmbed", () => {
+    [u("paragraph", [u("image", { url: "test.png" })])].forEach(t =>
+      assert.ok(
+        !embeds.internalImgEmbed(t, base, "html", "md"),
+        `Expected invalid:\n${inspect(t)}`
+      )
+    );
     [
-      u('paragraph', [
-        u('image', { url: 'test.png' }),
-      ]),
-    ].forEach((t) => assert.ok(!embeds.internalImgEmbed(t, base, 'html', 'md'), `Expected invalid:\n${inspect(t)}`));
-    [
-      u('paragraph', [
-        u('image', { url: 'test.md' }),
-      ]),
-      u('paragraph', [
-        u('image', { url: '../test.md' }),
-      ]),
-      u('paragraph', [
-        u('image', { url: '../readme/test.html' }),
-      ]),
-    ].forEach((t) => assert.ok(embeds.internalImgEmbed(t, base, 'html', 'md'), `Expected valid:\n${inspect(t)}`));
+      u("paragraph", [u("image", { url: "test.md" })]),
+      u("paragraph", [u("image", { url: "../test.md" })]),
+      u("paragraph", [u("image", { url: "../readme/test.html" })])
+    ].forEach(t =>
+      assert.ok(
+        embeds.internalImgEmbed(t, base, "html", "md"),
+        `Expected valid:\n${inspect(t)}`
+      )
+    );
   });
 });

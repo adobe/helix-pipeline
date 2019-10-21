@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-const { setdefault } = require('ferrum');
+const { setdefault } = require("ferrum");
 
 function setVerboseError(error) {
   const res = {
@@ -18,12 +18,12 @@ function setVerboseError(error) {
       status: 500,
       body: JSON.stringify({
         status: 500,
-        statusText: error.trim(),
+        statusText: error.trim()
       }),
       headers: {
-        'Content-Type': 'application/json',
-      },
-    },
+        "Content-Type": "application/json"
+      }
+    }
   };
   return res;
 }
@@ -37,18 +37,18 @@ function selectStatus(prod) {
     if (!error) {
       return {
         response: {
-          status: 200,
-        },
+          status: 200
+        }
       };
     }
     // error handling
-    logger.debug('context.error -> 500');
-    if (prod && !setdefault(request, 'headers', {})['x-debug']) {
+    logger.debug("context.error -> 500");
+    if (prod && !setdefault(request, "headers", {})["x-debug"]) {
       return {
         response: {
           status: 500,
-          body: '',
-        },
+          body: ""
+        }
       };
     }
     return setVerboseError(error);

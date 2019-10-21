@@ -10,22 +10,23 @@
  * governing permissions and limitations under the License.
  */
 
-const { selectAll } = require('unist-util-select');
-const { flat, obj, map } = require('ferrum');
-const _ = require('lodash/fp');
+const { selectAll } = require("unist-util-select");
+const { flat, obj, map } = require("ferrum");
+const _ = require("lodash/fp");
 
 // Compute the meta information for the section
 function computeMeta(section) {
-  return obj(flat(map(selectAll('yaml', section), ({ payload }) => payload)));
+  return obj(flat(map(selectAll("yaml", section), ({ payload }) => payload)));
 }
 
 function split({ content }) {
   const { mdast } = content;
 
   // filter all children that are either yaml or break blocks
-  const dividers = mdast.children.filter((node) => node.type === 'yaml' || node.type === 'thematicBreak')
-  // then get their index in the list of children
-    .map((node) => mdast.children.indexOf(node));
+  const dividers = mdast.children
+    .filter(node => node.type === "yaml" || node.type === "thematicBreak")
+    // then get their index in the list of children
+    .map(node => mdast.children.indexOf(node));
 
   // find pairwise permutations of spaces between blocks
   // include the very start and end of the document
@@ -33,22 +34,26 @@ function split({ content }) {
   const ends = [...dividers, mdast.children.length];
 
   content.mdast.children = _.zip(starts, ends)
-  // but filter out empty section
+    // but filter out empty section
     .filter(([start, end]) => start !== end)
-  // then return all nodes that are in between
+    // then return all nodes that are in between
     .map(([start, end]) => {
-    // skip 'thematicBreak' nodes
-      const index = mdast.children[start].type === 'thematicBreak' ? start + 1 : start;
+      // skip 'thematicBreak' nodes
+      const index =
+        mdast.children[start].type === "thematicBreak" ? start + 1 : start;
       const section = {
-        type: 'section',
-        children: mdast.children.slice(index, end),
+        type: "section",
+        children: mdast.children.slice(index, end)
       };
       section.meta = computeMeta(section);
       return section;
     });
 
   // unwrap sole section directly on the root
-  if (content.mdast.children.length === 1 && content.mdast.children[0].type === 'section') {
+  if (
+    content.mdast.children.length === 1 &&
+    content.mdast.children[0].type === "section"
+  ) {
     content.mdast.children = content.mdast.children[0].children;
   }
 }

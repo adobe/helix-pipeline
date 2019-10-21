@@ -10,11 +10,11 @@
  * governing permissions and limitations under the License.
  */
 
-const hash = require('object-hash');
-const { setdefault, type, each } = require('ferrum');
+const hash = require("object-hash");
+const { setdefault, type, each } = require("ferrum");
 
 function selectstrain(context, { request, logger }) {
-  const cont = setdefault(context, 'content', { mdast: {} });
+  const cont = setdefault(context, "content", { mdast: {} });
   const params = request.params || {};
   const { strain } = params;
   const sections = cont.mdast.children;
@@ -24,10 +24,13 @@ function selectstrain(context, { request, logger }) {
   }
 
   logger.debug(`Filtering sections not intended for strain ${strain}`);
-  each(sections, (section) => {
-    const meta = setdefault(section, 'meta', {});
-    const strainList = type(meta.strain) === Array ? meta.strain : [meta.strain];
-    meta.hidden = Boolean(meta.strain && meta.strain !== [] && !strainList.includes(strain));
+  each(sections, section => {
+    const meta = setdefault(section, "meta", {});
+    const strainList =
+      type(meta.strain) === Array ? meta.strain : [meta.strain];
+    meta.hidden = Boolean(
+      meta.strain && meta.strain !== [] && !strainList.includes(strain)
+    );
   });
 }
 
@@ -48,7 +51,7 @@ function testgroups(sections = []) {
  * Generate a stable sort order based on a random seed.
  * @param {String} strain random seed
  */
-function strainhashsort(strain = 'default') {
+function strainhashsort(strain = "default") {
   return function compare(left, right) {
     const lhash = hash({ strain, val: left });
     const rhash = hash({ strain, val: right });
@@ -56,20 +59,19 @@ function strainhashsort(strain = 'default') {
   };
 }
 
-function pick(groups = {}, strain = 'default') {
-  return Object.keys(groups)
-    .reduce((selected, group) => {
-      const candidates = groups[group];
-      candidates.sort(strainhashsort(strain));
-      if (candidates.length) {
-        [selected[group]] = candidates; // eslint prefers array destructing here
-      }
-      return selected;
-    }, {});
+function pick(groups = {}, strain = "default") {
+  return Object.keys(groups).reduce((selected, group) => {
+    const candidates = groups[group];
+    candidates.sort(strainhashsort(strain));
+    if (candidates.length) {
+      [selected[group]] = candidates; // eslint prefers array destructing here
+    }
+    return selected;
+  }, {});
 }
 
 function selecttest(context, { request }) {
-  const cont = setdefault(context, 'content', { mdast: {} });
+  const cont = setdefault(context, "content", { mdast: {} });
   const params = request.params || {};
   const { strain } = params;
   const sections = cont.mdast.children;
@@ -79,7 +81,7 @@ function selecttest(context, { request }) {
   }
 
   const selected = pick(testgroups(sections), strain);
-  each(sections, (section) => {
+  each(sections, section => {
     if (!section.meta || !section.meta.test) {
       return;
     }
@@ -92,5 +94,5 @@ module.exports = {
   selectstrain,
   testgroups,
   selecttest,
-  pick,
+  pick
 };

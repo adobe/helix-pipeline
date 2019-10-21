@@ -71,6 +71,10 @@ export interface Request {
   params?: {
     [k: string]: string | string[];
   };
+  /**
+   * The original query string
+   */
+  queryString?: string;
 }
 /**
  * The content as retrieved from the repository and enriched in the pipeline.

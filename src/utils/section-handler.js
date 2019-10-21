@@ -9,18 +9,39 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const all = require('mdast-util-to-hast/lib/all');
-const wrap = require('mdast-util-to-hast/lib/wrap');
+const all = require("mdast-util-to-hast/lib/all");
+const wrap = require("mdast-util-to-hast/lib/wrap");
 
-const HELIX_NAMESPACE = 'hlx-';
-const DEFAULT_SECTION_TAG = 'div';
+const HELIX_NAMESPACE = "hlx-";
+const DEFAULT_SECTION_TAG = "div";
 const DEFAULT_SECTION_CLASS = `${HELIX_NAMESPACE}section`;
-const SYSTEM_META_PROPERTIES = ['tagname'];
-const SYSTEM_HTML_ATTRIBUTES = ['types'];
+const SYSTEM_META_PROPERTIES = ["tagname"];
+const SYSTEM_HTML_ATTRIBUTES = ["types"];
 const GLOBAL_HTML_ATTRIBUTES = [
-  'accesskey', 'autocapitalize', 'class', 'contenteditable', 'contextmenu', 'dir', 'draggable', 'dropzone', 'hidden',
-  'id', 'inputmode', 'is', 'itemid', 'itemprop', 'itemref', 'itemscope', 'itemtype', 'lang', 'slot', 'spellcheck',
-  'style', 'tabindex', 'title', 'translate',
+  "accesskey",
+  "autocapitalize",
+  "class",
+  "contenteditable",
+  "contextmenu",
+  "dir",
+  "draggable",
+  "dropzone",
+  "hidden",
+  "id",
+  "inputmode",
+  "is",
+  "itemid",
+  "itemprop",
+  "itemref",
+  "itemscope",
+  "itemtype",
+  "lang",
+  "slot",
+  "spellcheck",
+  "style",
+  "tabindex",
+  "title",
+  "translate"
 ];
 
 /**
@@ -34,24 +55,42 @@ function getTagName(section) {
 }
 
 function toHtmlAttribute(value) {
-  return Array.isArray(value) ? value.join(' ') : value;
+  return Array.isArray(value) ? value.join(" ") : value;
 }
 
 function getAttributes(section) {
   const attributeKeys = Object.keys(section.meta);
   // Add system properties as data-hlx-*
   const attributes = attributeKeys
-    .filter((k) => SYSTEM_HTML_ATTRIBUTES.indexOf(k) > -1)
-    .reduce((result, attr) => Object.assign(result, { [`data-${HELIX_NAMESPACE}${attr}`]: toHtmlAttribute(section.meta[attr]) }), {});
+    .filter(k => SYSTEM_HTML_ATTRIBUTES.indexOf(k) > -1)
+    .reduce(
+      (result, attr) =>
+        Object.assign(result, {
+          [`data-${HELIX_NAMESPACE}${attr}`]: toHtmlAttribute(
+            section.meta[attr]
+          )
+        }),
+      {}
+    );
   return attributeKeys
-    .filter((k) => [...SYSTEM_HTML_ATTRIBUTES, ...SYSTEM_META_PROPERTIES].indexOf(k) === -1)
+    .filter(
+      k =>
+        [...SYSTEM_HTML_ATTRIBUTES, ...SYSTEM_META_PROPERTIES].indexOf(k) === -1
+    )
     .reduce((result, attr) => {
       // Add invalid HTML attributes as data-*
-      if (GLOBAL_HTML_ATTRIBUTES.indexOf(attr) === -1 && !attr.startsWith('data-')) {
-        return Object.assign(result, { [`data-${attr}`]: toHtmlAttribute(section.meta[attr]) });
+      if (
+        GLOBAL_HTML_ATTRIBUTES.indexOf(attr) === -1 &&
+        !attr.startsWith("data-")
+      ) {
+        return Object.assign(result, {
+          [`data-${attr}`]: toHtmlAttribute(section.meta[attr])
+        });
       }
       // Add valid HTML attributes
-      return Object.assign(result, { [attr]: toHtmlAttribute(section.meta[attr]) });
+      return Object.assign(result, {
+        [attr]: toHtmlAttribute(section.meta[attr])
+      });
     }, attributes);
 }
 
@@ -61,7 +100,9 @@ function sectionHandler() {
 
     const tagName = getTagName(n);
     const props = getAttributes(n);
-    props.class = props.class ? `${DEFAULT_SECTION_CLASS} ${props.class}` : DEFAULT_SECTION_CLASS;
+    props.class = props.class
+      ? `${DEFAULT_SECTION_CLASS} ${props.class}`
+      : DEFAULT_SECTION_CLASS;
     const children = wrap(all(h, n), true);
 
     return h(node, tagName, props, children);

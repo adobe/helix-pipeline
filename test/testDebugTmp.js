@@ -10,32 +10,32 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const fs = require('fs-extra');
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const fs = require("fs-extra");
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
 
-const dumper = require('../src/utils/dump-context.js');
+const dumper = require("../src/utils/dump-context.js");
 
-describe('Test Temp Context Dumper', () => {
-  it('Writes context dump on loglevel silly', async () => {
+describe("Test Temp Context Dumper", () => {
+  it("Writes context dump on loglevel silly", async () => {
     const logger = Logger.getTestLogger({
-      level: 'silly',
+      level: "silly"
     });
 
     const action = {
-      logger,
+      logger
     };
-    await dumper.record({ foo: 'bar' }, action, 0, 'once:test');
-    await dumper.record({ foo: 'bar', result: 42 }, action, 1, 'after:result');
+    await dumper.record({ foo: "bar" }, action, 0, "once:test");
+    await dumper.record({ foo: "bar", result: 42 }, action, 1, "after:result");
     const dump0 = action.debug.contextDumps[0];
     assert.equal(dump0.index, 0);
-    assert.equal(dump0.name, 'test');
-    assert.deepEqual(await fs.readJSON(dump0.file), { foo: 'bar' });
+    assert.equal(dump0.name, "test");
+    assert.deepEqual(await fs.readJSON(dump0.file), { foo: "bar" });
 
     const dump1 = action.debug.contextDumps[1];
     assert.equal(dump1.index, 1);
-    assert.equal(dump1.name, 'result');
-    assert.deepEqual(await fs.readJSON(dump1.file), { foo: 'bar', result: 42 });
+    assert.equal(dump1.name, "result");
+    assert.deepEqual(await fs.readJSON(dump1.file), { foo: "bar", result: 42 });
 
     await dumper.report({}, action);
 
@@ -44,18 +44,18 @@ describe('Test Temp Context Dumper', () => {
     assert.equal(output.match(/writing context dump/g).length, 2);
   });
 
-  it('does not write on loglevel debug', async () => {
+  it("does not write on loglevel debug", async () => {
     const logger = Logger.getTestLogger({
-      level: 'debug',
+      level: "debug"
     });
 
     const action = {
-      logger,
+      logger
     };
-    await dumper.record({ foo: 'bar' }, action, 0, 'once:test');
+    await dumper.record({ foo: "bar" }, action, 0, "once:test");
     const dump = action.debug.contextDumps[0];
     assert.equal(dump.index, 0);
-    assert.equal(dump.name, 'test');
+    assert.equal(dump.name, "test");
     assert.equal(dump.file, undefined);
   });
 });

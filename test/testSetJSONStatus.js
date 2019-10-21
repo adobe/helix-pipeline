@@ -10,91 +10,96 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const status = require('../src/json/set-json-status.js');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const status = require("../src/json/set-json-status.js");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
-describe('Test set-json-status', () => {
-  const error = 'oh, no!';
+describe("Test set-json-status", () => {
+  const error = "oh, no!";
 
-  it('sets a verbose 500 for an error in dev', () => {
+  it("sets a verbose 500 for an error in dev", () => {
     assert.deepEqual(
-      status.selectStatus(false)({ content: { }, error }, { logger }),
+      status.selectStatus(false)({ content: {}, error }, { logger }),
       {
         response: {
           status: 500,
           body: `{"status":500,"statusText":"${error}"}`,
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      },
+            "Content-Type": "application/json"
+          }
+        }
+      }
     );
   });
 
-  it('sets a terse 500 for an error in production', () => {
+  it("sets a terse 500 for an error in production", () => {
     assert.deepEqual(
-      status.selectStatus(true)({ content: { }, error }, { logger }),
+      status.selectStatus(true)({ content: {}, error }, { logger }),
       {
         response: {
           status: 500,
-          body: '',
-        },
-      },
+          body: ""
+        }
+      }
     );
   });
 
-  it('sets a verbose 500 for an error in production if x-debug header is present', () => {
+  it("sets a verbose 500 for an error in production if x-debug header is present", () => {
     const request = {
       headers: {
-        'x-debug': 'true',
-      },
+        "x-debug": "true"
+      }
     };
     assert.deepEqual(
-      status.selectStatus(true)({ content: { }, error }, { logger, request }),
+      status.selectStatus(true)({ content: {}, error }, { logger, request }),
       {
         response: {
           status: 500,
           body: `{"status":500,"statusText":"${error}"}`,
           headers: {
-            'Content-Type': 'application/json',
-          },
-        },
-      },
+            "Content-Type": "application/json"
+          }
+        }
+      }
     );
   });
 
-  it('keeps an existing status', () => {
+  it("keeps an existing status", () => {
     assert.deepEqual(
-      status({
-        response: {
-          status: 201,
+      status(
+        {
+          response: {
+            status: 201
+          }
         },
-      }, { logger }),
-      {},
+        { logger }
+      ),
+      {}
     );
   });
 
-  it('sets a 200 if all good', () => {
+  it("sets a 200 if all good", () => {
     assert.deepEqual(
-      status({
-        content: {
-          json: {
-            root: {},
-          },
+      status(
+        {
+          content: {
+            json: {
+              root: {}
+            }
+          }
         },
-      },
-      { logger }),
+        { logger }
+      ),
       {
         response: {
-          status: 200,
-        },
-      },
+          status: 200
+        }
+      }
     );
   });
 });

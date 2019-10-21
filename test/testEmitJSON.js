@@ -10,57 +10,57 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { deepclone } = require('ferrum');
-const emit = require('../src/json/emit-json');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const { deepclone } = require("ferrum");
+const emit = require("../src/json/emit-json");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 const content = {
   json: {
     root: {
-      title: 'Bill, Welcome to the future',
-    },
-  },
+      title: "Bill, Welcome to the future"
+    }
+  }
 };
 const response = {};
 const action = {
-  logger,
+  logger
 };
 
 const expectedJSON = { ...content.json };
 
-describe('Test emit-json', () => {
-  it('builds JSON from object', () => {
+describe("Test emit-json", () => {
+  it("builds JSON from object", () => {
     const dat = deepclone({ content, response });
     emit(dat, action);
     assert.deepEqual(dat.response.body, expectedJSON);
   });
 
-  it('does nothing if no JSON object specified', () => {
+  it("does nothing if no JSON object specified", () => {
     const dat = deepclone({ content: {}, response });
     emit(dat, action);
     assert(dat, { content: {}, response });
   });
 
-  it('keeps existing response body', () => {
+  it("keeps existing response body", () => {
     response.body = expectedJSON;
     const dat = deepclone({ content, response });
     emit(dat, action);
     assert.deepEqual(dat, { content, response });
   });
 
-  it('handles missing response object', () => {
+  it("handles missing response object", () => {
     const dat = deepclone({ content });
     emit(dat, action);
     assert.deepEqual(dat.response.body, expectedJSON);
   });
 
-  it('handles missing content object', () => {
+  it("handles missing content object", () => {
     // no content object at all
     const dat = deepclone({ response });
     emit(dat, action);

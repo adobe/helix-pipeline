@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
-const { match } = require('./pattern-compiler');
+const { match } = require("./pattern-compiler");
 /**
  * This utility class allows the registration of type matchers. Type matchers
  * are either content-expressions like `header? (image|paragraph)+` or predicate
@@ -51,7 +51,8 @@ class TypeMatcher {
    * @returns {TypeMatcher} this, enabling chaining
    */
   match(matcher, type) {
-    const matchfn = typeof matcher === 'function' ? matcher : TypeMatcher.matchfn(matcher);
+    const matchfn =
+      typeof matcher === "function" ? matcher : TypeMatcher.matchfn(matcher);
 
     this._matchers.push([matchfn, type]);
 
@@ -69,7 +70,6 @@ class TypeMatcher {
       .filter(([matchfn]) => matchfn(types))
       .map(([_, type]) => type);
   }
-
 
   /**
    * Turns a content expression into a matcher predicate function
@@ -90,14 +90,15 @@ class TypeMatcher {
    * @returns {(Node|Node[])} the processed sections
    */
   process() {
-    const mapped = this._sections.map((section) => {
+    const mapped = this._sections.map(section => {
       // get the type for each node, skip everything that's not a node or
       // doesn't have a type
       const childtypes = section.children
-        ? section.children.map((node) => node.type).filter((type) => !!type)
+        ? section.children.map(node => node.type).filter(type => !!type)
         : [];
       const matchedtypes = this.matches(childtypes);
-      const oldtypes = section.types && Array.isArray(section.types) ? section.types : [];
+      const oldtypes =
+        section.types && Array.isArray(section.types) ? section.types : [];
 
       return { types: [...matchedtypes, ...oldtypes], ...section };
     });

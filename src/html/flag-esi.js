@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-const { merge } = require('lodash');
+const { merge } = require("lodash");
 
 /**
  * Detects if ESI tags are used in the repose body. Intended to be used as
@@ -18,7 +18,9 @@ const { merge } = require('lodash');
  * @param {Context} param0 the pipeline context
  */
 function esi({ response }) {
-  return Boolean(response && response.body && /<esi:include/.test(response.body));
+  return Boolean(
+    response && response.body && /<esi:include/.test(response.body)
+  );
 }
 
 /**
@@ -28,12 +30,13 @@ function flag(context) {
   merge(context, {
     response: {
       headers: {
-        'X-ESI': 'enabled',
-      },
-    },
+        "X-ESI": "enabled"
+      }
+    }
   });
 }
 
 module.exports = {
-  esi, flag,
+  esi,
+  flag
 };

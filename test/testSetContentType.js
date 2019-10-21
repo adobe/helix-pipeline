@@ -10,36 +10,36 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const type = require('../src/utils/set-content-type.js');
+const assert = require("assert");
+const { Logger } = require("@adobe/helix-shared");
+const type = require("../src/utils/set-content-type.js");
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
-  level: 'info',
+  level: "info"
 });
 
 const context = {
   response: {
     headers: {
-      'Content-Type': 'text/plain',
-    },
-  },
+      "Content-Type": "text/plain"
+    }
+  }
 };
 
-describe('Test set-content-type', () => {
-  it('is a function', () => {
-    assert.equal(typeof type('foo/bar'), 'function');
+describe("Test set-content-type", () => {
+  it("is a function", () => {
+    assert.equal(typeof type("foo/bar"), "function");
   });
 
-  it('sets a content type', () => {
+  it("sets a content type", () => {
     const data = {};
-    type('text/html')(data, { logger });
-    assert.strictEqual(data.response.headers['Content-Type'], 'text/html');
+    type("text/html")(data, { logger });
+    assert.strictEqual(data.response.headers["Content-Type"], "text/html");
   });
 
-  it('keeps existing content type', () => {
-    type('text/html')(context, { logger });
-    assert.strictEqual(context.response.headers['Content-Type'], 'text/plain');
+  it("keeps existing content type", () => {
+    type("text/html")(context, { logger });
+    assert.strictEqual(context.response.headers["Content-Type"], "text/plain");
   });
 });
