@@ -43,6 +43,7 @@ const SECTIONS_BLOCS = [
   'headerparaimage',
   'headerpara2images',
   'complex',
+  'herosection',
 ];
 
 describe('Test getMetadata', () => {
@@ -60,6 +61,77 @@ describe('Test getMetadata', () => {
     };
     getmetadata(dat, { logger });
     assert.deepEqual(dat.content.meta, { types: [] });
+  });
+
+  it('getmetadata gets first title and intro', () => {
+    const dat = { content: {} };
+    dat.content.mdast = {
+      type: 'root',
+      children: [
+        {
+          type: 'section',
+          children: [
+            {
+              type: 'paragraph',
+              children: [
+                {
+                  type: 'image',
+                  title: null,
+                  url: './helix_logo.png',
+                  alt: 'helix-logo',
+                },
+              ],
+              meta: {
+                types: [
+                  'has-image',
+                ],
+              },
+            },
+          ],
+          meta: {
+            types: [
+              'has-image',
+              'nb-image-1',
+              'has-only-image',
+            ],
+          },
+          title: '',
+          intro: '',
+          image: './helix_logo.png',
+        },
+        {
+          type: 'section',
+          children: [
+            {
+              type: 'heading',
+              depth: 1,
+              children: [
+                {
+                  type: 'text',
+                  value: 'Header and one image',
+                },
+              ],
+              meta: {
+                types: [
+                  'is-heading',
+                ],
+              },
+            },
+          ],
+          meta: {
+            types: [
+              'has-heading',
+              'nb-heading-1',
+              'has-only-heading',
+            ],
+          },
+          title: 'Header and one image',
+          intro: 'Header and one image',
+        },
+      ],
+    };
+    getmetadata(dat, { logger });
+    assert.equal(dat.content.title, 'Header and one image');
   });
 
   it('getmetadata does not fail with empty sections', () => {

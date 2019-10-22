@@ -1,0 +1,65 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "./helix_logo.png",
+              "alt": "helix-logo"
+            }
+          ],
+          "meta": {
+            "types": [
+              "has-image"
+            ]
+          }
+        }
+      ],
+      "meta": {
+        "types": [
+          "has-image",
+          "nb-image-1",
+          "has-only-image"
+        ]
+      },
+      "title": "",
+      "intro": "",
+      "image": "./helix_logo.png"
+    },
+    {
+      "type": "section",
+      "children": [
+        {
+          "type": "heading",
+          "depth": 1,
+          "children": [
+            {
+              "type": "text",
+              "value": "Header and one image"
+            }
+          ],
+          "meta": {
+            "types": [
+              "is-heading"
+            ]
+          }
+        }
+      ],
+      "meta": {
+        "types": [
+          "has-heading",
+          "nb-heading-1",
+          "has-only-heading"
+        ]
+      },
+      "title": "Header and one image",
+      "intro": "Header and one image"
+    }
+  ]
+}
