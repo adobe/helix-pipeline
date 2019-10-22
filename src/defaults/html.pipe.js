@@ -77,7 +77,7 @@ const htmlpipe = (cont, context, action) => {
     .use(cache).when(uncached)
     .use(key)
     .use(tovdom).expose('post') // start HTML post-processing
-    .use(removeHlxProps).when(() => production())
+    .use(removeHlxProps).expose('removeHlxProps')
     .use(rewriteLinks).when(production)
     .use(addHeaders)
     .use(tohtml) // end HTML post-processing
