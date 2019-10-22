@@ -482,4 +482,24 @@ describe('Testing Markdown conversion', () => {
       SANITIZE_DOM: true,
     });
   });
+
+  it('formats links correctly', async () => {
+    process.env.__OW_ACTIVATION_ID = '1234';
+    await assertMd(
+      '[<u>**Adobe**</u>](https://www.adobe.com)',
+      '<body><p><a href="https://www.adobe.com"><u><strong>Adobe</strong></u></a></p></body>', {
+        SANITIZE_DOM: true,
+      },
+    );
+  });
+
+  it('formats links correctly reverse', async () => {
+    process.env.__OW_ACTIVATION_ID = '1234';
+    await assertMd(
+      '[**<u>Adobe</u>**](https://www.adobe.com)',
+      '<body><p><a href="https://www.adobe.com"><strong><u>Adobe</u></strong></a></p></body>', {
+        SANITIZE_DOM: true,
+      },
+    );
+  });
 });
