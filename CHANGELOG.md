@@ -1,3 +1,10 @@
+# [5.6.0](https://github.com/adobe/helix-pipeline/compare/v5.5.6...v5.6.0) (2019-10-23)
+
+
+### Features
+
+* **pipeline:** icon support ([#500](https://github.com/adobe/helix-pipeline/issues/500)) ([3fadee7](https://github.com/adobe/helix-pipeline/commit/3fadee7c736537f7fec698d8fc10103f4f2a1178))
+
 ## [5.5.6](https://github.com/adobe/helix-pipeline/compare/v5.5.5...v5.5.6) (2019-10-22)
 
 
