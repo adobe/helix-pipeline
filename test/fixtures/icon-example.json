@@ -1,0 +1,106 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "The "
+        },
+        {
+          "type": "strong",
+          "children": [
+            {
+              "type": "text",
+              "value": "Helix"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": " "
+        },
+        {
+          "type": "icon",
+          "value": "pipeline",
+          "code": ":pipeline:"
+        },
+        {
+          "type": "text",
+          "value": " supports icons now"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "This "
+        },
+        {
+          "type": "icon",
+          "value": "tada",
+          "code": ":tada:"
+        },
+        {
+          "type": "text",
+          "value": " will render as an icon. "
+        },
+        {
+          "type": "icon",
+          "value": "thumbsup",
+          "code": ":thumbsup:"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "I said: this is cool. There are smiles :)"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": ":: smile "
+        },
+        {
+          "type": "icon",
+          "value": "smile",
+          "code": ":smile:"
+        },
+        {
+          "type": "icon",
+          "value": "smile",
+          "code": ":smile:"
+        },
+        {
+          "type": "text",
+          "value": ":"
+        },
+        {
+          "type": "icon",
+          "value": "smile",
+          "code": ":smile:"
+        },
+        {
+          "type": "text",
+          "value": "::"
+        },
+        {
+          "type": "icon",
+          "value": "smile",
+          "code": ":smile:"
+        }
+      ]
+    }
+  ]
+}
