@@ -185,6 +185,11 @@
             ],
             "description": "Extracted title of the document"
         },
+        "code": {
+            "type": "string",
+            "pattern": ":[a-zA-Z0-9_-]+:",
+            "description": "Icon code"
+        },
         "intro": {
             "type": [
                 "null",
