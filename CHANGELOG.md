@@ -1,3 +1,10 @@
+## [5.5.6](https://github.com/adobe/helix-pipeline/compare/v5.5.5...v5.5.6) (2019-10-22)
+
+
+### Bug Fixes
+
+* **metadata:** use first available section title instead of title of first section ([761aca6](https://github.com/adobe/helix-pipeline/commit/761aca653532387eb82333b028f1e9e74b5c2979)), closes [#502](https://github.com/adobe/helix-pipeline/issues/502)
+
 ## [5.5.5](https://github.com/adobe/helix-pipeline/compare/v5.5.4...v5.5.5) (2019-10-03)
 
 
