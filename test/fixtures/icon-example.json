@@ -61,7 +61,37 @@
       "children": [
         {
           "type": "text",
-          "value": "I said: this is cool. There are smiles :)"
+          "value": "I said: this is cool. There are smiles :) - even "
+        },
+        {
+          "type": "strong",
+          "children": [
+            {
+              "type": "text",
+              "value": "big "
+            },
+            {
+              "type": "icon",
+              "value": "smiles",
+              "code": ":smiles:"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "value": " and "
+        },
+        {
+          "type": "link",
+          "title": null,
+          "url": "http://www.example.com/",
+          "children": [
+            {
+              "type": "icon",
+              "value": "foo",
+              "code": ":foo:"
+            }
+          ]
         }
       ]
     },
@@ -99,6 +129,21 @@
           "type": "icon",
           "value": "smile",
           "code": ":smile:"
+        }
+      ]
+    },
+    {
+      "type": "code",
+      "lang": "javascript",
+      "meta": null,
+      "value": "console.log('this is in a :code: block');"
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "inlineCode",
+          "value": "this is inline :code:"
         }
       ]
     }

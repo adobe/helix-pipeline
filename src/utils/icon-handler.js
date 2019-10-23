@@ -18,10 +18,10 @@ function icon() {
   return function handler(h, node) {
     const { value, code } = node;
     return [h(node, 'img', {
-      className: `icon ${value}`,
+      className: `icon icon-${value}`,
       src: `/icons/${value}.svg`,
       title: code,
-      altText: value,
+      altText: `icon ${value}`,
     })];
   };
 }
