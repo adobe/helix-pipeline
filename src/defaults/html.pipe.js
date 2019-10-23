@@ -19,6 +19,7 @@ const html = require('../html/make-html.js');
 const type = require('../utils/set-content-type.js');
 const selectStatus = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
+const iconize = require('../html/iconize');
 const sections = require('../html/split-sections');
 const { selectstrain, selecttest } = require('../utils/conditional-sections');
 const debug = require('../html/output-debug.js');
@@ -65,6 +66,7 @@ const htmlpipe = (cont, context, action) => {
     .use(parseFrontmatter)
     .use(embeds)
     .use(smartypants)
+    .use(iconize)
     .use(sections)
     .use(meta).expose('meta')
     .use(unwrapSoleImages)
