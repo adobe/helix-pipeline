@@ -13,7 +13,7 @@
 const { Logger } = require('@adobe/helix-shared');
 const parse = require('../src/html/parse-markdown');
 const iconize = require('../src/html/iconize');
-const { assertMatch } = require('./markdown-utils');
+const { assertMatch, assertValid } = require('./markdown-utils');
 
 const logger = Logger.getTestLogger({
   // tune this for debugging
@@ -27,14 +27,28 @@ function callback(body) {
   return data.content.mdast;
 }
 
+function context(body) {
+  const dat = {
+    content: {
+      body,
+      mdast: callback(body),
+    },
+  };
+  return dat;
+}
+
 describe('Test Iconize Processing', () => {
+  it('Markdown with icons yields valid context', (done) => {
+    assertValid('icon-example', context, done);
+  });
+
   it('Parses markdown with icons', () => {
     for (let i = 0; i < 50; i += 1) {
       assertMatch('icon-example', callback);
     }
   });
 
-  it('does not throw error if mdast is missing', () => {
+  it('Does not throw error if mdast is missing', () => {
     iconize({
       content: {
         html: '<html></html>',
