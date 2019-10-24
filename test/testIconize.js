@@ -43,9 +43,7 @@ describe('Test Iconize Processing', () => {
   });
 
   it('Parses markdown with icons', () => {
-    for (let i = 0; i < 50; i += 1) {
-      assertMatch('icon-example', callback);
-    }
+    assertMatch('icon-example', callback);
   });
 
   it('Does not throw error if mdast is missing', () => {
