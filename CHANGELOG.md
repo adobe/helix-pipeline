@@ -1,3 +1,10 @@
+## [5.6.1](https://github.com/adobe/helix-pipeline/compare/v5.6.0...v5.6.1) (2019-10-24)
+
+
+### Bug Fixes
+
+* **schema:** add missing code property to icon ([#508](https://github.com/adobe/helix-pipeline/issues/508)) ([9e6a888](https://github.com/adobe/helix-pipeline/commit/9e6a88823c052ce9a2be2b5ef56916b2155796cd))
+
 # [5.6.0](https://github.com/adobe/helix-pipeline/compare/v5.5.6...v5.6.0) (2019-10-23)
 
 
