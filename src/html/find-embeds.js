@@ -45,8 +45,8 @@ function iaEmbed({ type, children }, parent) {
     && children.length === 1
     && children[0].type === 'link'
     && (parent.type === 'root' || parent.type === 'section') // only direct children
-    && children[0].children[0] // needs to have a text node child
-    && children[0].children[0].value === children[0].url // no other link text
+    && children[0].children.length === 1
+    && (children[0].children[0].type === 'image' || children[0].children[0].value === children[0].url) // no other link text
     && URI.parse(children[0].url).reference === 'absolute') {
     return URI.parse(children[0].url);
   }
