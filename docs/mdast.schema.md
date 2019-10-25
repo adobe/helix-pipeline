@@ -24,6 +24,7 @@ A node in the Markdown AST
 | [alt](#alt)                     | `string`   | Optional | Yes      | MDAST (this schema) |
 | [checked](#checked)             | `boolean`  | Optional | Yes      | MDAST (this schema) |
 | [children](#children)           | `array`    | Optional | No       | MDAST (this schema) |
+| [code](#code)                   | `string`   | Optional | No       | MDAST (this schema) |
 | [data](#data)                   | `object`   | Optional | No       | MDAST (this schema) |
 | [depth](#depth)                 | `integer`  | Optional | No       | MDAST (this schema) |
 | [identifier](#identifier)       | `string`   | Optional | No       | MDAST (this schema) |
@@ -133,6 +134,27 @@ All items must be of the type:
 #### Condition 2
 
 - []() – `https://ns.adobe.com/helix/pipeline/section#/definitions/section`
+
+## code
+
+Icon code
+
+`code`
+
+- is optional
+- type: `string`
+- defined in this schema
+
+### code Type
+
+`string`
+
+All instances must conform to this regular expression (test examples
+[here](https://regexr.com/?expression=%3A%5Ba-zA-Z0-9_-%5D%2B%3A)):
+
+```regex
+:[a-zA-Z0-9_-]+:
+```
 
 ## data
 
@@ -495,6 +517,7 @@ The value of this property **must** be equal to one of the [known values below](
 | `footnoteReference`  | A reference to a footnote                                                                                                                                            |
 | `embed`              | Content embedded from another page, identified by the `url` attribute.                                                                                               |
 | `section`            | A section within the document. Sections serve as a high-level structure of a single markdown document and can have their own section-specific front matter metadata. |
+| `icon`               | An SVG icon, identified by the syntax `:foo:`                                                                                                                        |
 | `listItem`           |                                                                                                                                                                      |
 
 ## types
