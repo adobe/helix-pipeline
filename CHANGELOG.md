@@ -1,3 +1,11 @@
+## [5.6.2](https://github.com/adobe/helix-pipeline/compare/v5.6.1...v5.6.2) (2019-10-25)
+
+
+### Bug Fixes
+
+* **embeds:** fix regression in detecting link and image embeds ([c1f555a](https://github.com/adobe/helix-pipeline/commit/c1f555a1b4eb34f4c0b3c3579288942c9142c7f0))
+* **embeds:** restrict detection of IA embeds ([7507fcc](https://github.com/adobe/helix-pipeline/commit/7507fcc99723cb754c72c7a56cdd2668045c319c)), closes [#511](https://github.com/adobe/helix-pipeline/issues/511)
+
 ## [5.6.1](https://github.com/adobe/helix-pipeline/compare/v5.6.0...v5.6.1) (2019-10-24)
 
 
