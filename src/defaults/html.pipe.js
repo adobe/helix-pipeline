@@ -39,7 +39,6 @@ const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
 const sanitize = require('../html/sanitize');
 const removeHlxProps = require('../html/removeHlxProps');
-const resolveRef = require('../utils/resolve-ref');
 
 /* eslint newline-per-chained-call: off */
 
@@ -60,7 +59,6 @@ const htmlpipe = (cont, context, action) => {
     .every(dump.record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
-    .use(resolveRef).expose('resolve').when(hascontent)
     .use(fetch).expose('fetch').when(hascontent)
     .use(parse).expose('parse')
     .use(parseFrontmatter)
