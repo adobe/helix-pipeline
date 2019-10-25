@@ -130,7 +130,7 @@ describe('Integration Test with Embeds', () => {
     );
   });
 
-  it.only('html.pipe does not detect IA "embeds" in normal youtube links', async () => {
+  it('html.pipe does not detect IA "embeds" in normal youtube links', async () => {
     const result = await pipe(
       (context) => {
         context.response = { status: 201, body: context.content.document.body.innerHTML };
