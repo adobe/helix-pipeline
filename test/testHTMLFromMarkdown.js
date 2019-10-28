@@ -380,12 +380,12 @@ describe('Testing Markdown conversion', () => {
         ![Bar](/baz.png)
 
       `, `
-        <div class="hlx-section" data-hlx-types="has-heading nb-heading-1 has-only-heading">
-          <h1 id="foo">Foo</h1>
-        </div>
-        <div class="hlx-section" data-hlx-types="has-image nb-image-1 has-only-image">
-          <img src="/baz.png" alt="Bar"/>
-        </div>
+      <div>
+        <h1 id="foo">Foo</h1>
+      </div>
+      <div>
+        <img alt="Bar" src="/baz.png">
+      </div>
     `, {
       SANITIZE_DOM: true,
     });
@@ -439,21 +439,21 @@ describe('Testing Markdown conversion', () => {
 
         # Fred
       `, `
-        <div class="hlx-section" title="foo" data-hlx-types="has-heading nb-heading-1 has-only-heading">
-          <h1 id="foo">Foo</h1>
-        </div>
-        <div class="hlx-section qux-section" data-baz="qux" data-hlx-types="has-heading nb-heading-1 has-only-heading">
-          <h1 id="baz">Baz</h1>
-        </div>
-        <section class="hlx-section" data-hlx-types="has-heading nb-heading-1 has-only-heading">
-          <h1 id="corge">Corge</h1>
-        </section>
-        <div class="hlx-section" data-meta data-hlx-types="has-heading nb-heading-1 has-only-heading">
-          <h1 id="garply">Garply</h1>
-        </div>
-        <div class="hlx-section" data-hlx-types="fred plugh">
-          <h1 id="fred">Fred</h1>
-        </div>
+      <div title="foo">
+        <h1 id="foo">Foo</h1>
+      </div>
+      <div class="qux-section" data-baz="qux">
+        <h1 id="baz">Baz</h1>
+      </div>
+      <section>
+        <h1 id="corge">Corge</h1>
+      </section>
+      <div data-meta="">
+        <h1 id="garply">Garply</h1>
+      </div>
+      <div>
+        <h1 id="fred">Fred</h1>
+      </div>
     `, {
       SANITIZE_DOM: true,
     });
@@ -461,6 +461,30 @@ describe('Testing Markdown conversion', () => {
 
   it('Filters out hlx-* class and data-hlx-* attributes in production', async () => {
     process.env.__OW_ACTIVATION_ID = '1234';
+    await assertMd(`
+        ---
+
+        # Foo
+
+        ---
+        data-hlx-types: [bar, baz]
+        ---
+
+        # Bar
+      `, `
+        <div>
+          <h1 id="foo">Foo</h1>
+        </div>
+        <div>
+          <h1 id="bar">Bar</h1>
+        </div>
+    `, {
+      SANITIZE_DOM: true,
+    });
+  });
+
+  it('Filters out hlx-* class and data-hlx-* attributes in development', async () => {
+    delete process.env.__OW_ACTIVATION_ID;
     await assertMd(`
         ---
 
