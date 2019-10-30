@@ -20,6 +20,7 @@ const toDOM = require('./hast-util-to-dom');
 const HeadingHandler = require('./heading-handler');
 const embed = require('./embed-handler');
 const link = require('./link-handler');
+const icon = require('./icon-handler');
 const section = require('./section-handler');
 const types = require('../schemas/mdast.schema.json').properties.type.enum;
 
@@ -68,6 +69,7 @@ class VDOMTransformer {
     this.match('heading', this._headingHandler.handler());
     this.match('embed', embed(this._options));
     this.match('link', link(this._options));
+    this.match('icon', icon(this._options));
     this.match('section', section(this._options));
     this.match('html', (h, node) => {
       if (node.value.startsWith('<!--')) {

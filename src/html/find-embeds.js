@@ -40,10 +40,13 @@ function internalGatsbyEmbed(text, base, contentext, resourceext) {
  * Finds embeds that are single absolute links in a paragraph
  * @param {*} node An MDAST node
  */
-function iaEmbed({ type, children }) {
+function iaEmbed({ type, children }, parent) {
   if (type === 'paragraph'
     && children.length === 1
     && children[0].type === 'link'
+    && (parent.type === 'root' || parent.type === 'section') // only direct children
+    && children[0].children.length === 1
+    && (children[0].children[0].type === 'image' || children[0].children[0].value === children[0].url) // no other link text
     && URI.parse(children[0].url).reference === 'absolute') {
     return URI.parse(children[0].url);
   }
@@ -116,11 +119,11 @@ function find({ content: { mdast }, request: { extension, url } },
   { logger, secrets: { EMBED_WHITELIST, EMBED_SELECTOR }, request: { params: { path } } }) {
   const resourceext = `.${extension}`;
   const contentext = p.extname(path);
-  map(mdast, (node) => {
+  map(mdast, (node, _, parent) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
       embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger.debug);
-    } else if (node.type === 'paragraph' && iaEmbed(node)) {
-      embed(iaEmbed(node), node, EMBED_WHITELIST, logger.debug);
+    } else if (node.type === 'paragraph' && iaEmbed(node, parent)) {
+      embed(iaEmbed(node, parent), node, EMBED_WHITELIST, logger.debug);
     } else if (node.type === 'paragraph' && imgEmbed(node)) {
       embed(imgEmbed(node), node, EMBED_WHITELIST, logger.debug);
     } else if (node.type === 'inlineCode'

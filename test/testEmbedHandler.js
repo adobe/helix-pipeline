@@ -130,6 +130,36 @@ describe('Integration Test with Embeds', () => {
     );
   });
 
+  it('html.pipe does not detect IA "embeds" in normal youtube links', async () => {
+    const result = await pipe(
+      (context) => {
+        context.response = { status: 201, body: context.content.document.body.innerHTML };
+      },
+      {
+        request: crequest,
+        content: {
+          body: `https://www.youtube.com/watch?balakaka
+
+[https://www.youtube.com/watch?balakaka](https://www.youtube.com/watch?balakaka)
+
+[this cool video](https://www.youtube.com/watch?balakaka)
+
+- [this cool video](https://www.youtube.com/watch?balakaka)
+`,
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers['Content-Type'], 'text/html');
+    assert.equal(result.response.document.body.innerHTML.match(/<esi:include/g).length, 2);
+  });
+
   it('html.pipe processes embeds', async () => {
     const result = await pipe(
       (context) => {

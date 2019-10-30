@@ -156,9 +156,10 @@ function getmetadata({ content }, { logger }) {
   });
 
   const img = sections.filter((section) => section.image)[0];
+  const titl = sections.filter((section) => section.title)[0];
 
   content.meta = sections[0].meta;
-  content.title = sections[0].title;
+  content.title = titl ? titl.title : '';
   content.intro = sections[0].intro;
   content.image = img ? img.image : undefined;
 }
