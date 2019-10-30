@@ -1,3 +1,10 @@
+## [5.6.3](https://github.com/adobe/helix-pipeline/compare/v5.6.2...v5.6.3) (2019-10-30)
+
+
+### Bug Fixes
+
+* **html:** consistent hlx props removal ([#505](https://github.com/adobe/helix-pipeline/issues/505)) ([4ef6b1c](https://github.com/adobe/helix-pipeline/commit/4ef6b1c4f6f2ffd3c6eb3a016c93c7cb7498f862))
+
 ## [5.6.2](https://github.com/adobe/helix-pipeline/compare/v5.6.1...v5.6.2) (2019-10-25)
 
 
