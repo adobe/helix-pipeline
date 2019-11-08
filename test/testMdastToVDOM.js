@@ -206,11 +206,10 @@ describe('Test MDAST to VDOM Transformation', () => {
     );
   });
 
-  it('Icon handler replaces :placeholders: with SVG tag', () => {
+  it.only('Icon handler replaces :placeholders: with SVG tags', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'icon-example.json'));
-    const transformer = new VDOM(mdast, action.secrets);
-    assertTransformerYieldsDocument(
-      transformer, fs.readFileSync(path.resolve(__dirname, 'fixtures', 'icon-example.html')).toString('utf-8'),
-    );
+    const actual = new VDOM(mdast, action.secrets).getDocument().documentElement;
+    const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'icon-example.html')).toString('utf-8')).window.document.documentElement;
+    assert.deepEqual(actual.outerHTML, expected.outerHTML);
   });
 });
