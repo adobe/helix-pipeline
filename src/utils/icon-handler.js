@@ -12,7 +12,7 @@
 
 /**
  * Handles `icon` MDAST nodes by converting them into `<svg>` tags, e.g.
- * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons/smile.svg"><title>:smile:</title></use></svg>`
+ * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons/smile.svg"><title>smile</title></use></svg>`
  * @param {string} id the identifier of the icon
  */
 function icon() {
