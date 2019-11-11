@@ -117,7 +117,6 @@ describe('Testing HTML Pipeline in Production', () => {
 
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/html', 'keeps content-type');
-    assert.equal(result.response.headers['X-ESI'], 'enabled', 'detects ESI');
     assert.equal(result.response.headers.Expires, '3000', 'allows setting through meta http-equiv');
     assert.equal(result.response.headers.Exceeds, undefined, 'ignores invalid meta tags');
     assert.equal(result.response.headers.Foo, 'bar', 'does not override existing headers');
@@ -160,10 +159,12 @@ describe('Testing HTML Pipeline in Production', () => {
     );
 
     assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers['X-ESI'], 'enabled', 'detects ESI');
     assert.equal(result.response.headers.Link, '<next.html>; rel="next",<index.html>; rel="first"', 'allows setting through link');
   });
 
-  it('html.pipe propagates \'as\' attribute of link tags', async () => {
+  // enable once 'as' attribute is handled by JSDOM, see issue #520
+  it.skip('html.pipe propagates \'as\' attribute of link tags', async () => {
     const result = await pipe(
       (context) => {
         context.response = {
