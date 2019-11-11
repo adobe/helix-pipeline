@@ -14,7 +14,7 @@ function addHeaders({ response: { headers, document } }) {
   const linkHeader = [];
   document.querySelectorAll('link').forEach(({ href, rel, as }) => {
     if (href && rel && !href.match(/<esi:include/)) {
-      if (as && rel.indexOf('preload' > -1)) {
+      if (as && rel.indexOf('preload') > -1) {
         // https://www.w3.org/TR/preload/#as-attribute
         linkHeader.push(`<${href}>; rel="${rel}"; as="${as}"`);
       } else {
