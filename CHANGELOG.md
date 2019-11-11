@@ -1,3 +1,23 @@
+## [6.0.1](https://github.com/adobe/helix-pipeline/compare/v6.0.0...v6.0.1) (2019-11-10)
+
+
+### Bug Fixes
+
+* **package:** update dependencies ([55d7535](https://github.com/adobe/helix-pipeline/commit/55d7535033710872d403251c54272e1c002f1782))
+
+# [6.0.0](https://github.com/adobe/helix-pipeline/compare/v5.6.4...v6.0.0) (2019-11-09)
+
+
+### Features
+
+* **icons:** use <svg> instead of <img> tag ([#509](https://github.com/adobe/helix-pipeline/issues/509)) ([5e43175](https://github.com/adobe/helix-pipeline/commit/5e431756456842bf5f704715f506a7c9d59b2b14))
+
+
+### BREAKING CHANGES
+
+* **icons:** icons are now rendered as <svg> instead of <img> tags.
+If icons have been used and styled before, CSS changes are required.
+
 ## [5.6.4](https://github.com/adobe/helix-pipeline/compare/v5.6.3...v5.6.4) (2019-11-04)
 
 

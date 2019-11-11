@@ -11,18 +11,22 @@
  */
 
 /**
- * Handles `icon` MDAST nodes by converting them into `<img>` tags
+ * Handles `icon` MDAST nodes by converting them into `<svg>` tags, e.g.
+ * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons/smile.svg"><title>smile</title></use></svg>`
  * @param {string} id the identifier of the icon
  */
 function icon() {
   return function handler(h, node) {
-    const { value, code } = node;
-    return [h(node, 'img', {
+    const { value } = node;
+    return [h(node, 'svg', {
+      xmlns: 'http://www.w3.org/2000/svg',
       className: `icon icon-${value}`,
-      src: `/icons/${value}.svg`,
-      title: code,
-      altText: `icon ${value}`,
-    })];
+    }, [h(node, 'use', {
+      href: `/icons/${value}.svg`,
+    }, [h(node, 'title', null, [{
+      type: 'text',
+      value,
+    }])])])];
   };
 }
 
