@@ -12,7 +12,7 @@
 
 /**
  * Handles `icon` MDAST nodes by converting them into `<svg>` tags, e.g.
- * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons/smile.svg"><title>smile</title></use></svg>`
+ * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons/smile.svg"></use></svg>`
  * @param {string} id the identifier of the icon
  */
 function icon() {
@@ -23,10 +23,7 @@ function icon() {
       className: `icon icon-${value}`,
     }, [h(node, 'use', {
       href: `/icons/${value}.svg`,
-    }, [h(node, 'title', null, [{
-      type: 'text',
-      value,
-    }])])])];
+    })])];
   };
 }
 
