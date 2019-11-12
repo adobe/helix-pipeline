@@ -15,14 +15,14 @@
  * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons/smile.svg"></use></svg>`
  * @param {string} id the identifier of the icon
  */
-function icon() {
+function icon(cfg) {
   return function handler(h, node) {
     const { value } = node;
     return [h(node, 'svg', {
       xmlns: 'http://www.w3.org/2000/svg',
-      className: `icon icon-${value}`,
+      className: `${cfg.ICON_CLASS_PREFIX}${value}`,
     }, [h(node, 'use', {
-      href: `/icons/${value}.svg`,
+      href: `${cfg.ICON_URL_PREFIX}${value}${cfg.ICON_URL_SUFFIX}`,
     })])];
   };
 }
