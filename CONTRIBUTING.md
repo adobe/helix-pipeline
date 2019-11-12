@@ -63,7 +63,8 @@ $ npm run commit
 * any change that will add, remove, or rename HTML tags in the generated HTML output
 * any change that will remove or rename configuration settings in `secrets`
 * any change that will remove or rename properties exported through `index.js module.exports`
-
+* any change that adds required properties to the schemas
+* any change that removes or renames properties in the schemas
 # How Contributions get Reviewed
 
 One of the maintainers will look at the pull request within one week. Feedback on the pull request will be given in writing, in GitHub.
