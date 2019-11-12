@@ -60,7 +60,7 @@ $ npm run commit
 `npm run commit` will ask you if a change is a breaking change. This is a non-exhaustive list of what we consider breaking changes for `helix-pipeline`
 
 * any change that will remove or rename HTML attributes in the generated HTML output
-* any change that will remove or rename HTML tags in the generated HTML output
+* any change that will add, remove, or rename HTML tags in the generated HTML output
 * any change that will remove or rename configuration settings in `secrets`
 * any change that will remove or rename properties exported through `index.js module.exports`
 
