@@ -1,3 +1,10 @@
+## [6.0.2](https://github.com/adobe/helix-pipeline/compare/v6.0.1...v6.0.2) (2019-11-12)
+
+
+### Bug Fixes
+
+* **icons:** use title from SVG file ([#528](https://github.com/adobe/helix-pipeline/issues/528)) ([9ad6f7e](https://github.com/adobe/helix-pipeline/commit/9ad6f7ef611e992c1f0904f0e77e530f3a906696))
+
 ## [6.0.1](https://github.com/adobe/helix-pipeline/compare/v6.0.0...v6.0.1) (2019-11-10)
 
 
