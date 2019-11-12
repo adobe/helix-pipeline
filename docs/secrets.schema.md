@@ -19,6 +19,9 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [EMBED_WHITELIST](#embed_whitelist)               | `string`  | Optional | No       | `"www.youtube.com, spark.adobe.com, unsplash.com/photos"`               | Secrets (this schema) |
 | [GITHUB_TOKEN](#github_token)                     | `string`  | Optional | No       | `""`                                                                    | Secrets (this schema) |
 | [HTTP_TIMEOUT](#http_timeout)                     | `integer` | Optional | No       | `1000`                                                                  | Secrets (this schema) |
+| [ICON_CLASS_PREFIX](#icon_class_prefix)           | `string`  | Optional | No       | `"icon icon-"`                                                          | Secrets (this schema) |
+| [ICON_URL_PREFIX](#icon_url_prefix)               | `string`  | Optional | No       | `"/icons/"`                                                             | Secrets (this schema) |
+| [ICON_URL_SUFFIX](#icon_url_suffix)               | `string`  | Optional | No       | `".svg"`                                                                | Secrets (this schema) |
 | [IMAGES_MIN_SIZE](#images_min_size)               | `integer` | Optional | No       | `480`                                                                   | Secrets (this schema) |
 | [REPO_API_ROOT](#repo_api_root)                   | `string`  | Optional | No       | `"https://api.github.com/"`                                             | Secrets (this schema) |
 | [REPO_RAW_ROOT](#repo_raw_root)                   | `string`  | Optional | No       | `"https://raw.githubusercontent.com/"`                                  | Secrets (this schema) |
@@ -104,6 +107,51 @@ Timeout for outgoing HTTP requests in milliseconds
 ### HTTP_TIMEOUT Type
 
 `integer`
+
+## ICON_CLASS_PREFIX
+
+The prefix to use in the icon class attribute
+
+`ICON_CLASS_PREFIX`
+
+- is optional
+- type: `string`
+- default: `"icon icon-"`
+- defined in this schema
+
+### ICON_CLASS_PREFIX Type
+
+`string`
+
+## ICON_URL_PREFIX
+
+The prefix to use in the icon URL
+
+`ICON_URL_PREFIX`
+
+- is optional
+- type: `string`
+- default: `"/icons/"`
+- defined in this schema
+
+### ICON_URL_PREFIX Type
+
+`string`
+
+## ICON_URL_SUFFIX
+
+The suffix to use in the icon URL
+
+`ICON_URL_SUFFIX`
+
+- is optional
+- type: `string`
+- default: `".svg"`
+- defined in this schema
+
+### ICON_URL_SUFFIX Type
+
+`string`
 
 ## IMAGES_MIN_SIZE
 
