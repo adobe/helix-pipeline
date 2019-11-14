@@ -13,6 +13,7 @@
 
 const assert = require('assert');
 const nock = require('nock');
+const { rootLogger } = require('@adobe/helix-log');
 const {
   createActionResponse,
   extractActionContext,
@@ -22,14 +23,16 @@ const {
 const { pipe, log } = require('../src/defaults/default.js');
 
 describe('Testing OpenWhisk adapter', () => {
-  after(() => {
+  afterEach(() => {
     nock.restore();
   });
 
-  before(() => {
+  beforeEach(() => {
     nock.restore();
     nock.activate();
     nock.cleanAll();
+
+    rootLogger.loggers.delete('OpenWhiskLogger');
   });
 
   it('createActionResponse keeps response intact', async () => {
@@ -377,14 +380,13 @@ describe('Testing OpenWhisk adapter', () => {
     assert.deepEqual(context.content, params.content);
   });
 
-  it.skip('it logs to corralogix if secrets are present', async () => {
+  it('it logs to corralogix if secrets are present', async () => {
     const reqs = [];
 
     nock('https://api.coralogix.com/api/v1/')
       .post('/logs')
       .reply((uri, requestBody) => {
         reqs.push(requestBody);
-        resolve();
         return [200, 'ok'];
       });
 
