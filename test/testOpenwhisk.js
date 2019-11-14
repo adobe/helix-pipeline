@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 
 const assert = require('assert');
+const nock = require('nock');
 const {
   createActionResponse,
   extractActionContext,
@@ -21,6 +22,16 @@ const {
 const { pipe, log } = require('../src/defaults/default.js');
 
 describe('Testing OpenWhisk adapter', () => {
+  after(() => {
+    nock.restore();
+  });
+
+  before(() => {
+    nock.restore();
+    nock.activate();
+    nock.cleanAll();
+  });
+
   it('createActionResponse keeps response intact', async () => {
     const inp = {
       response: {
@@ -364,5 +375,55 @@ describe('Testing OpenWhisk adapter', () => {
     }, pipe, params);
 
     assert.deepEqual(context.content, params.content);
+  });
+
+  it.skip('it logs to corralogix if secrets are present', async () => {
+    const reqs = [];
+
+    nock('https://api.coralogix.com/api/v1/')
+      .post('/logs')
+      .reply((uri, requestBody) => {
+        reqs.push(requestBody);
+        resolve();
+        return [200, 'ok'];
+      });
+
+    const params = {
+      __ow_headers: {
+        'content-type': 'application/json',
+      },
+      __ow_method: 'get',
+      CORALOGIX_API_KEY: '1234',
+      CORALOGIX_APPLICATION_NAME: 'logger-test',
+      CORALOGIX_SUBSYSTEM_NAME: 'test-1',
+      CORALOGIX_LOG_LEVEL: 'info',
+    };
+
+    process.env.__OW_ACTIVATION_ID = 'test-my-activation-id';
+    process.env.__OW_ACTION_NAME = 'test-my-action-name';
+    process.env.__OW_TRANSACTION_ID = 'test-transaction-id';
+
+    await runPipeline((context, action) => {
+      action.logger.info({ myId: 42 }, 'Hello, world');
+    }, pipe, params);
+
+    assert.equal(reqs.length, 1);
+    assert.equal(reqs[0].applicationName, 'logger-test');
+    assert.equal(reqs[0].subsystemName, 'test-1');
+    assert.equal(reqs[0].privateKey, '1234');
+    assert.equal(reqs[0].logEntries.length, 1);
+
+    const logEntry = JSON.parse(reqs[0].logEntries[0].text);
+    delete logEntry.timestamp;
+    assert.deepEqual(logEntry, {
+      level: 'info',
+      message: 'Hello, world',
+      myId: 42,
+      ow: {
+        actionName: 'test-my-action-name',
+        activationId: 'test-my-activation-id',
+        transactionId: 'test-transaction-id',
+      },
+    });
   });
 });

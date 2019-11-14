@@ -23,7 +23,7 @@
         },
         "logger": {
             "type": "object",
-            "description": "A [Winston](https://github.com/winstonjs/winston) logger instance."
+            "description": "A helix-log [SimpleInterface](https://github.com/adobe/helix-log) logger instance."
         },
         "debug": {
             "type": "object",

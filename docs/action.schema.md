@@ -46,7 +46,7 @@ Internal information related to debugging.
 
 ## logger
 
-A [Winston](https://github.com/winstonjs/winston) logger instance.
+A helix-log [SimpleInterface](https://github.com/adobe/helix-log) logger instance.
 
 `logger`
 

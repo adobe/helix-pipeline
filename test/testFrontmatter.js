@@ -10,11 +10,11 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const winston = require('winston');
 const assert = require('assert');
 const { cloneDeep } = require('lodash');
 const yaml = require('js-yaml');
 const { multiline } = require('@adobe/helix-shared').string;
+const { SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   flattenTree, concat, each,
 } = require('ferrum');
@@ -25,13 +25,7 @@ const { FrontmatterParsingError } = parseFront;
 
 let warning;
 
-const logger = winston.createLogger({
-  silent: true,
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
-});
+const logger = new SimpleInterface({ logger: new ConsoleLogger() });
 
 const procMd = (md) => {
   const dat = { content: { body: multiline(md) } };

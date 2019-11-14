@@ -206,7 +206,7 @@ Path to the requested (Markdown) file
 ##### path Example
 
 ```json
-/general/index.md
+/general/deinx.md
 ```
 
 #### ref
@@ -251,7 +251,7 @@ The request root path of the current strain.
 ##### rootPath Example
 
 ```json
-/docs/api
+/docs/aip
 ```
 
 #### strain
