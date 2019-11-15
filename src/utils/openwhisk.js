@@ -173,6 +173,10 @@ async function runPipeline(cont, pipe, actionParams) {
     }
     return createActionResponse(await pipe(cont, context, action));
   }
+  // enhance logger if trace method is missing (eg. a winston logger)
+  if (actionParams.__ow_logger && !actionParams.__ow_logger.trace) {
+    actionParams.__ow_logger.trace = actionParams.__ow_logger.silly;
+  }
   return logger.wrap(runner, actionParams);
 }
 
