@@ -13,7 +13,7 @@
 
 const assert = require('assert');
 const nock = require('nock');
-const { rootLogger } = require('@adobe/helix-log');
+const { rootLogger, SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   createActionResponse,
   extractActionContext,
@@ -426,6 +426,34 @@ describe('Testing OpenWhisk adapter', () => {
         activationId: 'test-my-activation-id',
         transactionId: 'test-transaction-id',
       },
+    });
+  });
+
+  it('it logs even if no trace logging', async () => {
+    const winstonLogger = new SimpleInterface({
+      level: 'debug',
+      logger: new ConsoleLogger(),
+    });
+    winstonLogger.trace = undefined;
+
+    const params = {
+      __ow_headers: {
+        'content-type': 'application/json',
+      },
+      __ow_method: 'get',
+      __ow_logger: winstonLogger,
+    };
+
+    const ret = await runPipeline((context, action) => {
+      action.logger.trace({ myId: 42 }, 'Hello, world');
+    }, pipe, params);
+
+    assert.deepEqual(ret, {
+      body: {},
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      statusCode: 200,
     });
   });
 });
