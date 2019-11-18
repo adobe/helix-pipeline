@@ -1,3 +1,10 @@
+# [6.1.0](https://github.com/adobe/helix-pipeline/compare/v6.0.2...v6.1.0) (2019-11-18)
+
+
+### Features
+
+* **log:** use helix-log instead of winston ([#532](https://github.com/adobe/helix-pipeline/issues/532)) ([03e4ba9](https://github.com/adobe/helix-pipeline/commit/03e4ba944f571797b5cd526cc0e7f3060719a643))
+
 ## [6.0.2](https://github.com/adobe/helix-pipeline/compare/v6.0.1...v6.0.2) (2019-11-12)
 
 
