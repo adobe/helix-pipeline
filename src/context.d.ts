@@ -71,6 +71,10 @@ export interface Request {
   params?: {
     [k: string]: string | string[];
   };
+  /**
+   * The original query string
+   */
+  queryString?: string;
 }
 /**
  * The content as retrieved from the repository and enriched in the pipeline.
@@ -161,7 +165,8 @@ export interface MDAST {
     | "footnote"
     | "footnoteReference"
     | "embed"
-    | "section";
+    | "section"
+    | "icon";
   children?: (
     | {
         [k: string]: any;
@@ -193,7 +198,8 @@ export interface MDAST {
          * Path (can be relative) to the first image in the document
          */
         image?: string;
-      })[];
+      }
+  )[];
   position?: Position;
   /**
    * The string value of the node, if it is a terminal node.
@@ -252,6 +258,10 @@ export interface MDAST {
    * Extracted title of the document
    */
   title?: null | string;
+  /**
+   * Icon code
+   */
+  code?: string;
   /**
    * Extracted first paragraph of the document
    */

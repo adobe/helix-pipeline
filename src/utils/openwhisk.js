@@ -12,7 +12,7 @@
 
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
-const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
+const { logger } = require('@adobe/openwhisk-action-utils');
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -128,6 +128,16 @@ function extractActionContext(params) {
   // extract content (will be added to context)
   delete disclosed.content;
 
+  // keep logger backward compatible with winston logger
+  if (__ow_logger) {
+    if (!__ow_logger.log) {
+      __ow_logger.log = (level, ...msg) => __ow_logger[level](...msg);
+    }
+    if (!__ow_logger.silly) {
+      __ow_logger.silly = __ow_logger.trace;
+    }
+  }
+
   // setup action
   return {
     secrets,
@@ -161,9 +171,13 @@ async function runPipeline(cont, pipe, actionParams) {
       // pass content param from request to context
       context.content = params.content;
     }
-    return pipe(cont, context, action);
+    return createActionResponse(await pipe(cont, context, action));
   }
-  return createActionResponse(await owwrapper(runner, actionParams));
+  // enhance logger if trace method is missing (eg. a winston logger)
+  if (actionParams.__ow_logger && !actionParams.__ow_logger.trace) {
+    actionParams.__ow_logger.trace = actionParams.__ow_logger.silly;
+  }
+  return logger.wrap(runner, actionParams);
 }
 
 module.exports = {

@@ -41,7 +41,6 @@ function errorWrapper(fn) {
 
 /**
  * @typedef {Object} Context
- * @param {Winston.Logger} logger Winston logger to use
  */
 
 /**
