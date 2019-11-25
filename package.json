@@ -50,7 +50,7 @@
   "dependencies": {
     "@adobe/helix-log": "4.0.0",
     "@adobe/helix-shared": "^3.0.0",
-    "@adobe/openwhisk-action-utils": "2.7.2",
+    "@adobe/openwhisk-action-utils": "3.0.0",
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
