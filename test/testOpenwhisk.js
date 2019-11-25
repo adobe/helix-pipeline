@@ -406,7 +406,7 @@ describe('Testing OpenWhisk adapter', () => {
     process.env.__OW_TRANSACTION_ID = 'test-transaction-id';
 
     await runPipeline((context, action) => {
-      action.logger.info({ myId: 42 }, 'Hello, world');
+      action.logger.infoFields('Hello, world', { myId: 42 });
     }, pipe, params);
 
     assert.equal(reqs.length, 1);

@@ -48,9 +48,9 @@
     "unist-util-remove-position": "2.0.0"
   },
   "dependencies": {
-    "@adobe/helix-log": "4.0.0",
+    "@adobe/helix-log": "4.1.0",
     "@adobe/helix-shared": "^3.0.0",
-    "@adobe/openwhisk-action-utils": "3.0.0",
+    "@adobe/openwhisk-action-logger": "2.0.0",
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
