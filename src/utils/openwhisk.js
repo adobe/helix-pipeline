@@ -12,7 +12,7 @@
 
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
-const { logger } = require('@adobe/openwhisk-action-utils');
+const { logger } = require('@adobe/openwhisk-action-logger');
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -130,12 +130,7 @@ function extractActionContext(params) {
 
   // keep logger backward compatible with winston logger
   if (__ow_logger) {
-    if (!__ow_logger.log) {
-      __ow_logger.log = (level, ...msg) => __ow_logger[level](...msg);
-    }
-    if (!__ow_logger.silly) {
-      __ow_logger.silly = __ow_logger.trace;
-    }
+    __ow_logger.log = (level, ...msg) => __ow_logger[level](...msg);
   }
 
   // setup action
@@ -177,7 +172,7 @@ async function runPipeline(cont, pipe, actionParams) {
   if (actionParams.__ow_logger && !actionParams.__ow_logger.trace) {
     actionParams.__ow_logger.trace = actionParams.__ow_logger.silly;
   }
-  return logger.wrap(runner, actionParams);
+  return logger(logger.trace(runner))(actionParams);
 }
 
 module.exports = {
