@@ -1,3 +1,10 @@
+## [6.1.1](https://github.com/adobe/helix-pipeline/compare/v6.1.0...v6.1.1) (2019-12-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-utils to v3 ([#539](https://github.com/adobe/helix-pipeline/issues/539)) ([4f31381](https://github.com/adobe/helix-pipeline/commit/4f3138171c95178b756a3cc072ebcf747da19069))
+
 # [6.1.0](https://github.com/adobe/helix-pipeline/compare/v6.0.2...v6.1.0) (2019-11-18)
 
 
