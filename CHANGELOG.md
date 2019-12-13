@@ -1,3 +1,10 @@
+## [6.1.2](https://github.com/adobe/helix-pipeline/compare/v6.1.1...v6.1.2) (2019-12-13)
+
+
+### Bug Fixes
+
+* **log:** fix bottomless recursion issue ([#544](https://github.com/adobe/helix-pipeline/issues/544)) ([371df4c](https://github.com/adobe/helix-pipeline/commit/371df4cce5a57007046e9921771904277c57a74d)), closes [#543](https://github.com/adobe/helix-pipeline/issues/543)
+
 ## [6.1.1](https://github.com/adobe/helix-pipeline/compare/v6.1.0...v6.1.1) (2019-12-04)
 
 
