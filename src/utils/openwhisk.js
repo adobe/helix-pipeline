@@ -128,11 +128,6 @@ function extractActionContext(params) {
   // extract content (will be added to context)
   delete disclosed.content;
 
-  // keep logger backward compatible with winston logger
-  if (__ow_logger) {
-    __ow_logger.log = (level, ...msg) => __ow_logger[level](...msg);
-  }
-
   // setup action
   return {
     secrets,
