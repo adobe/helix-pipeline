@@ -1,3 +1,10 @@
+## [6.1.3](https://github.com/adobe/helix-pipeline/compare/v6.1.2...v6.1.3) (2019-12-16)
+
+
+### Bug Fixes
+
+* **logger:** replace logger.log(level) with logger.level() ([#551](https://github.com/adobe/helix-pipeline/issues/551)) ([5ca53ee](https://github.com/adobe/helix-pipeline/commit/5ca53eeceab1adeff10d33e7762fb73137fc933e))
+
 ## [6.1.2](https://github.com/adobe/helix-pipeline/compare/v6.1.1...v6.1.2) (2019-12-13)
 
 
