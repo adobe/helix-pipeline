@@ -79,7 +79,7 @@ This project's main entry provides a helper function for pipeline construction a
 const pipeline = require("@adobe/hypermedia-pipeline");
 
 module.exports.pipe = function(cont, context, action) {
-    action.logger.log("debug", "Constructing Custom Pipeline");
+    action.logger.debug("Constructing Custom Pipeline");
 
     return pipeline()
         .use(adjustContent)

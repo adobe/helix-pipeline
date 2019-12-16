@@ -48,7 +48,7 @@ const pipeline = require("@adobe/hypermedia-pipeline");
 const { adaptOWRequest, adaptOWResponse, log } = require('@adobe/hypermedia-pipeline/src/defaults/default.js');
 
 module.exports.pipe = function(cont, params, secrets, logger = log) {
-    logger.log("debug", "Constructing Custom Pipeline");
+    logger.debug("Constructing Custom Pipeline");
 
     return pipeline()
         .pre(adaptOWRequest)   // optional: turns OpenWhisk-style arguments into a proper payload

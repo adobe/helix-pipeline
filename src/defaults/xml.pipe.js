@@ -34,7 +34,7 @@ const timing = require('../utils/timing');
 
 const xmlpipe = (cont, context, action) => {
   action.logger = action.logger || log;
-  action.logger.log('debug', 'Constructing XML Pipeline');
+  action.logger.debug('Constructing XML Pipeline');
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
@@ -58,7 +58,7 @@ const xmlpipe = (cont, context, action) => {
     .error(dump.report)
     .error(selectStatus);
 
-  action.logger.log('debug', 'Running XML pipeline');
+  action.logger.debug('Running XML pipeline');
   return pipe.run(context);
 };
 

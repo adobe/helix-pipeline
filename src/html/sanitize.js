@@ -62,7 +62,7 @@ function allowCustomAttributes(DOMPurify) {
 }
 
 function sanitize({ content }, { logger }) {
-  logger.log('debug', 'Sanitizing content body to avoid XSS injections.');
+  logger.debug('Sanitizing content body to avoid XSS injections.');
 
   const globalContext = (new JSDOM('')).window;
   const DOMPurify = createDOMPurify(globalContext);

@@ -30,7 +30,7 @@ const timing = require('../utils/timing');
 
 const jsonpipe = (cont, context, action) => {
   action.logger = action.logger || log;
-  action.logger.log('debug', 'Constructing JSON Pipeline');
+  action.logger.debug('Constructing JSON Pipeline');
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
@@ -50,7 +50,7 @@ const jsonpipe = (cont, context, action) => {
     .error(dump.report)
     .error(selectStatus(production()));
 
-  action.logger.log('debug', 'Running JSON pipeline');
+  action.logger.debug('Running JSON pipeline');
   return pipe.run(context);
 };
 
