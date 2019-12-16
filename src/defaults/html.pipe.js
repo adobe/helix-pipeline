@@ -52,7 +52,7 @@ function paranoid(context, action) {
 
 const htmlpipe = (cont, context, action) => {
   action.logger = action.logger || log;
-  action.logger.log('debug', 'Constructing HTML Pipeline');
+  action.logger.debug('Constructing HTML Pipeline');
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
@@ -87,7 +87,7 @@ const htmlpipe = (cont, context, action) => {
     .error(dump.report)
     .error(selectStatus);
 
-  action.logger.log('debug', 'Running HTML pipeline');
+  action.logger.debug('Running HTML pipeline');
   return pipe.run(context);
 };
 
