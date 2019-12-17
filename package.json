@@ -31,7 +31,7 @@
     "cz-conventional-changelog": "3.0.2",
     "eslint": "6.7.2",
     "eslint-plugin-header": "3.0.0",
-    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-import": "2.19.1",
     "ghooks": "2.0.4",
     "hastscript": "5.1.1",
     "hyperscript": "2.0.2",
