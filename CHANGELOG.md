@@ -1,3 +1,10 @@
+## [6.1.5](https://github.com/adobe/helix-pipeline/compare/v6.1.4...v6.1.5) (2019-12-18)
+
+
+### Bug Fixes
+
+* **deps:** update [@adobe](https://github.com/adobe) ([#553](https://github.com/adobe/helix-pipeline/issues/553)) ([e1cf5a5](https://github.com/adobe/helix-pipeline/commit/e1cf5a5554a8097f05359f09cc3b733621e46529))
+
 ## [6.1.4](https://github.com/adobe/helix-pipeline/compare/v6.1.3...v6.1.4) (2019-12-17)
 
 
