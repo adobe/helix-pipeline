@@ -18,7 +18,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.1.0",
-    "@adobe/jsonschema2md": "3.3.1",
+    "@adobe/jsonschema2md": "4.0.4",
     "@pollyjs/adapter-fetch": "3.0.1",
     "@pollyjs/adapter-node-http": "3.0.2",
     "@pollyjs/core": "3.0.0",
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@adobe/helix-log": "4.4.2",
-    "@adobe/helix-shared": "^3.0.0",
+    "@adobe/helix-shared": "^4.0.0",
     "@adobe/openwhisk-action-logger": "2.0.3",
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
