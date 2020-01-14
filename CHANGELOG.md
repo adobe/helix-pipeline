@@ -1,3 +1,10 @@
+## [6.1.7](https://github.com/adobe/helix-pipeline/compare/v6.1.6...v6.1.7) (2020-01-14)
+
+
+### Bug Fixes
+
+* **ci:** use debian-stretch ([596199f](https://github.com/adobe/helix-pipeline/commit/596199f24862eeddbcf5b22903b6c3bcf7af34f7))
+
 ## [6.1.6](https://github.com/adobe/helix-pipeline/compare/v6.1.5...v6.1.6) (2020-01-09)
 
 
