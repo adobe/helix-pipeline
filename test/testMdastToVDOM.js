@@ -16,13 +16,13 @@ const path = require('path');
 const h = require('hastscript');
 const hy = require('hyperscript');
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const { JSDOM } = require('jsdom');
 const VDOM = require('../').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });

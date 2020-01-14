@@ -11,12 +11,12 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { deepclone } = require('ferrum');
 const _ = require('lodash');
 const debug = require('../src/html/output-debug');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });

@@ -91,7 +91,7 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
   return false;
 }
 
-function embed(uri, node, whitelist = '', debug = () => {}) {
+function embed(uri, node, whitelist = '', logger) {
   if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist.split(','))) {
     const children = [{ ...node }];
     node.type = 'embed';
@@ -101,7 +101,7 @@ function embed(uri, node, whitelist = '', debug = () => {}) {
       delete node.value;
     }
   } else {
-    debug(`Whitelist forbids embedding of URL: ${URI.serialize(uri)}`);
+    logger.debug(`Whitelist forbids embedding of URL: ${URI.serialize(uri)}`);
   }
 }
 
@@ -121,11 +121,11 @@ function find({ content: { mdast }, request: { extension, url } },
   const contentext = p.extname(path);
   map(mdast, (node, _, parent) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger.debug);
+      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger);
     } else if (node.type === 'paragraph' && iaEmbed(node, parent)) {
-      embed(iaEmbed(node, parent), node, EMBED_WHITELIST, logger.debug);
+      embed(iaEmbed(node, parent), node, EMBED_WHITELIST, logger);
     } else if (node.type === 'paragraph' && imgEmbed(node)) {
-      embed(imgEmbed(node), node, EMBED_WHITELIST, logger.debug);
+      embed(imgEmbed(node), node, EMBED_WHITELIST, logger);
     } else if (node.type === 'inlineCode'
       && internalGatsbyEmbed(node.value, url, contentext, resourceext)) {
       internalembed(internalGatsbyEmbed(node.value, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);

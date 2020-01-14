@@ -10,12 +10,12 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const parse = require('../src/html/parse-markdown');
 const smartypants = require('../src/html/smartypants');
 const { assertMatch } = require('./markdown-utils');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
