@@ -247,7 +247,7 @@ describe('Testing Markdown conversion', () => {
     await assertMd(`
         # Foo Bar</em>
       `, `
-        <h1>500</h1><pre>Error: no matching inline element found for </pre>
+        <body><h1 id="foo-bar">Foo Bar</h1></body>
     `);
   });
 
@@ -481,5 +481,14 @@ describe('Testing Markdown conversion', () => {
     `, {
       SANITIZE_DOM: true,
     });
+  });
+
+  it('is robust against wrong tags in md', async () => {
+    await assertMd(`
+        # Foo
+        </p>
+      `, `
+        <body><h1 id="foo">Foo</h1></body>
+    `);
   });
 });
