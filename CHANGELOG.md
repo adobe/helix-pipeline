@@ -1,3 +1,10 @@
+## [6.1.10](https://github.com/adobe/helix-pipeline/compare/v6.1.9...v6.1.10) (2020-01-15)
+
+
+### Bug Fixes
+
+* **md:** ignore non-matching lineline elements ([#561](https://github.com/adobe/helix-pipeline/issues/561)) ([b476a79](https://github.com/adobe/helix-pipeline/commit/b476a79f9425fa6217035989a3512dcdbd54aafb)), closes [#557](https://github.com/adobe/helix-pipeline/issues/557)
+
 ## [6.1.9](https://github.com/adobe/helix-pipeline/compare/v6.1.8...v6.1.9) (2020-01-15)
 
 
