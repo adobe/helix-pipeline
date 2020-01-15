@@ -18,7 +18,10 @@ function image() {
       const patchednode = {
         ...node,
       };
-      patchednode.url = `${node.url.replace(/^https:\/\/hlx\.blob\.core\.windows\.net\/external\//, '/hlx_')}.jpg`;
+      const [filename, fragment] = node.url.split('/').pop().split('#');
+      const fragmentextension = fragment ? fragment.split('.').pop() : undefined;
+      const extension = fragmentextension || 'jpg';
+      patchednode.url = `/hlx_${filename}.${extension}`;
       return fallback(h, patchednode);
     }
     return fallback(h, node);
