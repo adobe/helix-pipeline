@@ -1,3 +1,10 @@
+## [6.1.9](https://github.com/adobe/helix-pipeline/compare/v6.1.8...v6.1.9) (2020-01-15)
+
+
+### Bug Fixes
+
+* **tests:** use test logger from testutils ([#562](https://github.com/adobe/helix-pipeline/issues/562)) ([a1d3a73](https://github.com/adobe/helix-pipeline/commit/a1d3a73642e1246239b52cbd1d311dd6303c60e5))
+
 ## [6.1.8](https://github.com/adobe/helix-pipeline/compare/v6.1.7...v6.1.8) (2020-01-14)
 
 
