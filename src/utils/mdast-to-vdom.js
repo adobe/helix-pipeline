@@ -220,7 +220,7 @@ class VDOMTransformer {
       if (child.type === 'raw') {
         if (child.value.firstElementChild === null) {
           if (stack.length === 0) {
-            throw new Error(`no matching inline element found for ${child.html}`);
+            // ignore unmatched inline elements
           } else {
             const last = stack.pop();
             let html = '';
