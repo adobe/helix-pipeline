@@ -12,13 +12,13 @@
 /* eslint-env mocha */
 const fs = require('fs-extra');
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 
 const dumper = require('../src/utils/dump-context.js');
 
 describe('Test Temp Context Dumper', () => {
   it('Writes context dump on loglevel silly', async () => {
-    const logger = Logger.getTestLogger({
+    const logger = logging.createTestLogger({
       level: 'silly',
     });
 
@@ -45,7 +45,7 @@ describe('Test Temp Context Dumper', () => {
   });
 
   it('does not write on loglevel debug', async () => {
-    const logger = Logger.getTestLogger({
+    const logger = logging.createTestLogger({
       level: 'debug',
     });
 

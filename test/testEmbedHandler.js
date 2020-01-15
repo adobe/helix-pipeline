@@ -11,7 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger, dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const embed = require('../src/utils/embed-handler');
 const { pipe } = require('../src/defaults/html.pipe.js');
@@ -64,7 +65,7 @@ const secrets = {
   EMBED_SERVICE: 'https://example-embed-service.com/',
 };
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });

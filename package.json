@@ -18,6 +18,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.1.0",
+    "@adobe/helix-testutils": "0.3.0",
     "@adobe/jsonschema2md": "4.0.7",
     "@pollyjs/adapter-fetch": "3.0.1",
     "@pollyjs/adapter-node-http": "3.0.2",

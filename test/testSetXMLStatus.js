@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { assertEquals } = require('ferrum');
 const selectStatus_ = require('../src/xml/set-xml-status.js');
 
@@ -26,7 +26,7 @@ const selectStatus = (inProduction) => (context, env) => {
   }
 };
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });

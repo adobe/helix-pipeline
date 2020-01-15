@@ -11,14 +11,14 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { setdefault } = require('ferrum');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const setupPolly = require('@pollyjs/core').setupMocha;
 const { pipe } = require('../src/defaults/xml.pipe.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });

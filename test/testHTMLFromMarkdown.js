@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const { multiline } = require('@adobe/helix-shared').string;
 const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
@@ -57,7 +57,7 @@ const params = {
   selector: 'md',
 };
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });

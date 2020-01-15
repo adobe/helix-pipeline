@@ -11,7 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger, dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const fs = require('fs-extra');
 const path = require('path');
@@ -21,7 +22,7 @@ const setupPolly = require('@pollyjs/core').setupMocha;
 const { runPipeline } = require('../src/utils/openwhisk.js');
 const { pipe } = require('../src/defaults/html.pipe.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
