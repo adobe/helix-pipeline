@@ -12,10 +12,10 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { JSDOM } = require('jsdom');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const stringify = require('../src/html/stringify-response');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
