@@ -19,6 +19,8 @@ const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
 const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const { JSDOM } = require('jsdom');
+const unified = require('unified');
+const parser = require('remark-parse');
 const VDOM = require('../').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
@@ -210,6 +212,14 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'icon-example.json'));
     const actual = new VDOM(mdast, action.secrets).getDocument().documentElement;
     const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'icon-example.html')).toString('utf-8')).window.document.documentElement;
+    assert.deepEqual(actual.outerHTML, expected.outerHTML);
+  });
+
+  it('Image handler replaces blobs with Fastly proxies', () => {
+    const markdown = fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-example.md'));
+    const mdast = unified().use(parser).parse(markdown);
+    const actual = new VDOM(mdast, action.secrets).getDocument().documentElement;
+    const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-example.html')).toString('utf-8')).window.document.documentElement;
     assert.deepEqual(actual.outerHTML, expected.outerHTML);
   });
 });
