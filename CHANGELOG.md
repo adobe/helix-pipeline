@@ -1,3 +1,11 @@
+# [6.2.0](https://github.com/adobe/helix-pipeline/compare/v6.1.10...v6.2.0) (2020-01-16)
+
+
+### Features
+
+* **html:** rewrite image URL for Azure Blob store ([7fe994b](https://github.com/adobe/helix-pipeline/commit/7fe994bbdd96ff3301736e4bf0b2ab13566a30ef))
+* **image:** include file extension if indicated through fragment identifier ([a9ea0a7](https://github.com/adobe/helix-pipeline/commit/a9ea0a704fc04d1bcd5487da6f8fa7feafa2a1c2)), closes [/github.com/adobe/helix-pipeline/pull/564#discussion_r366872234](https://github.com//github.com/adobe/helix-pipeline/pull/564/issues/discussion_r366872234)
+
 ## [6.1.10](https://github.com/adobe/helix-pipeline/compare/v6.1.9...v6.1.10) (2020-01-15)
 
 
