@@ -1,7 +1,6 @@
 {
   "extends": [
     "config:base",
-    "schedule:earlyMondays",
     ":semanticCommits"
   ],
   "timezone": "Europe/Zurich",
@@ -20,6 +19,9 @@
       ]
     },
     {
+      "schedule": [
+        "after 2pm on Monday"
+      ],
       "packagePatterns": [
         "^.+"
       ],
