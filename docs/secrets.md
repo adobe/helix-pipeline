@@ -17,21 +17,21 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 # Secrets Properties
 
-| Property                                          | Type      | Required | Nullable       | Defined by                                                                                                                                    |
-| :------------------------------------------------ | --------- | -------- | -------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
-| [REPO_RAW_ROOT](#REPO_RAW_ROOT)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-repo_raw_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_RAW_ROOT")                   |
-| [REPO_API_ROOT](#REPO_API_ROOT)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-repo_api_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_API_ROOT")                   |
-| [EMBED_WHITELIST](#EMBED_WHITELIST)               | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_WHITELIST")               |
-| [EMBED_SERVICE](#EMBED_SERVICE)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SERVICE")                   |
-| [EMBED_SELECTOR](#EMBED_SELECTOR)                 | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")                 |
-| [IMAGES_MIN_SIZE](#IMAGES_MIN_SIZE)               | `integer` | Optional | cannot be null | [Secrets](secrets-properties-images_min_size.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/IMAGES_MIN_SIZE")               |
-| [HTTP_TIMEOUT](#HTTP_TIMEOUT)                     | `integer` | Optional | cannot be null | [Secrets](secrets-properties-http_timeout.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT")                     |
-| [TEST_BOOLEAN](#TEST_BOOLEAN)                     | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-test_boolean.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/TEST_BOOLEAN")                     |
-| [XML_PRETTY](#XML_PRETTY)                         | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-xml_pretty.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/XML_PRETTY")                         |
-| [SANITIZE_DOM](#SANITIZE_DOM)                     | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-sanitize_dom.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/SANITIZE_DOM")                     |
-| [RESOLVE_GITREF_SERVICE](#RESOLVE_GITREF_SERVICE) | `string`  | Optional | cannot be null | [Secrets](secrets-properties-resolve_gitref_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/RESOLVE_GITREF_SERVICE") |
-| [GITHUB_TOKEN](#GITHUB_TOKEN)                     | `string`  | Optional | cannot be null | [Secrets](secrets-properties-github_token.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/GITHUB_TOKEN")                     |
-| `[A-Z0-9_]+`                                      | Multiple  | Optional | cannot be null | [Secrets](secrets-patternproperties-a-z0-9_.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/patternProperties/\[A-Z0-9\_]+")            |
+| Property                                          | Type         | Required | Nullable       | Defined by                                                                                                                                    |
+| :------------------------------------------------ | ------------ | -------- | -------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
+| [REPO_RAW_ROOT](#REPO_RAW_ROOT)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-repo_raw_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_RAW_ROOT")                   |
+| [REPO_API_ROOT](#REPO_API_ROOT)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-repo_api_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_API_ROOT")                   |
+| [EMBED_WHITELIST](#EMBED_WHITELIST)               | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_WHITELIST")               |
+| [EMBED_SERVICE](#EMBED_SERVICE)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SERVICE")                   |
+| [EMBED_SELECTOR](#EMBED_SELECTOR)                 | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")                 |
+| [IMAGES_MIN_SIZE](#IMAGES_MIN_SIZE)               | `integer`    | Optional | cannot be null | [Secrets](secrets-properties-images_min_size.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/IMAGES_MIN_SIZE")               |
+| [HTTP_TIMEOUT](#HTTP_TIMEOUT)                     | `integer`    | Optional | cannot be null | [Secrets](secrets-properties-http_timeout.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT")                     |
+| [TEST_BOOLEAN](#TEST_BOOLEAN)                     | `boolean`    | Optional | cannot be null | [Secrets](secrets-properties-test_boolean.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/TEST_BOOLEAN")                     |
+| [XML_PRETTY](#XML_PRETTY)                         | `boolean`    | Optional | cannot be null | [Secrets](secrets-properties-xml_pretty.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/XML_PRETTY")                         |
+| [SANITIZE_DOM](#SANITIZE_DOM)                     | `boolean`    | Optional | cannot be null | [Secrets](secrets-properties-sanitize_dom.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/SANITIZE_DOM")                     |
+| [RESOLVE_GITREF_SERVICE](#RESOLVE_GITREF_SERVICE) | `string`     | Optional | cannot be null | [Secrets](secrets-properties-resolve_gitref_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/RESOLVE_GITREF_SERVICE") |
+| [GITHUB_TOKEN](#GITHUB_TOKEN)                     | `string`     | Optional | cannot be null | [Secrets](secrets-properties-github_token.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/GITHUB_TOKEN")                     |
+| `[A-Z0-9_]+`                                      | Unknown Type | Optional | cannot be null | [Secrets](secrets-patternproperties-a-z0-9_.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/patternProperties/\[A-Z0-9\_]+")            |
 
 ## REPO_RAW_ROOT
 

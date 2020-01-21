@@ -17,12 +17,12 @@ The context thingie.
 
 # Context Properties
 
-| Property              | Type     | Required | Nullable       | Defined by                                                                                                         |
-| :-------------------- | -------- | -------- | -------------- | :----------------------------------------------------------------------------------------------------------------- |
-| [error](#error)       | Multiple | Optional | cannot be null | [Context](context-properties-error.md "https&#x3A;//ns.adobe.com/helix/pipeline/context#/properties/error")        |
-| [request](#request)   | `object` | Optional | cannot be null | [Context](context-properties-request.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/request")    |
-| [content](#content)   | `object` | Optional | cannot be null | [Context](context-properties-content.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/content")    |
-| [response](#response) | `object` | Optional | cannot be null | [Context](context-properties-response.md "https&#x3A;//ns.adobe.com/helix/pipeline/response#/properties/response") |
+| Property              | Type         | Required | Nullable       | Defined by                                                                                                         |
+| :-------------------- | ------------ | -------- | -------------- | :----------------------------------------------------------------------------------------------------------------- |
+| [error](#error)       | Unknown Type | Optional | cannot be null | [Context](context-properties-error.md "https&#x3A;//ns.adobe.com/helix/pipeline/context#/properties/error")        |
+| [request](#request)   | `object`     | Optional | cannot be null | [Context](context-properties-request.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/request")    |
+| [content](#content)   | `object`     | Optional | cannot be null | [Context](context-properties-content.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/content")    |
+| [response](#response) | `object`     | Optional | cannot be null | [Context](context-properties-response.md "https&#x3A;//ns.adobe.com/helix/pipeline/response#/properties/response") |
 
 ## error
 
