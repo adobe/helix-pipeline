@@ -10,7 +10,6 @@
  * governing permissions and limitations under the License.
  */
 const createDOMPurify = require('dompurify');
-const { JSDOM } = require('jsdom');
 
 const helixSanitizationConfig = {
   // Allowing all ESI tags, see: https://www.w3.org/TR/esi-lang
@@ -64,11 +63,11 @@ function allowCustomAttributes(DOMPurify) {
 function sanitize({ content }, { logger }) {
   logger.debug('Sanitizing content body to avoid XSS injections.');
 
-  const globalContext = (new JSDOM('')).window;
-  const DOMPurify = createDOMPurify(globalContext);
+  const { window, body } = content.document;
+  const DOMPurify = createDOMPurify(window);
   allowCustomElements(DOMPurify);
   allowCustomAttributes(DOMPurify);
-  const sanitizedBody = DOMPurify.sanitize(content.document.body, helixSanitizationConfig);
+  const sanitizedBody = DOMPurify.sanitize(body, helixSanitizationConfig);
   content.document.body = sanitizedBody;
 }
 
