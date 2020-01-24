@@ -275,7 +275,20 @@ class VDOMTransformer {
     // this is a bit a hack to pass the JSDOM instance along, so that other module can use it.
     // this ensures that other modules can parse documents and fragments that are compatible
     // with this document
-    doc.JSDOM = JSDOM;
+    Object.defineProperty(doc, 'JSDOM', {
+      enumerable: false,
+      writable: false,
+      value: JSDOM,
+    });
+
+    // this is another hack to pass the respective window instance along. this is to ensure that
+    // the shared prototypes can be used to check node instances (see jsdom 16.x release)
+    Object.defineProperty(doc, 'window', {
+      enumerable: false,
+      writable: false,
+      value: dom.window,
+    });
+
     return doc;
   }
 }
