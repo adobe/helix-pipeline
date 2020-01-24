@@ -1,37 +1,3 @@
 {
-  "extends": [
-    "config:base",
-    ":semanticCommits"
-  ],
-  "timezone": "Europe/Zurich",
-  "packageRules": [
-    {
-      "packagePatterns": [
-        "^@adobe/"
-      ],
-      "groupName": "@adobe",
-      "automerge": true,
-      "major": {
-        "automerge": false
-      },
-      "schedule": [
-        "at any time"
-      ]
-    },
-    {
-      "schedule": [
-        "after 2pm on Monday"
-      ],
-      "packagePatterns": [
-        "^.+"
-      ],
-      "excludePackagePatterns": [
-        "^@adobe/"
-      ],
-      "groupName": "external",
-      "patch": {
-        "automerge": true
-      }
-    }
-  ]
+  "extends": ["github>adobe/helix-shared"]
 }
