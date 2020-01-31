@@ -19,7 +19,7 @@
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.1.0",
     "@adobe/helix-testutils": "0.3.0",
-    "@adobe/jsonschema2md": "4.0.12",
+    "@adobe/jsonschema2md": "4.0.13",
     "@pollyjs/adapter-fetch": "4.0.0",
     "@pollyjs/adapter-node-http": "4.0.0",
     "@pollyjs/core": "4.0.0",
@@ -51,7 +51,7 @@
   "dependencies": {
     "@adobe/helix-log": "4.5.0",
     "@adobe/helix-shared": "^5.0.0",
-    "@adobe/openwhisk-action-logger": "2.0.4",
+    "@adobe/openwhisk-action-logger": "2.1.0",
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
