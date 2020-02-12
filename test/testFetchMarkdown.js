@@ -353,9 +353,9 @@ describe('Test misbehaved HTTP Responses', () => {
 
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept(async (_, res) => {
+      .intercept(async (_, res, interceptor) => {
         await server.timeout(50);
-        res.sendStatus(500);
+        interceptor.abort();
       });
 
     const myaction = {
@@ -384,9 +384,9 @@ describe('Test misbehaved HTTP Responses', () => {
     const { server } = this.polly;
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept(async (_, res) => {
+      .intercept(async (_, res, interceptor) => {
         await server.timeout(2000);
-        res.sendStatus(500);
+        interceptor.abort();
       });
 
     const myaction = {

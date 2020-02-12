@@ -65,52 +65,46 @@ async function fetchFileInRepo(path, context, { secrets = {}, request, logger })
   const uri = computeURI(rootPath, owner, repo, ref, path);
 
   logger.debug(`fetching file from ${uri}`);
-  return fetch(uri, options)
-    .then((res) => {
-      if (!res.ok) {
-        res.options = options;
-        return Promise.reject(res);
-      }
-      // Update sources
-      if (branch && branch !== ref) {
-        setdefault(context.content, 'sources', []).push(computeURI(rootPath, owner, repo, branch, path));
-      } else {
-        setdefault(context.content, 'sources', []).push(uri);
-      }
-      return Promise.resolve(res);
-    });
+  const res = await fetch(uri, options);
+  if (!res.ok) {
+    res.options = options;
+    return Promise.reject(res);
+  }
+  // Update sources
+  if (branch && branch !== ref) {
+    setdefault(context.content, 'sources', []).push(computeURI(rootPath, owner, repo, branch, path));
+  } else {
+    setdefault(context.content, 'sources', []).push(uri);
+  }
+  return res;
 }
 
 async function fetchMarkdown(context, { secrets = {}, request, logger }) {
   const { content } = context;
   const { path } = request.params;
 
-  // get required request parameters
-  return fetchFileInRepo(path, context, { secrets, request, logger })
-    .then(async (res) => {
-      content.body = res && await res.text();
-    })
-    .catch((err) => {
-      if (err.status === 404) {
-        logger.error(`Could not find file at ${err.url}`);
-        setdefault(context, 'response', {}).status = 404;
-      } else if (err.status === 502 || err instanceof TimeoutError) {
-        logger.error(`Gateway timeout of ${secrets.HTTP_TIMEOUT} milliseconds exceeded for ${err.url}`);
-        setdefault(context, 'response', {}).status = 504;
-      } else {
-        logger.error(`Error while fetching file from ${err.url} with the following `
-                    + `options:\n${inspect(err.options, { depth: null })}`);
-        setdefault(context, 'response', {}).status = 502;
-      }
-      if (err instanceof Error) {
-        context.error = err;
-        return err;
-      } else {
-        return err.text().then((msg) => {
-          context.error = new Error(msg);
-        });
-      }
-    });
+  try {
+    const res = await fetchFileInRepo(path, context, { secrets, request, logger });
+    content.body = res && await res.text();
+  } catch (err) {
+    if (err.status === 404) {
+      logger.error(`Could not find file at ${err.url}`);
+      setdefault(context, 'response', {}).status = 404;
+    } else if (err.status === 502 || err instanceof TimeoutError) {
+      logger.error(`Gateway timeout of ${secrets.HTTP_TIMEOUT} milliseconds exceeded for ${err.url}`);
+      setdefault(context, 'response', {}).status = 504;
+    } else {
+      logger.error(`Error while fetching file from ${err.url} with the following `
+                  + `options:\n${inspect(err.options, { depth: null })}`);
+      setdefault(context, 'response', {}).status = 502;
+    }
+    if (err instanceof Error) {
+      context.error = err;
+    } else {
+      const msg = await err.text();
+      context.error = new Error(msg);
+    }
+  }
 }
 
 async function fetchAll(context, action) {
