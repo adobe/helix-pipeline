@@ -266,7 +266,7 @@ describe('Test requests', () => {
     const context = {};
     await fetch(context, myaction);
     assert.ok(context.content.body);
-    assert.equal(context.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
+    assert.equal(context.content.body.split('\n')[0], '# Experience Data Model (XDM) Schema');
   });
 
   it('Getting README from private repo with GitHub token', async function testToken() {
@@ -334,7 +334,9 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
     };
@@ -361,7 +363,9 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
       secrets: {
@@ -390,7 +394,9 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
     };

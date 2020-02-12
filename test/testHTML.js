@@ -695,11 +695,11 @@ ${context.content.document.body.innerHTML}`,
       path: 'not-existent.md',
     });
 
-    assert.ok(out.errorStack.startsWith('StatusCodeError: 404'));
+    assert.ok(out.errorStack.startsWith('Error: 404'));
     delete out.errorStack;
     assert.deepEqual(out, {
       body: '',
-      errorMessage: 'StatusCodeError: 404 - "404: Not Found\\n"',
+      errorMessage: 'Error: 404: Not Found\n',
       headers: {},
       statusCode: 404,
     });
