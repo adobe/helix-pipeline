@@ -14,7 +14,7 @@ const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
+const { setupMocha: setupPolly } = require('@pollyjs/core');
 const fetch = require('../src/html/fetch-markdown');
 const coerce = require('../src/utils/coerce-secrets');
 
@@ -239,7 +239,7 @@ describe('Test requests', () => {
     recordIfMissing: false,
     matchRequestsBy: {
       headers: {
-        exclude: ['authorization'],
+        exclude: ['authorization', 'accept-encoding'],
       },
     },
     adapters: [NodeHttpAdapter],
@@ -251,22 +251,35 @@ describe('Test requests', () => {
     },
   });
 
-  it('Getting XDM README', async () => {
+  it('Getting XDM README', async function testGet() {
     const myaction = {
       request: {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
     };
 
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
+      .intercept((req, res) => {
+        assert.equal(req.headers.connection, 'keep-alive');
+        assert.equal(req.headers['user-agent'], 'helix-fetch');
+        assert.equal(req.headers.host, 'raw.githubusercontent.com');
+        res.body = '# Foo Data Model (XDM) Schema';
+      });
+
     await coerce(myaction);
     const context = {};
     await fetch(context, myaction);
+    assert.ok(!context.error);
     assert.ok(context.content.body);
-    assert.equal(context.content.body.split('\n')[0], '# Experience Data Model (XDM) Schema');
+    assert.equal(context.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
   });
 
   it('Getting README from private repo with GitHub token', async function testToken() {
@@ -275,7 +288,9 @@ describe('Test requests', () => {
         params: {
           repo: 'project-helix', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
       secrets: {},

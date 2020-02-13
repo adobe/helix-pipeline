@@ -74,6 +74,11 @@ describe('Testing JSON Pipeline', () => {
     logging: false,
     recordFailedRequests: false,
     recordIfMissing: false,
+    matchRequestsBy: {
+      headers: {
+        exclude: ['accept-encoding'],
+      },
+    },
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -100,7 +105,10 @@ describe('Testing JSON Pipeline', () => {
       () => {},
       context,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
       },
     );
@@ -127,7 +135,10 @@ describe('Testing JSON Pipeline', () => {
       },
       {},
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -158,7 +169,10 @@ describe('Testing JSON Pipeline', () => {
       },
       {},
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -219,7 +233,10 @@ describe('Testing JSON Pipeline', () => {
       myfunc,
       { },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -246,7 +263,10 @@ describe('Testing JSON Pipeline', () => {
       () => {},
       context,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
