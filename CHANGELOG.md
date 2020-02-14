@@ -1,3 +1,10 @@
+# [6.3.0](https://github.com/adobe/helix-pipeline/compare/v6.2.3...v6.3.0) (2020-02-14)
+
+
+### Features
+
+* **html pipe:** use helix-fetch to fetch the markdown files ([a5c33d1](https://github.com/adobe/helix-pipeline/commit/a5c33d104bea5c4a0a084fd7358123c401ccebca))
+
 ## [6.2.3](https://github.com/adobe/helix-pipeline/compare/v6.2.2...v6.2.3) (2020-01-25)
 
 
