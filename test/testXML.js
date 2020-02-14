@@ -127,6 +127,11 @@ describe('Testing XML Pipeline', () => {
     logging: false,
     recordFailedRequests: false,
     recordIfMissing: false,
+    matchRequestsBy: {
+      headers: {
+        exclude: ['accept-encoding'],
+      },
+    },
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -167,7 +172,10 @@ describe('Testing XML Pipeline', () => {
       },
       {},
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -231,7 +239,10 @@ describe('Testing XML Pipeline', () => {
       myfunc,
       { },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -249,7 +260,10 @@ describe('Testing XML Pipeline', () => {
       () => {},
       testContext,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
       },
     );
@@ -262,7 +276,10 @@ describe('Testing XML Pipeline', () => {
       () => {},
       testContext,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
       },
     );
@@ -275,7 +292,10 @@ describe('Testing XML Pipeline', () => {
       () => {}, // empty main function
       {},
       {
-        request: { params: params404 },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params: params404,
+        },
         secrets,
         logger,
       },
@@ -298,7 +318,10 @@ describe('Testing XML Pipeline', () => {
     },
     {},
     {
-      request: { params },
+      request: {
+        headers: { 'Cache-Control': 'no-store' },
+        params,
+      },
       secrets,
       logger,
     });

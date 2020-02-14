@@ -239,7 +239,7 @@ describe('Test requests', () => {
     recordIfMissing: false,
     matchRequestsBy: {
       headers: {
-        exclude: ['authorization'],
+        exclude: ['authorization', 'accept-encoding'],
       },
     },
     adapters: [NodeHttpAdapter],
@@ -257,7 +257,9 @@ describe('Test requests', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
     };
@@ -266,7 +268,7 @@ describe('Test requests', () => {
     const context = {};
     await fetch(context, myaction);
     assert.ok(context.content.body);
-    assert.equal(context.content.body.split('\n')[0], '# Foo Data Model (XDM) Schema');
+    assert.equal(context.content.body.split('\n')[0], '# Experience Data Model (XDM) Schema');
   });
 
   it('Getting README from private repo with GitHub token', async function testToken() {
@@ -275,7 +277,9 @@ describe('Test requests', () => {
         params: {
           repo: 'project-helix', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
       secrets: {},
@@ -334,7 +338,9 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
     };
@@ -351,9 +357,9 @@ describe('Test misbehaved HTTP Responses', () => {
 
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept(async (_, res) => {
+      .intercept(async (_, res, interceptor) => {
         await server.timeout(50);
-        res.sendStatus(500);
+        interceptor.abort();
       });
 
     const myaction = {
@@ -361,7 +367,9 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
       secrets: {
@@ -380,9 +388,9 @@ describe('Test misbehaved HTTP Responses', () => {
     const { server } = this.polly;
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept(async (_, res) => {
+      .intercept(async (_, res, interceptor) => {
         await server.timeout(2000);
-        res.sendStatus(500);
+        interceptor.abort();
       });
 
     const myaction = {
@@ -390,7 +398,9 @@ describe('Test misbehaved HTTP Responses', () => {
         params: {
           repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
         },
-        headers: {},
+        headers: {
+          'Cache-Control': 'no-store',
+        },
       },
       logger,
     };

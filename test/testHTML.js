@@ -122,8 +122,13 @@ const crequest = {
 describe('Testing HTML Pipeline', () => {
   setupPolly({
     logging: false,
-    recordFailedRequests: true,
+    recordFailedRequests: false,
     recordIfMissing: false,
+    matchRequestsBy: {
+      headers: {
+        exclude: ['accept-encoding'],
+      },
+    },
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
@@ -154,7 +159,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -192,7 +200,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -232,7 +243,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -274,7 +288,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -341,7 +358,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -373,7 +393,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -401,7 +424,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -429,7 +455,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -450,7 +479,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -472,7 +504,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -495,7 +530,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -516,7 +554,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
         break: true,
@@ -554,7 +595,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -599,7 +643,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params: myparams },
+        request: {
+          params: myparams,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -644,7 +691,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params: myparams },
+        request: {
+          params: myparams,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -670,7 +720,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params: params404 },
+        request: {
+          params: params404,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -695,11 +748,11 @@ ${context.content.document.body.innerHTML}`,
       path: 'not-existent.md',
     });
 
-    assert.ok(out.errorStack.startsWith('StatusCodeError: 404'));
+    assert.ok(out.errorStack.startsWith('Error: 404'));
     delete out.errorStack;
     assert.deepEqual(out, {
       body: '',
-      errorMessage: 'StatusCodeError: 404 - "404: Not Found\\n"',
+      errorMessage: 'Error: 404: Not Found\n',
       headers: {},
       statusCode: 404,
     });
@@ -720,7 +773,10 @@ ${context.content.document.body.innerHTML}`,
       },
       { request: crequest },
       {
-        request: { params },
+        request: {
+          params,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -734,7 +790,10 @@ ${context.content.document.body.innerHTML}`,
 
   it('html.pipe produces debug dumps in memory', async () => {
     const action = {
-      request: { params },
+      request: {
+        headers: { 'Cache-Control': 'no-store' },
+        params,
+      },
       secrets,
       logger,
     };
@@ -767,7 +826,10 @@ ${context.content.document.body.innerHTML}`,
 
   it('html.pipe produces debug dumps on disk for error', async () => {
     const action = {
-      request: { params },
+      request: {
+        headers: { 'Cache-Control': 'no-store' },
+        params,
+      },
       secrets,
       logger,
     };
@@ -817,7 +879,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets: { ...secrets, SANITIZE_DOM: true },
         logger,
       },
@@ -855,7 +920,10 @@ ${context.content.document.body.innerHTML}`,
           },
         },
         {
-          request: { params },
+          request: {
+            headers: { 'Cache-Control': 'no-store' },
+            params,
+          },
           logger,
         },
       );
