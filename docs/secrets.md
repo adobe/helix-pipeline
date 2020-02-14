@@ -110,7 +110,7 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 The default value is:
 
 ```json
-"www.youtube.com, spark.adobe.com, unsplash.com/photos"
+"www.youtube.com, spark.adobe.com, unsplash.com/photos, soundcloud.com"
 ```
 
 ## EMBED_SERVICE
