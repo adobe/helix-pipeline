@@ -1,3 +1,10 @@
+# [6.4.0](https://github.com/adobe/helix-pipeline/compare/v6.3.0...v6.4.0) (2020-02-18)
+
+
+### Features
+
+* **secrets:** add soundcloud.com to whitelist for embed service ([#585](https://github.com/adobe/helix-pipeline/issues/585)) ([818b209](https://github.com/adobe/helix-pipeline/commit/818b2094552f049a5c1f31fa8999bd2ac39f7452)), closes [#584](https://github.com/adobe/helix-pipeline/issues/584)
+
 # [6.3.0](https://github.com/adobe/helix-pipeline/compare/v6.2.3...v6.3.0) (2020-02-14)
 
 
