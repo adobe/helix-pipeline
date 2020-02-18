@@ -42,11 +42,11 @@
     "mocha-junit-reporter": "1.23.3",
     "nock": "12.0.0",
     "nyc": "15.0.0",
-    "semantic-release": "17.0.2",
+    "semantic-release": "17.0.4",
     "sinon": "8.1.1",
-    "unist-builder": "2.0.2",
-    "unist-util-inspect": "5.0.0",
-    "unist-util-remove-position": "2.0.0"
+    "unist-builder": "2.0.3",
+    "unist-util-inspect": "5.0.1",
+    "unist-util-remove-position": "2.0.1"
   },
   "dependencies": {
     "@adobe/helix-fetch": "1.1.0",
@@ -61,7 +61,7 @@
     "fs-extra": "^8.1.0",
     "github-slugger": "^1.2.1",
     "js-yaml": "^3.13.1",
-    "jsdom": "16.1.0",
+    "jsdom": "16.2.0",
     "lodash": "^4.17.15",
     "mdast-util-to-hast": "^7.0.0",
     "mdast-util-to-string": "^1.0.6",
