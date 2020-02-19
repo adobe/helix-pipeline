@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const { setupPolly, pipe } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging
@@ -71,6 +71,10 @@ const crequest = {
 };
 
 describe('Testing HTML Pipeline in Production', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   let production;
   before('Fake Production Mode', () => {
     // eslint-disable-next-line no-underscore-dangle

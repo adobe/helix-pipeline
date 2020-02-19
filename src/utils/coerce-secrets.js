@@ -18,6 +18,7 @@ function coerce(action) {
   }
   action.logger.debug('Coercing secrets');
   defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
+  return action;
 }
 
 module.exports = coerce;

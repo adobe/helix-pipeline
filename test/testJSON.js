@@ -13,10 +13,7 @@
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
 const { setdefault } = require('ferrum');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
-const { pipe } = require('../src/defaults/json.pipe.js');
+const { setupPolly, jsonPipe: pipe } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging
@@ -71,21 +68,7 @@ const secrets = {
 
 describe('Testing JSON Pipeline', () => {
   setupPolly({
-    logging: false,
-    recordFailedRequests: false,
     recordIfMissing: false,
-    matchRequestsBy: {
-      headers: {
-        exclude: ['accept-encoding'],
-      },
-    },
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('json.pipe is a function', () => {
@@ -110,6 +93,7 @@ describe('Testing JSON Pipeline', () => {
           params,
         },
         secrets,
+        logger,
       },
     );
     assert.equal(result.response.headers['Content-Type'], 'application/json');

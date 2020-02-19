@@ -14,8 +14,8 @@
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
 const { setdefault } = require('ferrum');
-const { pipe } = require('../src/defaults/html.pipe.js');
 const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
+const { setupPolly, pipe } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging
@@ -76,6 +76,10 @@ const crequest = {
 const nonhidden = (section) => !section.meta.hidden;
 
 describe('Integration Test Section Strain Filtering', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   it('html.pipe sees only selected section', async () => {
     const myparams = { strain: 'a', ...params };
     const result = await pipe(
@@ -344,6 +348,10 @@ describe('Pick among possible candidate sections #unit', () => {
 });
 
 describe('Integration Test A/B Testing', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   it('html.pipe sees only one variant', async () => {
     const myparams = { strain: 'default', ...params };
     const result = await pipe(

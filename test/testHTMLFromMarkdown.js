@@ -14,7 +14,7 @@ const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const { multiline } = require('@adobe/helix-shared').string;
 const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
-const { pipe } = require('../src/defaults/html.pipe.js');
+const { setupPolly, pipe } = require('./utils.js');
 
 const params = {
   path: '/hello.md',
@@ -104,6 +104,10 @@ const assertMd = async (md, html, secrets = {}) => {
 };
 
 describe('Testing Markdown conversion', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   it('Renders empty markdown', async () => {
     await assertMd(
       '',

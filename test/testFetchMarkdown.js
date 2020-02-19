@@ -12,117 +12,28 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
 const fetch = require('../src/html/fetch-markdown');
 const coerce = require('../src/utils/coerce-secrets');
+const Downloader = require('../src/utils/Downloader.js');
+const { setupPolly } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
 
-describe('Test URI parsing and construction', () => {
-  it('fetch.uri is a function', () => {
-    assert.equal(typeof fetch.uri, 'function');
+function doFetch(context, action) {
+  const mgr = new Downloader(context, action, {
+    forceNoCache: true,
+    forceHttp1: true,
   });
-
-  it('fetch.uri constructs URIs', () => {
-    assert.equal(
-      fetch.uri(
-        'https://raw.githubusercontent.com',
-        'adobe',
-        'xdm',
-        'master',
-        'README.md',
-      ),
-      'https://raw.githubusercontent.com/adobe/xdm/master/README.md',
-    );
-  });
-
-  it('fetch.uri deals with trailing slashes', () => {
-    assert.equal(
-      fetch.uri(
-        'https://raw.githubusercontent.com/',
-        'adobe',
-        'xdm',
-        'master',
-        'README.md',
-      ),
-      'https://raw.githubusercontent.com/adobe/xdm/master/README.md',
-    );
-  });
-
-  it('fetch.uri deals with leading slashes', () => {
-    assert.equal(
-      fetch.uri(
-        'https://raw.githubusercontent.com',
-        'adobe',
-        'xdm',
-        'master',
-        '/README.md',
-      ),
-      'https://raw.githubusercontent.com/adobe/xdm/master/README.md',
-    );
-  });
-
-  it('fetch.uri deals with slashes in refs', () => {
-    assert.equal(
-      fetch.uri(
-        'https://raw.githubusercontent.com',
-        'adobe',
-        'xdm',
-        'tags/release_1',
-        '/README.md',
-      ),
-      'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md',
-    );
-  });
-
-  it('fetch.uri deals with ugly slashes in refs', () => {
-    assert.equal(
-      fetch.uri(
-        'https://raw.githubusercontent.com',
-        'adobe',
-        'xdm',
-        '/tags/release_1/',
-        '/README.md',
-      ),
-      'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md',
-    );
-  });
-
-  it('fetch.uri deals with ugly slashes in owner', () => {
-    assert.equal(
-      fetch.uri(
-        'https://raw.githubusercontent.com',
-        '/adobe/',
-        'xdm',
-        'tags/release_1',
-        '/README.md',
-      ),
-      'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md',
-    );
-  });
-
-  it('fetch.uri deals with ugly slashes in repo', () => {
-    assert.equal(
-      fetch.uri(
-        'https://raw.githubusercontent.com',
-        'adobe',
-        '/xdm/',
-        'tags/release_1',
-        '/README.md',
-      ),
-      'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md',
-    );
-  });
-});
+  action.downloader = mgr;
+  return fetch(context, action).finally(mgr.destroy.bind(mgr));
+}
 
 describe('Test invalid input', () => {
   it('Test for missing owner', async () => {
-    await assert.rejects(() => (fetch(
+    await assert.rejects(() => (doFetch(
       {},
       {
         request: { params: { repo: 'xdm', ref: 'master', path: 'README.md' } },
@@ -135,7 +46,7 @@ describe('Test invalid input', () => {
   });
 
   it('Test for missing repo', async () => {
-    await assert.rejects(() => (fetch(
+    await assert.rejects(() => (doFetch(
       {},
       {
         request: { params: { ref: 'master', path: 'README.md', owner: 'adobe' } },
@@ -148,7 +59,7 @@ describe('Test invalid input', () => {
   });
 
   it('Test for missing path', async () => {
-    await assert.rejects(() => (fetch(
+    await assert.rejects(() => (doFetch(
       {},
       {
         request: { params: { repo: 'xdm', ref: 'master', owner: 'adobe' } },
@@ -161,7 +72,7 @@ describe('Test invalid input', () => {
   });
 
   it('Test for missing params', async () => {
-    await assert.rejects(() => (fetch(
+    await assert.rejects(() => (doFetch(
       {},
       {
         request: {},
@@ -174,7 +85,7 @@ describe('Test invalid input', () => {
   });
 
   it('Test for missing request', async () => {
-    await assert.rejects(() => (fetch(
+    await assert.rejects(() => (doFetch(
       {},
       { logger },
     )), {
@@ -186,21 +97,7 @@ describe('Test invalid input', () => {
 
 describe('Test non-existing content', () => {
   setupPolly({
-    logging: false,
     recordIfMissing: false,
-    recordFailedRequests: true,
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
-    matchRequestsBy: {
-      headers: {
-        exclude: ['connection', 'accept', 'accept-encoding', 'user-agent'],
-      },
-    },
   });
 
   it('Getting XDM README (from wrong URL)', async () => {
@@ -216,7 +113,7 @@ describe('Test non-existing content', () => {
 
     await coerce(myaction);
     const context = {};
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.ok(context.error);
   });
 
@@ -233,28 +130,14 @@ describe('Test non-existing content', () => {
 
     await coerce(myaction);
     const context = {};
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.ok(context.content.body);
   });
 });
 
 describe('Test requests', () => {
   setupPolly({
-    logging: false,
-    recordFailedRequests: false,
     recordIfMissing: false,
-    matchRequestsBy: {
-      headers: {
-        exclude: ['authorization', 'accept-encoding'],
-      },
-    },
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('Getting XDM README', async () => {
@@ -272,7 +155,7 @@ describe('Test requests', () => {
 
     await coerce(myaction);
     const context = {};
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.ok(context.content.body);
     assert.equal(context.content.body.split('\n')[0], '# Experience Data Model (XDM) Schema');
   });
@@ -305,14 +188,14 @@ describe('Test requests', () => {
 
     // test with GitHub token from action.secrets
     myaction.secrets.GITHUB_TOKEN = token;
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.equal(authHeader, `token ${token}`, 'GitHub token from action.secrets.GITHUB_TOKEN used');
     myaction.secrets.GITHUB_TOKEN = '';
     authHeader = '';
 
     // test with GitHub token from request headers
     myaction.request.headers['x-github-token'] = token;
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.equal(authHeader, `token ${token}`, 'GitHub token from request headers["x-github-token"] used');
   });
 });
@@ -320,16 +203,8 @@ describe('Test requests', () => {
 
 describe('Test misbehaved HTTP Responses', () => {
   setupPolly({
-    logging: false,
     recordFailedRequests: false,
     recordIfMissing: false,
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('Getting XDM README with bad HTTP Status Code', async function badStatus() {
@@ -353,7 +228,7 @@ describe('Test misbehaved HTTP Responses', () => {
 
     await coerce(myaction);
     const context = {};
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.ok(context.error);
     assert.equal(context.response.status, 502);
   });
@@ -363,9 +238,9 @@ describe('Test misbehaved HTTP Responses', () => {
 
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept(async (_, res, interceptor) => {
+      .intercept(async (_, res) => {
         await server.timeout(50);
-        interceptor.abort();
+        res.sendStatus(500);
       });
 
     const myaction = {
@@ -385,7 +260,7 @@ describe('Test misbehaved HTTP Responses', () => {
 
     await coerce(myaction);
     const context = {};
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.ok(context.error);
     assert.equal(context.response.status, 504);
   });
@@ -394,9 +269,9 @@ describe('Test misbehaved HTTP Responses', () => {
     const { server } = this.polly;
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
-      .intercept(async (_, res, interceptor) => {
-        await server.timeout(2000);
-        interceptor.abort();
+      .intercept(async (_, res) => {
+        await server.timeout(1500);
+        res.sendStatus(500);
       });
 
     const myaction = {
@@ -413,7 +288,7 @@ describe('Test misbehaved HTTP Responses', () => {
 
     await coerce(myaction);
     const context = {};
-    await fetch(context, myaction);
+    await doFetch(context, myaction);
     assert.ok(context.error);
     assert.equal(context.response.status, 504);
   }).timeout(3000);

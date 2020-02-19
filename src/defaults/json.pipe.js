@@ -13,6 +13,8 @@ const { Pipeline } = require('../../index.js');
 const { log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
+const fetchFstab = require('../html/fetch-fstab.js');
+const fetchExternal = require('../html/fetch-external.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const type = require('../utils/set-content-type.js');
@@ -37,6 +39,8 @@ const jsonpipe = (cont, context, action) => {
     .every(dump.record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
+    .use(fetchFstab)
+    .use(fetchExternal)
     .use(fetch).expose('fetch')
     .use(parse).expose('parse')
     .use(parseFrontmatter)

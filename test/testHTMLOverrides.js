@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const { setupPolly, pipe } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging
@@ -71,6 +71,10 @@ const crequest = {
 };
 
 describe('Testing HTML Pipeline Overrides', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   it('html.pipe adds headers from meta and link tags', async () => {
     const myfunc = (context) => {
       context.response = {

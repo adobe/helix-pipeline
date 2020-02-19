@@ -16,11 +16,8 @@ const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const fs = require('fs-extra');
 const path = require('path');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
 const { runPipeline } = require('../src/utils/openwhisk.js');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const { setupPolly, pipe } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging
@@ -121,21 +118,7 @@ const crequest = {
 
 describe('Testing HTML Pipeline', () => {
   setupPolly({
-    logging: false,
-    recordFailedRequests: false,
     recordIfMissing: false,
-    matchRequestsBy: {
-      headers: {
-        exclude: ['accept-encoding'],
-      },
-    },
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('html.pipe is a function', () => {
@@ -317,6 +300,7 @@ ${context.content.document.body.innerHTML}`,
     let calledfoo = false;
     let calledbar = false;
     let calledbaz = false;
+
     function foo() {
       assert.equal(calledfoo, false, 'foo has not yet been called');
       assert.equal(calledbar, false, 'bar has not yet been called');
@@ -747,12 +731,11 @@ ${context.content.document.body.innerHTML}`,
       ref: 'master',
       path: 'not-existent.md',
     });
-
-    assert.ok(out.errorStack.startsWith('Error: 404'));
+    assert.ok(out.errorStack.startsWith('Error: Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404'));
     delete out.errorStack;
     assert.deepEqual(out, {
       body: '',
-      errorMessage: 'Error: 404: Not Found\n',
+      errorMessage: 'Error: Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404',
       headers: {},
       statusCode: 404,
     });
