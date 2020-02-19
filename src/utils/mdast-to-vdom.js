@@ -202,6 +202,14 @@ class VDOMTransformer {
    * for nodes matching the pattern
    */
   static matchfn(ast, pattern) {
+    // evaluating selectAll on a large tree for each handler is very expensive.
+    // use node name for simple element selectors
+    if (/^\w+$/.test(pattern)) {
+      return function match(node) {
+        return node.type === pattern;
+      };
+    }
+
     return function match(node, myast = ast) {
       return selectAll(pattern, myast).indexOf(node) >= 0;
     };

@@ -1,3 +1,10 @@
+## [6.4.2](https://github.com/adobe/helix-pipeline/compare/v6.4.1...v6.4.2) (2020-02-19)
+
+
+### Bug Fixes
+
+* **vdom:** faster vdom generation ([0d1882a](https://github.com/adobe/helix-pipeline/commit/0d1882ae2e5aa444cdbb035d25e30450d20eea04)), closes [#583](https://github.com/adobe/helix-pipeline/issues/583)
+
 ## [6.4.1](https://github.com/adobe/helix-pipeline/compare/v6.4.0...v6.4.1) (2020-02-18)
 
 
