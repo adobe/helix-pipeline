@@ -1,3 +1,10 @@
+## [6.4.3](https://github.com/adobe/helix-pipeline/compare/v6.4.2...v6.4.3) (2020-02-19)
+
+
+### Bug Fixes
+
+* **embed:** fix external embed service URL construction ([4457135](https://github.com/adobe/helix-pipeline/commit/4457135f7d236b414f9b84f94157d9f4f95d6ad0)), closes [#559](https://github.com/adobe/helix-pipeline/issues/559)
+
 ## [6.4.2](https://github.com/adobe/helix-pipeline/compare/v6.4.1...v6.4.2) (2020-02-19)
 
 
