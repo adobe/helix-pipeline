@@ -62,7 +62,7 @@ const params = {
 const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
   EMBED_WHITELIST: '*.youtube.com',
-  EMBED_SERVICE: 'https://example-embed-service.com/',
+  EMBED_SERVICE: 'https://example-embed-service.com',
 };
 
 const logger = logging.createTestLogger({
@@ -88,7 +88,7 @@ describe('Test Embed Handler', () => {
 
 
     embed(action.secrets)((_, tagname, parameters, children) => {
-      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1https://www.example.com/');
+      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.example.com/');
       assert.equal(children, undefined);
       assert.equal(tagname, 'esi:include');
     }, node);

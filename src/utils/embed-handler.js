@@ -20,7 +20,7 @@ function embed({ EMBED_SERVICE } = {}) {
     const { url } = node;
     const props = {
       // prepend the embed service for absolute URLs
-      src: (URI.parse(url).reference === 'absolute' ? EMBED_SERVICE : '') + url,
+      src: (URI.parse(url).reference === 'absolute' ? `${EMBED_SERVICE}/` : '') + url,
     };
     const retval = [h(node, 'esi:include', props)];
 
