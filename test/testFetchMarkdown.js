@@ -187,12 +187,18 @@ describe('Test invalid input', () => {
 describe('Test non-existing content', () => {
   setupPolly({
     logging: false,
+    recordIfMissing: false,
     recordFailedRequests: true,
     adapters: [NodeHttpAdapter],
     persister: FSPersister,
     persisterOptions: {
       fs: {
         recordingsDir: 'test/fixtures',
+      },
+    },
+    matchRequestsBy: {
+      headers: {
+        exclude: ['connection', 'accept', 'accept-encoding', 'user-agent'],
       },
     },
   });

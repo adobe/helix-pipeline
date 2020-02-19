@@ -222,4 +222,13 @@ describe('Test MDAST to VDOM Transformation', () => {
     const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-example.html')).toString('utf-8')).window.document.documentElement;
     assert.deepEqual(actual.outerHTML, expected.outerHTML);
   });
+
+  it('creating nested list is performant', () => {
+    const markdown = fs.readFileSync(path.resolve(__dirname, 'fixtures', 'tags.md'));
+    const mdast = unified().use(parser).parse(markdown);
+    const doc = new VDOM(mdast, action.secrets).getDocument();
+    const actual = doc.documentElement.innerHTML;
+    const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'tags.html')).toString('utf-8')).window.document.documentElement.innerHTML;
+    assert.deepEqual(actual.outerHTML, expected.outerHTML);
+  });
 });
