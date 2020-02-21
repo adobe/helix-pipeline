@@ -117,7 +117,13 @@ describe('Test non-existing content', () => {
     assert.ok(context.error);
   });
 
-  it('Getting XDM README (with missing ref)', async () => {
+  it('Getting XDM README (with missing ref)', async function missingRef() {
+    const { server } = this.polly;
+
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
+
     const myaction = {
       request: {
         params: {
@@ -140,7 +146,13 @@ describe('Test requests', () => {
     recordIfMissing: false,
   });
 
-  it('Getting XDM README', async () => {
+  it('Getting XDM README', async function testPublic() {
+    const { server } = this.polly;
+
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
+
     const myaction = {
       request: {
         params: {
@@ -161,6 +173,22 @@ describe('Test requests', () => {
   });
 
   it('Getting README from private repo with GitHub token', async function testToken() {
+    const { server } = this.polly;
+
+    const token = 'undisclosed-token';
+    let authHeader = '';
+    server
+      .get('https://raw.githubusercontent.com/adobe/project-helix/master/README.md')
+      .on('request', (req) => {
+        authHeader = req.headers.Authorization;
+      });
+    server
+      .get('https://raw.githubusercontent.com/adobe/project-helix/master/helix-markup.yaml')
+      .on('request', (req) => {
+        authHeader = req.headers.Authorization;
+      })
+      .intercept((_, res) => res.sendStatus(404));
+
     const myaction = {
       request: {
         params: {
@@ -173,15 +201,6 @@ describe('Test requests', () => {
       logger,
       secrets: {},
     };
-
-    const token = 'undisclosed-token';
-    let authHeader = '';
-    const { server } = this.polly;
-    server
-      .get('https://raw.githubusercontent.com/adobe/project-helix/master/README.md')
-      .on('request', (req) => {
-        authHeader = req.headers.Authorization;
-      });
 
     await coerce(myaction);
     const context = {};
@@ -213,6 +232,9 @@ describe('Test misbehaved HTTP Responses', () => {
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
       .intercept((_, res) => res.sendStatus(500));
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -242,6 +264,9 @@ describe('Test misbehaved HTTP Responses', () => {
         await server.timeout(50);
         res.sendStatus(500);
       });
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -273,6 +298,9 @@ describe('Test misbehaved HTTP Responses', () => {
         await server.timeout(1500);
         res.sendStatus(500);
       });
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {

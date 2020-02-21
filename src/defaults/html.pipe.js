@@ -43,6 +43,7 @@ const sanitize = require('../html/sanitize');
 const removeHlxProps = require('../html/removeHlxProps');
 const dataEmbeds = require('../html/fetch-data');
 const dataSections = require('../html/data-sections');
+const { adjustMDAST, adjustHTML } = require('../utils/adjust-markup');
 
 /* eslint newline-per-chained-call: off */
 
@@ -75,10 +76,12 @@ const htmlpipe = (cont, context, action) => {
     .use(sections)
     .use(meta).expose('meta')
     .use(unwrapSoleImages)
+    .use(adjustMDAST)
     .use(selectstrain)
     .use(selecttest)
     .use(dataSections)
     .use(html).expose('html')
+    .use(adjustHTML)
     .use(sanitize).when(paranoid)
     .use(cont)
     .use(type('text/html'))
