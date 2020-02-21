@@ -286,6 +286,9 @@ describe('Test misbehaved HTTP Responses', () => {
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
       .intercept((_, res) => res.sendStatus(500));
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -315,6 +318,9 @@ describe('Test misbehaved HTTP Responses', () => {
         await server.timeout(50);
         res.sendStatus(500);
       });
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -346,6 +352,9 @@ describe('Test misbehaved HTTP Responses', () => {
         await server.timeout(1500);
         res.sendStatus(500);
       });
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
