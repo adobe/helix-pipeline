@@ -243,6 +243,27 @@ describe('Test requests', () => {
     await doFetch(context, myaction);
     assert.equal(authHeader, `token ${token}`, 'GitHub token from request headers["x-github-token"] used');
   });
+
+  it('Getting helix-markup.xml README', async () => {
+    const myaction = {
+      request: {
+        params: {
+          repo: 'hlx-test-markupconfig', ref: 'master', path: 'index.md', owner: 'ramboz',
+        },
+        headers: {
+          'Cache-Control': 'no-store',
+        },
+      },
+      logger,
+    };
+
+    await coerce(myaction);
+    const context = {};
+    await fetch(context, myaction);
+    assert.ok(myaction.markupconfig);
+    assert.equal(myaction.markupconfig.markup.foo.wrap, '.qux');
+    assert.equal(myaction.markupconfig.markup.corge.wrap, '.waldo');
+  });
 });
 
 
