@@ -139,6 +139,32 @@ describe('Test non-existing content', () => {
     await doFetch(context, myaction);
     assert.ok(context.content.body);
   });
+
+  it('Getting helix-markup.yaml when it does not exist', async function badStatus() {
+    const { server } = this.polly;
+
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
+
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
+        },
+        headers: {
+          'Cache-Control': 'no-store',
+        },
+      },
+      logger,
+    };
+
+    await coerce(myaction);
+    const context = {};
+    await fetch(context, myaction);
+    assert.equal(!context.error, true);
+    assert.equal(!myaction.markupconfig, true);
+  });
 });
 
 describe('Test requests', () => {
@@ -226,15 +252,19 @@ describe('Test misbehaved HTTP Responses', () => {
     recordIfMissing: false,
   });
 
+  beforeEach(async function setup() {
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(404));
+  });
+
   it('Getting XDM README with bad HTTP Status Code', async function badStatus() {
     const { server } = this.polly;
 
     server
       .get('https://raw.githubusercontent.com/adobe/xdm/master/README.md')
       .intercept((_, res) => res.sendStatus(500));
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -264,9 +294,6 @@ describe('Test misbehaved HTTP Responses', () => {
         await server.timeout(50);
         res.sendStatus(500);
       });
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -298,9 +325,6 @@ describe('Test misbehaved HTTP Responses', () => {
         await server.timeout(1500);
         res.sendStatus(500);
       });
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -320,4 +344,30 @@ describe('Test misbehaved HTTP Responses', () => {
     assert.ok(context.error);
     assert.equal(context.response.status, 504);
   }).timeout(3000);
+
+  it('Getting helix-markup.yaml with bad HTTP Status Code', async function badStatus() {
+    const { server } = this.polly;
+
+    server
+      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
+      .intercept((_, res) => res.sendStatus(500));
+
+    const myaction = {
+      request: {
+        params: {
+          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
+        },
+        headers: {
+          'Cache-Control': 'no-store',
+        },
+      },
+      logger,
+    };
+
+    await coerce(myaction);
+    const context = {};
+    await fetch(context, myaction);
+    assert.equal(!context.error, true);
+    assert.equal(!myaction.markupconfig, true);
+  });
 });
