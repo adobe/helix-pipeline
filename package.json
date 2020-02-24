@@ -43,7 +43,7 @@
     "nock": "12.0.0",
     "nyc": "15.0.0",
     "semantic-release": "17.0.4",
-    "sinon": "8.1.1",
+    "sinon": "9.0.0",
     "unist-builder": "2.0.3",
     "unist-util-inspect": "5.0.1",
     "unist-util-remove-position": "2.0.1"
@@ -63,7 +63,7 @@
     "js-yaml": "^3.13.1",
     "jsdom": "16.2.0",
     "lodash": "^4.17.15",
-    "mdast-util-to-hast": "^7.0.0",
+    "mdast-util-to-hast": "^8.0.0",
     "mdast-util-to-string": "^1.0.6",
     "micromatch": "^4.0.2",
     "object-hash": "^2.0.0",
