@@ -50,9 +50,9 @@
   },
   "dependencies": {
     "@adobe/helix-fetch": "1.1.0",
-    "@adobe/helix-log": "4.5.0",
+    "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "^5.0.0",
-    "@adobe/openwhisk-action-logger": "2.1.0",
+    "@adobe/openwhisk-action-logger": "2.1.1",
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
