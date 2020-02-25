@@ -1,3 +1,10 @@
+## [6.4.5](https://github.com/adobe/helix-pipeline/compare/v6.4.4...v6.4.5) (2020-02-25)
+
+
+### Bug Fixes
+
+* **deps:** update [@adobe](https://github.com/adobe) ([#596](https://github.com/adobe/helix-pipeline/issues/596)) ([330c2f9](https://github.com/adobe/helix-pipeline/commit/330c2f9d65dedbd377aa908b40625d08a8fe0c04))
+
 ## [6.4.4](https://github.com/adobe/helix-pipeline/compare/v6.4.3...v6.4.4) (2020-02-24)
 
 
