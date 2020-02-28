@@ -42,6 +42,10 @@
     },
     "markupconfig": {
       "$ref": "https://ns.adobe.com/helix/shared/markupconfig"
+    },
+    "downloader": {
+      "type": "object",
+      "description": "A Downloader instance"
     }
   }
 }
