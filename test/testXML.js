@@ -13,10 +13,7 @@
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
 const { setdefault } = require('ferrum');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
-const { pipe } = require('../src/defaults/xml.pipe.js');
+const { setupPolly, xmlPipe: pipe } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging
@@ -124,21 +121,7 @@ describe('Testing XML Pipeline', () => {
   });
 
   setupPolly({
-    logging: false,
-    recordFailedRequests: false,
     recordIfMissing: false,
-    matchRequestsBy: {
-      headers: {
-        exclude: ['accept-encoding'],
-      },
-    },
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('xml.pipe is a function', () => {

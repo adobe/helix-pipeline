@@ -35,6 +35,10 @@
     "transformer": {
       "type": "object",
       "description": "A VDOMTransformer instance"
+    },
+    "downloader": {
+      "type": "object",
+      "description": "A Downloader instance"
     }
   }
 }
