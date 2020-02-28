@@ -1,3 +1,10 @@
+# [6.5.0](https://github.com/adobe/helix-pipeline/compare/v6.4.6...v6.5.0) (2020-02-28)
+
+
+### Features
+
+* **pipe:** add fstab support ([#592](https://github.com/adobe/helix-pipeline/issues/592)) ([974a921](https://github.com/adobe/helix-pipeline/commit/974a921fd884e0589fb29a99bd3394133ed84a95)), closes [#591](https://github.com/adobe/helix-pipeline/issues/591)
+
 ## [6.4.6](https://github.com/adobe/helix-pipeline/compare/v6.4.5...v6.4.6) (2020-02-28)
 
 
