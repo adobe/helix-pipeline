@@ -117,13 +117,7 @@ describe('Test non-existing content', () => {
     assert.ok(context.error);
   });
 
-  it('Getting XDM README (with missing ref)', async function missingRef() {
-    const { server } = this.polly;
-
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
-
+  it('Getting XDM README (with missing ref)', async () => {
     const myaction = {
       request: {
         params: {
@@ -139,32 +133,6 @@ describe('Test non-existing content', () => {
     await doFetch(context, myaction);
     assert.ok(context.content.body);
   });
-
-  it('Getting helix-markup.yaml when it does not exist', async function badStatus() {
-    const { server } = this.polly;
-
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
-
-    const myaction = {
-      request: {
-        params: {
-          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
-        },
-        headers: {
-          'Cache-Control': 'no-store',
-        },
-      },
-      logger,
-    };
-
-    await coerce(myaction);
-    const context = {};
-    await fetch(context, myaction);
-    assert.equal(!context.error, true);
-    assert.equal(!myaction.markupconfig, true);
-  });
 });
 
 describe('Test requests', () => {
@@ -172,13 +140,7 @@ describe('Test requests', () => {
     recordIfMissing: false,
   });
 
-  it('Getting XDM README', async function testPublic() {
-    const { server } = this.polly;
-
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
-
+  it('Getting XDM README', async () => {
     const myaction = {
       request: {
         params: {
@@ -208,12 +170,6 @@ describe('Test requests', () => {
       .on('request', (req) => {
         authHeader = req.headers.Authorization;
       });
-    server
-      .get('https://raw.githubusercontent.com/adobe/project-helix/master/helix-markup.yaml')
-      .on('request', (req) => {
-        authHeader = req.headers.Authorization;
-      })
-      .intercept((_, res) => res.sendStatus(404));
 
     const myaction = {
       request: {
@@ -243,27 +199,6 @@ describe('Test requests', () => {
     await doFetch(context, myaction);
     assert.equal(authHeader, `token ${token}`, 'GitHub token from request headers["x-github-token"] used');
   });
-
-  it('Getting helix-markup.xml README', async () => {
-    const myaction = {
-      request: {
-        params: {
-          repo: 'hlx-test-markupconfig', ref: 'master', path: 'index.md', owner: 'ramboz',
-        },
-        headers: {
-          'Cache-Control': 'no-store',
-        },
-      },
-      logger,
-    };
-
-    await coerce(myaction);
-    const context = {};
-    await fetch(context, myaction);
-    assert.ok(myaction.markupconfig);
-    assert.equal(myaction.markupconfig.markup.foo.wrap, '.qux');
-    assert.equal(myaction.markupconfig.markup.corge.wrap, '.waldo');
-  });
 });
 
 
@@ -271,13 +206,6 @@ describe('Test misbehaved HTTP Responses', () => {
   setupPolly({
     recordFailedRequests: false,
     recordIfMissing: false,
-  });
-
-  beforeEach(async function setup() {
-    const { server } = this.polly;
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
   });
 
   it('Getting XDM README with bad HTTP Status Code', async function badStatus() {
@@ -365,30 +293,4 @@ describe('Test misbehaved HTTP Responses', () => {
     assert.ok(context.error);
     assert.equal(context.response.status, 504);
   }).timeout(3000);
-
-  it('Getting helix-markup.yaml with bad HTTP Status Code', async function badStatus() {
-    const { server } = this.polly;
-
-    server
-      .get('https://raw.githubusercontent.com/adobe/xdm/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(500));
-
-    const myaction = {
-      request: {
-        params: {
-          repo: 'xdm', ref: 'master', path: 'README.md', owner: 'adobe',
-        },
-        headers: {
-          'Cache-Control': 'no-store',
-        },
-      },
-      logger,
-    };
-
-    await coerce(myaction);
-    const context = {};
-    await fetch(context, myaction);
-    assert.equal(!context.error, true);
-    assert.equal(!myaction.markupconfig, true);
-  });
 });

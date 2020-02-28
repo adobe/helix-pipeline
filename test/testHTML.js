@@ -121,13 +121,6 @@ describe('Testing HTML Pipeline', () => {
     recordIfMissing: false,
   });
 
-  beforeEach(function setup() {
-    const { server } = this.polly;
-    server
-      .get('https://raw.githubusercontent.com/*/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
-  });
-
   it('html.pipe is a function', () => {
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');
@@ -928,84 +921,5 @@ ${context.content.document.body.innerHTML}`,
     } finally {
       delete process.env.__OW_ACTIVATION_ID;
     }
-  });
-
-  it('html.pipe adjusts the MDAST as per markup config', async () => {
-    const result = await pipe(
-      (context) => {
-        context.response = {
-          status: 200,
-          body: context.content.document.body.innerHTML,
-        };
-      },
-      {
-        request: crequest,
-        content: {
-          body: 'Foo',
-        },
-      },
-      {
-        request: { params },
-        secrets,
-        logger,
-        markupconfig: {
-          markup: {
-            foo: {
-              match: 'paragraph',
-              classnames: ['bar'],
-              attribute: {
-                baz: 'qux',
-              },
-              wrap: '.corge',
-              type: 'markdown',
-            },
-          },
-        },
-      },
-    );
-    assert.equal(result.response.status, 200);
-    assertEquivalentNode(
-      new JSDOM(result.response.body).window.document.body,
-      new JSDOM('<div class="corge"><p class="bar" baz="qux">Foo</p></div>').window.document.body,
-    );
-  });
-
-  it('html.pipe adjusts the DOM as per markup config', async () => {
-    const result = await pipe(
-      (context) => {
-        context.response = {
-          status: 200,
-          body: context.content.document.body.innerHTML,
-        };
-      },
-      {
-        request: crequest,
-        content: {
-          body: 'Foo',
-        },
-      },
-      {
-        request: { params },
-        secrets,
-        logger,
-        markupconfig: {
-          markup: {
-            foo: {
-              match: 'p',
-              classnames: ['bar'],
-              attribute: {
-                baz: 'qux',
-              },
-              wrap: '.corge',
-            },
-          },
-        },
-      },
-    );
-    assert.equal(result.response.status, 200);
-    assertEquivalentNode(
-      new JSDOM(result.response.body).window.document.body,
-      new JSDOM('<div class="corge"><p class="bar" baz="qux">Foo</p></div>').window.document.body,
-    );
   });
 });
