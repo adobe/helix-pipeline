@@ -161,16 +161,6 @@ describe('Test requests', () => {
   });
 
   it('Getting README from private repo with GitHub token', async function testToken() {
-    const { server } = this.polly;
-
-    const token = 'undisclosed-token';
-    let authHeader = '';
-    server
-      .get('https://raw.githubusercontent.com/adobe/project-helix/master/README.md')
-      .on('request', (req) => {
-        authHeader = req.headers.Authorization;
-      });
-
     const myaction = {
       request: {
         params: {
@@ -183,6 +173,15 @@ describe('Test requests', () => {
       logger,
       secrets: {},
     };
+
+    const token = 'undisclosed-token';
+    let authHeader = '';
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/adobe/project-helix/master/README.md')
+      .on('request', (req) => {
+        authHeader = req.headers.Authorization;
+      });
 
     await coerce(myaction);
     const context = {};

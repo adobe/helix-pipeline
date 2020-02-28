@@ -112,21 +112,16 @@ const expectedXML = '<?xml version="1.0" encoding="utf-8"?><document><title leve
 describe('Testing XML Pipeline', () => {
   let testContext;
 
-  setupPolly({
-    recordIfMissing: false,
-  });
-
-  beforeEach(function setup() {
-    const { server } = this.polly;
-    server
-      .get('https://raw.githubusercontent.com/*/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
-
+  beforeEach(() => {
     testContext = {
       response: {
         body: '<?xml version="1.0" encoding="utf-8"?><test />',
       },
     };
+  });
+
+  setupPolly({
+    recordIfMissing: false,
   });
 
   it('xml.pipe is a function', () => {

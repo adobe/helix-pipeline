@@ -71,13 +71,6 @@ describe('Testing JSON Pipeline', () => {
     recordIfMissing: false,
   });
 
-  beforeEach(function setup() {
-    const { server } = this.polly;
-    server
-      .get('https://raw.githubusercontent.com/*/master/helix-markup.yaml')
-      .intercept((_, res) => res.sendStatus(404));
-  });
-
   it('json.pipe is a function', () => {
     assert.ok(pipe);
     assert.strictEqual(typeof pipe, 'function');
