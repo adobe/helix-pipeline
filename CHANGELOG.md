@@ -1,3 +1,10 @@
+# [6.6.0](https://github.com/adobe/helix-pipeline/compare/v6.5.2...v6.6.0) (2020-03-02)
+
+
+### Features
+
+* **pipeline:** add options to force http1 for tests ([#602](https://github.com/adobe/helix-pipeline/issues/602)) ([b14fc06](https://github.com/adobe/helix-pipeline/commit/b14fc061b45bddb12d965e88f1f1269e5799ffd3))
+
 ## [6.5.2](https://github.com/adobe/helix-pipeline/compare/v6.5.1...v6.5.2) (2020-03-01)
 
 
