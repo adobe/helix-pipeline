@@ -1,3 +1,10 @@
+## [6.6.3](https://github.com/adobe/helix-pipeline/compare/v6.6.2...v6.6.3) (2020-03-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-logger to v2.2.0 ([#609](https://github.com/adobe/helix-pipeline/issues/609)) ([6d92633](https://github.com/adobe/helix-pipeline/commit/6d926334bbc212e65ddd52ed6bddfc279a50cace))
+
 ## [6.6.2](https://github.com/adobe/helix-pipeline/compare/v6.6.1...v6.6.2) (2020-03-03)
 
 
