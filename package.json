@@ -52,7 +52,7 @@
     "@adobe/helix-fetch": "1.4.0",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "6.0.2",
-    "@adobe/openwhisk-action-logger": "2.1.1",
+    "@adobe/openwhisk-action-logger": "2.2.0",
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
