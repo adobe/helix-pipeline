@@ -89,6 +89,21 @@ describe('Integration Test with Data Embeds', () => {
   });
 
   it('html.pipe processes data embeds', async () => {
+    /*
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/fstab.yaml')
+      .reply(() => 404);
+    */
+
+    console.log('nocking!');
+    nock(/.*/)
+      .get()
+      .reply(404, (uri, requestBody) => {
+        // this never happens
+        console.log('intercepting', uri);
+        return requestBody;
+      });
+
     const action = coerce({
       request: { params },
       secrets,
