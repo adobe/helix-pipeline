@@ -16,6 +16,12 @@ const fetchAPI = require('@adobe/helix-fetch');
 
 const { TimeoutError } = fetchAPI;
 
+const DEFAULT_FORWARD_HEADERS = [
+  'x-request-id',
+  'x-cdn-request-id',
+  'x-cdn-url',
+];
+
 class Downloader {
   constructor(context, action, options = {}) {
     this._context = context;
@@ -76,10 +82,12 @@ class Downloader {
    * Schedules a task that fetches a web resource.
    * @param {object} opts options.
    * @param {object} opts.uri URI to download
-   * @param {object} opts.options Fetch options.
+   * @param {object} opts.options Fetch options passed to the underling helix-fetch.
    * @param {string} opts.id Some id to later identify the task.
    * @param {number} opts.timeout Override global timeout
    * @param {boolean} opts.errorOn404 Treat 404 as error.
+   * @param {string[]} opts.forwardHeaders Names of headers that are forwarded.
+   * Default `['x-request-id', 'x-cdn-request-id', 'x-cdn-url']`
    * @return {Promise} Promise that resolves with the response.
    */
 
@@ -101,6 +109,18 @@ class Downloader {
     }
     if (this._forceNoCache) {
       options.cache = 'no-store';
+    }
+
+    if (request.headers) {
+      const forwardHeaders = opts.forwardHeaders || DEFAULT_FORWARD_HEADERS;
+      if (forwardHeaders.length > 0) {
+        options.headers = options.headers || {};
+        forwardHeaders.forEach((header) => {
+          if (request.headers[header]) {
+            options.headers[header] = request.headers[header];
+          }
+        });
+      }
     }
 
     const download = async () => {
@@ -207,6 +227,7 @@ class Downloader {
       options,
       id: opts.id || '',
       errorOn404: opts.errorOn404 || false,
+      forwardHeaders: [],
     });
   }
 
