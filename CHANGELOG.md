@@ -1,3 +1,10 @@
+# [6.7.0](https://github.com/adobe/helix-pipeline/compare/v6.6.3...v6.7.0) (2020-03-06)
+
+
+### Features
+
+* **downloader:** forward headers ([8eae6c3](https://github.com/adobe/helix-pipeline/commit/8eae6c391f675371ba40b712ee9ce0e950edf05f))
+
 ## [6.6.3](https://github.com/adobe/helix-pipeline/compare/v6.6.2...v6.6.3) (2020-03-04)
 
 
