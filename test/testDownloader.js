@@ -415,4 +415,76 @@ describe('Test Download', () => {
 
     mgr.destroy();
   });
+
+  it('forward default headers only', async () => {
+    const scope = nock('https://www.example.com', {
+      reqheaders: {
+        'x-cdn-url': 'cdn url',
+        'x-request-id': 'request id',
+      },
+      badheaders: ['x-not-forward'],
+    })
+      .get('/data')
+      .reply(() => [200, 'hello, world 4.']);
+
+    const action = coerce({
+      logger,
+      request: {
+        headers: {
+          'x-cdn-url': 'cdn url',
+          'x-request-id': 'request id',
+          'x-not-forward': 'should not forward',
+        },
+      },
+    });
+    const mgr = new Downloader(context, action, {
+      forceNoCache: true,
+      forceHttp1: true,
+    });
+
+
+    await mgr.fetch({
+      uri: 'https://www.example.com/data',
+    });
+
+    scope.done();
+
+    mgr.destroy();
+  });
+
+  it('forward only specified headers', async () => {
+    const scope = nock('https://www.example.com', {
+      reqheaders: {
+        'x-forward': 'should forward',
+      },
+      badheaders: ['x-not-forward', 'x-cdn-url', 'x-request-id'],
+    })
+      .get('/data')
+      .reply(() => [200, 'hello, world 4.']);
+
+    const action = coerce({
+      logger,
+      request: {
+        headers: {
+          'x-cdn-url': 'cdn url',
+          'x-request-id': 'request id',
+          'x-not-forward': 'should not forward',
+          'x-forward': 'should forward',
+        },
+      },
+    });
+    const mgr = new Downloader(context, action, {
+      forceNoCache: true,
+      forceHttp1: true,
+    });
+
+    await mgr.fetch({
+      uri: 'https://www.example.com/data',
+      forwardHeaders: ['x-forward'],
+    });
+
+    scope.done();
+
+    mgr.destroy();
+  });
 });
