@@ -89,19 +89,19 @@ describe('Integration Test with Data Embeds', () => {
   });
 
   it('html.pipe processes data embeds', async () => {
-    /*
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/fstab.yaml')
-      .reply(() => 404);
-    */
+      .reply(() => {
+        console.log('fstab');
+        return 404;
+      });
 
-    console.log('nocking!');
-    nock(/.*/)
+    nock('https://adobeioruntime.net')
       .get()
-      .reply(404, (uri, requestBody) => {
+      .reply(() => {
         // this never happens
-        console.log('intercepting', uri);
-        return requestBody;
+        console.log('intercepting runtime');
+        return 404;
       });
 
     const action = coerce({
@@ -132,6 +132,8 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
       context,
       action,
     );
+
+    console.log(result.content.mdast);
 
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/html');
