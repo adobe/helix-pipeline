@@ -1,3 +1,10 @@
+## [6.7.1](https://github.com/adobe/helix-pipeline/compare/v6.7.0...v6.7.1) (2020-03-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v16.2.1 ([#615](https://github.com/adobe/helix-pipeline/issues/615)) ([60124d8](https://github.com/adobe/helix-pipeline/commit/60124d822ffcfb16c35543090a4134e081b993f5))
+
 # [6.7.0](https://github.com/adobe/helix-pipeline/compare/v6.6.3...v6.7.0) (2020-03-06)
 
 
