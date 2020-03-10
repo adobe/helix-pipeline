@@ -97,7 +97,7 @@ describe('Integration Test with Data Embeds', () => {
       });
 
     nock('https://adobeioruntime.net')
-      .get()
+      .get(/.*/)
       .reply(() => {
         // this never happens
         console.log('intercepting runtime');
@@ -135,6 +135,7 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
 
     console.log(result.content.mdast);
 
+    console.log(result.response);
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/html');
     assertEquivalentNode(
