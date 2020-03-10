@@ -10,6 +10,7 @@
  * governing permissions and limitations under the License.
  */
 const { selectAll } = require('unist-util-select');
+const remove = require('unist-util-remove');
 
 /**
  * Copied from 'unist-util-map' and promisified.
@@ -39,11 +40,9 @@ async function data({ content: { mdast } }, { downloader }) {
       if (node.type === 'dataEmbed') {
         const task = downloader.getTaskById(`dataEmbed:${node.url}`);
         const downloadeddata = await task;
-        console.log('task data', downloadeddata);
+        // TODO: better error handling
         const json = await downloadeddata.json();
-        console.log('data', json);
         section.meta.embedData = json;
-        node.type = 'delete';
       }
       return node;
     });
@@ -56,6 +55,7 @@ async function data({ content: { mdast } }, { downloader }) {
   // extract data from the root node (in case there are no sections)
   await extractData(mdast);
   console.log('found data sections', dataSections.length);
+  remove(mdast, 'dataEmbed');
 }
 
 module.exports = data;
