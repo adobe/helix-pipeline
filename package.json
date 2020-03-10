@@ -76,6 +76,7 @@
     "strip-markdown": "^3.1.0",
     "unified": "^8.3.2",
     "unist-util-map": "^2.0.0",
+    "unist-util-remove": "^2.0.0",
     "unist-util-select": "^3.0.0",
     "unist-util-visit": "^2.0.0",
     "uri-js": "^4.2.2",
