@@ -45,8 +45,7 @@
     "semantic-release": "17.0.4",
     "sinon": "9.0.0",
     "unist-builder": "2.0.3",
-    "unist-util-inspect": "5.0.1",
-    "unist-util-remove-position": "2.0.1"
+    "unist-util-inspect": "5.0.1"
   },
   "dependencies": {
     "@adobe/helix-fetch": "1.4.0",
@@ -77,6 +76,7 @@
     "unified": "^8.3.2",
     "unist-util-map": "^2.0.0",
     "unist-util-remove": "^2.0.0",
+    "unist-util-remove-position": "2.0.1",
     "unist-util-select": "^3.0.0",
     "unist-util-visit": "^2.0.0",
     "uri-js": "^4.2.2",
