@@ -88,21 +88,14 @@ describe('Integration Test with Data Embeds', () => {
     nock.cleanAll();
   });
 
-  it('html.pipe processes data embeds', async () => {
+  async function testEmbeds(data, markdown, html) {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/fstab.yaml')
-      .reply(() => {
-        console.log('fstab');
-        return [404];
-      });
+      .reply(() => [404]);
 
     nock('https://adobeioruntime.net')
       .get(/.*/)
-      .reply(() => {
-        // this never happens
-        console.log('intercepting runtime');
-        return [404, [{ foo: 'bar', bar: 'foo' }, { foo: 'shoo', bar: 'bidoo' }]];
-      });
+      .reply(() => [404, data]);
 
     const action = coerce({
       request: { params },
@@ -113,13 +106,7 @@ describe('Integration Test with Data Embeds', () => {
     const context = {
       request: crequest,
       content: {
-        body: `Hello World
-Here comes a data embed.
-
-https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
-
-![Easy!](easy.png)
-`,
+        body: markdown,
       },
     };
 
@@ -127,24 +114,37 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
 
     const result = await pipe(
       (mycontext) => {
-        mycontext.response = { status: 201, body: mycontext.content.document.body.innerHTML };
+        mycontext.response = { status: 200, body: mycontext.content.document.body.innerHTML };
       },
       context,
       action,
     );
-
-    console.log(result.content.mdast);
-    assert.equal(result.response.status, 201);
+    assert.equal(result.response.status, 200);
     assert.equal(result.response.headers['Content-Type'], 'text/html');
     assertEquivalentNode(
       result.response.document.body,
-      new JSDOM(`
-        <p>Hello World
-        Here comes an embed.</p>
-        <esi:include src="https://example-embed-service.com/https://www.youtube.com/watch?v=KOxbO0EI4MA"></esi:include>
-        <esi:remove><p><a href="https://www.youtube.com/watch?v=KOxbO0EI4MA">https://www.youtube.com/watch?v=KOxbO0EI4MA</a></p></esi:remove>
-        <p><img src="easy.png" alt="Easy!"></p>
-      `).window.document.body,
+      new JSDOM(html).window.document.body,
     );
-  });
+  }
+  it('html.pipe processes data embeds', async () => testEmbeds(
+    [
+      {
+        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+      }],
+    `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+    `<ol>
+    <li>My car:<a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny"></a></li>
+    <li>My car:<a href="cars-2000.html"><img src="renault.jpg" alt="Renault Scenic"></a></li>
+    <li>My car:<a href="cars-2005.html"><img src="honda.png" alt="Honda FR-V"></a></li>
+  </ol>`,
+  ));
 });
