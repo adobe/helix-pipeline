@@ -16,6 +16,7 @@ const {
   deepclone, trySlidingWindow, map, list, reject, contains, is, pipe,
 } = require('ferrum');
 const removePosition = require('unist-util-remove-position');
+const dotprop = require('dot-prop');
 
 const pattern = /{{([^{}]+)}}/g;
 /**
@@ -40,6 +41,12 @@ async function pmap(tree, iteratee) {
   return preorder(tree, null, null);
 }
 
+/**
+ * Finds all MDAST nodes that have a placeholder value and calls
+ * a user-provided callback function.
+ * @param {MDAST} section an MDAST node
+ * @param {*} handlefn a callback function to handle the placeholder
+ */
 function findPlaceholders(section, handlefn) {
   visit(section, (node) => {
     if (node.value && pattern.test(node.value)) {
@@ -57,6 +64,10 @@ function findPlaceholders(section, handlefn) {
   });
 }
 
+/**
+ * Determines if an MDAST node contains placeholders like `{{foo}}`
+ * @param {MDAST} section
+ */
 function hasPlaceholders(section) {
   try {
     findPlaceholders(section, () => {
@@ -68,6 +79,9 @@ function hasPlaceholders(section) {
   }
 }
 
+/**
+ * @param {MDAST} section
+ */
 function fillPlaceholders(section) {
   if (!section.meta || (!section.meta.embedData && !Array.isArray(section.meta.embedData))) {
     return;
@@ -81,7 +95,7 @@ function fillPlaceholders(section) {
 
     findPlaceholders(workingcopy, (node, prop) => {
       if (typeof node[prop] === 'string') {
-        node[prop] = node[prop].replace(pattern, (_, expr) => value[expr]);
+        node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
       }
     });
     return [...p, ...workingcopy.children];

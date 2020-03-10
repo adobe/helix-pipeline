@@ -149,6 +149,40 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
   </ol>`,
   ));
 
+  it('html.pipe processes data embeds with dot notation', async () => testEmbeds(
+    [
+      {
+        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg', mileage: { from: 100000, to: 150000 },
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg', mileage: { from: 75000, to: 100000 },
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png', mileage: { from: 50000, to: 150000 },
+      },
+    ],
+    `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+# My {{make}} {{model}}
+
+![{{make}} {{model}}]({{image}})
+
+Built in {{year}}. Driven from {{mileage.from}} km to {{mileage.to}} km.
+`,
+    `<h1 id="my-nissan-sunny">My Nissan Sunny</h1>
+    <p><img src="nissan.jpg" alt="Nissan Sunny"></p>
+    <p>Built in 1992. Driven from 100000 km to 150000 km.</p>
+
+    <h1 id="my-renault-scenic">My Renault Scenic</h1>
+    <p><img src="renault.jpg" alt="Renault Scenic"></p>
+    <p>Built in 2000. Driven from 75000 km to 100000 km.</p>
+    
+    <h1 id="my-honda-fr-v">My Honda FR-V</h1>
+    <p><img src="honda.png" alt="Honda FR-V"></p>
+    <p>Built in 2005. Driven from 50000 km to 150000 km.</p>`,
+  ));
+
   it('html.pipe processes data embeds in sections', async () => testEmbeds(
     [
       {
