@@ -11,14 +11,20 @@
  */
 const { selectAll } = require('unist-util-select');
 const remove = require('unist-util-remove');
+const visit = require('unist-util-visit');
+const {
+  deepclone, trySlidingWindow, map, list, reject, contains, is, pipe,
+} = require('ferrum');
+const removePosition = require('unist-util-remove-position');
 
+const pattern = /{{([^{}]+)}}/g;
 /**
  * Copied from 'unist-util-map' and promisified.
  * @param tree
  * @param iteratee
  * @returns {Promise<any>}
  */
-async function map(tree, iteratee) {
+async function pmap(tree, iteratee) {
   async function preorder(node, index, parent) {
     async function bound(child, idx) {
       return preorder(child, idx, node);
@@ -34,13 +40,96 @@ async function map(tree, iteratee) {
   return preorder(tree, null, null);
 }
 
-async function data({ content: { mdast } }, { downloader }) {
+function findPlaceholders(section, handlefn) {
+  visit(section, (node) => {
+    if (node.value && pattern.test(node.value)) {
+      handlefn(node, 'value');
+    }
+    if (node.alt && pattern.test(node.alt)) {
+      handlefn(node, 'alt');
+    }
+    if (node.url && pattern.test(node.url)) {
+      handlefn(node, 'url');
+    }
+    if (node.title && pattern.test(node.title)) {
+      handlefn(node, 'title');
+    }
+  });
+}
+
+function hasPlaceholders(section) {
+  try {
+    findPlaceholders(section, () => {
+      throw new Error('Placeholder detected');
+    });
+    return false;
+  } catch {
+    return true;
+  }
+}
+
+function fillPlaceholders(section) {
+  if (!section.meta.embedData && !Array.isArray(section.meta.embedData)) {
+    return;
+  }
+  const data = section.meta.embedData;
+  // required to make deepclone below work
+  removePosition(section);
+
+  const children = data.reduce((p, value) => {
+    const workingcopy = deepclone(section);
+
+    findPlaceholders(workingcopy, (node, prop) => {
+      if (typeof node[prop] === 'string') {
+        node[prop] = node[prop].replace(pattern, (_, expr) => value[expr]);
+      }
+    });
+    return [...p, ...workingcopy.children];
+  }, []);
+
+  section.children = children;
+}
+
+function normalizeLists(section) {
+  function cleanupLists([first, second]) {
+    // two consecutive, identical lists
+    if (first.type === 'list' && second.type === 'list'
+        && first.ordered === second.ordered
+        && first.start === second.start
+        && first.spread === second.spread) {
+      // move the children of the first to the second list
+      second.children = [...first.children, ...second.children];
+      first.children = [];
+      // mark the first list to be emptied
+      return first;
+    }
+    return null;
+  }
+
+  // get the sequence of lists to be removed
+  const emptiedLists = pipe(
+    trySlidingWindow(section.children, 2),
+    map(cleanupLists),
+    reject(is(null)),
+    list,
+  );
+
+  // perform the cleanup
+  section.children = pipe(
+    section.children, // take all existing children
+    reject((child) => contains(is(child))(emptiedLists)), // reject if they are in the list above
+    list, // make a nice array because the rest of the world doesn't like iterators yet
+  );
+}
+
+async function fillDataSections({ content: { mdast } }, { downloader }) {
   async function extractData(section) {
-    return map(section, async (node) => {
+    return pmap(section, async (node) => {
       if (node.type === 'dataEmbed') {
         const task = downloader.getTaskById(`dataEmbed:${node.url}`);
         const downloadeddata = await task;
         // TODO: better error handling
+        // TODO: check that the result is an array
         const json = await downloadeddata.json();
         section.meta.embedData = json;
       }
@@ -49,13 +138,19 @@ async function data({ content: { mdast } }, { downloader }) {
   }
 
   const dataSections = selectAll('section', mdast);
-  console.log('dataSections', dataSections);
+
   // extract data from all sections
   await Promise.all(dataSections.map(extractData));
-  // extract data from the root node (in case there are no sections)
-  await extractData(mdast);
-  console.log('found data sections', dataSections.length);
-  remove(mdast, 'dataEmbed');
+
+  if (dataSections.length === 0 && hasPlaceholders(mdast)) {
+    // extract data from the root node (in case there are no sections)
+    await extractData(mdast);
+    remove(mdast, 'dataEmbed');
+    fillPlaceholders(mdast);
+    normalizeLists(mdast);
+  } else {
+    console.log('nothing to do for me.');
+  }
 }
 
-module.exports = data;
+module.exports = fillDataSections;
