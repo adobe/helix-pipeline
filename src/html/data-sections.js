@@ -69,7 +69,7 @@ function hasPlaceholders(section) {
 }
 
 function fillPlaceholders(section) {
-  if (!section.meta.embedData && !Array.isArray(section.meta.embedData)) {
+  if (!section.meta || (!section.meta.embedData && !Array.isArray(section.meta.embedData))) {
     return;
   }
   const data = section.meta.embedData;
@@ -88,6 +88,7 @@ function fillPlaceholders(section) {
   }, []);
 
   section.children = children;
+  delete section.meta.embedData;
 }
 
 function normalizeLists(section) {
@@ -137,20 +138,26 @@ async function fillDataSections({ content: { mdast } }, { downloader }) {
     });
   }
 
+  async function applyDataSections(section) {
+    await extractData(section);
+    remove(section, 'dataEmbed');
+    fillPlaceholders(section);
+    normalizeLists(section);
+  }
+
   const dataSections = selectAll('section', mdast);
 
   // extract data from all sections
-  await Promise.all(dataSections.map(extractData));
+  await Promise.all(dataSections
+    .filter(hasPlaceholders)
+    .map(applyDataSections));
 
   if (dataSections.length === 0 && hasPlaceholders(mdast)) {
     // extract data from the root node (in case there are no sections)
-    await extractData(mdast);
-    remove(mdast, 'dataEmbed');
-    fillPlaceholders(mdast);
-    normalizeLists(mdast);
-  } else {
-    console.log('nothing to do for me.');
+    await applyDataSections(mdast);
   }
+
+  remove(mdast, 'dataEmbed');
 }
 
 module.exports = fillDataSections;
