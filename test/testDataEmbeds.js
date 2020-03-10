@@ -93,7 +93,7 @@ describe('Integration Test with Data Embeds', () => {
       .get('/adobe/test-repo/master/fstab.yaml')
       .reply(() => {
         console.log('fstab');
-        return 404;
+        return [404];
       });
 
     nock('https://adobeioruntime.net')
@@ -101,7 +101,7 @@ describe('Integration Test with Data Embeds', () => {
       .reply(() => {
         // this never happens
         console.log('intercepting runtime');
-        return 404;
+        return [404, [{ foo: 'bar', bar: 'foo' }, { foo: 'shoo', bar: 'bidoo' }]];
       });
 
     const action = coerce({
@@ -134,8 +134,6 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
     );
 
     console.log(result.content.mdast);
-
-    console.log(result.response);
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['Content-Type'], 'text/html');
     assertEquivalentNode(
