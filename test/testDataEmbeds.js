@@ -88,14 +88,14 @@ describe('Integration Test with Data Embeds', () => {
     nock.cleanAll();
   });
 
-  async function testEmbeds(data, markdown, html) {
+  async function testEmbeds(data, markdown, html, status = 200) {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/fstab.yaml')
       .reply(() => [404]);
 
     nock('https://adobeioruntime.net')
       .get(/.*/)
-      .reply(() => [404, data]);
+      .reply(() => [status, data]);
 
     const action = coerce({
       request: { params },
@@ -111,6 +111,7 @@ describe('Integration Test with Data Embeds', () => {
     };
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
+    action.logger = logger;
 
     const result = await pipe(
       (mycontext) => {
