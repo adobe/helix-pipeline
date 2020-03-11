@@ -101,7 +101,7 @@ In the example above, the keyword is `video`, but any keyword like `embed`, `ext
 
 ### Image-Style Embeds
 
-The only notion Markdown has of external content embedded in the document are images. This embed syntax extends that idea by allowing embeds using the image synatx.
+The only notion Markdown has of external content embedded in the document are images. This embed syntax extends that idea by allowing embeds using the image syntax.
 
 An embed is:
 
@@ -151,7 +151,7 @@ Instead of just dumping the data as a Markdown table, Helix will fetch the data,
 
 If the data source has more than one entry, e.g. multiple rows in a spreadsheet, multiple events in a calendar, or multiple posts in an RSS feed, then the content of the document (or section) will be replicated for each entry.
 
-Helix maintains a separate whitelist of URLs that indicate embeddable data sources, so any of the embed synaxes describe above can be used. In the following examples, we will use the IA Writer-style syntax.
+Helix maintains a separate whitelist of URLs that indicate embeddable data sources, so any of the embed syntaxes describe above can be used. In the following examples, we will use the IA Writer-style syntax.
 
 ### Example
 
