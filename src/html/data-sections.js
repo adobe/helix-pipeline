@@ -17,6 +17,7 @@ const {
 } = require('ferrum');
 const removePosition = require('unist-util-remove-position');
 const dotprop = require('dot-prop');
+const { merge } = require('../utils/cache-helper');
 
 const pattern = /{{([^{}]+)}}/g;
 /**
@@ -158,9 +159,17 @@ async function fillDataSections(context, { downloader, logger }) {
 
           // remember that we are using this source so that we can compute the
           // surrogate key later
-
           setdefault(context.content, 'sources', []);
           context.content.sources.push(node.url);
+
+          // pass the cache control header through
+          const res = setdefault(context, 'response', {});
+          const headers = setdefault(res, 'headers', {});
+
+          headers['Cache-Control'] = merge(
+            headers['Cache-Control'],
+            downloadeddata.headers.get('cache-control'),
+          );
         } catch (e) {
           logger.warn(`Unable to parse JSON for data embed ${node.url}: ${e.message}`);
           return node;

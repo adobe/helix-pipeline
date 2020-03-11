@@ -104,6 +104,9 @@ describe('Integration Test with Data Embeds', () => {
       .reply(() => [404]);
 
     nock('https://adobeioruntime.net')
+      .defaultReplyHeaders({
+        'Cache-Control': 'max-age=3600',
+      })
       .get(/.*/)
       .reply(() => [status, data]);
 
@@ -125,7 +128,11 @@ describe('Integration Test with Data Embeds', () => {
 
     const result = await pipe(
       (mycontext) => {
-        mycontext.response = { status: 200, body: mycontext.content.document.body.innerHTML };
+        if (!mycontext.response) {
+          mycontext.response = {};
+        }
+        mycontext.response.status = 200;
+        mycontext.response.body = mycontext.content.document.body.innerHTML;
       },
       context,
       action,
@@ -213,6 +220,8 @@ https://docs.google.com/spreadsheets/d/e/someotheruri/pubhtml
 
     assert.equal(res1.response.headers['Surrogate-Key'], 'PbTcuh0tIarmUOZM');
     assert.equal(res2.response.headers['Surrogate-Key'], 'IkqgcxcG5+q8/cOT');
+
+    assert.equal(res1.response.headers['Cache-Control'], 'max-age=3600');
   });
 
   it('html.pipe processes data embeds in main document', async () => testEmbeds(
