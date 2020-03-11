@@ -14,13 +14,13 @@ const {
   pipe, map, uniq, list,
 } = require('ferrum');
 
-function fetch({ content: { mdast } }, { downloader, secrets: { DATA_EMBED_SERVICE } }) {
+function fetch({ content: { mdast } }, { downloader, logger, secrets: { DATA_EMBED_SERVICE } }) {
   const fetches = pipe(
     selectAll('dataEmbed', mdast),
     map((node) => node.url),
     uniq,
     map((url) => {
-      console.log(`fetching ${DATA_EMBED_SERVICE}/${url}`);
+      logger.info(`fetching ${DATA_EMBED_SERVICE}/${url}`);
       return downloader.fetch({
         uri: `${DATA_EMBED_SERVICE}/${url}`,
         id: `dataEmbed:${url}`,
