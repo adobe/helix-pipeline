@@ -127,6 +127,53 @@ describe('Integration Test with Data Embeds', () => {
       new JSDOM(html).window.document.body,
     );
   }
+
+  it('html.pipe handles error responses gracefully', async () => testEmbeds(
+    [
+      {
+        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+      },
+    ],
+    `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+    `<ol>
+      <li>My car:<a href="cars-%7B%7Byear%7D%7D.html"><img src="%7B%7Bimage%7D%7D" alt="{{make}} {{model}}"></a></li>
+    </ol>`,
+    404,
+  ));
+
+  it('html.pipe handles non-JSON responses gracefully', async () => testEmbeds(
+    'This is not a JSON document!',
+    `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+    `<ol>
+      <li>My car:<a href="cars-%7B%7Byear%7D%7D.html"><img src="%7B%7Bimage%7D%7D" alt="{{make}} {{model}}"></a></li>
+    </ol>`,
+    200,
+  ));
+
+  it('html.pipe handles non-Array responses gracefully', async () => testEmbeds(
+    { thisis: 'not a JSON array' },
+    `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+    `<ol>
+      <li>My car:<a href="cars-%7B%7Byear%7D%7D.html"><img src="%7B%7Bimage%7D%7D" alt="{{make}} {{model}}"></a></li>
+    </ol>`,
+    200,
+  ));
+
   it('html.pipe processes data embeds in main document', async () => testEmbeds(
     [
       {
