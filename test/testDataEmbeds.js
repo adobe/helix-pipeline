@@ -11,6 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
+const path = require('path');
+const fs = require('fs-extra');
 const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
 const { logging } = require('@adobe/helix-testutils');
 const nock = require('nock');
@@ -77,6 +79,14 @@ const crequest = {
   url: '/test/test.html',
 };
 
+const doc1 = fs.readFileSync(path.resolve(__dirname, 'fixtures/example.md')).toString();
+const data1 = 'none';
+const html1 = fs.readFileSync(path.resolve(__dirname, 'fixtures/example.html')).toString();
+
+const doc2 = fs.readFileSync(path.resolve(__dirname, 'fixtures/example-embeds.md')).toString();
+const data2 = [{ foo: 'bar' }];
+const html2 = fs.readFileSync(path.resolve(__dirname, 'fixtures/example-embeds.html')).toString();
+
 describe('Integration Test with Data Embeds', () => {
   afterEach(() => {
     nock.restore();
@@ -127,28 +137,6 @@ describe('Integration Test with Data Embeds', () => {
       new JSDOM(html).window.document.body,
     );
   }
-
-  it('html.pipe handles error responses gracefully', async () => testEmbeds(
-    [
-      {
-        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
-      },
-      {
-        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
-      },
-      {
-        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
-      },
-    ],
-    `
-https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
-
-1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
-    `<ol>
-      <li>My car:<a href="cars-%7B%7Byear%7D%7D.html"><img src="%7B%7Bimage%7D%7D" alt="{{make}} {{model}}"></a></li>
-    </ol>`,
-    404,
-  ));
 
   it('html.pipe handles non-JSON responses gracefully', async () => testEmbeds(
     'This is not a JSON document!',
@@ -263,4 +251,74 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
       </ul>
     </div>`,
   ));
+
+  it('html.pipe handles error responses gracefully', async () => testEmbeds(
+    [
+      {
+        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+      },
+    ],
+    `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+    `<ol>
+      <li>My car:<a href="cars-%7B%7Byear%7D%7D.html"><img src="%7B%7Bimage%7D%7D" alt="{{make}} {{model}}"></a></li>
+    </ol>`,
+    404,
+  )).timeout(10000);
+
+  it('embed processing works with big files, even when there are few embeds', async () => {
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+    await testEmbeds(data2, doc2, html2);
+  }).timeout(20000);
+
+  it('embed processing works with big files, even when there are no embeds', async () => {
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+    await testEmbeds(data1, doc1, html1);
+  }).timeout(20000);
+
+  it('html.pipe handles error responses gracefully', async () => testEmbeds(
+    [
+      {
+        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+      },
+    ],
+    `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+    `<ol>
+      <li>My car:<a href="cars-%7B%7Byear%7D%7D.html"><img src="%7B%7Bimage%7D%7D" alt="{{make}} {{model}}"></a></li>
+    </ol>`,
+    404,
+  )).timeout(10000);
 });
