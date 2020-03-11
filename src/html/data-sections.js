@@ -27,8 +27,8 @@ const pattern = /{{([^{}]+)}}/g;
  */
 async function pmap(tree, iteratee) {
   async function preorder(node) {
-    async function bound(child, idx) {
-      return preorder(child, idx, node);
+    async function bound(child) {
+      return preorder(child);
     }
     const { children } = node;
     const newNode = { ...await iteratee(node) };
@@ -38,7 +38,7 @@ async function pmap(tree, iteratee) {
     }
     return newNode;
   }
-  return preorder(tree, null, null);
+  return preorder(tree);
 }
 
 /**
