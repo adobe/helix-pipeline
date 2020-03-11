@@ -13,7 +13,7 @@ const { selectAll } = require('unist-util-select');
 const remove = require('unist-util-remove');
 const visit = require('unist-util-visit');
 const {
-  deepclone, trySlidingWindow, map, list, reject, contains, is, pipe,
+  deepclone, trySlidingWindow, map, list, reject, contains, is, pipe, setdefault,
 } = require('ferrum');
 const removePosition = require('unist-util-remove-position');
 const dotprop = require('dot-prop');
@@ -137,7 +137,8 @@ function normalizeLists(section) {
   );
 }
 
-async function fillDataSections({ content: { mdast } }, { downloader, logger }) {
+async function fillDataSections(context, { downloader, logger }) {
+  const { content: { mdast } } = context;
   async function extractData(section) {
     return pmap(section, async (node) => {
       if (node.type === 'dataEmbed') {
@@ -154,6 +155,12 @@ async function fillDataSections({ content: { mdast } }, { downloader, logger }) 
             return node;
           }
           section.meta.embedData = json;
+
+          // remember that we are using this source so that we can compute the
+          // surrogate key later
+
+          setdefault(context.content, 'sources', []);
+          context.content.sources.push(node.url);
         } catch (e) {
           logger.warn(`Unable to parse JSON for data embed ${node.url}: ${e.message}`);
           return node;

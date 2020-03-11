@@ -136,6 +136,8 @@ describe('Integration Test with Data Embeds', () => {
       result.response.document.body,
       new JSDOM(html).window.document.body,
     );
+
+    return result;
   }
 
   it('html.pipe handles non-JSON responses gracefully', async () => testEmbeds(
@@ -161,6 +163,57 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
     </ol>`,
     200,
   ));
+
+  it('data embeds generate a surrogate key', async () => {
+    const res1 = await testEmbeds(
+      [
+        {
+          make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+        },
+        {
+          make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+        },
+        {
+          make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+        },
+      ],
+      `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+      `<ol>
+    <li>My car:<a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny"></a></li>
+    <li>My car:<a href="cars-2000.html"><img src="renault.jpg" alt="Renault Scenic"></a></li>
+    <li>My car:<a href="cars-2005.html"><img src="honda.png" alt="Honda FR-V"></a></li>
+    </ol>`,
+    );
+
+    const res2 = await testEmbeds(
+      [
+        {
+          make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+        },
+        {
+          make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+        },
+        {
+          make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+        },
+      ],
+      `
+https://docs.google.com/spreadsheets/d/e/someotheruri/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+      `<ol>
+    <li>My car:<a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny"></a></li>
+    <li>My car:<a href="cars-2000.html"><img src="renault.jpg" alt="Renault Scenic"></a></li>
+    <li>My car:<a href="cars-2005.html"><img src="honda.png" alt="Honda FR-V"></a></li>
+    </ol>`,
+    );
+
+    assert.equal(res1.response.headers['Surrogate-Key'], 'PbTcuh0tIarmUOZM');
+    assert.equal(res2.response.headers['Surrogate-Key'], 'IkqgcxcG5+q8/cOT');
+  });
 
   it('html.pipe processes data embeds in main document', async () => testEmbeds(
     [
