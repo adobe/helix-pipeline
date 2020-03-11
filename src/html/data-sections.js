@@ -137,16 +137,27 @@ function normalizeLists(section) {
   );
 }
 
-async function fillDataSections({ content: { mdast } }, { downloader }) {
+async function fillDataSections({ content: { mdast } }, { downloader, logger }) {
   async function extractData(section) {
     return pmap(section, async (node) => {
       if (node.type === 'dataEmbed') {
         const task = downloader.getTaskById(`dataEmbed:${node.url}`);
         const downloadeddata = await task;
-        // TODO: better error handling
-        // TODO: check that the result is an array
-        const json = await downloadeddata.json();
-        section.meta.embedData = json;
+        if (downloadeddata.status !== 200) {
+          logger.warn(`Bad status code (${downloadeddata.status}) for data embed ${node.url}`);
+          return node;
+        }
+        try {
+          const json = JSON.parse(downloadeddata.body);
+          if (!Array.isArray(json)) {
+            logger.warn(`Expected array for data embed ${node.url}, got ${typeof json}`);
+            return node;
+          }
+          section.meta.embedData = json;
+        } catch (e) {
+          logger.warn(`Unable to parse JSON for data embed ${node.url}: ${e.message}`);
+          return node;
+        }
       }
       return node;
     });
