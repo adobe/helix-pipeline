@@ -26,12 +26,12 @@ const pattern = /{{([^{}]+)}}/g;
  * @returns {Promise<any>}
  */
 async function pmap(tree, iteratee) {
-  async function preorder(node, index, parent) {
+  async function preorder(node) {
     async function bound(child, idx) {
       return preorder(child, idx, node);
     }
     const { children } = node;
-    const newNode = { ...await iteratee(node, index, parent) };
+    const newNode = { ...await iteratee(node) };
 
     if (children) {
       newNode.children = await Promise.all(children.map(bound));
