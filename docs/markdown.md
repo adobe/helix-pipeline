@@ -204,7 +204,7 @@ The following examples use the above data.
 
 #### Placeholders
 
-To create a data embed, add an embedable URL to the document and use placeholders like `{{make}}` or `{{model}}` in the document.
+To create a data embed, add an embeddable URL to the document and use placeholders like `{{make}}` or `{{model}}` in the document.
 
 ```markdown
 
