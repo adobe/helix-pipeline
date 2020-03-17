@@ -1,3 +1,10 @@
+## [6.7.4](https://github.com/adobe/helix-pipeline/compare/v6.7.3...v6.7.4) (2020-03-17)
+
+
+### Bug Fixes
+
+* **deps:** update external ([#618](https://github.com/adobe/helix-pipeline/issues/618)) ([da764ac](https://github.com/adobe/helix-pipeline/commit/da764ac704d3772bccfd1d12e83ef062fb5cf715))
+
 ## [6.7.3](https://github.com/adobe/helix-pipeline/compare/v6.7.2...v6.7.3) (2020-03-17)
 
 
