@@ -49,7 +49,7 @@
     "unist-util-remove-position": "2.0.1"
   },
   "dependencies": {
-    "@adobe/helix-fetch": "1.4.0",
+    "@adobe/helix-fetch": "1.4.1",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "6.0.4",
     "@adobe/openwhisk-action-logger": "2.2.0",
