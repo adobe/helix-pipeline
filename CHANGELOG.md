@@ -1,3 +1,24 @@
+## [6.7.5](https://github.com/adobe/helix-pipeline/compare/v6.7.4...v6.7.5) (2020-03-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-fetch to v1.4.1 ([#621](https://github.com/adobe/helix-pipeline/issues/621)) ([2974051](https://github.com/adobe/helix-pipeline/commit/297405168e5fb0de21a34205fdb1e0ab5f055aa8))
+
+## [6.7.4](https://github.com/adobe/helix-pipeline/compare/v6.7.3...v6.7.4) (2020-03-17)
+
+
+### Bug Fixes
+
+* **deps:** update external ([#618](https://github.com/adobe/helix-pipeline/issues/618)) ([da764ac](https://github.com/adobe/helix-pipeline/commit/da764ac704d3772bccfd1d12e83ef062fb5cf715))
+
+## [6.7.3](https://github.com/adobe/helix-pipeline/compare/v6.7.2...v6.7.3) (2020-03-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v6.0.4 ([#619](https://github.com/adobe/helix-pipeline/issues/619)) ([5e57a1b](https://github.com/adobe/helix-pipeline/commit/5e57a1b9489e247862d1cdeb0dcaa6c5a1a68c1a))
+
 ## [6.7.2](https://github.com/adobe/helix-pipeline/compare/v6.7.1...v6.7.2) (2020-03-10)
 
 
