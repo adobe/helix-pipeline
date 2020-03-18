@@ -1,3 +1,33 @@
+# [6.8.0](https://github.com/adobe/helix-pipeline/compare/v6.7.5...v6.8.0) (2020-03-18)
+
+
+### Bug Fixes
+
+* **data-sections:** ensure that unist map can handle async callbacks ([4f80666](https://github.com/adobe/helix-pipeline/commit/4f806668ffa2f0cb8dd0b6c4ee46d709c8fec909))
+* **data-sections:** ensure that unist map can handle async callbacks ([13dca79](https://github.com/adobe/helix-pipeline/commit/13dca796da8a7f72e794a71af735a7dcf4f82f60))
+* **embeds:** add proper error handling (logging) for failed data embed downloads ([a221714](https://github.com/adobe/helix-pipeline/commit/a221714c0af5408ebd85039399682926655f84aa)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **embeds:** add proper error handling (logging) for failed data embed downloads ([79d194e](https://github.com/adobe/helix-pipeline/commit/79d194e3ac48fabb8050980f238bbd17b75beab2)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **embeds:** data embeds update the surrogate key based on the source URL ([638415b](https://github.com/adobe/helix-pipeline/commit/638415b29e8ee4f69cff82a1f223177e43895413))
+* **embeds:** remove dataEmbed nodes from mdast after detection ([ae6445c](https://github.com/adobe/helix-pipeline/commit/ae6445c196032119c84d2b0e20778499091b257d))
+* **embeds:** remove dataEmbed nodes from mdast after detection ([0ab4dba](https://github.com/adobe/helix-pipeline/commit/0ab4dbaa479e075c1feb56a7d596e2479b01110e))
+* **embeds:** use a proper logger when fetching data embeds ([aca4798](https://github.com/adobe/helix-pipeline/commit/aca4798d58b1753de4f0e749b5806057622ea717))
+* **embeds:** use a proper logger when fetching data embeds ([2f959a0](https://github.com/adobe/helix-pipeline/commit/2f959a09662e7c32e500ac67db2fcdd6e4702485))
+
+
+### Features
+
+* **embeds:** add data section extraction step ([e7bc55a](https://github.com/adobe/helix-pipeline/commit/e7bc55abe1d08c5b52ff63ea0a6c18a324834a23))
+* **embeds:** add data section extraction step ([bd721a5](https://github.com/adobe/helix-pipeline/commit/bd721a518e3d2780050af3968cd42c9b0af365a7))
+* **embeds:** detect data embeds ([155df67](https://github.com/adobe/helix-pipeline/commit/155df67d1c3c704731bf6f0caaa8a6bcb81c8945)), closes [/github.com/adobe/helix-pipeline/issues/593#issuecomment-590956631](https://github.com//github.com/adobe/helix-pipeline/issues/593/issues/issuecomment-590956631)
+* **embeds:** detect data embeds ([fec11d4](https://github.com/adobe/helix-pipeline/commit/fec11d4de35b84a00d1ba46596e79e8b3b10d562)), closes [/github.com/adobe/helix-pipeline/issues/593#issuecomment-590956631](https://github.com//github.com/adobe/helix-pipeline/issues/593/issues/issuecomment-590956631)
+* **embeds:** implement data embeds for sections ([de54ccb](https://github.com/adobe/helix-pipeline/commit/de54ccbe43b0e15ad411ccc7c3967b8a8c9eeb95)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **embeds:** implement data embeds for sections ([366a7e9](https://github.com/adobe/helix-pipeline/commit/366a7e9a1965802fac591dcbb8edb301870748d6)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **embeds:** provide basic data injection ([e733e24](https://github.com/adobe/helix-pipeline/commit/e733e24385ca7fa29b9b90af9edfdb439ae297bc)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **embeds:** provide basic data injection ([355b2ba](https://github.com/adobe/helix-pipeline/commit/355b2bab26e38cb13d8aae582e1f046f0202a789)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **embeds:** support dot notation `{{foo.bar}}` in data embed templates ([283972a](https://github.com/adobe/helix-pipeline/commit/283972accb9b8be271eae42636d85d1d2f876931)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **embeds:** support dot notation `{{foo.bar}}` in data embed templates ([ace965e](https://github.com/adobe/helix-pipeline/commit/ace965e9381760ed00d1b96739442eb0a0fc4160)), closes [#593](https://github.com/adobe/helix-pipeline/issues/593)
+* **utils:** add cache-utils for merging cache-control headers ([3568d39](https://github.com/adobe/helix-pipeline/commit/3568d391782fc67021be692372f5c5d376128681))
+
 ## [6.7.5](https://github.com/adobe/helix-pipeline/compare/v6.7.4...v6.7.5) (2020-03-17)
 
 
