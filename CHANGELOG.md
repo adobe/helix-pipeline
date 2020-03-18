@@ -1,3 +1,10 @@
+## [6.7.5](https://github.com/adobe/helix-pipeline/compare/v6.7.4...v6.7.5) (2020-03-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-fetch to v1.4.1 ([#621](https://github.com/adobe/helix-pipeline/issues/621)) ([2974051](https://github.com/adobe/helix-pipeline/commit/297405168e5fb0de21a34205fdb1e0ab5f055aa8))
+
 ## [6.7.4](https://github.com/adobe/helix-pipeline/compare/v6.7.3...v6.7.4) (2020-03-17)
 
 
