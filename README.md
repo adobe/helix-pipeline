@@ -45,10 +45,6 @@ Table of Contents
 [![npm](https://img.shields.io/npm/dw/@adobe/helix-pipeline.svg)](https://www.npmjs.com/package/@adobe/helix-pipeline) [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/helix-pipeline.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/adobe/hypermedia-pipeline/badge.svg?targetFile=package.json)](https://snyk.io/test/github/adobe/hypermedia-pipeline?targetFile=package.json)
 
-## Helix Markdown
-
-The Helix Pipeline supports some [Markdown extensions](docs/markdown.md).
-
 ## Anatomy of a Pipeline
 
 A pipeline consists of the following main parts:
