@@ -88,8 +88,11 @@ async function fetchExternal(context, { logger, request, downloader }) {
       options: {
         timeout: 10000,
       },
-      errorOn404: true,
+      errorOn404: false,
     });
+    if (resp.status !== 200) {
+      return;
+    }
 
     // store extra source location if present
     const sourceLocation = resp.headers.get('x-source-location') || '';
