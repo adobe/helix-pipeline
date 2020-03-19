@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "6.7.5",
+  "version": "6.8.0",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -45,8 +45,7 @@
     "semantic-release": "17.0.4",
     "sinon": "9.0.1",
     "unist-builder": "2.0.3",
-    "unist-util-inspect": "5.0.1",
-    "unist-util-remove-position": "2.0.1"
+    "unist-util-inspect": "5.0.1"
   },
   "dependencies": {
     "@adobe/helix-epsagon": "1.1.7",
@@ -59,6 +58,7 @@
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
     "dompurify": "2.0.8",
+    "dot-prop": "^5.2.0",
     "ferrum": "^1.2.0",
     "fs-extra": "^8.1.0",
     "github-slugger": "^1.2.1",
@@ -79,6 +79,8 @@
     "strip-markdown": "^3.1.0",
     "unified": "^8.3.2",
     "unist-util-map": "^2.0.0",
+    "unist-util-remove": "^2.0.0",
+    "unist-util-remove-position": "2.0.1",
     "unist-util-select": "^3.0.0",
     "unist-util-visit": "^2.0.0",
     "uri-js": "^4.2.2",

@@ -24,6 +24,11 @@ mountpoints:
   /experimental: http://localhost:4502
 `;
 
+const TEST_ROOT_FSTAB = `
+mountpoints:
+  /: https://adobe.sharepoint.com/sites/TheBlog/Shared%20Documents/theblog
+`;
+
 describe('Testing HTML Pipeline with fstab', () => {
   let logger;
 
@@ -174,6 +179,51 @@ describe('Testing HTML Pipeline with fstab', () => {
     assert.notEqual(result.response.status, 500);
     assert.equal(context.content.data.sourceLocation, '/drives/1234/items/5678');
     assert.equal(context.content.data.sourceHash, 'MTpvnZdh6fTIk6Sb');
+  });
+
+  it('html.pipe with fstab renders fallback markdown correctly if not found in onedrive', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/fstab.yaml')
+      .reply(() => [200, TEST_ROOT_FSTAB])
+      .get('/adobe/test-repo/master/header.md')
+      .reply(() => [200, 'hello in github.\n']);
+
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/word2md@v1')
+      .query(() => (true))
+      .reply(404);
+
+    const context = {};
+    const action = coerce({
+      request: {
+        headers: {
+          'Cache-Control': 'no-store',
+          'x-request-id': '1234',
+        },
+        params: {
+          path: '/header.md',
+          owner: 'adobe',
+          repo: 'test-repo',
+          ref: 'master',
+        },
+      },
+      secrets: {},
+      logger,
+    });
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    },
+    context,
+    action);
+    // eslint-disable-next-line no-console
+    console.log(logger.getOutput());
+
+    assert.equal(result.error, undefined);
+    assert.equal(result.response.body, '<p>hello in github.</p>');
+    assert.notEqual(result.response.status, 500);
   });
 
   it('html.pipe renders google docs document correctly', async () => {

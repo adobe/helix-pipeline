@@ -82,7 +82,7 @@ class Downloader {
    * Schedules a task that fetches a web resource.
    * @param {object} opts options.
    * @param {object} opts.uri URI to download
-   * @param {object} opts.options Fetch options passed to the underling helix-fetch.
+   * @param {object} opts.options Fetch options passed to the underlying helix-fetch.
    * @param {string} opts.id Some id to later identify the task.
    * @param {number} opts.timeout Override global timeout
    * @param {boolean} opts.errorOn404 Treat 404 as error.
@@ -142,7 +142,7 @@ class Downloader {
 
       if (res.status === 404) {
         if (!opts.errorOn404) {
-          logger.warn(`Could not find file at ${uri}`);
+          logger.info(`Could not find file at ${uri}`);
           res.body = 'not found';
           return res;
         }

@@ -1,24 +1,24 @@
 # Untitled string in Secrets Schema
 
 ```txt
-https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_WHITELIST
+https://ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_SERVICE
 ```
 
-Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_WHITELIST`)
+URL of a DataEmbed Service that takes the appended URL and returns an iterable JSON representation.
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
 | :------------------ | ---------- | -------------- | ----------------------- | :---------------- | --------------------- | ------------------- | ------------------------------------------------------------------- |
 | Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [secrets.schema.json\*](secrets.schema.json "open original schema") |
 
-## EMBED_WHITELIST Type
+## DATA_EMBED_SERVICE Type
 
 `string`
 
-## EMBED_WHITELIST Default Value
+## DATA_EMBED_SERVICE Default Value
 
 The default value is:
 
 ```json
-"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com"
+"https://adobeioruntime.net/api/v1/web/helix/helix-services/data-embed@v1"
 ```

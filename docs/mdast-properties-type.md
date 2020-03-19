@@ -49,5 +49,6 @@ unknown
 | `"footnote"`           | A footnote                                                                                                                                                           |
 | `"footnoteReference"`  | A reference to a footnote                                                                                                                                            |
 | `"embed"`              | Content embedded from another page, identified by the \`url\` attribute.                                                                                             |
+| `"dataEmbed"`          | Data embedded from another data source (API), identified by the \`url\` attribute.                                                                                   |
 | `"section"`            | A section within the document. Sections serve as a high-level structure of a single markdown document and can have their own section-specific front matter metadata. |
 | `"icon"`               | An SVG icon, identified by the syntax \`:foo:\`                                                                                                                      |
