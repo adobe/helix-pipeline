@@ -13,6 +13,8 @@
 
 const assert = require('assert');
 const nock = require('nock');
+const proxyquire = require('proxyquire');
+
 const { rootLogger, SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   createActionResponse,
@@ -380,7 +382,7 @@ describe('Testing OpenWhisk adapter', () => {
     assert.deepEqual(context.content, params.content);
   });
 
-  it('it logs to corralogix if secrets are present', async () => {
+  it('it logs to coralogix if secrets are present', async () => {
     const reqs = [];
 
     nock('https://api.coralogix.com/api/v1/')
@@ -455,5 +457,55 @@ describe('Testing OpenWhisk adapter', () => {
       },
       statusCode: 200,
     });
+  });
+});
+
+describe('Testing Epsagon in OpenWhisk adapter', () => {
+  // count how many time espagon was run.
+  let epsagonified = 0;
+
+  const proxiedRunPipeline = proxyquire('../src/utils/openwhisk.js', {
+    epsagon: {
+      openWhiskWrapper(action) {
+        return (parameters) => {
+          epsagonified += 1;
+          return action(parameters);
+        };
+      },
+      '@global': true,
+    },
+  }).runPipeline;
+
+  beforeEach(() => {
+    epsagonified = 0;
+  });
+
+  it('it does not instruments Espagon if token is not present', async () => {
+    const params = {};
+
+    await proxiedRunPipeline(() => {}, pipe, params);
+
+    assert.equal(epsagonified, 0, 'epsagon not instrumented');
+  });
+
+  it('it instruments Espagon if token is present', async () => {
+    const params = {
+      EPSAGON_TOKEN: '1234',
+    };
+
+    await proxiedRunPipeline(() => {}, pipe, params);
+
+    assert.equal(epsagonified, 1, 'epsagon instrumented');
+  });
+
+  it('it instruments Epsagon for each call when token is present', async () => {
+    const params = {
+      EPSAGON_TOKEN: '1234',
+    };
+
+    await proxiedRunPipeline(() => {}, pipe, params);
+    await proxiedRunPipeline(() => {}, pipe, params);
+
+    assert.equal(epsagonified, 2, 'epsagon instrumented');
   });
 });

@@ -12,7 +12,9 @@
 
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
+const { wrap } = require('@adobe/openwhisk-action-utils');
 const { logger } = require('@adobe/openwhisk-action-logger');
+const { epsagon } = require('@adobe/helix-epsagon');
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -167,7 +169,11 @@ async function runPipeline(cont, pipe, actionParams) {
   if (actionParams.__ow_logger && !actionParams.__ow_logger.trace) {
     actionParams.__ow_logger.trace = actionParams.__ow_logger.silly;
   }
-  return logger(logger.trace(runner))(actionParams);
+
+  return wrap(runner)
+    .with(epsagon)
+    .with(logger.trace)
+    .with(logger)(actionParams);
 }
 
 module.exports = {
