@@ -142,7 +142,7 @@ class Downloader {
 
       if (res.status === 404) {
         if (!opts.errorOn404) {
-          logger.warn(`Could not find file at ${uri}`);
+          logger.info(`Could not find file at ${uri}`);
           res.body = 'not found';
           return res;
         }
