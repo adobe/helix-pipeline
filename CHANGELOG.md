@@ -1,3 +1,10 @@
+# [6.9.0](https://github.com/adobe/helix-pipeline/compare/v6.8.1...v6.9.0) (2020-03-19)
+
+
+### Features
+
+* **pipeline:** instrument with Epsagon ([5555bce](https://github.com/adobe/helix-pipeline/commit/5555bce2bfa0f5e7bfcbdf5f2838fb5a2c14b460))
+
 ## [6.8.1](https://github.com/adobe/helix-pipeline/compare/v6.8.0...v6.8.1) (2020-03-19)
 
 
