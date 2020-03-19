@@ -91,8 +91,14 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
   return false;
 }
 
-function embed(uri, node, whitelist = '', logger) {
-  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist.split(','))) {
+function embed(uri, node, whitelist = '', datawhitelist = '', logger) {
+  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, datawhitelist.split(','))) {
+    const children = [{ ...node }];
+    node.type = 'dataEmbed';
+    node.children = children;
+    node.url = URI.serialize(uri);
+    delete node.value;
+  } else if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist.split(','))) {
     const children = [{ ...node }];
     node.type = 'embed';
     node.children = children;
@@ -116,16 +122,23 @@ function internalembed(uri, node, extension) {
 }
 
 function find({ content: { mdast }, request: { extension, url } },
-  { logger, secrets: { EMBED_WHITELIST, EMBED_SELECTOR }, request: { params: { path } } }) {
+  {
+    logger, secrets: {
+      EMBED_WHITELIST,
+      EMBED_SELECTOR,
+      DATA_EMBED_WHITELIST,
+    },
+    request: { params: { path } },
+  }) {
   const resourceext = `.${extension}`;
   const contentext = p.extname(path);
   map(mdast, (node, _, parent) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger);
+      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, DATA_EMBED_WHITELIST, logger);
     } else if (node.type === 'paragraph' && iaEmbed(node, parent)) {
-      embed(iaEmbed(node, parent), node, EMBED_WHITELIST, logger);
+      embed(iaEmbed(node, parent), node, EMBED_WHITELIST, DATA_EMBED_WHITELIST, logger);
     } else if (node.type === 'paragraph' && imgEmbed(node)) {
-      embed(imgEmbed(node), node, EMBED_WHITELIST, logger);
+      embed(imgEmbed(node), node, EMBED_WHITELIST, DATA_EMBED_WHITELIST, logger);
     } else if (node.type === 'inlineCode'
       && internalGatsbyEmbed(node.value, url, contentext, resourceext)) {
       internalembed(internalGatsbyEmbed(node.value, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);

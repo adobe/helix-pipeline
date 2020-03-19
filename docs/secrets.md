@@ -22,7 +22,9 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [REPO_RAW_ROOT](#REPO_RAW_ROOT)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-repo_raw_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_RAW_ROOT")                   |
 | [REPO_API_ROOT](#REPO_API_ROOT)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-repo_api_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_API_ROOT")                   |
 | [EMBED_WHITELIST](#EMBED_WHITELIST)               | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_WHITELIST")               |
+| [DATA_EMBED_WHITELIST](#DATA_EMBED_WHITELIST)     | `string`     | Optional | cannot be null | [Secrets](secrets-properties-data_embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_WHITELIST")     |
 | [EMBED_SERVICE](#EMBED_SERVICE)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SERVICE")                   |
+| [DATA_EMBED_SERVICE](#DATA_EMBED_SERVICE)         | `string`     | Optional | cannot be null | [Secrets](secrets-properties-data_embed_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_SERVICE")         |
 | [EMBED_SELECTOR](#EMBED_SELECTOR)                 | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")                 |
 | [IMAGES_MIN_SIZE](#IMAGES_MIN_SIZE)               | `integer`    | Optional | cannot be null | [Secrets](secrets-properties-images_min_size.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/IMAGES_MIN_SIZE")               |
 | [HTTP_TIMEOUT](#HTTP_TIMEOUT)                     | `integer`    | Optional | cannot be null | [Secrets](secrets-properties-http_timeout.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT")                     |
@@ -91,7 +93,7 @@ The default value is:
 
 ## EMBED_WHITELIST
 
-Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
+Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_WHITELIST`)
 
 
 `EMBED_WHITELIST`
@@ -110,7 +112,31 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 The default value is:
 
 ```json
-"www.youtube.com, spark.adobe.com, unsplash.com/photos, soundcloud.com"
+"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com"
+```
+
+## DATA_EMBED_WHITELIST
+
+Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_WHITELIST`)
+
+
+`DATA_EMBED_WHITELIST`
+
+-   is optional
+-   Type: `string`
+-   cannot be null
+-   defined in: [Secrets](secrets-properties-data_embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_WHITELIST")
+
+### DATA_EMBED_WHITELIST Type
+
+`string`
+
+### DATA_EMBED_WHITELIST Default Value
+
+The default value is:
+
+```json
+"docs.google.com"
 ```
 
 ## EMBED_SERVICE
@@ -135,6 +161,30 @@ The default value is:
 
 ```json
 "https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1"
+```
+
+## DATA_EMBED_SERVICE
+
+URL of a DataEmbed Service that takes the appended URL and returns an iterable JSON representation.
+
+
+`DATA_EMBED_SERVICE`
+
+-   is optional
+-   Type: `string`
+-   cannot be null
+-   defined in: [Secrets](secrets-properties-data_embed_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_SERVICE")
+
+### DATA_EMBED_SERVICE Type
+
+`string`
+
+### DATA_EMBED_SERVICE Default Value
+
+The default value is:
+
+```json
+"https://adobeioruntime.net/api/v1/web/helix/helix-services/data-embed@v1"
 ```
 
 ## EMBED_SELECTOR

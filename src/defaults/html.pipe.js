@@ -41,6 +41,8 @@ const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
 const sanitize = require('../html/sanitize');
 const removeHlxProps = require('../html/removeHlxProps');
+const dataEmbeds = require('../html/fetch-data');
+const dataSections = require('../html/data-sections');
 
 /* eslint newline-per-chained-call: off */
 
@@ -67,6 +69,7 @@ const htmlpipe = (cont, context, action) => {
     .use(parse).expose('parse')
     .use(parseFrontmatter)
     .use(embeds)
+    .use(dataEmbeds)
     .use(smartypants)
     .use(iconize)
     .use(sections)
@@ -74,6 +77,7 @@ const htmlpipe = (cont, context, action) => {
     .use(unwrapSoleImages)
     .use(selectstrain)
     .use(selecttest)
+    .use(dataSections)
     .use(html).expose('html')
     .use(sanitize).when(paranoid)
     .use(cont)
