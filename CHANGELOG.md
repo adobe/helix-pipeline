@@ -1,3 +1,10 @@
+## [6.8.1](https://github.com/adobe/helix-pipeline/compare/v6.8.0...v6.8.1) (2020-03-19)
+
+
+### Bug Fixes
+
+* **fstab:** ensure automatic fallback to github on 404 ([#626](https://github.com/adobe/helix-pipeline/issues/626)) ([dcdb5b0](https://github.com/adobe/helix-pipeline/commit/dcdb5b0a0773281408be02e57895ce91c1996857)), closes [#625](https://github.com/adobe/helix-pipeline/issues/625)
+
 # [6.8.0](https://github.com/adobe/helix-pipeline/compare/v6.7.5...v6.8.0) (2020-03-18)
 
 
