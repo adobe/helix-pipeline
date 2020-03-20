@@ -281,6 +281,40 @@ Built in {{year}}. Driven from {{mileage.from}} km to {{mileage.to}} km.
     <p>Built in 2005. Driven from 50000 km to 150000 km.</p>`,
   ));
 
+  it('html.pipe processes data embeds without XSS', async () => testEmbeds(
+    [
+      {
+        // eslint-disable-next-line no-script-url
+        make: 'Nissan', model: 'Sunny', year: 'javascript:alert("foo")', image: 'nissan.jpg',
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+      },
+    ],
+    `
+## My Cars
+
+---
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+- [![{{make}} {{model}}]({{image}})]({{year}}.md)
+`,
+    `<div>
+      <h2 id="my-cars">My Cars</h2>
+    </div>
+    <div>
+      <ul>
+        <li><a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny"></a></li>
+        <li><a href="cars-2000.html"><img src="renault.jpg" alt="Renault Scenic"></a></li>
+        <li><a href="cars-2005.html"><img src="honda.png" alt="Honda FR-V"></a></li>
+      </ul>
+    </div>`,
+  ));
+
   it('html.pipe processes data embeds in sections', async () => testEmbeds(
     [
       {
