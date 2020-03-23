@@ -1,3 +1,10 @@
+## [6.9.2](https://github.com/adobe/helix-pipeline/compare/v6.9.1...v6.9.2) (2020-03-23)
+
+
+### Bug Fixes
+
+* **error:** better error logging on download failures ([#632](https://github.com/adobe/helix-pipeline/issues/632)) ([ae49cf4](https://github.com/adobe/helix-pipeline/commit/ae49cf451124eea25eeec2f46e8be4baef5cc92d)), closes [#631](https://github.com/adobe/helix-pipeline/issues/631)
+
 ## [6.9.1](https://github.com/adobe/helix-pipeline/compare/v6.9.0...v6.9.1) (2020-03-19)
 
 
