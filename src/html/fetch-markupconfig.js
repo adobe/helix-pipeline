@@ -9,14 +9,11 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { setdefault } = require('ferrum');
-const { MarkupConfig } = require('@adobe/helix-shared');
-
 async function fetchMarkupConfig(context, action) {
   const { request, downloader } = action;
 
   const {
-    owner, repo, branch, ref,
+    owner, repo, ref,
   } = request.params || {};
   const path = '/helix-markup.yaml';
 
@@ -27,26 +24,13 @@ async function fetchMarkupConfig(context, action) {
 
   try {
     // schedule fetch task
-    const res = await downloader.fetchGithub({
+    downloader.fetchGithub({
       owner,
       repo,
       ref,
       path,
+      id: 'markupconfig',
     });
-
-    if (res.status === 404) {
-      return;
-    }
-
-    setdefault(context.content, 'sources', []).push(downloader.computeGithubURI(owner, repo, branch || ref || 'master', path));
-
-    const cfg = await new MarkupConfig()
-      .withSource(res.body)
-      .init();
-    const json = cfg.toJSON();
-    // TODO: Clean up `name` keys. Remove once @adobe/helix-shared#248 is fixed
-    Object.values(json.markup).forEach((c) => delete c.name);
-    setdefault(action, 'markupconfig', json);
   } catch (err) {
     // throw error if no status error
     /* istanbul ignore next */

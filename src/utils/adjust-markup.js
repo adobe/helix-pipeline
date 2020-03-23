@@ -11,12 +11,41 @@
  */
 
 const expand = require('emmet').expandAbbreviation;
+const { setdefault } = require('ferrum');
 const findAndReplace = require('hast-util-find-and-replace');
 const fromDOM = require('hast-util-from-dom');
 const { JSDOM } = require('jsdom');
+const { MarkupConfig } = require('@adobe/helix-shared');
 
 /** Pleceholder variable for the generate template. */
 const PLACEHOLDER_TEMPLATE = /\$\{\d+\}/g;
+
+async function getMarkupConfig(context, action) {
+  setdefault(context, 'content', {});
+
+  const { logger, downloader } = action;
+  const markupConfigTask = downloader.getTaskById('markupconfig');
+  if (!markupConfigTask) {
+    logger.info('unable to adjust markup. no markup config task scheduled.');
+    return;
+  }
+
+  const res = await markupConfigTask;
+  if (res.status !== 200) {
+    logger.info(`unable to fetch markupconfig.yaml: ${res.status}`);
+    return;
+  }
+  // remember markupconfig as source
+  setdefault(context.content, 'sources', []).push(markupConfigTask.uri);
+
+  const cfg = await new MarkupConfig()
+    .withSource(res.body)
+    .init();
+  const json = cfg.toJSON();
+  // TODO: Clean up `name` keys. Remove once @adobe/helix-shared#248 is fixed
+  Object.values(json.markup).forEach((c) => delete c.name);
+  setdefault(action, 'markupconfig', json);
+}
 
 /**
  * Returns the HTML element for the provided HTML template.
@@ -43,7 +72,11 @@ function getHTMLElement(template) {
  * @param {Object} transformer the VDOM transformer
  * @param {Object} markupconfig the markup config
  */
-async function adjustMDAST(context, { logger, transformer, markupconfig }) {
+async function adjustMDAST(context, action) {
+  // Since this is called first in the pipeline, we get the markup config here
+  await getMarkupConfig(context, action);
+
+  const { logger, transformer, markupconfig } = action;
   if (!markupconfig || !markupconfig.markup) {
     return;
   }
