@@ -160,8 +160,12 @@ class Downloader {
       if (!(err instanceof Error)) {
         err = Error(`Error while fetching file from ${uri}: ${res.status}`);
       }
-      context.error = err;
-      context.error.status = res.status || 500;
+      err.status = res.status || 500;
+      context.error = {
+        message: err.message,
+        status: err.status,
+        stack: err.stack,
+      };
       throw err;
     };
 
