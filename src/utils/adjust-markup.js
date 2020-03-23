@@ -35,16 +35,15 @@ async function getMarkupConfig(context, action) {
     logger.info(`unable to fetch markupconfig.yaml: ${res.status}`);
     return;
   }
+
   // remember markupconfig as source
   setdefault(context.content, 'sources', []).push(markupConfigTask.uri);
 
+  // Expose markupconfig on the action
   const cfg = await new MarkupConfig()
     .withSource(res.body)
     .init();
-  const json = cfg.toJSON();
-  // TODO: Clean up `name` keys. Remove once @adobe/helix-shared#248 is fixed
-  Object.values(json.markup).forEach((c) => delete c.name);
-  setdefault(action, 'markupconfig', json);
+  setdefault(action, 'markupconfig', cfg.toJSON());
 }
 
 /**
