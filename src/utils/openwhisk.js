@@ -76,9 +76,10 @@ function extractClientRequest(action) {
 /**
  * Creates an response for the OpenWhisk Web-Action from the pipeline context
  * @param {Object} context Pipeline context.
+ * @param {object} action Action context.
  * @returns {Object} OpenWhisk response
  */
-async function createActionResponse(context) {
+async function createActionResponse(context, action) {
   const {
     response: {
       status,
@@ -93,8 +94,14 @@ async function createActionResponse(context) {
     body,
   };
   if (error) {
+    if (action && action.logger) {
+      action.logger.error('Error while executing action', error);
+    } else {
+      // eslint-disable-next-line no-console
+      console.error('Error while executing action', error);
+    }
     // don't set the 'error' property, otherwise openwhisk treats this as application error
-    ret.errorMessage = String(error);
+    ret.errorMessage = error.message || String(error);
     if (error.stack) {
       ret.errorStack = String(error.stack);
     }
@@ -163,7 +170,7 @@ async function runPipeline(cont, pipe, actionParams) {
       // pass content param from request to context
       context.content = params.content;
     }
-    return createActionResponse(await pipe(cont, context, action));
+    return createActionResponse(await pipe(cont, context, action), action);
   }
   // enhance logger if trace method is missing (eg. a winston logger)
   if (actionParams.__ow_logger && !actionParams.__ow_logger.trace) {

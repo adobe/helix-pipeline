@@ -735,7 +735,7 @@ ${context.content.document.body.innerHTML}`,
     delete out.errorStack;
     assert.deepEqual(out, {
       body: '',
-      errorMessage: 'Error: Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404',
+      errorMessage: 'Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404',
       headers: {},
       statusCode: 404,
     });

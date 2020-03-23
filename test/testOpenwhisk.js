@@ -101,7 +101,7 @@ describe('Testing OpenWhisk adapter', () => {
     delete out.errorStack;
     assert.deepEqual(out, {
       body: {},
-      errorMessage: 'Error: boom!',
+      errorMessage: 'boom!',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -126,7 +126,7 @@ describe('Testing OpenWhisk adapter', () => {
     delete out.errorStack;
     assert.deepEqual(out, {
       body: 'Forbidden',
-      errorMessage: 'Error: Forbidden',
+      errorMessage: 'Forbidden',
       headers: {
         'Content-Type': 'text/plain',
         Location: 'https://example.com',
@@ -146,7 +146,7 @@ describe('Testing OpenWhisk adapter', () => {
     delete out.errorStack;
     assert.deepEqual(out, {
       body: {},
-      errorMessage: 'ReferenceError: foo is not defined',
+      errorMessage: 'foo is not defined',
       headers: {
         'Content-Type': 'application/json',
       },

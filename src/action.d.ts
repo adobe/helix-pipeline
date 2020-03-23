@@ -109,6 +109,12 @@ export interface Action {
   transformer?: {
     [k: string]: any;
   };
+  /**
+   * A Downloader instance
+   */
+  downloader?: {
+    [k: string]: any;
+  };
 }
 /**
  * Secrets passed into the pipeline such as API Keys or configuration settings.
@@ -123,13 +129,21 @@ export interface Secrets {
    */
   REPO_API_ROOT?: string;
   /**
-   * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
+   * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_WHITELIST`)
    */
   EMBED_WHITELIST?: string;
+  /**
+   * Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_WHITELIST`)
+   */
+  DATA_EMBED_WHITELIST?: string;
   /**
    * URL of an Embed Service that takes the appended URL and returns an embeddable HTML representation.
    */
   EMBED_SERVICE?: string;
+  /**
+   * URL of a DataEmbed Service that takes the appended URL and returns an iterable JSON representation.
+   */
+  DATA_EMBED_SERVICE?: string;
   /**
    * Selector to be used when resolving internal embeds.
    */

@@ -108,6 +108,30 @@ export interface Content {
     [k: string]: any;
   };
   meta?: null | {
+    /**
+     * The CSS class to use for the section instead of the default `hlx-section` one
+     */
+    class?: string;
+    /**
+     * The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+     */
+    tagname?: string;
+    /**
+     * The inferred class names for the section
+     */
+    types?: string[];
+    /**
+     * Extracted title of the document
+     */
+    title?: string;
+    /**
+     * Extracted first paragraph of the document
+     */
+    intro?: string;
+    /**
+     * Path (can be relative) to the first image in the document
+     */
+    image?: string;
     [k: string]: any;
   };
   /**
@@ -165,12 +189,11 @@ export interface MDAST {
     | "footnote"
     | "footnoteReference"
     | "embed"
+    | "dataEmbed"
     | "section"
     | "icon";
   children?: (
-    | {
-        [k: string]: any;
-      }
+    | MDAST
     | {
         /**
          * The MDAST node type. Each section can be treated as a standalone document.
@@ -184,6 +207,30 @@ export interface MDAST {
          */
         children?: MDAST[];
         meta?: null | {
+          /**
+           * The CSS class to use for the section instead of the default `hlx-section` one
+           */
+          class?: string;
+          /**
+           * The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+           */
+          tagname?: string;
+          /**
+           * The inferred class names for the section
+           */
+          types?: string[];
+          /**
+           * Extracted title of the document
+           */
+          title?: string;
+          /**
+           * Extracted first paragraph of the document
+           */
+          intro?: string;
+          /**
+           * Path (can be relative) to the first image in the document
+           */
+          image?: string;
           [k: string]: any;
         };
         /**
@@ -234,7 +281,7 @@ export interface MDAST {
   /**
    * For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.
    */
-  align?: ("left" | "right" | "center" | null)[];
+  align?: (null | ("left" | "right" | "center" | null))[];
   /**
    * For code, a lang field can be present. It represents the language of computer code being marked up.
    */
@@ -252,6 +299,30 @@ export interface MDAST {
    */
   url?: string;
   meta?: null | {
+    /**
+     * The CSS class to use for the section instead of the default `hlx-section` one
+     */
+    class?: string;
+    /**
+     * The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+     */
+    tagname?: string;
+    /**
+     * The inferred class names for the section
+     */
+    types?: string[];
+    /**
+     * Extracted title of the document
+     */
+    title?: string;
+    /**
+     * Extracted first paragraph of the document
+     */
+    intro?: string;
+    /**
+     * Path (can be relative) to the first image in the document
+     */
+    image?: string;
     [k: string]: any;
   };
   /**
