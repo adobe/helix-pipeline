@@ -101,7 +101,7 @@ async function createActionResponse(context, action) {
     }
     const level = ret.statusCode >= 500 ? 'error' : 'warn';
     if (action && action.logger) {
-      action.logger[level](`problems while executing action: ${ret.errorMessage}`);
+      action.logger[level](`Problems while executing action: ${ret.errorMessage}`);
     } else {
       // eslint-disable-next-line no-console
       console[level](`problems while executing action: ${ret.errorMessage}`);
