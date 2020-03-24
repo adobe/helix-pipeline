@@ -60,7 +60,7 @@
     "dompurify": "2.0.8",
     "dot-prop": "^5.2.0",
     "ferrum": "^1.2.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "github-slugger": "^1.2.1",
     "js-yaml": "^3.13.1",
     "jsdom": "16.2.1",
