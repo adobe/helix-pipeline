@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "6.9.5",
+  "version": "6.9.6",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@adobe/helix-epsagon": "1.1.9",
-    "@adobe/helix-fetch": "1.4.1",
+    "@adobe/helix-fetch": "1.4.2",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "6.0.5",
     "@adobe/openwhisk-action-logger": "2.2.0",
