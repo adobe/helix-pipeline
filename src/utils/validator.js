@@ -38,6 +38,9 @@ function ajv(logger, options = {}) {
       require('../schemas/secrets.schema.json'),
       require('../schemas/section.schema.json'),
       require('../schemas/textcoordinates.schema.json'),
+      require('@adobe/helix-shared/src/schemas/markupconfig.schema.json'),
+      require('@adobe/helix-shared/src/schemas/markup.schema.json'),
+      require('@adobe/helix-shared/src/schemas/markupmapping.schema.json'),
       /* eslint-enable global-require */
     ].forEach((schemaData) => {
       validator.addSchema(schemaData);
