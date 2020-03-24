@@ -1,3 +1,10 @@
+# [6.10.0](https://github.com/adobe/helix-pipeline/compare/v6.9.6...v6.10.0) (2020-03-24)
+
+
+### Features
+
+* **html pipe:** support declaratively configurable markup ([#533](https://github.com/adobe/helix-pipeline/issues/533)) ([4489463](https://github.com/adobe/helix-pipeline/commit/4489463b5e0a2d36e8c770c74d8da71a6a006826)), closes [#516](https://github.com/adobe/helix-pipeline/issues/516)
+
 ## [6.9.6](https://github.com/adobe/helix-pipeline/compare/v6.9.5...v6.9.6) (2020-03-24)
 
 
