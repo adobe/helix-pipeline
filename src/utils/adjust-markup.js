@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
-const expand = require('emmet').expandAbbreviation;
+const { expand } = require('@emmetio/expand-abbreviation');
 const { setdefault } = require('ferrum');
 const findAndReplace = require('hast-util-find-and-replace');
 const fromDOM = require('hast-util-from-dom');
@@ -54,7 +54,12 @@ async function getMarkupConfig(context, action) {
  * @returns {HTMLElement} the resulting HTML element including a `${0}` placeholder
  */
 function getHTMLElement(template) {
-  const html = expand(template);
+  const html = expand(template, {
+    field: (index, placeholder) => {
+      const p = placeholder ? `:${placeholder}` : '';
+      return `\${${index}${p}}`;
+    },
+  });
   const doc = new JSDOM().window.document;
   const dom = doc.createElement('div');
   dom.innerHTML = html;
