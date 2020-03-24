@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "6.9.3",
+  "version": "6.9.5",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -61,7 +61,7 @@
     "dot-prop": "^5.2.0",
     "emmet": "^1.6.3",
     "ferrum": "^1.2.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^9.0.0",
     "github-slugger": "^1.2.1",
     "hast-util-find-and-replace": "^2.0.0",
     "hast-util-from-dom": "^2.0.1",
