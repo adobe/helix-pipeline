@@ -15,6 +15,7 @@ const { log } = require('./default.js');
 const fetch = require('../html/fetch-markdown.js');
 const fetchFstab = require('../html/fetch-fstab.js');
 const fetchExternal = require('../html/fetch-external.js');
+const fetchMarkupConfig = require('../html/fetch-markupconfig.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
@@ -43,6 +44,7 @@ const sanitize = require('../html/sanitize');
 const removeHlxProps = require('../html/removeHlxProps');
 const dataEmbeds = require('../html/fetch-data');
 const dataSections = require('../html/data-sections');
+const { adjustMDAST, adjustHTML } = require('../utils/adjust-markup');
 
 /* eslint newline-per-chained-call: off */
 
@@ -65,6 +67,7 @@ const htmlpipe = (cont, context, action) => {
     .every(timer.update)
     .use(fetchFstab)
     .use(fetchExternal)
+    .use(fetchMarkupConfig)
     .use(fetch).expose('fetch').when(hascontent)
     .use(parse).expose('parse')
     .use(parseFrontmatter)
@@ -75,10 +78,12 @@ const htmlpipe = (cont, context, action) => {
     .use(sections)
     .use(meta).expose('meta')
     .use(unwrapSoleImages)
+    .use(adjustMDAST)
     .use(selectstrain)
     .use(selecttest)
     .use(dataSections)
     .use(html).expose('html')
+    .use(adjustHTML)
     .use(sanitize).when(paranoid)
     .use(cont)
     .use(type('text/html'))
