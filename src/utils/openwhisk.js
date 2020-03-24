@@ -94,16 +94,17 @@ async function createActionResponse(context, action) {
     body,
   };
   if (error) {
-    if (action && action.logger) {
-      action.logger.error('Error while executing action', error);
-    } else {
-      // eslint-disable-next-line no-console
-      console.error('Error while executing action', error);
-    }
     // don't set the 'error' property, otherwise openwhisk treats this as application error
     ret.errorMessage = error.message || String(error);
     if (error.stack) {
       ret.errorStack = String(error.stack);
+    }
+    const level = ret.statusCode >= 500 ? 'error' : 'warn';
+    if (action && action.logger) {
+      action.logger[level](`problems while executing action: ${ret.errorMessage}`);
+    } else {
+      // eslint-disable-next-line no-console
+      console[level](`problems while executing action: ${ret.errorMessage}`);
     }
   }
   return ret;
