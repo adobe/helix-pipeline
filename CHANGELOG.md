@@ -1,3 +1,10 @@
+## [6.9.4](https://github.com/adobe/helix-pipeline/compare/v6.9.3...v6.9.4) (2020-03-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v6.0.5 ([#636](https://github.com/adobe/helix-pipeline/issues/636)) ([05a06da](https://github.com/adobe/helix-pipeline/commit/05a06da65b56e7d40bf4ce0cf5e280ee170c03cd))
+
 ## [6.9.3](https://github.com/adobe/helix-pipeline/compare/v6.9.2...v6.9.3) (2020-03-23)
 
 
