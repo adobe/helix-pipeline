@@ -104,7 +104,7 @@ async function createActionResponse(context, action) {
       action.logger[level](`Problems while executing action: ${ret.errorMessage}`);
     } else {
       // eslint-disable-next-line no-console
-      console[level](`problems while executing action: ${ret.errorMessage}`);
+      console[level](`Problems while executing action: ${ret.errorMessage}`);
     }
   }
   return ret;
