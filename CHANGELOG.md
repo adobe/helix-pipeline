@@ -1,3 +1,10 @@
+## [6.10.1](https://github.com/adobe/helix-pipeline/compare/v6.10.0...v6.10.1) (2020-03-25)
+
+
+### Bug Fixes
+
+* **html pipe:** pipeline v6.10.0 breaks some project deployments ([db35b72](https://github.com/adobe/helix-pipeline/commit/db35b7230a962f05a91c0e72277b90ccec7b5220))
+
 # [6.10.0](https://github.com/adobe/helix-pipeline/compare/v6.9.6...v6.10.0) (2020-03-24)
 
 
