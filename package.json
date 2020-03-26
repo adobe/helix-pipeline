@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "6.10.0",
+  "version": "6.10.2",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -48,18 +48,18 @@
     "unist-util-inspect": "5.0.1"
   },
   "dependencies": {
-    "@adobe/helix-epsagon": "1.1.9",
+    "@adobe/helix-epsagon": "1.1.10",
     "@adobe/helix-fetch": "1.4.2",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "6.0.5",
     "@adobe/openwhisk-action-logger": "2.2.0",
     "@adobe/openwhisk-action-utils": "4.2.2",
+    "@emmetio/expand-abbreviation": "^0.7.3",
     "ajv": "^6.10.2",
     "callsites": "^3.1.0",
     "clone": "^2.1.2",
     "dompurify": "2.0.8",
     "dot-prop": "^5.2.0",
-    "emmet": "^1.6.3",
     "ferrum": "^1.2.0",
     "fs-extra": "^9.0.0",
     "github-slugger": "^1.2.1",
