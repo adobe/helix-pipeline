@@ -115,6 +115,12 @@ export interface Action {
   downloader?: {
     [k: string]: any;
   };
+  /**
+   * A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)
+   */
+  markupconfig?: {
+    [k: string]: any;
+  };
 }
 /**
  * Secrets passed into the pipeline such as API Keys or configuration settings.

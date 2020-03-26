@@ -41,7 +41,8 @@
       "description": "A Downloader instance"
     },
     "markupconfig": {
-      "$ref": "https://ns.adobe.com/helix/shared/markupconfig"
+      "type": "object",
+      "description": "A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)"
     }
   }
 }
