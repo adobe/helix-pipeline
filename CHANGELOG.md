@@ -1,3 +1,10 @@
+# [6.11.0](https://github.com/adobe/helix-pipeline/compare/v6.10.4...v6.11.0) (2020-03-26)
+
+
+### Features
+
+* **downloader:** add transaction id ([#648](https://github.com/adobe/helix-pipeline/issues/648)) ([17a8164](https://github.com/adobe/helix-pipeline/commit/17a8164dc31392701d5d5505f86075db67437552)), closes [#641](https://github.com/adobe/helix-pipeline/issues/641)
+
 ## [6.10.4](https://github.com/adobe/helix-pipeline/compare/v6.10.3...v6.10.4) (2020-03-26)
 
 
