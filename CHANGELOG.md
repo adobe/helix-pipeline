@@ -1,3 +1,10 @@
+## [6.10.4](https://github.com/adobe/helix-pipeline/compare/v6.10.3...v6.10.4) (2020-03-26)
+
+
+### Bug Fixes
+
+* **error:** adjust error messages ([#639](https://github.com/adobe/helix-pipeline/issues/639)) ([5ed4a6d](https://github.com/adobe/helix-pipeline/commit/5ed4a6d50df15ed819187049ede6d210089266f5))
+
 ## [6.10.3](https://github.com/adobe/helix-pipeline/compare/v6.10.2...v6.10.3) (2020-03-26)
 
 
