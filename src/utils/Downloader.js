@@ -116,11 +116,18 @@ class Downloader {
       if (forwardHeaders.length > 0) {
         options.headers = options.headers || {};
         forwardHeaders.forEach((header) => {
+          header = header.toLowerCase();
           if (request.headers[header]) {
             options.headers[header] = request.headers[header];
           }
         });
       }
+    }
+    // include transaction id if not already present
+    if (options.headers
+      && !options.headers['x-request-id']
+      && process.env.__OW_TRANSACTION_ID) {
+      options.headers['x-request-id'] = process.env.__OW_TRANSACTION_ID;
     }
 
     const download = async () => {
