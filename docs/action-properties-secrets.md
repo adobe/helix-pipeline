@@ -28,6 +28,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [EMBED_SELECTOR](#EMBED_SELECTOR)                 | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")                 |
 | [IMAGES_MIN_SIZE](#IMAGES_MIN_SIZE)               | `integer`    | Optional | cannot be null | [Secrets](secrets-properties-images_min_size.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/IMAGES_MIN_SIZE")               |
 | [HTTP_TIMEOUT](#HTTP_TIMEOUT)                     | `integer`    | Optional | cannot be null | [Secrets](secrets-properties-http_timeout.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT")                     |
+| [HTTP_TIMEOUT_EXTERNAL](#HTTP_TIMEOUT_EXTERNAL)   | `integer`    | Optional | cannot be null | [Secrets](secrets-properties-http_timeout_external.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT_EXTERNAL")   |
 | [TEST_BOOLEAN](#TEST_BOOLEAN)                     | `boolean`    | Optional | cannot be null | [Secrets](secrets-properties-test_boolean.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/TEST_BOOLEAN")                     |
 | [XML_PRETTY](#XML_PRETTY)                         | `boolean`    | Optional | cannot be null | [Secrets](secrets-properties-xml_pretty.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/XML_PRETTY")                         |
 | [SANITIZE_DOM](#SANITIZE_DOM)                     | `boolean`    | Optional | cannot be null | [Secrets](secrets-properties-sanitize_dom.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/SANITIZE_DOM")                     |
@@ -257,6 +258,30 @@ The default value is:
 
 ```json
 1000
+```
+
+## HTTP_TIMEOUT_EXTERNAL
+
+Timeout for outgoing HTTP requests to external services in milliseconds
+
+
+`HTTP_TIMEOUT_EXTERNAL`
+
+-   is optional
+-   Type: `integer`
+-   cannot be null
+-   defined in: [Secrets](secrets-properties-http_timeout_external.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT_EXTERNAL")
+
+### HTTP_TIMEOUT_EXTERNAL Type
+
+`integer`
+
+### HTTP_TIMEOUT_EXTERNAL Default Value
+
+The default value is:
+
+```json
+20000
 ```
 
 ## TEST_BOOLEAN

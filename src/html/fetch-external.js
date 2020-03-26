@@ -13,7 +13,9 @@ const crypto = require('crypto');
 const { setdefault } = require('ferrum');
 const { MountConfig } = require('@adobe/helix-shared');
 
-async function fetchExternal(context, { logger, request, downloader }) {
+async function fetchExternal(context, {
+  logger, request, downloader, secrets,
+}) {
   setdefault(context, 'content', {});
   // check for fstab
   const fstabTask = downloader.getTaskById('fstab');
@@ -21,7 +23,6 @@ async function fetchExternal(context, { logger, request, downloader }) {
     logger.info('unable to fetch from external. no fstab task scheduled.');
     return;
   }
-
   try {
     const res = await fstabTask;
     if (res.status !== 200) {
@@ -86,7 +87,7 @@ async function fetchExternal(context, { logger, request, downloader }) {
       uri: url.href,
       // ump the timeout a bit, since the external script might take a while to render
       options: {
-        timeout: 10000,
+        timeout: secrets.HTTP_TIMEOUT_EXTERNAL,
       },
       errorOn404: false,
     });

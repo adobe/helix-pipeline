@@ -181,6 +181,57 @@ describe('Testing HTML Pipeline with fstab', () => {
     assert.equal(context.content.data.sourceHash, 'MTpvnZdh6fTIk6Sb');
   });
 
+  it('external requests honour the HTTP_TIMEOUT_EXTERNAL parameter', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/fstab.yaml')
+      .reply(() => [200, TEST_FSTAB]);
+
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/word2md@v1')
+      .query((q) => {
+        assert.equal(q.path, '/en/posts/hello.docx');
+        assert.equal(q.shareLink, 'https://adobe.sharepoint.com/sites/TheBlog/Shared%20Documents/theblog');
+        assert.equal(q.rid, '1234');
+        assert.equal(q.src, 'adobe/test-repo/master');
+        return true;
+      })
+      .delay(500)
+      .reply(() => [200, 'hello from onedrive.\n', {
+        'x-source-location': '/drives/1234/items/5678',
+      }]);
+
+    const context = {};
+    const action = coerce({
+      request: {
+        headers: {
+          'Cache-Control': 'no-store',
+          'x-request-id': '1234',
+        },
+        params: {
+          path: '/ms/en/posts/hello.selector.md',
+          owner: 'adobe',
+          repo: 'test-repo',
+          ref: 'master',
+        },
+      },
+      secrets: {
+        HTTP_TIMEOUT_EXTERNAL: '20',
+      },
+      logger,
+    });
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    },
+    context,
+    action);
+    // eslint-disable-next-line no-console
+    console.log(logger.getOutput());
+    assert.equal(result.response.status, 504);
+  });
+
   it('html.pipe with fstab renders fallback markdown correctly if not found in onedrive', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/fstab.yaml')
