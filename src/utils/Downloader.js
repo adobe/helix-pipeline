@@ -149,7 +149,7 @@ class Downloader {
         logger.warn(`Could not find file at ${uri}`);
         setdefault(context, 'response', {}).status = 404;
       } else if (res.status === 502 || res instanceof TimeoutError) {
-        logger.error(`Gateway timeout of ${this.timeout} milliseconds exceeded for ${uri}`);
+        logger.error(`Gateway timeout of ${options.timeout} milliseconds exceeded for ${uri}`);
         setdefault(context, 'response', {}).status = 504;
       } else {
         logger.error(`Error while fetching file from ${uri} with the following options:\n${inspect(options, { depth: null })}`);
