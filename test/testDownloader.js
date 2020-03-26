@@ -452,6 +452,42 @@ describe('Test Download', () => {
     mgr.destroy();
   });
 
+  it('forwards the transaction id', async () => {
+    const scope = nock('https://www.example.com', {
+      reqheaders: {
+        'x-cdn-url': 'cdn url',
+        'x-request-id': 'my-transaction',
+      },
+      badheaders: ['x-not-forward'],
+    })
+      .get('/data')
+      .reply(() => [200, 'hello, world 4.']);
+
+    const action = coerce({
+      logger,
+      request: {
+        headers: {
+          'x-cdn-url': 'cdn url',
+          'x-not-forward': 'should not forward',
+        },
+      },
+    });
+    try {
+      process.env.__OW_TRANSACTION_ID = 'my-transaction';
+      const mgr = new Downloader(context, action, {
+        forceNoCache: true,
+        forceHttp1: true,
+      });
+      await mgr.fetch({
+        uri: 'https://www.example.com/data',
+      });
+      scope.done();
+      mgr.destroy();
+    } finally {
+      delete process.env.__OW_TRANSACTION_ID;
+    }
+  });
+
   it('forward only specified headers', async () => {
     const scope = nock('https://www.example.com', {
       reqheaders: {
