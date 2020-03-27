@@ -1,3 +1,17 @@
+## [6.11.1](https://github.com/adobe/helix-pipeline/compare/v6.11.0...v6.11.1) (2020-03-26)
+
+
+### Bug Fixes
+
+* **external:** make external HTTP timeout configurable ([#646](https://github.com/adobe/helix-pipeline/issues/646)) ([0b69511](https://github.com/adobe/helix-pipeline/commit/0b695119e12ac82efacc298e005f0241b541e15f)), closes [#638](https://github.com/adobe/helix-pipeline/issues/638)
+
+# [6.11.0](https://github.com/adobe/helix-pipeline/compare/v6.10.4...v6.11.0) (2020-03-26)
+
+
+### Features
+
+* **downloader:** add transaction id ([#648](https://github.com/adobe/helix-pipeline/issues/648)) ([17a8164](https://github.com/adobe/helix-pipeline/commit/17a8164dc31392701d5d5505f86075db67437552)), closes [#641](https://github.com/adobe/helix-pipeline/issues/641)
+
 ## [6.10.4](https://github.com/adobe/helix-pipeline/compare/v6.10.3...v6.10.4) (2020-03-26)
 
 
