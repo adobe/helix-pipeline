@@ -17,15 +17,15 @@ Tracks the OpenWhisk action invocation
 
 # Action Properties
 
-| Property                      | Type          | Required | Nullable       | Defined by                                                                                                             |
-| :---------------------------- | ------------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [request](#request)           | Merged        | Optional | cannot be null | [Action](action-properties-raw-request.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/properties/request")   |
-| [logger](#logger)             | `object`      | Optional | cannot be null | [Action](action-properties-logger.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/logger")             |
-| [debug](#debug)               | `object`      | Optional | cannot be null | [Action](action-properties-debug.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/debug")               |
-| [secrets](#secrets)           | `object`      | Optional | cannot be null | [Action](action-properties-secrets.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/secrets")          |
-| [transformer](#transformer)   | `object`      | Optional | cannot be null | [Action](action-properties-transformer.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/transformer")   |
-| [downloader](#downloader)     | `object`      | Optional | cannot be null | [Action](action-properties-downloader.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/downloader")     |
-| [markupconfig](#markupconfig) | Not specified | Optional | cannot be null | [Action](action-properties-markupconfig.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/markupconfig") |
+| Property                      | Type     | Required | Nullable       | Defined by                                                                                                             |
+| :---------------------------- | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------- |
+| [request](#request)           | Merged   | Optional | cannot be null | [Action](action-properties-raw-request.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/properties/request")   |
+| [logger](#logger)             | `object` | Optional | cannot be null | [Action](action-properties-logger.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/logger")             |
+| [debug](#debug)               | `object` | Optional | cannot be null | [Action](action-properties-debug.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/debug")               |
+| [secrets](#secrets)           | `object` | Optional | cannot be null | [Action](action-properties-secrets.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/secrets")          |
+| [transformer](#transformer)   | `object` | Optional | cannot be null | [Action](action-properties-transformer.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/transformer")   |
+| [downloader](#downloader)     | `object` | Optional | cannot be null | [Action](action-properties-downloader.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/downloader")     |
+| [markupconfig](#markupconfig) | `object` | Optional | cannot be null | [Action](action-properties-markupconfig.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/markupconfig") |
 
 ## request
 
@@ -129,16 +129,16 @@ A Downloader instance
 
 ## markupconfig
 
-
+A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)
 
 
 `markupconfig`
 
 -   is optional
--   Type: unknown
+-   Type: `object` ([Details](action-properties-markupconfig.md))
 -   cannot be null
 -   defined in: [Action](action-properties-markupconfig.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/markupconfig")
 
 ### markupconfig Type
 
-unknown
+`object` ([Details](action-properties-markupconfig.md))

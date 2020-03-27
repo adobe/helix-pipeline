@@ -26,14 +26,15 @@
 -   [Response](./context-properties-response.md "The HTTP response object") – `https://ns.adobe.com/helix/pipeline/response#/properties/response`
 -   [Secrets](./action-properties-secrets.md "Secrets passed into the pipeline such as API Keys or configuration settings") – `https://ns.adobe.com/helix/pipeline/secrets#/properties/secrets`
 -   [Text Coordinates](./position-properties-text-coordinates.md "A position in a text document") – `https://ns.adobe.com/helix/pipeline/textcoordinates#/properties/start`
--   [Untitled object in Action](./action-properties-transformer.md "A VDOMTransformer instance") – `https://ns.adobe.com/helix/pipeline/action#/properties/transformer`
 -   [Untitled object in Action](./action-properties-downloader.md "A Downloader instance") – `https://ns.adobe.com/helix/pipeline/action#/properties/downloader`
+-   [Untitled object in Action](./action-properties-markupconfig.md "A markup configuration") – `https://ns.adobe.com/helix/pipeline/action#/properties/markupconfig`
 -   [Untitled object in Action](./action-properties-debug.md "Internal information related to debugging") – `https://ns.adobe.com/helix/pipeline/action#/properties/debug`
 -   [Untitled object in Action](./action-properties-logger.md "A helix-log SimpleInterface logger instance") – `https://ns.adobe.com/helix/pipeline/action#/properties/logger`
--   [Untitled object in Content](./content-properties-json.md "The JSON object to emit") – `https://ns.adobe.com/helix/pipeline/content#/properties/json`
+-   [Untitled object in Action](./action-properties-transformer.md "A VDOMTransformer instance") – `https://ns.adobe.com/helix/pipeline/action#/properties/transformer`
 -   [Untitled object in Content](./content-properties-data.md "Custom object that can hold any user defined data") – `https://ns.adobe.com/helix/pipeline/content#/properties/data`
 -   [Untitled object in Content](./content-properties-xml.md "The XML object to emit") – `https://ns.adobe.com/helix/pipeline/content#/properties/xml`
 -   [Untitled object in Content](./content-properties-document.md "The DOM-compatible representation of the document's inner HTML") – `https://ns.adobe.com/helix/pipeline/content#/properties/document`
+-   [Untitled object in Content](./content-properties-json.md "The JSON object to emit") – `https://ns.adobe.com/helix/pipeline/content#/properties/json`
 -   [Untitled object in MDAST](./mdast-properties-payload.md "The payload of a frontmatter/yaml block") – `https://ns.adobe.com/helix/pipeline/mdast#/properties/payload`
 -   [Untitled object in MDAST](./mdast-properties-payload.md "The payload of a frontmatter/yaml block") – `https://ns.adobe.com/helix/pipeline/mdast#/properties/payload`
 -   [Untitled object in MDAST](./mdast-properties-data-hproperties-items.md) – `https://ns.adobe.com/helix/pipeline/mdast#/properties/data/hProperties/items`

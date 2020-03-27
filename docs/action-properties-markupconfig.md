@@ -1,10 +1,10 @@
-# Untitled undefined type in Action Schema
+# Untitled object in Action Schema
 
 ```txt
 https://ns.adobe.com/helix/pipeline/action#/properties/markupconfig
 ```
 
-
+A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                        |
@@ -13,4 +13,4 @@ https://ns.adobe.com/helix/pipeline/action#/properties/markupconfig
 
 ## markupconfig Type
 
-unknown
+`object` ([Details](action-properties-markupconfig.md))
