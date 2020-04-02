@@ -49,7 +49,7 @@
   },
   "dependencies": {
     "@adobe/helix-epsagon": "1.1.11",
-    "@adobe/helix-fetch": "1.5.0",
+    "@adobe/helix-fetch": "1.6.0",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "6.0.5",
     "@adobe/openwhisk-action-logger": "2.2.0",
