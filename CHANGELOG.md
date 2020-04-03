@@ -1,3 +1,10 @@
+## [6.11.4](https://github.com/adobe/helix-pipeline/compare/v6.11.3...v6.11.4) (2020-04-03)
+
+
+### Bug Fixes
+
+* **deps:** update external ([cccb8f9](https://github.com/adobe/helix-pipeline/commit/cccb8f9d98eb643f9744121e30c789f19bb859d3))
+
 ## [6.11.3](https://github.com/adobe/helix-pipeline/compare/v6.11.2...v6.11.3) (2020-04-02)
 
 
