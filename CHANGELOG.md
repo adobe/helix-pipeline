@@ -1,3 +1,10 @@
+# [6.12.0](https://github.com/adobe/helix-pipeline/compare/v6.11.5...v6.12.0) (2020-04-07)
+
+
+### Features
+
+* **data-embeds:** enable embedding from Excel (on Sharepoint) ([f9aa443](https://github.com/adobe/helix-pipeline/commit/f9aa443f99b9743013e1c7439313dd576d261105)), closes [#653](https://github.com/adobe/helix-pipeline/issues/653)
+
 ## [6.11.5](https://github.com/adobe/helix-pipeline/compare/v6.11.4...v6.11.5) (2020-04-06)
 
 
