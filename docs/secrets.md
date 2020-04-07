@@ -137,7 +137,7 @@ Comma-separated list of allowed hostnames for data embeds. Supports `*.example.c
 The default value is:
 
 ```json
-"docs.google.com"
+"docs.google.com, *.sharepoint.com"
 ```
 
 ## EMBED_SERVICE
