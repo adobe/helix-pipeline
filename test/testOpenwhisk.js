@@ -454,7 +454,6 @@ describe('Testing OpenWhisk adapter', () => {
       body: {},
       headers: {
         'Content-Type': 'application/json',
-        'x-last-activation-id': 'test-my-activation-id',
       },
       statusCode: 200,
     });
