@@ -1,3 +1,10 @@
+## [6.12.2](https://github.com/adobe/helix-pipeline/compare/v6.12.1...v6.12.2) (2020-04-08)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.2.0 ([#659](https://github.com/adobe/helix-pipeline/issues/659)) ([7880655](https://github.com/adobe/helix-pipeline/commit/7880655cf48d88a59a9143cf9e7820c077c344c3))
+
 ## [6.12.1](https://github.com/adobe/helix-pipeline/compare/v6.12.0...v6.12.1) (2020-04-07)
 
 
