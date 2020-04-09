@@ -20,7 +20,7 @@ function embed({ EMBED_SERVICE } = {}) {
     const { url } = node;
     let src = url;
     if (URI.parse(url).reference === 'absolute') {
-      src = URI.normalize(`${EMBED_SERVICE}/${url}`);
+      src = URI.normalize([EMBED_SERVICE, EMBED_SERVICE.slice(-1) !== '/' ? '/' : '', url].join(''));
     }
     const props = {
       // prepend the embed service for absolute URLs
