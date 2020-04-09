@@ -383,4 +383,11 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
     </ol>`,
     404,
   )).timeout(10000);
+
+  it('test various embed format', async () => {
+    const doc = fs.readFileSync(path.resolve(__dirname, 'fixtures/embeds.md')).toString();
+    const data = 'none';
+    const html = fs.readFileSync(path.resolve(__dirname, 'fixtures/embeds.html')).toString();
+    await testEmbeds(data, doc, html);
+  }).timeout(20000);
 });
