@@ -445,7 +445,7 @@ describe('Testing OpenWhisk adapter', () => {
       __ow_method: 'get',
       __ow_logger: winstonLogger,
     };
-
+    process.env.__OW_ACTIVATION_ID = 'test-my-activation-id';
     const ret = await runPipeline((context, action) => {
       action.logger.trace({ myId: 42 }, 'Hello, world');
     }, pipe, params);
@@ -454,6 +454,7 @@ describe('Testing OpenWhisk adapter', () => {
       body: {},
       headers: {
         'Content-Type': 'application/json',
+        'x-last-activation-id': 'test-my-activation-id',
       },
       statusCode: 200,
     });
