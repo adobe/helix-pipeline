@@ -1,3 +1,10 @@
+## [6.12.4](https://github.com/adobe/helix-pipeline/compare/v6.12.3...v6.12.4) (2020-04-10)
+
+
+### Bug Fixes
+
+* **embed:** fix embed url construction ([#663](https://github.com/adobe/helix-pipeline/issues/663)) ([4d9a481](https://github.com/adobe/helix-pipeline/commit/4d9a481b2f55d21168e7b7fe6d235dda6fb37e0a))
+
 ## [6.12.3](https://github.com/adobe/helix-pipeline/compare/v6.12.2...v6.12.3) (2020-04-08)
 
 
