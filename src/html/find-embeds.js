@@ -92,7 +92,7 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
 }
 
 function embed(uri, node, whitelist = '', datawhitelist = '', logger) {
-  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, datawhitelist.split(', '))) {
+  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, datawhitelist.split(',').map((s) => s.trim()))) {
     const children = [{ ...node }];
     node.type = 'dataEmbed';
     node.children = children;
