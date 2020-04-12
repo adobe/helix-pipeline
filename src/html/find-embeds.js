@@ -98,7 +98,7 @@ function embed(uri, node, whitelist = '', datawhitelist = '', logger) {
     node.children = children;
     node.url = URI.serialize(uri);
     delete node.value;
-  } else if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist.split(', '))) {
+  } else if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist.split(',').map((s) => s.trim()))) {
     const children = [{ ...node }];
     node.type = 'embed';
     node.children = children;
