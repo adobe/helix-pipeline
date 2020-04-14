@@ -162,6 +162,10 @@ export interface Secrets {
    * Timeout for outgoing HTTP requests in milliseconds
    */
   HTTP_TIMEOUT?: number;
+  /**
+   * Timeout for outgoing HTTP requests to external services in milliseconds
+   */
+  HTTP_TIMEOUT_EXTERNAL?: number;
   TEST_BOOLEAN?: boolean;
   /**
    * Print XML with line breaks and indentation

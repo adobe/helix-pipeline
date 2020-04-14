@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "6.12.4",
+  "version": "6.12.5",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -48,7 +48,7 @@
     "unist-util-inspect": "5.0.1"
   },
   "dependencies": {
-    "@adobe/helix-epsagon": "1.1.13",
+    "@adobe/helix-epsagon": "1.2.0",
     "@adobe/helix-fetch": "1.6.0",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "6.0.5",
