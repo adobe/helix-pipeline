@@ -1,3 +1,10 @@
+## [6.12.5](https://github.com/adobe/helix-pipeline/compare/v6.12.4...v6.12.5) (2020-04-14)
+
+
+### Bug Fixes
+
+* **downloader:** prevent open sockets ([#666](https://github.com/adobe/helix-pipeline/issues/666)) ([d69af07](https://github.com/adobe/helix-pipeline/commit/d69af07d9ffbf6c75baad20fd9bf713bf4ec0025)), closes [#665](https://github.com/adobe/helix-pipeline/issues/665)
+
 ## [6.12.4](https://github.com/adobe/helix-pipeline/compare/v6.12.3...v6.12.4) (2020-04-10)
 
 
