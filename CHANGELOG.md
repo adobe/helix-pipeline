@@ -1,3 +1,10 @@
+## [6.12.6](https://github.com/adobe/helix-pipeline/compare/v6.12.5...v6.12.6) (2020-04-14)
+
+
+### Bug Fixes
+
+* **embeds:** fix embeds problem ([#668](https://github.com/adobe/helix-pipeline/issues/668)) ([afad1de](https://github.com/adobe/helix-pipeline/commit/afad1de0d8d33d50f5425002616ed71b7eabbb94))
+
 ## [6.12.5](https://github.com/adobe/helix-pipeline/compare/v6.12.4...v6.12.5) (2020-04-14)
 
 
