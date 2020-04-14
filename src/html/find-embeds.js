@@ -91,14 +91,14 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
   return false;
 }
 
-function embed(uri, node, whitelist = '', datawhitelist = '', logger) {
-  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, datawhitelist.split(',').map((s) => s.trim()))) {
+function embed(uri, node, whitelist = [], datawhitelist = [], logger) {
+  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, datawhitelist)) {
     const children = [{ ...node }];
     node.type = 'dataEmbed';
     node.children = children;
     node.url = URI.serialize(uri);
     delete node.value;
-  } else if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist.split(',').map((s) => s.trim()))) {
+  } else if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist)) {
     const children = [{ ...node }];
     node.type = 'embed';
     node.children = children;
@@ -131,14 +131,16 @@ function find({ content: { mdast }, request: { extension, url } },
     request: { params: { path } },
   }) {
   const resourceext = `.${extension}`;
+  const embedWhitelist = EMBED_WHITELIST.split(',').map((s) => s.trim());
+  const dataEmbedWhitelist = DATA_EMBED_WHITELIST.split(',').map((s) => s.trim());
   const contentext = p.extname(path);
   map(mdast, (node, _, parent) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, DATA_EMBED_WHITELIST, logger);
+      embed(gatsbyEmbed(node.value), node, embedWhitelist, dataEmbedWhitelist, logger);
     } else if (node.type === 'paragraph' && iaEmbed(node, parent)) {
-      embed(iaEmbed(node, parent), node, EMBED_WHITELIST, DATA_EMBED_WHITELIST, logger);
+      embed(iaEmbed(node, parent), node, embedWhitelist, dataEmbedWhitelist, logger);
     } else if (node.type === 'paragraph' && imgEmbed(node)) {
-      embed(imgEmbed(node), node, EMBED_WHITELIST, DATA_EMBED_WHITELIST, logger);
+      embed(imgEmbed(node), node, embedWhitelist, dataEmbedWhitelist, logger);
     } else if (node.type === 'inlineCode'
       && internalGatsbyEmbed(node.value, url, contentext, resourceext)) {
       internalembed(internalGatsbyEmbed(node.value, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
