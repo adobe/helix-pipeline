@@ -111,10 +111,10 @@ class Downloader {
       options.cache = 'no-store';
     }
 
+    options.headers = options.headers || {};
     if (request.headers) {
       const forwardHeaders = opts.forwardHeaders || DEFAULT_FORWARD_HEADERS;
       if (forwardHeaders.length > 0) {
-        options.headers = options.headers || {};
         forwardHeaders.forEach((header) => {
           header = header.toLowerCase();
           if (request.headers[header]) {
@@ -124,8 +124,7 @@ class Downloader {
       }
     }
     // include transaction id if not already present
-    if (options.headers
-      && !options.headers['x-request-id']
+    if (!options.headers['x-request-id']
       && process.env.__OW_TRANSACTION_ID) {
       options.headers['x-request-id'] = process.env.__OW_TRANSACTION_ID;
     }
@@ -135,10 +134,11 @@ class Downloader {
       let res = {};
       try {
         res = await this._client(uri, options);
+        const body = await res.text();
         if (res.ok) {
           return {
             status: res.status,
-            body: await res.text(),
+            body,
             headers: res.headers,
           };
         }

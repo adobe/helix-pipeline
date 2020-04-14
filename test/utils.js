@@ -33,7 +33,7 @@ function setupPolly(opts) {
     recordIfMissing: false,
     matchRequestsBy: {
       headers: {
-        exclude: ['authorization', 'accept-encoding', 'user-agent', 'accept', 'connection'],
+        exclude: ['authorization', 'accept-encoding', 'user-agent', 'accept', 'connection', 'x-request-id'],
       },
     },
     adapters: [NodeHttpAdapter],
