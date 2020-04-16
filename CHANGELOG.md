@@ -1,3 +1,10 @@
+# [6.13.0](https://github.com/adobe/helix-pipeline/compare/v6.12.7...v6.13.0) (2020-04-16)
+
+
+### Features
+
+* **secrets.schema.json:** adds lottifile ([#675](https://github.com/adobe/helix-pipeline/issues/675)) ([d90e5b6](https://github.com/adobe/helix-pipeline/commit/d90e5b692bb2657d0b247ef4da89eb98cc49e2aa)), closes [#674](https://github.com/adobe/helix-pipeline/issues/674)
+
 ## [6.12.7](https://github.com/adobe/helix-pipeline/compare/v6.12.6...v6.12.7) (2020-04-15)
 
 
