@@ -20,5 +20,5 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 The default value is:
 
 ```json
-"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com"
+"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com, lottiefiles.com"
 ```
