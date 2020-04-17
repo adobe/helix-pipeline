@@ -13,11 +13,7 @@
 const removePosition = require('unist-util-remove-position');
 const { numericLogLevel } = require('@adobe/helix-log');
 
-async function clearPositions({ content: { mdast } }, { logger }) {
-  if (!mdast) {
-    return;
-  }
-
+async function clearPositions({ content: { mdast = {} } }, { logger }) {
   if (numericLogLevel(logger.level) < numericLogLevel('debug')) {
     removePosition(mdast, true);
   }
