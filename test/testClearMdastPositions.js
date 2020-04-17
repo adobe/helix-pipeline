@@ -39,7 +39,7 @@ describe('Testing the clear MDAST position step', () => {
   });
 
   ['verbose', 'info', 'warn', 'error', 'fatal'].forEach((level) => {
-    it(`removes the position information if the logger is not in '${level}' mode`, () => {
+    it(`removes the position information if the logger is in '${level}' mode`, () => {
       const mockContext = {
         content: { mdast },
       };
