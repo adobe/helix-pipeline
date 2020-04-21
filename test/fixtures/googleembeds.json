@@ -1,0 +1,47 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Here is an example from Google"
+        }
+      ]
+    },
+    {
+      "type": "embed",
+      "children": [
+        {
+          "type": "paragraph",
+          "children": [
+            {
+              "type": "link",
+              "title": null,
+              "url": "https://www.youtube.com/watch?v=85UKLsvQEIA",
+              "children": [
+                {
+                  "type": "image",
+                  "title": null,
+                  "url": "https://hlx.blob.core.windows.net/external/aa59825575016ba5bb9f1ee54be5d7efc23e3032#image.png",
+                  "alt": "Lars explains the future."
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "url": "https://www.youtube.com/watch?v=85UKLsvQEIA"
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Done."
+        }
+      ]
+    }
+  ]
+}

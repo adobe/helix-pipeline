@@ -55,6 +55,14 @@ describe('Test Embed Detection Processing', () => {
   it('Parses markdown with embeds', () => {
     assertMatch('embeds', mdast);
   });
+
+  it('Parses markdown with embeds from word2md', () => {
+    assertMatch('wordembeds', mdast);
+  });
+
+  it('Parses markdown with embeds from gdocs2md', () => {
+    assertMatch('googleembeds', mdast);
+  });
 });
 
 describe('Validate Embed Examples In Pipeline', () => {
