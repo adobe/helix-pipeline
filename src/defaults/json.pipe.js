@@ -25,7 +25,6 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate.js');
 const emit = require('../json/emit-json.js');
 const { selectStatus } = require('../json/set-json-status.js');
-const parseFrontmatter = require('../html/parse-frontmatter.js');
 const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
@@ -43,7 +42,6 @@ const jsonpipe = (cont, context, action) => {
     .use(fetchExternal)
     .use(fetch).expose('fetch')
     .use(parse).expose('parse')
-    .use(parseFrontmatter)
     .use(smartypants)
     .use(sections)
     .use(meta).expose('meta')

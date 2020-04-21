@@ -33,7 +33,6 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
 const { cache, uncached } = require('../html/shared-cache');
 const embeds = require('../html/find-embeds');
-const parseFrontmatter = require('../html/parse-frontmatter');
 const unwrapSoleImages = require('../html/unwrap-sole-images');
 const rewriteLinks = require('../html/static-asset-links');
 const tovdom = require('../html/html-to-vdom');
@@ -70,7 +69,6 @@ const htmlpipe = (cont, context, action) => {
     .use(fetchMarkupConfig)
     .use(fetch).expose('fetch').when(hascontent)
     .use(parse).expose('parse')
-    .use(parseFrontmatter)
     .use(embeds)
     .use(dataEmbeds)
     .use(smartypants)
