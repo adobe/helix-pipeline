@@ -4,7 +4,7 @@
 https://ns.adobe.com/helix/pipeline/request#/properties/selector
 ```
 
-The selector (sub-type indicator)
+The selector (sub-type indicator).
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
