@@ -4,7 +4,7 @@
 https://ns.adobe.com/helix/pipeline/request#/properties/extension
 ```
 
-The extension of the requested resource
+The extension of the requested resource.
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |

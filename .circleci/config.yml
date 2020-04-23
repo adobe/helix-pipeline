@@ -15,8 +15,8 @@ commands:
           keys:
             - v2-dependencies-{{ arch }}-{{ checksum "package-lock.json" }}
       - run:
-          name: install npm 6.9.0
-          command: sudo npm -g install npm@6.9.0
+          name: install latest npm
+          command: sudo npm -g install npm
       - run:
           name: Installing Dependencies
           command: npm install
@@ -49,10 +49,6 @@ jobs:
       - store_artifacts:
           path: junit
 
-      - run:
-          name: Generating Docs
-          command: npm run docs
-
   release:
     executor: node10
     steps:
@@ -72,25 +68,27 @@ jobs:
       - add_ssh_keys:
           fingerprints:
             - "e2:da:a5:eb:5a:3c:69:a8:d7:1a:db:19:26:86:69:2b"
-
-      # generate markdowm
+      - run: git checkout -- .
+      - run: git pull --rebase origin $CIRCLE_BRANCH
       - run: npm run docs
-      - run: git config --global user.email "circleci@example.com" && git config --global user.name "CircleCi Build"
-
-      # send up-to-date markdown back to GitHub
-      - run: git checkout -- package-lock.json
+      - run:
+          name: Check if new docs were generated
+          command: |
+            if [ -z "$(git status --porcelain)" ]; then
+              echo "No new docs generated. Halting step."
+              circleci-agent step halt
+            fi
+      - run: git status -s
       - run:
           name: Publish Markdown to GitHub
-          command: git pull --no-commit && git add --force docs/* && git commit --allow-empty -m "[ci skip] updating documentation" && git push
+          command: |
+            git add -A docs/ && git commit -m "chore(docs): updating documentation [skip ci]" && git push origin $CIRCLE_BRANCH
 
 workflows:
   version: 2
   build:
     jobs:
-    # run build on any branch
     - build
-
-    # publish releases on master
     - release:
         requires:
         - build
@@ -98,14 +96,15 @@ workflows:
           branches:
             only: master
 
-    # generate documentation on master
+    # generate documentation on non-renovate branches
     - generate-docs:
         requires:
         - build
-        - release
         filters:
           branches:
-            only: master
+            ignore:
+              - master
+              - /renovate\/.*/
 
   smoke:
     jobs:

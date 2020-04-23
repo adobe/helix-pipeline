@@ -4,7 +4,7 @@
 https://ns.adobe.com/helix/pipeline/request#/properties/queryString
 ```
 
-The original query string
+The original query string.
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |

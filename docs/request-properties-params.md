@@ -4,7 +4,7 @@
 https://ns.adobe.com/helix/pipeline/request#/properties/params
 ```
 
-The passed through (and filtered) URL parameters of the request
+The passed through (and filtered) URL parameters of the request.
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
