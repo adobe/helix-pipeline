@@ -32,7 +32,7 @@ The HTTP Request
 
 ## url
 
-The path and request parameters of the client request URL
+The path and request parameters of the client request URL.
 
 
 `url`
@@ -76,7 +76,7 @@ The path of the client request URL
 
 ## pathInfo
 
-The part of the client path that is relative to the rootPath
+The part of the client path that is relative to the rootPath.
 
 
 `pathInfo`
@@ -120,7 +120,7 @@ The request root path of the current strain.
 
 ## selector
 
-The selector (sub-type indicator)
+The selector (sub-type indicator).
 
 
 `selector`
@@ -146,7 +146,7 @@ The selector (sub-type indicator)
 
 ## extension
 
-The extension of the requested resource
+The extension of the requested resource.
 
 
 `extension`
@@ -204,7 +204,7 @@ unknown
 
 ## params
 
-The passed through (and filtered) URL parameters of the request
+The passed through (and filtered) URL parameters of the request.
 
 
 `params`
@@ -220,7 +220,7 @@ The passed through (and filtered) URL parameters of the request
 
 ## queryString
 
-The original query string
+The original query string.
 
 
 `queryString`

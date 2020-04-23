@@ -4,7 +4,7 @@
 https://ns.adobe.com/helix/pipeline/request#/properties/url
 ```
 
-The path and request parameters of the client request URL
+The path and request parameters of the client request URL.
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
