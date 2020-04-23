@@ -4,7 +4,7 @@
 https://ns.adobe.com/helix/pipeline/request#/properties/pathInfo
 ```
 
-The part of the client path that is relative to the rootPath
+The part of the client path that is relative to the rootPath.
 
 
 | Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
