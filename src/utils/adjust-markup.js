@@ -181,7 +181,7 @@ async function adjustMDAST(context, action) {
  * @param {Object} logger the pipeline logger
  * @param {Object} markupconfig the markup config
  */
-async function adjustHAST(context, { logger, markupconfig }) {
+async function adjustHTML(context, { logger, markupconfig }) {
   if (!markupconfig || !markupconfig.markup) {
     return;
   }
@@ -197,5 +197,5 @@ async function adjustHAST(context, { logger, markupconfig }) {
 
 module.exports = {
   adjustMDAST,
-  adjustHTML: adjustHAST,
+  adjustHTML,
 };
