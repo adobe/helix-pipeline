@@ -44,7 +44,6 @@ const removeHlxProps = require('../html/removeHlxProps');
 const dataEmbeds = require('../html/fetch-data');
 const dataSections = require('../html/data-sections');
 const { adjustMDAST, adjustHTML } = require('../utils/adjust-markup');
-const { clearPositions } = require('../utils/clear-mdast-positions');
 
 /* eslint newline-per-chained-call: off */
 

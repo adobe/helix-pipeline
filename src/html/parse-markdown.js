@@ -12,10 +12,12 @@
 const unified = require('unified');
 const remark = require('remark-parse');
 const { setdefault } = require('ferrum');
+const { numericLogLevel } = require('@adobe/helix-log');
 const VDOMTransformer = require('../utils/mdast-to-vdom');
 const frontmatter = require('./remark-matter.js');
 
 function parseMarkdown(context, action) {
+  const { logger } = action;
   const content = setdefault(context, 'content', {});
   const body = setdefault(content, 'body', '');
 
@@ -23,10 +25,12 @@ function parseMarkdown(context, action) {
   if (!request.extension) request.extension = 'html';
   const { extension } = request;
 
+  const isDebugLevel = numericLogLevel(logger.level) >= numericLogLevel('debug');
   action.logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
   content.mdast = unified()
     .use(remark)
     .use(frontmatter, { logger: action.logger })
+    .use({ settings: { position: isDebugLevel } })
     .parse(body);
 
   // initialize transformer
