@@ -56,7 +56,6 @@ function cleanup(html) {
 }
 
 function expectBodyEquals(result, expectedMarkup) {
-  // eslint-disable-next-line no-console
   assert.equal(result.error, undefined);
   assert.equal(cleanup(result.response.body), cleanup(expectedMarkup));
   assert.notEqual(result.response.status, 500);
