@@ -39,6 +39,17 @@ markup:
     wrap: .corge
     type: html
 `;
+const TEST_MARKUP_CONFIG_CONTENT = `
+version: 1
+markup:
+  foo:
+    match: ^heading + paragraph
+    classnames: bar
+    attribute:
+      baz: qux
+    wrap: .corge
+    type: content
+`;
 
 describe('Testing HTML Pipeline with markup config', () => {
   let logger;
@@ -57,7 +68,7 @@ describe('Testing HTML Pipeline with markup config', () => {
     nock.cleanAll();
   });
 
-  it('html.pipe adjusts the MDAST as per markup config', async () => {
+  it('html.pipe adjusts the MDAST as per markup markdown config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_MD])
@@ -92,7 +103,85 @@ describe('Testing HTML Pipeline with markup config', () => {
 
     // eslint-disable-next-line no-console
     assert.equal(result.error, undefined);
-    assert.equal(result.response.body, '<h1 id="hello">Hello</h1>\n<div class="corge"><p class="bar" baz="qux">from github.</p></div>');
+    assert.equal(result.response.body.replace(/\n/g, ''), '<h1 id="hello">Hello</h1><div class="corge"><p class="bar" baz="qux">from github.</p></div>');
+    assert.notEqual(result.response.status, 500);
+  });
+
+  it('html.pipe adjusts the MDAST as per markup content config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
+
+    const context = {};
+    const action = coerce({
+      request: {
+        headers: {
+          'Cache-Control': 'no-store',
+          'x-request-id': '1234',
+        },
+        params: {
+          path: '/hello.md',
+          owner: 'adobe',
+          repo: 'test-repo',
+          ref: 'master',
+        },
+      },
+      secrets: {},
+      logger,
+    });
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    },
+    context,
+    action);
+
+    // eslint-disable-next-line no-console
+    assert.equal(result.error, undefined);
+    assert.equal(result.response.body.replace(/\n/g, ''), '<div class="corge"><div class="bar" baz="qux"><h1 id="hello">Hello</h1><p>from github.</p></div></div><div><h1 id="bar">Bar</h1></div>');
+    assert.notEqual(result.response.status, 500);
+  });
+
+  it('html.pipe does not adjust the MDAST as per markup content config if there are no sections', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.']);
+
+    const context = {};
+    const action = coerce({
+      request: {
+        headers: {
+          'Cache-Control': 'no-store',
+          'x-request-id': '1234',
+        },
+        params: {
+          path: '/hello.md',
+          owner: 'adobe',
+          repo: 'test-repo',
+          ref: 'master',
+        },
+      },
+      secrets: {},
+      logger,
+    });
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    },
+    context,
+    action);
+
+    // eslint-disable-next-line no-console
+    assert.equal(result.error, undefined);
+    assert.equal(result.response.body.replace(/\n/g, ''), '<h1 id="hello">Hello</h1><p>from github.</p>');
     assert.notEqual(result.response.status, 500);
   });
 
@@ -132,7 +221,7 @@ describe('Testing HTML Pipeline with markup config', () => {
 
     // eslint-disable-next-line no-console
     assert.equal(result.error, undefined);
-    assert.equal(result.response.body, '<h1 id="hello">Hello</h1>\n<div class="corge"><p class="bar" baz="qux">from github.</p></div>');
+    assert.equal(result.response.body.replace(/\n/g, ''), '<h1 id="hello">Hello</h1><div class="corge"><p class="bar" baz="qux">from github.</p></div>');
     assert.notEqual(result.response.status, 500);
   });
 });

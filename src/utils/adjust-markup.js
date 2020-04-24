@@ -16,6 +16,8 @@ const findAndReplace = require('hast-util-find-and-replace');
 const fromDOM = require('hast-util-from-dom');
 const { JSDOM } = require('jsdom');
 const { MarkupConfig } = require('@adobe/helix-shared');
+const { match } = require('./pattern-compiler');
+const section = require('./section-handler');
 
 /** Pleceholder variable for the generate template. */
 const PLACEHOLDER_TEMPLATE = /\$\{\d+\}/g;
@@ -32,7 +34,7 @@ async function getMarkupConfig(context, action) {
 
   const res = await markupConfigTask;
   if (res.status !== 200) {
-    logger.info(`unable to fetch markupconfig.yaml: ${res.status}`);
+    logger.info(`unable to fetch helix-markup.yaml: ${res.status}`);
     return;
   }
 
@@ -67,6 +69,62 @@ function getHTMLElement(template) {
 }
 
 /**
+ * Patches the specified HAST node.
+ *
+ * @param {HAST} hast The HAST node to patch
+ * @param {*} cfg The configuration options
+ * @returns {HAST} the new patched node
+ */
+function patchHastNode(hast, cfg) {
+  // Append classes to the element (space or comma separated)
+  if (cfg.classnames) {
+    hast.properties.className = [
+      ...(hast.properties.className || '').split(' '),
+      ...cfg.classnames,
+    ].join(' ').trim();
+  }
+
+  // Append attributes to the element
+  if (cfg.attribute) {
+    Object.assign(hast.properties, cfg.attribute);
+  }
+
+  // Wrap the element
+  if (cfg.wrap) {
+    const wrapperEl = getHTMLElement(cfg.wrap);
+    const n = fromDOM(wrapperEl);
+    hast = findAndReplace(n, PLACEHOLDER_TEMPLATE, () => hast);
+  }
+
+  return hast;
+}
+
+/**
+ * Patches the specified html element.
+ *
+ * @param {HTMLElement} el The html element to patch
+ * @param {*} cfg The configuration options
+ */
+function patchHtmlElement(el, cfg) {
+  // Append classes to the element (space or comma separated)
+  if (cfg.classnames) {
+    el.classList.add(...cfg.classnames);
+  }
+
+  // Append attributes to the element
+  if (cfg.attribute) {
+    Object.entries(cfg.attribute).forEach((e) => el.setAttribute(e[0], e[1]));
+  }
+
+  // Wrap the element
+  if (cfg.wrap) {
+    const wrapperEl = getHTMLElement(cfg.wrap);
+    wrapperEl.innerHTML = wrapperEl.innerHTML.replace(PLACEHOLDER_TEMPLATE, el.outerHTML);
+    el.replaceWith(wrapperEl);
+  }
+}
+
+/**
  * Adjust the MDAST tree according to the markup config.
  * This is done by registering new matchers on the VDOMTransformer before the HTML
  * is generated in the pipeline
@@ -85,36 +143,32 @@ async function adjustMDAST(context, action) {
     return;
   }
 
+  // Adjust the MDAST based on AST matcher
   Object.entries(markupconfig.markup)
     .filter(([_, cfg]) => cfg.type === 'markdown')
     .forEach(([name, cfg]) => {
       logger.info(`Applying markdown markup adjustment: ${name}`);
-
       transformer.match(cfg.match, (h, node) => {
         const handler = transformer.constructor.default(node);
-        let el = handler(h, node);
+        const hast = handler(h, node);
+        return patchHastNode(hast, cfg);
+      });
+    });
 
-        // Append classes to the element (space or comma separated)
-        if (cfg.classnames) {
-          el.properties.className = [
-            ...(el.properties.className || '').split(' '),
-            ...cfg.classnames,
-          ].join(' ').trim();
-        }
-
-        // Append attributes to the element
-        if (cfg.attribute) {
-          Object.assign(el.properties, cfg.attribute);
-        }
-
-        // Wrap the element
-        if (cfg.wrap) {
-          const wrapperEl = getHTMLElement(cfg.wrap);
-          const n = fromDOM(wrapperEl);
-          el = findAndReplace(n, PLACEHOLDER_TEMPLATE, () => el);
-        }
-
-        return el;
+  // Adjust the MDAST based on type matcher
+  const sectionHandler = section();
+  Object.entries(markupconfig.markup)
+    .filter(([_, cfg]) => cfg.type === 'content')
+    .forEach(([name, cfg]) => {
+      logger.info(`Applying content intelligence adjustment: ${name}`);
+      transformer.match((node) => {
+        const childtypes = node.children
+          ? node.children.map((n) => n.type).filter((type) => !!type)
+          : [];
+        return node.type === 'section' && match(childtypes, cfg.match);
+      }, (h, node) => {
+        const hast = sectionHandler(h, node);
+        return patchHastNode(hast, cfg);
       });
     });
 }
@@ -127,7 +181,7 @@ async function adjustMDAST(context, action) {
  * @param {Object} logger the pipeline logger
  * @param {Object} markupconfig the markup config
  */
-async function adjustHTML(context, { logger, markupconfig }) {
+async function adjustHAST(context, { logger, markupconfig }) {
   if (!markupconfig || !markupconfig.markup) {
     return;
   }
@@ -136,30 +190,12 @@ async function adjustHTML(context, { logger, markupconfig }) {
     .filter(([_, cfg]) => !cfg.type || cfg.type === 'html')
     .forEach(([name, cfg]) => {
       logger.info(`Applying HTML markup adjustment: ${name}`);
-
       const elements = context.content.document.querySelectorAll(cfg.match);
-      elements.forEach((el) => {
-        // Append classes to the element (space or comma separated)
-        if (cfg.classnames) {
-          el.classList.add(...cfg.classnames);
-        }
-
-        // Append attributes to the element
-        if (cfg.attribute) {
-          Object.entries(cfg.attribute).forEach((e) => el.setAttribute(e[0], e[1]));
-        }
-
-        // Wrap the element
-        if (cfg.wrap) {
-          const wrapperEl = getHTMLElement(cfg.wrap);
-          wrapperEl.innerHTML = wrapperEl.innerHTML.replace(PLACEHOLDER_TEMPLATE, el.outerHTML);
-          el.replaceWith(wrapperEl);
-        }
-      });
+      elements.forEach((el) => patchHtmlElement(el, cfg));
     });
 }
 
 module.exports = {
   adjustMDAST,
-  adjustHTML,
+  adjustHTML: adjustHAST,
 };
