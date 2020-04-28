@@ -1,3 +1,17 @@
+# [6.14.0](https://github.com/adobe/helix-pipeline/compare/v6.13.1...v6.14.0) (2020-04-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.1.0 ([#689](https://github.com/adobe/helix-pipeline/issues/689)) ([25ab0ef](https://github.com/adobe/helix-pipeline/commit/25ab0ef0da835272affeda794348d7503d1ff5dc))
+* **deps:** update dependency @adobe/helix-shared to v7.2.0 ([#692](https://github.com/adobe/helix-pipeline/issues/692)) ([2060e96](https://github.com/adobe/helix-pipeline/commit/2060e960cccbe74dbf1d05501b4f76b3c67df38b))
+* **deps:** update dependency @adobe/helix-shared to v7.2.1 ([a50c141](https://github.com/adobe/helix-pipeline/commit/a50c1415e6a9d8749ee1784220dfa005265e6155))
+
+
+### Features
+
+* **embed:** enable slideshare embeds ([f64a7c1](https://github.com/adobe/helix-pipeline/commit/f64a7c1cda232a2b557f852681ac9c2427de4ffa)), closes [#693](https://github.com/adobe/helix-pipeline/issues/693)
+
 ## [6.13.1](https://github.com/adobe/helix-pipeline/compare/v6.13.0...v6.13.1) (2020-04-19)
 
 
