@@ -1,3 +1,17 @@
+# [7.0.0](https://github.com/adobe/helix-pipeline/compare/v6.14.0...v7.0.0) (2020-04-29)
+
+
+### Features
+
+* **md:** create frontmatter plugin ([#685](https://github.com/adobe/helix-pipeline/issues/685)) ([e96fc72](https://github.com/adobe/helix-pipeline/commit/e96fc727cd47d4a5f6b460458f3ca64eaab29806)), closes [#616](https://github.com/adobe/helix-pipeline/issues/616) [#697](https://github.com/adobe/helix-pipeline/issues/697)
+
+
+### BREAKING CHANGES
+
+* **md:** parse-frontmatter is deprecated and will be removed
+  in the next major version. Frontmatter parsing is done directly in
+  parse-markdown.
+
 # [6.14.0](https://github.com/adobe/helix-pipeline/compare/v6.13.1...v6.14.0) (2020-04-28)
 
 
