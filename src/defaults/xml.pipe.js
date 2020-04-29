@@ -29,7 +29,6 @@ const type = require('../utils/set-content-type.js');
 const emit = require('../xml/emit-xml.js');
 const selectStatus = require('../xml/set-xml-status.js');
 const check = require('../xml/check-xml');
-const parseFrontmatter = require('../html/parse-frontmatter');
 const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
@@ -47,7 +46,6 @@ const xmlpipe = (cont, context, action) => {
     .use(fetchExternal)
     .use(fetch).expose('fetch')
     .use(parse).expose('parse')
-    .use(parseFrontmatter)
     .use(smartypants)
     .use(sections)
     .use(meta).expose('meta')

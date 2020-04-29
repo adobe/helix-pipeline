@@ -11,17 +11,16 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { cloneDeep } = require('lodash');
 const yaml = require('js-yaml');
 const { multiline } = require('@adobe/helix-shared').string;
 const { SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   flattenTree, concat, each,
 } = require('ferrum');
+const unified = require('unified');
+const remark = require('remark-parse');
 const parseMd = require('../src/html/parse-markdown');
-const parseFront = require('../src/html/parse-frontmatter');
-
-const { FrontmatterParsingError } = parseFront;
+const { FrontmatterParsingError } = require('../src/html/remark-matter');
 
 let warning;
 
@@ -29,9 +28,13 @@ const logger = new SimpleInterface({ logger: new ConsoleLogger() });
 
 const procMd = (md) => {
   const dat = { content: { body: multiline(md) } };
+
+  // parse w/o frontmatter plugin
+  const orig = unified()
+    .use(remark)
+    .parse(dat.content.body);
+
   parseMd(dat, { logger });
-  const orig = cloneDeep(dat.content.mdast);
-  parseFront(dat, { logger });
   return { orig, proc: dat.content.mdast };
 };
 
@@ -51,13 +54,14 @@ const ck = (wat, md, ast) => {
 const ckNop = (wat, md) => {
   it(`${wat} should be ignored`, () => {
     const { proc, orig } = procMd(md);
-    assert.deepStrictEqual(proc, orig);
+    assert.deepEqual(proc, orig);
   });
 };
 
-const ckErr = (wat, body) => {
-  it(`${wat} should raise exception`, () => {
-    procMd(body);
+const ckErr = (wat, md) => {
+  it(`${wat} should log a warning`, () => {
+    const { proc, orig } = procMd(md);
+    assert.deepEqual(proc, orig);
     assert.ok(warning instanceof FrontmatterParsingError, 'No Frontmatter Parsing Error logged');
   });
 };
@@ -136,6 +140,23 @@ describe('parseFrontmatter', () => {
     ***
   `);
 
+  ckNop('no frontmatter due to empty lines', `
+    # Multimedia Test
+    ---
+    ![](https://hlx.blob.core.windows.net/external/20f9d6dff67514da262230822bda5f3b50ef28c6#image.png)
+    ---
+    PUBLISHED ON 28-04-2020
+    ---
+    
+    ### SlideShare
+
+    <https://www.slideshare.net/adobe/adobe-digital-insights-holiday-recap-2019>
+    
+    ---
+    Topics: Bar, Baz
+    Products: Stock, Creative Cloud
+  `);
+
   // actual warnings
   ckErr('reject invalid yaml', `
     ---
@@ -168,13 +189,7 @@ describe('parseFrontmatter', () => {
     null
     ---
   `);
-  ckErr('frontmatter with corrupted yaml', `
-      Foo
-      ---
-      Bar: 42
-      ---
-    `);
-  ckErr('frontmatter with insufficient space before it', `
+  ckNop('frontmatter with insufficient space before it', `
       Foo
       ---
       Bar: 42
@@ -186,7 +201,7 @@ describe('parseFrontmatter', () => {
       ---
       XXX
     `);
-  ckErr('frontmatter with insufficient space on both ends', `
+  ckNop('frontmatter with insufficient space on both ends', `
       ab: 33
       ---
       Bar: 22

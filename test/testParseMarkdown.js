@@ -13,7 +13,6 @@
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
 const parse = require('../src/html/parse-markdown');
-const parseFront = require('../src/html/parse-frontmatter');
 const { assertMatch } = require('./markdown-utils');
 
 const logger = logging.createTestLogger({
@@ -24,7 +23,6 @@ const logger = logging.createTestLogger({
 function callback(body) {
   const dat = { content: { body } };
   parse(dat, { logger });
-  parseFront(dat, { logger });
   return dat.content.mdast;
 }
 

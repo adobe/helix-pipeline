@@ -32,7 +32,7 @@ export interface Context {
  */
 export interface Request {
   /**
-   * The path and request parameters of the client request URL
+   * The path and request parameters of the client request URL.
    */
   url?: string;
   /**
@@ -40,7 +40,7 @@ export interface Request {
    */
   path?: string;
   /**
-   * The part of the client path that is relative to the rootPath
+   * The part of the client path that is relative to the rootPath.
    */
   pathInfo?: string;
   /**
@@ -48,11 +48,11 @@ export interface Request {
    */
   rootPath?: string;
   /**
-   * The selector (sub-type indicator)
+   * The selector (sub-type indicator).
    */
   selector?: string;
   /**
-   * The extension of the requested resource
+   * The extension of the requested resource.
    */
   extension?: string;
   /**
@@ -66,13 +66,13 @@ export interface Request {
     [k: string]: string;
   };
   /**
-   * The passed through (and filtered) URL parameters of the request
+   * The passed through (and filtered) URL parameters of the request.
    */
   params?: {
     [k: string]: string | string[];
   };
   /**
-   * The original query string
+   * The original query string.
    */
   queryString?: string;
 }
