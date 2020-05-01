@@ -49,6 +49,16 @@ async function getMarkupConfig(context, action) {
 }
 
 /**
+ * Checks whether the given mdast node is a section.
+ *
+ * @param {MDAST} node the mdast node to check
+ * @returns {boolean} `true` if the node is a section, `false` otherwise
+ */
+function isSection(node) {
+  return node.type === 'root' || node.type === 'section';
+}
+
+/**
  * Returns the HTML element for the provided HTML template.
  *
  * @param {String} template The HTML template to use
@@ -125,8 +135,8 @@ function patchHtmlElement(el, cfg) {
 }
 
 /**
- * Adjust the MDAST tree according to the markup config.
- * This is done by registering new matchers on the VDOMTransformer before the HTML
+ * Adjust the MDAST conversion according to the markup config.
+ * This is done by registering new matchers on the VDOMTransformer before the HAST
  * is generated in the pipeline
  *
  * @param {Object} context the execution context
@@ -143,19 +153,20 @@ async function adjustMDAST(context, action) {
     return;
   }
 
-  // Adjust the MDAST based on AST matcher
+  // Adjust the MDAST conversion based on markdown config
   Object.entries(markupconfig.markup)
     .filter(([_, cfg]) => cfg.type === 'markdown')
     .forEach(([name, cfg]) => {
       logger.info(`Applying markdown markup adjustment: ${name}`);
       transformer.match(cfg.match, (h, node) => {
         const handler = transformer.constructor.default(node);
+        // Generate the matching HAST node
         const hast = handler(h, node);
         return patchHastNode(hast, cfg);
       });
     });
 
-  // Adjust the MDAST based on type matcher
+  // Adjust the MDAST conversion based on content config
   const sectionHandler = section();
   Object.entries(markupconfig.markup)
     .filter(([_, cfg]) => cfg.type === 'content')
@@ -165,8 +176,9 @@ async function adjustMDAST(context, action) {
         const childtypes = node.children
           ? node.children.map((n) => n.type).filter((type) => !!type)
           : [];
-        return node.type === 'section' && match(childtypes, cfg.match);
+        return isSection(node) && match(childtypes, cfg.match);
       }, (h, node) => {
+        // Generate the matching HAST node
         const hast = sectionHandler(h, node);
         return patchHastNode(hast, cfg);
       });

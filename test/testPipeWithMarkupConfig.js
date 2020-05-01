@@ -144,7 +144,7 @@ describe('Testing HTML Pipeline with markup config', () => {
       </div>`);
   });
 
-  it('html.pipe does not adjust the MDAST as per markup content config if there are no sections', async () => {
+  it('html.pipe adjusts single section per markup content config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT])
@@ -159,8 +159,12 @@ describe('Testing HTML Pipeline with markup config', () => {
     }, context, action);
 
     expectBodyEquals(result,
-      `<h1 id="hello">Hello</h1>
-      <p>from github.</p>`);
+      `<div class="corge">
+        <div class="bar" baz="qux">
+          <h1 id="hello">Hello</h1>
+          <p>from github.</p>
+        </div>
+      </div>`);
   });
 
   it('html.pipe adjusts the DOM as per markup config', async () => {
