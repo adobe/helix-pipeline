@@ -28,9 +28,8 @@ function parseMarkdown(context, action) {
   const isDebugLevel = numericLogLevel(logger.level) >= numericLogLevel('debug');
   action.logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
   content.mdast = unified()
-    .use(remark)
+    .use(remark, { position: isDebugLevel })
     .use(frontmatter, { logger: action.logger })
-    .use({ settings: { position: isDebugLevel } })
     .parse(body);
 
   // initialize transformer
