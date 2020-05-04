@@ -136,7 +136,7 @@ function patchHtmlElement(el, cfg) {
 
 /**
  * Adjust the MDAST conversion according to the markup config.
- * This is done by registering new matchers on the VDOMTransformer before the HAST
+ * This is done by registering new matchers on the VDOMTransformer before the VDOM
  * is generated in the pipeline
  *
  * @param {Object} context the execution context
@@ -161,8 +161,8 @@ async function adjustMDAST(context, action) {
       transformer.match(cfg.match, (h, node) => {
         const handler = transformer.constructor.default(node);
         // Generate the matching VDOM element
-        const hast = handler(h, node);
-        return patchVDOMNode(hast, cfg);
+        const el = handler(h, node);
+        return patchVDOMNode(el, cfg);
       });
     });
 
@@ -179,8 +179,8 @@ async function adjustMDAST(context, action) {
         return isSection(node) && match(childtypes, cfg.match);
       }, (h, node) => {
         // Generate the matching VDOM element
-        const hast = sectionHandler(h, node);
-        return patchVDOMNode(hast, cfg);
+        const el = sectionHandler(h, node);
+        return patchVDOMNode(el, cfg);
       });
     });
 }
