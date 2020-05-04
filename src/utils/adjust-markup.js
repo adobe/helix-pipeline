@@ -79,34 +79,34 @@ function getHTMLElement(template) {
 }
 
 /**
- * Patches the specified HAST node.
+ * Patches the specified VDOM element.
  *
- * @param {HAST} hast The HAST node to patch
+ * @param {VDOM} el The VDOM element to patch
  * @param {*} cfg The configuration options
- * @returns {HAST} the new patched node
+ * @returns {VDOM} the new patched element
  */
-function patchHastNode(hast, cfg) {
+function patchVDOMNode(el, cfg) {
   // Append classes to the element (space or comma separated)
   if (cfg.classnames) {
-    hast.properties.className = [
-      ...(hast.properties.className || '').split(' '),
+    el.properties.className = [
+      ...(el.properties.className || '').split(' '),
       ...cfg.classnames,
     ].join(' ').trim();
   }
 
   // Append attributes to the element
   if (cfg.attribute) {
-    Object.assign(hast.properties, cfg.attribute);
+    Object.assign(el.properties, cfg.attribute);
   }
 
   // Wrap the element
   if (cfg.wrap) {
     const wrapperEl = getHTMLElement(cfg.wrap);
     const n = fromDOM(wrapperEl);
-    hast = findAndReplace(n, PLACEHOLDER_TEMPLATE, () => hast);
+    el = findAndReplace(n, PLACEHOLDER_TEMPLATE, () => el);
   }
 
-  return hast;
+  return el;
 }
 
 /**
@@ -160,9 +160,9 @@ async function adjustMDAST(context, action) {
       logger.info(`Applying markdown markup adjustment: ${name}`);
       transformer.match(cfg.match, (h, node) => {
         const handler = transformer.constructor.default(node);
-        // Generate the matching HAST node
+        // Generate the matching VDOM element
         const hast = handler(h, node);
-        return patchHastNode(hast, cfg);
+        return patchVDOMNode(hast, cfg);
       });
     });
 
@@ -178,9 +178,9 @@ async function adjustMDAST(context, action) {
           : [];
         return isSection(node) && match(childtypes, cfg.match);
       }, (h, node) => {
-        // Generate the matching HAST node
+        // Generate the matching VDOM element
         const hast = sectionHandler(h, node);
-        return patchHastNode(hast, cfg);
+        return patchVDOMNode(hast, cfg);
       });
     });
 }
