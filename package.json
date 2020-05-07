@@ -51,7 +51,7 @@
     "@adobe/helix-epsagon": "1.2.1",
     "@adobe/helix-fetch": "1.6.0",
     "@adobe/helix-log": "4.5.1",
-    "@adobe/helix-shared": "7.2.1",
+    "@adobe/helix-shared": "7.3.0",
     "@adobe/openwhisk-action-logger": "2.2.0",
     "@adobe/openwhisk-action-utils": "4.2.2",
     "@emmetio/expand-abbreviation": "^0.7.3",
