@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "",
   "repository": "https://github.com/adobe/helix-pipeline",
   "main": "index.js",
@@ -36,7 +36,7 @@
     "ghooks": "2.0.4",
     "hastscript": "5.1.2",
     "hyperscript": "2.0.2",
-    "json-schema-to-typescript": "8.2.0",
+    "json-schema-to-typescript": "9.0.1",
     "lint-staged": "10.2.2",
     "mocha": "7.1.2",
     "mocha-junit-reporter": "1.23.3",
@@ -45,10 +45,10 @@
     "semantic-release": "17.0.7",
     "sinon": "9.0.2",
     "unist-builder": "2.0.3",
-    "unist-util-inspect": "5.0.1"
+    "unist-util-inspect": "6.0.0"
   },
   "dependencies": {
-    "@adobe/helix-epsagon": "1.2.0",
+    "@adobe/helix-epsagon": "1.2.1",
     "@adobe/helix-fetch": "1.6.0",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "7.2.1",
@@ -68,7 +68,7 @@
     "js-yaml": "^3.13.1",
     "jsdom": "16.2.2",
     "lodash": "^4.17.15",
-    "mdast-util-to-hast": "^8.0.0",
+    "mdast-util-to-hast": "^9.0.0",
     "mdast-util-to-string": "^1.0.6",
     "micromatch": "^4.0.2",
     "object-hash": "^2.0.0",
