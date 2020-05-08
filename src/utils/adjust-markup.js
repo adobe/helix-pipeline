@@ -15,7 +15,9 @@ const { setdefault } = require('ferrum');
 const findAndReplace = require('hast-util-find-and-replace');
 const fromDOM = require('hast-util-from-dom');
 const { JSDOM } = require('jsdom');
+const { match: matchUrl } = require('path-to-regexp');
 const { MarkupConfig } = require('@adobe/helix-shared');
+const section = require('./section-handler');
 
 /** Pleceholder variable for the generate template. */
 const PLACEHOLDER_TEMPLATE = /\$\{\d+\}/g;
@@ -67,6 +69,39 @@ function getHTMLElement(template) {
 }
 
 /**
+ * Patches the specified VDOM element.
+ *
+ * @param {VDOM} el The VDOM element to patch
+ * @param {*} cfg The configuration options
+ * @returns {VDOM} the new patched element
+ */
+function patchVDOMNode(el, cfg) {
+  setdefault(el, 'properties', {});
+
+  // Append classes to the element (space or comma separated)
+  if (cfg.classnames) {
+    el.properties.className = [
+      ...(el.properties.className || '').split(' '),
+      ...cfg.classnames,
+    ].join(' ').trim();
+  }
+
+  // Append attributes to the element
+  if (cfg.attribute) {
+    Object.assign(el.properties, cfg.attribute);
+  }
+
+  // Wrap the element
+  if (cfg.wrap) {
+    const wrapperEl = getHTMLElement(cfg.wrap);
+    const n = fromDOM(wrapperEl);
+    el = findAndReplace(n, PLACEHOLDER_TEMPLATE, () => el);
+  }
+
+  return el;
+}
+
+/**
  * Adjust the MDAST tree according to the markup config.
  * This is done by registering new matchers on the VDOMTransformer before the HTML
  * is generated in the pipeline
@@ -85,6 +120,22 @@ async function adjustMDAST(context, action) {
     return;
   }
 
+  const sectionHandler = section();
+  Object.entries(markupconfig.markup)
+    .filter(([_, cfg]) => cfg.type === 'url')
+    .forEach(([name, cfg]) => {
+      logger.info(`Applying markdown url adjustment: ${name}`);
+
+      const match = matchUrl(cfg.match, { decode: decodeURIComponent });
+      if (match(context.request.path)) {
+        transformer.match('root', (h, node) => {
+          // Generate the matching VDOM element
+          const el = sectionHandler(h, { ...node, meta: {} });
+          return patchVDOMNode(el, cfg);
+        });
+      }
+    });
+
   Object.entries(markupconfig.markup)
     .filter(([_, cfg]) => cfg.type === 'markdown')
     .forEach(([name, cfg]) => {
@@ -92,29 +143,9 @@ async function adjustMDAST(context, action) {
 
       transformer.match(cfg.match, (h, node) => {
         const handler = transformer.constructor.default(node);
-        let el = handler(h, node);
-
-        // Append classes to the element (space or comma separated)
-        if (cfg.classnames) {
-          el.properties.className = [
-            ...(el.properties.className || '').split(' '),
-            ...cfg.classnames,
-          ].join(' ').trim();
-        }
-
-        // Append attributes to the element
-        if (cfg.attribute) {
-          Object.assign(el.properties, cfg.attribute);
-        }
-
-        // Wrap the element
-        if (cfg.wrap) {
-          const wrapperEl = getHTMLElement(cfg.wrap);
-          const n = fromDOM(wrapperEl);
-          el = findAndReplace(n, PLACEHOLDER_TEMPLATE, () => el);
-        }
-
-        return el;
+        // Generate the matching VDOM element
+        const el = handler(h, node);
+        return patchVDOMNode(el, cfg);
       });
     });
 }
