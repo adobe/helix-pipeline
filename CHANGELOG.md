@@ -1,3 +1,24 @@
+## [7.0.3](https://github.com/adobe/helix-pipeline/compare/v7.0.2...v7.0.3) (2020-05-08)
+
+
+### Bug Fixes
+
+* **html:** fix frontmatter detection ([#708](https://github.com/adobe/helix-pipeline/issues/708)) ([0c1e8fd](https://github.com/adobe/helix-pipeline/commit/0c1e8fd0c37d589881f3ab5e2959e0fce27658b4)), closes [#707](https://github.com/adobe/helix-pipeline/issues/707)
+
+## [7.0.2](https://github.com/adobe/helix-pipeline/compare/v7.0.1...v7.0.2) (2020-05-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.3.0 ([#705](https://github.com/adobe/helix-pipeline/issues/705)) ([488eb40](https://github.com/adobe/helix-pipeline/commit/488eb4012f6b65b4ce7b2de71952c54190caaf38))
+
+## [7.0.1](https://github.com/adobe/helix-pipeline/compare/v7.0.0...v7.0.1) (2020-05-07)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.2.1 ([227e5b0](https://github.com/adobe/helix-pipeline/commit/227e5b0069b3f40534fced653512b9434130d48a))
+
 # [7.0.0](https://github.com/adobe/helix-pipeline/compare/v6.14.0...v7.0.0) (2020-04-29)
 
 
