@@ -83,6 +83,14 @@ function createTokenizer(opts) {
       );
     }
 
+    // reject ambiguous yaml
+    if (/^\s*:/m.test(src)) {
+      return warn(
+        'Found ambiguous frontmatter fence: Block contains yaml key starting with \':\'.'
+        + 'If this was intended, escape the key with quotes. ', src,
+      );
+    }
+
     // try to parse the yaml
     let payload = {};
     try {

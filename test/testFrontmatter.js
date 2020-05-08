@@ -208,6 +208,16 @@ describe('parseFrontmatter', () => {
       ---
       XXX: 44
     `);
+  ckNop('section with emoticons', `
+---
+
+:normal:
+
+---
+
+- [home](#)
+- [menu](#menu)
+    `);
   ckErr('frontmatter with empty line between paragraphs', `
       echo
 
