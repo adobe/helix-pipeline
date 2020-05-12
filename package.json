@@ -2,7 +2,10 @@
   "name": "@adobe/helix-pipeline",
   "version": "7.0.4",
   "description": "",
-  "repository": "https://github.com/adobe/helix-pipeline",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adobe/helix-pipeline.git"
+  },
   "main": "index.js",
   "types": "index.d.ts",
   "scripts": {
@@ -102,5 +105,9 @@
     "ghooks": {
       "pre-commit": "npx lint-staged"
     }
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/adobe/helix-pipeline/issues"
+  },
+  "homepage": "https://github.com/adobe/helix-pipeline#readme"
 }
