@@ -393,7 +393,7 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
     await testEmbeds(data, doc, html);
   }).timeout(20000);
 
-  it.only('test large dataset - should not take more than 10s for 5k dataset', async () => {
+  it('test large dataset - should not take more than 10s for 5k dataset', async () => {
     // locally takes 4.5s
     const data = [];
     let html = '';
