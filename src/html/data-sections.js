@@ -110,7 +110,6 @@ function fillPlaceholders(section) {
   }, []);
 
   section.children = children;
-  delete section.meta.embedData;
 }
 
 function normalizeLists(section) {
