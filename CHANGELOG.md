@@ -1,3 +1,14 @@
+# [7.1.0](https://github.com/adobe/helix-pipeline/compare/v7.0.4...v7.1.0) (2020-05-13)
+
+
+### Features
+
+* **embed:** whitelist instagram.com ([96d816c](https://github.com/adobe/helix-pipeline/commit/96d816cdd89b1ae37161241e102d326b32b8bb3f)), closes [#701](https://github.com/adobe/helix-pipeline/issues/701)
+* **embed:** whitelist spotify ([8706500](https://github.com/adobe/helix-pipeline/commit/8706500d4cd2e6f4b7ea0ff8c43f525803fdfc10))
+* **embed:** whitelist spotify ([9d73286](https://github.com/adobe/helix-pipeline/commit/9d73286ec11f6fb31c1f0c5354c28c6c59184261))
+* **embed:** whitelist twitter.com ([4b7e2a3](https://github.com/adobe/helix-pipeline/commit/4b7e2a362ae38060b009948a750875f2a23addf2)), closes [#700](https://github.com/adobe/helix-pipeline/issues/700)
+* **embed:** whitelist vimeo.com ([1b32812](https://github.com/adobe/helix-pipeline/commit/1b3281204bfe8cd6b2e809f3f592d86b60b46fd4)), closes [#702](https://github.com/adobe/helix-pipeline/issues/702)
+
 ## [7.0.4](https://github.com/adobe/helix-pipeline/compare/v7.0.3...v7.0.4) (2020-05-12)
 
 
