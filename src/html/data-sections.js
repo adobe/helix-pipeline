@@ -91,8 +91,15 @@ function fillPlaceholders(section) {
   // required to make deepclone below work
   removePosition(section);
 
+  // no need to copy the full dataset over and over
+  delete section.meta.embedData;
+
   const children = data.reduce((p, value) => {
     const workingcopy = deepclone(section);
+
+    // set the data per section
+    workingcopy.meta = workingcopy.meta || {};
+    workingcopy.meta.embedData = value;
 
     findPlaceholders(workingcopy, (node, prop) => {
       if (typeof node[prop] === 'string') {
