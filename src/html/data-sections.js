@@ -97,10 +97,6 @@ function fillPlaceholders(section) {
   const children = data.reduce((p, value) => {
     const workingcopy = deepclone(section);
 
-    // set the data per section
-    workingcopy.meta = workingcopy.meta || {};
-    workingcopy.meta.embedData = value;
-
     findPlaceholders(workingcopy, (node, prop) => {
       if (typeof node[prop] === 'string') {
         node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
