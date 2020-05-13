@@ -113,7 +113,7 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 The default value is:
 
 ```json
-"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com, lottiefiles.com, www.slideshare.net"
+"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com, lottiefiles.com, www.slideshare.net, vimeo.com, www.instagram.com, twitter.com, open.spotify.com"
 ```
 
 ## DATA_EMBED_WHITELIST
