@@ -139,10 +139,12 @@ describe('Integration Test with Data Embeds', () => {
     );
     assert.equal(result.response.status, 200, result.error);
     assert.equal(result.response.headers['Content-Type'], 'text/html');
-    assertEquivalentNode(
-      result.response.document.body,
-      new JSDOM(html).window.document.body,
-    );
+    if (html) {
+      assertEquivalentNode(
+        result.response.document.body,
+        new JSDOM(html).window.document.body,
+      );
+    }
 
     return result;
   }
@@ -389,5 +391,28 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
     const data = 'none';
     const html = fs.readFileSync(path.resolve(__dirname, 'fixtures/embeds.html')).toString();
     await testEmbeds(data, doc, html);
+  }).timeout(20000);
+
+  it('test large dataset - should not take more than 20s for 5k dataset', async () => {
+    // locally takes 4.5s
+    const data = [];
+    let html = '';
+    for (let i = 0; i < 5000; i += 1) {
+      data.push({
+        make: 'Nissan', model: `Sunny ${i}`, year: 1992, image: 'nissan.jpg',
+      });
+      html += `<li>My car: <a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny ${i}"></a></li>\n`;
+    }
+    html = `<ol>
+${html}
+</ol>`;
+
+    const doc = `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+    
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`;
+
+    const result = await testEmbeds(data, doc);
+    assert.ok(result.response.body.replace(/\n/gm, '') === html.replace(/\n/gm, ''));
   }).timeout(20000);
 });

@@ -14,6 +14,8 @@ const {
   pipe, map, uniq, list,
 } = require('ferrum');
 
+const DATA_EMBED_TIMEOUT = 20000;
+
 function fetch({ content: { mdast } }, { downloader, logger, secrets: { DATA_EMBED_SERVICE } }) {
   const fetches = pipe(
     selectAll('dataEmbed', mdast),
@@ -24,6 +26,10 @@ function fetch({ content: { mdast } }, { downloader, logger, secrets: { DATA_EMB
       return downloader.fetch({
         uri: `${DATA_EMBED_SERVICE}/${url}`,
         id: `dataEmbed:${url}`,
+        // dataset can be large
+        options: {
+          timeout: DATA_EMBED_TIMEOUT,
+        },
       });
     }),
   );
