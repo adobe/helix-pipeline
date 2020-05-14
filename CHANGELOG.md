@@ -1,3 +1,10 @@
+## [7.1.2](https://github.com/adobe/helix-pipeline/compare/v7.1.1...v7.1.2) (2020-05-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.3.2 ([#717](https://github.com/adobe/helix-pipeline/issues/717)) ([15db554](https://github.com/adobe/helix-pipeline/commit/15db5545f10e52b7ce449bbed5438ef5c92ab46c))
+
 ## [7.1.1](https://github.com/adobe/helix-pipeline/compare/v7.1.0...v7.1.1) (2020-05-14)
 
 
