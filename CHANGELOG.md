@@ -1,3 +1,10 @@
+## [7.1.1](https://github.com/adobe/helix-pipeline/compare/v7.1.0...v7.1.1) (2020-05-14)
+
+
+### Bug Fixes
+
+* **data-embed:** optimise data embeds to support large datasets ([80bf0d7](https://github.com/adobe/helix-pipeline/commit/80bf0d7f847c22386619347145839cd51696a13d))
+
 # [7.1.0](https://github.com/adobe/helix-pipeline/compare/v7.0.4...v7.1.0) (2020-05-13)
 
 
