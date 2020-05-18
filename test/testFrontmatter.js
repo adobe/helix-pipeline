@@ -55,6 +55,7 @@ const ckNop = (wat, md) => {
   it(`${wat} should be ignored`, () => {
     const { proc, orig } = procMd(md);
     assert.deepEqual(proc, orig);
+    assert.equal(warning, undefined, 'Unexpected frontmatter parsing error logged.');
   });
 };
 
@@ -62,7 +63,7 @@ const ckErr = (wat, md) => {
   it(`${wat} should log a warning`, () => {
     const { proc, orig } = procMd(md);
     assert.deepEqual(proc, orig);
-    assert.ok(warning instanceof FrontmatterParsingError, 'No Frontmatter Parsing Error logged');
+    assert.ok(warning instanceof FrontmatterParsingError, 'expected frontmatter parsing error logged');
   });
 };
 
@@ -157,6 +158,14 @@ describe('parseFrontmatter', () => {
     Products: Stock, Creative Cloud
   `);
 
+  ckNop('no frontmatter with embeds', `
+    ---
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+    
+    Is foo {{foo}}?"
+    ---
+  `);
+
   // actual warnings
   ckErr('reject invalid yaml', `
     ---
@@ -169,17 +178,17 @@ describe('parseFrontmatter', () => {
     - Foo
     ---
   `);
-  ckErr('reject yaml with json style list', `
+  ckNop('reject yaml with json style list', `
     ---
     [1,2,3,4]
     ---
   `);
-  ckErr('reject yaml with number', `
+  ckNop('reject yaml with number', `
     ---
     42
     ---
   `);
-  ckErr('reject yaml with string', `
+  ckNop('reject yaml with string', `
     ---
     Hello
     ---
@@ -217,6 +226,21 @@ describe('parseFrontmatter', () => {
 
 - [home](#)
 - [menu](#menu)
+    `);
+  ckNop('just sections', `
+# Title
+
+---
+
+Lorem ipsum 1
+
+---
+
+Lorem ipsum 2
+
+---
+
+Lorem ipsum 3
     `);
   ckErr('frontmatter with empty line between paragraphs', `
       echo
@@ -280,7 +304,7 @@ describe('parseFrontmatter', () => {
   `);
   // Good values
 
-  ck('trieloff/helix-demo/foo.md',
+  ckErr('trieloff/helix-demo/foo.md',
     `---
 title: Foo bar hey.
 
