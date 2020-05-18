@@ -1,3 +1,10 @@
+## [7.1.4](https://github.com/adobe/helix-pipeline/compare/v7.1.3...v7.1.4) (2020-05-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.3.0 ([#722](https://github.com/adobe/helix-pipeline/issues/722)) ([0ce3aea](https://github.com/adobe/helix-pipeline/commit/0ce3aea74604f9cb804ed144d8b66a8bc66503e7))
+
 ## [7.1.3](https://github.com/adobe/helix-pipeline/compare/v7.1.2...v7.1.3) (2020-05-14)
 
 
