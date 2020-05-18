@@ -1,3 +1,10 @@
+## [7.1.5](https://github.com/adobe/helix-pipeline/compare/v7.1.4...v7.1.5) (2020-05-18)
+
+
+### Bug Fixes
+
+* **md:** relax frontmatter complaining ([#723](https://github.com/adobe/helix-pipeline/issues/723)) ([ec04a01](https://github.com/adobe/helix-pipeline/commit/ec04a01191523a6edd64c0fbb7ad2d3c3a0d9b75)), closes [#721](https://github.com/adobe/helix-pipeline/issues/721) [#715](https://github.com/adobe/helix-pipeline/issues/715)
+
 ## [7.1.4](https://github.com/adobe/helix-pipeline/compare/v7.1.3...v7.1.4) (2020-05-18)
 
 
