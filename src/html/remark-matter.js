@@ -51,7 +51,7 @@ function createTokenizer(opts) {
    * @param {string} value The input value (markdown)
    */
   return function frontmatter(eat, value) {
-    const REGEXP_EMPTY_LINE = /^\s*?(\r\n|\r|\n)/;
+    const REGEXP_EMPTY_LINE = /^\s*?\n/;
 
     // if start of document
     const wasStart = startOfDocument;
@@ -63,11 +63,11 @@ function createTokenizer(opts) {
       }
       startOfDocument = false;
     }
-    const match = /^---(\r\n|\r|\n)([^]*?)(\r\n|\r|\n)---((\r\n|\r|\n)*$|(\r\n|\r|\n))/.exec(value);
+    const match = /^---\n([^]*?)\n---(\n*$|\n)/.exec(value);
     if (!match) {
       return false;
     }
-    const src = match[2];
+    const src = match[1];
 
     // reject ambiguous yaml
     if (/^\s*[^a-zA-Z"{\s-]/m.test(src)) {
@@ -95,7 +95,7 @@ function createTokenizer(opts) {
     }
 
     // reject non-continuous yaml
-    if (!wasStart && /(\r\n|\r|\n)\s*(\r\n|\r|\n)/m.test(src)) {
+    if (!wasStart && /\n\s*\n/m.test(src)) {
       if (yamlError) {
         // if it wasn't yaml, just ignore.
         /* istanbul ignore next */
