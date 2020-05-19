@@ -1,3 +1,56 @@
+## [7.1.6](https://github.com/adobe/helix-pipeline/compare/v7.1.5...v7.1.6) (2020-05-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.3.1 ([85eb86f](https://github.com/adobe/helix-pipeline/commit/85eb86fdc4810f76893e2c10025e9b7360d78888))
+
+## [7.1.5](https://github.com/adobe/helix-pipeline/compare/v7.1.4...v7.1.5) (2020-05-18)
+
+
+### Bug Fixes
+
+* **md:** relax frontmatter complaining ([#723](https://github.com/adobe/helix-pipeline/issues/723)) ([ec04a01](https://github.com/adobe/helix-pipeline/commit/ec04a01191523a6edd64c0fbb7ad2d3c3a0d9b75)), closes [#721](https://github.com/adobe/helix-pipeline/issues/721) [#715](https://github.com/adobe/helix-pipeline/issues/715)
+
+## [7.1.4](https://github.com/adobe/helix-pipeline/compare/v7.1.3...v7.1.4) (2020-05-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.3.0 ([#722](https://github.com/adobe/helix-pipeline/issues/722)) ([0ce3aea](https://github.com/adobe/helix-pipeline/commit/0ce3aea74604f9cb804ed144d8b66a8bc66503e7))
+
+## [7.1.3](https://github.com/adobe/helix-pipeline/compare/v7.1.2...v7.1.3) (2020-05-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-fetch to v1.6.1 ([6babb1f](https://github.com/adobe/helix-pipeline/commit/6babb1f2297035858b82f5e2a3342a2748169964))
+
+## [7.1.2](https://github.com/adobe/helix-pipeline/compare/v7.1.1...v7.1.2) (2020-05-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.3.2 ([#717](https://github.com/adobe/helix-pipeline/issues/717)) ([15db554](https://github.com/adobe/helix-pipeline/commit/15db5545f10e52b7ce449bbed5438ef5c92ab46c))
+
+## [7.1.1](https://github.com/adobe/helix-pipeline/compare/v7.1.0...v7.1.1) (2020-05-14)
+
+
+### Bug Fixes
+
+* **data-embed:** optimise data embeds to support large datasets ([80bf0d7](https://github.com/adobe/helix-pipeline/commit/80bf0d7f847c22386619347145839cd51696a13d))
+
+# [7.1.0](https://github.com/adobe/helix-pipeline/compare/v7.0.4...v7.1.0) (2020-05-13)
+
+
+### Features
+
+* **embed:** whitelist instagram.com ([96d816c](https://github.com/adobe/helix-pipeline/commit/96d816cdd89b1ae37161241e102d326b32b8bb3f)), closes [#701](https://github.com/adobe/helix-pipeline/issues/701)
+* **embed:** whitelist spotify ([8706500](https://github.com/adobe/helix-pipeline/commit/8706500d4cd2e6f4b7ea0ff8c43f525803fdfc10))
+* **embed:** whitelist spotify ([9d73286](https://github.com/adobe/helix-pipeline/commit/9d73286ec11f6fb31c1f0c5354c28c6c59184261))
+* **embed:** whitelist twitter.com ([4b7e2a3](https://github.com/adobe/helix-pipeline/commit/4b7e2a362ae38060b009948a750875f2a23addf2)), closes [#700](https://github.com/adobe/helix-pipeline/issues/700)
+* **embed:** whitelist vimeo.com ([1b32812](https://github.com/adobe/helix-pipeline/commit/1b3281204bfe8cd6b2e809f3f592d86b60b46fd4)), closes [#702](https://github.com/adobe/helix-pipeline/issues/702)
+
 ## [7.0.4](https://github.com/adobe/helix-pipeline/compare/v7.0.3...v7.0.4) (2020-05-12)
 
 

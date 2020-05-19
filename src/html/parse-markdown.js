@@ -24,13 +24,17 @@ function parseMarkdown(context, action) {
   const request = setdefault(context, 'request', {});
   if (!request.extension) request.extension = 'html';
   const { extension } = request;
+  
+  // convert linebreaks
+  const converted = body.replace(/(\r\n|\n|\r)/gm, '\n');
+  const idx = Math.min(converted.indexOf('\n'), 100);
+  action.logger.debug(`Parsing markdown from request body starting with ${converted.substring(0, idx)}`);
 
   const isDebugLevel = numericLogLevel(logger.level) >= numericLogLevel('debug');
-  action.logger.debug(`Parsing markdown from request body starting with ${body.split('\n')[0]}`);
   content.mdast = unified()
     .use(remark, { position: isDebugLevel })
     .use(frontmatter, { logger: action.logger })
-    .parse(body);
+    .parse(converted);
 
   // initialize transformer
   action.transformer = new VDOMTransformer()
