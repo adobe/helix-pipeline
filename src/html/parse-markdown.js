@@ -24,7 +24,7 @@ function parseMarkdown(context, action) {
   const request = setdefault(context, 'request', {});
   if (!request.extension) request.extension = 'html';
   const { extension } = request;
-  
+
   // convert linebreaks
   const converted = body.replace(/(\r\n|\n|\r)/gm, '\n');
   const idx = Math.min(converted.indexOf('\n'), 100);
