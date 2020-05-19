@@ -1,3 +1,10 @@
+# [7.2.0](https://github.com/adobe/helix-pipeline/compare/v7.1.6...v7.2.0) (2020-05-19)
+
+
+### Features
+
+* **all pipes:** add clearPositions step to the default pipelines ([#679](https://github.com/adobe/helix-pipeline/issues/679)) ([2318277](https://github.com/adobe/helix-pipeline/commit/2318277b778506b75b333f4d93adb6ff74bf2fc2))
+
 ## [7.1.6](https://github.com/adobe/helix-pipeline/compare/v7.1.5...v7.1.6) (2020-05-18)
 
 
