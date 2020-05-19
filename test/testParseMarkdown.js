@@ -94,3 +94,37 @@ describe('Test Markdown Setting Context', () => {
     assert.equal(context.request.extension, 'html');
   });
 });
+
+describe('Test MDAST position generation', () => {
+  ['silly', 'trace', 'debug'].forEach((level) => {
+    it(`keeps the position information if the logger is in '${level}' mode`, () => {
+      const context = {
+        content: { body: '# Hellow World' },
+      };
+      const action = {
+        logger: logging.createTestLogger({ level }),
+      };
+
+      parse(context, action);
+
+      assert.ok(context.content.mdast.position);
+      assert.ok(context.content.mdast.children[0].position);
+    });
+  });
+
+  ['verbose', 'info', 'warn', 'error', 'fatal'].forEach((level) => {
+    it(`removes the position information if the logger is in '${level}' mode`, () => {
+      const context = {
+        content: { body: '# Hellow World' },
+      };
+      const action = {
+        logger: logging.createTestLogger({ level }),
+      };
+
+      parse(context, action);
+
+      assert.equal(context.content.mdast.position, undefined);
+      assert.equal(context.content.mdast.children[0].position, undefined);
+    });
+  });
+});
