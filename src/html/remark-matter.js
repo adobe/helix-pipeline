@@ -29,8 +29,7 @@ class FrontmatterParsingError extends Error {}
 function createTokenizer(opts) {
   const { logger } = opts;
 
-  let start = true;
-  let wasStart = false;
+  let startOfDocument = true;
 
   function warn(msg, sourceref) {
     const err = new FrontmatterParsingError(`${msg}\n${sourceref}`);
@@ -41,41 +40,67 @@ function createTokenizer(opts) {
     return false;
   }
 
+  function info(msg, sourceref) {
+    logger.info(`${msg}\n${sourceref}`);
+    return false;
+  }
+
   /**
    * Frontmatter tokenizer.
    * @param {function} eat The remark eat function.
    * @param {string} value The input value (markdown)
    */
   return function frontmatter(eat, value) {
+    const REGEXP_EMPTY_LINE = /^\s*?\n/;
+
     // if start of document
-    wasStart = start;
-    if (start) {
+    const wasStart = startOfDocument;
+    if (startOfDocument) {
       if (value.charAt(0).trim() === '') {
         // ignore trailing white space
+        /* istanbul ignore next */
         return false;
       }
-      start = false;
+      startOfDocument = false;
     }
-    // find start matter
-    if (!value.startsWith('---\n')) {
+    const match = /^---\n([^]*?)\n---(\n*$|\n)/.exec(value);
+    if (!match) {
       return false;
     }
+    const src = match[1];
 
-    // find eof matter
-    let offset = value.indexOf('---\n', 3);
-    if (offset < 0) {
-      // maybe end of doc ?
-      offset = value.indexOf('---', 3);
-      if (offset !== value.length - 3) {
-        return false;
-      }
+    // reject ambiguous yaml
+    if (/^\s*[^a-zA-Z"{\s-]/m.test(src)) {
+      return info(
+        'Found ambiguous frontmatter fence: Block contains yaml key not starting with a letter. '
+        + 'If this was intended, escape the key with quotes. ', src,
+      );
     }
 
-    // extract the matter
-    const src = value.substring(4, offset).trim();
+    // needs to be end of document or followed by a new line
+    const follow = value.substring(match[0].length);
+    if (follow.trim() && !REGEXP_EMPTY_LINE.test(follow)) {
+      return warn('Found ambiguous frontmatter fence: No empty line after the block! '
+        + 'Make sure your mid-document YAML blocks contain no empty lines '
+        + 'and your horizontal rules have an empty line before AND after them.', src);
+    }
+
+    // try to parse the yaml
+    let payload = {};
+    let yamlError;
+    try {
+      payload = yaml.safeLoad(src);
+    } catch (e) {
+      yamlError = e;
+    }
 
     // reject non-continuous yaml
     if (!wasStart && /\n\s*\n/m.test(src)) {
+      if (yamlError) {
+        // if it wasn't yaml, just ignore.
+        /* istanbul ignore next */
+        return false;
+      }
       return warn(
         'Found ambiguous frontmatter fence: Block contains empty line! '
         + 'Make sure your mid-document YAML blocks contain no empty lines '
@@ -83,24 +108,13 @@ function createTokenizer(opts) {
       );
     }
 
-    // reject ambiguous yaml
-    if (/^\s*:/m.test(src)) {
-      return warn(
-        'Found ambiguous frontmatter fence: Block contains yaml key starting with \':\'.'
-        + 'If this was intended, escape the key with quotes. ', src,
-      );
-    }
-
-    // try to parse the yaml
-    let payload = {};
-    try {
-      payload = yaml.safeLoad(src);
-    } catch (e) {
-      return warn(`Exception occurred while parsing yaml: ${e}`, src);
-    }
-
     // ensure we only accept YAML objects
-    if (type(payload) !== Object) {
+    const payloadType = type(payload);
+    if (payloadType !== Object) {
+      if (payloadType === String || payloadType === Number) {
+        // ignore scalar
+        return false;
+      }
       return warn(
         'Found ambiguous frontmatter block: Block contains valid yaml, but '
         + `it's data type is ${type(payload)} instead of Object.`
@@ -108,8 +122,12 @@ function createTokenizer(opts) {
       );
     }
 
+    if (yamlError) {
+      return warn(`Exception occurred while parsing yaml: ${yamlError}`, src);
+    }
+
     // consume parsed value
-    return eat(value.substring(0, offset + 4))({
+    return eat(value.substring(0, match[0].length))({
       type: 'yaml',
       payload,
     });
@@ -148,15 +166,6 @@ function createTokenizer(opts) {
  * - The yaml must yield an object (as in key-value pairs); strings, numbers or
  *   arrays are not considered to be frontmatter in this context
  * - The thematic break must be made up of three dashes
- *
- * Note that most of the information required to asses these properties
- * is not contained in the mdast itself, which is why this algorithm requires
- * access to the original markdown string. (The mdast is an Abstract Syntax Tree,
- * the proper tool for a task like this would be a Concrete Syntax Tree, but we have
- * no such thing...).
- *
- * Note that converting the mdast to a markdown string will not do, since
- * the generated markdown will be much different.
  *
  * # Future directions
  *

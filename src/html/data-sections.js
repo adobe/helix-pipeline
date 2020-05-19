@@ -91,6 +91,9 @@ function fillPlaceholders(section) {
   // required to make deepclone below work
   removePosition(section);
 
+  // no need to copy the full dataset over and over
+  delete section.meta.embedData;
+
   const children = data.reduce((p, value) => {
     const workingcopy = deepclone(section);
 
@@ -103,7 +106,6 @@ function fillPlaceholders(section) {
   }, []);
 
   section.children = children;
-  delete section.meta.embedData;
 }
 
 function normalizeLists(section) {
