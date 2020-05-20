@@ -1,3 +1,10 @@
+# [7.3.0](https://github.com/adobe/helix-pipeline/compare/v7.2.0...v7.3.0) (2020-05-20)
+
+
+### Features
+
+* **matter:** make frontmatter less verbose ([#727](https://github.com/adobe/helix-pipeline/issues/727)) ([ef1502c](https://github.com/adobe/helix-pipeline/commit/ef1502c8cd39d296d5d81f25154b7a451ed2a39d)), closes [#721](https://github.com/adobe/helix-pipeline/issues/721)
+
 # [7.2.0](https://github.com/adobe/helix-pipeline/compare/v7.1.6...v7.2.0) (2020-05-19)
 
 
