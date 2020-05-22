@@ -72,16 +72,6 @@ function expectBodyEquals(result, expectedMarkup) {
   assert.notEqual(result.response.status, 500);
 }
 
-function cleanup(html) {
-  return html.replace(/\n\s*/g, '').trim();
-}
-
-function expectBodyEquals(result, expectedMarkup) {
-  assert.equal(result.error, undefined);
-  assert.equal(cleanup(result.response.body), cleanup(expectedMarkup));
-  assert.notEqual(result.response.status, 500);
-}
-
 describe('Testing HTML Pipeline with markup config', () => {
   let action;
   let context;
