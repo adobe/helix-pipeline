@@ -10,9 +10,9 @@
       "nb-image-1",
       "nb-text-1",
       "nb-heading-1",
-      "is-image-text-heading",
-      "is-image-text",
-      "is-image"
+      "is-heading-image-text",
+      "is-heading-image",
+      "is-heading"
     ]
   },
   "type": "root",

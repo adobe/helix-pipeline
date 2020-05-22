@@ -213,7 +213,7 @@
           "nb-inlineCode-2",
           "nb-list-1",
           "nb-heading-1",
-          "is-text-inlineCode-list",
+          "is-text-inlineCode-heading",
           "is-text-inlineCode",
           "is-text"
         ]
@@ -2034,7 +2034,7 @@
               "nb-text-6",
               "nb-list-1",
               "nb-link-1",
-              "is-inlineCode-text-list",
+              "is-inlineCode-text-link",
               "is-inlineCode-text",
               "is-inlineCode",
               "is-list"

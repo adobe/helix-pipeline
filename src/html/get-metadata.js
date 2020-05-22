@@ -58,10 +58,14 @@ function constructTypes(typecounter) {
     types.push(`has-only-${Object.keys(typecounter)[0]}`);
   } else {
     types.push(...Object.entries(typecounter) // get pairs of type, count
-      .sort((left, right) => left[1] < right[1]) // sort descending by count
-      .slice(0, 3) // take the top three
-      .map(([name]) => name) // keep only the type
-      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], [])); // generate names
+      // sort descending by count, or alphabetical key if count is the same
+      .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
+      // take the top three
+      .slice(0, 3)
+      // keep only the type
+      .map(([name]) => name)
+      // generate names
+      .reduce((names, name) => [`${names[0] || 'is'}-${name}`, ...names], []));
   }
   return types;
 }

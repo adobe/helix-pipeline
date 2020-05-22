@@ -7,8 +7,8 @@
       "has-heading",
       "nb-list-1",
       "nb-heading-1",
-      "is-list-heading",
-      "is-list"
+      "is-heading-list",
+      "is-heading"
     ]
   },
   "type": "root",
