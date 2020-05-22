@@ -1,3 +1,10 @@
+# [7.4.0](https://github.com/adobe/helix-pipeline/compare/v7.3.0...v7.4.0) (2020-05-22)
+
+
+### Features
+
+* **html pipe:** Content Intelligence Matching from markup.yaml ([#691](https://github.com/adobe/helix-pipeline/issues/691)) ([4b0599d](https://github.com/adobe/helix-pipeline/commit/4b0599d95d9c36f30a08dfcf6d8bd0559f937114)), closes [#687](https://github.com/adobe/helix-pipeline/issues/687) [#664](https://github.com/adobe/helix-pipeline/issues/664)
+
 # [7.3.0](https://github.com/adobe/helix-pipeline/compare/v7.2.0...v7.3.0) (2020-05-20)
 
 
