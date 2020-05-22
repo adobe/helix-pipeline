@@ -58,7 +58,7 @@ function constructTypes(typecounter) {
     types.push(`has-only-${Object.keys(typecounter)[0]}`);
   } else {
     types.push(...Object.entries(typecounter) // get pairs of type, count
-      // sort descending by count, or alphabetical key if count is the same
+      // sort first descending by count, then alphabetical by key if count is the same
       .sort((left, right) => right[1] - left[1] || left[0].localeCompare(right[0]))
       // take the top three
       .slice(0, 3)
