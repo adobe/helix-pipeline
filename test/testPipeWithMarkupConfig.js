@@ -39,8 +39,31 @@ markup:
     wrap: .corge
     type: html
 `;
+const TEST_MARKUP_CONFIG_CONTENT = `
+version: 1
+markup:
+  foo:
+    match: ^heading + paragraph
+    classnames: bar
+    attribute:
+      baz: qux
+    wrap: .corge
+    type: content
+`;
+
+function cleanup(html) {
+  return html.replace(/\n\s*/g, '').trim();
+}
+
+function expectBodyEquals(result, expectedMarkup) {
+  assert.equal(result.error, undefined);
+  assert.equal(cleanup(result.response.body), cleanup(expectedMarkup));
+  assert.notEqual(result.response.status, 500);
+}
 
 describe('Testing HTML Pipeline with markup config', () => {
+  let action;
+  let context;
   let logger;
 
   afterEach(() => {
@@ -52,20 +75,8 @@ describe('Testing HTML Pipeline with markup config', () => {
       // tune this for debugging
       level: 'info',
     });
-    nock.restore();
-    nock.activate();
-    nock.cleanAll();
-  });
-
-  it('html.pipe adjusts the MDAST as per markup config', async () => {
-    nock('https://raw.githubusercontent.com')
-      .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [200, TEST_MARKUP_CONFIG_MD])
-      .get('/adobe/test-repo/master/hello.md')
-      .reply(() => [200, '# Hello\nfrom github.\n']);
-
-    const context = {};
-    const action = coerce({
+    context = {};
+    action = coerce({
       request: {
         headers: {
           'Cache-Control': 'no-store',
@@ -81,19 +92,79 @@ describe('Testing HTML Pipeline with markup config', () => {
       secrets: {},
       logger,
     });
+    nock.restore();
+    nock.activate();
+    nock.cleanAll();
+  });
+
+  it('html.pipe adjusts the MDAST as per markup markdown config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [200, TEST_MARKUP_CONFIG_MD])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.\n']);
+
     action.downloader = new Downloader(context, action, { forceHttp1: true });
 
     const result = await pipe((ctx) => {
       const { content } = ctx;
       ctx.response = { status: 200, body: content.document.body.innerHTML };
-    },
-    context,
-    action);
+    }, context, action);
 
-    // eslint-disable-next-line no-console
-    assert.equal(result.error, undefined);
-    assert.equal(result.response.body, '<h1 id="hello">Hello</h1>\n<div class="corge"><p class="bar" baz="qux">from github.</p></div>');
-    assert.notEqual(result.response.status, 500);
+    expectBodyEquals(result,
+      `<h1 id="hello">Hello</h1>
+      <div class="corge">
+        <p class="bar" baz="qux">from github.</p>
+      </div>`);
+  });
+
+  it('html.pipe adjusts the MDAST as per markup content config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    }, context, action);
+
+    expectBodyEquals(result,
+      `<div class="corge">
+        <div class="bar" baz="qux">
+          <h1 id="hello">Hello</h1>
+          <p>from github.</p>
+        </div>
+      </div>
+      <div>
+        <h1 id="bar">Bar</h1>
+      </div>`);
+  });
+
+  it('html.pipe adjusts single section per markup content config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.']);
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    }, context, action);
+
+    expectBodyEquals(result,
+      `<div class="corge">
+        <div class="bar" baz="qux">
+          <h1 id="hello">Hello</h1>
+          <p>from github.</p>
+        </div>
+      </div>`);
   });
 
   it('html.pipe adjusts the DOM as per markup config', async () => {
@@ -104,35 +175,17 @@ describe('Testing HTML Pipeline with markup config', () => {
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
 
-    const context = {};
-    const action = coerce({
-      request: {
-        headers: {
-          'Cache-Control': 'no-store',
-          'x-request-id': '1234',
-        },
-        params: {
-          path: '/hello.md',
-          owner: 'adobe',
-          repo: 'test-repo',
-          ref: 'master',
-        },
-      },
-      secrets: {},
-      logger,
-    });
     action.downloader = new Downloader(context, action, { forceHttp1: true });
 
     const result = await pipe((ctx) => {
       const { content } = ctx;
       ctx.response = { status: 200, body: content.document.body.innerHTML };
-    },
-    context,
-    action);
+    }, context, action);
 
-    // eslint-disable-next-line no-console
-    assert.equal(result.error, undefined);
-    assert.equal(result.response.body, '<h1 id="hello">Hello</h1>\n<div class="corge"><p class="bar" baz="qux">from github.</p></div>');
-    assert.notEqual(result.response.status, 500);
+    expectBodyEquals(result,
+      `<h1 id="hello">Hello</h1>
+      <div class="corge">
+        <p class="bar" baz="qux">from github.</p>
+      </div>`);
   });
 });
