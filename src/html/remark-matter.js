@@ -40,11 +40,6 @@ function createTokenizer(opts) {
     return false;
   }
 
-  function info(msg, sourceref) {
-    logger.info(`${msg}\n${sourceref}`);
-    return false;
-  }
-
   /**
    * Frontmatter tokenizer.
    * @param {function} eat The remark eat function.
@@ -71,10 +66,7 @@ function createTokenizer(opts) {
 
     // reject ambiguous yaml
     if (/^\s*[^a-zA-Z"{\s-]/m.test(src)) {
-      return info(
-        'Found ambiguous frontmatter fence: Block contains yaml key not starting with a letter. '
-        + 'If this was intended, escape the key with quotes. ', src,
-      );
+      return false;
     }
 
     // needs to be end of document or followed by a new line
