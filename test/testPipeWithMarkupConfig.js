@@ -101,6 +101,30 @@ describe('Testing HTML Pipeline with markup config', () => {
     nock.cleanAll();
   });
 
+  it('html.pipe does not touch output if there is no markup config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [404, 'Not Found'])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    }, context, action);
+
+    expectBodyEquals(result,
+      `<div>
+        <h1 id="hello">Hello</h1>
+        <p>from github.</p>
+      </div>
+      <div>
+        <h1 id="bar">Bar</h1>
+      </div>`);
+  });
+
   it('html.pipe adjusts the MDAST as per markup url config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
