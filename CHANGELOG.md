@@ -1,3 +1,10 @@
+# [7.5.0](https://github.com/adobe/helix-pipeline/compare/v7.4.1...v7.5.0) (2020-05-28)
+
+
+### Features
+
+* **embeds:** add more embeds ([2531c19](https://github.com/adobe/helix-pipeline/commit/2531c192b9548afcfede4950da8a521c0ca7f079))
+
 ## [7.4.1](https://github.com/adobe/helix-pipeline/compare/v7.4.0...v7.4.1) (2020-05-26)
 
 
