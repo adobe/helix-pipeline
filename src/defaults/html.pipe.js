@@ -17,6 +17,7 @@ const fetchFstab = require('../html/fetch-fstab.js');
 const fetchExternal = require('../html/fetch-external.js');
 const fetchMarkupConfig = require('../html/fetch-markupconfig.js');
 const parse = require('../html/parse-markdown.js');
+const rewriteBlobImages = require('../html/rewrite-blob-images');
 const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
 const type = require('../utils/set-content-type.js');
@@ -74,6 +75,7 @@ const htmlpipe = (cont, context, action) => {
     .use(smartypants)
     .use(iconize)
     .use(sections)
+    .use(rewriteBlobImages)
     .use(meta).expose('meta')
     .use(unwrapSoleImages)
     .use(adjustMDAST)
