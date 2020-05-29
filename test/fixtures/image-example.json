@@ -1,0 +1,65 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "This is a normal image:"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "children": [
+        {
+          "alt": null,
+          "title": null,
+          "type": "image",
+          "url": "foo.png"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "This is a blob image:"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "children": [
+        {
+          "alt": null,
+          "title": null,
+          "type": "image",
+          "url": "https://hlx.blob.core.windows.net/external/dccc13d784576fa3f0b3e06fb0ea705c49b8085"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "children": [
+        {
+          "type": "text",
+          "value": "This is a blob image with type indication:"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "children": [
+        {
+          "alt": null,
+          "title": null,
+          "type": "image",
+          "url": "https://hlx.blob.core.windows.net/external/dccc13d784576fa3f0b3e06fb0ea705c49b8085#image.png"
+        }
+      ],
+      "type": "paragraph"
+    }
+  ]
+}
