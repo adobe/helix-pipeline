@@ -17,6 +17,17 @@ const { pipe } = require('../src/defaults/html.pipe.js');
 const coerce = require('../src/utils/coerce-secrets');
 const Downloader = require('../src/utils/Downloader.js');
 
+const TEST_MARKUP_CONFIG_URL = `
+version: 1
+markup:
+  foo:
+    match: (.*)/hello.md
+    classnames: bar
+    attribute:
+      baz: qux
+    wrap: .corge
+    type: url
+`;
 const TEST_MARKUP_CONFIG_MD = `
 version: 1
 markup:
@@ -75,7 +86,11 @@ describe('Testing HTML Pipeline with markup config', () => {
       // tune this for debugging
       level: 'info',
     });
-    context = {};
+    context = {
+      request: {
+        path: '/adobe/test-repo/master/hello.md',
+      },
+    };
     action = coerce({
       request: {
         headers: {
@@ -95,6 +110,58 @@ describe('Testing HTML Pipeline with markup config', () => {
     nock.restore();
     nock.activate();
     nock.cleanAll();
+  });
+
+  it('html.pipe does not touch output if there is no markup config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [404, 'Not Found'])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    }, context, action);
+
+    expectBodyEquals(result,
+      `<div>
+        <h1 id="hello">Hello</h1>
+        <p>from github.</p>
+      </div>
+      <div>
+        <h1 id="bar">Bar</h1>
+      </div>`);
+  });
+
+  it('html.pipe adjusts the MDAST as per markup url config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [200, TEST_MARKUP_CONFIG_URL])
+      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    }, context, action);
+
+    expectBodyEquals(result,
+      `<div class="corge">
+        <div class="bar" baz="qux">
+          <div>
+            <h1 id="hello">Hello</h1>
+            <p>from github.</p>
+          </div>
+          <div>
+            <h1 id="bar">Bar</h1>
+          </div>
+        </div>
+      </div>`);
   });
 
   it('html.pipe adjusts the MDAST as per markup markdown config', async () => {
