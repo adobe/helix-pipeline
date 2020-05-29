@@ -1,3 +1,30 @@
+# [7.6.0](https://github.com/adobe/helix-pipeline/compare/v7.5.0...v7.6.0) (2020-05-29)
+
+
+### Bug Fixes
+
+* **secrets.schema.json:** add slideshare and update docs ([1831fdc](https://github.com/adobe/helix-pipeline/commit/1831fdc54b407cd64e5d5e3446a1a6599618046d)), closes [#735](https://github.com/adobe/helix-pipeline/issues/735)
+
+
+### Features
+
+* **secrets.schema.json:** add linkedin, spotify, vimeo, soundcloud embeds ([878c1e1](https://github.com/adobe/helix-pipeline/commit/878c1e10de5233fd29c5deca71b8573e0ac488f2)), closes [#732](https://github.com/adobe/helix-pipeline/issues/732)
+* **secrets.schema.json:** add slideshare embeds ([40b4e52](https://github.com/adobe/helix-pipeline/commit/40b4e52b209ae3da8b1654e1ca49cd245f677e9e)), closes [#735](https://github.com/adobe/helix-pipeline/issues/735)
+
+# [7.5.0](https://github.com/adobe/helix-pipeline/compare/v7.4.1...v7.5.0) (2020-05-28)
+
+
+### Features
+
+* **embeds:** add more embeds ([2531c19](https://github.com/adobe/helix-pipeline/commit/2531c192b9548afcfede4950da8a521c0ca7f079))
+
+## [7.4.1](https://github.com/adobe/helix-pipeline/compare/v7.4.0...v7.4.1) (2020-05-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.3.2 ([#731](https://github.com/adobe/helix-pipeline/issues/731)) ([7ea48e1](https://github.com/adobe/helix-pipeline/commit/7ea48e14ba5709d46bfe05f919fb3a3a5fc31b3c))
+
 # [7.4.0](https://github.com/adobe/helix-pipeline/compare/v7.3.0...v7.4.0) (2020-05-22)
 
 
