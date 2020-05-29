@@ -1,3 +1,10 @@
+# [7.7.0](https://github.com/adobe/helix-pipeline/compare/v7.6.0...v7.7.0) (2020-05-29)
+
+
+### Features
+
+* **pipe:** move image handler into pipeline step ([#737](https://github.com/adobe/helix-pipeline/issues/737)) ([28a7abf](https://github.com/adobe/helix-pipeline/commit/28a7abfa47bf7ac105ca987e146297e08377febd))
+
 # [7.6.0](https://github.com/adobe/helix-pipeline/compare/v7.5.0...v7.6.0) (2020-05-29)
 
 
