@@ -15,6 +15,7 @@ const { setdefault } = require('ferrum');
 const findAndReplace = require('hast-util-find-and-replace');
 const fromDOM = require('hast-util-from-dom');
 const { JSDOM } = require('jsdom');
+const { match: matchUrlBuilder } = require('path-to-regexp');
 const { MarkupConfig } = require('@adobe/helix-shared');
 const { match } = require('./pattern-compiler');
 const section = require('./section-handler');
@@ -86,6 +87,8 @@ function getHTMLElement(template) {
  * @returns {VDOM} the new patched element
  */
 function patchVDOMNode(el, cfg) {
+  setdefault(el, 'properties', {});
+
   // Append classes to the element (space or comma separated)
   if (cfg.classnames) {
     el.properties.className = [
@@ -153,6 +156,23 @@ async function adjustMDAST(context, action) {
     return;
   }
 
+  // Adjust the MDAST conversion based on url config
+  const sectionHandler = section();
+  Object.entries(markupconfig.markup)
+    .filter(([_, cfg]) => cfg.type === 'url')
+    .forEach(([name, cfg]) => {
+      logger.info(`Applying markdown url adjustment: ${name}`);
+
+      const matchUrl = matchUrlBuilder(cfg.match, { decode: decodeURIComponent });
+      if (matchUrl(context.request.path)) {
+        transformer.match('root', (h, node) => {
+          // Generate the matching VDOM element
+          const el = sectionHandler(h, { ...node, meta: {} });
+          return patchVDOMNode(el, cfg);
+        });
+      }
+    });
+
   // Adjust the MDAST conversion based on markdown config
   Object.entries(markupconfig.markup)
     .filter(([_, cfg]) => cfg.type === 'markdown')
@@ -167,7 +187,6 @@ async function adjustMDAST(context, action) {
     });
 
   // Adjust the MDAST conversion based on content config
-  const sectionHandler = section();
   Object.entries(markupconfig.markup)
     .filter(([_, cfg]) => cfg.type === 'content')
     .forEach(([name, cfg]) => {
