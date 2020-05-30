@@ -42,7 +42,7 @@ Table of Contents
 [![CircleCI](https://img.shields.io/circleci/project/github/adobe/helix-pipeline.svg)](https://circleci.com/gh/adobe/helix-pipeline)
 [![GitHub license](https://img.shields.io/github/license/adobe/helix-pipeline.svg)](https://github.com/adobe/helix-pipeline/blob/master/LICENSE.txt)
 [![GitHub issues](https://img.shields.io/github/issues/adobe/helix-pipeline.svg)](https://github.com/adobe/helix-pipeline/issues)
-[![npm](https://img.shields.io/npm/dw/@adobe/helix-pipeline.svg)](https://www.npmjs.com/package/@adobe/helix-pipeline) [![Greenkeeper badge](https://badges.greenkeeper.io/adobe/helix-pipeline.svg)](https://greenkeeper.io/)
+[![npm](https://img.shields.io/npm/dw/@adobe/helix-pipeline.svg)](https://www.npmjs.com/package/@adobe/helix-pipeline) 
 [![Known Vulnerabilities](https://snyk.io/test/github/adobe/hypermedia-pipeline/badge.svg?targetFile=package.json)](https://snyk.io/test/github/adobe/hypermedia-pipeline?targetFile=package.json)
 
 ## Helix Markdown
