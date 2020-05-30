@@ -215,14 +215,6 @@ describe('Test MDAST to VDOM Transformation', () => {
     assert.deepEqual(actual.outerHTML, expected.outerHTML);
   });
 
-  it('Image handler replaces blobs with Fastly proxies', () => {
-    const markdown = fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-example.md'));
-    const mdast = unified().use(parser).parse(markdown);
-    const actual = new VDOM(mdast, action.secrets).getDocument().documentElement;
-    const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-example.html')).toString('utf-8')).window.document.documentElement;
-    assert.deepEqual(actual.outerHTML, expected.outerHTML);
-  });
-
   it('creating nested list is performant', () => {
     const markdown = fs.readFileSync(path.resolve(__dirname, 'fixtures', 'tags.md'));
     const mdast = unified().use(parser).parse(markdown);
