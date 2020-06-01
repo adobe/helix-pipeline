@@ -1,3 +1,21 @@
+# [8.0.0](https://github.com/adobe/helix-pipeline/compare/v7.7.0...v8.0.0) (2020-06-01)
+
+
+### Bug Fixes
+
+* **all pipes:** get-metadata is not map-enumeration stable ([#728](https://github.com/adobe/helix-pipeline/issues/728)) ([f2861b2](https://github.com/adobe/helix-pipeline/commit/f2861b25d842d40334d9e01de7e1ff7aadf5bc77)), closes [#669](https://github.com/adobe/helix-pipeline/issues/669)
+
+
+### BREAKING CHANGES
+
+* **all pipes:** Rather than relying on node's property enumeration to sort the
+types for `is-…` types in the metadata, we are now enforcing a stable sort
+order based on alphabetical ordering in case of count collisions.
+The result is that there may be inversions of type order:
+- text=1, heading=1: `is-text-heading` => `is-heading-text`
+- text=2, heading=1: `is-text-heading`
+- text=2, heading=1, image=1, list=1: `is-text-list-image` => `is-text-heading-image`
+
 # [7.7.0](https://github.com/adobe/helix-pipeline/compare/v7.6.0...v7.7.0) (2020-05-29)
 
 
