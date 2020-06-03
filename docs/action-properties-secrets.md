@@ -34,6 +34,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | [SANITIZE_DOM](#SANITIZE_DOM)                     | `boolean`    | Optional | cannot be null | [Secrets](secrets-properties-sanitize_dom.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/SANITIZE_DOM")                     |
 | [RESOLVE_GITREF_SERVICE](#RESOLVE_GITREF_SERVICE) | `string`     | Optional | cannot be null | [Secrets](secrets-properties-resolve_gitref_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/RESOLVE_GITREF_SERVICE") |
 | [GITHUB_TOKEN](#GITHUB_TOKEN)                     | `string`     | Optional | cannot be null | [Secrets](secrets-properties-github_token.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/GITHUB_TOKEN")                     |
+| [CONTENT_PROXY_URL](#CONTENT_PROXY_URL)           | `string`     | Optional | cannot be null | [Secrets](secrets-properties-content_proxy_url.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/CONTENT_PROXY_URL")           |
 | `[A-Z0-9_]+`                                      | Unknown Type | Optional | cannot be null | [Secrets](secrets-patternproperties-a-z0-9_.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/patternProperties/\[A-Z0-9\_]+")            |
 
 ## REPO_RAW_ROOT
@@ -381,6 +382,26 @@ GitHub access token to use while fetching markdown. See <https://help.github.com
 ### GITHUB_TOKEN Type
 
 `string`
+
+## CONTENT_PROXY_URL
+
+URL of the content proxy service.
+
+
+`CONTENT_PROXY_URL`
+
+-   is optional
+-   Type: `string`
+-   cannot be null
+-   defined in: [Secrets](secrets-properties-content_proxy_url.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/CONTENT_PROXY_URL")
+
+### CONTENT_PROXY_URL Type
+
+`string`
+
+### CONTENT_PROXY_URL Constraints
+
+**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc4291 "check the specification")
 
 ## Pattern: `[A-Z0-9_]+`
 
