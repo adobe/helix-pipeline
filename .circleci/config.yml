@@ -3,7 +3,7 @@ version: 2.1
 executors:
   node10:
     docker:
-      - image: circleci/node:10.20.1-buster
+      - image: circleci/node:10.21.0-buster
     environment:
       NPM_CONFIG_PREFIX: ~/.npm-global
 
