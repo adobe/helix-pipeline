@@ -21,7 +21,7 @@ export interface Context {
   error?:
     | string
     | {
-        [k: string]: any;
+        [k: string]: unknown;
       };
   request?: Request;
   content?: Content;
@@ -93,19 +93,19 @@ export interface Content {
    * The DOM-compatible representation of the document's inner HTML
    */
   document?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The JSON object to emit.
    */
   json?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The XML object to emit. See xmlbuilder-js for syntax.
    */
   xml?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   meta?: null | {
     /**
@@ -132,7 +132,7 @@ export interface Content {
      * Path (can be relative) to the first image in the document
      */
     image?: string;
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * Extracted title of the document
@@ -150,7 +150,7 @@ export interface Content {
    * Custom object that can hold any user defined data.
    */
   data?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
 }
 /**
@@ -199,7 +199,7 @@ export interface MDAST {
          * The MDAST node type. Each section can be treated as a standalone document.
          */
         type?: {
-          [k: string]: any;
+          [k: string]: unknown;
         };
         position?: Position;
         /**
@@ -231,7 +231,7 @@ export interface MDAST {
            * Path (can be relative) to the first image in the document
            */
           image?: string;
-          [k: string]: any;
+          [k: string]: unknown;
         };
         /**
          * Extracted title of the document
@@ -256,7 +256,7 @@ export interface MDAST {
    * The payload of a frontmatter/yaml block
    */
   payload?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The heading level
@@ -323,7 +323,7 @@ export interface MDAST {
      * Path (can be relative) to the first image in the document
      */
     image?: string;
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * Extracted title of the document
@@ -357,7 +357,7 @@ export interface MDAST {
    * data is guaranteed to never be specified by unist or specifications implementing unist. Free data space.
    */
   data?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
 }
 /**
@@ -366,7 +366,7 @@ export interface MDAST {
 export interface Position {
   start?: TextCoordinates;
   end?: TextCoordinates;
-  indent?: any[];
+  indent?: unknown[];
 }
 /**
  * A position in a text document
@@ -394,13 +394,13 @@ export interface Response {
    */
   status?: number;
   body?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The DOM-compatible representation of the response document
    */
   document?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The HTTP headers of the response

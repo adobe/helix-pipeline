@@ -21,7 +21,7 @@ const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const { JSDOM } = require('jsdom');
 const unified = require('unified');
 const parser = require('remark-parse');
-const VDOM = require('../').utils.vdom;
+const VDOM = require('../index.js').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
 const logger = logging.createTestLogger({

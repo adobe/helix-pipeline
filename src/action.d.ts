@@ -76,7 +76,7 @@ export type RawRequest = {
      * Deprecated: The original OpenWhisk request headers
      */
     __ow_headers?: {
-      [k: string]: any;
+      [k: string]: unknown;
     };
     /**
      * All other parameters are interpreted as string.
@@ -94,32 +94,32 @@ export interface Action {
    * A helix-log [SimpleInterface](https://github.com/adobe/helix-log) logger instance.
    */
   logger?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * Internal information related to debugging.
    */
   debug?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   secrets?: Secrets;
   /**
    * A VDOMTransformer instance
    */
   transformer?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * A Downloader instance
    */
   downloader?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)
    */
   markupconfig?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
 }
 /**
