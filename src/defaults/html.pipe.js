@@ -13,8 +13,7 @@ const { Pipeline } = require('../../index.js');
 const { log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
-const fetchFstab = require('../html/fetch-fstab.js');
-const fetchExternal = require('../html/fetch-external.js');
+const fetchContent = require('../html/fetch-content.js');
 const fetchMarkupConfig = require('../html/fetch-markupconfig.js');
 const parse = require('../html/parse-markdown.js');
 const rewriteBlobImages = require('../html/rewrite-blob-images');
@@ -48,7 +47,7 @@ const { adjustMDAST, adjustHTML } = require('../utils/adjust-markup');
 
 /* eslint newline-per-chained-call: off */
 
-function hascontent({ content }) {
+function hasNoContent({ content }) {
   return !(content !== undefined && content.body !== undefined);
 }
 
@@ -65,10 +64,9 @@ const htmlpipe = (cont, context, action) => {
     .every(dump.record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
-    .use(fetchFstab)
     .use(fetchMarkupConfig)
-    .use(fetchExternal)
-    .use(fetch).expose('fetch').when(hascontent)
+    .use(fetchContent).expose('content').when(hasNoContent)
+    .use(fetch).expose('fetch').when(hasNoContent)
     .use(parse).expose('parse')
     .use(embeds)
     .use(dataEmbeds)
