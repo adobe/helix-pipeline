@@ -1,3 +1,10 @@
+## [9.0.2](https://github.com/adobe/helix-pipeline/compare/v9.0.1...v9.0.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* **icons:** avoid iconizing icons starting with digits ([#757](https://github.com/adobe/helix-pipeline/issues/757)) ([c5faa83](https://github.com/adobe/helix-pipeline/commit/c5faa83669749dbd4c7d18a08aab6cef3f17cc5a))
+
 ## [9.0.1](https://github.com/adobe/helix-pipeline/compare/v9.0.0...v9.0.1) (2020-06-12)
 
 
