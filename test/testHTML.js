@@ -731,11 +731,11 @@ ${context.content.document.body.innerHTML}`,
       ref: 'master',
       path: 'not-existent.md',
     });
-    assert.ok(out.errorStack.startsWith('Error: Error while fetching file from https://adobeioruntime.net/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=helix-pipeline&path=not-existent.md&ref=master: 404\n'));
+    assert.ok(out.errorStack.startsWith('Error: Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404\n'));
     delete out.errorStack;
     assert.deepEqual(out, {
       body: '',
-      errorMessage: 'Error while fetching file from https://adobeioruntime.net/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=helix-pipeline&path=not-existent.md&ref=master: 404',
+      errorMessage: 'Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404',
       headers: {},
       statusCode: 404,
     });

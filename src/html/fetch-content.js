@@ -64,8 +64,12 @@ async function fetchContent(context, {
         timeout: secrets.HTTP_TIMEOUT_EXTERNAL,
         headers,
       },
-      errorOn404: true,
+      errorOn404: false,
     });
+    // if 404, return and let the fetch-markdown try to load the resource.
+    if (res.status === 404) {
+      return;
+    }
 
     content.body = res.body;
 
