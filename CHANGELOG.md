@@ -1,3 +1,15 @@
+# [9.0.0](https://github.com/adobe/helix-pipeline/compare/v8.0.7...v9.0.0) (2020-06-12)
+
+
+### Features
+
+* **pipe:** use content-proxy to download content ([#743](https://github.com/adobe/helix-pipeline/issues/743)) ([9f60062](https://github.com/adobe/helix-pipeline/commit/9f60062331933f333ffecac41fc93cfcec962e64)), closes [#734](https://github.com/adobe/helix-pipeline/issues/734)
+
+
+### BREAKING CHANGES
+
+* **pipe:** removed fetch-fstab and fetch-external
+
 ## [8.0.7](https://github.com/adobe/helix-pipeline/compare/v8.0.6...v8.0.7) (2020-06-11)
 
 
