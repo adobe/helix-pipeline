@@ -1,3 +1,10 @@
+## [9.0.1](https://github.com/adobe/helix-pipeline/compare/v9.0.0...v9.0.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* fallback to fetch-markdown if resource cannot be loaded from content proxy ([#758](https://github.com/adobe/helix-pipeline/issues/758)) ([6b9b943](https://github.com/adobe/helix-pipeline/commit/6b9b9436b8125a9fbd98e4cf19994dfe5ef992bd))
+
 # [9.0.0](https://github.com/adobe/helix-pipeline/compare/v8.0.7...v9.0.0) (2020-06-12)
 
 
