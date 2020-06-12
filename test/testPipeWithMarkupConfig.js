@@ -115,8 +115,9 @@ describe('Testing HTML Pipeline with markup config', () => {
   it('html.pipe does not touch output if there is no markup config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [404, 'Not Found'])
-      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [404, 'Not Found']);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -139,8 +140,9 @@ describe('Testing HTML Pipeline with markup config', () => {
   it('html.pipe adjusts the MDAST as per markup url config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [200, TEST_MARKUP_CONFIG_URL])
-      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, TEST_MARKUP_CONFIG_URL]);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -167,8 +169,9 @@ describe('Testing HTML Pipeline with markup config', () => {
   it('html.pipe adjusts the MDAST as per markup markdown config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [200, TEST_MARKUP_CONFIG_MD])
-      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, TEST_MARKUP_CONFIG_MD]);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -188,8 +191,9 @@ describe('Testing HTML Pipeline with markup config', () => {
   it('html.pipe adjusts the MDAST as per markup content config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT])
-      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT]);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -214,9 +218,10 @@ describe('Testing HTML Pipeline with markup config', () => {
   it('html.pipe adjusts single section per markup content config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT])
-      .get('/adobe/test-repo/master/hello.md')
-      .reply(() => [200, '# Hello\nfrom github.']);
+      .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT]);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
 
@@ -237,8 +242,9 @@ describe('Testing HTML Pipeline with markup config', () => {
   it('html.pipe adjusts the DOM as per markup config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [200, TEST_MARKUP_CONFIG_HTML])
-      .get('/adobe/test-repo/master/hello.md')
+      .reply(() => [200, TEST_MARKUP_CONFIG_HTML]);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
 

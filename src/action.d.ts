@@ -186,6 +186,10 @@ export interface Secrets {
    */
   GITHUB_TOKEN?: string;
   /**
+   * URL of the content proxy service.
+   */
+  CONTENT_PROXY_URL?: string;
+  /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".
    */
