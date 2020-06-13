@@ -21,8 +21,8 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 | :------------------------------------------------ | ------------ | -------- | -------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
 | [REPO_RAW_ROOT](#REPO_RAW_ROOT)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-repo_raw_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_RAW_ROOT")                   |
 | [REPO_API_ROOT](#REPO_API_ROOT)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-repo_api_root.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/REPO_API_ROOT")                   |
-| [EMBED_WHITELIST](#EMBED_WHITELIST)               | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_WHITELIST")               |
-| [DATA_EMBED_WHITELIST](#DATA_EMBED_WHITELIST)     | `string`     | Optional | cannot be null | [Secrets](secrets-properties-data_embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_WHITELIST")     |
+| [EMBED_ALLOWLIST](#EMBED_ALLOWLIST)               | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_allowlist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_ALLOWLIST")               |
+| [DATA_EMBED_ALLOWLIST](#DATA_EMBED_ALLOWLIST)     | `string`     | Optional | cannot be null | [Secrets](secrets-properties-data_embed_allowlist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_ALLOWLIST")     |
 | [EMBED_SERVICE](#EMBED_SERVICE)                   | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SERVICE")                   |
 | [DATA_EMBED_SERVICE](#DATA_EMBED_SERVICE)         | `string`     | Optional | cannot be null | [Secrets](secrets-properties-data_embed_service.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_SERVICE")         |
 | [EMBED_SELECTOR](#EMBED_SELECTOR)                 | `string`     | Optional | cannot be null | [Secrets](secrets-properties-embed_selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")                 |
@@ -93,23 +93,23 @@ The default value is:
 "https://api.github.com/"
 ```
 
-## EMBED_WHITELIST
+## EMBED_ALLOWLIST
 
-Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_WHITELIST`)
+Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_ALLOWLIST`)
 
 
-`EMBED_WHITELIST`
+`EMBED_ALLOWLIST`
 
 -   is optional
 -   Type: `string`
 -   cannot be null
--   defined in: [Secrets](secrets-properties-embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_WHITELIST")
+-   defined in: [Secrets](secrets-properties-embed_allowlist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_ALLOWLIST")
 
-### EMBED_WHITELIST Type
+### EMBED_ALLOWLIST Type
 
 `string`
 
-### EMBED_WHITELIST Default Value
+### EMBED_ALLOWLIST Default Value
 
 The default value is:
 
@@ -117,23 +117,23 @@ The default value is:
 "www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com, lottiefiles.com, www.slideshare.net, vimeo.com, www.instagram.com, twitter.com, open.spotify.com, web.spotify.com, player.vimeo.com, www.linkedin.com, w.soundcloud.com, www.slideshare.net"
 ```
 
-## DATA_EMBED_WHITELIST
+## DATA_EMBED_ALLOWLIST
 
-Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_WHITELIST`)
+Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_ALLOWLIST`)
 
 
-`DATA_EMBED_WHITELIST`
+`DATA_EMBED_ALLOWLIST`
 
 -   is optional
 -   Type: `string`
 -   cannot be null
--   defined in: [Secrets](secrets-properties-data_embed_whitelist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_WHITELIST")
+-   defined in: [Secrets](secrets-properties-data_embed_allowlist.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_ALLOWLIST")
 
-### DATA_EMBED_WHITELIST Type
+### DATA_EMBED_ALLOWLIST Type
 
 `string`
 
-### DATA_EMBED_WHITELIST Default Value
+### DATA_EMBED_ALLOWLIST Default Value
 
 The default value is:
 

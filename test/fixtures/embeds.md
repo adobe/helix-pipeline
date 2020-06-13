@@ -34,9 +34,9 @@ https://www.youtube.com/watch?v=KOxbO0EI4MA
 
 is an embed, but https://www.youtube.com/watch?v=KOxbO0EI4MA is just a link.
 
-# Whitelisting
+# Allowing URLs
 
-All embed hostnames must be whitelisted. Therefore, the following are not embeds:
+All embed hostnames must be allowed. Therefore, the following are not embeds:
 
 `video: https://www.example.com/embed/2Xc9gXyf2G4`
 
