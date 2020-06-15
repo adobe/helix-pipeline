@@ -60,7 +60,7 @@ Because it looks like Markdown "frontmatter", but is allowed in the middle of th
 
 Embedding external content in a Markdown document is supported in Helix Markdown. We support a number of embedding syntaxes that were originally introduced for other software and allow a certain degree of interoperability:
 
-**Note: Helix Pipeline will only process embeds if the URL matches a known whitelist. This is for reasons of security and to guard against accidential embeds.**
+**Note: Helix Pipeline will only process embeds if the URL matches a known allow list. This is for reasons of security and to guard against accidental embeds.**
 
 
 ### IA Writer-Style Embeds
@@ -69,7 +69,7 @@ The [IA Writer Markdown editing app](https://ia.net/writer) for desktop and mobi
 
 An embed is:
 
-- a whitelisted URL
+- an allowed URL
 - in a separate paragraph
 - that's all.
 
@@ -89,7 +89,7 @@ An embed is:
 
 - an inline code block
 - in a separate paragraph
-- containing a keyword, a colon `:`, and a whitelisted URL
+- containing a keyword, a colon `:`, and an allowed URL
 
 ```markdown
 
@@ -106,7 +106,7 @@ The only notion Markdown has of external content embedded in the document are im
 An embed is:
 
 - an image `![]()`
-- with a whitelisted URL
+- with an allowed URL
 - in a separate paragraph
 
 ```markdown
@@ -121,7 +121,7 @@ The downside of the three embed approaches above is that they do not work on Git
 
 An embed is:
 
-- a link to a whitelisted URL
+- a link to an allowed URL
 - in a separate paragraph
 - with a preview image as the only child
 
@@ -136,7 +136,7 @@ An embed is:
 Helix also supports internal embeds, similar to [IA Writer's content blocks](https://ia.net/writer/support/general/content-blocks), with following changes:
 
 - any of the external embed syntaxes are supported, not just IA-Writer-Style embeds
-- whitelisted URLs must be relative and end with `.md` or `.html`
+- allowed URLs must be relative and end with `.md` or `.html`
 
 ## Data Embeds and Markdown Templates
 
@@ -151,7 +151,7 @@ Instead of just dumping the data as a Markdown table, Helix will fetch the data,
 
 If the data source has more than one entry, e.g. multiple rows in a spreadsheet, multiple events in a calendar, or multiple posts in an RSS feed, then the content of the document (or section) will be replicated for each entry.
 
-Helix maintains a separate whitelist of URLs that indicate embeddable data sources, so any of the embed syntaxes describe above can be used. In the following examples, we will use the IA Writer-style syntax.
+Helix maintains a separate list of allowed URLs that indicate embeddable data sources, so any of the embed syntaxes describe above can be used. In the following examples, we will use the IA Writer-style syntax.
 
 ### Example
 
