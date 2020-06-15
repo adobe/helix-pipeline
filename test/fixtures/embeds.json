@@ -280,7 +280,7 @@
       "children": [
         {
           "type": "text",
-          "value": "Whitelisting"
+          "value": "Allowing URLs"
         }
       ]
     },
@@ -289,7 +289,7 @@
       "children": [
         {
           "type": "text",
-          "value": "All embed hostnames must be whitelisted. Therefore, the following are not embeds:"
+          "value": "All embed hostnames must be allowed. Therefore, the following are not embeds:"
         }
       ]
     },

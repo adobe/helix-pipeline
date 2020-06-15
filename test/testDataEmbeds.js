@@ -64,8 +64,8 @@ const params = {
 
 const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
-  EMBED_WHITELIST: '*.youtube.com',
-  DATA_EMBED_WHITELIST: 'docs.google.com',
+  EMBED_ALLOWLIST: '*.youtube.com',
+  DATA_EMBED_ALLOWLIST: 'docs.google.com',
 };
 
 const logger = logging.createTestLogger({

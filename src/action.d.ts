@@ -135,13 +135,13 @@ export interface Secrets {
    */
   REPO_API_ROOT?: string;
   /**
-   * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_WHITELIST`)
+   * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_ALLOWLIST`)
    */
-  EMBED_WHITELIST?: string;
+  EMBED_ALLOWLIST?: string;
   /**
-   * Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_WHITELIST`)
+   * Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_ALLOWLIST`)
    */
-  DATA_EMBED_WHITELIST?: string;
+  DATA_EMBED_ALLOWLIST?: string;
   /**
    * URL of an Embed Service that takes the appended URL and returns an embeddable HTML representation.
    */
