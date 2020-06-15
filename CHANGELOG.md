@@ -1,3 +1,11 @@
+## [9.0.3](https://github.com/adobe/helix-pipeline/compare/v9.0.2...v9.0.3) (2020-06-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.3.11 ([#759](https://github.com/adobe/helix-pipeline/issues/759)) ([844cb92](https://github.com/adobe/helix-pipeline/commit/844cb9247331bac074346dca9e659055bf4b3201))
+* **deps:** update dependency @adobe/helix-shared to v7.6.0 ([#762](https://github.com/adobe/helix-pipeline/issues/762)) ([e60fb85](https://github.com/adobe/helix-pipeline/commit/e60fb8571446c85ca7b4fe89ebb7d63119c5cef5))
+
 ## [9.0.2](https://github.com/adobe/helix-pipeline/compare/v9.0.1...v9.0.2) (2020-06-12)
 
 
