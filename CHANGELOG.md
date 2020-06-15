@@ -1,3 +1,17 @@
+# [10.0.0](https://github.com/adobe/helix-pipeline/compare/v9.0.3...v10.0.0) (2020-06-15)
+
+
+### Bug Fixes
+
+* improve language for accepted embeds and data embeds ([#760](https://github.com/adobe/helix-pipeline/issues/760)) ([f900748](https://github.com/adobe/helix-pipeline/commit/f900748f77c891d16260a8ec56462a076e71686f))
+
+
+### BREAKING CHANGES
+
+* EMBED_WHITELIST renamed to EMBED_ALLOWLIST; DATA_EMBED_WHITELIST renamed to DATA_EMBED_ALLOWLIST
+
+Co-authored-by: Lars Trieloff <lars@trieloff.net>
+
 ## [9.0.3](https://github.com/adobe/helix-pipeline/compare/v9.0.2...v9.0.3) (2020-06-15)
 
 
