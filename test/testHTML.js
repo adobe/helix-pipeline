@@ -110,7 +110,6 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',
@@ -242,7 +241,6 @@ describe('Testing HTML Pipeline', () => {
 
 </body></html>`);
   });
-
 
   it('html.pipe keeps double ESI tags', async () => {
     const result = await pipe(

@@ -70,7 +70,6 @@ class TypeMatcher {
       .map(([_, type]) => type);
   }
 
-
   /**
    * Turns a content expression into a matcher predicate function
    * @private

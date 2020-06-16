@@ -64,7 +64,6 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',
@@ -82,7 +81,6 @@ describe('Testing HTML Pipeline in Production', () => {
     // eslint-disable-next-line no-underscore-dangle
     process.env.__OW_ACTIVATION_ID = 'fake';
   });
-
 
   it('html.pipe adds headers from meta and link tags', async () => {
     const result = await pipe(

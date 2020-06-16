@@ -247,7 +247,6 @@ describe('Unit Test Section Strain Filtering', () => {
     assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
-
   it('Filters strain a', () => {
     const context = {
       content: {

@@ -247,7 +247,6 @@ describe('Testing HTML Pipeline with markup config', () => {
       .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
-
     action.downloader = new Downloader(context, action, { forceHttp1: true });
 
     const result = await pipe((ctx) => {

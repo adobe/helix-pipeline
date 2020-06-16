@@ -14,7 +14,6 @@ const path = require('path');
 const fs = require('fs-extra');
 const { setdefault } = require('ferrum');
 
-
 /**
  * Returns {@code true} if context dumps should never be written to disk.
  * @returns {boolean} {@code true} if writing dumps is disabled.

@@ -15,7 +15,6 @@ const fs = require('fs-extra');
 const path = require('path');
 const rewriteBlobImages = require('../src/html/rewrite-blob-images');
 
-
 describe('Test Blob Image Rewriting', () => {
   it('Rewrites blob store image URLs', () => {
     const mdast = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-example.json')).toString('utf-8'));
