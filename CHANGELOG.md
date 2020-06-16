@@ -1,3 +1,10 @@
+## [10.0.1](https://github.com/adobe/helix-pipeline/compare/v10.0.0...v10.0.1) (2020-06-16)
+
+
+### Bug Fixes
+
+* don't ignore content proxy ([#761](https://github.com/adobe/helix-pipeline/issues/761)) ([9199ccd](https://github.com/adobe/helix-pipeline/commit/9199ccd0c0b93b700f289f0308f62d0892b6f115))
+
 # [10.0.0](https://github.com/adobe/helix-pipeline/compare/v9.0.3...v10.0.0) (2020-06-15)
 
 
