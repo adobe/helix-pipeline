@@ -20,8 +20,8 @@
   "author": "",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@adobe/eslint-config-helix": "1.1.1",
-    "@adobe/helix-testutils": "0.3.1",
+    "@adobe/eslint-config-helix": "1.1.3",
+    "@adobe/helix-testutils": "0.3.2",
     "@adobe/jsonschema2md": "4.1.3",
     "@pollyjs/adapter-fetch": "4.3.0",
     "@pollyjs/adapter-node-http": "4.3.0",
@@ -51,8 +51,8 @@
     "unist-util-inspect": "6.0.0"
   },
   "dependencies": {
-    "@adobe/helix-epsagon": "1.3.11",
-    "@adobe/helix-fetch": "1.6.1",
+    "@adobe/helix-epsagon": "1.3.12",
+    "@adobe/helix-fetch": "1.6.2",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "7.6.0",
     "@adobe/openwhisk-action-logger": "2.2.0",
