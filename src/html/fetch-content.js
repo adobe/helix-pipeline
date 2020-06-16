@@ -24,15 +24,6 @@ async function fetchContent(context, {
     owner, repo, path, branch = 'master', ref,
   } = request.params;
 
-  // don't use content-proxy for localhost
-  const repoRawRoot = new URL(secrets.REPO_RAW_ROOT);
-  /* istanbul ignore if */
-  if (repoRawRoot.hostname === 'localhost' || repoRawRoot.hostname === '127.0.0.1') {
-    // this is not testable, since the nock interceptor don't work on localhost and http2.. ??..
-    logger.debug(`ignore content proxy for ${repoRawRoot}`);
-    return;
-  }
-
   // compute content proxy url
   let contentProxyUrl = secrets.CONTENT_PROXY_URL || '';
   if (!contentProxyUrl) {
@@ -47,6 +38,7 @@ async function fetchContent(context, {
   url.searchParams.append('ref', ref || branch);
 
   // append raw root if different from default
+  const repoRawRoot = new URL(secrets.REPO_RAW_ROOT);
   if (repoRawRoot.href !== 'https://raw.githubusercontent.com/') {
     url.searchParams.append('REPO_RAW_ROOT', repoRawRoot.href);
   }
