@@ -200,7 +200,6 @@ describe('Test requests', () => {
   });
 });
 
-
 describe('Test misbehaved HTTP Responses', () => {
   setupPolly({
     recordFailedRequests: false,

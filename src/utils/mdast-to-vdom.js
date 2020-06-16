@@ -92,7 +92,6 @@ class VDOMTransformer {
   withMdast(mdast) {
     this._root = mdast;
 
-
     return this;
   }
 

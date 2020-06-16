@@ -15,7 +15,6 @@ const {
   flat, obj, map, each,
 } = require('ferrum');
 
-
 function yaml(section) {
   const yamls = selectAll('yaml', section);
   section.meta = obj(flat(map(yamls, ({ payload }) => payload)));

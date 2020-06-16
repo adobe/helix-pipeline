@@ -67,7 +67,6 @@ describe('Testing fetch content', () => {
       .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master&REPO_RAW_ROOT=https%3A%2F%2Ffrozen.githubusercontent.com/')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
-
     action.downloader = new Downloader(context, action, { forceHttp1: true });
     action.secrets.REPO_RAW_ROOT = 'https://frozen.githubusercontent.com/';
 
@@ -151,7 +150,6 @@ describe('Testing fetch content', () => {
       .reply(() => [404, 'Not Found'])
       .get('/adobe/test-repo/master/hello.md')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
-
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
     action.secrets.REPO_RAW_ROOT = 'http://localhost:1234/';

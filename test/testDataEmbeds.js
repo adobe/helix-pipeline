@@ -73,7 +73,6 @@ const logger = logging.createTestLogger({
   level: 'debug',
 });
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',

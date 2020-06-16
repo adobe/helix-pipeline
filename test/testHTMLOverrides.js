@@ -64,7 +64,6 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',

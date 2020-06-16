@@ -70,7 +70,6 @@ const logger = logging.createTestLogger({
   level: 'info',
 });
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',
@@ -86,7 +85,6 @@ describe('Test Embed Handler', () => {
     const action = { logger };
     await coerce(action);
 
-
     embed(action.secrets)((_, tagname, parameters, children) => {
       assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.example.com/');
       assert.equal(children, undefined);
@@ -94,7 +92,6 @@ describe('Test Embed Handler', () => {
     }, node);
   });
 });
-
 
 describe('Integration Test with Embeds', () => {
   it('html.pipe does not blow up "embeds" from Helix Not Slides when seeing mailto links', async () => {

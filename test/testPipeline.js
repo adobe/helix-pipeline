@@ -253,7 +253,6 @@ describe('Testing Pipeline', () => {
       .catch(done);
   });
 
-
   it('When works with promises resolving true pre before when', (done) => {
     const order = [];
     new Pipeline({ logger })

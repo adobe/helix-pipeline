@@ -442,7 +442,6 @@ describe('Test Download', () => {
       forceHttp1: true,
     });
 
-
     await mgr.fetch({
       uri: 'https://www.example.com/data',
     });
