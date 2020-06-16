@@ -143,22 +143,23 @@ describe('Testing fetch content', () => {
     assert.equal(result.response.body, '<div>\n<h1 id="hello">Hello</h1>\n<p>from github.</p>\n</div>\n<div>\n<h1 id="bar">Bar</h1>\n</div>');
   });
 
-  // this currently doesn't work...I guess due to helix-fetch
-  it.skip('ignores localhost for content proxy', async () => {
-    nock('http://localhost:1234')
+  it('sets source hash and location', async () => {
+    nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [404, 'Not Found'])
-      .get('/adobe/test-repo/master/hello.md')
-      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
+      .reply(() => [404, 'Not Found']);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .reply(200, '# Hello\nfrom github.\n\n---\n\n# Bar', {
+        'x-source-location': 'https://onedrive.com/hello.docx',
+      });
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
-    action.secrets.REPO_RAW_ROOT = 'http://localhost:1234/';
 
     const result = await pipe((ctx) => {
       const { content } = ctx;
-      ctx.response = { status: 200, body: content.document.body.innerHTML };
+      ctx.response = { status: 200, body: JSON.stringify(content.data) };
     }, context, action);
 
-    assert.equal(result.response.body, '<div>\n<h1 id="hello">Hello</h1>\n<p>from github.</p>\n</div>\n<div>\n<h1 id="bar">Bar</h1>\n</div>');
+    assert.equal(result.response.body, '{"sourceLocation":"https://onedrive.com/hello.docx","sourceHash":"WCoswd7nuFy/cY2v"}');
   });
 });
