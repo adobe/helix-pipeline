@@ -1,3 +1,10 @@
+## [10.0.3](https://github.com/adobe/helix-pipeline/compare/v10.0.2...v10.0.3) (2020-06-17)
+
+
+### Bug Fixes
+
+* **md:** make pipeline more robust ([#769](https://github.com/adobe/helix-pipeline/issues/769)) ([bb3a0fd](https://github.com/adobe/helix-pipeline/commit/bb3a0fd7cc797aaedf6f501c129c5890cac67c8c)), closes [#756](https://github.com/adobe/helix-pipeline/issues/756)
+
 ## [10.0.2](https://github.com/adobe/helix-pipeline/compare/v10.0.1...v10.0.2) (2020-06-17)
 
 
