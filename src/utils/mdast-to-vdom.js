@@ -81,7 +81,8 @@ class VDOMTransformer {
       const frag = JSDOM.fragment(node.value);
       return h.augment(node, {
         type: 'raw',
-        value: frag,
+        value: '', // we ignore the value here and treat it later in hast-util-to-dom
+        frag,
         html: node.value,
       });
     });
@@ -225,16 +226,16 @@ class VDOMTransformer {
     for (let i = 0; i < node.children.length; i += 1) {
       const child = node.children[i];
       if (child.type === 'raw') {
-        if (child.value.firstElementChild === null) {
+        if (child.frag.firstElementChild === null) {
           if (stack.length === 0) {
             // ignore unmatched inline elements
           } else {
             const last = stack.pop();
             let html = '';
             for (let j = last; j <= i; j += 1) {
-              html += node.children[j].html || node.children[j].value;
+              html += node.children[j].html || node.children[j].value || '';
             }
-            node.children[last].value = JSDOM.fragment(html);
+            node.children[last].frag = JSDOM.fragment(html);
             node.children[last].html = html;
             node.children.splice(last + 1, i - last);
             i = last;
@@ -256,7 +257,7 @@ class VDOMTransformer {
     // mdast -> hast; hast -> DOM using JSDOM
     const hast = mdast2hast(this._root, {
       handlers: this._handlers,
-      allowDangerousHTML: true,
+      allowDangerousHtml: true,
     });
 
     if (this._hasRaw) {
