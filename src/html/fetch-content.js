@@ -9,6 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+const crypto = require('crypto');
 const { setdefault } = require('ferrum');
 
 async function fetchContent(context, {
@@ -64,8 +65,17 @@ async function fetchContent(context, {
     }
 
     content.body = res.body;
+    setdefault(content, 'sources', []).push(downloader.computeGithubURI(owner, repo, branch, path));
 
-    setdefault(context.content, 'sources', []).push(downloader.computeGithubURI(owner, repo, branch, path));
+    // store extra source location if present
+    const sourceLocation = res.headers.get('x-source-location') || '';
+    const sourceHash = crypto.createHash('sha1').update(sourceLocation).digest('base64').substring(0, 16);
+    logger.info(`source-location: ${sourceLocation}`);
+    logger.info(`source-hash: ${sourceHash}`);
+    context.content.data = {
+      sourceLocation,
+      sourceHash,
+    };
   } catch (err) {
     // throw error if no status error
     /* istanbul ignore next */
