@@ -1,3 +1,10 @@
+## [10.0.2](https://github.com/adobe/helix-pipeline/compare/v10.0.1...v10.0.2) (2020-06-17)
+
+
+### Bug Fixes
+
+* **content:** set source location and hash on content.data ([f3e93d3](https://github.com/adobe/helix-pipeline/commit/f3e93d3ac3e8222652757ae917d456a6eabf73a7))
+
 ## [10.0.1](https://github.com/adobe/helix-pipeline/compare/v10.0.0...v10.0.1) (2020-06-16)
 
 
