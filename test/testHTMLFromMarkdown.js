@@ -108,6 +108,16 @@ describe('Testing Markdown conversion', () => {
     recordIfMissing: false,
   });
 
+  beforeEach(function beforeEach() {
+    this.polly.server
+      .host('https://raw.githubusercontent.com', () => {
+        this.polly.server.get('/trieloff/soupdemo/master/helix-markup.yaml')
+          .intercept((req, res) => {
+            res.status(404).send();
+          });
+      });
+  });
+
   it('Renders empty markdown', async () => {
     await assertMd(
       '',
@@ -265,11 +275,10 @@ describe('Testing Markdown conversion', () => {
 
   it.skip('HTML nested inline elements and markup', async () => {
     // this is not supported yet. ideally the mdast-to-dom is done directly and not via hast.
-    await assertMd(`
-        # Foo <em>Bar **Important**</em>
-      `, `
-        <h1 id="foo-bar">Foo <em>Bar</em></h1>
-    `);
+    await assertMd(
+      '# Foo <em>Bar **Important**</em>',
+      '<h1 id="foo-bar-important">Foo <em>Bar <strong>Important</strong></em></h1>',
+    );
   });
 
   it('GFM', async () => {
@@ -488,11 +497,23 @@ describe('Testing Markdown conversion', () => {
   });
 
   it('is robust against wrong tags in md', async () => {
-    await assertMd(`
-        # Foo
-        </p>
-      `, `
-        <body><h1 id="foo">Foo</h1></body>
-    `);
+    await assertMd(
+      '# Foo </p>',
+      '<h1 id="foo">Foo</h1>',
+    );
+  });
+
+  it('is robust against tags in link texts', async () => {
+    await assertMd(
+      '305-333-2614 [<u>www.mirumagency.com</u>](https://www.mirumagency.com/)',
+      '<p>305-333-2614 <a href="https://www.mirumagency.com/"><u>www.mirumagency.com</u></a></p>',
+    );
+  });
+
+  it('is robust against linebreaks in tags', async () => {
+    await assertMd(
+      '**<u>  \n</u>**',
+      '<p><strong><u></u></strong></p>',
+    );
   });
 });

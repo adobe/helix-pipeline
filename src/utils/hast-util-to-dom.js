@@ -156,7 +156,7 @@ const wrap = (document) => {
 
   // the raw node is stored in the value directly
   function raw(node) {
-    return node.value;
+    return node.frag;
   }
 
   function transform(node, options) {
