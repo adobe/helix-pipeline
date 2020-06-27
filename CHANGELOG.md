@@ -1,3 +1,10 @@
+## [10.0.6](https://github.com/adobe/helix-pipeline/compare/v10.0.5...v10.0.6) (2020-06-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.8.1 ([#775](https://github.com/adobe/helix-pipeline/issues/775)) ([8d1a09e](https://github.com/adobe/helix-pipeline/commit/8d1a09e12cb795d4e5e4d238cac8554c4b2853e9))
+
 ## [10.0.5](https://github.com/adobe/helix-pipeline/compare/v10.0.4...v10.0.5) (2020-06-26)
 
 
