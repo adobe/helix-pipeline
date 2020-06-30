@@ -1,3 +1,10 @@
+## [10.0.8](https://github.com/adobe/helix-pipeline/compare/v10.0.7...v10.0.8) (2020-06-30)
+
+
+### Bug Fixes
+
+* **deps:** update external ([#777](https://github.com/adobe/helix-pipeline/issues/777)) ([acbe938](https://github.com/adobe/helix-pipeline/commit/acbe9389c8f31fc7a97f7ca8e68bc92affb361c0))
+
 ## [10.0.7](https://github.com/adobe/helix-pipeline/compare/v10.0.6...v10.0.7) (2020-06-29)
 
 
