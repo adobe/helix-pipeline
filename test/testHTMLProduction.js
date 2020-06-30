@@ -165,7 +165,8 @@ describe('Testing HTML Pipeline in Production', () => {
     assert.equal(result.response.headers.Link, '<next.html>; rel="next",<index.html>; rel="first"', 'allows setting through link');
   });
 
-  // enable once 'as' attribute is handled by JSDOM, see issue #520
+  // enable once 'as' attribute is handled by JSDOM: https://github.com/jsdom/jsdom/issues/2471
+  // see issue #520
   it.skip('html.pipe propagates \'as\' attribute of link tags', async () => {
     const result = await pipe(
       (context) => {
