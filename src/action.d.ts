@@ -76,7 +76,7 @@ export type RawRequest = {
      * Deprecated: The original OpenWhisk request headers
      */
     __ow_headers?: {
-      [k: string]: any;
+      [k: string]: unknown;
     };
     /**
      * All other parameters are interpreted as string.
@@ -91,18 +91,36 @@ export type RawRequest = {
 export interface Action {
   request?: RawRequest;
   /**
-   * A [Winston](https://github.com/winstonjs/winston) logger instance.
+   * A helix-log [SimpleInterface](https://github.com/adobe/helix-log) logger instance.
    */
   logger?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * Internal information related to debugging.
    */
   debug?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   secrets?: Secrets;
+  /**
+   * A VDOMTransformer instance
+   */
+  transformer?: {
+    [k: string]: unknown;
+  };
+  /**
+   * A Downloader instance
+   */
+  downloader?: {
+    [k: string]: unknown;
+  };
+  /**
+   * A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)
+   */
+  markupconfig?: {
+    [k: string]: unknown;
+  };
 }
 /**
  * Secrets passed into the pipeline such as API Keys or configuration settings.
@@ -117,13 +135,21 @@ export interface Secrets {
    */
   REPO_API_ROOT?: string;
   /**
-   * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure)
+   * Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_ALLOWLIST`)
    */
-  EMBED_WHITELIST?: string;
+  EMBED_ALLOWLIST?: string;
+  /**
+   * Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_ALLOWLIST`)
+   */
+  DATA_EMBED_ALLOWLIST?: string;
   /**
    * URL of an Embed Service that takes the appended URL and returns an embeddable HTML representation.
    */
   EMBED_SERVICE?: string;
+  /**
+   * URL of a DataEmbed Service that takes the appended URL and returns an iterable JSON representation.
+   */
+  DATA_EMBED_SERVICE?: string;
   /**
    * Selector to be used when resolving internal embeds.
    */
@@ -136,6 +162,10 @@ export interface Secrets {
    * Timeout for outgoing HTTP requests in milliseconds
    */
   HTTP_TIMEOUT?: number;
+  /**
+   * Timeout for outgoing HTTP requests to external services in milliseconds
+   */
+  HTTP_TIMEOUT_EXTERNAL?: number;
   TEST_BOOLEAN?: boolean;
   /**
    * Print XML with line breaks and indentation
@@ -151,6 +181,14 @@ export interface Secrets {
    * API endpoint or action name to the service that resolves github refs to commit SHAs.
    */
   RESOLVE_GITREF_SERVICE?: string;
+  /**
+   * GitHub access token to use while fetching markdown. See https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line.
+   */
+  GITHUB_TOKEN?: string;
+  /**
+   * URL of the content proxy service.
+   */
+  CONTENT_PROXY_URL?: string;
   /**
    * This interface was referenced by `Secrets`'s JSON-Schema definition
    * via the `patternProperty` "[A-Z0-9_]+".

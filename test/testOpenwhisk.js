@@ -12,6 +12,10 @@
 /* eslint-env mocha */
 
 const assert = require('assert');
+const nock = require('nock');
+const proxyquire = require('proxyquire');
+
+const { rootLogger, SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   createActionResponse,
   extractActionContext,
@@ -21,6 +25,18 @@ const {
 const { pipe, log } = require('../src/defaults/default.js');
 
 describe('Testing OpenWhisk adapter', () => {
+  afterEach(() => {
+    nock.restore();
+  });
+
+  beforeEach(() => {
+    nock.restore();
+    nock.activate();
+    nock.cleanAll();
+
+    rootLogger.loggers.delete('OpenWhiskLogger');
+  });
+
   it('createActionResponse keeps response intact', async () => {
     const inp = {
       response: {
@@ -85,7 +101,7 @@ describe('Testing OpenWhisk adapter', () => {
     delete out.errorStack;
     assert.deepEqual(out, {
       body: {},
-      errorMessage: 'Error: boom!',
+      errorMessage: 'boom!',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -110,7 +126,7 @@ describe('Testing OpenWhisk adapter', () => {
     delete out.errorStack;
     assert.deepEqual(out, {
       body: 'Forbidden',
-      errorMessage: 'Error: Forbidden',
+      errorMessage: 'Forbidden',
       headers: {
         'Content-Type': 'text/plain',
         Location: 'https://example.com',
@@ -130,7 +146,7 @@ describe('Testing OpenWhisk adapter', () => {
     delete out.errorStack;
     assert.deepEqual(out, {
       body: {},
-      errorMessage: 'ReferenceError: foo is not defined',
+      errorMessage: 'foo is not defined',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -364,5 +380,136 @@ describe('Testing OpenWhisk adapter', () => {
     }, pipe, params);
 
     assert.deepEqual(context.content, params.content);
+  });
+
+  it('it logs to coralogix if secrets are present', async () => {
+    const reqs = [];
+
+    nock('https://api.coralogix.com/api/v1/')
+      .post('/logs')
+      .reply((uri, requestBody) => {
+        reqs.push(requestBody);
+        return [200, 'ok'];
+      });
+
+    const params = {
+      __ow_headers: {
+        'content-type': 'application/json',
+      },
+      __ow_method: 'get',
+      CORALOGIX_API_KEY: '1234',
+      CORALOGIX_APPLICATION_NAME: 'logger-test',
+      CORALOGIX_SUBSYSTEM_NAME: 'test-1',
+      CORALOGIX_LOG_LEVEL: 'info',
+    };
+
+    process.env.__OW_ACTIVATION_ID = 'test-my-activation-id';
+    process.env.__OW_ACTION_NAME = 'test-my-action-name';
+    process.env.__OW_TRANSACTION_ID = 'test-transaction-id';
+
+    await runPipeline((context, action) => {
+      action.logger.infoFields('Hello, world', { myId: 42 });
+    }, pipe, params);
+
+    // nock 13.x needs 1 tick to respond with the correct reply.
+    await new Promise((resolve) => setImmediate(resolve));
+
+    assert.equal(reqs.length, 1);
+    assert.equal(reqs[0].applicationName, 'logger-test');
+    assert.equal(reqs[0].subsystemName, 'test-1');
+    assert.equal(reqs[0].privateKey, '1234');
+    assert.equal(reqs[0].logEntries.length, 1);
+
+    const logEntry = JSON.parse(reqs[0].logEntries[0].text);
+    delete logEntry.timestamp;
+    assert.deepEqual(logEntry, {
+      level: 'info',
+      message: 'Hello, world',
+      myId: 42,
+      ow: {
+        actionName: 'test-my-action-name',
+        activationId: 'test-my-activation-id',
+        transactionId: 'test-transaction-id',
+      },
+    });
+  });
+
+  it('it logs even if no trace logging', async () => {
+    const winstonLogger = new SimpleInterface({
+      level: 'debug',
+      logger: new ConsoleLogger(),
+    });
+    winstonLogger.trace = undefined;
+
+    const params = {
+      __ow_headers: {
+        'content-type': 'application/json',
+      },
+      __ow_method: 'get',
+      __ow_logger: winstonLogger,
+    };
+    process.env.__OW_ACTIVATION_ID = 'test-my-activation-id';
+    const ret = await runPipeline((context, action) => {
+      action.logger.trace({ myId: 42 }, 'Hello, world');
+    }, pipe, params);
+
+    assert.deepEqual(ret, {
+      body: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'x-last-activation-id': 'test-my-activation-id',
+      },
+      statusCode: 200,
+    });
+  });
+});
+
+describe('Testing Epsagon in OpenWhisk adapter', () => {
+  // count how many time espagon was run.
+  let epsagonified = 0;
+
+  const proxiedRunPipeline = proxyquire('../src/utils/openwhisk.js', {
+    epsagon: {
+      openWhiskWrapper(action) {
+        return (parameters) => {
+          epsagonified += 1;
+          return action(parameters);
+        };
+      },
+      '@global': true,
+    },
+  }).runPipeline;
+
+  beforeEach(() => {
+    epsagonified = 0;
+  });
+
+  it('it does not instruments Espagon if token is not present', async () => {
+    const params = {};
+
+    await proxiedRunPipeline(() => {}, pipe, params);
+
+    assert.equal(epsagonified, 0, 'epsagon not instrumented');
+  });
+
+  it('it instruments Espagon if token is present', async () => {
+    const params = {
+      EPSAGON_TOKEN: '1234',
+    };
+
+    await proxiedRunPipeline(() => {}, pipe, params);
+
+    assert.equal(epsagonified, 1, 'epsagon instrumented');
+  });
+
+  it('it instruments Epsagon for each call when token is present', async () => {
+    const params = {
+      EPSAGON_TOKEN: '1234',
+    };
+
+    await proxiedRunPipeline(() => {}, pipe, params);
+    await proxiedRunPipeline(() => {}, pipe, params);
+
+    assert.equal(epsagonified, 2, 'epsagon instrumented');
   });
 });

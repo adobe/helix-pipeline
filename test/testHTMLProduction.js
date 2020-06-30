@@ -11,10 +11,10 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const { logging } = require('@adobe/helix-testutils');
+const { setupPolly, pipe } = require('./utils.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -64,13 +64,16 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',
 };
 
 describe('Testing HTML Pipeline in Production', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   let production;
   before('Fake Production Mode', () => {
     // eslint-disable-next-line no-underscore-dangle
@@ -78,7 +81,6 @@ describe('Testing HTML Pipeline in Production', () => {
     // eslint-disable-next-line no-underscore-dangle
     process.env.__OW_ACTIVATION_ID = 'fake';
   });
-
 
   it('html.pipe adds headers from meta tags', async () => {
     const result = await pipe(

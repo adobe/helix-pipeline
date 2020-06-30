@@ -10,34 +10,31 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const winston = require('winston');
 const assert = require('assert');
-const { cloneDeep } = require('lodash');
 const yaml = require('js-yaml');
 const { multiline } = require('@adobe/helix-shared').string;
+const { SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   flattenTree, concat, each,
 } = require('ferrum');
+const unified = require('unified');
+const remark = require('remark-parse');
 const parseMd = require('../src/html/parse-markdown');
-const parseFront = require('../src/html/parse-frontmatter');
-
-const { FrontmatterParsingError } = parseFront;
+const { FrontmatterParsingError } = require('../src/html/remark-matter');
 
 let warning;
 
-const logger = winston.createLogger({
-  silent: true,
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-  ],
-});
+const logger = new SimpleInterface({ logger: new ConsoleLogger() });
 
 const procMd = (md) => {
   const dat = { content: { body: multiline(md) } };
+
+  // parse w/o frontmatter plugin
+  const orig = unified()
+    .use(remark)
+    .parse(dat.content.body);
+
   parseMd(dat, { logger });
-  const orig = cloneDeep(dat.content.mdast);
-  parseFront(dat, { logger });
   return { orig, proc: dat.content.mdast };
 };
 
@@ -57,14 +54,16 @@ const ck = (wat, md, ast) => {
 const ckNop = (wat, md) => {
   it(`${wat} should be ignored`, () => {
     const { proc, orig } = procMd(md);
-    assert.deepStrictEqual(proc, orig);
+    assert.deepEqual(proc, orig);
+    assert.equal(warning, undefined, 'Unexpected frontmatter parsing error logged.');
   });
 };
 
-const ckErr = (wat, body) => {
-  it(`${wat} should raise exception`, () => {
-    procMd(body);
-    assert.ok(warning instanceof FrontmatterParsingError, 'No Frontmatter Parsing Error logged');
+const ckErr = (wat, md) => {
+  it(`${wat} should log a warning`, () => {
+    const { proc, orig } = procMd(md);
+    assert.deepEqual(proc, orig);
+    assert.ok(warning instanceof FrontmatterParsingError, 'expected frontmatter parsing error logged');
   });
 };
 
@@ -142,6 +141,31 @@ describe('parseFrontmatter', () => {
     ***
   `);
 
+  ckNop('no frontmatter due to empty lines', `
+    # Multimedia Test
+    ---
+    ![](https://hlx.blob.core.windows.net/external/20f9d6dff67514da262230822bda5f3b50ef28c6#image.png)
+    ---
+    PUBLISHED ON 28-04-2020
+    ---
+    
+    ### SlideShare
+
+    <https://www.slideshare.net/adobe/adobe-digital-insights-holiday-recap-2019>
+    
+    ---
+    Topics: Bar, Baz
+    Products: Stock, Creative Cloud
+  `);
+
+  ckNop('no frontmatter with embeds', `
+    ---
+    "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+    
+    Is foo {{foo}}?"
+    ---
+  `);
+
   // actual warnings
   ckErr('reject invalid yaml', `
     ---
@@ -154,17 +178,17 @@ describe('parseFrontmatter', () => {
     - Foo
     ---
   `);
-  ckErr('reject yaml with json style list', `
+  ckNop('reject yaml with json style list', `
     ---
     [1,2,3,4]
     ---
   `);
-  ckErr('reject yaml with number', `
+  ckNop('reject yaml with number', `
     ---
     42
     ---
   `);
-  ckErr('reject yaml with string', `
+  ckNop('reject yaml with string', `
     ---
     Hello
     ---
@@ -174,13 +198,7 @@ describe('parseFrontmatter', () => {
     null
     ---
   `);
-  ckErr('frontmatter with corrupted yaml', `
-      Foo
-      ---
-      Bar: 42
-      ---
-    `);
-  ckErr('frontmatter with insufficient space before it', `
+  ckNop('frontmatter with insufficient space before it', `
       Foo
       ---
       Bar: 42
@@ -192,12 +210,37 @@ describe('parseFrontmatter', () => {
       ---
       XXX
     `);
-  ckErr('frontmatter with insufficient space on both ends', `
+  ckNop('frontmatter with insufficient space on both ends', `
       ab: 33
       ---
       Bar: 22
       ---
       XXX: 44
+    `);
+  ckNop('section with emoticons', `
+---
+
+:normal:
+
+---
+
+- [home](#)
+- [menu](#menu)
+    `);
+  ckNop('just sections', `
+# Title
+
+---
+
+Lorem ipsum 1
+
+---
+
+Lorem ipsum 2
+
+---
+
+Lorem ipsum 3
     `);
   ckErr('frontmatter with empty line between paragraphs', `
       echo
@@ -261,7 +304,7 @@ describe('parseFrontmatter', () => {
   `);
   // Good values
 
-  ck('trieloff/helix-demo/foo.md',
+  ckErr('trieloff/helix-demo/foo.md',
     `---
 title: Foo bar hey.
 

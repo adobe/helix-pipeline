@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { Pipeline } = require('../index.js');
 
 /* eslint-disable array-callback-return */
@@ -19,7 +19,7 @@ let logger;
 
 describe('Testing Pipeline', () => {
   beforeEach(() => {
-    logger = Logger.getTestLogger({
+    logger = logging.createTestLogger({
       // tune this for debugging
       level: 'info',
     });
@@ -252,7 +252,6 @@ describe('Testing Pipeline', () => {
       })
       .catch(done);
   });
-
 
   it('When works with promises resolving true pre before when', (done) => {
     const order = [];

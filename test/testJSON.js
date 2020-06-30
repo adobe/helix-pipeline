@@ -11,14 +11,11 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { setdefault } = require('ferrum');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
-const { pipe } = require('../src/defaults/json.pipe.js');
+const { setupPolly, jsonPipe: pipe } = require('./utils.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -71,16 +68,7 @@ const secrets = {
 
 describe('Testing JSON Pipeline', () => {
   setupPolly({
-    logging: false,
-    recordFailedRequests: false,
     recordIfMissing: false,
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('json.pipe is a function', () => {
@@ -100,8 +88,12 @@ describe('Testing JSON Pipeline', () => {
       () => {},
       context,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
+        logger,
       },
     );
     assert.equal(result.response.headers['Content-Type'], 'application/json');
@@ -127,7 +119,10 @@ describe('Testing JSON Pipeline', () => {
       },
       {},
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -158,7 +153,10 @@ describe('Testing JSON Pipeline', () => {
       },
       {},
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -219,7 +217,10 @@ describe('Testing JSON Pipeline', () => {
       myfunc,
       { },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -246,7 +247,10 @@ describe('Testing JSON Pipeline', () => {
       () => {},
       context,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },

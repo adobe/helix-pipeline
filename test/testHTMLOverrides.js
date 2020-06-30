@@ -11,10 +11,10 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const { logging } = require('@adobe/helix-testutils');
+const { setupPolly, pipe } = require('./utils.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -64,13 +64,16 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',
 };
 
 describe('Testing HTML Pipeline Overrides', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   it('html.pipe adds headers from meta and link tags', async () => {
     const myfunc = (context) => {
       context.response = {

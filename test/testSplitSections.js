@@ -10,13 +10,12 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const parse = require('../src/html/parse-markdown');
 const split = require('../src/html/split-sections');
-const parseFront = require('../src/html/parse-frontmatter');
 const { assertMatch } = require('./markdown-utils');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -24,7 +23,6 @@ const logger = Logger.getTestLogger({
 function callback(body) {
   const data = { content: { body } };
   parse(data, { logger });
-  parseFront(data, { logger });
   split(data, { logger });
   return data.content.mdast.children;
 }

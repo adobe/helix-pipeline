@@ -8,8 +8,8 @@
       "has-heading",
       "nb-image-1",
       "nb-heading-1",
-      "is-image-heading",
-      "is-image"
+      "is-heading-image",
+      "is-heading"
     ]
   },
   "type": "root",

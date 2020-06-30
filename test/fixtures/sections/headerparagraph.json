@@ -7,8 +7,8 @@
       "has-heading",
       "nb-text-1",
       "nb-heading-1",
-      "is-text-heading",
-      "is-text"
+      "is-heading-text",
+      "is-heading"
     ]
   },
   "type": "root",

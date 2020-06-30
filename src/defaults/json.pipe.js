@@ -13,6 +13,7 @@ const { Pipeline } = require('../../index.js');
 const { log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
+const fetchContent = require('../html/fetch-content.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const type = require('../utils/set-content-type.js');
@@ -23,23 +24,26 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate.js');
 const emit = require('../json/emit-json.js');
 const { selectStatus } = require('../json/set-json-status.js');
-const parseFrontmatter = require('../html/parse-frontmatter.js');
 const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
 
+function hasNoContent({ content }) {
+  return !(content !== undefined && content.body !== undefined);
+}
+
 const jsonpipe = (cont, context, action) => {
   action.logger = action.logger || log;
-  action.logger.log('debug', 'Constructing JSON Pipeline');
+  action.logger.debug('Constructing JSON Pipeline');
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
     .every(dump.record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
-    .use(fetch).expose('fetch')
+    .use(fetchContent).expose('content').when(hasNoContent)
+    .use(fetch).expose('fetch').when(hasNoContent)
     .use(parse).expose('parse')
-    .use(parseFrontmatter)
     .use(smartypants)
     .use(sections)
     .use(meta).expose('meta')
@@ -50,7 +54,7 @@ const jsonpipe = (cont, context, action) => {
     .error(dump.report)
     .error(selectStatus(production()));
 
-  action.logger.log('debug', 'Running JSON pipeline');
+  action.logger.debug('Running JSON pipeline');
   return pipe.run(context);
 };
 

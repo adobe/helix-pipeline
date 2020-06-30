@@ -16,6 +16,7 @@ const _ = require('lodash/fp');
 const callsites = require('callsites');
 const { enumerate, iter } = require('ferrum');
 const coerce = require('./utils/coerce-secrets');
+const Downloader = require('./utils/Downloader.js');
 
 const noOp = () => {};
 const nopLogger = {
@@ -41,7 +42,6 @@ function errorWrapper(fn) {
 
 /**
  * @typedef {Object} Context
- * @param {Winston.Logger} logger Winston logger to use
  */
 
 /**
@@ -333,6 +333,11 @@ class Pipeline {
     // register all custom attachers to the pipeline
     this.attach(this._attachments);
 
+    // setup the download manager
+    if (!this._action.downloader) {
+      this._action.downloader = new Downloader(context, this._action);
+    }
+
     /**
      * Executes the taps of the current function.
      * @param {Function[]} taps the taps
@@ -401,6 +406,8 @@ class Pipeline {
       if (!context.error) {
         context.error = e;
       }
+    } finally {
+      this._action.downloader.destroy();
     }
     return context;
   }

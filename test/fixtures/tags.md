@@ -1,0 +1,722 @@
+- Content Strategy
+  - Priority
+    - High
+    - Medium
+    - Low
+  - Redirect Pointer
+  - KCS
+  - GetStarted
+  - MAX 2018
+  - Links to A.com
+  - Reason Code
+    - Download Install
+      - How-to
+      - Error
+        - Download error
+        - Installation error
+  - MAX 2019
+  - MAX 2020
+  - SUMMIT 2020
+  - Rocket
+- serp
+  - content-type
+    - help
+    - learn
+- Learning Approach
+  - Article
+  - Event - listing
+  - Example
+  - Game
+  - Interactive-in-app
+  - Overview
+  - Tutorial - video hands-on
+  - Reference
+  - Reference - API
+  - Showcase
+  - Tutorial - graphical hands-on
+  - Tutorial - text hands-on
+  - Tip
+  - Tutorial - text
+  - Troubleshooting
+  - Tutorial - video
+  - Reference - graphical
+  - Event - recording
+  - Tutorial - graphical
+  - Reference - support-how-to
+  - Troubleshooting - issue-solution
+  - Troubleshooting - common-problems
+- Apps
+  - Global or OS
+  - Policy or pricing
+  - Adobe Acrobat
+    - 8
+    - 9
+    - DC
+    - 2017
+    - XI
+    - X
+  - PDF services
+    - CreatePDF
+  - Adobe After Effects
+    - CS6
+    - CS5
+    - CS5.5
+    - CS4
+    - CC (2015)
+    - 
+  - AIR
+    - 1
+    - 2
+    - 3
+    - 4
+  - Adobe Audition
+    - CS6
+    - CS5.5
+    - CC (2015)
+  - Behance
+  - Adobe Bridge
+    - CS6
+    - CS5.5
+    - CS5
+    - CS4
+  - Brush CC
+  - Captivate
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+    - 6.1
+    - 8.0.1
+    - 9.0.2
+    - 2017
+    - 5.5
+  - Captivate Prime
+    - 1
+  - ColdFusion
+    - 8
+    - 9
+    - 10
+    - 11
+    - 2016
+    - 2018
+    - CFML Reference
+    - Developing Applications
+  - ColdFusion Builder
+    - 3
+  - Adobe Color
+  - Communiqué
+    - 2
+    - 3
+    - 4
+  - Connect
+    - 6
+    - 7
+    - 8
+    - 9
+    - 10
+  - Contribute
+    - CS6
+    - CS5
+    - CS4
+  - CQ
+    - 5.5
+    - 5.2
+    - 5.3
+    - 5.4
+    - 5.6
+    - 5.6.1
+  - AEM Cloud Management
+  - PDF Pack
+  - Adobe Creative Cloud
+  - Creative Suite
+    - CS6
+    - CS5
+    - CS5.5
+    - CS4
+    - CS7
+    - CS3
+  - CRX
+    - 2.3
+    - 2.2
+    - 2.1
+    - 2.0
+    - 1.4
+    - 1.3
+    - 1.2
+    - 1.0
+    - 1.4.2
+    - 2.x
+  - CS Live
+  - Digital Editions
+  - Experience Manager Mobile
+  - Digital Publishing Suite
+  - Digital Publishing Suite, Single Edition
+  - Director
+    - 11
+    - 12
+  - Analytics
+  - Dispatcher
+    - 4.1.1
+  - Document Cloud
+  - Download and Installation
+  - Adobe Dreamweaver
+    - CS6
+    - CS5.5
+    - CS5
+    - CS4
+    - CC (2014)
+    - CC (2015)
+    - extend
+  - Drive CC
+  - EchoSign
+  - Edge Animate
+    - CC
+    - CC (2015)
+  - Edge Code CC
+  - Edge Inspect CC
+  - Edge Reflow CC
+  - Edge Tools
+  - Edge Web Fonts
+  - eLearning Suite
+    - 6
+    - 2.5
+    - 2  1
+  - Elements Organizer
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - Mac App Store
+  - Encore
+    - CS6
+    - CS5
+    - CS4
+    - CC
+  - Experience Manager
+    - 5.5
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+    - 5.6
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+    - 5.6.1
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+    - 6.0
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+    - 6.1
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+    - 6.2
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+      - Managing
+    - 6.3
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+      - Managing
+    - 6.4
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+      - Managing
+    - Sites
+      - MSM
+      - Touch UI Authoring
+    - Communities
+    - Assets
+      - Dynamic Media
+    - Forms
+    - Apps
+    - Core Platform
+      - Oak
+      - Replication
+    - Commerce
+      - 6.2
+      - 6.3
+    - Mobile
+      - 6.2
+      - 6.3
+    - Assets Brand Portal
+    - HTL
+    - Dispatcher
+    - Core Components OLD
+    - Core Components
+    - XML Documentation Add-on for Adobe Experience Manager
+    - Dynamic Media Classic (Scene7)
+    - Livefyre
+    - Cloud Manager
+    - 6.5
+      - Communities
+      - Assets
+      - Forms
+      - Mobile
+      - Screens
+      - Sites
+      - Managing
+  - Extension Builder
+    - 2
+    - 3
+  - Extension Manager CC
+    - CS6
+    - CS5.5
+    - CS5
+    - CC
+  - Adobe Fireworks
+    - CS6
+    - CS5
+    - CS4
+    - CC
+  - Flash Professional
+    - CS6
+    - CS5.5
+    - CS5
+    - CS4
+    - CC
+    - CC (2015)
+  - Access
+    - 2
+    - 3
+  - Flash Builder
+    - 4
+    - 5
+    - 4.5
+    - 4.7
+  - Flash Catalyst
+    - CS5.5
+    - CS5
+  - Flash Media Playback
+  - Media Server
+    - 3
+    - 4
+    - 5
+    - 5.0.3
+    - 4.5
+  - Flash Platform Services
+  - Flash Player
+    - 10
+    - 11
+    - 12
+    - 13
+  - Flex
+    - 3
+    - 4
+    - 4.5
+  - Font Folio
+  - FrameMaker
+    - 9
+    - 10
+    - 11
+    - 12
+    - (2015 release)
+    - (2017 release)
+    - (2019 release)
+    - FrameMaker XML Author
+  - Genesis
+  - Hue
+  - Ideas
+  - Adobe Illustrator
+    - CS6
+    - CS5
+    - CS4
+    - CC (2015)
+  - Adobe Illustrator Draw
+  - Adobe Illustrator Line
+  - Adobe InCopy
+    - CS6
+    - CS5.5
+    - CS5
+    - CS4
+    - CC (2015)
+  - Adobe InDesign
+    - CS6
+    - CS5.5
+    - CS5
+    - CS4
+    - CC (2015)
+  - Ink & Slide
+  - Insight
+  - Kuler
+  - LeanPrint
+  - Adobe Photoshop Lightroom
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - Classic
+    - classic-temp
+  - Adobe Lightroom Mobile
+  - LiveCycle
+    - ES3
+    - ES4
+  - LiveCycle Collaboration Service
+  - LiveCycle ES
+  - Adobe Media Encoder
+    - CS6
+    - CS4
+    - CC (2015)
+  - Adobe Muse
+    - CC (2015)
+  - Adobe PhoneGap Build
+  - Adobe Photoshop
+    - CS6
+    - CS5
+    - CS4
+    - CC (2014)
+    - CC (2015)
+  - Photoshop Elements
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+    - Mac App Store
+  - Photoshop Touch for phone
+  - Photoshop.com
+  - Adobe Prelude
+    - CS6
+    - CC (2015)
+  - Premiere Elements
+    - 8
+    - 9
+    - 10
+    - 11
+    - 12
+    - 13
+    - 14
+    - 15
+  - Adobe Premiere Pro
+    - CS6
+    - CS5.5
+    - CS5
+    - CS4
+    - CC (2015)
+  - Presenter
+    - 8.0
+    - 9
+    - 10
+    - 11
+    - 8.0.1
+  - Adobe Preview
+  - Reader
+    - 8
+    - 9
+    - XI
+    - X
+  - Revel
+  - RoboHelp
+    - 8
+    - 9
+    - 10
+    - 11
+    - (2015 release)
+    - (2017 release)
+    - (2019 release)
+  - Shockwave Player
+    - 10
+    - 11
+    - 12
+  - SiteCatalyst
+  - Social
+  - SpeedGrade
+    - CS6
+    - CC
+    - CC (2015)
+  - Adobe Story
+    - CC
+    - (Classic)
+  - Technical Communication Suite
+    - 2
+    - 3
+    - 4
+    - 5
+    - (2015 release)
+    - (2017 release)
+    - (2019 release)
+  - Type Products
+  - Adobe Fonts
+  - Visual Communicator
+  - Web Experience Management
+  - Web Fonts
+  - AIR SDK
+  - After Effects SDK
+  - Authorware
+  - Bridge SDK
+    - Business Catalyst
+  - Content Server
+  - Contribute Publishing Server
+  - Device Central
+  - Digital Enterprise Platform
+  - Document Center
+  - Download Manager
+  - Drive SDK
+  - Flash Lite
+  - Flash Media Encoding Server
+  - Flash Media Rights Management Server
+  - FlashPaper
+  - Flash Remoting
+  - Flex Builder
+  - FrameMaker Developer Kit
+  - FrameMaker Server
+  - FreeHand
+  - Graphics Server
+  - HomeSite
+  - Illustrator SDK
+  - InContext Editing
+  - InCopy SDK
+  - InDesign SDK
+  - Adobe InDesign Server
+    - CS6
+    - CS5
+    - CS5.5
+  - InDesign Server SDK
+  - Jrun
+  - Marketing Cloud
+  - Media Player
+  - Mobile Apps
+  - Mobile Customer Certification Portal
+  - OnLocation CS
+  - Output Designer
+  - Output Manager
+  - Output Pak for mySAP.com
+  - Ovation
+  - PageMaker
+  - Photoshop Album
+  - Photoshop.com Mobile-Android
+  - Photoshop Extended
+  - Adobe Photoshop Mix
+  - Adobe Photoshop Sketch
+  - Photoshop SDK
+  - PostScript
+  - PostScript printer drivers
+  - Adobe Premiere Clip
+  - Premiere Express
+  - Production Studio
+  - Resource Central
+  - RoboHelp for FrameMaker
+  - RoboHelp Office
+  - RoboHelp Server
+  - Scene7 OnDemand
+  - Shape CC
+  - Soundbooth
+    - CS5
+    - CS4
+  - Stock Photos
+  - Studio
+  - Ultra
+  - Version Cue
+  - Vlog it!
+  - Web Output Pak
+  - XMP SDK
+  - Premiere Elements Editor
+    - 10
+    - 11
+  - Photoshop Elements Editor
+    - 10
+    - 11
+    - 12
+  - Premiere Elements Quick Editor
+    - 11
+  - Presenter Video Express
+    - 11
+  - Adobe Camera Raw
+    - 
+  - Export PDF
+  - Analytics
+  - Target
+    - Search&Promote
+  - Media Optimizer
+    - TubeMogul
+  - Adobe Scout
+  - Primetime
+    - 1
+    - 1.1
+  - Campaign
+    - Standard
+    - Classic
+  - Connect On-Premise
+    - 6
+    - 7
+    - 8
+  - AEM 6.0 Forms
+  - Playpanel
+  - AEM Forms on JEE
+  - AEM Forms on OSGi
+  - Audience Manager
+  - Adobe Comp
+  - Acrobat Reader
+    - DC
+  - Adobe Stock
+  - AEM 6.1 Forms
+  - Publish
+  - All Apps
+  - Creative Cloud for iOS & Android
+  - Access
+  - Behance Prosite
+  - Acrobat Reader
+  - Anywhere
+  - Creative Cloud Extract
+  - Assets
+  - Creative Cloud Libraries
+  - Creative Cloud Market
+  - Sign for mobile
+  - Adobe Sign
+  - ExtendScript Toolkit CC
+  - Gaming SDK
+  - Prelude Live Logger
+  - Spark Page
+  - Spark Video
+  - Adobe Character Animator
+  - Connect for mobile
+  - Creative Portfolio (Behance mobile)
+  - Web Hosting (Business Catalyst)
+  - LeanPrint (Enterprise)
+  - LeanPrint (Small Business Edition)
+  - Document Cloud for enterprise
+  - Photoshop Touch for tablet
+  - Lightroom - Contact Hub only
+  - Adobe Fuse (Beta)
+  - Adobe Portfolio
+  - Adobe Capture
+  - Adobe Photoshop Fix
+  - AEM 6.2 Forms
+  - Adobe Animate
+    - extend
+  - Digital Publishing Solution
+  - Spark Post
+  - Adobe Spark
+  - Packager
+  - Stock Contributor
+  - FrameMaker Publishing Server
+  - Creative Suite Web Premium
+  - Creative Suite Design Standard
+  - Creative Suite Design Premium
+  - Photoshop Elements and Premiere Elements
+  - Creative Cloud Photography Plan
+  - Premiere Pro + Stock
+  - Photoshop + Stock
+  - Photography Plan + Stock
+  - Muse + Stock
+  - Illustrator + Stock
+  - InDesign + Stock
+  - InCopy + Stock
+  - Animate + Stock
+  - Dreamweaver + Stock
+  - Acrobat DC Pro + Stock
+  - Creative Cloud - All Apps + Stock
+  - Creative Suite Production Premium
+  - Creative Suite Web Premium
+  - Creative Suite Web Standard
+  - Creative Suite Design and Web Premium
+  - Creative Suite Design Premium
+  - Creative Suite Design Standard
+  - Stock Single HD Video
+  - Stock 4K Video
+  - Stock Single Image
+  - Stock Small
+  - Stock Large
+  - Stock Medium
+  - Flash Builder Standard
+  - Flash Builder Premium Edition
+  - ColdFusion Enterprise
+  - Adobe Photoshop Express
+  - Audition + Stock
+  - After Effects + Stock
+  - Creative Cloud for Android
+  - Creative Cloud Tutorials
+  - Experience Design (Beta) on mobile
+  - AEM 6.3 Forms
+  - Prelude Mobile
+  - AIR - icon only
+  - Experience Cloud
+  - Advertising Cloud
+  - Analytics Cloud
+  - Enterprise
+  - Creative Cloud for enterprise
+  - Scan
+  - Test Tag
+    - Test sub-tag A
+    - Test sub-tag B
+  - Adobe XD
+  - Adobe XD
+  - Adobe Dimension
+  - Enterprise
+  - Team Projects
+  - Customer Care Office Hours
+  - Internal Author Procedures
+  - Engage
+  - Exchange
+  - Agent Landing Hub
+    - CC Download and Install
+    - Design
+    - Video
+    - Digital Imaging
+    - PPBU
+    - Web
+    - Acrobat
+    - Account Management
+    - PPTL
+    - Policy and Guidelines
+    - MAX General Update
+    - Decision Tree
+  - XD SPRK_F
+  - Send & Track
+  - Adobe Premiere Rush
+    - Adobe Premiere Rush
+  - After Effects
+  - Premiere Pro
+  - Photoshop Lightroom
+  - XD CC
+  - Creative Cloud for teams
+  - Fresco
+  - Adobe IO
+  - Aero
+- Asset Properties
+  - Orientation
+    - Portrait
+    - Landscape
+    - Square
+  - Style
+    - Color
+    - Monochrome
+      - Grayscale
+- Facebook

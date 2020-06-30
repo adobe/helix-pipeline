@@ -11,14 +11,13 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const parse = require('../src/html/parse-markdown');
 const split = require('../src/html/split-sections');
-const parseFront = require('../src/html/parse-frontmatter');
 const { assertMatchDir } = require('./markdown-utils');
 const getmetadata = require('../src/html/get-metadata');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -26,7 +25,6 @@ const logger = Logger.getTestLogger({
 function callback(body) {
   const dat = { content: { body } };
   parse(dat, { logger });
-  parseFront(dat, { logger });
   split(dat, { logger });
   getmetadata(dat, { logger });
   return dat.content.mdast;

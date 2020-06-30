@@ -11,17 +11,15 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger, dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const fs = require('fs-extra');
 const path = require('path');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
 const { runPipeline } = require('../src/utils/openwhisk.js');
-const { pipe } = require('../src/defaults/html.pipe.js');
+const { setupPolly, pipe } = require('./utils.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -112,7 +110,6 @@ const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
 };
 
-
 const crequest = {
   extension: 'html',
   url: '/test/test.html',
@@ -120,16 +117,7 @@ const crequest = {
 
 describe('Testing HTML Pipeline', () => {
   setupPolly({
-    logging: false,
-    recordFailedRequests: true,
     recordIfMissing: false,
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('html.pipe is a function', () => {
@@ -153,7 +141,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -191,7 +182,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -231,7 +225,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -244,7 +241,6 @@ describe('Testing HTML Pipeline', () => {
 
 </body></html>`);
   });
-
 
   it('html.pipe keeps double ESI tags', async () => {
     const result = await pipe(
@@ -273,7 +269,10 @@ describe('Testing HTML Pipeline', () => {
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -299,6 +298,7 @@ ${context.content.document.body.innerHTML}`,
     let calledfoo = false;
     let calledbar = false;
     let calledbaz = false;
+
     function foo() {
       assert.equal(calledfoo, false, 'foo has not yet been called');
       assert.equal(calledbar, false, 'bar has not yet been called');
@@ -340,7 +340,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -372,7 +375,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -400,7 +406,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -428,7 +437,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -449,7 +461,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -471,7 +486,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -494,7 +512,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -515,7 +536,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
         break: true,
@@ -553,7 +577,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -598,7 +625,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params: myparams },
+        request: {
+          params: myparams,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -613,7 +643,7 @@ ${context.content.document.body.innerHTML}`,
     assert.ok(res.body.match(/<img/));
   });
 
-  it('html.pipe makes HTTP requests and prefers branch param for surrogate computationr', async () => {
+  it('html.pipe makes HTTP requests and prefers branch param for surrogate computation', async () => {
     const myparams = { ...params };
     myparams.branch = 'mybranch';
 
@@ -643,7 +673,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params: myparams },
+        request: {
+          params: myparams,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -669,7 +702,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params: params404 },
+        request: {
+          params: params404,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -693,12 +729,11 @@ ${context.content.document.body.innerHTML}`,
       ref: 'master',
       path: 'not-existent.md',
     });
-
-    assert.ok(out.errorStack.startsWith('StatusCodeError: 404'));
+    assert.ok(out.errorStack.startsWith('Error: Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404\n'));
     delete out.errorStack;
     assert.deepEqual(out, {
       body: '',
-      errorMessage: 'StatusCodeError: 404 - "404: Not Found\\n"',
+      errorMessage: 'Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404',
       headers: {},
       statusCode: 404,
     });
@@ -719,7 +754,10 @@ ${context.content.document.body.innerHTML}`,
       },
       { request: crequest },
       {
-        request: { params },
+        request: {
+          params,
+          headers: { 'Cache-Control': 'no-store' },
+        },
         secrets,
         logger,
       },
@@ -733,7 +771,10 @@ ${context.content.document.body.innerHTML}`,
 
   it('html.pipe produces debug dumps in memory', async () => {
     const action = {
-      request: { params },
+      request: {
+        headers: { 'Cache-Control': 'no-store' },
+        params,
+      },
       secrets,
       logger,
     };
@@ -766,7 +807,10 @@ ${context.content.document.body.innerHTML}`,
 
   it('html.pipe produces debug dumps on disk for error', async () => {
     const action = {
-      request: { params },
+      request: {
+        headers: { 'Cache-Control': 'no-store' },
+        params,
+      },
       secrets,
       logger,
     };
@@ -816,7 +860,10 @@ ${context.content.document.body.innerHTML}`,
         },
       },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets: { ...secrets, SANITIZE_DOM: true },
         logger,
       },
@@ -854,7 +901,10 @@ ${context.content.document.body.innerHTML}`,
           },
         },
         {
-          request: { params },
+          request: {
+            headers: { 'Cache-Control': 'no-store' },
+            params,
+          },
           logger,
         },
       );

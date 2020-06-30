@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-env mocha */
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const assert = require('assert');
 const u = require('unist-builder');
 const inspect = require('unist-util-inspect');
@@ -19,7 +19,7 @@ const embeds = require('../src/html/find-embeds');
 const { assertMatch, assertValid } = require('./markdown-utils');
 const coerce = require('../src/utils/coerce-secrets');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -54,6 +54,14 @@ describe('Test Embed Detection Processing', () => {
 
   it('Parses markdown with embeds', () => {
     assertMatch('embeds', mdast);
+  });
+
+  it('Parses markdown with embeds from word2md', () => {
+    assertMatch('wordembeds', mdast);
+  });
+
+  it('Parses markdown with embeds from gdocs2md', () => {
+    assertMatch('googleembeds', mdast);
   });
 });
 

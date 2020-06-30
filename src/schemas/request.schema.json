@@ -20,7 +20,7 @@
   "properties": {
     "url": {
       "type": "string",
-      "description": "The path and request parameters of the client request URL",
+      "description": "The path and request parameters of the client request URL.",
       "examples": [
         "/docs/api/general/index.nav.html?a=1"
       ]
@@ -34,7 +34,7 @@
     },
     "pathInfo": {
       "type": "string",
-      "description": "The part of the client path that is relative to the rootPath",
+      "description": "The part of the client path that is relative to the rootPath.",
       "examples": [
         "/general/index.nav.html"
       ]
@@ -48,7 +48,7 @@
     },
     "selector": {
       "type": "string",
-      "description": "The selector (sub-type indicator)",
+      "description": "The selector (sub-type indicator).",
       "examples": [
         "",
         "nav"
@@ -56,7 +56,7 @@
     },
     "extension": {
       "type": "string",
-      "description": "The extension of the requested resource",
+      "description": "The extension of the requested resource.",
       "examples": [
         "html",
         "json"
@@ -80,7 +80,7 @@
     },
     "params": {
       "type": "object",
-      "description": "The passed through (and filtered) URL parameters of the request",
+      "description": "The passed through (and filtered) URL parameters of the request.",
       "additionalProperties": {
         "anyOf": [
           { "type": "string" },
@@ -90,7 +90,7 @@
     },
     "queryString": {
       "type": "string",
-      "description": "The original query string",
+      "description": "The original query string.",
       "examples": [
         "?parameter1=foo&parameter2=bar"
       ]

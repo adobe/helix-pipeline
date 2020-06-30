@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const winston = require('winston');
+const { SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const Pipeline = require('../pipeline.js');
 
 /**
@@ -35,14 +35,12 @@ function pipe(next, context, action) {
  */
 const pre = (cont) => cont;
 
-const log = winston.createLogger({
+const log = new SimpleInterface({
   level: 'debug',
-  format: winston.format.simple(),
-  transports: [
-    new winston.transports.Console(),
-    new winston.transports.File({ filename: 'logs/pipeline.log' }),
-  ],
+  logger: new ConsoleLogger(),
 });
+// keep backward compatible with winston logger
+log.log = (level, ...msg) => log._logImpl(level, ...msg, {});
 
 const defaults = {
   pipe,

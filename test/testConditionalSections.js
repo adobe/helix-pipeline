@@ -12,12 +12,13 @@
 /* eslint-env mocha */
 
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
+const visit = require('unist-util-visit');
 const { setdefault } = require('ferrum');
-const { pipe } = require('../src/defaults/html.pipe.js');
 const { selectstrain, testgroups, pick } = require('../src/utils/conditional-sections');
+const { setupPolly, pipe } = require('./utils.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -76,6 +77,10 @@ const crequest = {
 const nonhidden = (section) => !section.meta.hidden;
 
 describe('Integration Test Section Strain Filtering', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   it('html.pipe sees only selected section', async () => {
     const myparams = { strain: 'a', ...params };
     const result = await pipe(
@@ -242,7 +247,6 @@ describe('Unit Test Section Strain Filtering', () => {
     assert.equal(context.content.mdast.children.filter(nonhidden).length, 2);
   });
 
-
   it('Filters strain a', () => {
     const context = {
       content: {
@@ -344,6 +348,10 @@ describe('Pick among possible candidate sections #unit', () => {
 });
 
 describe('Integration Test A/B Testing', () => {
+  setupPolly({
+    recordIfMissing: false,
+  });
+
   it('html.pipe sees only one variant', async () => {
     const myparams = { strain: 'default', ...params };
     const result = await pipe(
@@ -396,19 +404,32 @@ Or this one at the same time.
   it('variant in html.pipe differs from strain to strain', async () => {
     async function runpipe(strain) {
       let selected = {};
+
+      const once = (context) => {
+        const { content } = context;
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
+        assert.equal(content.mdast.children.filter(nonhidden).length, 3);
+        // remember what was selected
+        /* eslint-disable-next-line prefer-destructuring */
+        selected = content.mdast.children.filter(nonhidden)[2];
+        setdefault(context, 'response', {}).body = content.document.body.innerHTML;
+      };
+
+      // this is a bit a 'hack' to make the mdast independent if positions are enabled or not
+      // in order to make the A/B test hash most stable.
+      once.after = {
+        parse({ content: { mdast } }) {
+          visit(mdast, (node) => {
+            delete node.position;
+          });
+        },
+      };
+
       const myparams = { strain, ...params };
       const result = await pipe(
-        (context) => {
-          const { content } = context;
-          // this is the main function (normally it would be the template function)
-          // but we use it to assert that pre-processing has happened
-          logger.debug(`Found ${content.mdast.children.filter(nonhidden).length} nonhidden sections`);
-          assert.equal(content.mdast.children.filter(nonhidden).length, 3);
-          // remember what was selected
-          /* eslint-disable-next-line prefer-destructuring */
-          selected = content.mdast.children.filter(nonhidden)[2];
-          setdefault(context, 'response', {}).body = content.document.body.innerHTML;
-        },
+        once,
         {
           request: crequest,
           content: {

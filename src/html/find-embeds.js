@@ -91,8 +91,14 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
   return false;
 }
 
-function embed(uri, node, whitelist = '', debug = () => {}) {
-  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, whitelist.split(','))) {
+function embed(uri, node, allowlist = [], dataAllowlist = [], logger) {
+  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, dataAllowlist)) {
+    const children = [{ ...node }];
+    node.type = 'dataEmbed';
+    node.children = children;
+    node.url = URI.serialize(uri);
+    delete node.value;
+  } else if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, allowlist)) {
     const children = [{ ...node }];
     node.type = 'embed';
     node.children = children;
@@ -101,7 +107,7 @@ function embed(uri, node, whitelist = '', debug = () => {}) {
       delete node.value;
     }
   } else {
-    debug(`Whitelist forbids embedding of URL: ${URI.serialize(uri)}`);
+    logger.debug(`Allowlist forbids embedding of URL: ${URI.serialize(uri)}`);
   }
 }
 
@@ -116,16 +122,25 @@ function internalembed(uri, node, extension) {
 }
 
 function find({ content: { mdast }, request: { extension, url } },
-  { logger, secrets: { EMBED_WHITELIST, EMBED_SELECTOR }, request: { params: { path } } }) {
+  {
+    logger, secrets: {
+      EMBED_ALLOWLIST,
+      EMBED_SELECTOR,
+      DATA_EMBED_ALLOWLIST,
+    },
+    request: { params: { path } },
+  }) {
   const resourceext = `.${extension}`;
+  const embedAllowlist = EMBED_ALLOWLIST.split(',').map((s) => s.trim());
+  const dataEmbedAllowlist = DATA_EMBED_ALLOWLIST.split(',').map((s) => s.trim());
   const contentext = p.extname(path);
   map(mdast, (node, _, parent) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      embed(gatsbyEmbed(node.value), node, EMBED_WHITELIST, logger.debug);
+      embed(gatsbyEmbed(node.value), node, embedAllowlist, dataEmbedAllowlist, logger);
     } else if (node.type === 'paragraph' && iaEmbed(node, parent)) {
-      embed(iaEmbed(node, parent), node, EMBED_WHITELIST, logger.debug);
+      embed(iaEmbed(node, parent), node, embedAllowlist, dataEmbedAllowlist, logger);
     } else if (node.type === 'paragraph' && imgEmbed(node)) {
-      embed(imgEmbed(node), node, EMBED_WHITELIST, logger.debug);
+      embed(imgEmbed(node), node, embedAllowlist, dataEmbedAllowlist, logger);
     } else if (node.type === 'inlineCode'
       && internalGatsbyEmbed(node.value, url, contentext, resourceext)) {
       internalembed(internalGatsbyEmbed(node.value, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);

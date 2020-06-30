@@ -11,7 +11,8 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger, dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const embed = require('../src/utils/embed-handler');
 const { pipe } = require('../src/defaults/html.pipe.js');
@@ -60,15 +61,14 @@ const params = {
 
 const secrets = {
   REPO_RAW_ROOT: 'https://raw.githubusercontent.com/',
-  EMBED_WHITELIST: '*.youtube.com',
+  EMBED_ALLOWLIST: '*.youtube.com',
   EMBED_SERVICE: 'https://example-embed-service.com/',
 };
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
-
 
 const crequest = {
   extension: 'html',
@@ -85,15 +85,13 @@ describe('Test Embed Handler', () => {
     const action = { logger };
     await coerce(action);
 
-
     embed(action.secrets)((_, tagname, parameters, children) => {
-      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1https://www.example.com/');
+      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.example.com/');
       assert.equal(children, undefined);
       assert.equal(tagname, 'esi:include');
     }, node);
   });
 });
-
 
 describe('Integration Test with Embeds', () => {
   it('html.pipe does not blow up "embeds" from Helix Not Slides when seeing mailto links', async () => {

@@ -12,7 +12,9 @@
 
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
-const owwrapper = require('@adobe/openwhisk-loggly-wrapper');
+const { wrap } = require('@adobe/openwhisk-action-utils');
+const { logger } = require('@adobe/openwhisk-action-logger');
+const { epsagon } = require('@adobe/helix-epsagon');
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -74,9 +76,10 @@ function extractClientRequest(action) {
 /**
  * Creates an response for the OpenWhisk Web-Action from the pipeline context
  * @param {Object} context Pipeline context.
+ * @param {object} action Action context.
  * @returns {Object} OpenWhisk response
  */
-async function createActionResponse(context) {
+async function createActionResponse(context, action) {
   const {
     response: {
       status,
@@ -92,9 +95,16 @@ async function createActionResponse(context) {
   };
   if (error) {
     // don't set the 'error' property, otherwise openwhisk treats this as application error
-    ret.errorMessage = String(error);
+    ret.errorMessage = error.message || String(error);
     if (error.stack) {
       ret.errorStack = String(error.stack);
+    }
+    const level = ret.statusCode >= 500 ? 'error' : 'warn';
+    if (action && action.logger) {
+      action.logger[level](`Problems while executing action: ${ret.errorMessage}`);
+    } else {
+      // eslint-disable-next-line no-console
+      console[level](`Problems while executing action: ${ret.errorMessage}`);
     }
   }
   return ret;
@@ -161,9 +171,17 @@ async function runPipeline(cont, pipe, actionParams) {
       // pass content param from request to context
       context.content = params.content;
     }
-    return pipe(cont, context, action);
+    return createActionResponse(await pipe(cont, context, action), action);
   }
-  return createActionResponse(await owwrapper(runner, actionParams));
+  // enhance logger if trace method is missing (eg. a winston logger)
+  if (actionParams.__ow_logger && !actionParams.__ow_logger.trace) {
+    actionParams.__ow_logger.trace = actionParams.__ow_logger.silly;
+  }
+
+  return wrap(runner)
+    .with(epsagon)
+    .with(logger.trace)
+    .with(logger)(actionParams);
 }
 
 module.exports = {

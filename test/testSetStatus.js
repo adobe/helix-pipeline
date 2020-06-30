@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const selectStatus_ = require('../src/html/set-status.js');
 
 const selectStatus = (inProduction) => (context, env) => {
@@ -26,7 +26,7 @@ const selectStatus = (inProduction) => (context, env) => {
   }
 };
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });

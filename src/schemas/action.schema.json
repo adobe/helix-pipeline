@@ -23,7 +23,7 @@
     },
     "logger": {
       "type": "object",
-      "description": "A [Winston](https://github.com/winstonjs/winston) logger instance."
+      "description": "A helix-log [SimpleInterface](https://github.com/adobe/helix-log) logger instance."
     },
     "debug": {
       "type": "object",
@@ -35,6 +35,14 @@
     "transformer": {
       "type": "object",
       "description": "A VDOMTransformer instance"
+    },
+    "downloader": {
+      "type": "object",
+      "description": "A Downloader instance"
+    },
+    "markupconfig": {
+      "type": "object",
+      "description": "A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)"
     }
   }
 }

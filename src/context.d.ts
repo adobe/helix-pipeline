@@ -21,7 +21,7 @@ export interface Context {
   error?:
     | string
     | {
-        [k: string]: any;
+        [k: string]: unknown;
       };
   request?: Request;
   content?: Content;
@@ -32,7 +32,7 @@ export interface Context {
  */
 export interface Request {
   /**
-   * The path and request parameters of the client request URL
+   * The path and request parameters of the client request URL.
    */
   url?: string;
   /**
@@ -40,7 +40,7 @@ export interface Request {
    */
   path?: string;
   /**
-   * The part of the client path that is relative to the rootPath
+   * The part of the client path that is relative to the rootPath.
    */
   pathInfo?: string;
   /**
@@ -48,11 +48,11 @@ export interface Request {
    */
   rootPath?: string;
   /**
-   * The selector (sub-type indicator)
+   * The selector (sub-type indicator).
    */
   selector?: string;
   /**
-   * The extension of the requested resource
+   * The extension of the requested resource.
    */
   extension?: string;
   /**
@@ -66,11 +66,15 @@ export interface Request {
     [k: string]: string;
   };
   /**
-   * The passed through (and filtered) URL parameters of the request
+   * The passed through (and filtered) URL parameters of the request.
    */
   params?: {
     [k: string]: string | string[];
   };
+  /**
+   * The original query string.
+   */
+  queryString?: string;
 }
 /**
  * The content as retrieved from the repository and enriched in the pipeline.
@@ -89,22 +93,46 @@ export interface Content {
    * The DOM-compatible representation of the document's inner HTML
    */
   document?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The JSON object to emit.
    */
   json?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The XML object to emit. See xmlbuilder-js for syntax.
    */
   xml?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   meta?: null | {
-    [k: string]: any;
+    /**
+     * The CSS class to use for the section instead of the default `hlx-section` one
+     */
+    class?: string;
+    /**
+     * The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+     */
+    tagname?: string;
+    /**
+     * The inferred class names for the section
+     */
+    types?: string[];
+    /**
+     * Extracted title of the document
+     */
+    title?: string;
+    /**
+     * Extracted first paragraph of the document
+     */
+    intro?: string;
+    /**
+     * Path (can be relative) to the first image in the document
+     */
+    image?: string;
+    [k: string]: unknown;
   };
   /**
    * Extracted title of the document
@@ -122,7 +150,7 @@ export interface Content {
    * Custom object that can hold any user defined data.
    */
   data?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
 }
 /**
@@ -161,17 +189,17 @@ export interface MDAST {
     | "footnote"
     | "footnoteReference"
     | "embed"
-    | "section";
+    | "dataEmbed"
+    | "section"
+    | "icon";
   children?: (
-    | {
-        [k: string]: any;
-      }
+    | MDAST
     | {
         /**
          * The MDAST node type. Each section can be treated as a standalone document.
          */
         type?: {
-          [k: string]: any;
+          [k: string]: unknown;
         };
         position?: Position;
         /**
@@ -179,7 +207,31 @@ export interface MDAST {
          */
         children?: MDAST[];
         meta?: null | {
-          [k: string]: any;
+          /**
+           * The CSS class to use for the section instead of the default `hlx-section` one
+           */
+          class?: string;
+          /**
+           * The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+           */
+          tagname?: string;
+          /**
+           * The inferred class names for the section
+           */
+          types?: string[];
+          /**
+           * Extracted title of the document
+           */
+          title?: string;
+          /**
+           * Extracted first paragraph of the document
+           */
+          intro?: string;
+          /**
+           * Path (can be relative) to the first image in the document
+           */
+          image?: string;
+          [k: string]: unknown;
         };
         /**
          * Extracted title of the document
@@ -193,7 +245,8 @@ export interface MDAST {
          * Path (can be relative) to the first image in the document
          */
         image?: string;
-      })[];
+      }
+  )[];
   position?: Position;
   /**
    * The string value of the node, if it is a terminal node.
@@ -203,7 +256,7 @@ export interface MDAST {
    * The payload of a frontmatter/yaml block
    */
   payload?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The heading level
@@ -228,7 +281,7 @@ export interface MDAST {
   /**
    * For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.
    */
-  align?: ("left" | "right" | "center" | null)[];
+  align?: (null | ("left" | "right" | "center" | null))[];
   /**
    * For code, a lang field can be present. It represents the language of computer code being marked up.
    */
@@ -246,12 +299,40 @@ export interface MDAST {
    */
   url?: string;
   meta?: null | {
-    [k: string]: any;
+    /**
+     * The CSS class to use for the section instead of the default `hlx-section` one
+     */
+    class?: string;
+    /**
+     * The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
+     */
+    tagname?: string;
+    /**
+     * The inferred class names for the section
+     */
+    types?: string[];
+    /**
+     * Extracted title of the document
+     */
+    title?: string;
+    /**
+     * Extracted first paragraph of the document
+     */
+    intro?: string;
+    /**
+     * Path (can be relative) to the first image in the document
+     */
+    image?: string;
+    [k: string]: unknown;
   };
   /**
    * Extracted title of the document
    */
   title?: null | string;
+  /**
+   * Icon code
+   */
+  code?: string;
   /**
    * Extracted first paragraph of the document
    */
@@ -276,7 +357,7 @@ export interface MDAST {
    * data is guaranteed to never be specified by unist or specifications implementing unist. Free data space.
    */
   data?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
 }
 /**
@@ -285,7 +366,7 @@ export interface MDAST {
 export interface Position {
   start?: TextCoordinates;
   end?: TextCoordinates;
-  indent?: any[];
+  indent?: unknown[];
 }
 /**
  * A position in a text document
@@ -313,13 +394,13 @@ export interface Response {
    */
   status?: number;
   body?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The DOM-compatible representation of the response document
    */
   document?: {
-    [k: string]: any;
+    [k: string]: unknown;
   };
   /**
    * The HTTP headers of the response

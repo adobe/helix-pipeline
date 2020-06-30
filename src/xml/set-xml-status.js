@@ -18,7 +18,6 @@ function setStatus(context, { logger, request = {} }) {
   const headers = setdefault(res, 'headers', {});
   const err = context.error;
 
-
   // if a status is already default, keep it.
   if (res.status) {
     return;

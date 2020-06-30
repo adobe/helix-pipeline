@@ -18,9 +18,13 @@ const URI = require('uri-js');
 function embed({ EMBED_SERVICE } = {}) {
   return function handler(h, node, _, handlechild) {
     const { url } = node;
+    let src = url;
+    if (URI.parse(url).reference === 'absolute') {
+      src = URI.normalize([EMBED_SERVICE, EMBED_SERVICE.slice(-1) !== '/' ? '/' : '', url].join(''));
+    }
     const props = {
       // prepend the embed service for absolute URLs
-      src: (URI.parse(url).reference === 'absolute' ? EMBED_SERVICE : '') + url,
+      src,
     };
     const retval = [h(node, 'esi:include', props)];
 

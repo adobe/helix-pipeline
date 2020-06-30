@@ -146,6 +146,43 @@
           "value": "this is inline :code:"
         }
       ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "icon",
+          "value": "rocket",
+          "code": ":rocket:"
+        },
+        {
+          "type": "text",
+          "value": " is an icon at the beginning of the line, and here's one at the end: "
+        },
+        {
+          "type": "icon",
+          "value": "heart-0",
+          "code": ":heart-0:"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "Oh, and 09:00:00 is a time code."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "No icon here"
+        }
+      ]
     }
   ]
 }

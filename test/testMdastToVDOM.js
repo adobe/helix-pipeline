@@ -16,13 +16,15 @@ const path = require('path');
 const h = require('hastscript');
 const hy = require('hyperscript');
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
 const { JSDOM } = require('jsdom');
-const VDOM = require('../').utils.vdom;
+const unified = require('unified');
+const parser = require('remark-parse');
+const VDOM = require('../index.js').utils.vdom;
 const coerce = require('../src/utils/coerce-secrets');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -210,6 +212,15 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'icon-example.json'));
     const actual = new VDOM(mdast, action.secrets).getDocument().documentElement;
     const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'icon-example.html')).toString('utf-8')).window.document.documentElement;
+    assert.deepEqual(actual.outerHTML, expected.outerHTML);
+  });
+
+  it('creating nested list is performant', () => {
+    const markdown = fs.readFileSync(path.resolve(__dirname, 'fixtures', 'tags.md'));
+    const mdast = unified().use(parser).parse(markdown);
+    const doc = new VDOM(mdast, action.secrets).getDocument();
+    const actual = doc.documentElement.innerHTML;
+    const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'tags.html')).toString('utf-8')).window.document.documentElement.innerHTML;
     assert.deepEqual(actual.outerHTML, expected.outerHTML);
   });
 });

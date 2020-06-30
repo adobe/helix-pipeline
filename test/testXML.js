@@ -11,14 +11,11 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { Logger } = require('@adobe/helix-shared');
+const { logging } = require('@adobe/helix-testutils');
 const { setdefault } = require('ferrum');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const setupPolly = require('@pollyjs/core').setupMocha;
-const { pipe } = require('../src/defaults/xml.pipe.js');
+const { setupPolly, xmlPipe: pipe } = require('./utils.js');
 
-const logger = Logger.getTestLogger({
+const logger = logging.createTestLogger({
   // tune this for debugging
   level: 'info',
 });
@@ -124,16 +121,7 @@ describe('Testing XML Pipeline', () => {
   });
 
   setupPolly({
-    logging: false,
-    recordFailedRequests: false,
     recordIfMissing: false,
-    adapters: [NodeHttpAdapter],
-    persister: FSPersister,
-    persisterOptions: {
-      fs: {
-        recordingsDir: 'test/fixtures',
-      },
-    },
   });
 
   it('xml.pipe is a function', () => {
@@ -167,7 +155,10 @@ describe('Testing XML Pipeline', () => {
       },
       {},
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -231,7 +222,10 @@ describe('Testing XML Pipeline', () => {
       myfunc,
       { },
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
         logger,
       },
@@ -249,7 +243,10 @@ describe('Testing XML Pipeline', () => {
       () => {},
       testContext,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
       },
     );
@@ -262,7 +259,10 @@ describe('Testing XML Pipeline', () => {
       () => {},
       testContext,
       {
-        request: { params },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
         secrets,
       },
     );
@@ -275,7 +275,10 @@ describe('Testing XML Pipeline', () => {
       () => {}, // empty main function
       {},
       {
-        request: { params: params404 },
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params: params404,
+        },
         secrets,
         logger,
       },
@@ -298,7 +301,10 @@ describe('Testing XML Pipeline', () => {
     },
     {},
     {
-      request: { params },
+      request: {
+        headers: { 'Cache-Control': 'no-store' },
+        params,
+      },
       secrets,
       logger,
     });

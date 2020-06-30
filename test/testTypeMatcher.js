@@ -15,7 +15,6 @@ const path = require('path');
 const assert = require('assert');
 const TypeMatcher = require('../src/utils/match-section-types');
 
-
 describe('Test Type Matcher Util', () => {
   const sections = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'sections.json'));
 

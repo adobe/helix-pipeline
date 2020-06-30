@@ -13,7 +13,10 @@ const { Pipeline } = require('../../index.js');
 const { log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
+const fetchContent = require('../html/fetch-content.js');
+const fetchMarkupConfig = require('../html/fetch-markupconfig.js');
 const parse = require('../html/parse-markdown.js');
+const rewriteBlobImages = require('../html/rewrite-blob-images');
 const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
 const type = require('../utils/set-content-type.js');
@@ -30,7 +33,6 @@ const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
 const { cache, uncached } = require('../html/shared-cache');
 const embeds = require('../html/find-embeds');
-const parseFrontmatter = require('../html/parse-frontmatter');
 const unwrapSoleImages = require('../html/unwrap-sole-images');
 const rewriteLinks = require('../html/static-asset-links');
 const tovdom = require('../html/html-to-vdom');
@@ -39,10 +41,13 @@ const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
 const sanitize = require('../html/sanitize');
 const removeHlxProps = require('../html/removeHlxProps');
+const dataEmbeds = require('../html/fetch-data');
+const dataSections = require('../html/data-sections');
+const { adjustMDAST, adjustHTML } = require('../utils/adjust-markup');
 
 /* eslint newline-per-chained-call: off */
 
-function hascontent({ content }) {
+function hasNoContent({ content }) {
   return !(content !== undefined && content.body !== undefined);
 }
 
@@ -52,25 +57,31 @@ function paranoid(context, action) {
 
 const htmlpipe = (cont, context, action) => {
   action.logger = action.logger || log;
-  action.logger.log('debug', 'Constructing HTML Pipeline');
+  action.logger.debug('Constructing HTML Pipeline');
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
     .every(dump.record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
-    .use(fetch).expose('fetch').when(hascontent)
+    .use(fetchMarkupConfig)
+    .use(fetchContent).expose('content').when(hasNoContent)
+    .use(fetch).expose('fetch').when(hasNoContent)
     .use(parse).expose('parse')
-    .use(parseFrontmatter)
     .use(embeds)
+    .use(dataEmbeds)
     .use(smartypants)
     .use(iconize)
     .use(sections)
+    .use(rewriteBlobImages)
     .use(meta).expose('meta')
     .use(unwrapSoleImages)
+    .use(adjustMDAST)
     .use(selectstrain)
     .use(selecttest)
+    .use(dataSections)
     .use(html).expose('html')
+    .use(adjustHTML)
     .use(sanitize).when(paranoid)
     .use(cont)
     .use(type('text/html'))
@@ -87,7 +98,7 @@ const htmlpipe = (cont, context, action) => {
     .error(dump.report)
     .error(selectStatus);
 
-  action.logger.log('debug', 'Running HTML pipeline');
+  action.logger.debug('Running HTML pipeline');
   return pipe.run(context);
 };
 

@@ -13,6 +13,7 @@ const { Pipeline } = require('../../index.js');
 const { log } = require('./default.js');
 
 const fetch = require('../html/fetch-markdown.js');
+const fetchContent = require('../html/fetch-content.js');
 const parse = require('../html/parse-markdown.js');
 const meta = require('../html/get-metadata.js');
 const { esi, flag } = require('../html/flag-esi');
@@ -27,23 +28,26 @@ const type = require('../utils/set-content-type.js');
 const emit = require('../xml/emit-xml.js');
 const selectStatus = require('../xml/set-xml-status.js');
 const check = require('../xml/check-xml');
-const parseFrontmatter = require('../html/parse-frontmatter');
 const timing = require('../utils/timing');
 
 /* eslint newline-per-chained-call: off */
 
+function hasNoContent({ content }) {
+  return !(content !== undefined && content.body !== undefined);
+}
+
 const xmlpipe = (cont, context, action) => {
   action.logger = action.logger || log;
-  action.logger.log('debug', 'Constructing XML Pipeline');
+  action.logger.debug('Constructing XML Pipeline');
   const pipe = new Pipeline(action);
   const timer = timing();
   pipe
     .every(dump.record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
-    .use(fetch).expose('fetch')
+    .use(fetchContent).expose('content').when(hasNoContent)
+    .use(fetch).expose('fetch').when(hasNoContent)
     .use(parse).expose('parse')
-    .use(parseFrontmatter)
     .use(smartypants)
     .use(sections)
     .use(meta).expose('meta')
@@ -58,7 +62,7 @@ const xmlpipe = (cont, context, action) => {
     .error(dump.report)
     .error(selectStatus);
 
-  action.logger.log('debug', 'Running XML pipeline');
+  action.logger.debug('Running XML pipeline');
   return pipe.run(context);
 };
 

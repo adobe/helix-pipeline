@@ -81,7 +81,8 @@ class VDOMTransformer {
       const frag = JSDOM.fragment(node.value);
       return h.augment(node, {
         type: 'raw',
-        value: frag,
+        value: '', // we ignore the value here and treat it later in hast-util-to-dom
+        frag,
         html: node.value,
       });
     });
@@ -91,7 +92,6 @@ class VDOMTransformer {
 
   withMdast(mdast) {
     this._root = mdast;
-
 
     return this;
   }
@@ -200,6 +200,14 @@ class VDOMTransformer {
    * for nodes matching the pattern
    */
   static matchfn(ast, pattern) {
+    // evaluating selectAll on a large tree for each handler is very expensive.
+    // use node name for simple element selectors
+    if (/^\w+$/.test(pattern)) {
+      return function match(node) {
+        return node.type === pattern;
+      };
+    }
+
     return function match(node, myast = ast) {
       return selectAll(pattern, myast).indexOf(node) >= 0;
     };
@@ -218,16 +226,16 @@ class VDOMTransformer {
     for (let i = 0; i < node.children.length; i += 1) {
       const child = node.children[i];
       if (child.type === 'raw') {
-        if (child.value.firstElementChild === null) {
+        if (child.frag.firstElementChild === null) {
           if (stack.length === 0) {
-            throw new Error(`no matching inline element found for ${child.html}`);
+            // ignore unmatched inline elements
           } else {
             const last = stack.pop();
             let html = '';
             for (let j = last; j <= i; j += 1) {
-              html += node.children[j].html || node.children[j].value;
+              html += node.children[j].html || node.children[j].value || '';
             }
-            node.children[last].value = JSDOM.fragment(html);
+            node.children[last].frag = JSDOM.fragment(html);
             node.children[last].html = html;
             node.children.splice(last + 1, i - last);
             i = last;
@@ -249,7 +257,7 @@ class VDOMTransformer {
     // mdast -> hast; hast -> DOM using JSDOM
     const hast = mdast2hast(this._root, {
       handlers: this._handlers,
-      allowDangerousHTML: true,
+      allowDangerousHtml: true,
     });
 
     if (this._hasRaw) {
@@ -273,7 +281,20 @@ class VDOMTransformer {
     // this is a bit a hack to pass the JSDOM instance along, so that other module can use it.
     // this ensures that other modules can parse documents and fragments that are compatible
     // with this document
-    doc.JSDOM = JSDOM;
+    Object.defineProperty(doc, 'JSDOM', {
+      enumerable: false,
+      writable: false,
+      value: JSDOM,
+    });
+
+    // this is another hack to pass the respective window instance along. this is to ensure that
+    // the shared prototypes can be used to check node instances (see jsdom 16.x release)
+    Object.defineProperty(doc, 'window', {
+      enumerable: false,
+      writable: false,
+      value: dom.window,
+    });
+
     return doc;
   }
 }
