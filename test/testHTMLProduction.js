@@ -96,7 +96,8 @@ describe('Testing HTML Pipeline in Production', () => {
     <meta http-equiv="Expires" content="3000">
     <meta http-equiv="Foo" content="baz">
     <meta http-equiv="Exceeds" value="3000">
-    <meta http-equiv="Link" content="</some_image.jpeg>; rel=preload; as=image" />
+    <meta http-equiv="Link" content="<some_image.jpeg>; rel=preload; as=image" />
+    <meta http-equiv="Link" content="<style.css>; rel=preload; as=style" />
   </head>
   <body>
     ${context.content.document.body.innerHTML}
@@ -122,7 +123,7 @@ describe('Testing HTML Pipeline in Production', () => {
     assert.equal(result.response.headers.Expires, '3000', 'allows setting through meta http-equiv');
     assert.equal(result.response.headers.Exceeds, undefined, 'ignores invalid meta tags');
     assert.equal(result.response.headers.Foo, 'bar', 'does not override existing headers');
-    assert.equal(result.response.headers.Link, '</some_image.jpeg>; rel=preload; as=image', 'allows setting Link header through meta http-equiv');
+    assert.equal(result.response.headers.Link, '<some_image.jpeg>; rel=preload; as=image,<style.css>; rel=preload; as=style', 'allows setting Link header through meta http-equiv');
   });
 
   it('html.pipe adds headers from link tags', async () => {
