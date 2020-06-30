@@ -82,7 +82,7 @@ jobs:
       - run:
           name: Publish Markdown to GitHub
           command: |
-            git add -A docs/ && git commit -m "chore(docs): updating documentation [skip ci]" && git push origin $CIRCLE_BRANCH
+            git add -A docs/ && git commit -m "chore(docs): updating documentation" && git push origin $CIRCLE_BRANCH
 
 workflows:
   version: 2
