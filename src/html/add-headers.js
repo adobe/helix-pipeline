@@ -16,6 +16,8 @@ function addHeaders({ response: { headers, document } }) {
     if (href && rel && !href.match(/<esi:include/)) {
       if (as && rel.indexOf('preload') > -1) {
         // https://www.w3.org/TR/preload/#as-attribute
+        // depends on https://github.com/jsdom/jsdom/issues/2471
+        /* istanbul ignore next */
         linkHeader.push(`<${href}>; rel="${rel}"; as="${as}"`);
       } else {
         linkHeader.push(`<${href}>; rel="${rel}"`);
