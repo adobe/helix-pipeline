@@ -12,20 +12,29 @@
 
 function addHeaders({ response: { headers, document } }) {
   const linkHeader = [];
-  document.querySelectorAll('link').forEach(({ href, rel }) => {
+  document.querySelectorAll('link').forEach(({ href, rel, as }) => {
     if (href && rel && !href.match(/<esi:include/)) {
-      linkHeader.push(`<${href}>; rel="${rel}"`);
+      if (as && rel.indexOf('preload') > -1) {
+        // https://www.w3.org/TR/preload/#as-attribute
+        // depends on https://github.com/jsdom/jsdom/issues/2471
+        /* istanbul ignore next */
+        linkHeader.push(`<${href}>; rel="${rel}"; as="${as}"`);
+      } else {
+        linkHeader.push(`<${href}>; rel="${rel}"`);
+      }
     }
   });
-  if (linkHeader.length > 0) {
-    headers.Link = linkHeader.join();
-  }
-
   document.querySelectorAll('meta').forEach(({ httpEquiv, content }) => {
-    if (httpEquiv && content && !headers[httpEquiv]) {
+    if (httpEquiv === 'Link') {
+      linkHeader.push(content);
+    } else if (httpEquiv && content && !headers[httpEquiv]) {
       headers[httpEquiv] = content;
     }
   });
+
+  if (linkHeader.length > 0) {
+    headers.Link = linkHeader.join();
+  }
 }
 
 module.exports = addHeaders;

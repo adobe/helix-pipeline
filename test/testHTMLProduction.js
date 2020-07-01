@@ -82,7 +82,7 @@ describe('Testing HTML Pipeline in Production', () => {
     process.env.__OW_ACTIVATION_ID = 'fake';
   });
 
-  it('html.pipe adds headers from meta and link tags', async () => {
+  it('html.pipe adds headers from meta tags', async () => {
     const result = await pipe(
       (context) => {
         context.response = {
@@ -96,6 +96,47 @@ describe('Testing HTML Pipeline in Production', () => {
     <meta http-equiv="Expires" content="3000">
     <meta http-equiv="Foo" content="baz">
     <meta http-equiv="Exceeds" value="3000">
+    <meta http-equiv="Link" content="<some_image.jpeg>; rel=preload; as=image" />
+    <meta http-equiv="Link" content="<style.css>; rel=preload; as=style" />
+  </head>
+  <body>
+    ${context.content.document.body.innerHTML}
+  </body>
+</html>`,
+        };
+      },
+      {
+        request: crequest,
+        content: {
+          body: 'Hello World',
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers['Content-Type'], 'text/html', 'keeps content-type');
+    assert.equal(result.response.headers.Expires, '3000', 'allows setting through meta http-equiv');
+    assert.equal(result.response.headers.Exceeds, undefined, 'ignores invalid meta tags');
+    assert.equal(result.response.headers.Foo, 'bar', 'does not override existing headers');
+    assert.equal(result.response.headers.Link, '<some_image.jpeg>; rel=preload; as=image,<style.css>; rel=preload; as=style', 'allows setting Link header through meta http-equiv');
+  });
+
+  it('html.pipe adds headers from link tags', async () => {
+    const result = await pipe(
+      (context) => {
+        context.response = {
+          status: 201,
+          headers: {
+            Foo: 'bar',
+          },
+          body: `<html>
+  <head>
+    <title>Hello World</title>
     <link rel="next" href="next.html" />
     <link rel="stylesheet" href="style.css" />
     <link rel="first" href="index.html" />
@@ -121,12 +162,46 @@ describe('Testing HTML Pipeline in Production', () => {
     );
 
     assert.equal(result.response.status, 201);
-    assert.equal(result.response.headers['Content-Type'], 'text/html', 'keeps content-type');
     assert.equal(result.response.headers['X-ESI'], 'enabled', 'detects ESI');
-    assert.equal(result.response.headers.Expires, '3000', 'allows setting through meta http-equiv');
-    assert.equal(result.response.headers.Exceeds, undefined, 'ignores invalid meta tags');
-    assert.equal(result.response.headers.Foo, 'bar', 'does not override existing headers');
     assert.equal(result.response.headers.Link, '<next.html>; rel="next",<index.html>; rel="first"', 'allows setting through link');
+  });
+
+  // enable once 'as' attribute is handled by JSDOM: https://github.com/jsdom/jsdom/issues/2471
+  // see issue #520
+  it.skip('html.pipe propagates \'as\' attribute of link tags', async () => {
+    const result = await pipe(
+      (context) => {
+        context.response = {
+          status: 201,
+          headers: {
+            Foo: 'bar',
+          },
+          body: `<html>
+  <head>
+    <link rel="preload" href="/some_image.jpeg" as="image" />
+    <link rel="preload" href="/some_lib.js" as="script" />
+  </head>
+  <body>
+    ${context.content.document.body.innerHTML}
+  </body>
+</html>`,
+        };
+      },
+      {
+        request: crequest,
+        content: {
+          body: 'Hello World',
+        },
+      },
+      {
+        request: { params },
+        secrets,
+        logger,
+      },
+    );
+
+    assert.equal(result.response.status, 201);
+    assert.equal(result.response.headers.Link, '</some_image.jpeg>; rel=preload; as=image,</some_lib.js>; rel=preload; as=script', 'allows setting Link header through meta http-equiv');
   });
 
   after('Reset Production Mode', () => {
