@@ -1,3 +1,15 @@
+# [10.1.0](https://github.com/adobe/helix-pipeline/compare/v10.0.9...v10.1.0) (2020-07-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.3.13 ([#786](https://github.com/adobe/helix-pipeline/issues/786)) ([8c6ef34](https://github.com/adobe/helix-pipeline/commit/8c6ef345fc2fa9df3736ce562cc1aba50481a30a))
+
+
+### Features
+
+* **downloader:** (fetch) use new AbortController instead of timeout ([#784](https://github.com/adobe/helix-pipeline/issues/784)) ([9e9fc94](https://github.com/adobe/helix-pipeline/commit/9e9fc9475dae74d3a67d174ddc21cd414cecd9e1)), closes [#782](https://github.com/adobe/helix-pipeline/issues/782)
+
 ## [10.0.9](https://github.com/adobe/helix-pipeline/compare/v10.0.8...v10.0.9) (2020-06-30)
 
 
