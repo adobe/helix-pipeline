@@ -14,8 +14,6 @@ const URI = require('uri-js');
 const { setdefault } = require('ferrum');
 const fetchAPI = require('@adobe/helix-fetch');
 
-const { TimeoutError } = fetchAPI;
-
 const DEFAULT_FORWARD_HEADERS = [
   'x-request-id',
   'x-cdn-request-id',
@@ -132,6 +130,12 @@ class Downloader {
     const download = async () => {
       logger.debug(`fetching file from ${uri}`);
       let res = {};
+      const { AbortError, timeoutSignal } = this._fetchContext;
+      const { timeout } = options;
+      if (timeout) {
+        delete options.timeout;
+        options.signal = timeoutSignal(timeout);
+      }
       try {
         res = await this._client(uri, options);
         const body = await res.text();
@@ -155,8 +159,8 @@ class Downloader {
         }
         logger.warn(`Could not find file at ${uri}`);
         setdefault(context, 'response', {}).status = 404;
-      } else if (res.status === 502 || res instanceof TimeoutError) {
-        logger.error(`Gateway timeout of ${options.timeout} milliseconds exceeded for ${uri}`);
+      } else if (res.status === 502 || res instanceof AbortError) {
+        logger.error(`Gateway timeout of ${timeout} milliseconds exceeded for ${uri}`);
         setdefault(context, 'response', {}).status = 504;
       } else {
         logger.error(`Error while fetching file from ${uri} with the following options:\n${inspect(options, { depth: null })}`);
