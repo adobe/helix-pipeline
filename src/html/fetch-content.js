@@ -67,14 +67,14 @@ async function fetchContent(context, {
     }
 
     content.body = res.body;
-    setdefault(content, 'sources', []).push(
-      // prefer branch for surrogate computation
-      downloader.computeGithubURI(owner, repo, branchOrRef, path),
-    );
+
+    // prefer branch for surrogate computation
+    const source = downloader.computeGithubURI(owner, repo, branchOrRef, path);
+    setdefault(content, 'sources', []).push(source);
 
     // store extra source location if present
     const sourceLocation = res.headers.get('x-source-location') || '';
-    if (sourceLocation) {
+    if (sourceLocation && sourceLocation !== source) {
       content.sources.push(sourceLocation);
     }
     const sourceHash = crypto.createHash('sha1').update(sourceLocation).digest('base64').substring(0, 16);
