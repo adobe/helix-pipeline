@@ -662,7 +662,10 @@ ${context.content.document.body.innerHTML}`,
         assert.equal(content.meta.template, 'Medium');
         assert.equal(content.intro, 'Project Helix');
         assert.equal(content.title, 'Bill, Welcome to the future');
-        assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/mybranch/hello.md']);
+        assert.deepEqual(content.sources, [
+          'https://raw.githubusercontent.com/trieloff/soupdemo/mybranch/hello.md',
+          'https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md',
+        ]);
         // and return a different status code
         context.response = { status: 201, body: content.document.body.innerHTML };
       },
@@ -686,7 +689,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.status, 201);
     assert.equal(res.headers['Content-Type'], 'text/html');
     assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
-    assert.equal(res.headers['Surrogate-Key'], '+XCHRiDHBAUBviSX');
+    assert.equal(res.headers['Surrogate-Key'], '+XCHRiDHBAUBviSX yt+7rF5AO4Kmk0aF');
     assert.equal(res.body[0], '<');
     assert.ok(res.body.match(/<img/));
   });
