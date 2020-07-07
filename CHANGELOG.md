@@ -1,3 +1,10 @@
+## [10.1.1](https://github.com/adobe/helix-pipeline/compare/v10.1.0...v10.1.1) (2020-07-07)
+
+
+### Bug Fixes
+
+* add x-source-location from content-proxy for surrogate computation ([#789](https://github.com/adobe/helix-pipeline/issues/789)) ([7eb7876](https://github.com/adobe/helix-pipeline/commit/7eb7876ee40defe8ed7fcd4c29cfe9206788c19c))
+
 # [10.1.0](https://github.com/adobe/helix-pipeline/compare/v10.0.9...v10.1.0) (2020-07-02)
 
 
