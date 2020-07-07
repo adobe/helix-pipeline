@@ -22,8 +22,10 @@ async function fetchContent(context, {
   }
   const { content } = context;
   const {
-    owner, repo, path, branch = 'master', ref,
+    owner, repo, path, branch, ref,
   } = request.params;
+  const branchOrRef = branch || ref || 'master';
+  const refOrBranch = ref || branch || 'master';
 
   // compute content proxy url
   let contentProxyUrl = secrets.CONTENT_PROXY_URL || '';
@@ -36,7 +38,7 @@ async function fetchContent(context, {
   url.searchParams.append('owner', owner);
   url.searchParams.append('repo', repo);
   url.searchParams.append('path', path);
-  url.searchParams.append('ref', ref || branch);
+  url.searchParams.append('ref', refOrBranch); // prefer ref for content fetching
 
   // append raw root if different from default
   const repoRawRoot = new URL(secrets.REPO_RAW_ROOT);
@@ -65,10 +67,16 @@ async function fetchContent(context, {
     }
 
     content.body = res.body;
-    setdefault(content, 'sources', []).push(downloader.computeGithubURI(owner, repo, branch, path));
+
+    // prefer branch for surrogate computation
+    const source = downloader.computeGithubURI(owner, repo, branchOrRef, path);
+    setdefault(content, 'sources', []).push(source);
 
     // store extra source location if present
     const sourceLocation = res.headers.get('x-source-location') || '';
+    if (sourceLocation && sourceLocation !== source) {
+      content.sources.push(sourceLocation);
+    }
     const sourceHash = crypto.createHash('sha1').update(sourceLocation).digest('base64').substring(0, 16);
     logger.info(`source-location: ${sourceLocation}`);
     logger.info(`source-hash: ${sourceHash}`);

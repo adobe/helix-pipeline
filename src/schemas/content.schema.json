@@ -22,8 +22,7 @@
       "type": "array",
       "description": "List of URIs that have been retrieved for this piece of content",
       "items": {
-        "type": "string",
-        "format": "uri"
+        "type": "string"
       }
     },
     "body": {

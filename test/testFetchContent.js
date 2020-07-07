@@ -162,4 +162,24 @@ describe('Testing fetch content', () => {
 
     assert.equal(result.response.body, '{"sourceLocation":"https://onedrive.com/hello.docx","sourceHash":"WCoswd7nuFy/cY2v"}');
   });
+
+  it('supports non-url source location ', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [404, 'Not Found']);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .reply(200, '# Hello\nfrom github.\n\n---\n\n# Bar', {
+        'x-source-location': '/drives/b!PpnkewKFAEaDTS6slvlVjh_3ih9lhEZMgYWwps6bPIWZMmLU5xGqS4uES8kIQZbH/items/01DJQLOW44UHM362CKX5GYMQO2F4JIHSEV',
+      });
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: JSON.stringify(content.data) };
+    }, context, action);
+
+    assert.equal(result.response.body, '{"sourceLocation":"/drives/b!PpnkewKFAEaDTS6slvlVjh_3ih9lhEZMgYWwps6bPIWZMmLU5xGqS4uES8kIQZbH/items/01DJQLOW44UHM362CKX5GYMQO2F4JIHSEV","sourceHash":"g3TgmFV5eZurYJ+M"}');
+  });
 });
