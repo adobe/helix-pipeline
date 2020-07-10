@@ -149,12 +149,13 @@ describe('Testing HTML Pipeline with markup config', () => {
 
     const result = await pipe((ctx) => {
       const { content } = ctx;
-      ctx.response = { status: 200, body: content.document.body.innerHTML };
+      ctx.response = { status: 200, body: content.document.documentElement.outerHTML };
     }, context, action);
 
     expectBodyEquals(result,
-      `<div class="corge">
-        <div class="bar" baz="qux">
+      `<html class="corge">
+        <head></head>
+        <body class="bar" baz="qux">
           <div>
             <h1 id="hello">Hello</h1>
             <p>from github.</p>
@@ -162,8 +163,8 @@ describe('Testing HTML Pipeline with markup config', () => {
           <div>
             <h1 id="bar">Bar</h1>
           </div>
-        </div>
-      </div>`);
+        </body>
+      </html>`);
   });
 
   it('html.pipe adjusts the MDAST as per markup markdown config', async () => {
