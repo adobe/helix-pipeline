@@ -1,3 +1,10 @@
+# [10.2.0](https://github.com/adobe/helix-pipeline/compare/v10.1.5...v10.2.0) (2020-07-27)
+
+
+### Features
+
+* **src/schemas/secrets.schema.json:** add embeds ([#810](https://github.com/adobe/helix-pipeline/issues/810)) ([4422092](https://github.com/adobe/helix-pipeline/commit/442209212bd8f67609f23bdac8deda9c9aeba37a))
+
 ## [10.1.5](https://github.com/adobe/helix-pipeline/compare/v10.1.4...v10.1.5) (2020-07-23)
 
 
