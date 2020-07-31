@@ -1,3 +1,10 @@
+## [10.2.1](https://github.com/adobe/helix-pipeline/compare/v10.2.0...v10.2.1) (2020-07-31)
+
+
+### Bug Fixes
+
+* **html pipe:** properly adjust body and html tag properties for url markup match ([#796](https://github.com/adobe/helix-pipeline/issues/796)) ([278ab8e](https://github.com/adobe/helix-pipeline/commit/278ab8e55b927b3bcfccfa93a4170f86d68a8abd)), closes [adobe/theblog#241](https://github.com/adobe/theblog/issues/241)
+
 # [10.2.0](https://github.com/adobe/helix-pipeline/compare/v10.1.5...v10.2.0) (2020-07-27)
 
 
