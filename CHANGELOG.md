@@ -1,3 +1,38 @@
+# [10.2.0](https://github.com/adobe/helix-pipeline/compare/v10.1.5...v10.2.0) (2020-07-27)
+
+
+### Features
+
+* **src/schemas/secrets.schema.json:** add embeds ([#810](https://github.com/adobe/helix-pipeline/issues/810)) ([4422092](https://github.com/adobe/helix-pipeline/commit/442209212bd8f67609f23bdac8deda9c9aeba37a))
+
+## [10.1.5](https://github.com/adobe/helix-pipeline/compare/v10.1.4...v10.1.5) (2020-07-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-fetch to v1.8.1 ([#806](https://github.com/adobe/helix-pipeline/issues/806)) ([483eae6](https://github.com/adobe/helix-pipeline/commit/483eae6b9d586dd0ff551e21a48244b77301fe78))
+
+## [10.1.4](https://github.com/adobe/helix-pipeline/compare/v10.1.3...v10.1.4) (2020-07-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.10.0 ([#804](https://github.com/adobe/helix-pipeline/issues/804)) ([d9c44af](https://github.com/adobe/helix-pipeline/commit/d9c44af04d83a74c2c7c522ee796c0a7b90c5a6f))
+
+## [10.1.3](https://github.com/adobe/helix-pipeline/compare/v10.1.2...v10.1.3) (2020-07-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-fetch to v1.8.0 ([#803](https://github.com/adobe/helix-pipeline/issues/803)) ([3182adf](https://github.com/adobe/helix-pipeline/commit/3182adf45372f2cf9bc34519f0b148afd7b7cdc8))
+
+## [10.1.2](https://github.com/adobe/helix-pipeline/compare/v10.1.1...v10.1.2) (2020-07-14)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#797](https://github.com/adobe/helix-pipeline/issues/797)) ([c98183b](https://github.com/adobe/helix-pipeline/commit/c98183b3eb016dbdadd6ee87d0c4743a7fbcf365))
+
 ## [10.1.1](https://github.com/adobe/helix-pipeline/compare/v10.1.0...v10.1.1) (2020-07-07)
 
 
