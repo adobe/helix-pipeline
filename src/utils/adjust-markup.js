@@ -132,8 +132,15 @@ function patchHtmlElement(el, cfg) {
   // Wrap the element
   if (cfg.wrap) {
     const wrapperEl = getHTMLElement(cfg.wrap);
-    wrapperEl.innerHTML = wrapperEl.innerHTML.replace(PLACEHOLDER_TEMPLATE, el.outerHTML);
-    el.replaceWith(wrapperEl);
+    // if it is a regular element
+    if (el.nodeName !== 'BODY') {
+      wrapperEl.innerHTML = wrapperEl.innerHTML.replace(PLACEHOLDER_TEMPLATE, el.outerHTML);
+      el.replaceWith(wrapperEl);
+    } else { // ... but just merge the properties on the BODY
+      [...wrapperEl.attributes].forEach((attr) => {
+        el.parentNode.setAttribute(attr.name, attr.value);
+      });
+    }
   }
 }
 
@@ -155,23 +162,6 @@ async function adjustMDAST(context, action) {
   if (!markupconfig || !markupconfig.markup) {
     return;
   }
-
-  // Adjust the MDAST conversion based on url config
-  const sectionHandler = section();
-  Object.entries(markupconfig.markup)
-    .filter(([_, cfg]) => cfg.type === 'url')
-    .forEach(([name, cfg]) => {
-      logger.info(`Applying markdown url adjustment: ${name}`);
-
-      const matchUrl = matchUrlBuilder(cfg.match, { decode: decodeURIComponent });
-      if (matchUrl(context.request.path)) {
-        transformer.match('root', (h, node) => {
-          // Generate the matching VDOM element
-          const el = sectionHandler(h, { ...node, meta: {} });
-          return patchVDOMNode(el, cfg);
-        });
-      }
-    });
 
   // Adjust the MDAST conversion based on markdown config
   Object.entries(markupconfig.markup)
@@ -198,6 +188,7 @@ async function adjustMDAST(context, action) {
         return isSection(node) && match(childtypes, cfg.match);
       }, (h, node) => {
         // Generate the matching VDOM element
+        const sectionHandler = section();
         const el = sectionHandler(h, node);
         return patchVDOMNode(el, cfg);
       });
@@ -216,6 +207,16 @@ async function adjustHTML(context, { logger, markupconfig }) {
   if (!markupconfig || !markupconfig.markup) {
     return;
   }
+
+  Object.entries(markupconfig.markup)
+    .filter(([_, cfg]) => !cfg.type || cfg.type === 'url')
+    .forEach(([name, cfg]) => {
+      logger.info(`Applying URL markup adjustment: ${name}`);
+      const matchUrl = matchUrlBuilder(cfg.match, { decode: decodeURIComponent });
+      if (matchUrl(context.request.path)) {
+        patchHtmlElement(context.content.document.body, cfg);
+      }
+    });
 
   Object.entries(markupconfig.markup)
     .filter(([_, cfg]) => !cfg.type || cfg.type === 'html')
