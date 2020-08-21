@@ -17,19 +17,19 @@ The content as retrieved from the repository and enriched in the pipeline.
 
 # Content Properties
 
-| Property              | Type         | Required | Nullable       | Defined by                                                                                                        |
-| :-------------------- | ------------ | -------- | -------------- | :---------------------------------------------------------------------------------------------------------------- |
-| [sources](#sources)   | `array`      | Optional | cannot be null | [Content](content-properties-sources.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/sources")   |
-| [body](#body)         | `string`     | Optional | cannot be null | [Content](content-properties-body.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/body")         |
-| [mdast](#mdast)       | `object`     | Optional | cannot be null | [Content](content-properties-mdast.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/mdast")         |
-| [document](#document) | `object`     | Optional | cannot be null | [Content](content-properties-document.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/document") |
-| [json](#json)         | `object`     | Optional | cannot be null | [Content](content-properties-json.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/json")         |
-| [xml](#xml)           | `object`     | Optional | cannot be null | [Content](content-properties-xml.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/xml")           |
-| [meta](#meta)         | Unknown Type | Optional | can be null    | [Content](meta-definitions-meta.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/meta")           |
-| [title](#title)       | `string`     | Optional | cannot be null | [Content](content-properties-title.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/title")       |
-| [intro](#intro)       | `string`     | Optional | cannot be null | [Content](content-properties-intro.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/intro")       |
-| [image](#image)       | `string`     | Optional | cannot be null | [Content](content-properties-image.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/image")       |
-| [data](#data)         | `object`     | Optional | cannot be null | [Content](content-properties-data.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/data")         |
+| Property              | Type     | Required | Nullable       | Defined by                                                                                                        |
+| :-------------------- | -------- | -------- | -------------- | :---------------------------------------------------------------------------------------------------------------- |
+| [sources](#sources)   | `array`  | Optional | cannot be null | [Content](content-properties-sources.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/sources")   |
+| [body](#body)         | `string` | Optional | cannot be null | [Content](content-properties-body.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/body")         |
+| [mdast](#mdast)       | `object` | Optional | cannot be null | [Content](content-properties-mdast.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/mdast")         |
+| [document](#document) | `object` | Optional | cannot be null | [Content](content-properties-document.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/document") |
+| [json](#json)         | `object` | Optional | cannot be null | [Content](content-properties-json.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/json")         |
+| [xml](#xml)           | `object` | Optional | cannot be null | [Content](content-properties-xml.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/xml")           |
+| [meta](#meta)         | `object` | Optional | can be null    | [Content](meta-definitions-meta.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/meta")           |
+| [title](#title)       | `string` | Optional | cannot be null | [Content](content-properties-title.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/title")       |
+| [intro](#intro)       | `string` | Optional | cannot be null | [Content](content-properties-intro.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/intro")       |
+| [image](#image)       | `string` | Optional | cannot be null | [Content](content-properties-image.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/image")       |
+| [data](#data)         | `object` | Optional | cannot be null | [Content](content-properties-data.md "https&#x3A;//ns.adobe.com/helix/pipeline/content#/properties/data")         |
 
 ## sources
 
