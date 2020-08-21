@@ -1,3 +1,10 @@
+# [10.3.0](https://github.com/adobe/helix-pipeline/compare/v10.2.4...v10.3.0) (2020-08-21)
+
+
+### Features
+
+* **secrets.schema.json:** add support for video.tv.adobe.com ([#825](https://github.com/adobe/helix-pipeline/issues/825)) ([628e82f](https://github.com/adobe/helix-pipeline/commit/628e82f052a657f5dca822ac21362defdaa32218)), closes [#824](https://github.com/adobe/helix-pipeline/issues/824)
+
 ## [10.2.4](https://github.com/adobe/helix-pipeline/compare/v10.2.3...v10.2.4) (2020-08-11)
 
 
