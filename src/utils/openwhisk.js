@@ -15,6 +15,7 @@ const querystring = require('querystring');
 const { wrap } = require('@adobe/openwhisk-action-utils');
 const { logger } = require('@adobe/openwhisk-action-logger');
 const { epsagon } = require('@adobe/helix-epsagon');
+const { wrap: statusCheck } = require('@adobe/helix-status');
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -180,6 +181,7 @@ async function runPipeline(cont, pipe, actionParams) {
 
   return wrap(runner)
     .with(epsagon)
+    .with(statusCheck)
     .with(logger.trace)
     .with(logger)(actionParams);
 }
