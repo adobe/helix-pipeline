@@ -1,3 +1,10 @@
+# [10.4.0](https://github.com/adobe/helix-pipeline/compare/v10.3.2...v10.4.0) (2020-08-25)
+
+
+### Features
+
+* **status:** add status check ([#829](https://github.com/adobe/helix-pipeline/issues/829)) ([e6db4c0](https://github.com/adobe/helix-pipeline/commit/e6db4c0bf2aa2b14217d8668801eabe1c7b2acd6))
+
 ## [10.3.2](https://github.com/adobe/helix-pipeline/compare/v10.3.1...v10.3.2) (2020-08-25)
 
 
