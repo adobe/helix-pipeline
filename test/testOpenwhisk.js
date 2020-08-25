@@ -23,6 +23,7 @@ const {
   runPipeline,
 } = require('../src/utils/openwhisk.js');
 const { pipe, log } = require('../src/defaults/default.js');
+const pkgJson = require('../package.json');
 
 describe('Testing OpenWhisk adapter', () => {
   afterEach(() => {
@@ -380,6 +381,29 @@ describe('Testing OpenWhisk adapter', () => {
     }, pipe, params);
 
     assert.deepEqual(context.content, params.content);
+  });
+
+  it('pipeline responds to status check', async () => {
+    const params = {
+      __ow_logger: log,
+      __ow_method: 'get',
+      __ow_path: '/_status_check/healthcheck.json',
+    };
+
+    const ret = await runPipeline(() => {}, pipe, params);
+    delete ret.body.response_time;
+    delete ret.body.process;
+    assert.deepEqual(ret, {
+      body: {
+        status: 'OK',
+        version: pkgJson.version,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Version': pkgJson.version,
+      },
+      statusCode: 200,
+    });
   });
 
   it('it logs to coralogix if secrets are present', async () => {
