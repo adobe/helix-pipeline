@@ -1,3 +1,10 @@
+## [10.3.1](https://github.com/adobe/helix-pipeline/compare/v10.3.0...v10.3.1) (2020-08-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency hast-util-from-dom to v3 ([#828](https://github.com/adobe/helix-pipeline/issues/828)) ([1be6c06](https://github.com/adobe/helix-pipeline/commit/1be6c06097b55f89aa14c5579bd9b54f4fa65f0c))
+
 # [10.3.0](https://github.com/adobe/helix-pipeline/compare/v10.2.4...v10.3.0) (2020-08-21)
 
 
