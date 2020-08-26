@@ -1,3 +1,10 @@
+## [10.4.1](https://github.com/adobe/helix-pipeline/compare/v10.4.0...v10.4.1) (2020-08-26)
+
+
+### Bug Fixes
+
+* **deps:** update [@adobe](https://github.com/adobe) fixes ([#830](https://github.com/adobe/helix-pipeline/issues/830)) ([3860d3a](https://github.com/adobe/helix-pipeline/commit/3860d3a03ef54349465e1ab7ed06f396f494d18a))
+
 # [10.4.0](https://github.com/adobe/helix-pipeline/compare/v10.3.2...v10.4.0) (2020-08-25)
 
 
