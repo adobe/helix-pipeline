@@ -153,11 +153,14 @@ async function fillDataSections(context, { downloader, logger }) {
         }
         try {
           const json = JSON.parse(downloadeddata.body);
-          if (!Array.isArray(json)) {
-            logger.warn(`Expected array for data embed ${node.url}, got ${typeof json}`);
+          // be compatible with old and new data format.
+          // see https://github.com/adobe/helix-data-embed/issues/119
+          const data = json.data ? json.data : json;
+          if (!Array.isArray(data)) {
+            logger.warn(`Expected array for data embed ${node.url}, got ${typeof data}`);
             return node;
           }
-          section.meta.embedData = json;
+          section.meta.embedData = data;
 
           // remember that we are using this source so that we can compute the
           // surrogate key later
