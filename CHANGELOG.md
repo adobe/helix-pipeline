@@ -1,3 +1,10 @@
+# [10.5.0](https://github.com/adobe/helix-pipeline/compare/v10.4.2...v10.5.0) (2020-09-01)
+
+
+### Features
+
+* **secrets.schema.json:** add more w.soundcloud.com ([#836](https://github.com/adobe/helix-pipeline/issues/836)) ([2620c8e](https://github.com/adobe/helix-pipeline/commit/2620c8e41d7079967bcd800b261cf2369fcbbc12))
+
 ## [10.4.2](https://github.com/adobe/helix-pipeline/compare/v10.4.1...v10.4.2) (2020-09-01)
 
 
