@@ -1,3 +1,10 @@
+## [10.4.2](https://github.com/adobe/helix-pipeline/compare/v10.4.1...v10.4.2) (2020-09-01)
+
+
+### Bug Fixes
+
+* **data:** prepare for new data-embed format ([#834](https://github.com/adobe/helix-pipeline/issues/834)) ([63cf886](https://github.com/adobe/helix-pipeline/commit/63cf8869416c7d1c0d5016a8e9d88b0dfea2508e)), closes [#805](https://github.com/adobe/helix-pipeline/issues/805)
+
 ## [10.4.1](https://github.com/adobe/helix-pipeline/compare/v10.4.0...v10.4.1) (2020-08-26)
 
 
