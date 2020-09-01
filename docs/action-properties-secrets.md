@@ -55,7 +55,7 @@ The Base URL for retrieving raw text files from GitHub
 
 ### REPO_RAW_ROOT Constraints
 
-**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc4291 "check the specification")
+**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ### REPO_RAW_ROOT Default Value
 
@@ -83,7 +83,7 @@ The base URL for all GitHub API operations
 
 ### REPO_API_ROOT Constraints
 
-**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc4291 "check the specification")
+**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ### REPO_API_ROOT Default Value
 
@@ -401,7 +401,7 @@ URL of the content proxy service.
 
 ### CONTENT_PROXY_URL Constraints
 
-**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc4291 "check the specification")
+**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ## Pattern: `[A-Z0-9_]+`
 
