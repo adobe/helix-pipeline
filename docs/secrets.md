@@ -55,7 +55,7 @@ The Base URL for retrieving raw text files from GitHub
 
 ### REPO_RAW_ROOT Constraints
 
-**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc4291 "check the specification")
+**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ### REPO_RAW_ROOT Default Value
 
@@ -83,7 +83,7 @@ The base URL for all GitHub API operations
 
 ### REPO_API_ROOT Constraints
 
-**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc4291 "check the specification")
+**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ### REPO_API_ROOT Default Value
 
@@ -114,7 +114,7 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 The default value is:
 
 ```json
-"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com, lottiefiles.com, www.slideshare.net, vimeo.com, www.instagram.com, twitter.com, open.spotify.com, web.spotify.com, player.vimeo.com, www.linkedin.com, w.soundcloud.com, www.slideshare.net, youtu.be, media.giphy.com, video.tv.adobe.com"
+"www.youtube.com, spark.adobe.com, unsplash.com, soundcloud.com, lottiefiles.com, www.slideshare.net, vimeo.com, www.instagram.com, twitter.com, open.spotify.com, web.spotify.com, player.vimeo.com, www.linkedin.com, w.soundcloud.com, www.slideshare.net, youtu.be, media.giphy.com, video.tv.adobe.com, api.soundcloud.com, xd.adobe.com"
 ```
 
 ## DATA_EMBED_ALLOWLIST
@@ -401,7 +401,7 @@ URL of the content proxy service.
 
 ### CONTENT_PROXY_URL Constraints
 
-**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc4291 "check the specification")
+**URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
 ## Pattern: `[A-Z0-9_]+`
 
