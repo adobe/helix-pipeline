@@ -2,6 +2,8 @@
 
 This :tada: will render as an icon. :thumbsup:
 
+This :#tada: will also render as an icon, but is part of an icon collection.
+
 I said: this is cool. There are smiles :) - even **big :smiles:** and [:foo:](http://www.example.com/)
 
 :: smile :smile::smile:::smile::::smile:
