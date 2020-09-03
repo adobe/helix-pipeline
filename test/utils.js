@@ -14,6 +14,7 @@ const path = require('path');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const { setupMocha } = require('@pollyjs/core');
+const { VersionLock } = require('@adobe/openwhisk-action-utils');
 const { pipe: htmlPipe } = require('../src/defaults/html.pipe.js');
 const { pipe: jsonPipe } = require('../src/defaults/json.pipe.js');
 const { pipe: xmlPipe } = require('../src/defaults/xml.pipe.js');
@@ -22,6 +23,7 @@ const Downloader = require('../src/utils/Downloader.js');
 function piper(pipe) {
   return (cont, context, action) => {
     action.downloader = new Downloader(context, action, { forceHttp1: true });
+    action.versionLock = new VersionLock();
     return pipe(cont, context, action);
   };
 }

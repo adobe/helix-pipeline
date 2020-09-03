@@ -12,7 +12,7 @@
 
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
-const { wrap } = require('@adobe/openwhisk-action-utils');
+const { wrap, VersionLock } = require('@adobe/openwhisk-action-utils');
 const { logger } = require('@adobe/openwhisk-action-logger');
 const { epsagon } = require('@adobe/helix-epsagon');
 const { wrap: statusCheck } = require('@adobe/helix-status');
@@ -142,6 +142,7 @@ function extractActionContext(params) {
   // setup action
   return {
     secrets,
+    versionLock: new VersionLock(params),
     request: {
       params: disclosed,
       headers: __ow_headers || {},
