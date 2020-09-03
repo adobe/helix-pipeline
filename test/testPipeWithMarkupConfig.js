@@ -195,6 +195,11 @@ describe('Testing HTML Pipeline with markup config', () => {
       .reply(() => [200, `
 version: 1
 markup:
+  bar:
+    type: markdown
+    match: embed[url^="https://soundcloud.com/"]
+    attribute:
+      onerror: fail
   foo:
     match: embed[url^="https://www.youtube.com/"]
     classnames: bar
@@ -208,6 +213,10 @@ markup:
       .reply(() => [200, `# Hi\nfrom github.
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+And here is something from Soundcloud
+
+https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe
       
 `]);
 
@@ -226,7 +235,10 @@ https://www.youtube.com/watch?v=dQw4w9WgXcQ
         <esi:remove class="bar" baz="qux">
           <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a></p>
         </esi:remove>
-      </pre>`);
+      </pre>
+      <p>And here is something from Soundcloud</p>
+      <esi:include src="https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe" onerror="fail"></esi:include>
+      <esi:remove onerror="fail"><p><a href="https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe">https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe</a></p></esi:remove>`);
   });
 
   it('html.pipe adjusts the MDAST as per markup content config', async () => {
