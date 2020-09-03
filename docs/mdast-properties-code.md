@@ -20,7 +20,7 @@ Icon code
 **pattern**: the string must match the following regular expression: 
 
 ```regexp
-:[a-zA-Z0-9_-]+:
+:#*[a-zA-Z_-]+[a-zA-Z0-9]*:
 ```
 
-[try pattern](https://regexr.com/?expression=%3A%5Ba-zA-Z0-9_-%5D%2B%3A "try regular expression with regexr.com")
+[try pattern](https://regexr.com/?expression=%3A%23*%5Ba-zA-Z_-%5D%2B%5Ba-zA-Z0-9%5D*%3A "try regular expression with regexr.com")

@@ -11,7 +11,7 @@
  */
 const visit = require('unist-util-visit');
 
-const regexp = /:([a-z_-]+[a-z0-9]*):/gi;
+const regexp = /:#*[a-zA-Z_-]+[a-zA-Z0-9]*:/g;
 
 function iconize({ content }) {
   if (!content.mdast) {
@@ -23,24 +23,23 @@ function iconize({ content }) {
       if (icons) {
         let text = node.value;
         const nodes = [];
-        icons.forEach((match) => {
-          const matchIndex = text.indexOf(match);
-          if (matchIndex > 0) {
-            // add node with the text before the icon
-            nodes.push({
-              type: 'text',
-              value: text.substring(0, matchIndex),
-            });
-          }
-          // add the icon node
+        const match = icons[0];
+        const matchIndex = text.indexOf(match);
+        if (matchIndex > 0) {
+          // add node with the text before the icon
           nodes.push({
-            type: 'icon',
-            value: match.substring(1, match.length - 1),
-            code: match,
+            type: 'text',
+            value: text.substring(0, matchIndex),
           });
-          // truncate text
-          text = text.substring(matchIndex + match.length);
+        }
+        // add the icon node
+        nodes.push({
+          type: 'icon',
+          value: match.substring(1, match.length - 1),
+          code: match,
         });
+        // truncate text
+        text = text.substring(matchIndex + match.length);
         if (text.length > 0) {
           // add final node with the rest of the text
           nodes.push({
