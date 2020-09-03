@@ -1,3 +1,15 @@
+# [11.0.0](https://github.com/adobe/helix-pipeline/compare/v10.5.1...v11.0.0) (2020-09-03)
+
+
+### Features
+
+* **icons:** implement :#notation: to address icons in a collection ([#817](https://github.com/adobe/helix-pipeline/issues/817)) ([f349790](https://github.com/adobe/helix-pipeline/commit/f349790cc744827d3d9af9ed06627e7bb5ee8274))
+
+
+### BREAKING CHANGES
+
+* **icons:** svg icons are now rendered differently, see #817
+
 ## [10.5.1](https://github.com/adobe/helix-pipeline/compare/v10.5.0...v10.5.1) (2020-09-03)
 
 
