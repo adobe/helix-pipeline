@@ -1,3 +1,10 @@
+## [11.0.2](https://github.com/adobe/helix-pipeline/compare/v11.0.1...v11.0.2) (2020-09-04)
+
+
+### Bug Fixes
+
+* **icons:** make image absolute path ([#841](https://github.com/adobe/helix-pipeline/issues/841)) ([523c964](https://github.com/adobe/helix-pipeline/commit/523c9649647a02d7551edbe4a1b8cb574cbbb07d))
+
 ## [11.0.1](https://github.com/adobe/helix-pipeline/compare/v11.0.0...v11.0.1) (2020-09-04)
 
 
