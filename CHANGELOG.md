@@ -1,3 +1,36 @@
+## [11.0.1](https://github.com/adobe/helix-pipeline/compare/v11.0.0...v11.0.1) (2020-09-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-utils to v4.3.0 ([#842](https://github.com/adobe/helix-pipeline/issues/842)) ([65bd891](https://github.com/adobe/helix-pipeline/commit/65bd89112db4e2eee724b9f18c32a045c56a1308))
+
+# [11.0.0](https://github.com/adobe/helix-pipeline/compare/v10.5.1...v11.0.0) (2020-09-03)
+
+
+### Features
+
+* **icons:** implement :#notation: to address icons in a collection ([#817](https://github.com/adobe/helix-pipeline/issues/817)) ([f349790](https://github.com/adobe/helix-pipeline/commit/f349790cc744827d3d9af9ed06627e7bb5ee8274))
+
+
+### BREAKING CHANGES
+
+* **icons:** svg icons are now rendered differently, see #817
+
+## [10.5.1](https://github.com/adobe/helix-pipeline/compare/v10.5.0...v10.5.1) (2020-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.5.1 ([#838](https://github.com/adobe/helix-pipeline/issues/838)) ([8deeaa4](https://github.com/adobe/helix-pipeline/commit/8deeaa494304a60add32b82863c44960d0d504e0))
+
+# [10.5.0](https://github.com/adobe/helix-pipeline/compare/v10.4.2...v10.5.0) (2020-09-01)
+
+
+### Features
+
+* **secrets.schema.json:** add more w.soundcloud.com ([#836](https://github.com/adobe/helix-pipeline/issues/836)) ([2620c8e](https://github.com/adobe/helix-pipeline/commit/2620c8e41d7079967bcd800b261cf2369fcbbc12))
+
 ## [10.4.2](https://github.com/adobe/helix-pipeline/compare/v10.4.1...v10.4.2) (2020-09-01)
 
 
