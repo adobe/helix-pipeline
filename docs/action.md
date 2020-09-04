@@ -25,6 +25,7 @@ Tracks the OpenWhisk action invocation
 | [secrets](#secrets)           | `object` | Optional | cannot be null | [Action](action-properties-secrets.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/secrets")          |
 | [transformer](#transformer)   | `object` | Optional | cannot be null | [Action](action-properties-transformer.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/transformer")   |
 | [downloader](#downloader)     | `object` | Optional | cannot be null | [Action](action-properties-downloader.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/downloader")     |
+| [versionLock](#versionLock)   | `object` | Optional | cannot be null | [Action](action-properties-versionlock.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/versionLock")   |
 | [markupconfig](#markupconfig) | `object` | Optional | cannot be null | [Action](action-properties-markupconfig.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/markupconfig") |
 
 ## request
@@ -126,6 +127,22 @@ A Downloader instance
 ### downloader Type
 
 `object` ([Details](action-properties-downloader.md))
+
+## versionLock
+
+A VersionLock instance
+
+
+`versionLock`
+
+-   is optional
+-   Type: `object` ([Details](action-properties-versionlock.md))
+-   cannot be null
+-   defined in: [Action](action-properties-versionlock.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/versionLock")
+
+### versionLock Type
+
+`object` ([Details](action-properties-versionlock.md))
 
 ## markupconfig
 
