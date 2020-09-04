@@ -11,19 +11,31 @@
  */
 
 /**
- * Handles `icon` MDAST nodes by converting them into `<svg>` tags, e.g.
- * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons/smile.svg"></use></svg>`
+ * Handles `icon` MDAST nodes by converting them into `img` or `<svg>` tags, e.g.
+ * `<img class="icon icon-smile" src="/icons/smile.svg"/>` or
+ * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons.svg#smile"></use></svg>`
  * @param {string} id the identifier of the icon
  */
 function icon() {
   return function handler(h, node) {
-    const { value } = node;
-    return [h(node, 'svg', {
-      xmlns: 'http://www.w3.org/2000/svg',
-      className: `icon icon-${value}`,
-    }, [h(node, 'use', {
-      href: `/icons/${value}.svg`,
-    })])];
+    let { value } = node;
+    value = encodeURIComponent(value);
+    if (value.startsWith('%23')) {
+      // icon starts with #
+      value = value.substring(3);
+      return [h(node, 'svg', {
+        xmlns: 'http://www.w3.org/2000/svg',
+        className: `icon icon-${value}`,
+      }, [h(node, 'use', {
+        href: `/icons.svg#${value}`,
+      })])];
+    } else {
+      return [h(node, 'img', {
+        className: `icon icon-${value}`,
+        src: `icons/${value}.svg`,
+        alt: `${value} icon`,
+      })];
+    }
   };
 }
 

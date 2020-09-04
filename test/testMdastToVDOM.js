@@ -208,7 +208,7 @@ describe('Test MDAST to VDOM Transformation', () => {
     );
   });
 
-  it('Icon handler replaces :placeholders: with SVG tags', () => {
+  it('Icon handler replaces icon :placeholders:', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'icon-example.json'));
     const actual = new VDOM(mdast, action.secrets).getDocument().documentElement;
     const expected = new JSDOM(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'icon-example.html')).toString('utf-8')).window.document.documentElement;

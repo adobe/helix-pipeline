@@ -28,8 +28,13 @@
           "code": ":pipeline:"
         },
         {
+          "type": "icon",
+          "value": "ipelin",
+          "code": "pipeline"
+        },
+        {
           "type": "text",
-          "value": " supports icons now"
+          "value": "ts icons now"
         }
       ]
     },
@@ -46,13 +51,23 @@
           "code": ":tada:"
         },
         {
+          "type": "icon",
+          "value": "ad",
+          "code": "tada"
+        },
+        {
           "type": "text",
-          "value": " will render as an icon. "
+          "value": "ll render as an icon. "
         },
         {
           "type": "icon",
           "value": "thumbsup",
           "code": ":thumbsup:"
+        },
+        {
+          "type": "icon",
+          "value": "humbsu",
+          "code": "thumbsup"
         }
       ]
     },
@@ -61,16 +76,7 @@
       "children": [
         {
           "type": "text",
-          "value": "This "
-        },
-        {
-          "type": "icon",
-          "value": "#tada",
-          "code": ":#tada:"
-        },
-        {
-          "type": "text",
-          "value": " will also render as an icon, but is part of an icon collection."
+          "value": "This :#tada: will also render as an icon, but is part of an icon collection."
         }
       ]
     },
@@ -92,6 +98,11 @@
               "type": "icon",
               "value": "smiles",
               "code": ":smiles:"
+            },
+            {
+              "type": "icon",
+              "value": "mile",
+              "code": "smiles"
             }
           ]
         },
@@ -108,6 +119,11 @@
               "type": "icon",
               "value": "foo",
               "code": ":foo:"
+            },
+            {
+              "type": "icon",
+              "value": "o",
+              "code": "foo"
             }
           ]
         }
@@ -126,18 +142,13 @@
           "code": ":smile:"
         },
         {
-          "type": "icon",
-          "value": "smile",
-          "code": ":smile:"
-        },
-        {
           "type": "text",
           "value": ":"
         },
         {
           "type": "icon",
-          "value": "smile",
-          "code": ":smile:"
+          "value": "mil",
+          "code": "smile"
         },
         {
           "type": "text",
@@ -147,6 +158,19 @@
           "type": "icon",
           "value": "smile",
           "code": ":smile:"
+        },
+        {
+          "type": "text",
+          "value": ":::"
+        },
+        {
+          "type": "icon",
+          "value": "mil",
+          "code": "smile"
+        },
+        {
+          "type": "text",
+          "value": ":"
         }
       ]
     },
@@ -174,13 +198,23 @@
           "code": ":rocket:"
         },
         {
+          "type": "icon",
+          "value": "ocke",
+          "code": "rocket"
+        },
+        {
           "type": "text",
-          "value": " is an icon at the beginning of the line, and here's one at the end: "
+          "value": "n icon at the beginning of the line, and here's one at the end: "
         },
         {
           "type": "icon",
           "value": "heart-0",
           "code": ":heart-0:"
+        },
+        {
+          "type": "icon",
+          "value": "eart-",
+          "code": "heart-0"
         }
       ]
     },
