@@ -1,0 +1,12 @@
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+jobs:
+  block_label:
+    runs-on: ubuntu-latest
+    name: Check for 'breaking' label
+    steps:
+      - uses: adobe-rnd/github-label-wip-action@master
+        with:
+          label: breaking
