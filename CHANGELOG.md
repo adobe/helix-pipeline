@@ -1,3 +1,10 @@
+## [11.0.3](https://github.com/adobe/helix-pipeline/compare/v11.0.2...v11.0.3) (2020-09-06)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#845](https://github.com/adobe/helix-pipeline/issues/845)) ([0c38bac](https://github.com/adobe/helix-pipeline/commit/0c38bac3dd159160ac0525f2454ee47d8602c231))
+
 ## [11.0.2](https://github.com/adobe/helix-pipeline/compare/v11.0.1...v11.0.2) (2020-09-04)
 
 
