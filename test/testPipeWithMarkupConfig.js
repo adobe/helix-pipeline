@@ -189,6 +189,58 @@ describe('Testing HTML Pipeline with markup config', () => {
       </div>`);
   });
 
+  it('html.pipe adjusts the MDAST for embeds as per markup markdown config', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [200, `
+version: 1
+markup:
+  bar:
+    type: markdown
+    match: embed[url^="https://soundcloud.com/"]
+    attribute:
+      onerror: fail
+  foo:
+    match: embed[url^="https://www.youtube.com/"]
+    classnames: bar
+    attribute:
+      baz: qux
+    wrap: pre.zupp[data-embed="\${url}"]
+    type: markdown
+      `]);
+    nock('https://adobeioruntime.net')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .reply(() => [200, `# Hi\nfrom github.
+
+https://www.youtube.com/watch?v=dQw4w9WgXcQ
+
+And here is something from Soundcloud
+
+https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe
+      
+`]);
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: content.document.body.innerHTML };
+    }, context, action);
+
+    expectBodyEquals(result,
+      `<h1 id="hi">Hi</h1>
+      <p>from github.</p>
+      <pre class="zupp" data-embed="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+        <esi:include src="https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="bar" baz="qux"></esi:include>
+        <esi:remove class="bar" baz="qux">
+          <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a></p>
+        </esi:remove>
+      </pre>
+      <p>And here is something from Soundcloud</p>
+      <esi:include src="https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe" onerror="fail"></esi:include>
+      <esi:remove onerror="fail"><p><a href="https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe">https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe</a></p></esi:remove>`);
+  });
+
   it('html.pipe adjusts the MDAST as per markup content config', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
