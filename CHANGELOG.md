@@ -1,3 +1,10 @@
+# [11.1.0](https://github.com/adobe/helix-pipeline/compare/v11.0.3...v11.1.0) (2020-09-07)
+
+
+### Features
+
+* **markup:** allow variables in markup config ([cabb225](https://github.com/adobe/helix-pipeline/commit/cabb225499b27a583b65e373ddc32b7bbbc2954b))
+
 ## [11.0.3](https://github.com/adobe/helix-pipeline/compare/v11.0.2...v11.0.3) (2020-09-06)
 
 
