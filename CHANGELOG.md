@@ -1,3 +1,10 @@
+# [11.2.0](https://github.com/adobe/helix-pipeline/compare/v11.1.0...v11.2.0) (2020-09-08)
+
+
+### Features
+
+* **package:** switch to exact dependency versions ([a449dae](https://github.com/adobe/helix-pipeline/commit/a449dae388bc1fe06aef4ff4c30f843eddcf160d))
+
 # [11.1.0](https://github.com/adobe/helix-pipeline/compare/v11.0.3...v11.1.0) (2020-09-07)
 
 
