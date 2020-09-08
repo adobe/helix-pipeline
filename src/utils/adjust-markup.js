@@ -12,16 +12,28 @@
 
 const { expand } = require('@emmetio/expand-abbreviation');
 const { setdefault } = require('ferrum');
-const findAndReplace = require('hast-util-find-and-replace');
 const fromDOM = require('hast-util-from-dom');
 const { JSDOM } = require('jsdom');
 const { match: matchUrlBuilder } = require('path-to-regexp');
 const { MarkupConfig } = require('@adobe/helix-shared');
+const visit = require('unist-util-visit');
+const { get } = require('dot-prop');
 const { match } = require('./pattern-compiler');
 const section = require('./section-handler');
+const VDOMTransformer = require('./mdast-to-vdom');
 
-/** Pleceholder variable for the generate template. */
+/** Placeholder variable for the generate template. */
 const PLACEHOLDER_TEMPLATE = /\$\{\d+\}/g;
+
+function findAndReplace(root, insert) {
+  visit(root, (node) => node.type === 'text' && node.value && node.value.match(PLACEHOLDER_TEMPLATE), (_, index, parent) => {
+    const newels = Array.isArray(insert) ? insert : [insert];
+
+    parent.children.splice(index, 1, ...newels);
+  });
+
+  return root;
+}
 
 async function getMarkupConfig(context, action) {
   setdefault(context, 'content', {});
@@ -59,6 +71,11 @@ function isSection(node) {
   return node.type === 'root' || node.type === 'section';
 }
 
+function populate(template, data) {
+  const mod = template.replace(/\${([A-Za-z0-9.]+)}/g, (_, prop) => get(data, prop));
+  return mod;
+}
+
 /**
  * Returns the HTML element for the provided HTML template.
  *
@@ -66,8 +83,8 @@ function isSection(node) {
  *
  * @returns {HTMLElement} the resulting HTML element including a `${0}` placeholder
  */
-function getHTMLElement(template) {
-  const html = expand(template, {
+function getHTMLElement(template, data) {
+  const html = expand(populate(template, data), {
     field: (index, placeholder) => {
       const p = placeholder ? `:${placeholder}` : '';
       return `\${${index}${p}}`;
@@ -86,7 +103,7 @@ function getHTMLElement(template) {
  * @param {*} cfg The configuration options
  * @returns {VDOM} the new patched element
  */
-function patchVDOMNode(el, cfg) {
+function patchVDOMNode(el, cfg, data) {
   setdefault(el, 'properties', {});
 
   // Append classes to the element (space or comma separated)
@@ -104,12 +121,32 @@ function patchVDOMNode(el, cfg) {
 
   // Wrap the element
   if (cfg.wrap) {
-    const wrapperEl = getHTMLElement(cfg.wrap);
+    const wrapperEl = getHTMLElement(cfg.wrap, data);
     const n = fromDOM(wrapperEl);
-    el = findAndReplace(n, PLACEHOLDER_TEMPLATE, () => el);
+    el = findAndReplace(n, el);
   }
 
   return el;
+}
+
+function patchVDOMNodes(els, cfg, data) {
+  if (!Array.isArray(els)) {
+    return patchVDOMNode(els, cfg, data);
+  }
+
+  const copycfg = { ...cfg };
+  delete copycfg.wrap;
+
+  const patched = els.map((el) => patchVDOMNode(el, copycfg, data));
+
+  // Wrap the element
+  if (cfg.wrap) {
+    const wrapperEl = getHTMLElement(cfg.wrap, data);
+    const n = fromDOM(wrapperEl);
+    return findAndReplace(n, patched);
+  }
+
+  return patched;
 }
 
 /**
@@ -131,7 +168,7 @@ function patchHtmlElement(el, cfg) {
 
   // Wrap the element
   if (cfg.wrap) {
-    const wrapperEl = getHTMLElement(cfg.wrap);
+    const wrapperEl = getHTMLElement(cfg.wrap, el);
     // if it is a regular element
     if (el.nodeName !== 'BODY') {
       wrapperEl.innerHTML = wrapperEl.innerHTML.replace(PLACEHOLDER_TEMPLATE, el.outerHTML);
@@ -168,11 +205,35 @@ async function adjustMDAST(context, action) {
     .filter(([_, cfg]) => cfg.type === 'markdown')
     .forEach(([name, cfg]) => {
       logger.info(`Applying markdown markup adjustment: ${name}`);
-      transformer.match(cfg.match, (h, node) => {
-        const handler = transformer.constructor.default(node);
+      transformer.match(cfg.match, function myhandler(h, node, parent) {
+        const [fallbackhandler] = transformer
+          .allmatches(node)
+          .filter((theirhandler) => theirhandler !== myhandler);
         // Generate the matching VDOM element
-        const el = handler(h, node);
-        return patchVDOMNode(el, cfg);
+
+        /**
+         * A function that enables the recursive processing of MDAST child nodes
+         * in handler functions.
+         * @param {function} callback the HAST-constructing callback function
+         * @param {Node} childnode the MDAST child node that should be handled
+         * @param {Node} mdastparent the MDAST parent node, usually the current MDAST node
+         * processed by the handler function
+         * @param {*} hastparent the HAST parent node that the transformed child will be appended to
+         */
+        function handlechild(callback, childnode, mdastparent, hastparent) {
+          if (hastparent && hastparent.children) {
+            hastparent.children.push(VDOMTransformer.handle(
+              callback,
+              childnode,
+              mdastparent,
+              transformer,
+            ));
+          }
+        }
+
+        const el = fallbackhandler(h, node, parent, handlechild);
+
+        return patchVDOMNodes(el, cfg, node);
       });
     });
 
@@ -190,7 +251,7 @@ async function adjustMDAST(context, action) {
         // Generate the matching VDOM element
         const sectionHandler = section();
         const el = sectionHandler(h, node);
-        return patchVDOMNode(el, cfg);
+        return patchVDOMNode(el, cfg, node);
       });
     });
 }

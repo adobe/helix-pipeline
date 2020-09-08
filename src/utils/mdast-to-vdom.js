@@ -192,6 +192,28 @@ class VDOMTransformer {
   }
 
   /**
+   * Finds all appropriate handlers for a given MDAST node
+   * @param {Node} node an MDAST node
+   * @returns {handlerFunction[]} a handler function to process the node with
+   */
+  allmatches(node) {
+    const candidates = [
+      [() => true, VDOMTransformer.default(node)],
+      ...this._matchers];
+
+    candidates.reverse();
+
+    // go through all matchers and the default
+    // to find processors where matchfn matches
+    // start with most recently added processors
+    return candidates
+      .filter((candidate) => Array.isArray(candidate))
+      .filter(([matchfn, processor]) => typeof matchfn === 'function' && typeof processor === 'function')
+      .filter(([matchfn]) => matchfn(node, this._root))
+      .map(([_, processor]) => processor);
+  }
+
+  /**
    * Turns an unist-util-select expression into a matcher predicate function
    * @private
    * @param {Node} ast the MDAST root node to evaluated expressions against

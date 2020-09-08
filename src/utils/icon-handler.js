@@ -32,7 +32,7 @@ function icon() {
     } else {
       return [h(node, 'img', {
         className: `icon icon-${value}`,
-        src: `icons/${value}.svg`,
+        src: `/icons/${value}.svg`,
         alt: `${value} icon`,
       })];
     }
