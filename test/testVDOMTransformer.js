@@ -146,7 +146,7 @@ describe('Test VDOMTransformer#getDocument', () => {
         return h.augment(node, builder(node.type, node.value.toUpperCase()));
       },
     });
-    assert.equal(html, '<ol>\n<li>ITEM 1</li>\n<li>ITEM 2</li>\n</ol>');
+    assert.equal(html, '<ol>\n<li>\nITEM 1\n</li>\n<li>\nITEM 2\n</li>\n</ol>');
   });
 });
 
