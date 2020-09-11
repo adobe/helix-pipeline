@@ -195,6 +195,10 @@ describe('Testing HTML Pipeline with markup config', () => {
       .reply(() => [200, `
 version: 1
 markup:
+  heading:
+    type: markdown
+    match: heading
+    replace: hr
   bar:
     type: markdown
     match: embed[url^="https://soundcloud.com/"]
@@ -228,7 +232,7 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
     }, context, action);
 
     expectBodyEquals(result,
-      `<h1 id="hi">Hi</h1>
+      `<hr>
       <p>from github.</p>
       <pre class="zupp" data-embed="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
         <esi:include src="https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="bar" baz="qux"></esi:include>
