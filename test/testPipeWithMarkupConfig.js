@@ -42,6 +42,9 @@ markup:
 const TEST_MARKUP_CONFIG_HTML = `
 version: 1
 markup:
+  no-headings:
+    match: h1
+    replace: hr
   foo:
     match: p
     classnames: bar
@@ -312,7 +315,7 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
     }, context, action);
 
     expectBodyEquals(result,
-      `<h1 id="hello">Hello</h1>
+      `<hr>
       <div class="corge">
         <p class="bar" baz="qux">from github.</p>
       </div>`);
