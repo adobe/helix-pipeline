@@ -52,7 +52,7 @@
     "unist-util-inspect": "6.0.0"
   },
   "dependencies": {
-    "@adobe/helix-epsagon": "1.5.2",
+    "@adobe/helix-epsagon": "1.5.3",
     "@adobe/helix-fetch": "1.9.1",
     "@adobe/helix-log": "4.5.1",
     "@adobe/helix-shared": "7.13.0",
