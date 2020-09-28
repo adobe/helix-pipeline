@@ -1,3 +1,10 @@
+# [11.3.0](https://github.com/adobe/helix-pipeline/compare/v11.2.5...v11.3.0) (2020-09-28)
+
+
+### Features
+
+* **markup:** support replace directive ([9780488](https://github.com/adobe/helix-pipeline/commit/9780488c8abcdb1131f3033c7d7fe29004b77e64))
+
 ## [11.2.5](https://github.com/adobe/helix-pipeline/compare/v11.2.4...v11.2.5) (2020-09-28)
 
 
