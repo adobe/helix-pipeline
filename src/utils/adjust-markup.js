@@ -126,6 +126,13 @@ function patchVDOMNode(el, cfg, data) {
     el = findAndReplace(n, el);
   }
 
+  // Replace the element
+  if (cfg.replace) {
+    const wrapperEl = getHTMLElement(cfg.replace, data);
+    const n = fromDOM(wrapperEl);
+    el = findAndReplace(n, { type: 'text', value: '' });
+  }
+
   return el;
 }
 
@@ -178,6 +185,13 @@ function patchHtmlElement(el, cfg) {
         el.parentNode.setAttribute(attr.name, attr.value);
       });
     }
+  }
+
+  // Replace the element
+  if (cfg.replace) {
+    const wrapperEl = getHTMLElement(cfg.replace, el);
+    wrapperEl.innerHTML = wrapperEl.innerHTML.replace(PLACEHOLDER_TEMPLATE, '');
+    el.replaceWith(wrapperEl);
   }
 }
 
