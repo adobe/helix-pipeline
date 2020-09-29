@@ -1,3 +1,10 @@
+## [11.3.1](https://github.com/adobe/helix-pipeline/compare/v11.3.0...v11.3.1) (2020-09-29)
+
+
+### Bug Fixes
+
+* **deps:** update [@adobe](https://github.com/adobe) fixes ([5d5b665](https://github.com/adobe/helix-pipeline/commit/5d5b66510971bf93a28ed7c037f8f3087ff05481))
+
 # [11.3.0](https://github.com/adobe/helix-pipeline/compare/v11.2.5...v11.3.0) (2020-09-28)
 
 
