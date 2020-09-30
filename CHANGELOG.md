@@ -1,3 +1,23 @@
+# [12.0.0](https://github.com/adobe/helix-pipeline/compare/v11.3.2...v12.0.0) (2020-09-30)
+
+
+### Features
+
+* **ci:** make use of ow-version-lock utility ([3b0751a](https://github.com/adobe/helix-pipeline/commit/3b0751a456122178c1befaae8dacbd3b4072c8d6))
+* **deps:** use latest content proxy v2 ([fd9cb3f](https://github.com/adobe/helix-pipeline/commit/fd9cb3fc6c8cb3d7061659731c12d7023a398f71))
+
+
+### BREAKING CHANGES
+
+* **deps:** content proxy v2 uses new data embed and gdocs services.
+                 - requests to json now returns an object instead of and array [0]
+                 - gdocs2md now has a different table handling [1]
+                 - gdocs2md supports author friendly names [2]
+
+[0] https://github.com/adobe/helix-data-embed/commit/9d1e924acc3aa6488b464a3cdc4a3bf68e3843bc
+[1] https://github.com/adobe/helix-gdocs2md/commit/e4befdbaed4a5319b2cca4be8507f153bedcc68a
+[2] https://github.com/adobe/helix-gdocs2md/commit/3aca7b387bbee977f84e61ce823ff6271b1b0a8d
+
 ## [11.3.2](https://github.com/adobe/helix-pipeline/compare/v11.3.1...v11.3.2) (2020-09-30)
 
 
