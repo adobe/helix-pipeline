@@ -18,6 +18,7 @@ const DEFAULT_FORWARD_HEADERS = [
   'x-request-id',
   'x-cdn-request-id',
   'x-cdn-url',
+  'x-ow-version-lock',
 ];
 
 class Downloader {

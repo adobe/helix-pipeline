@@ -171,6 +171,8 @@ describe('Testing OpenWhisk adapter', () => {
     };
 
     const out = extractActionContext(params);
+    assert.ok(!!out.versionLock);
+    delete out.versionLock;
     assert.deepEqual(out, {
       logger: log,
       request: {
@@ -194,6 +196,8 @@ describe('Testing OpenWhisk adapter', () => {
 
   it('extractActionContext creates valid object with minimal params', () => {
     const out = extractActionContext({});
+    assert.ok(!!out.versionLock);
+    delete out.versionLock;
     assert.deepEqual(out, {
       logger: undefined,
       request: {

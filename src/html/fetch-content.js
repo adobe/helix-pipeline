@@ -13,7 +13,7 @@ const crypto = require('crypto');
 const { setdefault } = require('ferrum');
 
 async function fetchContent(context, {
-  request, downloader, secrets, logger,
+  request, downloader, secrets, logger, versionLock,
 }) {
   setdefault(context, 'content', {});
   /* istanbul ignore next */
@@ -33,6 +33,7 @@ async function fetchContent(context, {
     const namespace = process.env.__OW_NAMESPACE || 'helix';
     contentProxyUrl = `https://adobeioruntime.net/api/v1/web/${namespace}/helix-services/content-proxy@v1`;
   }
+  contentProxyUrl = versionLock.transformActionURL(contentProxyUrl);
 
   const url = new URL(contentProxyUrl);
   url.searchParams.append('owner', owner);
