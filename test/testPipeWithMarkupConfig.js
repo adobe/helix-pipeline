@@ -12,6 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const { logging } = require('@adobe/helix-testutils');
+const { VersionLock } = require('@adobe/openwhisk-action-utils');
 const nock = require('nock');
 const { pipe } = require('../src/defaults/html.pipe.js');
 const coerce = require('../src/utils/coerce-secrets');
@@ -109,6 +110,7 @@ describe('Testing HTML Pipeline with markup config', () => {
       },
       secrets: {},
       logger,
+      versionLock: new VersionLock(),
     });
     nock.restore();
     nock.activate();
@@ -120,7 +122,7 @@ describe('Testing HTML Pipeline with markup config', () => {
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404, 'Not Found']);
     nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -145,7 +147,7 @@ describe('Testing HTML Pipeline with markup config', () => {
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_URL]);
     nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -175,7 +177,7 @@ describe('Testing HTML Pipeline with markup config', () => {
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_MD]);
     nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -216,7 +218,7 @@ markup:
     type: markdown
       `]);
     nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, `# Hi\nfrom github.
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -253,7 +255,7 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT]);
     nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -280,7 +282,7 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT]);
     nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -304,7 +306,7 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_HTML]);
     nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v1?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });

@@ -16,15 +16,19 @@ const {
 
 const DATA_EMBED_TIMEOUT = 20000;
 
-function fetch({ content: { mdast } }, { downloader, logger, secrets: { DATA_EMBED_SERVICE } }) {
+function fetch({ content: { mdast } }, {
+  downloader, logger, versionLock, secrets: { DATA_EMBED_SERVICE },
+}) {
   const fetches = pipe(
     selectAll('dataEmbed', mdast),
     map((node) => node.url),
     uniq,
     map((url) => {
-      logger.info(`fetching ${DATA_EMBED_SERVICE}/${url}`);
+      const uri = new URL(versionLock.transformActionURL(DATA_EMBED_SERVICE));
+      uri.searchParams.append('src', url);
+      logger.info(`fetching ${uri}`);
       return downloader.fetch({
-        uri: `${DATA_EMBED_SERVICE}/${url}`,
+        uri: uri.href,
         id: `dataEmbed:${url}`,
         // dataset can be large
         options: {

@@ -40,6 +40,10 @@
       "type": "object",
       "description": "A Downloader instance"
     },
+    "versionLock": {
+      "type": "object",
+      "description": "A VersionLock instance"
+    },
     "markupconfig": {
       "type": "object",
       "description": "A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)"
