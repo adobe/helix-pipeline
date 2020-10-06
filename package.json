@@ -71,7 +71,7 @@
     "js-yaml": "3.14.0",
     "jsdom": "16.4.0",
     "lodash": "4.17.20",
-    "mdast-util-to-hast": "9.1.2",
+    "mdast-util-to-hast": "10.0.0",
     "mdast-util-to-string": "1.1.0",
     "micromatch": "4.0.2",
     "object-hash": "2.0.3",
