@@ -1,3 +1,10 @@
+## [12.0.3](https://github.com/adobe/helix-pipeline/compare/v12.0.2...v12.0.3) (2020-10-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mdast-util-to-hast to v10 ([#865](https://github.com/adobe/helix-pipeline/issues/865)) ([0155f9b](https://github.com/adobe/helix-pipeline/commit/0155f9b31eee95f479bd025af55bbccbc0f630a6))
+
 ## [12.0.2](https://github.com/adobe/helix-pipeline/compare/v12.0.1...v12.0.2) (2020-10-05)
 
 
