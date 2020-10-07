@@ -139,5 +139,12 @@ describe('Testing HTML Pipeline (Links)', () => {
       '<p><a href="../folder/file.html">Relative</a></p>',
     );
   });
+
+  it('Renders anchored relative links', async () => {
+    await assertMd(
+      '[Relative](./../folder/file.md)',
+      '<p><a href="./../folder/file.html">Relative</a></p>',
+    );
+  });
 });
 //
