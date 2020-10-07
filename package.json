@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "12.0.2",
+  "version": "12.0.4",
   "description": "",
   "repository": {
     "type": "git",
@@ -55,7 +55,7 @@
     "@adobe/helix-epsagon": "1.5.3",
     "@adobe/helix-fetch": "1.9.1",
     "@adobe/helix-log": "4.5.2",
-    "@adobe/helix-shared": "7.15.0",
+    "@adobe/helix-shared": "7.16.0",
     "@adobe/helix-status": "8.2.1",
     "@adobe/openwhisk-action-logger": "2.2.0",
     "@adobe/openwhisk-action-utils": "4.3.1",
@@ -71,7 +71,7 @@
     "js-yaml": "3.14.0",
     "jsdom": "16.4.0",
     "lodash": "4.17.20",
-    "mdast-util-to-hast": "9.1.2",
+    "mdast-util-to-hast": "10.0.0",
     "mdast-util-to-string": "1.1.0",
     "micromatch": "4.0.2",
     "object-hash": "2.0.3",
