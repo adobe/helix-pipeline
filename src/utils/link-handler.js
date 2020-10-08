@@ -19,7 +19,7 @@ function link({ extension = 'html' } = {}) {
     const uriParts = uri.parse(n.url);
     if (!uriParts.scheme && uriParts.path) {
       uriParts.path = uriParts.path.replace(/\.md$/, `.${extension}`);
-      n.url = uri.serialize(uriParts);
+      n.url = uri.serialize(uriParts, { absolutePath: true });
     }
     return fallback(h, n);
   };
