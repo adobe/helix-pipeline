@@ -1,3 +1,10 @@
+## [12.0.5](https://github.com/adobe/helix-pipeline/compare/v12.0.4...v12.0.5) (2020-10-08)
+
+
+### Bug Fixes
+
+* **html:** disable path normalization in links ([27bda8e](https://github.com/adobe/helix-pipeline/commit/27bda8ee2549b5f2b4abd9067f65eb0b1f12f5a3)), closes [#866](https://github.com/adobe/helix-pipeline/issues/866)
+
 ## [12.0.4](https://github.com/adobe/helix-pipeline/compare/v12.0.3...v12.0.4) (2020-10-06)
 
 
