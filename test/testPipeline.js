@@ -289,37 +289,16 @@ describe('Testing Pipeline', () => {
       .catch(done);
   });
 
-  it('when after once throws error', () => {
+  it('when before pre throws error', async () => {
     try {
       const order = [];
-      new Pipeline({ logger })
-        .use(() => { order.push('pre0'); })
-        .use(() => { order.push('once'); })
+      await new Pipeline({ logger })
         .when(() => false)
         .use(() => { order.push('post1'); })
-        .run()
-        .then(() => {
-          assert.fail('when after once should fail.');
-        });
+        .run();
+      assert.fail('when before pre should fail.');
     } catch (err) {
       assert.equal(err.toString(), 'Error: when() needs function to operate on.');
-    }
-  });
-
-  it('when before pre throws error', (done) => {
-    try {
-      const order = [];
-      new Pipeline({ logger })
-        .when(() => false)
-        .use(() => { order.push('post1'); })
-        .run()
-        .then(() => {
-          assert.fail('when after once should fail.');
-          done();
-        });
-    } catch (err) {
-      assert.equal(err.toString(), 'Error: when() needs function to operate on.');
-      done();
     }
   });
 
