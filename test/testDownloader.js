@@ -281,7 +281,7 @@ describe('Test Download', () => {
     const action = coerce({
       logger,
     });
-    const mgr = new Downloader(context, action, {
+    const mgr = new Downloader({}, action, {
       forceNoCache: true,
       forceHttp1: true,
     });
@@ -317,7 +317,7 @@ describe('Test Download', () => {
     const action = coerce({
       logger,
     });
-    const mgr = new Downloader(context, action, {
+    const mgr = new Downloader({}, action, {
       forceNoCache: true,
       forceHttp1: true,
     });
@@ -348,7 +348,7 @@ describe('Test Download', () => {
     const action = coerce({
       logger,
     });
-    const mgr = new Downloader(context, action, {
+    const mgr = new Downloader({}, action, {
       forceHttp1: true,
     });
     const r1 = await mgr.fetchGithub({
@@ -437,7 +437,7 @@ describe('Test Download', () => {
         },
       },
     });
-    const mgr = new Downloader(context, action, {
+    const mgr = new Downloader({}, action, {
       forceNoCache: true,
       forceHttp1: true,
     });
@@ -473,7 +473,7 @@ describe('Test Download', () => {
     });
     try {
       process.env.__OW_TRANSACTION_ID = 'my-transaction';
-      const mgr = new Downloader(context, action, {
+      const mgr = new Downloader({}, action, {
         forceNoCache: true,
         forceHttp1: true,
       });
@@ -508,7 +508,7 @@ describe('Test Download', () => {
         },
       },
     });
-    const mgr = new Downloader(context, action, {
+    const mgr = new Downloader({}, action, {
       forceNoCache: true,
       forceHttp1: true,
     });
