@@ -21,14 +21,14 @@ The HTTP Request
 | :-------------------------- | ------------- | -------- | -------------- | :---------------------------------------------------------------------------------------------------------------------- |
 | [url](#url)                 | `string`      | Optional | cannot be null | [Request](request-properties-url.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/url")                 |
 | [path](#path)               | `string`      | Optional | cannot be null | [Request](request-properties-path.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/path")               |
-| [pathInfo](#pathInfo)       | `string`      | Optional | cannot be null | [Request](request-properties-pathinfo.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/pathInfo")       |
-| [rootPath](#rootPath)       | `string`      | Optional | cannot be null | [Request](request-properties-rootpath.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/rootPath")       |
+| [pathInfo](#pathinfo)       | `string`      | Optional | cannot be null | [Request](request-properties-pathinfo.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/pathInfo")       |
+| [rootPath](#rootpath)       | `string`      | Optional | cannot be null | [Request](request-properties-rootpath.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/rootPath")       |
 | [selector](#selector)       | `string`      | Optional | cannot be null | [Request](request-properties-selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/selector")       |
 | [extension](#extension)     | `string`      | Optional | cannot be null | [Request](request-properties-extension.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/extension")     |
 | [method](#method)           | `string`      | Optional | cannot be null | [Request](request-properties-method.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/method")           |
 | [headers](#headers)         | Not specified | Optional | cannot be null | [Request](request-properties-headers.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/headers")         |
 | [params](#params)           | `object`      | Optional | cannot be null | [Request](request-properties-params.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/params")           |
-| [queryString](#queryString) | `string`      | Optional | cannot be null | [Request](request-properties-querystring.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/queryString") |
+| [queryString](#querystring) | `string`      | Optional | cannot be null | [Request](request-properties-querystring.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/queryString") |
 
 ## url
 
