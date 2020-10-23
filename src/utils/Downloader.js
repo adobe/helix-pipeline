@@ -185,6 +185,9 @@ class Downloader {
     task.uri = uri;
     task.id = opts.id || '';
     task.options = opts;
+    // ignore rejections in case the task is never `awaited`. this avoids unhandled promise
+    // rejection warnings
+    task.catch(() => {});
 
     this._queue.push(task);
     return task;

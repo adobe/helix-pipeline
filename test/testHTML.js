@@ -595,6 +595,67 @@ ${context.content.document.body.innerHTML}`,
     assert.ok(res.body.match(/<img/));
   });
 
+  it('html.pipe makes HTTP requests and handles timeouts', async function test() {
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/trieloff/soupdemo/master/helix-markup.yaml')
+      .intercept(async (req, res) => {
+        // the timeout for github is set to 100ms, so we cause a timeout here
+        await server.timeout(20000);
+        res.sendStatus(200);
+      });
+    server
+      .get('https://adobeioruntime.net/api/v1/web/helix/helix-services/content-proxy@v2?owner=trieloff&repo=soupdemo&path=%2Fhello.md&ref=master')
+      .intercept(async (req, res) => {
+        // the timeout for content proxy is 20s. so we make it a bit longer than above. this causes
+        // a promise rejection in the 'markupconfig' task.
+        await server.timeout(500);
+        res.sendStatus(200);
+      });
+
+    const result = await pipe(
+      (context) => {
+        const { content } = context;
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.ok(content.body);
+        assert.ok(content.mdast);
+        assert.ok(content.meta);
+        assert.ok(content.document);
+        assert.equal(typeof content.document.getElementsByTagName, 'function');
+        assert.equal(content.document.getElementsByTagName('h1').length, 1);
+        assert.equal(content.document.getElementsByTagName('h1')[0].innerHTML, 'Bill, Welcome to the future');
+        assert.equal(content.meta.template, 'Medium');
+        assert.equal(content.intro, 'Project Helix');
+        assert.equal(content.title, 'Bill, Welcome to the future');
+        assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/master/hello.md']);
+        // and return a different status code
+        context.response = { status: 201, body: content.document.body.innerHTML };
+      },
+      {
+        request: {
+          params: {
+          },
+        },
+      },
+      {
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
+        secrets: {
+          ...secrets,
+          HTTP_TIMEOUT: 100,
+        },
+        logger,
+      },
+    );
+    console.log(logger.getOutput());
+
+    const res = result.response;
+    assert.equal(res.status, 504);
+  });
+
   it('html.pipe makes HTTP requests and falls back to master', async () => {
     const myparams = { ...params };
     delete myparams.ref;
