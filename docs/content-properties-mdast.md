@@ -41,7 +41,7 @@ A node in the Markdown AST
 | [image](#image)                 | `string`      | Optional | can be null    | [MDAST](mdast-properties-image.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/image")                                |
 | [types](#types)                 | `array`       | Optional | cannot be null | [MDAST](mdast-properties-types.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/types")                                |
 | [alt](#alt)                     | `string`      | Optional | can be null    | [MDAST](mdast-properties-alt.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/alt")                                    |
-| [referenceType](#referenceType) | Not specified | Optional | cannot be null | [MDAST](mdast-properties-referencetype.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/referenceType")                |
+| [referenceType](#referencetype) | Not specified | Optional | cannot be null | [MDAST](mdast-properties-referencetype.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/referenceType")                |
 | [data](#data)                   | `object`      | Optional | cannot be null | [MDAST](mdast-properties-data.md "https&#x3A;//ns.adobe.com/helix/pipeline/mdast#/properties/data")                                  |
 
 ## type
