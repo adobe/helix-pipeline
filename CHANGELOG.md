@@ -1,3 +1,10 @@
+## [12.0.8](https://github.com/adobe/helix-pipeline/compare/v12.0.7...v12.0.8) (2020-10-24)
+
+
+### Bug Fixes
+
+* **downloader:** avoid promise rejection errors for slow github ([#875](https://github.com/adobe/helix-pipeline/issues/875)) ([c9f2212](https://github.com/adobe/helix-pipeline/commit/c9f2212ee76a43bcbc22b897c22e14b1ad6c8f0e)), closes [#874](https://github.com/adobe/helix-pipeline/issues/874)
+
 ## [12.0.7](https://github.com/adobe/helix-pipeline/compare/v12.0.6...v12.0.7) (2020-10-12)
 
 
