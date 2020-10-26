@@ -77,7 +77,7 @@
     "object-hash": "2.0.3",
     "path-to-regexp": "6.2.0",
     "property-information": "5.6.0",
-    "remark-parse": "8.0.3",
+    "remark-parse": "9.0.0",
     "request": "2.88.2",
     "retext": "7.0.1",
     "retext-smartypants": "4.0.0",
