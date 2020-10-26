@@ -1,3 +1,10 @@
+## [12.0.9](https://github.com/adobe/helix-pipeline/compare/v12.0.8...v12.0.9) (2020-10-26)
+
+
+### Bug Fixes
+
+* **deps:** update external major ([9595327](https://github.com/adobe/helix-pipeline/commit/9595327ef8348b4cbb6b7cbd99bbab7203b10967))
+
 ## [12.0.8](https://github.com/adobe/helix-pipeline/compare/v12.0.7...v12.0.8) (2020-10-24)
 
 
