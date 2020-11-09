@@ -184,6 +184,7 @@ describe('Testing Markdown conversion', () => {
   it('Link references', async () => {
     await assertMd(`
         Hello [World]
+        
         [World]: http://example.com
       `, `
         <p>Hello <a href="http://example.com">World</a></p>

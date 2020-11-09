@@ -25,14 +25,14 @@
     src="https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.youtube.com/watch?v=KOxbO0EI4MA">
   </esi:include>
   <esi:remove>
-    <p><img src="https://www.youtube.com/watch?v=KOxbO0EI4MA"></p>
+    <p><img src="https://www.youtube.com/watch?v=KOxbO0EI4MA" alt=""></p>
   </esi:remove>
   <p>is an embed, but</p>
   <p><img
-      src="https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg">is
+      src="https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg" alt="">is
     just an image. Even when</p>
   <p><img
-      src="https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg">
+      src="https://www.gstatic.com/youtube/img/promos/growth/b74c9f83bf1704acff7677e46adde6cf59f23f4be85261468c1b1c7fa992ec18_120x120.jpeg" alt="">
   </p>
   <p>is on a paragraph of its own.</p>
   <h2 id="ia-writer-style-embeds">IA Writer-Style Embeds</h2>
@@ -50,7 +50,7 @@
   <p><code>video: https://www.example.com/embed/2Xc9gXyf2G4</code></p>
   <p><a href="https://www.example.com/watch?v=KOxbO0EI4MA" title="Audi R8"><img
         src="http://img.youtube.com/vi/KOxbO0EI4MA/0.jpg" alt="Audi R8"></a></p>
-  <p><img src="https://www.example.com/watch?v=KOxbO0EI4MA"></p>
+  <p><img src="https://www.example.com/watch?v=KOxbO0EI4MA" alt=""></p>
   <p><a href="https://www.example.com/watch?v=KOxbO0EI4MA">https://www.example.com/watch?v=KOxbO0EI4MA</a></p>
   <h1 id="internal-embeds">Internal Embeds</h1>
   <h2 id="gatsby-style-embeds-1">Gatsby-Style-Embeds</h2>
@@ -71,11 +71,11 @@
   <h2 id="image-style-embeds-1">Image-Style Embeds</h2>
   <esi:include src="/test/foo.embed.html"></esi:include>
   <esi:remove>
-    <p><img src="foo.md"></p>
+    <p><img src="foo.md" alt=""></p>
   </esi:remove>
   <p>is an embed, but</p>
-  <p><img src="foo.png">is just an image. Even when</p>
-  <p><img src="foo.png"></p>
+  <p><img src="foo.png" alt="">is just an image. Even when</p>
+  <p><img src="foo.png" alt=""></p>
   <p>is on a paragraph of its own.</p>
   <h2 id="ia-writer-style-embeds-1">IA Writer-Style Embeds</h2>
   <esi:include src="/foo.embed.html"></esi:include>

@@ -19,8 +19,10 @@ const {
 } = require('ferrum');
 const unified = require('unified');
 const remark = require('remark-parse');
+const gfm = require('remark-gfm');
 const parseMd = require('../src/html/parse-markdown');
-const { FrontmatterParsingError } = require('../src/html/remark-matter');
+
+const { FrontmatterParsingError } = parseMd;
 
 let warning;
 
@@ -32,6 +34,7 @@ const procMd = (md) => {
   // parse w/o frontmatter plugin
   const orig = unified()
     .use(remark)
+    .use(gfm)
     .parse(dat.content.body);
 
   parseMd(dat, { logger });
@@ -167,18 +170,18 @@ describe('parseFrontmatter', () => {
   `);
 
   // actual warnings
-  ckErr('reject invalid yaml', `
+  ckNop('reject invalid yaml', `
     ---
     - Foo
     hello: 42
     ---
   `);
-  ckErr('reject yaml with list', `
+  ckNop('reject yaml with list', `
     ---
     - Foo
     ---
   `);
-  ckNop('reject yaml with json style list', `
+  ckErr('reject yaml with json style list', `
     ---
     [1,2,3,4]
     ---
@@ -204,7 +207,7 @@ describe('parseFrontmatter', () => {
       Bar: 42
       ---
     `);
-  ckErr('frontmatter with insufficient space after it', `
+  ckNop('frontmatter with insufficient space after it', `
       ---
       Bar
       ---
@@ -242,7 +245,7 @@ Lorem ipsum 2
 
 Lorem ipsum 3
     `);
-  ckErr('frontmatter with empty line between paragraphs', `
+  ckNop('frontmatter with empty line between paragraphs', `
       echo
 
       ---
@@ -266,7 +269,7 @@ Lorem ipsum 3
         world: 13
     `);
 
-  ckErr('frontmatter in the middle of the document with empty line', `
+  ckNop('frontmatter in the middle of the document with empty line', `
     This is normal.
 
     Really normal stuff.
@@ -291,7 +294,7 @@ Lorem ipsum 3
         world: 13
     `);
 
-  ckErr('frontmatter in the middle of the document with empty line filled with space', `
+  ckNop('frontmatter in the middle of the document with empty line filled with space', `
     This is normal.
 
     Really normal stuff.
@@ -304,21 +307,12 @@ Lorem ipsum 3
   `);
   // Good values
 
-  ckErr('trieloff/helix-demo/foo.md',
+  ckNop('trieloff/helix-demo/foo.md',
     `---
 title: Foo bar hey.
 
 ---
 # More?
-`, `
-- type: yaml
-  payload:
-    title: Foo bar hey.
-- type: heading
-  depth: 1
-  children:
-    - type: text
-      value: More?
 `);
 
   ck('Entire doc is frontmatter', `

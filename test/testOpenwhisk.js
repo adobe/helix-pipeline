@@ -439,8 +439,8 @@ describe('Testing OpenWhisk adapter', () => {
       action.logger.infoFields('Hello, world', { myId: 42 });
     }, pipe, params);
 
-    // nock 13.x needs 1 tick to respond with the correct reply.
-    await new Promise((resolve) => setImmediate(resolve));
+    // nock 13.x needs a bit to respond with the correct reply.
+    await new Promise((resolve) => setTimeout(resolve, 10));
 
     assert.equal(reqs.length, 1);
     assert.equal(reqs[0].applicationName, 'logger-test');

@@ -121,7 +121,7 @@ describe('Integration Test with Embeds', () => {
     assertEquivalentNode(
       result.response.document.body,
       new JSDOM(`
-      <body><p><img src="https://raw.githubusercontent.com/trieloff/not-slides/master/01.jpg"></p>
+      <body><p><img src="https://raw.githubusercontent.com/trieloff/not-slides/master/01.jpg" alt=""></p>
       <h1 id="bending-your-brain-for-serverless-success">Bending your Brain for Serverless Success</h1>
       <p><a href="mailto:trieloff@adobe.com">Lars Trieloff</a></p></body>
       `).window.document.body,
