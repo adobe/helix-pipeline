@@ -54,6 +54,10 @@ describe('Test Markdown Parsing', () => {
   it('Does not get confused by grayscale', () => {
     assertMatch('grayscale', callback);
   });
+
+  it('Does not get confused by escaped links', () => {
+    assertMatch('simple-links', callback);
+  });
 });
 
 describe('Test Markdown Setting Context', () => {

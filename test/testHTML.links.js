@@ -140,6 +140,13 @@ describe('Testing HTML Pipeline (Links)', () => {
     );
   });
 
+  it('Renders escaped links', async () => {
+    await assertMd(
+      '[Escaped](https://example.com/test\\_suite.html?d=wb4c84d46c3bf40b7bf36440744f1ee6f\\&csf=1\\&web=1\\&e=QcIGyX)',
+      '<p><a href="https://example.com/test_suite.html?d=wb4c84d46c3bf40b7bf36440744f1ee6f&amp;csf=1&amp;web=1&amp;e=QcIGyX">Escaped</a></p>',
+    );
+  });
+
   it('Renders anchored relative links', async () => {
     await assertMd(
       '[Relative](./../folder/file.md)',
