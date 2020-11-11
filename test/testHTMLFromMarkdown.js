@@ -208,6 +208,14 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
+  it('tags in bold', async () => {
+    await assertMd(`
+          **\\<form: on24>**
+      `, `
+        <p><strong>&lt;form: on24&gt;</strong></p>
+    `);
+  });
+
   it('Link with angle brackets', async () => {
     await assertMd(`
         # Foo
