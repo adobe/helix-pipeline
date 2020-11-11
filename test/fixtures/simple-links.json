@@ -76,6 +76,15 @@
           ]
         }
       ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "<steps>"
+        }
+      ]
     }
   ]
 }

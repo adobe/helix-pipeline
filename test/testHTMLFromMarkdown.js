@@ -191,6 +191,23 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
+  it('Admonition Notes', async () => {
+    await assertMd(`
+          > [!NOTE]
+          > This is a note. Who'd have noted?
+      `, `
+        <blockquote><p>[!NOTE] This is a note. Who’d have noted?</p></blockquote>
+    `);
+  });
+
+  it('tags', async () => {
+    await assertMd(`
+          \\<steps>
+      `, `
+        <p>&lt;steps&gt;</p>
+    `);
+  });
+
   it('Link with angle brackets', async () => {
     await assertMd(`
         # Foo
