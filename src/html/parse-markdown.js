@@ -11,10 +11,24 @@
  */
 const unified = require('unified');
 const remark = require('remark-parse');
+const gfm = require('remark-gfm');
+const visit = require('unist-util-visit');
 const { setdefault } = require('ferrum');
+const { remarkMatter } = require('@adobe/helix-markdown-support');
 const { numericLogLevel } = require('@adobe/helix-log');
 const VDOMTransformer = require('../utils/mdast-to-vdom');
-const frontmatter = require('./remark-matter.js');
+
+class FrontmatterParsingError extends Error {
+}
+
+function removePositions(tree) {
+  visit(tree, (node) => {
+    // eslint-disable-next-line no-param-reassign
+    delete node.position;
+    return visit.CONTINUE;
+  });
+  return tree;
+}
 
 function parseMarkdown(context, action) {
   const { logger } = action;
@@ -30,11 +44,20 @@ function parseMarkdown(context, action) {
   const idx = Math.min(converted.indexOf('\n'), 100);
   action.logger.debug(`Parsing markdown from request body starting with ${converted.substring(0, idx)}`);
 
-  const isDebugLevel = numericLogLevel(logger.level) >= numericLogLevel('debug');
   content.mdast = unified()
-    .use(remark, { position: isDebugLevel })
-    .use(frontmatter, { logger: action.logger })
+    .use(remark)
+    .use(gfm)
+    .use(remarkMatter, {
+      errorHandler: (e) => {
+        action.logger.warn(new FrontmatterParsingError(e));
+      },
+    })
+    // .use(frontmatter, { logger: action.logger })
     .parse(converted);
+
+  if (numericLogLevel(logger.level) < numericLogLevel('debug')) {
+    removePositions(content.mdast);
+  }
 
   // initialize transformer
   action.transformer = new VDOMTransformer()
@@ -42,3 +65,4 @@ function parseMarkdown(context, action) {
 }
 
 module.exports = parseMarkdown;
+module.exports.FrontmatterParsingError = FrontmatterParsingError;

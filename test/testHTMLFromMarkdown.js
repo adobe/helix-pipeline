@@ -184,9 +184,35 @@ describe('Testing Markdown conversion', () => {
   it('Link references', async () => {
     await assertMd(`
         Hello [World]
+        
         [World]: http://example.com
       `, `
         <p>Hello <a href="http://example.com">World</a></p>
+    `);
+  });
+
+  it('Admonition Notes', async () => {
+    await assertMd(`
+          > [!NOTE]
+          > This is a note. Who'd have noted?
+      `, `
+        <blockquote><p>[!NOTE] This is a note. Who’d have noted?</p></blockquote>
+    `);
+  });
+
+  it('tags', async () => {
+    await assertMd(`
+          \\<steps>
+      `, `
+        <p>&lt;steps&gt;</p>
+    `);
+  });
+
+  it('tags in bold', async () => {
+    await assertMd(`
+          **\\<form: on24>**
+      `, `
+        <p><strong>&lt;form: on24&gt;</strong></p>
     `);
   });
 

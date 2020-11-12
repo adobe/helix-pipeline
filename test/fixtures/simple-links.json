@@ -1,0 +1,90 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "heading",
+      "depth": 1,
+      "children": [
+        {
+          "type": "text",
+          "value": "Various Links"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://www.adobe.com",
+          "children": [
+            {
+              "type": "text",
+              "value": "https://www.adobe.com"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://example.com/test_suite.html",
+          "children": [
+            {
+              "type": "text",
+              "value": "test_suite"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://example.com/test.html?d=wb4c84d46c3bf40b7bf36440744f1ee6f&csf=1&web=1&e=QcIGyX",
+          "children": [
+            {
+              "type": "text",
+              "value": "query"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "link",
+          "title": null,
+          "url": "https://www.youtube.com/watch?v=85UKLsvQEIA",
+          "children": [
+            {
+              "type": "image",
+              "title": null,
+              "url": "https://hlx.blob.core.windows.net/external/aa59825575016ba5bb9f1ee54be5d7efc23e3032#image.png",
+              "alt": "Lars explains the future."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "children": [
+        {
+          "type": "text",
+          "value": "<steps>"
+        }
+      ]
+    }
+  ]
+}

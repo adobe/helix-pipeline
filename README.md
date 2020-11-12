@@ -1,7 +1,5 @@
 # Helix Pipeline
 
-(formerly known as Hypermedia Pipeline)
-
 This project provides helper functions and default implementations for creating Hypermedia Processing Pipelines.
 
 It uses reducers and continuations to create a simple processing pipeline that can pre-and post-process HTML, JSON, and other hypermedia.
