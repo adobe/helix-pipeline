@@ -1,3 +1,15 @@
+# [13.0.0](https://github.com/adobe/helix-pipeline/compare/v12.0.10...v13.0.0) (2020-11-12)
+
+
+### Bug Fixes
+
+* **deps:** upgrade remark-parse to v9 ([#878](https://github.com/adobe/helix-pipeline/issues/878)) ([b74cc8e](https://github.com/adobe/helix-pipeline/commit/b74cc8ef7e55aa83ef9e45a8abc0ed2233696c39))
+
+
+### BREAKING CHANGES
+
+* **deps:** Helix Pipeline is now using remark@v9, which is leading to minor changes in generated HTML (e.g. `img` tags now get empty `alt` attributes if no alternative text has been specified), minor changes in the intermediate MDAST (e.g. unresolvable `linkReference`s will stay regular `text`) and major changes in the plugin system used to tweak markdown parsing. The latter two change will only affect advanced users.
+
 ## [12.0.10](https://github.com/adobe/helix-pipeline/compare/v12.0.9...v12.0.10) (2020-11-09)
 
 
