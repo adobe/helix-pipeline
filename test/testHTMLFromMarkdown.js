@@ -299,7 +299,7 @@ describe('Testing Markdown conversion', () => {
     `);
   });
 
-  it.skip('HTML nested inline elements and markup', async () => {
+  it('HTML nested inline elements and markup', async () => {
     // this is not supported yet. ideally the mdast-to-dom is done directly and not via hast.
     await assertMd(
       '# Foo <em>Bar **Important**</em>',
@@ -539,7 +539,32 @@ describe('Testing Markdown conversion', () => {
   it('is robust against linebreaks in tags', async () => {
     await assertMd(
       '**<u>  \n</u>**',
-      '<p><strong><u></u></strong></p>',
+      '<p><strong><u><br></u></strong></p>',
+    );
+  });
+
+  it('translates icons', async () => {
+    await assertMd(
+      'Hello :photoshop: world.',
+      '<p>Hello <img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon">world.</p>',
+    );
+  });
+
+  it('translates icons in html', async () => {
+    await assertMd(
+      'Hello <p> test :photoshop:</p> world.',
+      '<p>Hello</p><p>test<img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"></p>world.<p></p>',
+    );
+  });
+
+  it('translates icons in tables with paras', async () => {
+    await assertMd(
+      `
+            |Video|Text|
+            |-|-|
+            |youtube|<p>:photoshop: :illustrator:</p></p>|
+    `,
+      '<table><thead><tr><th>Video</th><th>Text</th></tr></thead><tbody><tr><td>youtube</td><td><p><img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"><img class="icon icon-illustrator" src="/icons/illustrator.svg" alt="illustrator icon"></p></td></tr></tbody></table>',
     );
   });
 });
