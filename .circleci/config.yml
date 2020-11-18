@@ -49,18 +49,6 @@ jobs:
       - store_artifacts:
           path: junit
 
-  release:
-    executor: node10
-    steps:
-      - setup
-      - run:
-          name: revert changes to package-lock.json
-          command: git checkout -- package-lock.json
-
-      - run:
-          name: Semantic Release
-          command: npm run semantic-release
-
   generate-docs:
     executor: node10
     steps:
@@ -89,12 +77,6 @@ workflows:
   build:
     jobs:
     - build
-    - release:
-        requires:
-        - build
-        filters:
-          branches:
-            only: master
 
     # generate documentation on non-renovate branches
     - generate-docs:
@@ -104,7 +86,7 @@ workflows:
           branches:
             ignore:
               - master
-              - /renovate\/.*/
+              - /renovate.*/
 
   smoke:
     jobs:
