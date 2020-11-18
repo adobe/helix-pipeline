@@ -74,7 +74,7 @@
     "jsdom": "16.4.0",
     "lodash": "4.17.20",
     "mdast-util-to-hast": "10.0.1",
-    "mdast-util-to-string": "1.1.0",
+    "mdast-util-to-string": "2.0.0",
     "micromatch": "4.0.2",
     "object-hash": "2.0.3",
     "path-to-regexp": "6.2.0",
