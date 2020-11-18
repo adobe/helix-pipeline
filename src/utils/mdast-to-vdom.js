@@ -14,6 +14,7 @@
 const { selectAll } = require('unist-util-select');
 const defaultHandlers = require('mdast-util-to-hast/lib/handlers');
 const mdast2hast = require('mdast-util-to-hast');
+const hast2html = require('hast-util-to-html');
 const { JSDOM } = require('jsdom');
 const toDOM = require('./hast-util-to-dom');
 const HeadingHandler = require('./heading-handler');
@@ -255,7 +256,12 @@ class VDOMTransformer {
             const last = stack.pop();
             let html = '';
             for (let j = last; j <= i; j += 1) {
-              html += node.children[j].html || node.children[j].value || '';
+              const innerChild = node.children[j];
+              if (innerChild.type === 'raw') {
+                html += innerChild.html;
+              } else {
+                html += hast2html(innerChild);
+              }
             }
             node.children[last].frag = JSDOM.fragment(html);
             node.children[last].html = html;
