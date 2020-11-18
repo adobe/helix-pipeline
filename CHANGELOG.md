@@ -1,3 +1,12 @@
+## [13.0.3](https://github.com/adobe/helix-pipeline/compare/v13.0.2...v13.0.3) (2020-11-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency mdast-util-to-string to v2 ([f728e58](https://github.com/adobe/helix-pipeline/commit/f728e58545fa24d875526c125241d89a1b5dbba3))
+* **md:** correctly serialize inner html in raw elements ([#890](https://github.com/adobe/helix-pipeline/issues/890)) ([1e35f06](https://github.com/adobe/helix-pipeline/commit/1e35f066af5a4893f27bc543050905841412ec97)), closes [#889](https://github.com/adobe/helix-pipeline/issues/889)
+* trigger release ([bfa420f](https://github.com/adobe/helix-pipeline/commit/bfa420f95b37edf11e3b75557f1475a76ede4f02))
+
 ## [13.0.2](https://github.com/adobe/helix-pipeline/compare/v13.0.1...v13.0.2) (2020-11-17)
 
 
