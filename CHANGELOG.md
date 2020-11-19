@@ -1,3 +1,10 @@
+## [13.0.5](https://github.com/adobe/helix-pipeline/compare/v13.0.4...v13.0.5) (2020-11-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v8.2.2 ([#893](https://github.com/adobe/helix-pipeline/issues/893)) ([48b496a](https://github.com/adobe/helix-pipeline/commit/48b496a3db777b7dd1ca1312ae7125e287f44935))
+
 ## [13.0.4](https://github.com/adobe/helix-pipeline/compare/v13.0.3...v13.0.4) (2020-11-18)
 
 
