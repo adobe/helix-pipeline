@@ -38,7 +38,7 @@ Table of Contents
 
 [![codecov](https://img.shields.io/codecov/c/github/adobe/helix-pipeline.svg)](https://codecov.io/gh/adobe/helix-pipeline)
 [![CircleCI](https://img.shields.io/circleci/project/github/adobe/helix-pipeline.svg)](https://circleci.com/gh/adobe/helix-pipeline)
-[![GitHub license](https://img.shields.io/github/license/adobe/helix-pipeline.svg)](https://github.com/adobe/helix-pipeline/blob/master/LICENSE.txt)
+[![GitHub license](https://img.shields.io/github/license/adobe/helix-pipeline.svg)](https://github.com/adobe/helix-pipeline/blob/main/LICENSE.txt)
 [![GitHub issues](https://img.shields.io/github/issues/adobe/helix-pipeline.svg)](https://github.com/adobe/helix-pipeline/issues)
 [![npm](https://img.shields.io/npm/dw/@adobe/helix-pipeline.svg)](https://www.npmjs.com/package/@adobe/helix-pipeline) 
 [![Known Vulnerabilities](https://snyk.io/test/github/adobe/hypermedia-pipeline/badge.svg?targetFile=package.json)](https://snyk.io/test/github/adobe/hypermedia-pipeline?targetFile=package.json)
@@ -240,7 +240,7 @@ module.exports.replace = {
 
 All functions that are using the `before` and `after` extension points need to follow the same interface that all other pipeline functions follow, i.e. they have access to `context` and `action` and they should return a modified `context` object.
 
-A more complex example of using these extension points to implement custom markdown content nodes and handle 404 errors can be found in the [helix-cli integration tests](https://github.com/adobe/helix-cli/blob/master/test/integration/src/html.pre.js).
+A more complex example of using these extension points to implement custom markdown content nodes and handle 404 errors can be found in the [helix-cli integration tests](https://github.com/adobe/helix-cli/blob/main/test/integration/src/html.pre.js).
 
 
 ## Anatomy of the Context
