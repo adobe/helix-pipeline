@@ -1,3 +1,10 @@
+## [13.0.7](https://github.com/adobe/helix-pipeline/compare/v13.0.6...v13.0.7) (2020-12-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-utils to v4.3.3 ([#900](https://github.com/adobe/helix-pipeline/issues/900)) ([352c4a2](https://github.com/adobe/helix-pipeline/commit/352c4a2f480edbe58ba3d2fd4df10a240c3582e7))
+
 ## [13.0.6](https://github.com/adobe/helix-pipeline/compare/v13.0.5...v13.0.6) (2020-11-27)
 
 
