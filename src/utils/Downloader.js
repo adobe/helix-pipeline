@@ -32,14 +32,11 @@ class Downloader {
     if (!secrets || !secrets.HTTP_TIMEOUT) {
       logger.warn('No HTTP timeout set, risk of denial-of-service');
     }
-    if (options.forceHttp1 || process.env.HELIX_PIPELINE_FORCE_HTTP1) {
-      this._fetchContext = fetchAPI.context({
-        httpProtocol: 'http1',
-        httpsProtocols: ['http1'],
-      });
-    } else {
-      this._fetchContext = fetchAPI;
-    }
+    this._fetchContext = fetchAPI.context({
+      // force HTTP/1 in order to avoid issues with long-lived HTTP/2 sessions
+      // on azure/kubernetes based I/O Runtime
+      httpsProtocols: ['http1'],
+    });
     this._client = this._fetchContext.fetch;
   }
 
