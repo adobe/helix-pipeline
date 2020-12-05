@@ -41,6 +41,7 @@ class Downloader {
         httpsProtocols: ['http1'],
       });
     } else {
+      /* istanbul ignore next */
       this._fetchContext = fetchAPI;
     }
     this._client = this._fetchContext.fetch;
