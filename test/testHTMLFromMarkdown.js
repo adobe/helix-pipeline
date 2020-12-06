@@ -567,4 +567,32 @@ describe('Testing Markdown conversion', () => {
       '<table><thead><tr><th>Video</th><th>Text</th></tr></thead><tbody><tr><td>youtube</td><td><p><img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"><img class="icon icon-illustrator" src="/icons/illustrator.svg" alt="illustrator icon"></p></td></tr></tbody></table>',
     );
   });
+
+  it('direct links', async () => {
+    await assertMd(
+      '<https://www.adobe.com>',
+      '<p><a href="https://www.adobe.com">https://www.adobe.com</a></p>',
+    );
+  });
+
+  it('formatted links', async () => {
+    await assertMd(
+      '[**instagram**](https://richardianson.com/)',
+      '<p><a href="https://richardianson.com/"><strong>instagram</strong></a></p>',
+    );
+  });
+
+  it('formatted links with hostname', async () => {
+    await assertMd(
+      '[**www.richardianson.com**](https://richardianson.com/)',
+      '<body><p><a href="https://www.adobe.com">https://www.adobe.com</a></p></body>',
+    );
+  });
+
+  it('korean link', async () => {
+    await assertMd(
+      '**[프리미어 러시 CC(Premiere Rush CC)](http://theblog.adobe.com/create-and-share-online-videos-anywhere-with-all-new-premiere-rush-cc/)**',
+      '<p><strong><a href="http://theblog.adobe.com/create-and-share-online-videos-anywhere-with-all-new-premiere-rush-cc/">프리미어 러시 CC(Premiere Rush CC)</a></strong></p>',
+    );
+  });
 });
