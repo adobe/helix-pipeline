@@ -1,3 +1,24 @@
+## [13.0.9](https://github.com/adobe/helix-pipeline/compare/v13.0.8...v13.0.9) (2020-12-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-utils to v4.4.0 ([#902](https://github.com/adobe/helix-pipeline/issues/902)) ([5c55784](https://github.com/adobe/helix-pipeline/commit/5c55784169a410352d24f2337210eb1f2008d35f))
+
+## [13.0.8](https://github.com/adobe/helix-pipeline/compare/v13.0.7...v13.0.8) (2020-12-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.16.4 ([#901](https://github.com/adobe/helix-pipeline/issues/901)) ([acfcf53](https://github.com/adobe/helix-pipeline/commit/acfcf5341f6c449f32664f265365384306c43777))
+
+## [13.0.7](https://github.com/adobe/helix-pipeline/compare/v13.0.6...v13.0.7) (2020-12-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/openwhisk-action-utils to v4.3.3 ([#900](https://github.com/adobe/helix-pipeline/issues/900)) ([352c4a2](https://github.com/adobe/helix-pipeline/commit/352c4a2f480edbe58ba3d2fd4df10a240c3582e7))
+
 ## [13.0.6](https://github.com/adobe/helix-pipeline/compare/v13.0.5...v13.0.6) (2020-11-27)
 
 
