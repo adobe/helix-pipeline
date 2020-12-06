@@ -30,10 +30,12 @@ async function fetchContent(context, {
   // compute content proxy url
   let contentProxyUrl = secrets.CONTENT_PROXY_URL || '';
   if (!contentProxyUrl) {
-    const namespace = process.env.__OW_NAMESPACE || 'helix';
-    contentProxyUrl = `https://adobeioruntime.net/api/v1/web/${namespace}/helix-services/content-proxy@v2`;
+    contentProxyUrl = versionLock.createActionURL({
+      name: 'content-proxy@v2',
+      packageName: 'helix-services',
+      namespace: process.env.__OW_NAMESPACE || 'helix',
+    });
   }
-  contentProxyUrl = versionLock.transformActionURL(contentProxyUrl);
 
   const url = new URL(contentProxyUrl);
   url.searchParams.append('owner', owner);
