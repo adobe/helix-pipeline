@@ -1,3 +1,10 @@
+# [13.1.0](https://github.com/adobe/helix-pipeline/compare/v13.0.9...v13.1.0) (2020-12-06)
+
+
+### Features
+
+* force http1 to avoid issues with long-lived http2 sessions ([#903](https://github.com/adobe/helix-pipeline/issues/903)) ([2f592d0](https://github.com/adobe/helix-pipeline/commit/2f592d0a79abcb9985fe745a6fe12db7b358b624))
+
 ## [13.0.9](https://github.com/adobe/helix-pipeline/compare/v13.0.8...v13.0.9) (2020-12-04)
 
 
