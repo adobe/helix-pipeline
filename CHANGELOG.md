@@ -1,3 +1,17 @@
+## [13.1.1](https://github.com/adobe/helix-pipeline/compare/v13.1.0...v13.1.1) (2020-12-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.17.0 ([#906](https://github.com/adobe/helix-pipeline/issues/906)) ([3f692e6](https://github.com/adobe/helix-pipeline/commit/3f692e6ec11f922845a431ed6348ca8200241a3e))
+
+# [13.1.0](https://github.com/adobe/helix-pipeline/compare/v13.0.9...v13.1.0) (2020-12-06)
+
+
+### Features
+
+* force http1 to avoid issues with long-lived http2 sessions ([#903](https://github.com/adobe/helix-pipeline/issues/903)) ([2f592d0](https://github.com/adobe/helix-pipeline/commit/2f592d0a79abcb9985fe745a6fe12db7b358b624))
+
 ## [13.0.9](https://github.com/adobe/helix-pipeline/compare/v13.0.8...v13.0.9) (2020-12-04)
 
 
