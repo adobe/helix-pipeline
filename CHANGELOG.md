@@ -1,3 +1,10 @@
+## [13.1.2](https://github.com/adobe/helix-pipeline/compare/v13.1.1...v13.1.2) (2020-12-07)
+
+
+### Bug Fixes
+
+* **content:** use version lock to compute contentproxy url ([#905](https://github.com/adobe/helix-pipeline/issues/905)) ([d0dfb06](https://github.com/adobe/helix-pipeline/commit/d0dfb06d36e3a60df63daca0bb77cde8c3c977a5))
+
 ## [13.1.1](https://github.com/adobe/helix-pipeline/compare/v13.1.0...v13.1.1) (2020-12-06)
 
 
