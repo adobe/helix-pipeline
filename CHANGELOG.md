@@ -1,3 +1,10 @@
+# [13.2.0](https://github.com/adobe/helix-pipeline/compare/v13.1.3...v13.2.0) (2020-12-09)
+
+
+### Features
+
+* **log:** info log for on 404 ([8f40323](https://github.com/adobe/helix-pipeline/commit/8f40323c7c0ef8254795409af34cfb3aeae0d4cc))
+
 ## [13.1.3](https://github.com/adobe/helix-pipeline/compare/v13.1.2...v13.1.3) (2020-12-07)
 
 
