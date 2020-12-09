@@ -1,3 +1,10 @@
+## [13.2.1](https://github.com/adobe/helix-pipeline/compare/v13.2.0...v13.2.1) (2020-12-09)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#910](https://github.com/adobe/helix-pipeline/issues/910)) ([6e1c365](https://github.com/adobe/helix-pipeline/commit/6e1c3652740e1b13db3996fff07fa196d5ea638c))
+
 # [13.2.0](https://github.com/adobe/helix-pipeline/compare/v13.1.3...v13.2.0) (2020-12-09)
 
 
