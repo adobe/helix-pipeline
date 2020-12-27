@@ -61,7 +61,7 @@
     "@adobe/openwhisk-action-logger": "2.3.1",
     "@adobe/openwhisk-action-utils": "4.4.0",
     "@emmetio/expand-abbreviation": "0.7.3",
-    "ajv": "6.12.6",
+    "ajv": "7.0.2",
     "callsites": "3.1.0",
     "dompurify": "2.2.6",
     "dot-prop": "6.0.1",
