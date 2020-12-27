@@ -1,3 +1,10 @@
+## [13.2.7](https://github.com/adobe/helix-pipeline/compare/v13.2.6...v13.2.7) (2020-12-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency object-hash to v2.1.1 ([#922](https://github.com/adobe/helix-pipeline/issues/922)) ([10974a9](https://github.com/adobe/helix-pipeline/commit/10974a924c591526f45b33e471e0380d8f68197f))
+
 ## [13.2.6](https://github.com/adobe/helix-pipeline/compare/v13.2.5...v13.2.6) (2020-12-21)
 
 
