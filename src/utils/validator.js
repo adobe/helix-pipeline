@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-disable no-underscore-dangle */
-const Ajv = require('ajv');
+const Ajv = require('ajv').default;
 const hash = require('object-hash');
 const util = require('util');
 
@@ -19,7 +19,14 @@ const _ajv = {};
 function ajv(logger, options = {}) {
   if (!_ajv[hash(options)]) {
     logger.debug(`initializing ajv ${JSON.stringify(options)}`);
-    const validator = new Ajv({ allErrors: true, verbose: true, ...options });
+    const validator = new Ajv({
+      allErrors: true,
+      verbose: true,
+      strict: false,
+      validateFormats: false,
+      ...options,
+    });
+    // ajvFormats(validator);
     // compromise: in order to avoid async code here
     // (which would complicate pipeline implementation considerably)
     // we're using static file names and synchronous reads/requires (#134)
