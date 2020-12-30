@@ -74,12 +74,14 @@ describe('Testing HTML Pipeline in Production', () => {
     recordIfMissing: false,
   });
 
-  let production;
   before('Fake Production Mode', () => {
     // eslint-disable-next-line no-underscore-dangle
-    production = process.env.__OW_ACTIVATION_ID;
-    // eslint-disable-next-line no-underscore-dangle
     process.env.__OW_ACTIVATION_ID = 'fake';
+  });
+
+  after('Reset Production Mode', () => {
+    // eslint-disable-next-line no-underscore-dangle
+    delete process.env.__OW_ACTIVATION_ID;
   });
 
   it('html.pipe adds headers from meta tags', async () => {
@@ -202,10 +204,5 @@ describe('Testing HTML Pipeline in Production', () => {
 
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers.Link, '</some_image.jpeg>; rel=preload; as=image,</some_lib.js>; rel=preload; as=script', 'allows setting Link header through meta http-equiv');
-  });
-
-  after('Reset Production Mode', () => {
-    // eslint-disable-next-line no-underscore-dangle
-    process.env.__OW_ACTIVATION_ID = production;
   });
 });

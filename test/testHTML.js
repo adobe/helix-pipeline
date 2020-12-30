@@ -650,8 +650,6 @@ ${context.content.document.body.innerHTML}`,
         logger,
       },
     );
-    console.log(logger.getOutput());
-
     const res = result.response;
     assert.equal(res.status, 504);
   });
