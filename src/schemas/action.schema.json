@@ -44,6 +44,10 @@
       "type": "object",
       "description": "A VersionLock instance"
     },
+    "resolver": {
+      "type": "object",
+      "description": "An universal deploy resolver"
+    },
     "markupconfig": {
       "type": "object",
       "description": "A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)"

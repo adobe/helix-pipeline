@@ -13,7 +13,7 @@ const crypto = require('crypto');
 const { setdefault } = require('ferrum');
 
 async function fetchContent(context, {
-  request, downloader, secrets, logger, versionLock,
+  request, downloader, secrets, logger, versionLock, resolver,
 }) {
   setdefault(context, 'content', {});
   /* istanbul ignore next */
@@ -30,11 +30,19 @@ async function fetchContent(context, {
   // compute content proxy url
   let contentProxyUrl = secrets.CONTENT_PROXY_URL || '';
   if (!contentProxyUrl) {
-    contentProxyUrl = versionLock.createActionURL({
-      name: 'content-proxy@v2',
-      packageName: 'helix-services',
-      namespace: process.env.__OW_NAMESPACE || 'helix',
-    });
+    if (resolver) {
+      contentProxyUrl = resolver.createURL({
+        package: 'helix-services',
+        name: 'content-proxy',
+        version: 'v2',
+      });
+    } else {
+      contentProxyUrl = versionLock.createActionURL({
+        name: 'content-proxy@v2',
+        packageName: 'helix-services',
+        namespace: process.env.__OW_NAMESPACE || 'helix',
+      });
+    }
   }
 
   const url = new URL(contentProxyUrl);

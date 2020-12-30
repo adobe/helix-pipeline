@@ -11,6 +11,8 @@
  */
 
 const path = require('path');
+const querystring = require('querystring');
+const { Request } = require('node-fetch');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const { setupMocha } = require('@pollyjs/core');
@@ -20,10 +22,21 @@ const { pipe: jsonPipe } = require('../src/defaults/json.pipe.js');
 const { pipe: xmlPipe } = require('../src/defaults/xml.pipe.js');
 const Downloader = require('../src/utils/Downloader.js');
 
-function piper(pipe) {
+const resolver = {
+  createURL({ package, name, version }) {
+    const namespace = process.env.__OW_NAMESPACE || 'helix';
+    return new URL(`https://adobeioruntime.net/api/v1/web/${namespace}/${package}/${name}@${version}`);
+  },
+};
+
+function piper(pipe, universal) {
   return (cont, context, action) => {
     action.downloader = new Downloader(context, action, { forceHttp1: true });
-    action.versionLock = new VersionLock();
+    if (universal) {
+      action.resolver = resolver;
+    } else {
+      action.versionLock = new VersionLock();
+    }
     return pipe(cont, context, action);
   };
 }
@@ -49,9 +62,71 @@ function setupPolly(opts) {
   });
 }
 
+function retrofitResponse(resp) {
+  let body = resp.body ? String(resp.body) : null;
+  try {
+    body = JSON.parse(body);
+  } catch {
+    // ignore
+  }
+  const ret = {
+    statusCode: resp.status,
+    body,
+    headers: [...resp.headers.keys()].reduce((result, key) => {
+      // eslint-disable-next-line no-param-reassign
+      result[key] = resp.headers.get(key);
+      return result;
+    }, {}),
+  };
+  if (resp.errorStack) {
+    ret.errorStack = resp.errorStack;
+  }
+  if (resp.errorMessage) {
+    ret.errorMessage = resp.errorMessage;
+  }
+  return ret;
+}
+
+function universalRequest(params) {
+  const {
+    __ow_headers: headers = {},
+    __ow_method: method = 'get',
+    // eslint-disable-next-line no-unused-vars
+    __ow_logger: _logger,
+    // eslint-disable-next-line no-unused-vars
+    __ow_path: _path,
+    ...rest
+  } = params;
+  return new Request(`https://universal.com/action?${querystring.encode(rest)}`, {
+    headers,
+    method,
+  });
+}
+
+function retrofit(fn) {
+  return async (cont, p, params = {}, env = {}) => {
+    const req = universalRequest(params);
+    const suffix = params.__ow_path || '';
+    const resp = await fn(cont, p, req, {
+      resolver,
+      env,
+      log: params.__ow_logger,
+      pathInfo: {
+        suffix,
+      },
+    });
+    return retrofitResponse(resp);
+  };
+}
+
 module.exports = {
+  retrofit,
+  retrofitResponse,
+  universalRequest,
   pipe: piper(htmlPipe),
+  pipeUniversal: piper(htmlPipe, true),
   jsonPipe: piper(jsonPipe),
   xmlPipe: piper(xmlPipe),
+  resolver,
   setupPolly,
 };
