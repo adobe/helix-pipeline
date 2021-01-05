@@ -50,7 +50,7 @@ const ck = (wat, md, ast) => {
     each(nodes, (node) => {
       delete node.position;
     });
-    assert.deepStrictEqual(proc.children, yaml.safeLoad(ast));
+    assert.deepStrictEqual(proc.children, yaml.load(ast));
   });
 };
 
