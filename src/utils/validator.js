@@ -17,7 +17,8 @@ const util = require('util');
 const _ajv = {};
 
 function ajv(logger, options = {}) {
-  if (!_ajv[hash(options)]) {
+  const key = hash(options);
+  if (!_ajv[key]) {
     logger.debug(`initializing ajv ${JSON.stringify(options)}`);
     const validator = new Ajv({
       allErrors: true,
@@ -76,9 +77,9 @@ function ajv(logger, options = {}) {
     }.bind(validator);
 
     logger.debug('ajv initialized');
-    _ajv[hash(options)] = validator;
+    _ajv[key] = validator;
   }
-  return _ajv[hash(options)];
+  return _ajv[key];
 }
 
 module.exports = ajv;

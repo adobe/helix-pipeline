@@ -19,6 +19,7 @@ const { VersionLock } = require('@adobe/openwhisk-action-utils');
 const nock = require('nock');
 const { JSDOM } = require('jsdom');
 const { pipe } = require('../src/defaults/html.pipe.js');
+const { resolver } = require('./utils.js');
 const coerce = require('../src/utils/coerce-secrets');
 const Downloader = require('../src/utils/Downloader.js');
 
@@ -123,7 +124,7 @@ describe('Integration Test with Data Embeds', () => {
       },
     };
 
-    action.versionLock = new VersionLock();
+    action.resolver = resolver;
     action.downloader = new Downloader(context, action, { forceHttp1: true });
     action.logger = logger;
 
@@ -482,6 +483,93 @@ describe('Integration Test with Data Embeds (version locked)', () => {
         'x-ow-version-lock': 'data-embed=data-embed@v1.2.3',
       },
     });
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+    action.logger = logger;
+
+    const result = await pipe(
+      (mycontext) => {
+        if (!mycontext.response) {
+          mycontext.response = {};
+        }
+        mycontext.response.status = 200;
+        mycontext.response.body = mycontext.content.document.body.innerHTML;
+      },
+      context,
+      action,
+    );
+    assert.equal(result.response.status, 200, result.error);
+    assert.equal(result.response.headers['Content-Type'], 'text/html');
+    if (html) {
+      assertEquivalentNode(
+        result.response.document.body,
+        new JSDOM(html).window.document.body,
+      );
+    }
+
+    return result;
+  }
+
+  it('html.pipe processes data embeds', async () => testEmbeds({
+    data: [
+      {
+        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+      },
+    ],
+  }, `
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
+  `<ol>
+    <li>My car:<a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny"></a></li>
+    <li>My car:<a href="cars-2000.html"><img src="renault.jpg" alt="Renault Scenic"></a></li>
+    <li>My car:<a href="cars-2005.html"><img src="honda.png" alt="Honda FR-V"></a></li>
+  </ol>`));
+});
+
+describe('Integration Test with Data Embeds (resolver)', () => {
+  afterEach(() => {
+    nock.restore();
+  });
+
+  beforeEach(() => {
+    nock.restore();
+    nock.activate();
+    nock.cleanAll();
+  });
+
+  async function testEmbeds(data, markdown, html, status = 200) {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/fstab.yaml')
+      .reply(() => [404]);
+
+    nock('https://adobeioruntime.net')
+      .defaultReplyHeaders({
+        'Cache-Control': 'max-age=3600',
+      })
+      .get('/api/v1/web/helix/helix-services/data-embed@v1')
+      .query(true)
+      .reply(() => [status, data]);
+
+    const action = coerce({
+      request: { params },
+      secrets,
+      logger,
+    });
+
+    const context = {
+      request: crequest,
+      content: {
+        body: markdown,
+      },
+    };
+
+    action.resolver = resolver;
     action.downloader = new Downloader(context, action, { forceHttp1: true });
     action.logger = logger;
 

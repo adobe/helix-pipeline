@@ -26,6 +26,7 @@ Tracks the OpenWhisk action invocation
 | [transformer](#transformer)   | `object` | Optional | cannot be null | [Action](action-properties-transformer.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/transformer")   |
 | [downloader](#downloader)     | `object` | Optional | cannot be null | [Action](action-properties-downloader.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/downloader")     |
 | [versionLock](#versionlock)   | `object` | Optional | cannot be null | [Action](action-properties-versionlock.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/versionLock")   |
+| [resolver](#resolver)         | `object` | Optional | cannot be null | [Action](action-properties-resolver.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/resolver")         |
 | [markupconfig](#markupconfig) | `object` | Optional | cannot be null | [Action](action-properties-markupconfig.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/markupconfig") |
 
 ## request
@@ -143,6 +144,22 @@ A VersionLock instance
 ### versionLock Type
 
 `object` ([Details](action-properties-versionlock.md))
+
+## resolver
+
+An universal deploy resolver
+
+
+`resolver`
+
+-   is optional
+-   Type: `object` ([Details](action-properties-resolver.md))
+-   cannot be null
+-   defined in: [Action](action-properties-resolver.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/resolver")
+
+### resolver Type
+
+`object` ([Details](action-properties-resolver.md))
 
 ## markupconfig
 
