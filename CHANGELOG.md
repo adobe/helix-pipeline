@@ -1,3 +1,10 @@
+## [13.3.1](https://github.com/adobe/helix-pipeline/compare/v13.3.0...v13.3.1) (2021-01-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency js-yaml to v4 ([#925](https://github.com/adobe/helix-pipeline/issues/925)) ([a807098](https://github.com/adobe/helix-pipeline/commit/a807098115ccd7c0f85a755e6a71a7a5de82d7f5))
+
 # [13.3.0](https://github.com/adobe/helix-pipeline/compare/v13.2.8...v13.3.0) (2021-01-05)
 
 
