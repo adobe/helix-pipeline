@@ -1,3 +1,10 @@
+# [13.3.0](https://github.com/adobe/helix-pipeline/compare/v13.2.8...v13.3.0) (2021-01-05)
+
+
+### Features
+
+* **pipe:** migrate to helix-deploy ([#923](https://github.com/adobe/helix-pipeline/issues/923)) ([b660b4c](https://github.com/adobe/helix-pipeline/commit/b660b4ca9e6acc820ce69f4bfe8661e67fe2566a)), closes [#920](https://github.com/adobe/helix-pipeline/issues/920)
+
 ## [13.2.8](https://github.com/adobe/helix-pipeline/compare/v13.2.7...v13.2.8) (2021-01-03)
 
 
