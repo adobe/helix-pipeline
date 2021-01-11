@@ -11,12 +11,14 @@
  */
 const { selectAll } = require('unist-util-select');
 const remove = require('unist-util-remove');
-const visit = require('unist-util-visit');
+const visit = require('unist-util-visit-parents');
 const {
   deepclone, trySlidingWindow, map, list, reject, contains, is, pipe, setdefault,
 } = require('ferrum');
 const removePosition = require('unist-util-remove-position');
 const dotprop = require('dot-prop');
+const nodePath = require('path');
+const URI = require('uri-js');
 const { merge } = require('../utils/cache-helper');
 
 const pattern = /{{([^{}]+)}}/g;
@@ -49,18 +51,18 @@ async function pmap(tree, iteratee) {
  * @param {*} handlefn a callback function to handle the placeholder
  */
 function findPlaceholders(section, handlefn) {
-  visit(section, (node) => {
+  visit(section, (node, ancestors) => {
     if (node.value && pattern.test(node.value)) {
-      handlefn(node, 'value');
+      handlefn(node, 'value', ancestors);
     }
     if (node.alt && pattern.test(node.alt)) {
-      handlefn(node, 'alt');
+      handlefn(node, 'alt', ancestors);
     }
     if (node.url && pattern.test(node.url)) {
-      handlefn(node, 'url');
+      handlefn(node, 'url', ancestors);
     }
     if (node.title && pattern.test(node.title)) {
-      handlefn(node, 'title');
+      handlefn(node, 'title', ancestors);
     }
   });
 }
@@ -83,7 +85,7 @@ function hasPlaceholders(section) {
 /**
  * @param {MDAST} section
  */
-function fillPlaceholders(section) {
+function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
   if (!section.meta || (!section.meta.embedData && !Array.isArray(section.meta.embedData))) {
     return;
   }
@@ -97,8 +99,28 @@ function fillPlaceholders(section) {
   const children = data.reduce((p, value) => {
     const workingcopy = deepclone(section);
 
-    findPlaceholders(workingcopy, (node, prop) => {
-      if (typeof node[prop] === 'string') {
+    findPlaceholders(workingcopy, (node, prop, ancestors) => {
+      if (node.type === 'text'
+          && ancestors.length === 2
+          && ancestors[1].type === 'paragraph'
+          && node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).match('^[/.].*') && (
+        node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(contentext)
+        || node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
+      )) {
+        const parent = ancestors[1];
+        // construct an embed node
+        const uri = URI.parse(URI.resolve(baseurl, node[prop]
+          .replace(pattern, (_, expr) => dotprop.get(value, expr))));
+        node[prop] = node[prop]
+          .replace(pattern, (_, expr) => dotprop.get(value, expr));
+        const childNodes = [{ ...parent }];
+        parent.type = 'embed';
+        parent.children = childNodes;
+        parent.url = nodePath.resolve(nodePath.dirname(uri.path), `${nodePath.basename(uri.path, nodePath.extname(uri.path))}.${selector}${resourceext}`);
+        if (parent.value) {
+          delete node.value;
+        }
+      } else if (typeof node[prop] === 'string') {
         node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
       }
     });
@@ -140,8 +162,17 @@ function normalizeLists(section) {
   );
 }
 
-async function fillDataSections(context, { downloader, logger }) {
-  const { content: { mdast } } = context;
+async function fillDataSections(context, {
+  downloader,
+  logger,
+  secrets: { EMBED_SELECTOR },
+  request: { params: { path } },
+}) {
+  const { content: { mdast }, request: { extension, url } } = context;
+
+  const resourceext = `.${extension}`;
+  const contentext = nodePath.extname(path);
+
   async function extractData(section) {
     return pmap(section, async (node) => {
       if (node.type === 'dataEmbed') {
@@ -187,7 +218,7 @@ async function fillDataSections(context, { downloader, logger }) {
   async function applyDataSections(section) {
     await extractData(section);
     remove(section, 'dataEmbed');
-    fillPlaceholders(section);
+    fillPlaceholders(section, contentext, resourceext, url, EMBED_SELECTOR);
     normalizeLists(section);
   }
 

@@ -92,6 +92,7 @@
     "unist-util-remove-position": "3.0.0",
     "unist-util-select": "3.0.4",
     "unist-util-visit": "2.0.3",
+    "unist-util-visit-parents": "3.1.1",
     "uri-js": "4.4.1",
     "url-parse": "1.4.7",
     "web-namespaces": "1.1.4",
