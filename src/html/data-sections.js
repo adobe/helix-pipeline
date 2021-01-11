@@ -104,8 +104,8 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
           && ancestors.length === 2
           && ancestors[1].type === 'paragraph'
           && node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).match('^[/.].*') && (
-        node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(contentext)
-        || node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
+        node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
+        || node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(contentext)
       )) {
         const parent = ancestors[1];
         // construct an embed node
@@ -117,9 +117,7 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
         parent.type = 'embed';
         parent.children = childNodes;
         parent.url = nodePath.resolve(nodePath.dirname(uri.path), `${nodePath.basename(uri.path, nodePath.extname(uri.path))}.${selector}${resourceext}`);
-        if (parent.value) {
-          delete node.value;
-        }
+        delete parent.value;
       } else if (typeof node[prop] === 'string') {
         node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
       }
