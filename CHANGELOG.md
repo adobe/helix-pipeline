@@ -1,3 +1,10 @@
+# [13.4.0](https://github.com/adobe/helix-pipeline/compare/v13.3.4...v13.4.0) (2021-01-12)
+
+
+### Features
+
+* **embeds:** enable dynamic nesting of data embeds and internal embeds ([f582a29](https://github.com/adobe/helix-pipeline/commit/f582a29a7b3763d6c5dc52c8c7c423c356290f64))
+
 ## [13.3.4](https://github.com/adobe/helix-pipeline/compare/v13.3.3...v13.3.4) (2021-01-11)
 
 
