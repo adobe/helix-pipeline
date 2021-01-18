@@ -285,6 +285,35 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
     <p>/posts/honda.md</p>
   </esi:remove>`));
 
+  it('html.pipe supports data embed pagination', async () => testEmbeds({
+    data: [
+      {
+        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg', post: '/posts/sunny.md',
+      },
+      {
+        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg', post: '/posts/scenic.md',
+      },
+      {
+        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png', post: '/posts/honda.md',
+      },
+    ],
+  }, `
+---
+hlx_limit: 1
+hlx_page: 2
+---
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
+
+# {{make}} {{model}}
+
+{{post}}`,
+  `<h1 id="renault-scenic">Renault Scenic</h1>
+  <esi:include src="/posts/scenic.embed.html"></esi:include>
+  <esi:remove>
+    <p>/posts/scenic.md</p>
+  </esi:remove>`));
+
   it('html.pipe processes data embeds in new data format', async () => testEmbeds({
     data: [
       {

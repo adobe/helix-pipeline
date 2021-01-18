@@ -89,6 +89,10 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
   if (!section.meta || (!section.meta.embedData && !Array.isArray(section.meta.embedData))) {
     return;
   }
+
+  const limit = section.meta.hlx_limit;
+  const page = section.meta.hlx_page || 1;
+
   const data = section.meta.embedData;
   // required to make deepclone below work
   removePosition(section);
@@ -96,34 +100,36 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
   // no need to copy the full dataset over and over
   delete section.meta.embedData;
 
-  const children = data.reduce((p, value) => {
-    const workingcopy = deepclone(section);
+  const children = data
+    .filter((_, index) => !limit || (limit * page > index && limit * (page - 2) < index))
+    .reduce((p, value) => {
+      const workingcopy = deepclone(section);
 
-    findPlaceholders(workingcopy, (node, prop, ancestors) => {
-      if (node.type === 'text'
+      findPlaceholders(workingcopy, (node, prop, ancestors) => {
+        if (node.type === 'text'
           && ancestors.length === 2
           && ancestors[1].type === 'paragraph'
           && node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).match('^[/.].*') && (
-        node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
+          node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
         || node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(contentext)
-      )) {
-        const parent = ancestors[1];
-        // construct an embed node
-        const uri = URI.parse(URI.resolve(baseurl, node[prop]
-          .replace(pattern, (_, expr) => dotprop.get(value, expr))));
-        node[prop] = node[prop]
-          .replace(pattern, (_, expr) => dotprop.get(value, expr));
-        const childNodes = [{ ...parent }];
-        parent.type = 'embed';
-        parent.children = childNodes;
-        parent.url = nodePath.resolve(nodePath.dirname(uri.path), `${nodePath.basename(uri.path, nodePath.extname(uri.path))}.${selector}${resourceext}`);
-        delete parent.value;
-      } else if (typeof node[prop] === 'string') {
-        node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
-      }
-    });
-    return [...p, ...workingcopy.children];
-  }, []);
+        )) {
+          const parent = ancestors[1];
+          // construct an embed node
+          const uri = URI.parse(URI.resolve(baseurl, node[prop]
+            .replace(pattern, (_, expr) => dotprop.get(value, expr))));
+          node[prop] = node[prop]
+            .replace(pattern, (_, expr) => dotprop.get(value, expr));
+          const childNodes = [{ ...parent }];
+          parent.type = 'embed';
+          parent.children = childNodes;
+          parent.url = nodePath.resolve(nodePath.dirname(uri.path), `${nodePath.basename(uri.path, nodePath.extname(uri.path))}.${selector}${resourceext}`);
+          delete parent.value;
+        } else if (typeof node[prop] === 'string') {
+          node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
+        }
+      });
+      return [...p, ...workingcopy.children];
+    }, []);
 
   section.children = children;
 }
