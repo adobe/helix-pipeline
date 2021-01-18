@@ -85,13 +85,13 @@ function hasPlaceholders(section) {
 /**
  * @param {MDAST} section
  */
-function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
+function fillPlaceholders(section, contentext, resourceext, baseurl, selector, hlxPage, hlxLimit) {
   if (!section.meta || (!section.meta.embedData && !Array.isArray(section.meta.embedData))) {
     return;
   }
 
-  const limit = section.meta.hlx_limit;
-  const page = section.meta.hlx_page || 1;
+  const limit = section.meta.hlx_limit || parseInt(hlxLimit, 10); // cannot be overridden
+  const page = parseInt(hlxPage, 10) || section.meta.hlx_page || 1; // can be overridden
 
   const data = section.meta.embedData;
   // required to make deepclone below work
@@ -172,7 +172,10 @@ async function fillDataSections(context, {
   secrets: { EMBED_SELECTOR },
   request: { params: { path } },
 }) {
-  const { content: { mdast }, request: { extension, url } } = context;
+  const {
+    content: { mdast },
+    request: { extension, url, params: { hlx_limit: l, hlx_page: p } = {} },
+  } = context;
 
   const resourceext = `.${extension}`;
   const contentext = nodePath.extname(path);
@@ -222,7 +225,7 @@ async function fillDataSections(context, {
   async function applyDataSections(section) {
     await extractData(section);
     remove(section, 'dataEmbed');
-    fillPlaceholders(section, contentext, resourceext, url, EMBED_SELECTOR);
+    fillPlaceholders(section, contentext, resourceext, url, EMBED_SELECTOR, p, l);
     normalizeLists(section);
   }
 
