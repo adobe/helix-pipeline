@@ -82,13 +82,23 @@ function hasPlaceholders(section) {
   }
 }
 
+function paginate(limit, page = 1) {
+  const upper = limit * page;
+  const lower = limit * (page - 1);
+  return (_, index) => !limit || (upper > index && lower <= index);
+}
+
 /**
  * @param {MDAST} section
  */
-function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
+function fillPlaceholders(section, contentext, resourceext, baseurl, selector, hlxPage, hlxLimit) {
   if (!section.meta || (!section.meta.embedData && !Array.isArray(section.meta.embedData))) {
     return;
   }
+
+  const limit = section.meta.hlx_limit || parseInt(hlxLimit, 10); // cannot be overridden
+  const page = parseInt(hlxPage, 10) || section.meta.hlx_page || 1; // can be overridden
+
   const data = section.meta.embedData;
   // required to make deepclone below work
   removePosition(section);
@@ -96,34 +106,36 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector) {
   // no need to copy the full dataset over and over
   delete section.meta.embedData;
 
-  const children = data.reduce((p, value) => {
-    const workingcopy = deepclone(section);
+  const children = data
+    .filter(paginate(limit, page))
+    .reduce((p, value) => {
+      const workingcopy = deepclone(section);
 
-    findPlaceholders(workingcopy, (node, prop, ancestors) => {
-      if (node.type === 'text'
+      findPlaceholders(workingcopy, (node, prop, ancestors) => {
+        if (node.type === 'text'
           && ancestors.length === 2
           && ancestors[1].type === 'paragraph'
           && node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).match('^[/.].*') && (
-        node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
+          node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
         || node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(contentext)
-      )) {
-        const parent = ancestors[1];
-        // construct an embed node
-        const uri = URI.parse(URI.resolve(baseurl, node[prop]
-          .replace(pattern, (_, expr) => dotprop.get(value, expr))));
-        node[prop] = node[prop]
-          .replace(pattern, (_, expr) => dotprop.get(value, expr));
-        const childNodes = [{ ...parent }];
-        parent.type = 'embed';
-        parent.children = childNodes;
-        parent.url = nodePath.resolve(nodePath.dirname(uri.path), `${nodePath.basename(uri.path, nodePath.extname(uri.path))}.${selector}${resourceext}`);
-        delete parent.value;
-      } else if (typeof node[prop] === 'string') {
-        node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
-      }
-    });
-    return [...p, ...workingcopy.children];
-  }, []);
+        )) {
+          const parent = ancestors[1];
+          // construct an embed node
+          const uri = URI.parse(URI.resolve(baseurl, node[prop]
+            .replace(pattern, (_, expr) => dotprop.get(value, expr))));
+          node[prop] = node[prop]
+            .replace(pattern, (_, expr) => dotprop.get(value, expr));
+          const childNodes = [{ ...parent }];
+          parent.type = 'embed';
+          parent.children = childNodes;
+          parent.url = nodePath.resolve(nodePath.dirname(uri.path), `${nodePath.basename(uri.path, nodePath.extname(uri.path))}.${selector}${resourceext}`);
+          delete parent.value;
+        } else if (typeof node[prop] === 'string') {
+          node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
+        }
+      });
+      return [...p, ...workingcopy.children];
+    }, []);
 
   section.children = children;
 }
@@ -166,7 +178,10 @@ async function fillDataSections(context, {
   secrets: { EMBED_SELECTOR },
   request: { params: { path } },
 }) {
-  const { content: { mdast }, request: { extension, url } } = context;
+  const {
+    content: { mdast },
+    request: { extension, url, params: { hlx_limit: l, hlx_page: p } = {} },
+  } = context;
 
   const resourceext = `.${extension}`;
   const contentext = nodePath.extname(path);
@@ -216,7 +231,7 @@ async function fillDataSections(context, {
   async function applyDataSections(section) {
     await extractData(section);
     remove(section, 'dataEmbed');
-    fillPlaceholders(section, contentext, resourceext, url, EMBED_SELECTOR);
+    fillPlaceholders(section, contentext, resourceext, url, EMBED_SELECTOR, p, l);
     normalizeLists(section);
   }
 
@@ -236,3 +251,4 @@ async function fillDataSections(context, {
 }
 
 module.exports = fillDataSections;
+module.exports.testable = { paginate };
