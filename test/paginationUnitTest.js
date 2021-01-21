@@ -40,7 +40,7 @@ describe('Test Pagination Helper #unit', () => {
   });
 
   it('Returns (complete) third page when page', () => {
-    const result = data.filter(paginate(10, 3));
-    assert.deepEqual(result, ['twentyone', 'twentytwo']);
+    const result = data.filter(paginate(3, 7));
+    assert.deepEqual(result, ['nineteen', 'twenty', 'twentyone']);
   });
 });
