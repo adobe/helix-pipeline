@@ -82,6 +82,12 @@ function hasPlaceholders(section) {
   }
 }
 
+function paginate(limit, page = 1) {
+  const upper = limit * page;
+  const lower = limit * (page - 1);
+  return (_, index) => !limit || (upper > index && lower <= index);
+}
+
 /**
  * @param {MDAST} section
  */
@@ -101,7 +107,7 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector, h
   delete section.meta.embedData;
 
   const children = data
-    .filter((_, index) => !limit || (limit * page > index && limit * (page - 2) < index))
+    .filter(paginate(limit, page))
     .reduce((p, value) => {
       const workingcopy = deepclone(section);
 
@@ -245,3 +251,4 @@ async function fillDataSections(context, {
 }
 
 module.exports = fillDataSections;
+module.exports.testable = { paginate };
