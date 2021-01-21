@@ -1,3 +1,15 @@
+# [13.5.0](https://github.com/adobe/helix-pipeline/compare/v13.4.3...v13.5.0) (2021-01-21)
+
+
+### Bug Fixes
+
+* **data-embeds:** prevent overriding limits ([f46e7ee](https://github.com/adobe/helix-pipeline/commit/f46e7ee86449ed2134a23c8c9e620da6c91e6f0a))
+
+
+### Features
+
+* **data-embeds:** allow metadata-driven pagination of data-embeds ([7c69a62](https://github.com/adobe/helix-pipeline/commit/7c69a620bcb8fdd069041ba8a7dfc2ebb4e8bfd6))
+
 ## [13.4.3](https://github.com/adobe/helix-pipeline/compare/v13.4.2...v13.4.3) (2021-01-21)
 
 
