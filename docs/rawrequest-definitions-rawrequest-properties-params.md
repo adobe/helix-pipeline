@@ -6,10 +6,9 @@ https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/propertie
 
 Parameters used to invoke the OpenWhisk action. These are either URL parameters added when invoking the action from the CDN or default parameters set during creation of the action.
 
-
-| Abstract            | Extensible | Status         | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                                |
-| :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | ------------------------------------------------------------------------- |
-| Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [rawrequest.schema.json\*](rawrequest.schema.json "open original schema") |
+| Abstract            | Extensible | Status         | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                               |
+| :------------------ | :--------- | :------------- | :----------- | :---------------- | :-------------------- | :------------------ | :----------------------------------------------------------------------- |
+| Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [rawrequest.schema.json*](rawrequest.schema.json "open original schema") |
 
 ## params Type
 
@@ -17,29 +16,31 @@ Parameters used to invoke the OpenWhisk action. These are either URL parameters 
 
 # undefined Properties
 
-| Property                        | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                              |
-| :------------------------------ | -------- | -------- | -------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [owner](#owner)                 | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-owner.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/owner")                 |
-| [repo](#repo)                   | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-repo.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/repo")                   |
-| [ref](#ref)                     | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-ref.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/ref")                     |
-| [branch](#branch)               | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-branch.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/branch")               |
-| [path](#path)                   | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-path.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/path")                   |
-| [rootPath](#rootpath)           | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-rootpath.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/rootPath")           |
-| [strain](#strain)               | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-strain.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/strain")               |
-| [\_\_ow_headers](#__ow_headers) | `object` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/\_\_ow_headers") |
-| Additional Properties           | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-additionalproperties.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/additionalProperties")         |
+| Property                      | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                       |
+| :---------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [owner](#owner)               | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-owner.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/owner")               |
+| [repo](#repo)                 | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-repo.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/repo")                 |
+| [ref](#ref)                   | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-ref.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/ref")                   |
+| [branch](#branch)             | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-branch.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/branch")             |
+| [path](#path)                 | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-path.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/path")                 |
+| [rootPath](#rootpath)         | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-rootpath.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/rootPath")         |
+| [strain](#strain)             | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-strain.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/strain")             |
+| [__ow_headers](#__ow_headers) | `object` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers") |
+| Additional Properties         | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-params-additionalproperties.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/additionalProperties")       |
 
 ## owner
 
 Owner of the GitHub repository. This is the name of a user or organization.
 
-
 `owner`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-owner.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/owner")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-owner.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/owner")
 
 ### owner Type
 
@@ -49,13 +50,15 @@ Owner of the GitHub repository. This is the name of a user or organization.
 
 Repository where content originates
 
-
 `repo`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-repo.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/repo")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-repo.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/repo")
 
 ### repo Type
 
@@ -65,13 +68,15 @@ Repository where content originates
 
 Name of the branch or tag or the SHA of the commit
 
-
 `ref`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-ref.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/ref")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-ref.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/ref")
 
 ### ref Type
 
@@ -81,13 +86,15 @@ Name of the branch or tag or the SHA of the commit
 
 Name of the branch or tag. defaults back to the value of 'ref' if missing.
 
-
 `branch`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-branch.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/branch")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-branch.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/branch")
 
 ### branch Type
 
@@ -97,13 +104,15 @@ Name of the branch or tag. defaults back to the value of 'ref' if missing.
 
 Path to the requested (Markdown) file
 
-
 `path`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-path.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/path")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-path.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/path")
 
 ### path Type
 
@@ -119,13 +128,15 @@ Path to the requested (Markdown) file
 
 The request root path of the current strain.
 
-
 `rootPath`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-rootpath.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/rootPath")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-rootpath.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/rootPath")
 
 ### rootPath Type
 
@@ -141,33 +152,37 @@ The request root path of the current strain.
 
 The resolved strain (variant)
 
-
 `strain`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-strain.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/strain")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-strain.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/strain")
 
 ### strain Type
 
 `string`
 
-## \_\_ow_headers
+## \__ow_headers
 
 Deprecated: The original OpenWhisk request headers
 
-
 `__ow_headers`
 
--   is optional
--   Type: `object` ([Details](rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md))
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/\_\_ow_headers")
+*   is optional
 
-### \_\_ow_headers Type
+*   Type: `object` ([Details](rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md))
 
-`object` ([Details](rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md))
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/\__ow_headers")
+
+### \__ow_headers Type
+
+`object` ([Details](rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md))
 
 ## Additional Properties
 
@@ -175,11 +190,13 @@ Additional properties are allowed, as long as they follow this schema:
 
 All other parameters are interpreted as string.
 
+*   is optional
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-additionalproperties.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/additionalProperties")
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-params-additionalproperties.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/additionalProperties")
 
 ### additionalProperties Type
 

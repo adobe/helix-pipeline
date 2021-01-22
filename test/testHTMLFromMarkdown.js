@@ -567,4 +567,15 @@ describe('Testing Markdown conversion', () => {
       '<table><thead><tr><th>Video</th><th>Text</th></tr></thead><tbody><tr><td>youtube</td><td><p><img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"><img class="icon icon-illustrator" src="/icons/illustrator.svg" alt="illustrator icon"></p></td></tr></tbody></table>',
     );
   });
+
+  it('translates html in tables with self link', async () => {
+    await assertMd(
+      `
+            |Links|
+            |-----|
+            |<p><a href="https://www.adobe.com">https://www.adobe.com</a></p>|
+    `,
+      '<body><table><thead><tr><th>Links</th></tr></thead><tbody><tr><td><p><a href="https://www.adobe.com">https://www.adobe.com</a></p></td></tr></tbody></table></body>',
+    );
+  });
 });

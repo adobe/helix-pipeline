@@ -6,9 +6,8 @@ https://ns.adobe.com/helix/pipeline/meta
 
 Content and Section Metadata Properties
 
-
 | Abstract               | Extensible | Status      | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                  |
-| :--------------------- | ---------- | ----------- | ----------------------- | :---------------- | --------------------- | ------------------- | ----------------------------------------------------------- |
+| :--------------------- | :--------- | :---------- | :---------------------- | :---------------- | :-------------------- | :------------------ | :---------------------------------------------------------- |
 | Cannot be instantiated | Yes        | Stabilizing | Unknown identifiability | Forbidden         | Allowed               | none                | [meta.schema.json](meta.schema.json "open original schema") |
 
 ## Meta Type
@@ -25,26 +24,28 @@ Reference this group by using
 {"$ref":"https://ns.adobe.com/helix/pipeline/meta#/definitions/meta"}
 ```
 
-| Property            | Type     | Required | Nullable       | Defined by                                                                                                                               |
-| :------------------ | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| [class](#class)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-class.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/class")     |
-| [tagname](#tagname) | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-tagname.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/tagname") |
-| [types](#types)     | `array`  | Optional | cannot be null | [Meta](meta-definitions-meta-properties-types.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/types")     |
-| [title](#title)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-title.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title")     |
-| [intro](#intro)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-intro.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro")     |
-| [image](#image)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-image.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image")     |
+| Property            | Type     | Required | Nullable       | Defined by                                                                                                                          |
+| :------------------ | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------- |
+| [class](#class)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-class.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/class")     |
+| [tagname](#tagname) | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-tagname.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/tagname") |
+| [types](#types)     | `array`  | Optional | cannot be null | [Meta](meta-definitions-meta-properties-types.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/types")     |
+| [title](#title)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-title.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title")     |
+| [intro](#intro)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-intro.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro")     |
+| [image](#image)     | `string` | Optional | cannot be null | [Meta](meta-definitions-meta-properties-image.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image")     |
 
 ### class
 
 The CSS class to use for the section instead of the default `hlx-section` one
 
-
 `class`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Meta](meta-definitions-meta-properties-class.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/class")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Meta](meta-definitions-meta-properties-class.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/class")
 
 #### class Type
 
@@ -54,13 +55,15 @@ The CSS class to use for the section instead of the default `hlx-section` one
 
 The element tag name to use for the section instead of the default `div` one (i.e. `section`, `main`, `aside`)
 
-
 `tagname`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Meta](meta-definitions-meta-properties-tagname.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/tagname")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Meta](meta-definitions-meta-properties-tagname.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/tagname")
 
 #### tagname Type
 
@@ -70,13 +73,15 @@ The element tag name to use for the section instead of the default `div` one (i.
 
 The inferred class names for the section
 
-
 `types`
 
--   is optional
--   Type: `string[]`
--   cannot be null
--   defined in: [Meta](meta-definitions-meta-properties-types.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/types")
+*   is optional
+
+*   Type: `string[]`
+
+*   cannot be null
+
+*   defined in: [Meta](meta-definitions-meta-properties-types.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/types")
 
 #### types Type
 
@@ -86,13 +91,15 @@ The inferred class names for the section
 
 Extracted title of the document
 
-
 `title`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Meta](meta-definitions-meta-properties-title.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Meta](meta-definitions-meta-properties-title.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/title")
 
 #### title Type
 
@@ -102,13 +109,15 @@ Extracted title of the document
 
 Extracted first paragraph of the document
 
-
 `intro`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Meta](meta-definitions-meta-properties-intro.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Meta](meta-definitions-meta-properties-intro.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/intro")
 
 #### intro Type
 
@@ -118,13 +127,15 @@ Extracted first paragraph of the document
 
 Path (can be relative) to the first image in the document
 
-
 `image`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Meta](meta-definitions-meta-properties-image.md "https&#x3A;//ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Meta](meta-definitions-meta-properties-image.md "https://ns.adobe.com/helix/pipeline/meta#/definitions/meta/properties/image")
 
 #### image Type
 

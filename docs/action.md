@@ -6,9 +6,8 @@ https://ns.adobe.com/helix/pipeline/action
 
 Tracks the OpenWhisk action invocation
 
-
 | Abstract            | Extensible | Status      | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                      |
-| :------------------ | ---------- | ----------- | ------------ | :---------------- | --------------------- | ------------------- | --------------------------------------------------------------- |
+| :------------------ | :--------- | :---------- | :----------- | :---------------- | :-------------------- | :------------------ | :-------------------------------------------------------------- |
 | Can be instantiated | No         | Stabilizing | No           | Forbidden         | Forbidden             | none                | [action.schema.json](action.schema.json "open original schema") |
 
 ## Action Type
@@ -17,29 +16,31 @@ Tracks the OpenWhisk action invocation
 
 # Action Properties
 
-| Property                      | Type     | Required | Nullable       | Defined by                                                                                                             |
-| :---------------------------- | -------- | -------- | -------------- | :--------------------------------------------------------------------------------------------------------------------- |
-| [request](#request)           | Merged   | Optional | cannot be null | [Action](action-properties-raw-request.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/properties/request")   |
-| [logger](#logger)             | `object` | Optional | cannot be null | [Action](action-properties-logger.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/logger")             |
-| [debug](#debug)               | `object` | Optional | cannot be null | [Action](action-properties-debug.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/debug")               |
-| [secrets](#secrets)           | `object` | Optional | cannot be null | [Action](action-properties-secrets.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/secrets")          |
-| [transformer](#transformer)   | `object` | Optional | cannot be null | [Action](action-properties-transformer.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/transformer")   |
-| [downloader](#downloader)     | `object` | Optional | cannot be null | [Action](action-properties-downloader.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/downloader")     |
-| [versionLock](#versionlock)   | `object` | Optional | cannot be null | [Action](action-properties-versionlock.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/versionLock")   |
-| [resolver](#resolver)         | `object` | Optional | cannot be null | [Action](action-properties-resolver.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/resolver")         |
-| [markupconfig](#markupconfig) | `object` | Optional | cannot be null | [Action](action-properties-markupconfig.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/markupconfig") |
+| Property                      | Type     | Required | Nullable       | Defined by                                                                                                        |
+| :---------------------------- | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------- |
+| [request](#request)           | Merged   | Optional | cannot be null | [Action](action-properties-raw-request.md "https://ns.adobe.com/helix/pipeline/rawrequest#/properties/request")   |
+| [logger](#logger)             | `object` | Optional | cannot be null | [Action](action-properties-logger.md "https://ns.adobe.com/helix/pipeline/action#/properties/logger")             |
+| [debug](#debug)               | `object` | Optional | cannot be null | [Action](action-properties-debug.md "https://ns.adobe.com/helix/pipeline/action#/properties/debug")               |
+| [secrets](#secrets)           | `object` | Optional | cannot be null | [Action](action-properties-secrets.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/secrets")          |
+| [transformer](#transformer)   | `object` | Optional | cannot be null | [Action](action-properties-transformer.md "https://ns.adobe.com/helix/pipeline/action#/properties/transformer")   |
+| [downloader](#downloader)     | `object` | Optional | cannot be null | [Action](action-properties-downloader.md "https://ns.adobe.com/helix/pipeline/action#/properties/downloader")     |
+| [versionLock](#versionlock)   | `object` | Optional | cannot be null | [Action](action-properties-versionlock.md "https://ns.adobe.com/helix/pipeline/action#/properties/versionLock")   |
+| [resolver](#resolver)         | `object` | Optional | cannot be null | [Action](action-properties-resolver.md "https://ns.adobe.com/helix/pipeline/action#/properties/resolver")         |
+| [markupconfig](#markupconfig) | `object` | Optional | cannot be null | [Action](action-properties-markupconfig.md "https://ns.adobe.com/helix/pipeline/action#/properties/markupconfig") |
 
 ## request
 
 The Request Object used for Invoking OpenWhisk
 
-
 `request`
 
--   is optional
--   Type: `object` ([Raw Request](action-properties-raw-request.md))
--   cannot be null
--   defined in: [Action](action-properties-raw-request.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/properties/request")
+*   is optional
+
+*   Type: `object` ([Raw Request](action-properties-raw-request.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-raw-request.md "https://ns.adobe.com/helix/pipeline/rawrequest#/properties/request")
 
 ### request Type
 
@@ -47,19 +48,21 @@ The Request Object used for Invoking OpenWhisk
 
 all of
 
--   [Untitled undefined type in Raw Request](rawrequest-definitions-rawrequest.md "check type definition")
+*   [Untitled undefined type in Raw Request](rawrequest-definitions-rawrequest.md "check type definition")
 
 ## logger
 
 A helix-log [SimpleInterface](https://github.com/adobe/helix-log) logger instance.
 
-
 `logger`
 
--   is optional
--   Type: `object` ([Details](action-properties-logger.md))
--   cannot be null
--   defined in: [Action](action-properties-logger.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/logger")
+*   is optional
+
+*   Type: `object` ([Details](action-properties-logger.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-logger.md "https://ns.adobe.com/helix/pipeline/action#/properties/logger")
 
 ### logger Type
 
@@ -69,13 +72,15 @@ A helix-log [SimpleInterface](https://github.com/adobe/helix-log) logger instanc
 
 Internal information related to debugging.
 
-
 `debug`
 
--   is optional
--   Type: `object` ([Details](action-properties-debug.md))
--   cannot be null
--   defined in: [Action](action-properties-debug.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/debug")
+*   is optional
+
+*   Type: `object` ([Details](action-properties-debug.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-debug.md "https://ns.adobe.com/helix/pipeline/action#/properties/debug")
 
 ### debug Type
 
@@ -85,13 +90,15 @@ Internal information related to debugging.
 
 Secrets passed into the pipeline such as API Keys or configuration settings.
 
-
 `secrets`
 
--   is optional
--   Type: `object` ([Secrets](action-properties-secrets.md))
--   cannot be null
--   defined in: [Action](action-properties-secrets.md "https&#x3A;//ns.adobe.com/helix/pipeline/secrets#/properties/secrets")
+*   is optional
+
+*   Type: `object` ([Secrets](action-properties-secrets.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-secrets.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/secrets")
 
 ### secrets Type
 
@@ -101,13 +108,15 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 A VDOMTransformer instance
 
-
 `transformer`
 
--   is optional
--   Type: `object` ([Details](action-properties-transformer.md))
--   cannot be null
--   defined in: [Action](action-properties-transformer.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/transformer")
+*   is optional
+
+*   Type: `object` ([Details](action-properties-transformer.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-transformer.md "https://ns.adobe.com/helix/pipeline/action#/properties/transformer")
 
 ### transformer Type
 
@@ -117,13 +126,15 @@ A VDOMTransformer instance
 
 A Downloader instance
 
-
 `downloader`
 
--   is optional
--   Type: `object` ([Details](action-properties-downloader.md))
--   cannot be null
--   defined in: [Action](action-properties-downloader.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/downloader")
+*   is optional
+
+*   Type: `object` ([Details](action-properties-downloader.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-downloader.md "https://ns.adobe.com/helix/pipeline/action#/properties/downloader")
 
 ### downloader Type
 
@@ -133,13 +144,15 @@ A Downloader instance
 
 A VersionLock instance
 
-
 `versionLock`
 
--   is optional
--   Type: `object` ([Details](action-properties-versionlock.md))
--   cannot be null
--   defined in: [Action](action-properties-versionlock.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/versionLock")
+*   is optional
+
+*   Type: `object` ([Details](action-properties-versionlock.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-versionlock.md "https://ns.adobe.com/helix/pipeline/action#/properties/versionLock")
 
 ### versionLock Type
 
@@ -149,13 +162,15 @@ A VersionLock instance
 
 An universal deploy resolver
 
-
 `resolver`
 
--   is optional
--   Type: `object` ([Details](action-properties-resolver.md))
--   cannot be null
--   defined in: [Action](action-properties-resolver.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/resolver")
+*   is optional
+
+*   Type: `object` ([Details](action-properties-resolver.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-resolver.md "https://ns.adobe.com/helix/pipeline/action#/properties/resolver")
 
 ### resolver Type
 
@@ -165,13 +180,15 @@ An universal deploy resolver
 
 A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)
 
-
 `markupconfig`
 
--   is optional
--   Type: `object` ([Details](action-properties-markupconfig.md))
--   cannot be null
--   defined in: [Action](action-properties-markupconfig.md "https&#x3A;//ns.adobe.com/helix/pipeline/action#/properties/markupconfig")
+*   is optional
+
+*   Type: `object` ([Details](action-properties-markupconfig.md))
+
+*   cannot be null
+
+*   defined in: [Action](action-properties-markupconfig.md "https://ns.adobe.com/helix/pipeline/action#/properties/markupconfig")
 
 ### markupconfig Type
 
