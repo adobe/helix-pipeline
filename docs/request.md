@@ -6,9 +6,8 @@ https://ns.adobe.com/helix/pipeline/request
 
 The HTTP Request
 
-
 | Abstract            | Extensible | Status      | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                        |
-| :------------------ | ---------- | ----------- | ------------ | :---------------- | --------------------- | ------------------- | ----------------------------------------------------------------- |
+| :------------------ | :--------- | :---------- | :----------- | :---------------- | :-------------------- | :------------------ | :---------------------------------------------------------------- |
 | Can be instantiated | No         | Stabilizing | No           | Forbidden         | Forbidden             | none                | [request.schema.json](request.schema.json "open original schema") |
 
 ## Request Type
@@ -17,30 +16,32 @@ The HTTP Request
 
 # Request Properties
 
-| Property                    | Type          | Required | Nullable       | Defined by                                                                                                              |
-| :-------------------------- | ------------- | -------- | -------------- | :---------------------------------------------------------------------------------------------------------------------- |
-| [url](#url)                 | `string`      | Optional | cannot be null | [Request](request-properties-url.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/url")                 |
-| [path](#path)               | `string`      | Optional | cannot be null | [Request](request-properties-path.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/path")               |
-| [pathInfo](#pathinfo)       | `string`      | Optional | cannot be null | [Request](request-properties-pathinfo.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/pathInfo")       |
-| [rootPath](#rootpath)       | `string`      | Optional | cannot be null | [Request](request-properties-rootpath.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/rootPath")       |
-| [selector](#selector)       | `string`      | Optional | cannot be null | [Request](request-properties-selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/selector")       |
-| [extension](#extension)     | `string`      | Optional | cannot be null | [Request](request-properties-extension.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/extension")     |
-| [method](#method)           | `string`      | Optional | cannot be null | [Request](request-properties-method.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/method")           |
-| [headers](#headers)         | Not specified | Optional | cannot be null | [Request](request-properties-headers.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/headers")         |
-| [params](#params)           | `object`      | Optional | cannot be null | [Request](request-properties-params.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/params")           |
-| [queryString](#querystring) | `string`      | Optional | cannot be null | [Request](request-properties-querystring.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/queryString") |
+| Property                    | Type          | Required | Nullable       | Defined by                                                                                                         |
+| :-------------------------- | :------------ | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------- |
+| [url](#url)                 | `string`      | Optional | cannot be null | [Request](request-properties-url.md "https://ns.adobe.com/helix/pipeline/request#/properties/url")                 |
+| [path](#path)               | `string`      | Optional | cannot be null | [Request](request-properties-path.md "https://ns.adobe.com/helix/pipeline/request#/properties/path")               |
+| [pathInfo](#pathinfo)       | `string`      | Optional | cannot be null | [Request](request-properties-pathinfo.md "https://ns.adobe.com/helix/pipeline/request#/properties/pathInfo")       |
+| [rootPath](#rootpath)       | `string`      | Optional | cannot be null | [Request](request-properties-rootpath.md "https://ns.adobe.com/helix/pipeline/request#/properties/rootPath")       |
+| [selector](#selector)       | `string`      | Optional | cannot be null | [Request](request-properties-selector.md "https://ns.adobe.com/helix/pipeline/request#/properties/selector")       |
+| [extension](#extension)     | `string`      | Optional | cannot be null | [Request](request-properties-extension.md "https://ns.adobe.com/helix/pipeline/request#/properties/extension")     |
+| [method](#method)           | `string`      | Optional | cannot be null | [Request](request-properties-method.md "https://ns.adobe.com/helix/pipeline/request#/properties/method")           |
+| [headers](#headers)         | Not specified | Optional | cannot be null | [Request](request-properties-headers.md "https://ns.adobe.com/helix/pipeline/request#/properties/headers")         |
+| [params](#params)           | `object`      | Optional | cannot be null | [Request](request-properties-params.md "https://ns.adobe.com/helix/pipeline/request#/properties/params")           |
+| [queryString](#querystring) | `string`      | Optional | cannot be null | [Request](request-properties-querystring.md "https://ns.adobe.com/helix/pipeline/request#/properties/queryString") |
 
 ## url
 
 The path and request parameters of the client request URL.
 
-
 `url`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-url.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/url")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-url.md "https://ns.adobe.com/helix/pipeline/request#/properties/url")
 
 ### url Type
 
@@ -56,13 +57,15 @@ The path and request parameters of the client request URL.
 
 The path of the client request URL
 
-
 `path`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-path.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/path")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-path.md "https://ns.adobe.com/helix/pipeline/request#/properties/path")
 
 ### path Type
 
@@ -78,13 +81,15 @@ The path of the client request URL
 
 The part of the client path that is relative to the rootPath.
 
-
 `pathInfo`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-pathinfo.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/pathInfo")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-pathinfo.md "https://ns.adobe.com/helix/pipeline/request#/properties/pathInfo")
 
 ### pathInfo Type
 
@@ -100,13 +105,15 @@ The part of the client path that is relative to the rootPath.
 
 The request root path of the current strain.
 
-
 `rootPath`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-rootpath.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/rootPath")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-rootpath.md "https://ns.adobe.com/helix/pipeline/request#/properties/rootPath")
 
 ### rootPath Type
 
@@ -122,13 +129,15 @@ The request root path of the current strain.
 
 The selector (sub-type indicator).
 
-
 `selector`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-selector.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/selector")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-selector.md "https://ns.adobe.com/helix/pipeline/request#/properties/selector")
 
 ### selector Type
 
@@ -148,13 +157,15 @@ The selector (sub-type indicator).
 
 The extension of the requested resource.
 
-
 `extension`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-extension.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/extension")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-extension.md "https://ns.adobe.com/helix/pipeline/request#/properties/extension")
 
 ### extension Type
 
@@ -174,13 +185,15 @@ The extension of the requested resource.
 
 The HTTP method of the request. Note: method names can be lower-case.
 
-
 `method`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-method.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/method")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-method.md "https://ns.adobe.com/helix/pipeline/request#/properties/method")
 
 ### method Type
 
@@ -190,13 +203,15 @@ The HTTP method of the request. Note: method names can be lower-case.
 
 The HTTP headers of the request. Note: all header names will be lower-case.
 
-
 `headers`
 
--   is optional
--   Type: unknown
--   cannot be null
--   defined in: [Request](request-properties-headers.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/headers")
+*   is optional
+
+*   Type: unknown
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-headers.md "https://ns.adobe.com/helix/pipeline/request#/properties/headers")
 
 ### headers Type
 
@@ -206,13 +221,15 @@ unknown
 
 The passed through (and filtered) URL parameters of the request.
 
-
 `params`
 
--   is optional
--   Type: `object` ([Details](request-properties-params.md))
--   cannot be null
--   defined in: [Request](request-properties-params.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/params")
+*   is optional
+
+*   Type: `object` ([Details](request-properties-params.md))
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-params.md "https://ns.adobe.com/helix/pipeline/request#/properties/params")
 
 ### params Type
 
@@ -222,13 +239,15 @@ The passed through (and filtered) URL parameters of the request.
 
 The original query string.
 
-
 `queryString`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Request](request-properties-querystring.md "https&#x3A;//ns.adobe.com/helix/pipeline/request#/properties/queryString")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Request](request-properties-querystring.md "https://ns.adobe.com/helix/pipeline/request#/properties/queryString")
 
 ### queryString Type
 

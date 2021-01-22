@@ -6,10 +6,9 @@ https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/propertie
 
 The headers of the request made to OpenWhisk (or Simulator)
 
-
-| Abstract            | Extensible | Status         | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                                |
-| :------------------ | ---------- | -------------- | ------------ | :---------------- | --------------------- | ------------------- | ------------------------------------------------------------------------- |
-| Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [rawrequest.schema.json\*](rawrequest.schema.json "open original schema") |
+| Abstract            | Extensible | Status         | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                               |
+| :------------------ | :--------- | :------------- | :----------- | :---------------- | :-------------------- | :------------------ | :----------------------------------------------------------------------- |
+| Can be instantiated | No         | Unknown status | No           | Forbidden         | Allowed               | none                | [rawrequest.schema.json*](rawrequest.schema.json "open original schema") |
 
 ## headers Type
 
@@ -17,25 +16,27 @@ The headers of the request made to OpenWhisk (or Simulator)
 
 # undefined Properties
 
-| Property                                                | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                        |
-| :------------------------------------------------------ | -------- | -------- | -------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| [x-openwhisk-activation-id](#x-openwhisk-activation-id) | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-openwhisk-activation-id.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-openwhisk-activation-id") |
-| [x-request-id](#x-request-id)                           | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-request-id.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-request-id")                           |
-| [x-cdn-request-id](#x-cdn-request-id)                   | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-cdn-request-id.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-cdn-request-id")                   |
-| [x-backend-name](#x-backend-name)                       | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-backend-name.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-backend-name")                       |
-| Additional Properties                                   | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-additionalproperties.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/additionalProperties")                                 |
+| Property                                                | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                   |
+| :------------------------------------------------------ | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [x-openwhisk-activation-id](#x-openwhisk-activation-id) | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-openwhisk-activation-id.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-openwhisk-activation-id") |
+| [x-request-id](#x-request-id)                           | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-request-id.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-request-id")                           |
+| [x-cdn-request-id](#x-cdn-request-id)                   | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-cdn-request-id.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-cdn-request-id")                   |
+| [x-backend-name](#x-backend-name)                       | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-backend-name.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-backend-name")                       |
+| Additional Properties                                   | `string` | Optional | cannot be null | [Raw Request](rawrequest-definitions-rawrequest-properties-headers-additionalproperties.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/additionalProperties")                                 |
 
 ## x-openwhisk-activation-id
 
 OpenWhisk Activation ID
 
-
 `x-openwhisk-activation-id`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-openwhisk-activation-id.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-openwhisk-activation-id")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-openwhisk-activation-id.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-openwhisk-activation-id")
 
 ### x-openwhisk-activation-id Type
 
@@ -45,13 +46,15 @@ OpenWhisk Activation ID
 
 Request ID generated by OpenWhisk
 
-
 `x-request-id`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-request-id.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-request-id")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-request-id.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-request-id")
 
 ### x-request-id Type
 
@@ -61,13 +64,15 @@ Request ID generated by OpenWhisk
 
 Request ID generated by the CDN
 
-
 `x-cdn-request-id`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-cdn-request-id.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-cdn-request-id")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-cdn-request-id.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-cdn-request-id")
 
 ### x-cdn-request-id Type
 
@@ -77,13 +82,15 @@ Request ID generated by the CDN
 
 Name of the Backend handling the request.
 
-
 `x-backend-name`
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-backend-name.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-backend-name")
+*   is optional
+
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-properties-x-backend-name.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/properties/x-backend-name")
 
 ### x-backend-name Type
 
@@ -95,11 +102,13 @@ Additional properties are allowed, as long as they follow this schema:
 
 
 
+*   is optional
 
--   is optional
--   Type: `string`
--   cannot be null
--   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-additionalproperties.md "https&#x3A;//ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/additionalProperties")
+*   Type: `string`
+
+*   cannot be null
+
+*   defined in: [Raw Request](rawrequest-definitions-rawrequest-properties-headers-additionalproperties.md "https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers/additionalProperties")
 
 ### additionalProperties Type
 
