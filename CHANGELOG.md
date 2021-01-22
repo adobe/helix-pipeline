@@ -1,3 +1,10 @@
+## [13.5.1](https://github.com/adobe/helix-pipeline/compare/v13.5.0...v13.5.1) (2021-01-22)
+
+
+### Bug Fixes
+
+* **md:** fix gfm-autolink-literal@0.5.4 to avoid regression ([#940](https://github.com/adobe/helix-pipeline/issues/940)) ([d5fbf4d](https://github.com/adobe/helix-pipeline/commit/d5fbf4d50badf6221b95da4dc226b57d12a54cba)), closes [#939](https://github.com/adobe/helix-pipeline/issues/939)
+
 # [13.5.0](https://github.com/adobe/helix-pipeline/compare/v13.4.3...v13.5.0) (2021-01-21)
 
 
