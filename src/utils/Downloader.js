@@ -159,8 +159,8 @@ class Downloader {
       if (res.status === 404) {
         if (!opts.errorOn404) {
           logger.info(`Could not find file at ${uri}`);
-          res.body = 'not found';
-          return res;
+          // res.body = 'not found';
+          return new fetchAPI.Response('not found', { status: res.status, headers: res.headers });
         }
         logger.info(`Could not find file at ${uri}`);
         setdefault(context, 'response', {}).status = 404;
@@ -267,7 +267,7 @@ class Downloader {
    * disconnect clients
    */
   destroy() {
-    this._fetchContext.disconnectAll();
+    this._fetchContext.reset();
   }
 }
 

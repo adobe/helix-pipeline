@@ -222,7 +222,7 @@ describe('Test Download', () => {
 
     assert.equal(res.ok, false);
     assert.equal(res.status, 404);
-    assert.equal(res.body, 'not found');
+    assert.equal(await res.text(), 'not found');
     assert.equal(context.error, undefined);
 
     mgr.destroy();
