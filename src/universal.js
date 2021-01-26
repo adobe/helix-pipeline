@@ -12,7 +12,7 @@
 
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
-const { Response } = require('node-fetch');
+const { Response } = require('@adobe/helix-fetch');
 const { wrap } = require('@adobe/openwhisk-action-utils');
 const { logger } = require('@adobe/openwhisk-action-logger');
 const { wrap: statusCheck } = require('@adobe/helix-status');
@@ -133,7 +133,7 @@ function extractActionContext(req, context, params) {
       disclosed[key] = value;
     }
   });
-  const headers = Object.entries(req.headers.raw()).reduce((p, [key, value]) => {
+  const headers = Object.entries(req.headers.plain()).reduce((p, [key, value]) => {
     // eslint-disable-next-line prefer-destructuring
     p[key] = value[0];
     return p;

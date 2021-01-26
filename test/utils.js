@@ -12,7 +12,7 @@
 
 const path = require('path');
 const querystring = require('querystring');
-const { Request } = require('node-fetch');
+const { Request } = require('@adobe/helix-fetch');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const { setupMocha } = require('@pollyjs/core');

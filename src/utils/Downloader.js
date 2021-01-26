@@ -38,7 +38,7 @@ class Downloader {
     }
     if (options.forceHttp1 || process.env.HELIX_PIPELINE_FORCE_HTTP1) {
       this._fetchContext = fetchAPI.context({
-        httpsProtocols: ['http1'],
+        alpnProtocols: [fetchAPI.ALPN_HTTP1_1],
       });
     } else {
       /* istanbul ignore next */
