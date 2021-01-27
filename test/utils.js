@@ -62,8 +62,8 @@ function setupPolly(opts) {
   });
 }
 
-function retrofitResponse(resp) {
-  let body = resp.body ? String(resp.body) : null;
+async function retrofitResponse(resp) {
+  let body = await resp.text();
   try {
     body = JSON.parse(body);
   } catch {
