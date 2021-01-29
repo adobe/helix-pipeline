@@ -61,7 +61,7 @@ function create() {
     context.response.headers['Server-Timing'] = [
       timing,
       `total;dur=${total}`,
-    ];
+    ].join(',');
   }
 
   return {
