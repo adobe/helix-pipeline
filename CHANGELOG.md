@@ -1,3 +1,11 @@
+## [13.5.4](https://github.com/adobe/helix-pipeline/compare/v13.5.3...v13.5.4) (2021-01-29)
+
+
+### Bug Fixes
+
+* **pipe:** isProduction() check doesn't work in AWS ([4658e99](https://github.com/adobe/helix-pipeline/commit/4658e99505e97c08168517c5dceb3d0e7a7182d6))
+* **pipeline:** don't use array as header ([5830b3c](https://github.com/adobe/helix-pipeline/commit/5830b3c201df8cc9158a98426f11471a0424f25a))
+
 ## [13.5.3](https://github.com/adobe/helix-pipeline/compare/v13.5.2...v13.5.3) (2021-01-25)
 
 
