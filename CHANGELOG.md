@@ -1,3 +1,10 @@
+# [13.6.0](https://github.com/adobe/helix-pipeline/compare/v13.5.4...v13.6.0) (2021-01-29)
+
+
+### Features
+
+* migrate to helix-fetch v2 ([92c7484](https://github.com/adobe/helix-pipeline/commit/92c74841e68cbcc6dcbf3548a0ef51483ce0051d))
+
 ## [13.5.4](https://github.com/adobe/helix-pipeline/compare/v13.5.3...v13.5.4) (2021-01-29)
 
 
