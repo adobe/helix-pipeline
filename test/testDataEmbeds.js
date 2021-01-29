@@ -26,7 +26,7 @@ const Downloader = require('../src/utils/Downloader.js');
 const params = {
   path: '/hello.md',
   __ow_method: 'get',
-  owner: 'trieloff',
+  owner: 'adobe',
   __ow_headers: {
     'X-Forwarded-Port': '443',
     'X-CDN-Request-Id': '2a208a89-e071-44cf-aee9-220880da4c1e',
@@ -59,7 +59,7 @@ const params = {
     'User-Agent':
       'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.87 Safari/537.36',
   },
-  repo: 'soupdemo',
+  repo: 'test-repo',
   ref: 'master',
   selector: 'md',
 };
@@ -102,6 +102,8 @@ describe('Integration Test with Data Embeds', () => {
   async function testEmbeds(data, markdown, html, status = 200) {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/fstab.yaml')
+      .reply(() => [404])
+      .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404]);
 
     nock('https://adobeioruntime.net')
@@ -518,6 +520,8 @@ describe('Integration Test with Data Embeds (version locked)', () => {
   async function testEmbeds(data, markdown, html, status = 200) {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/fstab.yaml')
+      .reply(() => [404])
+      .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404]);
 
     nock('https://adobeioruntime.net')
@@ -609,6 +613,8 @@ describe('Integration Test with Data Embeds (resolver)', () => {
   async function testEmbeds(data, markdown, html, status = 200) {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/fstab.yaml')
+      .reply(() => [404])
+      .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404]);
 
     nock('https://adobeioruntime.net')

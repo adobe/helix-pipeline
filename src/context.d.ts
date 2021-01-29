@@ -198,9 +198,7 @@ export interface MDAST {
         /**
          * The MDAST node type. Each section can be treated as a standalone document.
          */
-        type?: {
-          [k: string]: unknown;
-        };
+        type?: "root";
         position?: Position;
         /**
          * The AST nodes making up the section. Section dividers are not included.
@@ -281,7 +279,7 @@ export interface MDAST {
   /**
    * For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.
    */
-  align?: (null | ("left" | "right" | "center" | null))[];
+  align?: ("left" | "right" | "center" | null)[];
   /**
    * For code, a lang field can be present. It represents the language of computer code being marked up.
    */

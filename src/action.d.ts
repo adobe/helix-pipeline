@@ -116,6 +116,18 @@ export interface Action {
     [k: string]: unknown;
   };
   /**
+   * A VersionLock instance
+   */
+  versionLock?: {
+    [k: string]: unknown;
+  };
+  /**
+   * An universal deploy resolver
+   */
+  resolver?: {
+    [k: string]: unknown;
+  };
+  /**
    * A [markup configuration](https://github.com/adobe/helix-shared/blob/master/docs/markup.md)
    */
   markupconfig?: {

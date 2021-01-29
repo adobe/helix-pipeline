@@ -50,11 +50,10 @@ describe('Testing universal adapter', () => {
         body: null,
       },
     };
-    const out = retrofitResponse(await createActionResponse(inp));
+    const out = await retrofitResponse(await createActionResponse(inp));
     assert.deepEqual(out, {
       body: null,
       headers: {
-        'content-type': 'text/plain;charset=UTF-8',
         location: 'https://example.com',
       },
       statusCode: 301,
@@ -67,7 +66,7 @@ describe('Testing universal adapter', () => {
         foo: 'bar',
       },
     };
-    const out = retrofitResponse(await createActionResponse(inp));
+    const out = await retrofitResponse(await createActionResponse(inp));
     assert.deepEqual(out, {
       body: {},
       headers: {
@@ -86,7 +85,7 @@ describe('Testing universal adapter', () => {
         },
       },
     };
-    const out = retrofitResponse(await createActionResponse(inp));
+    const out = await retrofitResponse(await createActionResponse(inp));
     assert.deepEqual(out, {
       body: '',
       headers: {
@@ -100,7 +99,7 @@ describe('Testing universal adapter', () => {
     const inp = {
       error: new Error('boom!'),
     };
-    const out = retrofitResponse(await createActionResponse(inp));
+    const out = await retrofitResponse(await createActionResponse(inp));
     assert.ok(out.errorStack.startsWith('Error: boom!'));
     delete out.errorStack;
     assert.deepEqual(out, {
@@ -125,7 +124,7 @@ describe('Testing universal adapter', () => {
       },
       error: new Error('Forbidden'),
     };
-    const out = retrofitResponse(await createActionResponse(inp));
+    const out = await retrofitResponse(await createActionResponse(inp));
     assert.ok(out.errorStack.startsWith('Error: Forbidden'));
     delete out.errorStack;
     assert.deepEqual(out, {
@@ -181,7 +180,7 @@ describe('Testing universal adapter', () => {
       logger: log,
       request: {
         headers: {
-          Host: 'example.com',
+          host: 'example.com',
         },
         method: 'GET',
         params: {
@@ -339,7 +338,7 @@ describe('Testing universal adapter', () => {
         rootPath: '/docs',
       },
       headers: {
-        Host: 'example.com',
+        host: 'example.com',
       },
       method: 'GET',
     });
@@ -355,7 +354,7 @@ describe('Testing universal adapter', () => {
           b: 'green',
         },
         headers: {
-          Host: 'example.com',
+          host: 'example.com',
         },
         method: 'GET',
         path: '/docs/test.print.preview.html',
