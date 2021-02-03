@@ -14,7 +14,7 @@ data is guaranteed to never be specified by unist or specifications implementing
 
 `object` ([Details](mdast-properties-data.md))
 
-# undefined Properties
+# data Properties
 
 | Property              | Type | Required | Nullable    | Defined by |
 | :-------------------- | :--- | :------- | :---------- | :--------- |

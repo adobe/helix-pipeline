@@ -14,7 +14,7 @@ https://ns.adobe.com/helix/pipeline/section#/definitions/section
 
 unknown
 
-# undefined Properties
+# section Properties
 
 | Property              | Type          | Required | Nullable       | Defined by                                                                                                                                            |
 | :-------------------- | :------------ | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |

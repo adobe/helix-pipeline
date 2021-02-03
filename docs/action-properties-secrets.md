@@ -14,7 +14,7 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 `object` ([Secrets](action-properties-secrets.md))
 
-# Secrets Properties
+# secrets Properties
 
 | Property                                          | Type      | Required | Nullable       | Defined by                                                                                                                               |
 | :------------------------------------------------ | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |

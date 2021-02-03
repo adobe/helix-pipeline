@@ -14,7 +14,7 @@ Parameters used to invoke the OpenWhisk action. These are either URL parameters 
 
 `object` ([Details](rawrequest-definitions-rawrequest-properties-params.md))
 
-# undefined Properties
+# params Properties
 
 | Property                      | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                       |
 | :---------------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
