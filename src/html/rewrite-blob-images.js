@@ -12,7 +12,7 @@
 const visit = require('unist-util-visit');
 
 /**
- * Rewrite blob store image URLs to /hlx_* URLs
+ * Rewrite blob store image URLs to /blob.hlx/* URLs
  *
  * @param {object} request The content request
  */
@@ -26,7 +26,7 @@ function rewrite({ content }) {
       const { pathname, hash } = new URL(node.url);
       const filename = pathname.split('/').pop();
       const extension = hash.includes('.') ? hash.split('.').pop() : 'jpg';
-      node.url = `/hlx_${filename}.${extension}`;
+      node.url = `./blob.hlx/${filename}.${extension}`;
     }
   });
 }
