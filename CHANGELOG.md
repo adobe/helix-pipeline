@@ -1,3 +1,10 @@
+## [13.6.5](https://github.com/adobe/helix-pipeline/compare/v13.6.4...v13.6.5) (2021-02-04)
+
+
+### Bug Fixes
+
+* **md:** ensure proper parsing of gfm autolinks ([#956](https://github.com/adobe/helix-pipeline/issues/956)) ([1bc40a1](https://github.com/adobe/helix-pipeline/commit/1bc40a1db16824e260d71ed367d6351abbb28389))
+
 ## [13.6.4](https://github.com/adobe/helix-pipeline/compare/v13.6.3...v13.6.4) (2021-02-02)
 
 
