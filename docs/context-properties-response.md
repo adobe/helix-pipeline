@@ -14,7 +14,7 @@ The HTTP response object
 
 `object` ([Response](context-properties-response.md))
 
-# Response Properties
+# response Properties
 
 | Property              | Type          | Required | Nullable       | Defined by                                                                                                      |
 | :-------------------- | :------------ | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------- |

@@ -14,7 +14,7 @@ The HTTP Request
 
 `object` ([Request](context-properties-request.md))
 
-# Request Properties
+# request Properties
 
 | Property                    | Type          | Required | Nullable       | Defined by                                                                                                         |
 | :-------------------------- | :------------ | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------- |

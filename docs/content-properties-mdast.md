@@ -14,7 +14,7 @@ A node in the Markdown AST
 
 `object` ([MDAST](content-properties-mdast.md))
 
-# MDAST Properties
+# mdast Properties
 
 | Property                        | Type          | Required | Nullable       | Defined by                                                                                                                      |
 | :------------------------------ | :------------ | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------ |

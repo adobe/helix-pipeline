@@ -14,7 +14,7 @@ The headers of the request made to OpenWhisk (or Simulator)
 
 `object` ([Details](rawrequest-definitions-rawrequest-properties-headers.md))
 
-# undefined Properties
+# headers Properties
 
 | Property                                                | Type     | Required | Nullable       | Defined by                                                                                                                                                                                                                                   |
 | :------------------------------------------------------ | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
