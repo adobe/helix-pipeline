@@ -14,7 +14,7 @@ Marks the position of an AST node in the original text flow
 
 `object` ([Position](section-definitions-section-properties-position.md))
 
-# Position Properties
+# position Properties
 
 | Property          | Type     | Required | Nullable       | Defined by                                                                                                                  |
 | :---------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------- |

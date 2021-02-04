@@ -14,7 +14,7 @@ The HTTP headers of the request. Note: all header names will be lower-case.
 
 unknown
 
-# undefined Properties
+# headers Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                           |
 | :-------------------- | :------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |

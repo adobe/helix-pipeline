@@ -14,7 +14,7 @@ The passed through (and filtered) URL parameters of the request.
 
 `object` ([Details](request-properties-params.md))
 
-# undefined Properties
+# params Properties
 
 | Property              | Type   | Required | Nullable       | Defined by                                                                                                                                         |
 | :-------------------- | :----- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------- |

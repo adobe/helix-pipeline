@@ -578,4 +578,16 @@ describe('Testing Markdown conversion', () => {
       '<body><table><thead><tr><th>Links</th></tr></thead><tbody><tr><td><p><a href="https://www.adobe.com">https://www.adobe.com</a></p></td></tr></tbody></table></body>',
     );
   });
+
+  it('ignores escaped urls', async () => {
+    await assertMd(
+      `
+          ## test
+
+          /media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3D-KYbAk4_wMs&amp;max_width=0&amp;max_height=0&amp;hash=Av_FuBMg_KEg93Yy_XTE1Q4RUzMrFXcMuNH-wNZuBSQ
+
+    `,
+      '<h2 id="test">test</h2><p>/media/oembed?url=https%3A//www.youtube.com/watch%3Fv%3D-KYbAk4_wMs&amp;max_width=0&amp;max_height=0&amp;hash=Av_FuBMg_KEg93Yy_XTE1Q4RUzMrFXcMuNH-wNZuBSQ</p>',
+    );
+  });
 });

@@ -14,7 +14,7 @@ https://ns.adobe.com/helix/pipeline/rawrequest#/allOf/0
 
 unknown
 
-# undefined Properties
+# 0 Properties
 
 | Property            | Type     | Required | Nullable       | Defined by                                                                                                                                                         |
 | :------------------ | :------- | :------- | :------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |

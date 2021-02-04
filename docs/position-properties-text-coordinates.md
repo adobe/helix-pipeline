@@ -14,7 +14,7 @@ A position in a text document
 
 `object` ([Text Coordinates](position-properties-text-coordinates.md))
 
-# Text Coordinates Properties
+# start Properties
 
 | Property          | Type     | Required | Nullable       | Defined by                                                                                                                        |
 | :---------------- | :------- | :------- | :------------- | :-------------------------------------------------------------------------------------------------------------------------------- |

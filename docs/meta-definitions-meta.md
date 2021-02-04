@@ -14,7 +14,7 @@ https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/meta
 
 `object` ([Details](meta-definitions-meta.md))
 
-# undefined Properties
+# meta Properties
 
 | Property            | Type     | Required | Nullable       | Defined by                                                                                                                          |
 | :------------------ | :------- | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------- |

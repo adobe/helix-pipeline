@@ -52,7 +52,6 @@ function parseMarkdown(context, action) {
         action.logger.warn(new FrontmatterParsingError(e));
       },
     })
-    // .use(frontmatter, { logger: action.logger })
     .parse(converted);
 
   if (numericLogLevel(logger.level) < numericLogLevel('debug')) {

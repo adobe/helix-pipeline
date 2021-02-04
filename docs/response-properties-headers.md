@@ -14,7 +14,7 @@ The HTTP headers of the response
 
 unknown
 
-# undefined Properties
+# headers Properties
 
 | Property              | Type     | Required | Nullable       | Defined by                                                                                                                                              |
 | :-------------------- | :------- | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------ |
