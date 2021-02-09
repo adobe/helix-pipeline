@@ -1,3 +1,11 @@
+## [13.6.7](https://github.com/adobe/helix-pipeline/compare/v13.6.6...v13.6.7) (2021-02-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.5.8 ([#959](https://github.com/adobe/helix-pipeline/issues/959)) ([fea1393](https://github.com/adobe/helix-pipeline/commit/fea13932b0139ea64eb91d8779e1c736282d3f29))
+* **icons:** do not allow multiple leading # ([605bae3](https://github.com/adobe/helix-pipeline/commit/605bae3f93ee2d6776c15b2c896eb47cf63659c8))
+
 ## [13.6.6](https://github.com/adobe/helix-pipeline/compare/v13.6.5...v13.6.6) (2021-02-08)
 
 
