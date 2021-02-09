@@ -11,7 +11,7 @@
  */
 const visit = require('unist-util-visit');
 
-const regexp = /:#*[a-zA-Z_-]+[a-zA-Z0-9]*:/g;
+const regexp = /:#?[a-zA-Z_-]+[a-zA-Z0-9]*:/g;
 
 function iconize({ content }) {
   if (!content.mdast) {
