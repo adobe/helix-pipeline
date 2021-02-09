@@ -26,7 +26,7 @@ function rewrite({ content }) {
       const { pathname, hash } = new URL(node.url);
       const filename = pathname.split('/').pop();
       const extension = hash.includes('.') ? hash.split('.').pop() : 'jpg';
-      node.url = `/hlx_${filename}.${extension}`;
+      node.url = `./media_${filename}.${extension}`;
     }
   });
 }
