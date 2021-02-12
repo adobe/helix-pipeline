@@ -63,11 +63,16 @@ function setupPolly(opts) {
 }
 
 async function retrofitResponse(resp) {
-  let body = await resp.text();
-  try {
-    body = JSON.parse(body);
-  } catch {
-    // ignore
+  let body;
+  if (resp.body === null) {
+    body = null;
+  } else {
+    body = await resp.text();
+    try {
+      body = JSON.parse(body);
+    } catch {
+      // ignore
+    }
   }
   const ret = {
     statusCode: resp.status,

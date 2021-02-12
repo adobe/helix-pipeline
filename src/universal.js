@@ -89,7 +89,7 @@ async function createActionResponse(context, action) {
     } = {},
     error,
   } = context;
-  const text = typeof body === 'object' ? JSON.stringify(body) : body;
+  const text = body !== null && typeof body === 'object' ? JSON.stringify(body) : body;
   const ret = new Response(text, {
     status: status || (error ? 500 : 200),
     headers,
