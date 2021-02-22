@@ -35,7 +35,7 @@ async function fetchContent(context, {
     contentProxyUrl.searchParams.append('path', path);
     contentProxyUrl.searchParams.append('ref', refOrBranch); // prefer ref for content fetching
   } else {
-    contentProxyUrl = new URL(`https://${branchOrRef}--${repo}--${owner}.hlx.page${path}`);
+    contentProxyUrl = new URL(`https://${refOrBranch}--${repo}--${owner}.hlx.page${path}`);
   }
 
   // append raw root if different from default
