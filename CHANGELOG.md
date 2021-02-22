@@ -1,3 +1,17 @@
+## [13.6.19](https://github.com/adobe/helix-pipeline/compare/v13.6.18...v13.6.19) (2021-02-22)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#973](https://github.com/adobe/helix-pipeline/issues/973)) ([47d65d3](https://github.com/adobe/helix-pipeline/commit/47d65d3bf4afe61394e0fc46c3b2d5c702661e04))
+
+## [13.6.18](https://github.com/adobe/helix-pipeline/compare/v13.6.17...v13.6.18) (2021-02-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.19.9 ([#972](https://github.com/adobe/helix-pipeline/issues/972)) ([9baa8db](https://github.com/adobe/helix-pipeline/commit/9baa8dbeb33117e208507cb24684c4221b80d553))
+
 ## [13.6.17](https://github.com/adobe/helix-pipeline/compare/v13.6.16...v13.6.17) (2021-02-17)
 
 
