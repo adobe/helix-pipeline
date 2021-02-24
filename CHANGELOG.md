@@ -1,3 +1,52 @@
+## [13.6.20](https://github.com/adobe/helix-pipeline/compare/v13.6.19...v13.6.20) (2021-02-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.19.10 ([#974](https://github.com/adobe/helix-pipeline/issues/974)) ([c5d143f](https://github.com/adobe/helix-pipeline/commit/c5d143fbb754a2e9e90a019de69e90bc812462f1))
+
+## [13.6.19](https://github.com/adobe/helix-pipeline/compare/v13.6.18...v13.6.19) (2021-02-22)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#973](https://github.com/adobe/helix-pipeline/issues/973)) ([47d65d3](https://github.com/adobe/helix-pipeline/commit/47d65d3bf4afe61394e0fc46c3b2d5c702661e04))
+
+## [13.6.18](https://github.com/adobe/helix-pipeline/compare/v13.6.17...v13.6.18) (2021-02-19)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.19.9 ([#972](https://github.com/adobe/helix-pipeline/issues/972)) ([9baa8db](https://github.com/adobe/helix-pipeline/commit/9baa8dbeb33117e208507cb24684c4221b80d553))
+
+## [13.6.17](https://github.com/adobe/helix-pipeline/compare/v13.6.16...v13.6.17) (2021-02-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v9.0.4 ([#970](https://github.com/adobe/helix-pipeline/issues/970)) ([779ed33](https://github.com/adobe/helix-pipeline/commit/779ed3300824bc29d964857acb603c789dd8dfa5))
+
+## [13.6.16](https://github.com/adobe/helix-pipeline/compare/v13.6.15...v13.6.16) (2021-02-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.19.8 ([#969](https://github.com/adobe/helix-pipeline/issues/969)) ([33e6bc4](https://github.com/adobe/helix-pipeline/commit/33e6bc43964939afaa2bb69295e8daa2af553372))
+
+## [13.6.15](https://github.com/adobe/helix-pipeline/compare/v13.6.14...v13.6.15) (2021-02-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-fetch to v2.1.5 ([#968](https://github.com/adobe/helix-pipeline/issues/968)) ([ebbb78c](https://github.com/adobe/helix-pipeline/commit/ebbb78c959864293e15b529640bc18e1a2c6521d))
+
+## [13.6.14](https://github.com/adobe/helix-pipeline/compare/v13.6.13...v13.6.14) (2021-02-16)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-markdown-support to v1.4.0 ([#967](https://github.com/adobe/helix-pipeline/issues/967)) ([c546bd9](https://github.com/adobe/helix-pipeline/commit/c546bd9daa620ff6856e270f9036c0e24b0970eb))
+
 ## [13.6.13](https://github.com/adobe/helix-pipeline/compare/v13.6.12...v13.6.13) (2021-02-15)
 
 
