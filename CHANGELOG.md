@@ -1,3 +1,10 @@
+## [13.7.3](https://github.com/adobe/helix-pipeline/compare/v13.7.2...v13.7.3) (2021-02-25)
+
+
+### Bug Fixes
+
+* **pipe:** fallback to branch or default if hostname label too long ([#981](https://github.com/adobe/helix-pipeline/issues/981)) ([b5b17ac](https://github.com/adobe/helix-pipeline/commit/b5b17acd200d7a1a2ccaec42d7138e4a11969095)), closes [#980](https://github.com/adobe/helix-pipeline/issues/980)
+
 ## [13.7.2](https://github.com/adobe/helix-pipeline/compare/v13.7.1...v13.7.2) (2021-02-25)
 
 
