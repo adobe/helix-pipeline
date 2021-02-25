@@ -1,3 +1,10 @@
+## [13.7.1](https://github.com/adobe/helix-pipeline/compare/v13.7.0...v13.7.1) (2021-02-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-log to v5 ([#977](https://github.com/adobe/helix-pipeline/issues/977)) ([1b054cf](https://github.com/adobe/helix-pipeline/commit/1b054cf6a14179a5cf9da6440cbcc27c496b385d))
+
 # [13.7.0](https://github.com/adobe/helix-pipeline/compare/v13.6.20...v13.7.0) (2021-02-25)
 
 
