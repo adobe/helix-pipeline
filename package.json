@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "13.6.20",
+  "version": "13.7.0",
   "description": "",
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.1.4",
-    "@adobe/helix-testutils": "0.4.2",
+    "@adobe/helix-testutils": "0.4.3",
     "@adobe/jsonschema2md": "5.0.2",
     "@pollyjs/adapter-fetch": "5.1.0",
     "@pollyjs/adapter-node-http": "5.1.0",
@@ -55,12 +55,12 @@
   "dependencies": {
     "@adobe/helix-epsagon": "1.5.8",
     "@adobe/helix-fetch": "2.1.5",
-    "@adobe/helix-log": "4.5.3",
+    "@adobe/helix-log": "5.0.0",
     "@adobe/helix-markdown-support": "1.4.0",
     "@adobe/helix-shared": "7.19.10",
     "@adobe/helix-status": "9.0.4",
-    "@adobe/openwhisk-action-logger": "2.3.1",
-    "@adobe/openwhisk-action-utils": "4.4.0",
+    "@adobe/openwhisk-action-logger": "2.4.0",
+    "@adobe/openwhisk-action-utils": "4.4.1",
     "@emmetio/expand-abbreviation": "0.7.3",
     "ajv": "7.1.1",
     "callsites": "3.1.0",

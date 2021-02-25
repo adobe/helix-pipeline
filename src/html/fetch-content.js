@@ -13,7 +13,7 @@ const crypto = require('crypto');
 const { setdefault } = require('ferrum');
 
 async function fetchContent(context, {
-  request, downloader, secrets, logger, versionLock, resolver,
+  request, downloader, secrets, logger,
 }) {
   setdefault(context, 'content', {});
   /* istanbul ignore next */
@@ -27,34 +27,21 @@ async function fetchContent(context, {
   const branchOrRef = branch || ref || 'master';
   const refOrBranch = ref || branch || 'master';
 
-  // compute content proxy url
-  let contentProxyUrl = secrets.CONTENT_PROXY_URL || '';
-  if (!contentProxyUrl) {
-    if (resolver) {
-      contentProxyUrl = resolver.createURL({
-        package: 'helix-services',
-        name: 'content-proxy',
-        version: 'v2',
-      });
-    } else {
-      contentProxyUrl = versionLock.createActionURL({
-        name: 'content-proxy@v2',
-        packageName: 'helix-services',
-        namespace: process.env.__OW_NAMESPACE || 'helix',
-      });
-    }
+  let contentProxyUrl;
+  if (secrets.CONTENT_PROXY_URL) {
+    contentProxyUrl = new URL(secrets.CONTENT_PROXY_URL);
+    contentProxyUrl.searchParams.append('owner', owner);
+    contentProxyUrl.searchParams.append('repo', repo);
+    contentProxyUrl.searchParams.append('path', path);
+    contentProxyUrl.searchParams.append('ref', refOrBranch); // prefer ref for content fetching
+  } else {
+    contentProxyUrl = new URL(`https://${refOrBranch}--${repo}--${owner}.hlx.page${path}`);
   }
-
-  const url = new URL(contentProxyUrl);
-  url.searchParams.append('owner', owner);
-  url.searchParams.append('repo', repo);
-  url.searchParams.append('path', path);
-  url.searchParams.append('ref', refOrBranch); // prefer ref for content fetching
 
   // append raw root if different from default
   const repoRawRoot = new URL(secrets.REPO_RAW_ROOT);
   if (repoRawRoot.href !== 'https://raw.githubusercontent.com/') {
-    url.searchParams.append('REPO_RAW_ROOT', repoRawRoot.href);
+    contentProxyUrl.searchParams.append('REPO_RAW_ROOT', repoRawRoot.href);
   }
   const headers = {};
   const token = (secrets && secrets.GITHUB_TOKEN) || (request.headers ? request.headers['x-github-token'] : '');
@@ -63,9 +50,9 @@ async function fetchContent(context, {
   }
 
   try {
-    logger.debug(`loading from content proxy: ${url}`);
+    logger.debug(`loading from content proxy: ${contentProxyUrl}`);
     const res = await downloader.fetch({
-      uri: url.href,
+      uri: contentProxyUrl.href,
       options: {
         timeout: secrets.HTTP_TIMEOUT_EXTERNAL,
         headers,

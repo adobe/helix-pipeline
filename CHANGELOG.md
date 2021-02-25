@@ -1,3 +1,10 @@
+# [13.7.0](https://github.com/adobe/helix-pipeline/compare/v13.6.20...v13.7.0) (2021-02-25)
+
+
+### Features
+
+* **content:** use fastly content-proxy cache ([#971](https://github.com/adobe/helix-pipeline/issues/971)) ([ef1cdb4](https://github.com/adobe/helix-pipeline/commit/ef1cdb48c0d4916b79401f7e0f3e4ad9f4e7809f)), closes [#795](https://github.com/adobe/helix-pipeline/issues/795)
+
 ## [13.6.20](https://github.com/adobe/helix-pipeline/compare/v13.6.19...v13.6.20) (2021-02-22)
 
 
