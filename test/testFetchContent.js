@@ -65,8 +65,8 @@ describe('Testing fetch content', () => {
     nock('https://frozen.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404, 'Not Found']);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master&REPO_RAW_ROOT=https%3A%2F%2Ffrozen.githubusercontent.com/')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md?REPO_RAW_ROOT=https%3A%2F%2Ffrozen.githubusercontent.com/')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -100,56 +100,12 @@ describe('Testing fetch content', () => {
     assert.equal(result.response.body, '<div>\n<h1 id="hello">Hello</h1>\n<p>from github.</p>\n</div>\n<div>\n<h1 id="bar">Bar</h1>\n</div>');
   });
 
-  it('uses version lock for  content proxy url', async () => {
-    process.env.__OW_NAMESPACE = 'my-namespace';
-    nock('https://raw.githubusercontent.com')
-      .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [404, 'Not Found']);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/my-namespace/helix-services/content-proxy@v2.2.3')
-      .query(true)
-      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
-
-    action.downloader = new Downloader(context, action, { forceHttp1: true });
-    action.versionLock = new VersionLock({
-      __ow_headers: {
-        'x-ow-version-lock': 'content-proxy=content-proxy@v2.2.3',
-      },
-    });
-
-    const result = await pipe((ctx) => {
-      const { content } = ctx;
-      ctx.response = { status: 200, body: content.document.body.innerHTML };
-    }, context, action);
-
-    assert.equal(result.response.body, '<div>\n<h1 id="hello">Hello</h1>\n<p>from github.</p>\n</div>\n<div>\n<h1 id="bar">Bar</h1>\n</div>');
-  });
-
-  it('uses namespace from environment', async () => {
-    process.env.__OW_NAMESPACE = 'my-namespace';
-    nock('https://raw.githubusercontent.com')
-      .get('/adobe/test-repo/master/helix-markup.yaml')
-      .reply(() => [404, 'Not Found']);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/my-namespace/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
-      .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
-
-    action.downloader = new Downloader(context, action, { forceHttp1: true });
-
-    const result = await pipe((ctx) => {
-      const { content } = ctx;
-      ctx.response = { status: 200, body: content.document.body.innerHTML };
-    }, context, action);
-
-    assert.equal(result.response.body, '<div>\n<h1 id="hello">Hello</h1>\n<p>from github.</p>\n</div>\n<div>\n<h1 id="bar">Bar</h1>\n</div>');
-  });
-
   it('passes github token to content proxy', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404, 'Not Found']);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(function cb() {
         try {
           assert.equal(this.req.headers['x-github-token'], 'dummy-token');
@@ -174,8 +130,8 @@ describe('Testing fetch content', () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404, 'Not Found']);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(200, '# Hello\nfrom github.\n\n---\n\n# Bar', {
         'x-source-location': 'https://onedrive.com/hello.docx',
       });
@@ -194,8 +150,8 @@ describe('Testing fetch content', () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404, 'Not Found']);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(200, '# Hello\nfrom github.\n\n---\n\n# Bar', {
         'x-source-location': '/drives/b!PpnkewKFAEaDTS6slvlVjh_3ih9lhEZMgYWwps6bPIWZMmLU5xGqS4uES8kIQZbH/items/01DJQLOW44UHM362CKX5GYMQO2F4JIHSEV',
       });

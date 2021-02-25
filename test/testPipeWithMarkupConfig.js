@@ -121,8 +121,8 @@ describe('Testing HTML Pipeline with markup config', () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [404, 'Not Found']);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -146,8 +146,8 @@ describe('Testing HTML Pipeline with markup config', () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_URL]);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -176,8 +176,8 @@ describe('Testing HTML Pipeline with markup config', () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_MD]);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -217,8 +217,8 @@ markup:
     wrap: pre.zupp[data-embed="\${url}"]
     type: markdown
       `]);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(() => [200, `# Hi\nfrom github.
 
 https://www.youtube.com/watch?v=dQw4w9WgXcQ
@@ -254,8 +254,8 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT]);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(() => [200, '# Hello\nfrom github.\n\n---\n\n# Bar']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -281,8 +281,8 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_CONTENT]);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -305,8 +305,8 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')
       .reply(() => [200, TEST_MARKUP_CONFIG_HTML]);
-    nock('https://adobeioruntime.net')
-      .get('/api/v1/web/helix/helix-services/content-proxy@v2?owner=adobe&repo=test-repo&path=%2Fhello.md&ref=master')
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
       .reply(() => [200, '# Hello\nfrom github.\n']);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
