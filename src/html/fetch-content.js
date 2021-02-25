@@ -35,7 +35,16 @@ async function fetchContent(context, {
     contentProxyUrl.searchParams.append('path', path);
     contentProxyUrl.searchParams.append('ref', refOrBranch); // prefer ref for content fetching
   } else {
-    contentProxyUrl = new URL(`https://${refOrBranch}--${repo}--${owner}.hlx.page${path}`);
+    let label = `${refOrBranch}--${repo}--${owner}`;
+    if (label.length > 64) {
+      label = `${branchOrRef}--${repo}--${owner}`;
+      logger.warn(`hostname label too long. fall back to ${label}`);
+    }
+    if (label.length > 64) {
+      logger.warn(`hostname label too long. fall back to ${label}`);
+      label = `${repo}--${owner}`;
+    }
+    contentProxyUrl = new URL(`https://${label}.hlx.page${path}`);
   }
 
   // append raw root if different from default

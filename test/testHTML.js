@@ -605,7 +605,7 @@ ${context.content.document.body.innerHTML}`,
         res.sendStatus(200);
       });
     server
-      .get('https://adobeioruntime.net/api/v1/web/helix/helix-services/content-proxy@v2?owner=trieloff&repo=soupdemo&path=%2Fhello.md&ref=master')
+      .get('https://master--soupdemo--trieloff.hlx.page/hello.md')
       .intercept(async (req, res) => {
         // the timeout for content proxy is 20s. so we make it a bit longer than above. this causes
         // a promise rejection in the 'markupconfig' task.
@@ -700,6 +700,116 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.headers['Surrogate-Key'], 'yt+7rF5AO4Kmk0aF');
     assert.equal(res.body[0], '<');
     assert.ok(res.body.match(/<img/));
+  });
+
+  it('html.pipe makes HTTP requests and falls back to branch if ref too long', async function test() {
+    const myparams = {
+      ...params,
+      ref: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz',
+      branch: 'foo',
+    };
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/trieloff/soupdemo/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/helix-markup.yaml')
+      .intercept(async (req, res) => {
+        res.sendStatus(404);
+      });
+    server
+      .get('https://foo--soupdemo--trieloff.hlx.page/hello.md')
+      .intercept(async (req, res) => {
+        res.send('# Hello\n');
+      });
+
+    const result = await pipe(
+      (context) => {
+        const { content } = context;
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.ok(content.body);
+        assert.ok(content.mdast);
+        assert.ok(content.meta);
+        assert.ok(content.document);
+        assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/foo/hello.md']);
+        // and return a different status code
+        context.response = { status: 200, body: content.document.body.innerHTML };
+      },
+      {
+        request: {
+          params: {
+          },
+        },
+      },
+      {
+        request: {
+          params: myparams,
+          headers: { 'Cache-Control': 'no-store' },
+        },
+        secrets,
+        logger,
+      },
+    );
+
+    const res = result.response;
+    assert.equal(res.status, 200);
+    assert.equal(res.headers['Content-Type'], 'text/html');
+    assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
+    assert.equal(res.headers['Surrogate-Key'], 'j9X85KMLk+w8y2/g');
+    assert.equal(res.body[0], '<');
+  });
+
+  it('html.pipe makes HTTP requests and falls back to default if ref and branch too long', async function test() {
+    const myparams = {
+      ...params,
+      ref: 'zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz',
+      branch: 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy',
+    };
+    const { server } = this.polly;
+    server
+      .get('https://raw.githubusercontent.com/trieloff/soupdemo/zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz/helix-markup.yaml')
+      .intercept(async (req, res) => {
+        res.sendStatus(404);
+      });
+    server
+      .get('https://soupdemo--trieloff.hlx.page/hello.md')
+      .intercept(async (req, res) => {
+        res.send('# Hello\n');
+      });
+
+    const result = await pipe(
+      (context) => {
+        const { content } = context;
+        // this is the main function (normally it would be the template function)
+        // but we use it to assert that pre-processing has happened
+        assert.ok(content.body);
+        assert.ok(content.mdast);
+        assert.ok(content.meta);
+        assert.ok(content.document);
+        assert.deepEqual(content.sources, ['https://raw.githubusercontent.com/trieloff/soupdemo/yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy/hello.md']);
+        // and return a different status code
+        context.response = { status: 200, body: content.document.body.innerHTML };
+      },
+      {
+        request: {
+          params: {
+          },
+        },
+      },
+      {
+        request: {
+          params: myparams,
+          headers: { 'Cache-Control': 'no-store' },
+        },
+        secrets,
+        logger,
+      },
+    );
+
+    const res = result.response;
+    assert.equal(res.status, 200);
+    assert.equal(res.headers['Content-Type'], 'text/html');
+    assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
+    assert.equal(res.headers['Surrogate-Key'], 'X5ZE3V5p+o//pVNa');
+    assert.equal(res.body[0], '<');
   });
 
   it.skip('html.pipe makes HTTP requests and prefers branch param for surrogate computation', async () => {
