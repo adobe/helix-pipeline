@@ -1,3 +1,38 @@
+## [13.7.5](https://github.com/adobe/helix-pipeline/compare/v13.7.4...v13.7.5) (2021-02-26)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#984](https://github.com/adobe/helix-pipeline/issues/984)) ([5163b9f](https://github.com/adobe/helix-pipeline/commit/5163b9fd88a9ce28de1a70e687cdb77bd398b152))
+
+## [13.7.4](https://github.com/adobe/helix-pipeline/compare/v13.7.3...v13.7.4) (2021-02-26)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#982](https://github.com/adobe/helix-pipeline/issues/982)) ([76aef94](https://github.com/adobe/helix-pipeline/commit/76aef94e569df9479972fbd9e109f19d50bbd7c8))
+
+## [13.7.3](https://github.com/adobe/helix-pipeline/compare/v13.7.2...v13.7.3) (2021-02-25)
+
+
+### Bug Fixes
+
+* **pipe:** fallback to branch or default if hostname label too long ([#981](https://github.com/adobe/helix-pipeline/issues/981)) ([b5b17ac](https://github.com/adobe/helix-pipeline/commit/b5b17acd200d7a1a2ccaec42d7138e4a11969095)), closes [#980](https://github.com/adobe/helix-pipeline/issues/980)
+
+## [13.7.2](https://github.com/adobe/helix-pipeline/compare/v13.7.1...v13.7.2) (2021-02-25)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#979](https://github.com/adobe/helix-pipeline/issues/979)) ([e753159](https://github.com/adobe/helix-pipeline/commit/e753159e4574c146fd67050f725ca3788500095d))
+
+## [13.7.1](https://github.com/adobe/helix-pipeline/compare/v13.7.0...v13.7.1) (2021-02-25)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-log to v5 ([#977](https://github.com/adobe/helix-pipeline/issues/977)) ([1b054cf](https://github.com/adobe/helix-pipeline/commit/1b054cf6a14179a5cf9da6440cbcc27c496b385d))
+
 # [13.7.0](https://github.com/adobe/helix-pipeline/compare/v13.6.20...v13.7.0) (2021-02-25)
 
 
