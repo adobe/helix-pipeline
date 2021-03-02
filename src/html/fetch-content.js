@@ -35,14 +35,10 @@ async function fetchContent(context, {
     contentProxyUrl.searchParams.append('path', path);
     contentProxyUrl.searchParams.append('ref', refOrBranch); // prefer ref for content fetching
   } else {
-    let label = `${refOrBranch}--${repo}--${owner}`;
+    let label = `${branchOrRef}--${repo}--${owner}`;
     if (label.length > 64) {
-      label = `${branchOrRef}--${repo}--${owner}`;
-      logger.warn(`hostname label too long. fall back to ${label}`);
-    }
-    if (label.length > 64) {
-      logger.warn(`hostname label too long. fall back to ${label}`);
       label = `${repo}--${owner}`;
+      logger.warn(`hostname label too long. fall back to ${label}`);
     }
     contentProxyUrl = new URL(`https://${label}.hlx.page${path}`);
   }
