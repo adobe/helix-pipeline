@@ -1,3 +1,10 @@
+## [13.7.6](https://github.com/adobe/helix-pipeline/compare/v13.7.5...v13.7.6) (2021-03-02)
+
+
+### Bug Fixes
+
+* **content:** fetch content using branch ([#987](https://github.com/adobe/helix-pipeline/issues/987)) ([baee0b2](https://github.com/adobe/helix-pipeline/commit/baee0b2c66cfe7a53f23c3c44ef50a4711c93b59)), closes [#985](https://github.com/adobe/helix-pipeline/issues/985)
+
 ## [13.7.5](https://github.com/adobe/helix-pipeline/compare/v13.7.4...v13.7.5) (2021-02-26)
 
 
