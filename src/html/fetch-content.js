@@ -87,6 +87,12 @@ async function fetchContent(context, {
       sourceLocation,
       sourceHash,
     };
+
+    const lastModified = res.headers.get('last-modified');
+    logger.info(`last-modified: ${lastModified}`);
+    if (lastModified) {
+      context.content.data = { ...context.content.data, lastModified };
+    }
   } catch (err) {
     // throw error if no status error
     /* istanbul ignore next */

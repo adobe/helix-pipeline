@@ -146,6 +146,26 @@ describe('Testing fetch content', () => {
     assert.equal(result.response.body, '{"sourceLocation":"https://onedrive.com/hello.docx","sourceHash":"WCoswd7nuFy/cY2v"}');
   });
 
+  it('sets last modified', async () => {
+    nock('https://raw.githubusercontent.com')
+      .get('/adobe/test-repo/master/helix-markup.yaml')
+      .reply(() => [404, 'Not Found']);
+    nock('https://master--test-repo--adobe.hlx.page')
+      .get('/hello.md')
+      .reply(200, '# Hello\nfrom github.\n\n---\n\n# Bar', {
+        'last-modified': 'Fri, 05 Mar 2021 08:39:50 GMT',
+      });
+
+    action.downloader = new Downloader(context, action, { forceHttp1: true });
+
+    const result = await pipe((ctx) => {
+      const { content } = ctx;
+      ctx.response = { status: 200, body: JSON.stringify(content.data) };
+    }, context, action);
+
+    assert.equal(result.response.body, '{"sourceLocation":"","sourceHash":"2jmj7l5rSw0yVb/v","lastModified":"Fri, 05 Mar 2021 08:39:50 GMT"}');
+  });
+
   it('supports non-url source location ', async () => {
     nock('https://raw.githubusercontent.com')
       .get('/adobe/test-repo/master/helix-markup.yaml')

@@ -28,6 +28,7 @@ const { selectstrain, selecttest } = require('../utils/conditional-sections');
 const debug = require('../html/output-debug.js');
 const { esi, flag } = require('../html/flag-esi');
 const key = require('../html/set-surrogate-key');
+const lastModified = require('../html/set-last-modified');
 const production = require('../utils/is-production');
 const dump = require('../utils/dump-context.js');
 const validate = require('../utils/validate');
@@ -87,6 +88,7 @@ const htmlpipe = (cont, context, action) => {
     .use(type('text/html'))
     .use(cache).when(uncached)
     .use(key)
+    .use(lastModified)
     .use(tovdom).expose('post') // start HTML post-processing
     .use(removeHlxProps).expose('cleanup')
     .use(rewriteLinks).when(production)

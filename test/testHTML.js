@@ -921,6 +921,7 @@ ${context.content.document.body.innerHTML}`,
           headers: {
             'Content-Type': 'text/plain',
             'Surrogate-Key': 'foobar',
+            'Last-Modified': 'Fri, 05 Mar 2021 08:39:50 GMT',
             'Cache-Control': 'max-age=0',
           },
         };
@@ -940,6 +941,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(result.response.headers['Content-Type'], 'text/plain');
     assert.equal(result.response.headers['Cache-Control'], 'max-age=0');
     assert.equal(result.response.headers['Surrogate-Key'], 'foobar');
+    assert.equal(result.response.headers['Last-Modified'], 'Fri, 05 Mar 2021 08:39:50 GMT');
   });
 
   it('html.pipe produces debug dumps in memory', async () => {
