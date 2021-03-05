@@ -1,3 +1,10 @@
+## [13.7.10](https://github.com/adobe/helix-pipeline/compare/v13.7.9...v13.7.10) (2021-03-05)
+
+
+### Bug Fixes
+
+* **html.pipe:** add last-modified to response ([#992](https://github.com/adobe/helix-pipeline/issues/992)) ([13d0816](https://github.com/adobe/helix-pipeline/commit/13d081649cc411e4650b77d52806f6a27ab704d7))
+
 ## [13.7.9](https://github.com/adobe/helix-pipeline/compare/v13.7.8...v13.7.9) (2021-03-05)
 
 
