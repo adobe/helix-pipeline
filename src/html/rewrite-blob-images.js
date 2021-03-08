@@ -9,26 +9,26 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const visit = require('unist-util-visit');
-
 /**
  * Rewrite blob store image URLs to /hlx_* URLs
  *
- * @param {object} request The content request
+ * @param {Document} document The (vdom) document
  */
-function rewrite({ content }) {
-  if (!content.mdast) {
-    return;
-  }
-  visit(content.mdast, (node) => {
-    if (node.type === 'image'
-      && /^https:\/\/hlx\.blob\.core\.windows\.net\/external\//.test(node.url)) {
-      const { pathname, hash } = new URL(node.url);
+function images(document) {
+  document.querySelectorAll('img').forEach((img) => {
+    if (/^https:\/\/hlx\.blob\.core\.windows\.net\/external\//.test(img.src)) {
+      const { pathname, hash } = new URL(img.src);
       const filename = pathname.split('/').pop();
       const extension = hash.includes('.') ? hash.split('.').pop() : 'jpg';
-      node.url = `/hlx_${filename}.${extension}`;
+      img.src = `/hlx_${filename}.${extension}`;
     }
   });
+}
+
+function rewrite({ content }) {
+  if (content.document) {
+    images(content.document);
+  }
 }
 
 module.exports = rewrite;
