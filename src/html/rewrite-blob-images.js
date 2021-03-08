@@ -20,7 +20,7 @@ function images(document) {
       const { pathname, hash } = new URL(img.src);
       const filename = pathname.split('/').pop();
       const extension = hash.includes('.') ? hash.split('.').pop() : 'jpg';
-      img.src = `/hlx_${filename}.${extension}`;
+      img.src = `./media_${filename}.${extension}`;
     }
   });
 }
