@@ -29,7 +29,7 @@ function fetch({ content: { mdast } }, {
         uri = resolver.createURL({
           package: 'helix-services',
           name: 'data-embed',
-          version: 'v1',
+          version: 'v2',
         });
       } else {
         uri = new URL(versionLock.transformActionURL(DATA_EMBED_SERVICE));

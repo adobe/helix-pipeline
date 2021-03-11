@@ -621,7 +621,7 @@ describe('Integration Test with Data Embeds (resolver)', () => {
       .defaultReplyHeaders({
         'Cache-Control': 'max-age=3600',
       })
-      .get('/api/v1/web/helix/helix-services/data-embed@v1')
+      .get('/api/v1/web/helix/helix-services/data-embed@v2')
       .query(true)
       .reply(() => [status, data]);
 
