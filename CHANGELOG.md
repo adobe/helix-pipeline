@@ -1,3 +1,10 @@
+## [13.7.17](https://github.com/adobe/helix-pipeline/compare/v13.7.16...v13.7.17) (2021-03-11)
+
+
+### Bug Fixes
+
+* **embed:** use data-embed v2 ([#1001](https://github.com/adobe/helix-pipeline/issues/1001)) ([3827070](https://github.com/adobe/helix-pipeline/commit/382707065e308b8cedd635b48b02a4555909b445))
+
 ## [13.7.16](https://github.com/adobe/helix-pipeline/compare/v13.7.15...v13.7.16) (2021-03-10)
 
 
