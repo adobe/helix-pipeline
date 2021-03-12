@@ -27,12 +27,12 @@ function icon() {
         xmlns: 'http://www.w3.org/2000/svg',
         className: `icon icon-${value}`,
       }, [h(node, 'use', {
-        href: `./_icons_.svg#${value}`,
+        href: `/icons.svg#${value}`,
       })])];
     } else {
       return [h(node, 'img', {
         className: `icon icon-${value}`,
-        src: `./_icons_${value}.svg`,
+        src: `/icons/${value}.svg`,
         alt: `${value} icon`,
       })];
     }
