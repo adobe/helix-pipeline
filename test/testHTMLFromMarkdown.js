@@ -546,14 +546,14 @@ describe('Testing Markdown conversion', () => {
   it('translates icons', async () => {
     await assertMd(
       'Hello :photoshop: world.',
-      '<p>Hello <img class="icon icon-photoshop" src="./_icons_photoshop.svg" alt="photoshop icon">world.</p>',
+      '<p>Hello <img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon">world.</p>',
     );
   });
 
   it('translates icons in html', async () => {
     await assertMd(
       'Hello <p> test :photoshop:</p> world.',
-      '<p>Hello</p><p>test<img class="icon icon-photoshop" src="./_icons_photoshop.svg" alt="photoshop icon"></p>world.<p></p>',
+      '<p>Hello</p><p>test<img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"></p>world.<p></p>',
     );
   });
 
@@ -564,7 +564,7 @@ describe('Testing Markdown conversion', () => {
             |-|-|
             |youtube|<p>:photoshop: :illustrator:</p></p>|
     `,
-      '<table><thead><tr><th>Video</th><th>Text</th></tr></thead><tbody><tr><td>youtube</td><td><p><img class="icon icon-photoshop" src="./_icons_photoshop.svg" alt="photoshop icon"><img class="icon icon-illustrator" src="./_icons_illustrator.svg" alt="illustrator icon"></p></td></tr></tbody></table>',
+      '<table><thead><tr><th>Video</th><th>Text</th></tr></thead><tbody><tr><td>youtube</td><td><p><img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"><img class="icon icon-illustrator" src="/icons/illustrator.svg" alt="illustrator icon"></p></td></tr></tbody></table>',
     );
   });
 
