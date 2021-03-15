@@ -26,6 +26,11 @@ const { pipe, log } = require('../src/defaults/default.js');
 const pkgJson = require('../package.json');
 
 describe('Testing OpenWhisk adapter', () => {
+  after('Reset Production Mode', () => {
+    // eslint-disable-next-line no-underscore-dangle
+    delete process.env.__OW_ACTIVATION_ID;
+  });
+
   afterEach(() => {
     nock.restore();
   });
