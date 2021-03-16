@@ -40,6 +40,11 @@ describe('Testing universal adapter', () => {
     rootLogger.loggers.delete('OpenWhiskLogger');
   });
 
+  after('Reset Production Mode', () => {
+    // eslint-disable-next-line no-underscore-dangle
+    delete process.env.__OW_ACTIVATION_ID;
+  });
+
   it('createActionResponse keeps response intact', async () => {
     const inp = {
       response: {
