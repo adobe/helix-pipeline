@@ -1,3 +1,10 @@
+# [13.8.0](https://github.com/adobe/helix-pipeline/compare/v13.7.19...v13.8.0) (2021-03-16)
+
+
+### Features
+
+* re-enable Http/2 ([#1008](https://github.com/adobe/helix-pipeline/issues/1008)) ([ac01a45](https://github.com/adobe/helix-pipeline/commit/ac01a45b01a300d62c74e5da0fe3eaf95cd56825))
+
 ## [13.7.19](https://github.com/adobe/helix-pipeline/compare/v13.7.18...v13.7.19) (2021-03-15)
 
 
