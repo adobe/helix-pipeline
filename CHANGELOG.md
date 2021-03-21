@@ -1,3 +1,11 @@
+## [13.8.1](https://github.com/adobe/helix-pipeline/compare/v13.8.0...v13.8.1) (2021-03-21)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#1012](https://github.com/adobe/helix-pipeline/issues/1012)) ([b403e79](https://github.com/adobe/helix-pipeline/commit/b403e79db97a3b4a266f6822bd66c3749c6672fe))
+* **deps:** update dependency ajv to v7.2.3 ([#1011](https://github.com/adobe/helix-pipeline/issues/1011)) ([0775871](https://github.com/adobe/helix-pipeline/commit/0775871c76b04bb180e3b605e454d7aab7ff777e))
+
 # [13.8.0](https://github.com/adobe/helix-pipeline/compare/v13.7.19...v13.8.0) (2021-03-16)
 
 
