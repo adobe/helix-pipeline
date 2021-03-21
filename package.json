@@ -22,7 +22,7 @@
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.1.4",
     "@adobe/helix-testutils": "0.4.3",
-    "@adobe/jsonschema2md": "5.0.4",
+    "@adobe/jsonschema2md": "5.0.5",
     "@pollyjs/adapter-fetch": "5.1.0",
     "@pollyjs/adapter-node-http": "5.1.0",
     "@pollyjs/core": "5.1.0",
@@ -57,7 +57,7 @@
     "@adobe/helix-fetch": "2.1.7",
     "@adobe/helix-log": "5.0.0",
     "@adobe/helix-markdown-support": "1.4.0",
-    "@adobe/helix-shared": "7.21.4",
+    "@adobe/helix-shared": "7.21.5",
     "@adobe/helix-status": "9.1.0",
     "@adobe/openwhisk-action-logger": "2.4.1",
     "@adobe/openwhisk-action-utils": "4.4.1",
