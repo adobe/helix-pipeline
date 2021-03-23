@@ -22,9 +22,11 @@
 
 /* eslint-disable header/header */
 
-const ns = require('web-namespaces');
 const info = require('property-information');
 
+const ns = {
+  html: 'http://www.w3.org/1999/xhtml',
+};
 /* istanbul ignore next */
 const wrap = (document) => {
   // Add all children.

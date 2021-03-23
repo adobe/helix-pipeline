@@ -96,7 +96,6 @@
     "unist-util-visit-parents": "3.1.1",
     "uri-js": "4.4.1",
     "url-parse": "1.5.1",
-    "web-namespaces": "1.1.4",
     "xml2js": "0.4.23",
     "xmlbuilder": "15.1.1"
   },
