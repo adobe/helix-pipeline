@@ -1,3 +1,10 @@
+## [13.8.9](https://github.com/adobe/helix-pipeline/compare/v13.8.8...v13.8.9) (2021-03-27)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#1021](https://github.com/adobe/helix-pipeline/issues/1021)) ([827e624](https://github.com/adobe/helix-pipeline/commit/827e62496d7b19229166482a649917e20b7964c5))
+
 ## [13.8.8](https://github.com/adobe/helix-pipeline/compare/v13.8.7...v13.8.8) (2021-03-26)
 
 
