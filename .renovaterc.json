@@ -2,6 +2,7 @@
   "extends": ["github>adobe/helix-shared"],
   "ignoreDeps": [
     "micromark-extension-gfm-autolink-literal",
-    "mdast-util-gfm-autolink-literal"
+    "mdast-util-gfm-autolink-literal",
+    "property-information"
   ]
 }
