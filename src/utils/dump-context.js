@@ -13,14 +13,15 @@
 const path = require('path');
 const fs = require('fs-extra');
 const { setdefault } = require('ferrum');
+const isProduction = require('./is-production.js');
 
 /**
  * Returns {@code true} if context dumps should never be written to disk.
  * @returns {boolean} {@code true} if writing dumps is disabled.
  */
 function disableDisk() {
-  // if we run in openwhisk, we never want files to be written to disk.
-  return !!process.env.__OW_ACTIVATION_ID;
+  // if we run in production, we never want files to be written to disk.
+  return isProduction();
 }
 
 /**
