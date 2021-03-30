@@ -471,7 +471,7 @@ ${context.content.document.body.innerHTML}`,
     );
     assert.ok(result.error);
     assert(result.error.stack.includes('Error: Invalid Context'));
-    assert(result.error.stack.includes('additionalProperties should NOT have additional properties'));
+    assert(result.error.stack.includes('additionalProperties must NOT have additional properties'));
   });
 
   it('html.pipe complains with a specific message for mdast nodes when context is invalid', async () => {
@@ -496,7 +496,7 @@ ${context.content.document.body.innerHTML}`,
     );
     assert.ok(result.error);
     assert(result.error.stack.includes('Error: Invalid Context'));
-    assert(result.error.stack.includes('should be equal to one of the allowed values'));
+    assert(result.error.stack.includes('must be equal to one of the allowed values'));
   });
 
   it('html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid', async () => {
@@ -522,7 +522,7 @@ ${context.content.document.body.innerHTML}`,
     );
     assert.ok(result.error);
     assert(result.error.stack.includes('Error: Invalid Context'));
-    assert(result.error.stack.includes('additionalProperties should NOT have additional properties'));
+    assert(result.error.stack.includes('additionalProperties must NOT have additional properties'));
   });
 
   it('html.pipe complains when action is invalid', async () => {
@@ -547,7 +547,7 @@ ${context.content.document.body.innerHTML}`,
     );
     assert.ok(result.error);
     assert(result.error.stack.includes('Error: Invalid Action'));
-    assert(result.error.stack.includes('additionalProperties should NOT have additional properties'));
+    assert(result.error.stack.includes('additionalProperties must NOT have additional properties'));
   });
 
   it('html.pipe makes HTTP requests', async () => {
