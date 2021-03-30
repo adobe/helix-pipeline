@@ -1,3 +1,10 @@
+## [13.8.13](https://github.com/adobe/helix-pipeline/compare/v13.8.12...v13.8.13) (2021-03-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-epsagon to v1.6.1 ([aad1d22](https://github.com/adobe/helix-pipeline/commit/aad1d22c08b9062c65ef10e3e70146a8e715ee78))
+
 ## [13.8.12](https://github.com/adobe/helix-pipeline/compare/v13.8.11...v13.8.12) (2021-03-30)
 
 
