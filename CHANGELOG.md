@@ -1,3 +1,10 @@
+## [13.8.12](https://github.com/adobe/helix-pipeline/compare/v13.8.11...v13.8.12) (2021-03-30)
+
+
+### Bug Fixes
+
+* **dump:** don't write error dumps in production ([#1027](https://github.com/adobe/helix-pipeline/issues/1027)) ([82746b7](https://github.com/adobe/helix-pipeline/commit/82746b7fb1677d7d241246f61d78b98e100c0305)), closes [#1026](https://github.com/adobe/helix-pipeline/issues/1026)
+
 ## [13.8.11](https://github.com/adobe/helix-pipeline/compare/v13.8.10...v13.8.11) (2021-03-30)
 
 
