@@ -55,7 +55,7 @@ async function fetchContent(context, {
   }
 
   try {
-    logger.debug(`loading from content proxy: ${contentProxyUrl}`);
+    logger.info(`loading from content proxy: ${contentProxyUrl}`);
     const res = await downloader.fetch({
       uri: contentProxyUrl.href,
       options: {
