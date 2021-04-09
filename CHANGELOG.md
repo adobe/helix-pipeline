@@ -1,3 +1,10 @@
+## [13.8.21](https://github.com/adobe/helix-pipeline/compare/v13.8.20...v13.8.21) (2021-04-09)
+
+
+### Bug Fixes
+
+* do not cache responses to Fastly content-proxy ([#1037](https://github.com/adobe/helix-pipeline/issues/1037)) ([1e3c250](https://github.com/adobe/helix-pipeline/commit/1e3c250fd0e02ed1209ac1d73df180986868a624))
+
 ## [13.8.20](https://github.com/adobe/helix-pipeline/compare/v13.8.19...v13.8.20) (2021-04-09)
 
 
