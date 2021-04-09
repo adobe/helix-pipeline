@@ -61,6 +61,7 @@ async function fetchContent(context, {
       options: {
         timeout: secrets.HTTP_TIMEOUT_EXTERNAL,
         headers,
+        cache: 'no-store',
       },
       errorOn404: false,
     });
