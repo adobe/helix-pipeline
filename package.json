@@ -53,11 +53,11 @@
     "unist-util-inspect": "6.0.1"
   },
   "dependencies": {
-    "@adobe/helix-epsagon": "1.6.2",
+    "@adobe/helix-epsagon": "1.6.3",
     "@adobe/helix-fetch": "2.2.0",
     "@adobe/helix-log": "5.0.2",
     "@adobe/helix-markdown-support": "1.4.0",
-    "@adobe/helix-shared": "7.22.0",
+    "@adobe/helix-shared": "7.23.0",
     "@adobe/helix-status": "9.1.5",
     "@adobe/openwhisk-action-logger": "2.4.3",
     "@adobe/openwhisk-action-utils": "4.4.3",
