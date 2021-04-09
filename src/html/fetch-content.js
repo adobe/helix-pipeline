@@ -55,12 +55,13 @@ async function fetchContent(context, {
   }
 
   try {
-    logger.debug(`loading from content proxy: ${contentProxyUrl}`);
+    logger.info(`loading from content proxy: ${contentProxyUrl}`);
     const res = await downloader.fetch({
       uri: contentProxyUrl.href,
       options: {
         timeout: secrets.HTTP_TIMEOUT_EXTERNAL,
         headers,
+        cache: 'no-store',
       },
       errorOn404: false,
     });
