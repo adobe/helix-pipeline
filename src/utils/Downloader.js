@@ -61,6 +61,13 @@ class Downloader {
   }
 
   computeGithubURI(owner, repo, ref, path) {
+    if (ref === 'gh-pages') {
+      const url = new URL(`https://${owner}.github.io`);
+      // remove double slashes
+      url.pathname = `/${repo}/${path}`.replace(/\/+/g, '/');
+      return url.href;
+    }
+
     const rootURI = URI.parse(this.githubRootPath);
     const rootPath = rootURI.path;
     // remove double slashes

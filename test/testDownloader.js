@@ -122,6 +122,19 @@ describe('Test URI parsing and construction', () => {
       'https://raw.githubusercontent.com/adobe/xdm/tags/release_1/README.md',
     );
   });
+
+  it('computeGithubURI generates github pages uri', () => {
+    assert.equal(
+      compute(
+        'https://raw.githubusercontent.com',
+        'adobe',
+        '/xdm/',
+        'gh-pages',
+        '/README.md',
+      ),
+      'https://adobe.github.io/xdm/README.md',
+    );
+  });
 });
 
 describe('Test input validation', () => {
