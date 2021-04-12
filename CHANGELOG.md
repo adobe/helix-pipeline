@@ -1,3 +1,10 @@
+# [13.9.0](https://github.com/adobe/helix-pipeline/compare/v13.8.22...v13.9.0) (2021-04-12)
+
+
+### Features
+
+* **content:** add support for github pages ([#1040](https://github.com/adobe/helix-pipeline/issues/1040)) ([f988677](https://github.com/adobe/helix-pipeline/commit/f98867752098d9566c8e42de0f816c9515c1b163))
+
 ## [13.8.22](https://github.com/adobe/helix-pipeline/compare/v13.8.21...v13.8.22) (2021-04-12)
 
 
