@@ -59,7 +59,7 @@
     "@adobe/helix-markdown-support": "1.4.0",
     "@adobe/helix-shared": "7.23.1",
     "@adobe/helix-status": "9.1.6",
-    "@adobe/openwhisk-action-logger": "2.4.3",
+    "@adobe/openwhisk-action-logger": "2.4.4",
     "@adobe/openwhisk-action-utils": "4.4.4",
     "@emmetio/expand-abbreviation": "0.7.3",
     "ajv": "8.0.5",
