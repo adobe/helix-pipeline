@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 /**
- * Returns true when run inside an OpenWhisk action, false otherwise.
+ * Returns true when run inside an OpenWhisk action or Lambda Function, false otherwise.
  */
 function production() {
   try {

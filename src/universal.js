@@ -13,8 +13,8 @@
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
 const { Response } = require('@adobe/helix-fetch');
-const { wrap } = require('@adobe/openwhisk-action-utils');
-const { logger } = require('@adobe/openwhisk-action-logger');
+const { wrap } = require('@adobe/helix-shared');
+const { logger } = require('@adobe/helix-universal-logger');
 const { wrap: statusCheck } = require('@adobe/helix-status');
 
 /**

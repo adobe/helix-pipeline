@@ -14,10 +14,6 @@ const URI = require('uri-js');
 const { setdefault } = require('ferrum');
 const fetchAPI = require('@adobe/helix-fetch');
 
-// force HTTP/1 in order to avoid issues with long-lived HTTP/2 sessions
-// on azure/kubernetes based I/O Runtime
-process.env.HELIX_PIPELINE_FORCE_HTTP1 = true;
-
 const DEFAULT_FORWARD_HEADERS = [
   'x-request-id',
   'x-cdn-request-id',
@@ -66,6 +62,13 @@ class Downloader {
   }
 
   computeGithubURI(owner, repo, ref, path) {
+    if (ref === 'gh-pages') {
+      const url = new URL(`https://${owner}.github.io`);
+      // remove double slashes
+      url.pathname = `/${repo}/${path}`.replace(/\/+/g, '/');
+      return url.href;
+    }
+
     const rootURI = URI.parse(this.githubRootPath);
     const rootPath = rootURI.path;
     // remove double slashes
