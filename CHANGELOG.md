@@ -1,3 +1,10 @@
+## [13.9.7](https://github.com/adobe/helix-pipeline/compare/v13.9.6...v13.9.7) (2021-04-19)
+
+
+### Bug Fixes
+
+* **universal:** use universal logger ([#1048](https://github.com/adobe/helix-pipeline/issues/1048)) ([72bca2a](https://github.com/adobe/helix-pipeline/commit/72bca2a4c80e26a700fe92d51cb12fb188ef63a7))
+
 ## [13.9.6](https://github.com/adobe/helix-pipeline/compare/v13.9.5...v13.9.6) (2021-04-17)
 
 
