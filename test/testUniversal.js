@@ -34,10 +34,10 @@ describe('Testing universal adapter', () => {
 
   beforeEach(() => {
     nock.restore();
-    nock.activate();
     nock.cleanAll();
+    nock.activate();
 
-    rootLogger.loggers.delete('OpenWhiskLogger');
+    rootLogger.loggers.delete('UniversalLogger');
   });
 
   it('createActionResponse keeps response intact', async () => {
@@ -437,13 +437,13 @@ describe('Testing universal adapter', () => {
       CORALOGIX_LOG_LEVEL: 'info',
     };
 
-    process.env.__OW_ACTIVATION_ID = 'test-my-activation-id';
-    process.env.__OW_ACTION_NAME = 'test-my-action-name';
-    process.env.__OW_TRANSACTION_ID = 'test-transaction-id';
-
+    let logger;
     await runPipeline((context, action) => {
       action.logger.infoFields('Hello, world', { myId: 42 });
+      logger = action.logger;
     }, pipe, params, env);
+
+    await logger.flush();
 
     // nock 13.x needs a bit to respond with the correct reply.
     await new Promise((resolve) => setTimeout(resolve, 10));
@@ -460,10 +460,11 @@ describe('Testing universal adapter', () => {
       level: 'info',
       message: 'Hello, world',
       myId: 42,
-      ow: {
-        actionName: 'test-my-action-name',
-        activationId: 'test-my-activation-id',
-        transactionId: 'test-transaction-id',
+      inv: {
+        functionName: '/pages_4.3.1/html/4.3.1',
+        invocationId: '1234',
+        requestId: 'rq334',
+        transactionId: 'tx556',
       },
     });
   });

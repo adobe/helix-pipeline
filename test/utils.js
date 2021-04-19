@@ -119,6 +119,16 @@ function retrofit(fn) {
       pathInfo: {
         suffix,
       },
+      func: {
+        name: 'html',
+        version: '4.3.1',
+        package: 'pages_4.3.1',
+      },
+      invocation: {
+        id: '1234',
+        requestId: 'rq334',
+        transactionId: 'tx556',
+      },
     });
     return retrofitResponse(resp);
   };
