@@ -1,6 +1,6 @@
 {
   "name": "@adobe/helix-pipeline",
-  "version": "13.9.8",
+  "version": "13.9.10",
   "description": "",
   "repository": {
     "type": "git",
@@ -57,7 +57,7 @@
     "@adobe/helix-fetch": "2.2.0",
     "@adobe/helix-log": "5.0.3",
     "@adobe/helix-markdown-support": "1.4.0",
-    "@adobe/helix-shared": "7.26.1",
+    "@adobe/helix-shared": "7.26.3",
     "@adobe/helix-status": "9.1.6",
     "@adobe/helix-universal-logger": "1.0.2",
     "@adobe/openwhisk-action-logger": "2.4.4",
