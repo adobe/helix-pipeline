@@ -1,3 +1,10 @@
+## [13.9.10](https://github.com/adobe/helix-pipeline/compare/v13.9.9...v13.9.10) (2021-04-21)
+
+
+### Bug Fixes
+
+* **embed:** remove spark from embed allowlist ([#1057](https://github.com/adobe/helix-pipeline/issues/1057)) ([2fee20f](https://github.com/adobe/helix-pipeline/commit/2fee20fbdbd782d8d9d137da33c571e56e49c1f6))
+
 ## [13.9.9](https://github.com/adobe/helix-pipeline/compare/v13.9.8...v13.9.9) (2021-04-20)
 
 
