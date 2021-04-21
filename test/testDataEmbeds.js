@@ -547,7 +547,7 @@ describe('Integration Test with Data Embeds (version locked)', () => {
 
     action.versionLock = new VersionLock({
       __ow_headers: {
-        'x-ow-version-lock': 'data-embed=data-embed@v1.2.3',
+        'x-ow-version-lock': 'data-embed=v1.2.3',
       },
     });
     action.downloader = new Downloader(context, action, { forceHttp1: true });

@@ -19,5 +19,5 @@ URL of an Embed Service that takes the appended URL and returns an embeddable HT
 The default value is:
 
 ```json
-"https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1"
+"https://helix-pages.anywhere.run/helix-services/embed@v1"
 ```
