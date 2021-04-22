@@ -1,3 +1,11 @@
+## [13.9.11](https://github.com/adobe/helix-pipeline/compare/v13.9.10...v13.9.11) (2021-04-22)
+
+
+### Bug Fixes
+
+* **data:** keep runtime for data-embed and fix tests ([41b9276](https://github.com/adobe/helix-pipeline/commit/41b927603a917e7b0cad6fa19f463e1db874b094))
+* **embed:** disable spark embeds, use universal runtime for embeds ([7e19fe5](https://github.com/adobe/helix-pipeline/commit/7e19fe5f112c2a8f77f7db6cad2dfc15508ecef2))
+
 ## [13.9.10](https://github.com/adobe/helix-pipeline/compare/v13.9.9...v13.9.10) (2021-04-21)
 
 
