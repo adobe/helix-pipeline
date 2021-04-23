@@ -1,3 +1,10 @@
+## [13.9.12](https://github.com/adobe/helix-pipeline/compare/v13.9.11...v13.9.12) (2021-04-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.27.0 ([#1061](https://github.com/adobe/helix-pipeline/issues/1061)) ([16267cc](https://github.com/adobe/helix-pipeline/commit/16267ccebe471cc16192ebd0687d40e592322f57))
+
 ## [13.9.11](https://github.com/adobe/helix-pipeline/compare/v13.9.10...v13.9.11) (2021-04-22)
 
 
