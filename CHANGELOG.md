@@ -1,3 +1,10 @@
+## [13.9.19](https://github.com/adobe/helix-pipeline/compare/v13.9.18...v13.9.19) (2021-05-03)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes to v1.0.3 ([#1071](https://github.com/adobe/helix-pipeline/issues/1071)) ([dce240d](https://github.com/adobe/helix-pipeline/commit/dce240d11487783e0f794177566244be87c1546b))
+
 ## [13.9.18](https://github.com/adobe/helix-pipeline/compare/v13.9.17...v13.9.18) (2021-05-03)
 
 
