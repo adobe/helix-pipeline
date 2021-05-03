@@ -13,7 +13,7 @@
 const assert = require('assert');
 const path = require('path');
 const fs = require('fs-extra');
-const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { assertEquivalentNode } = require('@adobe/helix-shared-dom');
 const { logging } = require('@adobe/helix-testutils');
 const { VersionLock } = require('@adobe/openwhisk-action-utils');
 const nock = require('nock');

@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 const assert = require('assert');
 const yaml = require('js-yaml');
-const { multiline } = require('@adobe/helix-shared').string;
+const { multiline } = require('@adobe/helix-shared-string');
 const { SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   flattenTree, concat, each,
