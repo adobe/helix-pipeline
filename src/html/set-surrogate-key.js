@@ -11,7 +11,7 @@
  */
 const { type } = require('ferrum');
 const { map, join, setdefault } = require('ferrum');
-const { computeSurrogateKey } = require('@adobe/helix-shared').utils;
+const { computeSurrogateKey } = require('@adobe/helix-shared-utils');
 
 function key(context, { logger }) {
   const cont = setdefault(context, 'content', {});

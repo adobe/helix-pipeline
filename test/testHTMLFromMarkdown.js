@@ -12,8 +12,8 @@
 /* eslint-env mocha */
 const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
-const { multiline } = require('@adobe/helix-shared').string;
-const { assertEquivalentNode } = require('@adobe/helix-shared').dom;
+const { multiline } = require('@adobe/helix-shared-string');
+const { assertEquivalentNode } = require('@adobe/helix-shared-dom');
 const { setupPolly, pipe } = require('./utils.js');
 
 const params = {

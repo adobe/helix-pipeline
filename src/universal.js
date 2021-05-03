@@ -13,7 +13,7 @@
 /* eslint-disable camelcase,no-underscore-dangle */
 const querystring = require('querystring');
 const { Response } = require('@adobe/helix-fetch');
-const { wrap } = require('@adobe/helix-shared');
+const wrap = require('@adobe/helix-shared-wrap');
 const { logger } = require('@adobe/helix-universal-logger');
 const { wrap: statusCheck } = require('@adobe/helix-status');
 

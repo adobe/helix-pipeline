@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { assertEquivalentNode } = require('@adobe/helix-shared-dom');
 const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const fs = require('fs-extra');
