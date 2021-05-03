@@ -1,3 +1,10 @@
+## [13.9.18](https://github.com/adobe/helix-pipeline/compare/v13.9.17...v13.9.18) (2021-05-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v8 ([#1068](https://github.com/adobe/helix-pipeline/issues/1068)) ([f3d1a8f](https://github.com/adobe/helix-pipeline/commit/f3d1a8f4a2873191fdc2652b3ef0ea95e6619e05))
+
 ## [13.9.17](https://github.com/adobe/helix-pipeline/compare/v13.9.16...v13.9.17) (2021-05-03)
 
 
