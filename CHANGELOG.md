@@ -1,3 +1,10 @@
+## [13.9.20](https://github.com/adobe/helix-pipeline/compare/v13.9.19...v13.9.20) (2021-05-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fs-extra to v10 ([#1072](https://github.com/adobe/helix-pipeline/issues/1072)) ([ec66e7b](https://github.com/adobe/helix-pipeline/commit/ec66e7b143c9d62fdc2dd249b6c665a5b04ed16c))
+
 ## [13.9.19](https://github.com/adobe/helix-pipeline/compare/v13.9.18...v13.9.19) (2021-05-03)
 
 
