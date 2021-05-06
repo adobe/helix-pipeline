@@ -1,3 +1,33 @@
+# [14.0.0](https://github.com/adobe/helix-pipeline/compare/v13.9.20...v14.0.0) (2021-05-06)
+
+
+* Merge pull request #1007 from adobe/remove-add-headers ([eba0dfb](https://github.com/adobe/helix-pipeline/commit/eba0dfbc5bcd17651e4f9e67d39de2d163325799)), closes [#1007](https://github.com/adobe/helix-pipeline/issues/1007) [#1005](https://github.com/adobe/helix-pipeline/issues/1005)
+
+
+### Bug Fixes
+
+* **html:** remove addHeaders() ([ddfa0c9](https://github.com/adobe/helix-pipeline/commit/ddfa0c93c69ca40bb9462d655ea9911ba5ea7189)), closes [#1005](https://github.com/adobe/helix-pipeline/issues/1005)
+* **pipe:** adjust blob images on vdom ([f118269](https://github.com/adobe/helix-pipeline/commit/f118269431cf46358cd70deb86ef35f07a48f095)), closes [#990](https://github.com/adobe/helix-pipeline/issues/990)
+* **tests:** avoid inter-test side effects ([620e0c5](https://github.com/adobe/helix-pipeline/commit/620e0c5809be53b5a4f1da8ff6ebf19b40dcba27))
+
+
+### Features
+
+* **blobs:** use rootless paths for images from word or google docs ([2942725](https://github.com/adobe/helix-pipeline/commit/2942725218d0b62b490902d729ee0e99869049e5))
+
+
+### Reverts
+
+* Revert "feat(icons): use rootless icon paths" ([58308dd](https://github.com/adobe/helix-pipeline/commit/58308dd15164c81e11159cd117714549b6fbf3ff)), closes [/github.com/adobe/helix-home/issues/183#issuecomment-797561083](https://github.com//github.com/adobe/helix-home/issues/183/issues/issuecomment-797561083) [/github.com/adobe/helix-pipeline/pull/995#issuecomment-797613721](https://github.com//github.com/adobe/helix-pipeline/pull/995/issues/issuecomment-797613721)
+
+
+### BREAKING CHANGES
+
+* the add-headers.js removed
+* **html:** the add-headers.js removed
+* **pipe:** rewriteBlobImages() now operates on the document and no longer on mdast.
+* **blobs:** fixes https://github.com/adobe/helix-home/issues/183 requires https://github.com/adobe/helix-publish/pull/724
+
 ## [13.9.20](https://github.com/adobe/helix-pipeline/compare/v13.9.19...v13.9.20) (2021-05-04)
 
 
