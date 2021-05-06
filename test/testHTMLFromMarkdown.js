@@ -500,26 +500,30 @@ describe('Testing Markdown conversion', () => {
 
   it('Filters out hlx-* class and data-hlx-* attributes in production', async () => {
     process.env.__OW_ACTIVATION_ID = '1234';
-    await assertMd(`
-        ---
+    try {
+      await assertMd(`
+      ---
 
-        # Foo
+      # Foo
 
-        ---
-        data-hlx-types: [bar, baz]
-        ---
+      ---
+      data-hlx-types: [bar, baz]
+      ---
 
-        # Bar
-      `, `
-        <div>
-          <h1 id="foo">Foo</h1>
-        </div>
-        <div>
-          <h1 id="bar">Bar</h1>
-        </div>
+      # Bar
+    `, `
+      <div>
+        <h1 id="foo">Foo</h1>
+      </div>
+      <div>
+        <h1 id="bar">Bar</h1>
+      </div>
     `, {
-      SANITIZE_DOM: true,
-    });
+        SANITIZE_DOM: true,
+      });
+    } finally {
+      delete process.env.__OW_ACTIVATION_ID;
+    }
   });
 
   it('is robust against wrong tags in md', async () => {

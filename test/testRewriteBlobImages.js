@@ -14,20 +14,25 @@ const assert = require('assert');
 const fs = require('fs-extra');
 const path = require('path');
 const rewriteBlobImages = require('../src/html/rewrite-blob-images');
+const VDOMTransformer = require('../src/utils/mdast-to-vdom');
 
 describe('Test Blob Image Rewriting', () => {
-  it('Rewrites blob store image URLs', () => {
-    const mdast = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-example.json')).toString('utf-8'));
-    const expected = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'fixtures', 'image-rewritten-example.json')).toString('utf-8'));
+  it('Rewrites blob store image URLs', async () => {
+    const mdast = JSON.parse(await fs.readFile(path.resolve(__dirname, 'fixtures', 'image-example.json'), 'utf-8'));
+    const expected = await fs.readFile(path.resolve(__dirname, 'fixtures', 'image-rewritten-example.html'), 'utf-8');
+
+    const document = new VDOMTransformer()
+      .withOptions({ })
+      .withMdast(mdast).getDocument();
 
     const context = {
-      content: { mdast },
+      content: { document },
     };
     rewriteBlobImages(context);
-    assert.deepEqual(context.content.mdast, expected);
+    assert.equal(context.content.document.documentElement.innerHTML.trim(), expected.trim());
   });
 
-  it('Does not throw error if mdast is missing', () => {
+  it('Does not throw error if document is missing', () => {
     rewriteBlobImages({
       content: {
         html: '<html></html>',

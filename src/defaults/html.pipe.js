@@ -38,7 +38,6 @@ const unwrapSoleImages = require('../html/unwrap-sole-images');
 const rewriteLinks = require('../html/static-asset-links');
 const tovdom = require('../html/html-to-vdom');
 const tohtml = require('../html/stringify-response');
-const addHeaders = require('../html/add-headers');
 const timing = require('../utils/timing');
 const sanitize = require('../html/sanitize');
 const removeHlxProps = require('../html/removeHlxProps');
@@ -74,7 +73,6 @@ const htmlpipe = (cont, context, action) => {
     .use(smartypants)
     .use(iconize)
     .use(sections)
-    .use(rewriteBlobImages)
     .use(meta).expose('meta')
     .use(unwrapSoleImages)
     .use(adjustMDAST)
@@ -82,6 +80,7 @@ const htmlpipe = (cont, context, action) => {
     .use(selecttest)
     .use(dataSections)
     .use(html).expose('html')
+    .use(rewriteBlobImages)
     .use(adjustHTML)
     .use(sanitize).when(paranoid)
     .use(cont)
@@ -92,7 +91,6 @@ const htmlpipe = (cont, context, action) => {
     .use(tovdom).expose('post') // start HTML post-processing
     .use(removeHlxProps).expose('cleanup')
     .use(rewriteLinks).when(production)
-    .use(addHeaders)
     .use(tohtml) // end HTML post-processing
     .use(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .use(debug)
