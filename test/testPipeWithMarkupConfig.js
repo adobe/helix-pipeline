@@ -240,13 +240,13 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       `<hr>
       <p>from github.</p>
       <pre class="zupp" data-embed="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-        <esi:include src="https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="bar" baz="qux"></esi:include>
+        <esi:include src="https://helix-pages.anywhere.run/helix-services/embed@v1/https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="bar" baz="qux"></esi:include>
         <esi:remove class="bar" baz="qux">
           <p><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a></p>
         </esi:remove>
       </pre>
       <p>And here is something from Soundcloud</p>
-      <esi:include src="https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe" onerror="fail"></esi:include>
+      <esi:include src="https://helix-pages.anywhere.run/helix-services/embed@v1/https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe" onerror="fail"></esi:include>
       <esi:remove onerror="fail"><p><a href="https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe">https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe</a></p></esi:remove>`);
   });
 

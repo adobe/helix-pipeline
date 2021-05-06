@@ -19,5 +19,5 @@ URL of a DataEmbed Service that takes the appended URL and returns an iterable J
 The default value is:
 
 ```json
-"https://adobeioruntime.net/api/v1/web/helix/helix-services/data-embed@v1"
+"https://adobeioruntime.net/api/v1/web/helix/helix-services/data-embed@v2"
 ```

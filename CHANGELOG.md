@@ -1,3 +1,74 @@
+## [13.9.20](https://github.com/adobe/helix-pipeline/compare/v13.9.19...v13.9.20) (2021-05-04)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fs-extra to v10 ([#1072](https://github.com/adobe/helix-pipeline/issues/1072)) ([ec66e7b](https://github.com/adobe/helix-pipeline/commit/ec66e7b143c9d62fdc2dd249b6c665a5b04ed16c))
+
+## [13.9.19](https://github.com/adobe/helix-pipeline/compare/v13.9.18...v13.9.19) (2021-05-03)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes to v1.0.3 ([#1071](https://github.com/adobe/helix-pipeline/issues/1071)) ([dce240d](https://github.com/adobe/helix-pipeline/commit/dce240d11487783e0f794177566244be87c1546b))
+
+## [13.9.18](https://github.com/adobe/helix-pipeline/compare/v13.9.17...v13.9.18) (2021-05-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v8 ([#1068](https://github.com/adobe/helix-pipeline/issues/1068)) ([f3d1a8f](https://github.com/adobe/helix-pipeline/commit/f3d1a8f4a2873191fdc2652b3ef0ea95e6619e05))
+
+## [13.9.17](https://github.com/adobe/helix-pipeline/compare/v13.9.16...v13.9.17) (2021-05-03)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#1069](https://github.com/adobe/helix-pipeline/issues/1069)) ([7e536a7](https://github.com/adobe/helix-pipeline/commit/7e536a701ea4891cc5ecf5a05871957ca309cf29))
+
+## [13.9.16](https://github.com/adobe/helix-pipeline/compare/v13.9.15...v13.9.16) (2021-04-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.29.1 ([#1067](https://github.com/adobe/helix-pipeline/issues/1067)) ([9be51fd](https://github.com/adobe/helix-pipeline/commit/9be51fd57cc9f1a9578f21738beb151679866870))
+
+## [13.9.15](https://github.com/adobe/helix-pipeline/compare/v13.9.14...v13.9.15) (2021-04-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.29.0 ([#1066](https://github.com/adobe/helix-pipeline/issues/1066)) ([caad91d](https://github.com/adobe/helix-pipeline/commit/caad91d6653ec69c3864a45643b8219bfd0e9fd7))
+
+## [13.9.14](https://github.com/adobe/helix-pipeline/compare/v13.9.13...v13.9.14) (2021-04-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.28.0 ([#1064](https://github.com/adobe/helix-pipeline/issues/1064)) ([7f783d4](https://github.com/adobe/helix-pipeline/commit/7f783d44f48621ffc42d873046c75676760d7d0e))
+
+## [13.9.13](https://github.com/adobe/helix-pipeline/compare/v13.9.12...v13.9.13) (2021-04-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.27.1 ([#1062](https://github.com/adobe/helix-pipeline/issues/1062)) ([d083238](https://github.com/adobe/helix-pipeline/commit/d0832384334c3b6e355f4382e5614fe05f29790e))
+
+## [13.9.12](https://github.com/adobe/helix-pipeline/compare/v13.9.11...v13.9.12) (2021-04-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared to v7.27.0 ([#1061](https://github.com/adobe/helix-pipeline/issues/1061)) ([16267cc](https://github.com/adobe/helix-pipeline/commit/16267ccebe471cc16192ebd0687d40e592322f57))
+
+## [13.9.11](https://github.com/adobe/helix-pipeline/compare/v13.9.10...v13.9.11) (2021-04-22)
+
+
+### Bug Fixes
+
+* **data:** keep runtime for data-embed and fix tests ([41b9276](https://github.com/adobe/helix-pipeline/commit/41b927603a917e7b0cad6fa19f463e1db874b094))
+* **embed:** disable spark embeds, use universal runtime for embeds ([7e19fe5](https://github.com/adobe/helix-pipeline/commit/7e19fe5f112c2a8f77f7db6cad2dfc15508ecef2))
+
 ## [13.9.10](https://github.com/adobe/helix-pipeline/compare/v13.9.9...v13.9.10) (2021-04-21)
 
 

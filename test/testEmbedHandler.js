@@ -11,7 +11,7 @@
  */
 /* eslint-env mocha */
 const assert = require('assert');
-const { dom: { assertEquivalentNode } } = require('@adobe/helix-shared');
+const { assertEquivalentNode } = require('@adobe/helix-shared-dom');
 const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const embed = require('../src/utils/embed-handler');
@@ -86,7 +86,7 @@ describe('Test Embed Handler', () => {
     await coerce(action);
 
     embed(action.secrets)((_, tagname, parameters, children) => {
-      assert.equal(parameters.src, 'https://adobeioruntime.net/api/v1/web/helix/helix-services/embed@v1/https://www.example.com/');
+      assert.equal(parameters.src, 'https://helix-pages.anywhere.run/helix-services/embed@v1/https://www.example.com/');
       assert.equal(children, undefined);
       assert.equal(tagname, 'esi:include');
     }, node);
