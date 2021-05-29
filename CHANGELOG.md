@@ -1,3 +1,10 @@
+## [14.0.6](https://github.com/adobe/helix-pipeline/compare/v14.0.5...v14.0.6) (2021-05-29)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#1086](https://github.com/adobe/helix-pipeline/issues/1086)) ([06ea272](https://github.com/adobe/helix-pipeline/commit/06ea2723e521fdeae9eff2ee6d0e30784678d9dd))
+
 ## [14.0.5](https://github.com/adobe/helix-pipeline/compare/v14.0.4...v14.0.5) (2021-05-25)
 
 
