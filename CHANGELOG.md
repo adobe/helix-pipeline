@@ -1,3 +1,10 @@
+## [14.0.7](https://github.com/adobe/helix-pipeline/compare/v14.0.6...v14.0.7) (2021-05-30)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-config to v1.1.3 ([#1087](https://github.com/adobe/helix-pipeline/issues/1087)) ([9787661](https://github.com/adobe/helix-pipeline/commit/978766165264a383e467543b27982b5050003c79))
+
 ## [14.0.6](https://github.com/adobe/helix-pipeline/compare/v14.0.5...v14.0.6) (2021-05-29)
 
 
