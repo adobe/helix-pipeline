@@ -1,3 +1,10 @@
+## [14.0.10](https://github.com/adobe/helix-pipeline/compare/v14.0.9...v14.0.10) (2021-06-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-markdown-support to v2 ([#1093](https://github.com/adobe/helix-pipeline/issues/1093)) ([e9de0b4](https://github.com/adobe/helix-pipeline/commit/e9de0b46f938efe70401412ed25792cb3d1bd32b))
+
 ## [14.0.9](https://github.com/adobe/helix-pipeline/compare/v14.0.8...v14.0.9) (2021-06-05)
 
 
