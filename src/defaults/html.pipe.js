@@ -17,12 +17,12 @@ const fetchContent = require('../html/fetch-content.js');
 const fetchMarkupConfig = require('../html/fetch-markupconfig.js');
 const parse = require('../html/parse-markdown.js');
 const rewriteBlobImages = require('../html/rewrite-blob-images');
+const rewriteIcons = require('../html/rewrite-icons.js');
 const meta = require('../html/get-metadata.js');
 const html = require('../html/make-html.js');
 const type = require('../utils/set-content-type.js');
 const selectStatus = require('../html/set-status.js');
 const smartypants = require('../html/smartypants');
-const iconize = require('../html/iconize');
 const sections = require('../html/split-sections');
 const { selectstrain, selecttest } = require('../utils/conditional-sections');
 const debug = require('../html/output-debug.js');
@@ -71,7 +71,6 @@ const htmlpipe = (cont, context, action) => {
     .use(embeds)
     .use(dataEmbeds)
     .use(smartypants)
-    .use(iconize)
     .use(sections)
     .use(meta).expose('meta')
     .use(unwrapSoleImages)
@@ -81,6 +80,7 @@ const htmlpipe = (cont, context, action) => {
     .use(dataSections)
     .use(html).expose('html')
     .use(rewriteBlobImages)
+    .use(rewriteIcons)
     .use(adjustHTML)
     .use(sanitize).when(paranoid)
     .use(cont)
