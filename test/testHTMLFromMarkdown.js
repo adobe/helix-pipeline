@@ -572,6 +572,36 @@ describe('Testing Markdown conversion', () => {
     );
   });
 
+  it('translates icons in html tables', async () => {
+    await assertMd(
+      `
+            <table>
+                <tr><td class=":noicon:">Video</td><td>Text</td></tr>
+                <tr><td>youtube</td><td><p>:photoshop: :illustrator:</p></td></tr>
+                <tr><td>:photoshop:</td><td><p>foo :photoshop: bar :illustrator: zoo</p></td></tr>
+            </table>
+    `,
+      `<body>
+              <table>
+                <tbody>
+                  <tr><td class=":noicon:">Video</td><td>Text</td></tr>
+                  <tr><td>youtube</td><td><p><img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"><img class="icon icon-illustrator" src="/icons/illustrator.svg" alt="illustrator icon"></p></td></tr>
+                  <tr><td><img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon"></td><td><p>foo <img class="icon icon-photoshop" src="/icons/photoshop.svg" alt="photoshop icon">bar <img class="icon icon-illustrator" src="/icons/illustrator.svg" alt="illustrator icon">zoo</p></td></tr>
+                </tbody>
+              </table>
+            </body>`,
+    );
+  });
+
+  it('translates svg-icons in html', async () => {
+    await assertMd(
+      `
+            <p>Some SVG :#photoshop-icon:.</p>
+    `,
+      '<body><p>Some SVG <svg class="icon icon-photoshop-icon"><use href="/icons.svg#photoshop-icon"></use></svg>.</p></body>',
+    );
+  });
+
   it('translates html in tables with self link', async () => {
     await assertMd(
       `
