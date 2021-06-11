@@ -1,3 +1,10 @@
+## [14.0.12](https://github.com/adobe/helix-pipeline/compare/v14.0.11...v14.0.12) (2021-06-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-fetch to v2.3.0 ([#1096](https://github.com/adobe/helix-pipeline/issues/1096)) ([0efe904](https://github.com/adobe/helix-pipeline/commit/0efe9048363b4a17c4775437fce06fb41e66d64f))
+
 ## [14.0.11](https://github.com/adobe/helix-pipeline/compare/v14.0.10...v14.0.11) (2021-06-11)
 
 
