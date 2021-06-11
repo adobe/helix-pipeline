@@ -1,3 +1,10 @@
+## [14.0.11](https://github.com/adobe/helix-pipeline/compare/v14.0.10...v14.0.11) (2021-06-11)
+
+
+### Bug Fixes
+
+* rewrite icons in html tables ([#1095](https://github.com/adobe/helix-pipeline/issues/1095)) ([e82863c](https://github.com/adobe/helix-pipeline/commit/e82863cc6014f474066eedd7ab1f2c771f3c88cc)), closes [#1094](https://github.com/adobe/helix-pipeline/issues/1094)
+
 ## [14.0.10](https://github.com/adobe/helix-pipeline/compare/v14.0.9...v14.0.10) (2021-06-10)
 
 
