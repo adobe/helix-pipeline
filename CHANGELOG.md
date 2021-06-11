@@ -1,3 +1,10 @@
+## [14.0.13](https://github.com/adobe/helix-pipeline/compare/v14.0.12...v14.0.13) (2021-06-11)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-universal-logger to v1.0.5 ([#1097](https://github.com/adobe/helix-pipeline/issues/1097)) ([b79ec69](https://github.com/adobe/helix-pipeline/commit/b79ec69c016b11d021bdf2278daebf1e5ebe334a))
+
 ## [14.0.12](https://github.com/adobe/helix-pipeline/compare/v14.0.11...v14.0.12) (2021-06-11)
 
 
