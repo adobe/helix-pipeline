@@ -67,10 +67,15 @@ function rewriteIcons(document) {
       textNode.parentNode.insertBefore(createIcon(document, icon), textNode);
       lastIdx = match.index + matched.length;
     }
-    if (lastIdx < text.length) {
-      textNode.data = text.substring(lastIdx);
-    } else {
-      textNode.remove();
+
+    if (lastIdx && lastIdx <= text.length) {
+      // there is still some text left
+      const after = text.substring(lastIdx);
+      if (after) {
+        textNode.data = after;
+      } else {
+        textNode.remove();
+      }
     }
   }
 }
