@@ -1,3 +1,10 @@
+## [14.0.14](https://github.com/adobe/helix-pipeline/compare/v14.0.13...v14.0.14) (2021-06-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency ajv to v8.6.0 ([#1098](https://github.com/adobe/helix-pipeline/issues/1098)) ([9ca08fd](https://github.com/adobe/helix-pipeline/commit/9ca08fda564118908d531cb2711b815b2bcbd844))
+
 ## [14.0.13](https://github.com/adobe/helix-pipeline/compare/v14.0.12...v14.0.13) (2021-06-11)
 
 
