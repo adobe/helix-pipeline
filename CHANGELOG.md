@@ -1,3 +1,10 @@
+## [14.0.19](https://github.com/adobe/helix-pipeline/compare/v14.0.18...v14.0.19) (2021-07-17)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#1108](https://github.com/adobe/helix-pipeline/issues/1108)) ([d869bc5](https://github.com/adobe/helix-pipeline/commit/d869bc52c739d8159adf1c15b5da06bfebcd5f15))
+
 ## [14.0.18](https://github.com/adobe/helix-pipeline/compare/v14.0.17...v14.0.18) (2021-07-13)
 
 
