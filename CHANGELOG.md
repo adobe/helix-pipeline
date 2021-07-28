@@ -1,3 +1,10 @@
+## [14.0.24](https://github.com/adobe/helix-pipeline/compare/v14.0.23...v14.0.24) (2021-07-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v9.2.0 ([#1115](https://github.com/adobe/helix-pipeline/issues/1115)) ([7a0cb75](https://github.com/adobe/helix-pipeline/commit/7a0cb755c9760abbb66f12682f8a6aea3070e70a))
+
 ## [14.0.23](https://github.com/adobe/helix-pipeline/compare/v14.0.22...v14.0.23) (2021-07-28)
 
 
