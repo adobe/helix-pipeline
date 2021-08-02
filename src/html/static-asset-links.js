@@ -10,15 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-const Url = require('url-parse');
-
 function scripts(document) {
   document.querySelectorAll('script').forEach((script) => {
     if (script.src) {
-      const src = new Url(script.src);
-      if (src.host === '' && src.query === '' && src.pathname) {
+      const src = new URL(script.src, 'http://localhost/');
+      if (src.hostname === 'localhost' && src.search === '' && src.pathname) {
         // eslint-disable-next-line no-param-reassign
-        script.src = `<esi:include src='${src.pathname}.url'/><esi:remove>${script.src}</esi:remove>`;
+        script.src = `<esi:include src='${script.src}.url'/><esi:remove>${script.src}</esi:remove>`;
       }
     }
   });
@@ -27,10 +25,10 @@ function scripts(document) {
 function links(document) {
   document.querySelectorAll('link').forEach((link) => {
     if (link.rel.indexOf('stylesheet') >= 0 && link.href) {
-      const href = new Url(link.href);
-      if (href.host === '' && href.query === '' && href.pathname) {
+      const href = new URL(link.href, 'http://localhost/');
+      if (href.hostname === 'localhost' && href.search === '' && href.pathname) {
         // eslint-disable-next-line no-param-reassign
-        link.href = `<esi:include src='${href.pathname}.url'/><esi:remove>${link.href}</esi:remove>`;
+        link.href = `<esi:include src='${link.href}.url'/><esi:remove>${link.href}</esi:remove>`;
       }
     }
   });
