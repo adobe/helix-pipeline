@@ -21,7 +21,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@adobe/eslint-config-helix": "1.1.5",
-    "@adobe/helix-shared-dom": "1.0.4",
+    "@adobe/helix-shared-dom": "1.0.5",
     "@adobe/helix-shared-string": "1.0.3",
     "@adobe/helix-testutils": "0.4.5",
     "@adobe/jsonschema2md": "6.1.0",
