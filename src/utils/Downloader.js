@@ -158,6 +158,10 @@ class Downloader {
       } catch (e) {
         res = e;
         res.ok = false;
+      } finally {
+        if (options.signal) {
+          options.signal.clear();
+        }
       }
 
       if (res.status === 404) {
