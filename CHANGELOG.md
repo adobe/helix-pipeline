@@ -1,3 +1,10 @@
+## [14.0.26](https://github.com/adobe/helix-pipeline/compare/v14.0.25...v14.0.26) (2021-08-09)
+
+
+### Bug Fixes
+
+* clear timeout in downloader ([#1121](https://github.com/adobe/helix-pipeline/issues/1121)) ([3a89f46](https://github.com/adobe/helix-pipeline/commit/3a89f462a539790559e7072d42af5024a3ce2209))
+
 ## [14.0.25](https://github.com/adobe/helix-pipeline/compare/v14.0.24...v14.0.25) (2021-07-30)
 
 
