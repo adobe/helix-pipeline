@@ -1,3 +1,10 @@
+## [14.0.30](https://github.com/adobe/helix-pipeline/compare/v14.0.29...v14.0.30) (2021-08-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v17 ([#1128](https://github.com/adobe/helix-pipeline/issues/1128)) ([6071030](https://github.com/adobe/helix-pipeline/commit/60710308ddedafdf6c6e4b9d712e72e8e95e0f94))
+
 ## [14.0.29](https://github.com/adobe/helix-pipeline/compare/v14.0.28...v14.0.29) (2021-08-14)
 
 
