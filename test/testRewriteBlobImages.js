@@ -29,7 +29,7 @@ describe('Test Blob Image Rewriting', () => {
       content: { document },
     };
     rewriteBlobImages(context);
-    assert.equal(context.content.document.documentElement.innerHTML.trim(), expected.trim());
+    assert.strictEqual(context.content.document.documentElement.innerHTML.trim(), expected.trim());
   });
 
   it('Does not throw error if document is missing', () => {
