@@ -1,3 +1,10 @@
+## [14.0.34](https://github.com/adobe/helix-pipeline/compare/v14.0.33...v14.0.34) (2021-08-24)
+
+
+### Bug Fixes
+
+* respect image hashes with dimensions ([#1134](https://github.com/adobe/helix-pipeline/issues/1134)) ([9390c93](https://github.com/adobe/helix-pipeline/commit/9390c93ec1083a117527f30a9161e68d1792c42a))
+
 ## [14.0.33](https://github.com/adobe/helix-pipeline/compare/v14.0.32...v14.0.33) (2021-08-21)
 
 
