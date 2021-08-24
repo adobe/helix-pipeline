@@ -19,7 +19,9 @@ function images(document) {
     if (/^https:\/\/hlx\.blob\.core\.windows\.net\/external\//.test(img.src)) {
       const { pathname, hash } = new URL(img.src);
       const filename = pathname.split('/').pop();
-      const extension = hash.includes('.') ? hash.split('.').pop() : 'jpg';
+
+      // remove width/height from hash, since helix-pages doesn't support it yet
+      const extension = hash.split('?').shift().split('.').pop() || 'jpg';
       img.src = `./media_${filename}.${extension}`;
     }
   });
