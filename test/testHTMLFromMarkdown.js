@@ -529,7 +529,7 @@ describe('Testing Markdown conversion', () => {
   it('is robust against wrong tags in md', async () => {
     await assertMd(
       '# Foo </p>',
-      '<h1 id="foo">Foo</h1>',
+      '<h1 id="foo-">Foo</h1>',
     );
   });
 
