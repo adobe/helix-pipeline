@@ -63,7 +63,7 @@
     "@adobe/helix-shared-utils": "1.0.3",
     "@adobe/helix-shared-wrap": "1.0.0",
     "@adobe/helix-status": "9.2.3",
-    "@adobe/helix-universal-logger": "1.0.9",
+    "@adobe/helix-universal-logger": "1.1.0",
     "@adobe/openwhisk-action-logger": "2.4.6",
     "@adobe/openwhisk-action-utils": "4.4.6",
     "@emmetio/expand-abbreviation": "0.7.3",
