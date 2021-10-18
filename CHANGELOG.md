@@ -1,3 +1,10 @@
+## [14.0.45](https://github.com/adobe/helix-pipeline/compare/v14.0.44...v14.0.45) (2021-10-18)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#1161](https://github.com/adobe/helix-pipeline/issues/1161)) ([118ec16](https://github.com/adobe/helix-pipeline/commit/118ec1633b3cc1db8ea0c492f1f4567653ad50aa))
+
 ## [14.0.44](https://github.com/adobe/helix-pipeline/compare/v14.0.43...v14.0.44) (2021-10-15)
 
 
