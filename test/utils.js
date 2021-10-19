@@ -16,7 +16,6 @@ const { Request } = require('@adobe/helix-fetch');
 const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
 const FSPersister = require('@pollyjs/persister-fs');
 const { setupMocha } = require('@pollyjs/core');
-const { VersionLock } = require('@adobe/openwhisk-action-utils');
 const { pipe: htmlPipe } = require('../src/defaults/html.pipe.js');
 const { pipe: jsonPipe } = require('../src/defaults/json.pipe.js');
 const { pipe: xmlPipe } = require('../src/defaults/xml.pipe.js');
@@ -29,14 +28,10 @@ const resolver = {
   },
 };
 
-function piper(pipe, universal) {
+function piper(pipe) {
   return (cont, context, action) => {
     action.downloader = new Downloader(context, action, { forceHttp1: true });
-    if (universal) {
-      action.resolver = resolver;
-    } else {
-      action.versionLock = new VersionLock();
-    }
+    action.resolver = resolver;
     return pipe(cont, context, action);
   };
 }
@@ -139,7 +134,6 @@ module.exports = {
   retrofitResponse,
   universalRequest,
   pipe: piper(htmlPipe),
-  pipeUniversal: piper(htmlPipe, true),
   jsonPipe: piper(jsonPipe),
   xmlPipe: piper(xmlPipe),
   resolver,

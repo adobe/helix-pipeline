@@ -17,23 +17,18 @@ const {
 const DATA_EMBED_TIMEOUT = 20000;
 
 function fetch({ content: { mdast } }, {
-  downloader, logger, versionLock, resolver, secrets: { DATA_EMBED_SERVICE },
+  downloader, logger, resolver,
 }) {
   const fetches = pipe(
     selectAll('dataEmbed', mdast),
     map((node) => node.url),
     uniq,
     map((url) => {
-      let uri;
-      if (resolver) {
-        uri = resolver.createURL({
-          package: 'helix-services',
-          name: 'data-embed',
-          version: 'v2',
-        });
-      } else {
-        uri = new URL(versionLock.transformActionURL(DATA_EMBED_SERVICE));
-      }
+      const uri = resolver.createURL({
+        package: 'helix-services',
+        name: 'data-embed',
+        version: 'v2',
+      });
       uri.searchParams.append('src', url);
       logger.info(`fetching ${uri}`);
       return downloader.fetch({
