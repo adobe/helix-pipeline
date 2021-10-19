@@ -30,20 +30,6 @@
 
 ### Objects
 
-*   [MDAST](./content-properties-mdast.md "A node in the Markdown AST") – `https://ns.adobe.com/helix/pipeline/mdast#/properties/mdast`
-
-*   [Position](./section-definitions-section-properties-position.md "Marks the position of an AST node in the original text flow") – `https://ns.adobe.com/helix/pipeline/position#/definitions/section/properties/position`
-
-*   [Raw Request](./action-properties-raw-request.md "The Request Object used for Invoking OpenWhisk") – `https://ns.adobe.com/helix/pipeline/rawrequest#/properties/request`
-
-*   [Request](./context-properties-request.md "The HTTP Request") – `https://ns.adobe.com/helix/pipeline/request#/properties/request`
-
-*   [Response](./context-properties-response.md "The HTTP response object") – `https://ns.adobe.com/helix/pipeline/response#/properties/response`
-
-*   [Secrets](./action-properties-secrets.md "Secrets passed into the pipeline such as API Keys or configuration settings") – `https://ns.adobe.com/helix/pipeline/secrets#/properties/secrets`
-
-*   [Text Coordinates](./position-properties-text-coordinates.md "A position in a text document") – `https://ns.adobe.com/helix/pipeline/textcoordinates#/properties/start`
-
 *   [Untitled object in Action](./action-properties-logger.md "A helix-log SimpleInterface logger instance") – `https://ns.adobe.com/helix/pipeline/action#/properties/logger`
 
 *   [Untitled object in Action](./action-properties-debug.md "Internal information related to debugging") – `https://ns.adobe.com/helix/pipeline/action#/properties/debug`

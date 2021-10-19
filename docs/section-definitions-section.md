@@ -16,15 +16,15 @@ unknown
 
 # section Properties
 
-| Property              | Type          | Required | Nullable       | Defined by                                                                                                                                            |
-| :-------------------- | :------------ | :------- | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [type](#type)         | Not specified | Optional | cannot be null | [Section](section-definitions-section-properties-type.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/type")          |
-| [position](#position) | `object`      | Optional | cannot be null | [Section](section-definitions-section-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/definitions/section/properties/position") |
-| [children](#children) | `array`       | Optional | cannot be null | [Section](section-definitions-section-properties-children.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/children")  |
-| [meta](#meta)         | `object`      | Optional | can be null    | [Section](meta-definitions-meta.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/meta")                                |
-| [title](#title)       | `string`      | Optional | cannot be null | [Section](meta-definitions-meta-properties-title.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/title")              |
-| [intro](#intro)       | `string`      | Optional | cannot be null | [Section](meta-definitions-meta-properties-intro.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/intro")              |
-| [image](#image)       | `string`      | Optional | cannot be null | [Section](meta-definitions-meta-properties-image.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/image")              |
+| Property              | Type          | Required | Nullable       | Defined by                                                                                                                                           |
+| :-------------------- | :------------ | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [type](#type)         | Not specified | Optional | cannot be null | [Section](section-definitions-section-properties-type.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/type")         |
+| [position](#position) | `object`      | Optional | cannot be null | [Section](mdast-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/definitions/section/properties/position")                      |
+| [children](#children) | `array`       | Optional | cannot be null | [Section](section-definitions-section-properties-children.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/children") |
+| [meta](#meta)         | `object`      | Optional | can be null    | [Section](meta-definitions-meta.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/meta")                               |
+| [title](#title)       | `string`      | Optional | cannot be null | [Section](meta-definitions-meta-properties-title.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/title")             |
+| [intro](#intro)       | `string`      | Optional | cannot be null | [Section](meta-definitions-meta-properties-intro.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/intro")             |
+| [image](#image)       | `string`      | Optional | cannot be null | [Section](meta-definitions-meta-properties-image.md "https://ns.adobe.com/helix/pipeline/section#/definitions/section/properties/image")             |
 
 ## type
 
@@ -60,15 +60,15 @@ Marks the position of an AST node in the original text flow
 
 *   is optional
 
-*   Type: `object` ([Position](section-definitions-section-properties-position.md))
+*   Type: `object` ([Position](mdast-properties-position.md))
 
 *   cannot be null
 
-*   defined in: [Section](section-definitions-section-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/definitions/section/properties/position")
+*   defined in: [Section](mdast-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/definitions/section/properties/position")
 
 ### position Type
 
-`object` ([Position](section-definitions-section-properties-position.md))
+`object` ([Position](mdast-properties-position.md))
 
 ## children
 

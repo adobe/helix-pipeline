@@ -16,32 +16,32 @@ A node in the Markdown AST
 
 # MDAST Properties
 
-| Property                        | Type          | Required | Nullable       | Defined by                                                                                                                      |
-| :------------------------------ | :------------ | :------- | :------------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| [type](#type)                   | Not specified | Optional | cannot be null | [MDAST](mdast-properties-type.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/type")                                  |
-| [children](#children)           | `array`       | Optional | cannot be null | [MDAST](mdast-properties-children.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/children")                          |
-| [position](#position)           | `object`      | Optional | cannot be null | [MDAST](section-definitions-section-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/properties/position") |
-| [value](#value)                 | `string`      | Optional | cannot be null | [MDAST](mdast-properties-value.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/value")                                |
-| [payload](#payload)             | `object`      | Optional | cannot be null | [MDAST](mdast-properties-payload.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/payload")                            |
-| [depth](#depth)                 | `integer`     | Optional | cannot be null | [MDAST](mdast-properties-depth.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/depth")                                |
-| [ordered](#ordered)             | `boolean`     | Optional | cannot be null | [MDAST](mdast-properties-ordered.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/ordered")                            |
-| [start](#start)                 | `integer`     | Optional | can be null    | [MDAST](mdast-properties-start.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/start")                                |
-| [spread](#spread)               | `boolean`     | Optional | can be null    | [MDAST](mdast-properties-spread.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/spread")                              |
-| [checked](#checked)             | `boolean`     | Optional | can be null    | [MDAST](mdast-properties-checked.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/checked")                            |
-| [align](#align)                 | `array`       | Optional | cannot be null | [MDAST](mdast-properties-align.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/align")                                |
-| [lang](#lang)                   | `string`      | Optional | can be null    | [MDAST](mdast-properties-lang.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/lang")                                  |
-| [identifier](#identifier)       | `string`      | Optional | cannot be null | [MDAST](mdast-properties-identifier.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/identifier")                      |
-| [label](#label)                 | `string`      | Optional | cannot be null | [MDAST](mdast-properties-label.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/label")                                |
-| [url](#url)                     | `string`      | Optional | cannot be null | [MDAST](mdast-properties-url.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/url")                                    |
-| [meta](#meta)                   | `object`      | Optional | can be null    | [MDAST](meta-definitions-meta.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/meta")                                  |
-| [title](#title)                 | `string`      | Optional | can be null    | [MDAST](mdast-properties-title.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/title")                                |
-| [code](#code)                   | `string`      | Optional | cannot be null | [MDAST](mdast-properties-code.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/code")                                  |
-| [intro](#intro)                 | `string`      | Optional | can be null    | [MDAST](mdast-properties-intro.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/intro")                                |
-| [image](#image)                 | `string`      | Optional | can be null    | [MDAST](mdast-properties-image.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/image")                                |
-| [types](#types)                 | `array`       | Optional | cannot be null | [MDAST](mdast-properties-types.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/types")                                |
-| [alt](#alt)                     | `string`      | Optional | can be null    | [MDAST](mdast-properties-alt.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/alt")                                    |
-| [referenceType](#referencetype) | Not specified | Optional | cannot be null | [MDAST](mdast-properties-referencetype.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/referenceType")                |
-| [data](#data)                   | `object`      | Optional | cannot be null | [MDAST](mdast-properties-data.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/data")                                  |
+| Property                        | Type          | Required | Nullable       | Defined by                                                                                                       |
+| :------------------------------ | :------------ | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------- |
+| [type](#type)                   | Not specified | Optional | cannot be null | [MDAST](mdast-properties-type.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/type")                   |
+| [children](#children)           | `array`       | Optional | cannot be null | [MDAST](mdast-properties-children.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/children")           |
+| [position](#position)           | `object`      | Optional | cannot be null | [MDAST](mdast-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/properties/position")        |
+| [value](#value)                 | `string`      | Optional | cannot be null | [MDAST](mdast-properties-value.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/value")                 |
+| [payload](#payload)             | `object`      | Optional | cannot be null | [MDAST](mdast-properties-payload.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/payload")             |
+| [depth](#depth)                 | `integer`     | Optional | cannot be null | [MDAST](mdast-properties-depth.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/depth")                 |
+| [ordered](#ordered)             | `boolean`     | Optional | cannot be null | [MDAST](mdast-properties-ordered.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/ordered")             |
+| [start](#start)                 | `integer`     | Optional | can be null    | [MDAST](mdast-properties-start.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/start")                 |
+| [spread](#spread)               | `boolean`     | Optional | can be null    | [MDAST](mdast-properties-spread.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/spread")               |
+| [checked](#checked)             | `boolean`     | Optional | can be null    | [MDAST](mdast-properties-checked.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/checked")             |
+| [align](#align)                 | `array`       | Optional | cannot be null | [MDAST](mdast-properties-align.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/align")                 |
+| [lang](#lang)                   | `string`      | Optional | can be null    | [MDAST](mdast-properties-lang.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/lang")                   |
+| [identifier](#identifier)       | `string`      | Optional | cannot be null | [MDAST](mdast-properties-identifier.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/identifier")       |
+| [label](#label)                 | `string`      | Optional | cannot be null | [MDAST](mdast-properties-label.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/label")                 |
+| [url](#url)                     | `string`      | Optional | cannot be null | [MDAST](mdast-properties-url.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/url")                     |
+| [meta](#meta)                   | `object`      | Optional | can be null    | [MDAST](meta-definitions-meta.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/meta")                   |
+| [title](#title)                 | `string`      | Optional | can be null    | [MDAST](mdast-properties-title.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/title")                 |
+| [code](#code)                   | `string`      | Optional | cannot be null | [MDAST](mdast-properties-code.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/code")                   |
+| [intro](#intro)                 | `string`      | Optional | can be null    | [MDAST](mdast-properties-intro.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/intro")                 |
+| [image](#image)                 | `string`      | Optional | can be null    | [MDAST](mdast-properties-image.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/image")                 |
+| [types](#types)                 | `array`       | Optional | cannot be null | [MDAST](mdast-properties-types.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/types")                 |
+| [alt](#alt)                     | `string`      | Optional | can be null    | [MDAST](mdast-properties-alt.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/alt")                     |
+| [referenceType](#referencetype) | Not specified | Optional | cannot be null | [MDAST](mdast-properties-referencetype.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/referenceType") |
+| [data](#data)                   | `object`      | Optional | cannot be null | [MDAST](mdast-properties-data.md "https://ns.adobe.com/helix/pipeline/mdast#/properties/data")                   |
 
 ## type
 
@@ -125,15 +125,15 @@ Marks the position of an AST node in the original text flow
 
 *   is optional
 
-*   Type: `object` ([Position](section-definitions-section-properties-position.md))
+*   Type: `object` ([Position](mdast-properties-position.md))
 
 *   cannot be null
 
-*   defined in: [MDAST](section-definitions-section-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/properties/position")
+*   defined in: [MDAST](mdast-properties-position.md "https://ns.adobe.com/helix/pipeline/position#/properties/position")
 
 ### position Type
 
-`object` ([Position](section-definitions-section-properties-position.md))
+`object` ([Position](mdast-properties-position.md))
 
 ## value
 
