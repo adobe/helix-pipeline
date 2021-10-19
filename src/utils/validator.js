@@ -57,12 +57,18 @@ function ajv(logger, options = {}) {
 
     validator.enhancedErrorsText = function enhancedErrorsText(errs, opts = {}) {
       const errors = errs || this.errors;
-      if (!errors) return 'No errors';
+      /* istanbul ignore next */
+      if (!errors) {
+        return 'No errors';
+      }
 
-      const separator = opts.separator === undefined ? '\n' : opts.separator;
+      const separator = opts.separator === undefined
+        ? /* istanbul ignore next */ '\n'
+        : /* istanbul ignore next */ opts.separator;
 
       let text = '';
       errors.forEach((err) => {
+        /* istanbul ignore next */
         if (err) {
           if (err.data && err.data.type) {
             text += `${err.data.type}${err.schemaPath} ${err.message} - path: ${err.dataPath}${separator}`;

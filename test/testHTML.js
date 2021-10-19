@@ -16,7 +16,6 @@ const { logging } = require('@adobe/helix-testutils');
 const { JSDOM } = require('jsdom');
 const fs = require('fs-extra');
 const path = require('path');
-const { runPipeline } = require('../src/utils/openwhisk.js');
 const { setupPolly, pipe } = require('./utils.js');
 
 const logger = logging.createTestLogger({
@@ -888,27 +887,6 @@ ${context.content.document.body.innerHTML}`,
     assert.deepEqual(res, {
       headers: {},
       status: 404,
-    });
-  });
-
-  it('html.pipe via pipeline fetch errors are propagated to action response', async () => {
-    const out = await runPipeline((context) => {
-      context.response = {
-        document: context.content.document,
-      };
-    }, pipe, {
-      owner: 'adobe',
-      repo: 'helix-pipeline',
-      ref: 'master',
-      path: '/not-existent.md',
-    });
-    assert.ok(out.errorStack.startsWith('Error: Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404\n'));
-    delete out.errorStack;
-    assert.deepEqual(out, {
-      body: '',
-      errorMessage: 'Error while fetching file from https://raw.githubusercontent.com/adobe/helix-pipeline/master/not-existent.md: 404',
-      headers: {},
-      statusCode: 404,
     });
   });
 

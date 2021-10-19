@@ -17,7 +17,7 @@ const { JSDOM } = require('jsdom');
 const fs = require('fs-extra');
 const path = require('path');
 const { runPipeline } = require('../src/universal.js');
-const { setupPolly, pipeUniversal: pipe, universalRequest } = require('./utils.js');
+const { setupPolly, pipe, universalRequest } = require('./utils.js');
 
 const logger = logging.createTestLogger({
   // tune this for debugging

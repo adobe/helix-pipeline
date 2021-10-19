@@ -14,12 +14,11 @@ const Pipeline = require('../pipeline.js');
 
 /**
  * Constructs a pipeline function that is capable of
- * - reading OpenWhisk parameters
  * - calling a continuation function
  * - wrapping the response in a friendly response format
  * @param {Function} next the continuation function
  * @param {Object} context the initial context
- * @param {Object} action the OpenWhisk action
+ * @param {Object} action the action
  * @returns {Function} a function to execute.
  */
 function pipe(next, context, action) {
