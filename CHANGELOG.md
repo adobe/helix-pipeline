@@ -1,3 +1,15 @@
+# [15.0.0](https://github.com/adobe/helix-pipeline/compare/v14.0.45...v15.0.0) (2021-10-19)
+
+
+### Features
+
+* remove direct openwhisk action support ([#1162](https://github.com/adobe/helix-pipeline/issues/1162)) ([d7507a1](https://github.com/adobe/helix-pipeline/commit/d7507a1aaec874fa209d9b4b636377814dc0f6e9))
+
+
+### BREAKING CHANGES
+
+* the pipeline can only be used with the universal runtime
+
 ## [14.0.45](https://github.com/adobe/helix-pipeline/compare/v14.0.44...v14.0.45) (2021-10-18)
 
 
