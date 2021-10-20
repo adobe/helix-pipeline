@@ -1,9 +1,9 @@
 version: 2.1
 
 executors:
-  node12:
+  node14:
     docker:
-      - image: circleci/node:12
+      - image: circleci/node:14
     environment:
       NPM_CONFIG_PREFIX: ~/.npm-global
 
@@ -33,7 +33,7 @@ orbs:
 
 jobs:
   build:
-    executor: node12
+    executor: node14
     steps:
       - setup
       - run: mkdir junit
@@ -50,7 +50,7 @@ jobs:
           path: junit
 
   generate-docs:
-    executor: node12
+    executor: node14
     steps:
       - setup
       - add_ssh_keys:
