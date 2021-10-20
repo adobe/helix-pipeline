@@ -14,7 +14,7 @@
 const assert = require('assert');
 const nock = require('nock');
 
-const { rootLogger, SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
+const { SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
 const {
   createActionResponse,
   extractActionContext,
@@ -36,8 +36,6 @@ describe('Testing universal adapter', () => {
     nock.restore();
     nock.cleanAll();
     nock.activate();
-
-    rootLogger.loggers.delete('UniversalLogger');
   });
 
   after('Reset Production Mode', () => {
