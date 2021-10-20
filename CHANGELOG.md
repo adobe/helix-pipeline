@@ -1,3 +1,10 @@
+## [15.0.1](https://github.com/adobe/helix-pipeline/compare/v15.0.0...v15.0.1) (2021-10-20)
+
+
+### Bug Fixes
+
+* **deps:** update adobe major (major) ([#1163](https://github.com/adobe/helix-pipeline/issues/1163)) ([e52411d](https://github.com/adobe/helix-pipeline/commit/e52411d880f5ff5093c14e633a5346da8053390f))
+
 # [15.0.0](https://github.com/adobe/helix-pipeline/compare/v14.0.45...v15.0.0) (2021-10-19)
 
 
