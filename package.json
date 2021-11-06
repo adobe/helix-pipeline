@@ -58,7 +58,7 @@
     "@adobe/helix-fetch": "3.0.0",
     "@adobe/helix-log": "6.0.0",
     "@adobe/helix-markdown-support": "2.0.1",
-    "@adobe/helix-shared-config": "1.4.5",
+    "@adobe/helix-shared-config": "1.4.6",
     "@adobe/helix-shared-utils": "1.0.3",
     "@adobe/helix-shared-wrap": "1.0.0",
     "@adobe/helix-status": "9.2.4",
