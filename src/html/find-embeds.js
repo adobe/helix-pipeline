@@ -91,6 +91,7 @@ function internalImgEmbed({ type, children }, base, contentext, resourceext) {
   return false;
 }
 
+// eslint-disable-next-line default-param-last
 function embed(uri, node, allowlist = [], dataAllowlist = [], logger) {
   if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, dataAllowlist)) {
     const children = [{ ...node }];
@@ -121,7 +122,8 @@ function internalembed(uri, node, extension) {
   }
 }
 
-function find({ content: { mdast }, request: { extension, url } },
+function find(
+  { content: { mdast }, request: { extension, url } },
   {
     logger, secrets: {
       EMBED_ALLOWLIST,
@@ -129,7 +131,8 @@ function find({ content: { mdast }, request: { extension, url } },
       DATA_EMBED_ALLOWLIST,
     },
     request: { params: { path } },
-  }) {
+  },
+) {
   const resourceext = `.${extension}`;
   const embedAllowlist = EMBED_ALLOWLIST.split(',').map((s) => s.trim());
   const dataEmbedAllowlist = DATA_EMBED_ALLOWLIST.split(',').map((s) => s.trim());

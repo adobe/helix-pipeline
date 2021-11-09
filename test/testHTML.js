@@ -502,7 +502,8 @@ ${context.content.document.body.innerHTML}`,
     const result = await pipe(
       (context) => {
         context.response = { status: 201, body: context.content.document.body.innerHTML };
-      }, {
+      },
+      {
         request: crequest,
         content: {
           mdast: {
@@ -528,7 +529,8 @@ ${context.content.document.body.innerHTML}`,
     const result = await pipe(
       (context) => {
         context.response = { status: 201, body: context.content.document.body.innerHTML };
-      }, {
+      },
+      {
         request: crequest,
         content: {
           body: 'Hello World',

@@ -54,7 +54,8 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Headings MDAST Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'heading-ids.json'));
     assertTransformerYieldsDocument(
-      new VDOM(mdast, action.secrets), `
+      new VDOM(mdast, action.secrets),
+      `
       <h1 id="foo">Foo</h1>
       <h2 id="bar">Bar</h2>
       <h3 id="baz">Baz</h1>
@@ -68,7 +69,8 @@ describe('Test MDAST to VDOM Transformation', () => {
   it('Sections MDAST Conversion', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'headings.json'));
     assertTransformerYieldsDocument(
-      new VDOM(mdast, action.secrets), `
+      new VDOM(mdast, action.secrets),
+      `
       <h1 id="heading-1-double-underline">Heading 1 (double-underline)</h1>
       <h2 id="heading-2-single-underline">Heading 2 (single-underline)</h2>
       <h1 id="heading-1">Heading 1</h1>
@@ -105,7 +107,8 @@ describe('Test MDAST to VDOM Transformation', () => {
     const transformer = new VDOM(mdast, action.secrets);
     transformer.match('heading', () => [h('a', { name: 'h1' }), h('h1', 'All Headings are the same to me')]);
     assertTransformerYieldsDocument(
-      transformer, `
+      transformer,
+      `
           <a name="h1"></a>
           <h1>All Headings are the same to me</h1>
         `,
@@ -118,7 +121,8 @@ describe('Test MDAST to VDOM Transformation', () => {
     transformer.match('heading', () => '<h1>All Headings are the same to me</h1>');
     try {
       assertTransformerYieldsDocument(
-        transformer, `
+        transformer,
+        `
           <a name="h1"></a>
           <h1>All Headings are the same to me</h1>
         `,
@@ -135,7 +139,8 @@ describe('Test MDAST to VDOM Transformation', () => {
     transformer.match('heading', () => hy('div'));
     try {
       assertTransformerYieldsDocument(
-        transformer, `
+        transformer,
+        `
           <a name="h1"></a>
           <h1>All Headings are the same to me</h1>
         `,
@@ -158,7 +163,8 @@ describe('Test MDAST to VDOM Transformation', () => {
       return res;
     });
     assertTransformerYieldsDocument(
-      transformer, `
+      transformer,
+      `
         <ul>
           <li>
             <p>
@@ -193,10 +199,13 @@ describe('Test MDAST to VDOM Transformation', () => {
     const mdast = fs.readJSONSync(path.resolve(__dirname, 'fixtures', 'paragraph.json'));
     const transformer = new VDOM(mdast, action.secrets);
     transformer.match('link[url^="http"]', (_, node) => h(
-      'a', { href: node.url, rel: 'nofollow' }, node.children.map(({ value }) => value),
+      'a',
+      { href: node.url, rel: 'nofollow' },
+      node.children.map(({ value }) => value),
     ));
     assertTransformerYieldsDocument(
-      transformer, `
+      transformer,
+      `
         <p>
           <a href="https://house.md/syntax-tree/mdast.md"
               rel="nofollow">External link</a>:
