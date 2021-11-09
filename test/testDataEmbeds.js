@@ -252,25 +252,27 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
   </ol>`,
   ));
 
-  it('html.pipe processes data embeds that generate new embeds', async () => testEmbeds({
-    data: [
-      {
-        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg', post: '/posts/sunny.md',
-      },
-      {
-        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg', post: '/posts/scenic.md',
-      },
-      {
-        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png', post: '/posts/honda.md',
-      },
-    ],
-  }, `
+  it('html.pipe processes data embeds that generate new embeds', async () => testEmbeds(
+    {
+      data: [
+        {
+          make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg', post: '/posts/sunny.md',
+        },
+        {
+          make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg', post: '/posts/scenic.md',
+        },
+        {
+          make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png', post: '/posts/honda.md',
+        },
+      ],
+    },
+    `
 https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
 
 # {{make}} {{model}}
 
 {{post}}`,
-  `<h1 id="nissan-sunny">Nissan Sunny</h1>
+    `<h1 id="nissan-sunny">Nissan Sunny</h1>
   <esi:include src="/posts/sunny.embed.html"></esi:include>
   <esi:remove>
     <p>/posts/sunny.md</p>
@@ -284,21 +286,24 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
   <esi:include src="/posts/honda.embed.html"></esi:include>
   <esi:remove>
     <p>/posts/honda.md</p>
-  </esi:remove>`));
+  </esi:remove>`,
+  ));
 
-  it('html.pipe supports data embed pagination', async () => testEmbeds({
-    data: [
-      {
-        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg', post: '/posts/sunny.md',
-      },
-      {
-        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg', post: '/posts/scenic.md',
-      },
-      {
-        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png', post: '/posts/honda.md',
-      },
-    ],
-  }, `
+  it('html.pipe supports data embed pagination', async () => testEmbeds(
+    {
+      data: [
+        {
+          make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg', post: '/posts/sunny.md',
+        },
+        {
+          make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg', post: '/posts/scenic.md',
+        },
+        {
+          make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png', post: '/posts/honda.md',
+        },
+      ],
+    },
+    `
 ---
 hlx_limit: 1
 hlx_page: 2
@@ -309,33 +314,37 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGY
 # {{make}} {{model}}
 
 {{post}}`,
-  `<h1 id="renault-scenic">Renault Scenic</h1>
+    `<h1 id="renault-scenic">Renault Scenic</h1>
   <esi:include src="/posts/scenic.embed.html"></esi:include>
   <esi:remove>
     <p>/posts/scenic.md</p>
-  </esi:remove>`));
+  </esi:remove>`,
+  ));
 
-  it('html.pipe processes data embeds in new data format', async () => testEmbeds({
-    data: [
-      {
-        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
-      },
-      {
-        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
-      },
-      {
-        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
-      },
-    ],
-  }, `
+  it('html.pipe processes data embeds in new data format', async () => testEmbeds(
+    {
+      data: [
+        {
+          make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+        },
+        {
+          make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+        },
+        {
+          make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+        },
+      ],
+    },
+    `
 https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
 
 1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
-  `<ol>
+    `<ol>
     <li>My car:<a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny"></a></li>
     <li>My car:<a href="cars-2000.html"><img src="renault.jpg" alt="Renault Scenic"></a></li>
     <li>My car:<a href="cars-2005.html"><img src="honda.png" alt="Honda FR-V"></a></li>
-  </ol>`));
+  </ol>`,
+  ));
 
   it('html.pipe processes data embeds with dot notation', async () => testEmbeds(
     [
@@ -365,7 +374,7 @@ Built in {{year}}. Driven from {{mileage.from}} km to {{mileage.to}} km.
     <h1 id="my-renault-scenic">My Renault Scenic</h1>
     <p><img src="renault.jpg" alt="Renault Scenic"></p>
     <p>Built in 2000. Driven from 75000 km to 100000 km.</p>
-    
+
     <h1 id="my-honda-fr-v">My Honda FR-V</h1>
     <p><img src="honda.png" alt="Honda FR-V"></p>
     <p>Built in 2005. Driven from 50000 km to 150000 km.</p>`,
@@ -497,7 +506,7 @@ ${html}
 
     const doc = `
 https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
-    
+
 1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`;
 
     const result = await testEmbeds(data, doc);
@@ -571,25 +580,28 @@ describe('Integration Test with Data Embeds (resolver)', () => {
     return result;
   }
 
-  it('html.pipe processes data embeds', async () => testEmbeds({
-    data: [
-      {
-        make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
-      },
-      {
-        make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
-      },
-      {
-        make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
-      },
-    ],
-  }, `
+  it('html.pipe processes data embeds', async () => testEmbeds(
+    {
+      data: [
+        {
+          make: 'Nissan', model: 'Sunny', year: 1992, image: 'nissan.jpg',
+        },
+        {
+          make: 'Renault', model: 'Scenic', year: 2000, image: 'renault.jpg',
+        },
+        {
+          make: 'Honda', model: 'FR-V', year: 2005, image: 'honda.png',
+        },
+      ],
+    },
+    `
 https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
 
 1. My car: [![{{make}} {{model}}]({{image}})](cars-{{year}}.md)`,
-  `<ol>
+    `<ol>
     <li>My car:<a href="cars-1992.html"><img src="nissan.jpg" alt="Nissan Sunny"></a></li>
     <li>My car:<a href="cars-2000.html"><img src="renault.jpg" alt="Renault Scenic"></a></li>
     <li>My car:<a href="cars-2005.html"><img src="honda.png" alt="Honda FR-V"></a></li>
-  </ol>`));
+  </ol>`,
+  ));
 });

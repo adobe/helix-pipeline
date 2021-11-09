@@ -132,14 +132,16 @@ describe('Testing HTML Pipeline with markup config', () => {
       ctx.response = { status: 200, body: content.document.body.innerHTML };
     }, context, action);
 
-    expectBodyEquals(result,
+    expectBodyEquals(
+      result,
       `<div>
         <h1 id="hello">Hello</h1>
         <p>from github.</p>
       </div>
       <div>
         <h1 id="bar">Bar</h1>
-      </div>`);
+      </div>`,
+    );
   });
 
   it('html.pipe adjusts the MDAST as per markup url config', async () => {
@@ -157,7 +159,8 @@ describe('Testing HTML Pipeline with markup config', () => {
       ctx.response = { status: 200, body: content.document.documentElement.outerHTML };
     }, context, action);
 
-    expectBodyEquals(result,
+    expectBodyEquals(
+      result,
       `<html class="corge">
         <head></head>
         <body class="bar" baz="qux">
@@ -169,7 +172,8 @@ describe('Testing HTML Pipeline with markup config', () => {
             <h1 id="bar">Bar</h1>
           </div>
         </body>
-      </html>`);
+      </html>`,
+    );
   });
 
   it('html.pipe adjusts the MDAST as per markup markdown config', async () => {
@@ -187,11 +191,13 @@ describe('Testing HTML Pipeline with markup config', () => {
       ctx.response = { status: 200, body: content.document.body.innerHTML };
     }, context, action);
 
-    expectBodyEquals(result,
+    expectBodyEquals(
+      result,
       `<h1 id="hello">Hello</h1>
       <div class="corge">
         <p class="bar" baz="qux">from github.</p>
-      </div>`);
+      </div>`,
+    );
   });
 
   it('html.pipe adjusts the MDAST for embeds as per markup markdown config', async () => {
@@ -226,7 +232,7 @@ https://www.youtube.com/watch?v=dQw4w9WgXcQ
 And here is something from Soundcloud
 
 https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe
-      
+
 `]);
 
     action.downloader = new Downloader(context, action, { forceHttp1: true });
@@ -236,7 +242,8 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       ctx.response = { status: 200, body: content.document.body.innerHTML };
     }, context, action);
 
-    expectBodyEquals(result,
+    expectBodyEquals(
+      result,
       `<hr>
       <p>from github.</p>
       <pre class="zupp" data-embed="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
@@ -247,7 +254,8 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       </pre>
       <p>And here is something from Soundcloud</p>
       <esi:include src="https://helix-pages.anywhere.run/helix-services/embed@v1/https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe" onerror="fail"></esi:include>
-      <esi:remove onerror="fail"><p><a href="https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe">https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe</a></p></esi:remove>`);
+      <esi:remove onerror="fail"><p><a href="https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe">https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe</a></p></esi:remove>`,
+    );
   });
 
   it('html.pipe adjusts the MDAST as per markup content config', async () => {
@@ -265,7 +273,8 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       ctx.response = { status: 200, body: content.document.body.innerHTML };
     }, context, action);
 
-    expectBodyEquals(result,
+    expectBodyEquals(
+      result,
       `<div class="corge">
         <div class="bar" baz="qux">
           <h1 id="hello">Hello</h1>
@@ -274,7 +283,8 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       </div>
       <div>
         <h1 id="bar">Bar</h1>
-      </div>`);
+      </div>`,
+    );
   });
 
   it('html.pipe adjusts single section per markup content config', async () => {
@@ -292,13 +302,15 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       ctx.response = { status: 200, body: content.document.body.innerHTML };
     }, context, action);
 
-    expectBodyEquals(result,
+    expectBodyEquals(
+      result,
       `<div class="corge">
         <div class="bar" baz="qux">
           <h1 id="hello">Hello</h1>
           <p>from github.</p>
         </div>
-      </div>`);
+      </div>`,
+    );
   });
 
   it('html.pipe adjusts the DOM as per markup config', async () => {
@@ -316,10 +328,12 @@ https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mari
       ctx.response = { status: 200, body: content.document.body.innerHTML };
     }, context, action);
 
-    expectBodyEquals(result,
+    expectBodyEquals(
+      result,
       `<hr>
       <div class="corge">
         <p class="bar" baz="qux">from github.</p>
-      </div>`);
+      </div>`,
+    );
   });
 });

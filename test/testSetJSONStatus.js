@@ -82,14 +82,16 @@ describe('Test set-json-status', () => {
 
   it('sets a 200 if all good', () => {
     assert.deepEqual(
-      status({
-        content: {
-          json: {
-            root: {},
+      status(
+        {
+          content: {
+            json: {
+              root: {},
+            },
           },
         },
-      },
-      { logger }),
+        { logger },
+      ),
       {
         response: {
           status: 200,

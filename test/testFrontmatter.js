@@ -45,8 +45,10 @@ const ck = (wat, md, ast) => {
   it(wat, () => {
     const { proc } = procMd(md);
     // Discard position info
-    const nodes = flattenTree(proc,
-      (node, recurse) => concat([node], recurse(node.children || [])));
+    const nodes = flattenTree(
+      proc,
+      (node, recurse) => concat([node], recurse(node.children || [])),
+    );
     each(nodes, (node) => {
       delete node.position;
     });
@@ -151,11 +153,11 @@ describe('parseFrontmatter', () => {
     ---
     PUBLISHED ON 28-04-2020
     ---
-    
+
     ### SlideShare
 
     <https://www.slideshare.net/adobe/adobe-digital-insights-holiday-recap-2019>
-    
+
     ---
     Topics: Bar, Baz
     Products: Stock, Creative Cloud
@@ -164,7 +166,7 @@ describe('parseFrontmatter', () => {
   ckNop('no frontmatter with embeds', `
     ---
     "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ78BeYUV4gFee4bSxjN8u86aV853LGYZlwv1jAUMZFnPn5TnIZteDJwjGr2GNu--zgnpTY1E_KHXcF/pubhtml
-    
+
     Is foo {{foo}}?"
     ---
   `);
@@ -307,13 +309,15 @@ Lorem ipsum 3
   `);
   // Good values
 
-  ckNop('trieloff/helix-demo/foo.md',
+  ckNop(
+    'trieloff/helix-demo/foo.md',
     `---
 title: Foo bar hey.
 
 ---
 # More?
-`);
+`,
+  );
 
   ck('Entire doc is frontmatter', `
     ---

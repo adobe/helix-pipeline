@@ -288,26 +288,28 @@ describe('Testing XML Pipeline', () => {
   });
 
   it('xml.pipe detects ESI tag in XML object', async () => {
-    const result = await pipe((context) => {
-      context.content.xml = {
-        root: {
-          'esi:include': {
-            '@src': 'foo.xml',
-            '@xmlns:esi': 'http://www.edge-delivery.org/esi/1.0',
+    const result = await pipe(
+      (context) => {
+        context.content.xml = {
+          root: {
+            'esi:include': {
+              '@src': 'foo.xml',
+              '@xmlns:esi': 'http://www.edge-delivery.org/esi/1.0',
+            },
           },
-        },
-      };
-      setdefault(context, 'response', {}).status = 201;
-    },
-    {},
-    {
-      request: {
-        headers: { 'Cache-Control': 'no-store' },
-        params,
+        };
+        setdefault(context, 'response', {}).status = 201;
       },
-      secrets,
-      logger,
-    });
+      {},
+      {
+        request: {
+          headers: { 'Cache-Control': 'no-store' },
+          params,
+        },
+        secrets,
+        logger,
+      },
+    );
     assert.equal(result.response.status, 201);
     assert.equal(result.response.headers['X-ESI'], 'enabled');
   });

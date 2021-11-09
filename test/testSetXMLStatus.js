@@ -69,14 +69,16 @@ describe('Test set-xml-status', () => {
   });
 
   it('sets a 200 if all good', () => {
-    const ctx = selectStatus(false)({
-      content: {
-        xml: {
-          root: {},
+    const ctx = selectStatus(false)(
+      {
+        content: {
+          xml: {
+            root: {},
+          },
         },
       },
-    },
-    { logger });
+      { logger },
+    );
     assertEquals(ctx.response.status, 200);
   });
 });

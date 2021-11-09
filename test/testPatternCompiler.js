@@ -28,26 +28,32 @@ describe('Test compiled patterns', () => {
   it('Matches a gallery', () => {
     const gallery = '^heading? image image image+$';
     assert.ok(pattern.match(
-      ['heading', 'image', 'image', 'image', 'image'], gallery,
+      ['heading', 'image', 'image', 'image', 'image'],
+      gallery,
     ));
     assert.ok(pattern.match(
-      ['heading', 'image', 'image', 'image', 'image', 'image'], gallery,
+      ['heading', 'image', 'image', 'image', 'image', 'image'],
+      gallery,
     ));
     assert.ok(pattern.match(
-      ['image', 'image', 'image', 'image'], gallery,
+      ['image', 'image', 'image', 'image'],
+      gallery,
     ));
   });
 
   it('Matches a section with text or lists', () => {
     const textlist = '^heading? (paragraph|list)+$';
     assert.ok(pattern.match(
-      ['heading', 'list', 'list', 'list', 'list'], textlist,
+      ['heading', 'list', 'list', 'list', 'list'],
+      textlist,
     ));
     assert.ok(pattern.match(
-      ['heading', 'paragraph', 'paragraph', 'list', 'paragraph', 'paragraph'], textlist,
+      ['heading', 'paragraph', 'paragraph', 'list', 'paragraph', 'paragraph'],
+      textlist,
     ));
     assert.ok(pattern.match(
-      ['paragraph', 'list', 'paragraph', 'list'], textlist,
+      ['paragraph', 'list', 'paragraph', 'list'],
+      textlist,
     ));
   });
 });
