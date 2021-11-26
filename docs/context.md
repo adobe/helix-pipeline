@@ -22,6 +22,7 @@ The context thingie.
 | [request](#request)   | `object` | Optional | cannot be null | [Context](context-properties-request.md "https://ns.adobe.com/helix/pipeline/request#/properties/request")    |
 | [content](#content)   | `object` | Optional | cannot be null | [Context](context-properties-content.md "https://ns.adobe.com/helix/pipeline/content#/properties/content")    |
 | [response](#response) | `object` | Optional | cannot be null | [Context](context-properties-response.md "https://ns.adobe.com/helix/pipeline/response#/properties/response") |
+| [props](#props)       | `object` | Optional | cannot be null | [Context](context-properties-props.md "https://ns.adobe.com/helix/pipeline/context#/properties/props")        |
 
 ## error
 
@@ -95,3 +96,21 @@ The HTTP response object
 ### response Type
 
 `object` ([Response](context-properties-response.md))
+
+## props
+
+
+
+`props`
+
+*   is optional
+
+*   Type: `object` ([Details](context-properties-props.md))
+
+*   cannot be null
+
+*   defined in: [Context](context-properties-props.md "https://ns.adobe.com/helix/pipeline/context#/properties/props")
+
+### props Type
+
+`object` ([Details](context-properties-props.md))
