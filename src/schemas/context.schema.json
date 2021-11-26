@@ -30,6 +30,9 @@
     },
     "response": {
       "$ref": "https://ns.adobe.com/helix/pipeline/response"
+    },
+    "props": {
+      "type": "object"
     }
   }
 }
