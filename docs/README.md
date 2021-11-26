@@ -52,6 +52,8 @@
 
 *   [Untitled object in Content](./content-properties-data.md "Custom object that can hold any user defined data") – `https://ns.adobe.com/helix/pipeline/content#/properties/data`
 
+*   [Untitled object in Context](./context-properties-props.md) – `https://ns.adobe.com/helix/pipeline/context#/properties/props`
+
 *   [Untitled object in MDAST](./mdast-properties-payload.md "The payload of a frontmatter/yaml block") – `https://ns.adobe.com/helix/pipeline/mdast#/properties/payload`
 
 *   [Untitled object in MDAST](./mdast-properties-data.md "data is guaranteed to never be specified by unist or specifications implementing unist") – `https://ns.adobe.com/helix/pipeline/mdast#/properties/data`
