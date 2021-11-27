@@ -1,3 +1,10 @@
+## [15.0.10](https://github.com/adobe/helix-pipeline/compare/v15.0.9...v15.0.10) (2021-11-27)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#1189](https://github.com/adobe/helix-pipeline/issues/1189)) ([3b82723](https://github.com/adobe/helix-pipeline/commit/3b82723b792b7542da9cee3aba07e95ef8a3cf1d))
+
 ## [15.0.9](https://github.com/adobe/helix-pipeline/compare/v15.0.8...v15.0.9) (2021-11-22)
 
 
