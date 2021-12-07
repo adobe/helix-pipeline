@@ -1,0 +1,440 @@
+<testsuite name="Mocha Tests" tests="438" failures="0" errors="0" skipped="3" timestamp="Thu, 16 Dec 2021 11:13:57 GMT" time="33.572">
+<testcase classname="Cache Helper Tests (surrogate)" name="directive parses directives" time="0.001"/>
+<testcase classname="Cache Helper Tests (surrogate)" name="format formats directives" time="0"/>
+<testcase classname="Cache Helper Tests (surrogate)" name="merge merges two directives" time="0"/>
+<testcase classname="Test check-xml" name="validates proper XML" time="0.003"/>
+<testcase classname="Test check-xml" name="throws error on improper XML" time="0"/>
+<testcase classname="Test check-xml" name="does nothing with empty response body" time="0"/>
+<testcase classname="Test Coercing Secrets" name="Secrets will be created" time="0.069"/>
+<testcase classname="Test Coercing Secrets" name="Defaults have correct values" time="0"/>
+<testcase classname="Test Coercing Secrets" name="Defaults have correct types (boolean)" time="0"/>
+<testcase classname="Test Coercing Secrets" name="Secrets have correct types (boolean)" time="0.001"/>
+<testcase classname="Integration Test Section Strain Filtering" name="html.pipe sees only selected section" time="0.234"/>
+<testcase classname="Unit Test Section Strain Filtering" name="Works with empty section lists" time="0"/>
+<testcase classname="Unit Test Section Strain Filtering" name="Filters sections based on strain" time="0"/>
+<testcase classname="Unit Test Section Strain Filtering" name="Filters sections based on strain (array)" time="0"/>
+<testcase classname="Unit Test Section Strain Filtering" name="Keeps sections without a strain" time="0"/>
+<testcase classname="Unit Test Section Strain Filtering" name="Keeps sections without metadata" time="0"/>
+<testcase classname="Unit Test Section Strain Filtering" name="Filters strain a" time="0"/>
+<testcase classname="Select Sections for Testing #unit" name="Works with empty section lists" time="0"/>
+<testcase classname="Select Sections for Testing #unit" name="Works with single test variants" time="0"/>
+<testcase classname="Select Sections for Testing #unit" name="Works with multiple test variants" time="0"/>
+<testcase classname="Pick among possible candidate sections #unit" name="Works with empty candidate lists" time="0"/>
+<testcase classname="Pick among possible candidate sections #unit" name="Picks a candidate for each group" time="0.008"/>
+<testcase classname="Pick among possible candidate sections #unit" name="Picks a different candidate for each strain" time="0.002"/>
+<testcase classname="Integration Test A/B Testing" name="html.pipe sees only one variant" time="0.055"/>
+<testcase classname="Integration Test A/B Testing" name="variant in html.pipe differs from strain to strain" time="0.21"/>
+<testcase classname="Test Pagination Helper #unit" name="Does not filter when no parameters given" time="0"/>
+<testcase classname="Test Pagination Helper #unit" name="Returns first page when no page is given" time="0"/>
+<testcase classname="Test Pagination Helper #unit" name="Returns second page when asked" time="0"/>
+<testcase classname="Test Pagination Helper #unit" name="Returns (incomplete) third page when asked" time="0"/>
+<testcase classname="Test Pagination Helper #unit" name="Returns (complete) third page when page" time="0.001"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI constructs URIs" time="0"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI deals with trailing slashes" time="0"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI deals with leading slashes" time="0"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI deals with slashes in refs" time="0"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI deals with ugly slashes in refs" time="0"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI deals with ugly slashes in owner" time="0"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI deals with ugly slashes in repo" time="0"/>
+<testcase classname="Test URI parsing and construction" name="computeGithubURI generates github pages uri" time="0.001"/>
+<testcase classname="Test input validation" name="fetch fails if no uri" time="0.001"/>
+<testcase classname="Test input validation" name="fetchGithub fails if no owner" time="0"/>
+<testcase classname="Test input validation" name="fetchGithub fails if no repo" time="0.001"/>
+<testcase classname="Test input validation" name="fetchGithub fails if no path" time="0"/>
+<testcase classname="Test input validation" name="fetchGithub warns if no HTTP_TIMEOUT" time="0.001"/>
+<testcase classname="Test Download" name="can suppress 404 error." time="0.026"/>
+<testcase classname="Test Download" name="throws on 404 error if desired." time="0.025"/>
+<testcase classname="Test Download" name="can schedule downloads in parallel" time="0.32"/>
+<testcase classname="Test Download" name="can retrieve a task by id" time="0.028"/>
+<testcase classname="Test Download" name="caches response" time="0.027"/>
+<testcase classname="Test Download" name="can disable cache response" time="0.025"/>
+<testcase classname="Test Download" name="forward default headers only" time="0.287"/>
+<testcase classname="Test Download" name="forwards the transaction id" time="0.289"/>
+<testcase classname="Test Download" name="forward only specified headers" time="0.288"/>
+<testcase classname="Test Temp Context Dumper" name="Writes context dump on loglevel silly" time="0.01"/>
+<testcase classname="Test Temp Context Dumper" name="does not write on loglevel debug" time="0.001"/>
+<testcase classname="Test Embed Handler" name="Creates ESI" time="0.001"/>
+<testcase classname="Integration Test with Embeds" name="html.pipe does not blow up &#x22;embeds&#x22; from Helix Not Slides when seeing mailto links" time="0.291"/>
+<testcase classname="Integration Test with Embeds" name="html.pipe does not detect IA &#x22;embeds&#x22; in normal youtube links" time="0.061"/>
+<testcase classname="Integration Test with Embeds" name="html.pipe processes embeds" time="0.083"/>
+<testcase classname="Integration Test with Embeds" name="html.pipe processes internal embeds" time="0.077"/>
+<testcase classname="Test emit-json" name="builds JSON from object" time="0.001"/>
+<testcase classname="Test emit-json" name="does nothing if no JSON object specified" time="0"/>
+<testcase classname="Test emit-json" name="keeps existing response body" time="0"/>
+<testcase classname="Test emit-json" name="handles missing response object" time="0"/>
+<testcase classname="Test emit-json" name="handles missing content object" time="0"/>
+<testcase classname="Test emit-xml" name="builds XML from object" time="0.004"/>
+<testcase classname="Test emit-xml" name="builds pretty XML from object" time="0.001"/>
+<testcase classname="Test emit-xml" name="does nothing if no XML object specified" time="0"/>
+<testcase classname="Test emit-xml" name="keeps existing response body" time="0.001"/>
+<testcase classname="Test emit-xml" name="handles missing response object" time="0"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe handles non-JSON responses gracefully" time="0.071"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe handles non-Array responses gracefully" time="0.074"/>
+<testcase classname="Integration Test with Data Embeds" name="data embeds generate a surrogate key" time="0.153"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe processes data embeds in main document" time="0.074"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe processes data embeds that generate new embeds" time="0.08"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe supports data embed pagination" time="0.06"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe processes data embeds in new data format" time="0.074"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe processes data embeds with dot notation" time="0.077"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe processes data embeds in sections" time="0.082"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe handles error responses gracefully" time="0.057"/>
+<testcase classname="Integration Test with Data Embeds" name="embed processing works with big files, even when there are few embeds" time="4.729"/>
+<testcase classname="Integration Test with Data Embeds" name="embed processing works with big files, even when there are no embeds" time="3.774"/>
+<testcase classname="Integration Test with Data Embeds" name="html.pipe handles error responses gracefully" time="0.062"/>
+<testcase classname="Integration Test with Data Embeds" name="test various embed format" time="0.212"/>
+<testcase classname="Integration Test with Data Embeds" name="test large dataset - should not take more than 20s for 5k dataset" time="10.205"/>
+<testcase classname="Integration Test with Data Embeds (resolver)" name="html.pipe processes data embeds" time="0.089"/>
+<testcase classname="Test invalid input" name="Test for missing owner" time="0"/>
+<testcase classname="Test invalid input" name="Test for missing repo" time="0"/>
+<testcase classname="Test invalid input" name="Test for missing path" time="0"/>
+<testcase classname="Test invalid input" name="Test for missing params" time="0"/>
+<testcase classname="Test invalid input" name="Test for missing request" time="0.001"/>
+<testcase classname="Test non-existing content" name="Getting XDM README (from wrong URL)" time="0.025"/>
+<testcase classname="Test non-existing content" name="Getting XDM README (with missing ref)" time="0.028"/>
+<testcase classname="Test requests" name="Getting XDM README" time="0.026"/>
+<testcase classname="Test requests" name="Getting README from private repo with GitHub token" time="0.055"/>
+<testcase classname="Test misbehaved HTTP Responses" name="Getting XDM README with bad HTTP Status Code" time="0.029"/>
+<testcase classname="Test misbehaved HTTP Responses" name="Getting XDM README with ultra-short Timeout" time="0.012"/>
+<testcase classname="Test misbehaved HTTP Responses" name="Getting XDM README with Backend Timeout" time="1.003"/>
+<testcase classname="Test Embed Detection Processing" name="Parses markdown with embeds" time="0.028"/>
+<testcase classname="Test Embed Detection Processing" name="Parses markdown with embeds from word2md" time="0.007"/>
+<testcase classname="Test Embed Detection Processing" name="Parses markdown with embeds from gdocs2md" time="0.011"/>
+<testcase classname="Validate Embed Examples In Pipeline" name="Markdown with embeds yields valid context" time="0.022"/>
+<testcase classname="Find Embeds #unit" name="internalGatsbyEmbed" time="0.001"/>
+<testcase classname="Find Embeds #unit" name="internalIaEmbed" time="0.001"/>
+<testcase classname="Find Embeds #unit" name="internalImgEmbed" time="0"/>
+<testcase classname="Test getMetadata" name="indvidual section block: header" time="0.002"/>
+<testcase classname="Test getMetadata" name="indvidual section block: paragraph" time="0.001"/>
+<testcase classname="Test getMetadata" name="indvidual section block: paragraphwithlink" time="0.001"/>
+<testcase classname="Test getMetadata" name="indvidual section block: 2images" time="0.002"/>
+<testcase classname="Test getMetadata" name="indvidual section block: headerparagraph" time="0.002"/>
+<testcase classname="Test getMetadata" name="indvidual section block: headerlist" time="0.003"/>
+<testcase classname="Test getMetadata" name="indvidual section block: headerimage" time="0.002"/>
+<testcase classname="Test getMetadata" name="indvidual section block: headerparaimage" time="0.002"/>
+<testcase classname="Test getMetadata" name="indvidual section block: headerpara2images" time="0.002"/>
+<testcase classname="Test getMetadata" name="indvidual section block: complex" time="0.054"/>
+<testcase classname="Test getMetadata" name="indvidual section block: herosection" time="0.004"/>
+<testcase classname="Test getMetadata" name="getmetadata does not fail with &#x22;empty&#x22; mdast" time="0"/>
+<testcase classname="Test getMetadata" name="getmetadata gets first title and intro" time="0.001"/>
+<testcase classname="Test getMetadata" name="getmetadata does not fail with empty sections" time="0.001"/>
+<testcase classname="Testing fetch content" name="passes non-standard raw github to content proxy" time="0.087"/>
+<testcase classname="Testing fetch content" name="uses custom content proxy url" time="0.059"/>
+<testcase classname="Testing fetch content" name="passes github token to content proxy" time="0.056"/>
+<testcase classname="Testing fetch content" name="sets source hash and location" time="0.055"/>
+<testcase classname="Testing fetch content" name="sets last modified" time="0.054"/>
+<testcase classname="Testing fetch content" name="supports non-url source location " time="0.05"/>
+<testcase classname="Testing HTML Pipeline (Filters)" name="html.pipe renders broken filters correctly" time="0.04"/>
+<testcase classname="Testing HTML Pipeline (Links)" name="Renders absolute links" time="0.055"/>
+<testcase classname="Testing HTML Pipeline (Links)" name="Renders self links" time="0.066"/>
+<testcase classname="Testing HTML Pipeline (Links)" name="Renders relative links" time="0.063"/>
+<testcase classname="Testing HTML Pipeline (Links)" name="Renders escaped links" time="0.063"/>
+<testcase classname="Testing HTML Pipeline (Links)" name="Renders anchored relative links" time="0.061"/>
+<testcase classname="Testing Markdown conversion" name="Renders empty markdown" time="0.055"/>
+<testcase classname="Testing Markdown conversion" name="Renders single paragraph" time="0.055"/>
+<testcase classname="Testing Markdown conversion" name="Code blocks with lang" time="0.111"/>
+<testcase classname="Testing Markdown conversion" name="Code blocks without lang" time="0.174"/>
+<testcase classname="Testing Markdown conversion" name="Quote with markdown" time="0.062"/>
+<testcase classname="Testing Markdown conversion" name="Link references" time="0.057"/>
+<testcase classname="Testing Markdown conversion" name="Admonition Notes" time="0.062"/>
+<testcase classname="Testing Markdown conversion" name="tags" time="0.071"/>
+<testcase classname="Testing Markdown conversion" name="tags in bold" time="0.058"/>
+<testcase classname="Testing Markdown conversion" name="Link with angle brackets" time="0.057"/>
+<testcase classname="Testing Markdown conversion" name="Link with space" time="0.058"/>
+<testcase classname="Testing Markdown conversion" name="Link with special character" time="0.063"/>
+<testcase classname="Testing Markdown conversion" name="HTML Block elements" time="0.084"/>
+<testcase classname="Testing Markdown conversion" name="HTML comments" time="0.066"/>
+<testcase classname="Testing Markdown conversion" name="HTML inline elements" time="0.077"/>
+<testcase classname="Testing Markdown conversion" name="HTML incomplete inline elements" time="0.062"/>
+<testcase classname="Testing Markdown conversion" name="HTML nested inline elements" time="0.06"/>
+<testcase classname="Testing Markdown conversion" name="HTML nested inline elements and markup" time="0.057"/>
+<testcase classname="Testing Markdown conversion" name="GFM" time="0.083"/>
+<testcase classname="Testing Markdown conversion" name="XSS escape href attribute on links disabled by default" time="0.06"/>
+<testcase classname="Testing Markdown conversion" name="XSS escape href attribute on links" time="0.064"/>
+<testcase classname="Testing Markdown conversion" name="XSS escape href in images" time="0.059"/>
+<testcase classname="Testing Markdown conversion" name="XSS escape DOM clobbering attributes" time="0.072"/>
+<testcase classname="Testing Markdown conversion" name="Accept custom elements and attributes" time="0.069"/>
+<testcase classname="Testing Markdown conversion" name="Unwraps hero images in the document root" time="0.059"/>
+<testcase classname="Testing Markdown conversion" name="Unwraps hero images in sections" time="0.064"/>
+<testcase classname="Testing Markdown conversion" name="Leaves regular images inside paragraphs" time="0.062"/>
+<testcase classname="Testing Markdown conversion" name="Exposes section meta data" time="0.097"/>
+<testcase classname="Testing Markdown conversion" name="Filters out hlx-* class and data-hlx-* attributes in production" time="0.061"/>
+<testcase classname="Testing Markdown conversion" name="is robust against wrong tags in md" time="0.057"/>
+<testcase classname="Testing Markdown conversion" name="is robust against tags in link texts" time="0.062"/>
+<testcase classname="Testing Markdown conversion" name="is robust against linebreaks in tags" time="0.066"/>
+<testcase classname="Testing Markdown conversion" name="translates icons" time="0.057"/>
+<testcase classname="Testing Markdown conversion" name="translates icons in html" time="0.06"/>
+<testcase classname="Testing Markdown conversion" name="translates icons in tables with paras" time="0.088"/>
+<testcase classname="Testing Markdown conversion" name="translates icons in html tables" time="0.104"/>
+<testcase classname="Testing Markdown conversion" name="translates svg-icons in html" time="0.066"/>
+<testcase classname="Testing Markdown conversion" name="translates html in tables with self link" time="0.082"/>
+<testcase classname="Testing Markdown conversion" name="expands gfm autolink" time="0.081"/>
+<testcase classname="Testing Markdown conversion" name="ignores escaped urls" time="0.055"/>
+<testcase classname="Testing HTML Pipeline with markup config" name="html.pipe does not touch output if there is no markup config" time="0.054"/>
+<testcase classname="Testing HTML Pipeline with markup config" name="html.pipe adjusts the MDAST as per markup url config" time="0.107"/>
+<testcase classname="Testing HTML Pipeline with markup config" name="html.pipe adjusts the MDAST as per markup markdown config" time="0.087"/>
+<testcase classname="Testing HTML Pipeline with markup config" name="html.pipe adjusts the MDAST for embeds as per markup markdown config" time="0.099"/>
+<testcase classname="Testing HTML Pipeline with markup config" name="html.pipe adjusts the MDAST as per markup content config" time="0.087"/>
+<testcase classname="Testing HTML Pipeline with markup config" name="html.pipe adjusts single section per markup content config" time="0.079"/>
+<testcase classname="Testing HTML Pipeline with markup config" name="html.pipe adjusts the DOM as per markup config" time="0.082"/>
+<testcase classname="Testing HTML Pipeline Overrides" name="html.pipe adds headers from meta and link tags" time="0.041"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe is a function" time="0"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe does not make HTTP requests if body is provided" time="0.041"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe keeps proper ESI tags" time="0.052"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe keeps self-closing ESI tags" time="0.051"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe keeps double ESI tags" time="0.045"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe can be extended" time="0.042"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe renders index.md from helix-cli correctly" time="0.057"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe renders index.md from project-helix.io correctly" time="0.075"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe renders modified index.md from helix-cli correctly" time="0.057"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe complains when context is invalid" time="0.005"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe complains with a specific message for mdast nodes when context is invalid" time="0.005"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid" time="0.003"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe complains when action is invalid" time="0.003"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe makes HTTP requests" time="0.063"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe makes HTTP requests and handles timeouts" time="0.55"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe makes HTTP requests and falls back to master" time="0.075"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe makes HTTP requests and falls back to branch if ref too long" time="0.052"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe makes HTTP requests and falls back to default if ref and branch too long" time="0.121"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe makes HTTP requests and prefers branch param for surrogate computation" time="0"><skipped/></testcase>
+<testcase classname="Testing HTML Pipeline" name="html.pipe serves 404 for non existent content" time="0.044"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe keeps existing headers" time="0.076"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe produces debug dumps in memory" time="0.043"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe produces debug dumps on disk for error" time="0.037"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe sanitizes author-generated content, but not developer-generated code" time="0.061"/>
+<testcase classname="Testing HTML Pipeline" name="html.pipe creates proper esi includes for css and scripts" time="0.059"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe is a function" time="0"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe does not make HTTP requests if body is provided" time="0.038"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe keeps proper ESI tags" time="0.043"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe keeps self-closing ESI tags" time="0.043"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe keeps double ESI tags" time="0.04"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe can be extended" time="0.044"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe renders index.md from helix-cli correctly" time="0.048"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe renders index.md from project-helix.io correctly" time="0.085"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe renders modified index.md from helix-cli correctly" time="0.048"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe complains when context is invalid" time="0.002"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe complains with a specific message for mdast nodes when context is invalid" time="0.003"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe complains with a specific message for mdast nodes wih extra properties when context is invalid" time="0.002"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe complains when action is invalid" time="0.003"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe makes HTTP requests" time="0.06"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe makes HTTP requests and handles timeouts" time="0.109"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe makes HTTP requests and falls back to master" time="0.058"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe makes HTTP requests and prefers branch param for surrogate computation" time="0"><skipped/></testcase>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe serves 404 for non existent content" time="0.043"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe via pipeline fetch errors are propagated to action response" time="0.05"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe keeps existing headers" time="0.058"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe produces debug dumps in memory" time="0.04"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe produces debug dumps on disk for error" time="0.038"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe sanitizes author-generated content, but not developer-generated code" time="0.067"/>
+<testcase classname="Testing HTML Pipeline (universal)" name="html.pipe creates proper esi includes for css and scripts" time="0.058"/>
+<testcase classname="Test Iconize Processing" name="Markdown with icons yields valid context" time="0.003"/>
+<testcase classname="Test Iconize Processing" name="Parses markdown with icons" time="0.002"/>
+<testcase classname="Test Iconize Processing" name="Does not throw error if mdast is missing" time="0"/>
+<testcase classname="Testing Default Pipeline" name="Default Pipeline can be loaded" time="0"/>
+<testcase classname="Testing Default Pipeline" name="creates and runs the default pipeline" time="0.001"/>
+<testcase classname="Test Check for Production Environment" name="Detects production environment" time="0"/>
+<testcase classname="Test Check for Production Environment" name="Detects production environment in uncooperative situations" time="0"/>
+<testcase classname="Test Check for Production Environment" name="Detects non-production environment" time="0.001"/>
+<testcase classname="Testing JSON Pipeline" name="json.pipe is a function" time="0"/>
+<testcase classname="Testing JSON Pipeline" name="json.pipe uses default logger if none provided" time="0.039"/>
+<testcase classname="Testing JSON Pipeline" name="json.pipe makes HTTP requests" time="0.043"/>
+<testcase classname="Testing JSON Pipeline" name="json.pipe keeps Mime-Type" time="0.043"/>
+<testcase classname="Testing JSON Pipeline" name="json.pipe can be extended" time="0.043"/>
+<testcase classname="Testing JSON Pipeline" name="json.pipe does not overwrite existing response body" time="0.038"/>
+<testcase classname="Test Link Handler" name="Rewrites .md extension to .html" time="0.001"/>
+<testcase classname="Test Link Handler" name="Does not alter URL with non .md extension" time="0"/>
+<testcase classname="Test Link Handler" name="Does not lose query string while rewriting" time="0"/>
+<testcase classname="Test Link Handler" name="Does not lose hash while rewriting" time="0"/>
+<testcase classname="Test Link Handler" name="Ignores URL with protocol" time="0"/>
+<testcase classname="Test Type Matcher Util" name="TypeMatcher works with empty input" time="0"/>
+<testcase classname="Test Type Matcher Util" name="TypeMatcher returns empty array if no matchers are registered" time="0"/>
+<testcase classname="Test Type Matcher Util" name="TypeMatcher matches simple expressions" time="0"/>
+<testcase classname="Test Type Matcher Util" name="TypeMatcher matches multiple expressions" time="0"/>
+<testcase classname="Test Type Matcher Util" name="TypeMatcher can match with functions" time="0"/>
+<testcase classname="Test Type Matcher Util" name="TypeMatcher can match with functions" time="0"/>
+<testcase classname="GFM autolink tests" name="keeps structure" time="0.003"/>
+<testcase classname="GFM autolink tests" name="ignores www with no schema" time="0.002"/>
+<testcase classname="GFM autolink tests" name="replaces single link" time="0"/>
+<testcase classname="GFM autolink tests" name="handle email addresses" time="0.001"/>
+<testcase classname="GFM autolink tests" name="do not replace links in html" time="0.005"/>
+<testcase classname="GFM autolink tests" name="replace links in tables" time="0.001"/>
+<testcase classname="GFM autolink tests" name="do not replace links in tables with html" time="0"/>
+<testcase classname="GFM autolink tests" name="creates several links" time="0"/>
+<testcase classname="GFM autolink tests" name="does not replace text in links" time="0.001"/>
+<testcase classname="Test VDOMTransformer#getDocument" name="empty node" time="0.006"/>
+<testcase classname="Test VDOMTransformer#getDocument" name="paragraph node" time="0.005"/>
+<testcase classname="Test VDOMTransformer#getDocument" name="image node" time="0.005"/>
+<testcase classname="Test VDOMTransformer#getDocument" name="h1 node" time="0.005"/>
+<testcase classname="Test VDOMTransformer#getDocument" name="complex node" time="0.005"/>
+<testcase classname="Test VDOMTransformer#getDocument" name="custom handler" time="0.004"/>
+<testcase classname="Test VDOMTransformer#getDocument" name="multiple custom handlers" time="0.005"/>
+<testcase classname="Test VDomTransformer static methods" name="static handle function returns result" time="0"/>
+<testcase classname="Test VDomTransformer static methods" name="static handle function throws when result is string" time="0"/>
+<testcase classname="Test VDomTransformer static methods" name="static handle throws when result is dom object" time="0"/>
+<testcase classname="Test VDomTransformer static methods" name="static default returns correct default handler" time="0.001"/>
+<testcase classname="Test VDomTransformer static methods" name="matchfn returns correct matches" time="0"/>
+<testcase classname="Test VDomTransformer static methods" name="sanitize fails when matching inline not found" time="0"/>
+<testcase classname="Test VDomTransformer static methods" name="sanitize creates proper closing tag" time="0.004"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Simple MDAST Conversion" time="0.016"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Headings MDAST Conversion" time="0.038"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Sections MDAST Conversion" time="0.027"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Custom Text Matcher Conversion" time="0.019"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Programmatic Matcher Function" time="0.019"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Custom Text Matcher with Multiple Elements" time="0.019"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Custom Matcher returns string fails" time="0.001"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Custom Matcher returns vdom fails" time="0.002"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Custom link handler with VDOM Nodes" time="0.087"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Custom link handler does not interfere with link rewriting" time="0.022"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="Icon handler replaces icon :placeholders:" time="0.015"/>
+<testcase classname="Test MDAST to VDOM Transformation" name="creating nested list is performant" time="0.349"/>
+<testcase classname="Test outputDebug" name="Testing no debug" time="0.001"/>
+<testcase classname="Test outputDebug" name="Testing simple context" time="0.001"/>
+<testcase classname="Test outputDebug" name="Testing upper case body tag" time="0"/>
+<testcase classname="parseFrontmatter" name="Empty document should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="Just some text should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="Hash based second level header should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="Underline second level header should be ignored" time="0.002"/>
+<testcase classname="parseFrontmatter" name="Single &#x3C;hr&#x3E; should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="h2 with underline followed by &#x3C;hr&#x3E; should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="diversity of h2 with underline and &#x3C;hr&#x3E; should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="resolving ambiguity by using h2 underlined with 4 dashes should be ignored" time="0.002"/>
+<testcase classname="parseFrontmatter" name="resolving ambiguity by using hr with spaces between dashes should be ignored" time="0.003"/>
+<testcase classname="parseFrontmatter" name="resolving ambiguity by using hr with spaces between dashes should be ignored" time="0.003"/>
+<testcase classname="parseFrontmatter" name="resolving ambiguity by using hr with asterisk should be ignored" time="0.002"/>
+<testcase classname="parseFrontmatter" name="resolving ambiguity by using hr with asterisk #2 should be ignored" time="0.002"/>
+<testcase classname="parseFrontmatter" name="no frontmatter due to empty lines should be ignored" time="0.005"/>
+<testcase classname="parseFrontmatter" name="no frontmatter with embeds should be ignored" time="0.004"/>
+<testcase classname="parseFrontmatter" name="reject invalid yaml should be ignored" time="0.003"/>
+<testcase classname="parseFrontmatter" name="reject yaml with list should be ignored" time="0.002"/>
+<testcase classname="parseFrontmatter" name="reject yaml with json style list should log a warning" time="0.002"/>
+<testcase classname="parseFrontmatter" name="reject yaml with number should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="reject yaml with string should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="Reject yaml with null should log a warning" time="0.002"/>
+<testcase classname="parseFrontmatter" name="frontmatter with insufficient space before it should be ignored" time="0.002"/>
+<testcase classname="parseFrontmatter" name="frontmatter with insufficient space after it should be ignored" time="0.001"/>
+<testcase classname="parseFrontmatter" name="frontmatter with insufficient space on both ends should be ignored" time="0.002"/>
+<testcase classname="parseFrontmatter" name="section with emoticons should be ignored" time="0.003"/>
+<testcase classname="parseFrontmatter" name="just sections should be ignored" time="0.005"/>
+<testcase classname="parseFrontmatter" name="frontmatter with empty line between paragraphs should be ignored" time="0.005"/>
+<testcase classname="parseFrontmatter" name="frontmatter at the start of the document with empty line" time="0.003"/>
+<testcase classname="parseFrontmatter" name="frontmatter in the middle of the document with empty line should be ignored" time="0.003"/>
+<testcase classname="parseFrontmatter" name="frontmatter at the start of the document with empty line filled with space" time="0.002"/>
+<testcase classname="parseFrontmatter" name="frontmatter in the middle of the document with empty line filled with space should be ignored" time="0.003"/>
+<testcase classname="parseFrontmatter" name="trieloff/helix-demo/foo.md should be ignored" time="0.003"/>
+<testcase classname="parseFrontmatter" name="Entire doc is frontmatter" time="0.003"/>
+<testcase classname="parseFrontmatter" name="Entire doc is frontmatter w trailing space" time="0.002"/>
+<testcase classname="parseFrontmatter" name="Frontmatter; underline h2; frontmatter" time="0.003"/>
+<testcase classname="parseFrontmatter" name="Frontmatter; underline h2; frontmatter; w trailing space" time="0.004"/>
+<testcase classname="parseFrontmatter" name="frontmatter; frontmatter" time="0.003"/>
+<testcase classname="parseFrontmatter" name="frontmatter, &#x3C;hr&#x3E;, frontmatter" time="0.003"/>
+<testcase classname="parseFrontmatter" name="frontmatter, text, frontmatter" time="0.002"/>
+<testcase classname="parseFrontmatter" name="frontmatter, &#x3C;hr&#x3E;, frontmatter, &#x3C;hr&#x3E;" time="0.003"/>
+<testcase classname="parseFrontmatter" name="frontmatter, text, frontmatter, text, frontmatter, text, frontmatter, text" time="0.007"/>
+<testcase classname="Test Markdown Parsing" name="Parses simple markdown" time="0.002"/>
+<testcase classname="Test Markdown Parsing" name="Parses example markdown" time="0.021"/>
+<testcase classname="Test Markdown Parsing" name="Parses frontmatter markdown" time="0.028"/>
+<testcase classname="Test Markdown Parsing" name="Parses headings correctly" time="0.003"/>
+<testcase classname="Test Markdown Parsing" name="Parses HTML in Markdown" time="0.002"/>
+<testcase classname="Test Markdown Parsing" name="Does not get confused by thematic breaks" time="0.002"/>
+<testcase classname="Test Markdown Parsing" name="Does not get confused by grayscale" time="0.005"/>
+<testcase classname="Test Markdown Parsing" name="Does not get confused by escaped links" time="0.004"/>
+<testcase classname="Test Markdown Setting Context" name="Sets default context objects" time="0.001"/>
+<testcase classname="Test Markdown Setting Context" name="Does not override values" time="0.001"/>
+<testcase classname="Test Markdown Setting Context" name="Does handle empty extension case" time="0"/>
+<testcase classname="Test MDAST position generation" name="keeps the position information if the logger is in &#x27;silly&#x27; mode" time="0"/>
+<testcase classname="Test MDAST position generation" name="keeps the position information if the logger is in &#x27;trace&#x27; mode" time="0"/>
+<testcase classname="Test MDAST position generation" name="keeps the position information if the logger is in &#x27;debug&#x27; mode" time="0"/>
+<testcase classname="Test MDAST position generation" name="removes the position information if the logger is in &#x27;verbose&#x27; mode" time="0.001"/>
+<testcase classname="Test MDAST position generation" name="removes the position information if the logger is in &#x27;info&#x27; mode" time="0.001"/>
+<testcase classname="Test MDAST position generation" name="removes the position information if the logger is in &#x27;warn&#x27; mode" time="0.001"/>
+<testcase classname="Test MDAST position generation" name="removes the position information if the logger is in &#x27;error&#x27; mode" time="0"/>
+<testcase classname="Test MDAST position generation" name="removes the position information if the logger is in &#x27;fatal&#x27; mode" time="0"/>
+<testcase classname="Test compiled patterns" name="Basic pattern matches" time="0"/>
+<testcase classname="Test compiled patterns" name="Or expressions work" time="0"/>
+<testcase classname="Test compiled patterns" name="Matches a gallery" time="0"/>
+<testcase classname="Test compiled patterns" name="Matches a section with text or lists" time="0"/>
+<testcase classname="Testing Pipeline" name="Executes without logger" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Executes correct order" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Can be run twice" time="0"/>
+<testcase classname="Testing Pipeline" name="Can be extended" time="0"/>
+<testcase classname="Testing Pipeline" name="Can be extended (once) using shorthand syntax" time="0"/>
+<testcase classname="Testing Pipeline" name="Logs correct names" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Disables pre before when" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Disables pre before when conditionally" time="0.001"/>
+<testcase classname="Testing Pipeline" name="When works with promises resolving false pre before when" time="0.002"/>
+<testcase classname="Testing Pipeline" name="When works with promises resolving true pre before when" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Disables step before when" time="0.001"/>
+<testcase classname="Testing Pipeline" name="when before pre throws error" time="0"/>
+<testcase classname="Testing Pipeline" name="Disables pre before unless" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Enables pre before when" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Enables pre before unless" time="0.002"/>
+<testcase classname="Testing Pipeline" name="Executes promises" time="0.003"/>
+<testcase classname="Testing Pipeline" name="Executes taps" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Does not executes taps when conditions fail" time="0.001"/>
+<testcase classname="Testing Pipeline" name="Ignore error if no error" time="0"/>
+<testcase classname="Testing Pipeline" name="skip functions if context.error" time="0"/>
+<testcase classname="Testing Pipeline" name="skip functions if exception" time="0.001"/>
+<testcase classname="Testing Pipeline" name="error handler can clear error" time="0.001"/>
+<testcase classname="Testing Pipeline" name="handles error in error" time="0.001"/>
+<testcase classname="Testing Pipeline" name="handles generic pipeline error" time="0"/>
+<testcase classname="Test Blob Image Rewriting" name="Rewrites blob store image URLs" time="0.014"/>
+<testcase classname="Test Blob Image Rewriting" name="Does not throw error if document is missing" time="0"/>
+<testcase classname="Test set-content-type" name="is a function" time="0"/>
+<testcase classname="Test set-content-type" name="sets a content type" time="0.001"/>
+<testcase classname="Test set-content-type" name="keeps existing content type" time="0"/>
+<testcase classname="Test set-json-status" name="sets a verbose 500 for an error in dev" time="0"/>
+<testcase classname="Test set-json-status" name="sets a terse 500 for an error in production" time="0"/>
+<testcase classname="Test set-json-status" name="sets a verbose 500 for an error in production if x-debug header is present" time="0"/>
+<testcase classname="Test set-json-status" name="keeps an existing status" time="0"/>
+<testcase classname="Test set-json-status" name="sets a 200 if all good" time="0"/>
+<testcase classname="Test set-status" name="sets a verbose 500 for an error in dev" time="0.001"/>
+<testcase classname="Test set-status" name="sets a terse 500 for an error in production" time="0"/>
+<testcase classname="Test set-status" name="sets a verbose 500 for an error in production if x-debug header is present" time="0"/>
+<testcase classname="Test set-status" name="keeps an existing status" time="0"/>
+<testcase classname="Test set-status" name="sets a 200 if all good" time="0"/>
+<testcase classname="Test set-xml-status" name="sets a verbose 500 for an error in dev" time="0"/>
+<testcase classname="Test set-xml-status" name="sets a terse 500 for an error in production" time="0"/>
+<testcase classname="Test set-xml-status" name="sets a verbose 500 for an error in production if x-debug header is present" time="0.001"/>
+<testcase classname="Test set-xml-status" name="keeps an existing status" time="0"/>
+<testcase classname="Test set-xml-status" name="sets a 200 if all good" time="0"/>
+<testcase classname="Test Smartypants Processing" name="Parses markdown with formatting" time="0.002"/>
+<testcase classname="Test Smartypants Processing" name="Parses markdown with formatting" time="1.187"/>
+<testcase classname="Test Smartypants Processing" name="does not throw error if mdast is missing" time="0"/>
+<testcase classname="Test Section Splitting" name="Parses markdown with sections" time="0.027"/>
+<testcase classname="Integration Test Static Asset Rewriting" name="Test static asset rewriting in full pipeline" time="0.023"/>
+<testcase classname="Test Static Asset Rewriting" name="Ignores non-HTML" time="0"/>
+<testcase classname="Test Static Asset Rewriting" name="Load simple HTML" time="0.009"/>
+<testcase classname="Test Static Asset Rewriting" name="ESI include script tags HTML" time="0.008"/>
+<testcase classname="Test Static Asset Rewriting" name="ESI include link tags HTML" time="0.009"/>
+<testcase classname="Testing stringify pipeline step" name="document can be transformed" time="0.007"/>
+<testcase classname="Testing stringify pipeline step" name="document without serialize function can be transformed" time="0.005"/>
+<testcase classname="Testing stringify pipeline step" name="document with doctype can be transformed" time="0.006"/>
+<testcase classname="Testing stringify pipeline step" name="document body can be transformed" time="0.005"/>
+<testcase classname="Testing stringify pipeline step" name="response body takes precedence over document can be transformed" time="0.004"/>
+<testcase classname="Testing stringify pipeline step" name="throws error if neither body or document is present in the response" time="0"/>
+<testcase classname="Testing stringify pipeline step" name="throws error if document is not serializable" time="0"/>
+<testcase classname="Testing universal adapter" name="createActionResponse keeps response intact" time="0.001"/>
+<testcase classname="Testing universal adapter" name="createActionResponse provides reasonable defaults for JSON" time="0.002"/>
+<testcase classname="Testing universal adapter" name="createActionResponse provides reasonable defaults for plain text" time="0.001"/>
+<testcase classname="Testing universal adapter" name="createActionResponse propagates error with no http status to openwhisk" time="0.001"/>
+<testcase classname="Testing universal adapter" name="createActionResponse keeps response intact in case of error" time="0.001"/>
+<testcase classname="Testing universal adapter" name="Pipeline errors are propagated to action response" time="0.003"/>
+<testcase classname="Testing universal adapter" name="extractActionContext creates valid object" time="0.001"/>
+<testcase classname="Testing universal adapter" name="extractActionContext creates valid object with minimal params" time="0"/>
+<testcase classname="Testing universal adapter" name="extractClientRequest needs to parse params parameter" time="0"/>
+<testcase classname="Testing universal adapter" name="extractClientRequest acts reasonably on wrong params parameter" time="0"/>
+<testcase classname="Testing universal adapter" name="extractClientRequest acts reasonably with no request object" time="0"/>
+<testcase classname="Testing universal adapter" name="extractClientRequest uses x-old-url correctly" time="0.001"/>
+<testcase classname="Testing universal adapter" name="extractClientRequest is correct with directory" time="0"/>
+<testcase classname="Testing universal adapter" name="openwhisk parameters are properly adapted" time="0.002"/>
+<testcase classname="Testing universal adapter" name="openwhisk adds JSON content from post request to context" time="0"><skipped/></testcase>
+<testcase classname="Testing universal adapter" name="pipeline responds to status check" time="0.001"/>
+<testcase classname="Testing universal adapter" name="it logs to coralogix if secrets are present" time="0.02"/>
+<testcase classname="Testing universal adapter" name="it logs even if no trace logging" time="0.002"/>
+<testcase classname="Testing XML Pipeline" name="xml.pipe is a function" time="0"/>
+<testcase classname="Testing XML Pipeline" name="xml.pipe makes HTTP requests" time="0.048"/>
+<testcase classname="Testing XML Pipeline" name="xml.pipe can be extended" time="0.043"/>
+<testcase classname="Testing XML Pipeline" name="xml.pipe does not overwrite existing response body" time="0.039"/>
+<testcase classname="Testing XML Pipeline" name="xml.pipe uses default logger if none provided" time="0.043"/>
+<testcase classname="Testing XML Pipeline" name="xml.pipe serves 404 for non existent content" time="0.071"/>
+<testcase classname="Testing XML Pipeline" name="xml.pipe detects ESI tag in XML object" time="0.045"/>
+</testsuite>
