@@ -1,3 +1,10 @@
+## [15.0.12](https://github.com/adobe/helix-pipeline/compare/v15.0.11...v15.0.12) (2021-12-07)
+
+
+### Bug Fixes
+
+* **deps:** update external major (major) ([#1193](https://github.com/adobe/helix-pipeline/issues/1193)) ([f72df8d](https://github.com/adobe/helix-pipeline/commit/f72df8d12188e1f257d310dc6342ed1073229a94))
+
 ## [15.0.11](https://github.com/adobe/helix-pipeline/compare/v15.0.10...v15.0.11) (2021-12-02)
 
 
