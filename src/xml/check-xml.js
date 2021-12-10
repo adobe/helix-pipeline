@@ -9,20 +9,18 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const parse = require('xml2js').parseString;
+import { parseString } from 'xml2js';
 
-function check({ response }, { logger }) {
+export default function check({ response }, { logger }) {
   if (!response.body) {
     logger.debug('No XML to validate');
     return;
   }
 
   logger.debug('Validating XML');
-  parse(response.body, { trim: true }, (err) => {
+  parseString(response.body, { trim: true }, (err) => {
     if (err) {
       throw new Error(`Error parsing XML: ${err}`);
     }
   });
 }
-
-module.exports = check;

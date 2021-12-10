@@ -10,10 +10,10 @@
  * governing permissions and limitations under the License.
  */
 
-const { setdefault } = require('ferrum');
-const isProduction = require('../utils/is-production');
+import { setdefault } from 'ferrum';
+import isProduction from '../utils/is-production.js';
 
-const selectStatus = (context, { logger, request = {} }) => {
+export default function setStatus(context, { logger, request = {} }) {
   const res = setdefault(context, 'response', {});
   const headers = setdefault(res, 'headers', {});
   const err = context.error;
@@ -37,6 +37,4 @@ const selectStatus = (context, { logger, request = {} }) => {
     res.body = `<html><body><h1>500</h1><pre>${err}</pre></body></html>`;
     headers['Content-Type'] = 'text/html';
   }
-};
-
-module.exports = selectStatus;
+}

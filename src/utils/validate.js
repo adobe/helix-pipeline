@@ -9,9 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const ajv = require('./validator');
+import ajv from './validator.js';
 
-function validate(context, action, index) {
+export default function validate(context, action, index) {
   const validator = ajv(action.logger);
   const cvalid = validator.validate('https://ns.adobe.com/helix/pipeline/context', context);
   if (!cvalid) {
@@ -22,5 +22,3 @@ function validate(context, action, index) {
     throw new Error(`Invalid Action at step ${index}: \n${validator.enhancedErrorsText()}`);
   }
 }
-
-module.exports = validate;

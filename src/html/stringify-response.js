@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function stringify({ response }, { logger }) {
+export default function stringify({ response }, { logger }) {
   if (response.body) {
     logger.debug('stringify: ignoring already defined context.response.body');
     return;
@@ -30,5 +30,3 @@ function stringify({ response }, { logger }) {
     throw Error(`unexpected context.response.document: ${doc}`);
   }
 }
-
-module.exports = stringify;

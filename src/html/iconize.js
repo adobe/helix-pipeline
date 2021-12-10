@@ -9,11 +9,11 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const visit = require('unist-util-visit');
+import { visit } from 'unist-util-visit';
 
 const regexp = /:#?[a-zA-Z_-]+[a-zA-Z0-9]*:/g;
 
-function iconize({ content }) {
+export default function iconize({ content }) {
   if (!content.mdast) {
     return;
   }
@@ -53,5 +53,3 @@ function iconize({ content }) {
     }
   });
 }
-
-module.exports = iconize;

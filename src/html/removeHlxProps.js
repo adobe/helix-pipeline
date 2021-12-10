@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function clean({ response }) {
+export default function clean({ response }) {
   response.document.querySelectorAll('[class]').forEach((el) => {
     // Remove all `hlx-*` classes on the elements
     el.classList.value.split(' ')
@@ -25,5 +25,3 @@ function clean({ response }) {
       .forEach((key) => delete el.dataset[key]);
   });
 }
-
-module.exports = clean;

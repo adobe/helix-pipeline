@@ -34,12 +34,10 @@ function links(document) {
   });
 }
 
-function rewrite(context) {
+export default function rewrite(context) {
   const res = context.response;
   if ((res.headers['Content-Type'] || '').match(/html/) && res.document) {
     links(res.document);
     scripts(res.document);
   }
 }
-
-module.exports = rewrite;

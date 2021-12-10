@@ -11,9 +11,8 @@
  */
 
 /* eslint-disable import/no-extraneous-dependencies */
-const { compileFromFile } = require('json-schema-to-typescript');
-const { writeFileSync } = require('fs-extra');
-const fs = require('fs-extra');
+import { compileFromFile } from 'json-schema-to-typescript';
+import fs from 'fs-extra';
 
 const options = {
   $refOptions: {
@@ -52,5 +51,5 @@ const options = {
  */`,
 };
 
-compileFromFile('docs/context.schema.json', options).then((ts) => writeFileSync('src/context.d.ts', ts));
-compileFromFile('docs/action.schema.json', options).then((ts) => writeFileSync('src/action.d.ts', ts));
+compileFromFile('docs/context.schema.json', options).then((ts) => fs.writeFileSync('src/context.d.ts', ts));
+compileFromFile('docs/action.schema.json', options).then((ts) => fs.writeFileSync('src/action.d.ts', ts));

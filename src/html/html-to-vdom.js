@@ -9,9 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { JSDOM } = require('jsdom');
+import { JSDOM } from 'jsdom';
 
-function tovdom({ response }) {
+export default function tovdom({ response }) {
   // todo: check content type ?
   if (!response.document && 'body' in response) {
     if (response.body.match(/<html/i)) {
@@ -26,5 +26,3 @@ function tovdom({ response }) {
     delete response.body;
   }
 }
-
-module.exports = tovdom;

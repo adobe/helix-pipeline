@@ -9,18 +9,17 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-const { expand } = require('@emmetio/expand-abbreviation');
-const { setdefault } = require('ferrum');
-const fromDOM = require('hast-util-from-dom');
-const { JSDOM } = require('jsdom');
-const { match: matchUrlBuilder } = require('path-to-regexp');
-const { MarkupConfig } = require('@adobe/helix-shared-config');
-const visit = require('unist-util-visit');
-const { get } = require('dot-prop');
-const { match } = require('./pattern-compiler');
-const section = require('./section-handler');
-const VDOMTransformer = require('./mdast-to-vdom');
+import { expand } from '@emmetio/expand-abbreviation';
+import { setdefault } from 'ferrum';
+import { fromDom } from 'hast-util-from-dom';
+import { JSDOM } from 'jsdom';
+import { match as matchUrlBuilder } from 'path-to-regexp';
+import { MarkupConfig } from '@adobe/helix-shared-config';
+import { visit } from 'unist-util-visit';
+import { get } from 'dot-prop';
+import { match } from './pattern-compiler.js';
+import section from './section-handler.js';
+import VDOMTransformer from './mdast-to-vdom.js';
 
 /** Placeholder variable for the generate template. */
 const PLACEHOLDER_TEMPLATE = /\$\{\d+\}/g;
@@ -122,14 +121,14 @@ function patchVDOMNode(el, cfg, data) {
   // Wrap the element
   if (cfg.wrap) {
     const wrapperEl = getHTMLElement(cfg.wrap, data);
-    const n = fromDOM(wrapperEl);
+    const n = fromDom(wrapperEl);
     el = findAndReplace(n, el);
   }
 
   // Replace the element
   if (cfg.replace) {
     const wrapperEl = getHTMLElement(cfg.replace, data);
-    const n = fromDOM(wrapperEl);
+    const n = fromDom(wrapperEl);
     el = findAndReplace(n, { type: 'text', value: '' });
   }
 
@@ -149,7 +148,7 @@ function patchVDOMNodes(els, cfg, data) {
   // Wrap the element
   if (cfg.wrap) {
     const wrapperEl = getHTMLElement(cfg.wrap, data);
-    const n = fromDOM(wrapperEl);
+    const n = fromDom(wrapperEl);
     return findAndReplace(n, patched);
   }
 
@@ -205,7 +204,7 @@ function patchHtmlElement(el, cfg) {
  * @param {Object} transformer the VDOM transformer
  * @param {Object} markupconfig the markup config
  */
-async function adjustMDAST(context, action) {
+export async function adjustMDAST(context, action) {
   // Since this is called first in the pipeline, we get the markup config here
   await getMarkupConfig(context, action);
 
@@ -278,7 +277,7 @@ async function adjustMDAST(context, action) {
  * @param {Object} logger the pipeline logger
  * @param {Object} markupconfig the markup config
  */
-async function adjustHTML(context, { logger, markupconfig }) {
+export async function adjustHTML(context, { logger, markupconfig }) {
   if (!markupconfig || !markupconfig.markup) {
     return;
   }
@@ -301,8 +300,3 @@ async function adjustHTML(context, { logger, markupconfig }) {
       elements.forEach((el) => patchHtmlElement(el, cfg));
     });
 }
-
-module.exports = {
-  adjustMDAST,
-  adjustHTML,
-};

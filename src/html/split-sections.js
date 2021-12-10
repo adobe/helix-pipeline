@@ -9,17 +9,16 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-const { selectAll } = require('unist-util-select');
-const { flat, obj, map } = require('ferrum');
-const _ = require('lodash/fp');
+import { selectAll } from 'unist-util-select';
+import { flat, map, obj } from 'ferrum';
+import _ from 'lodash/fp.js';
 
 // Compute the meta information for the section
 function computeMeta(section) {
   return obj(flat(map(selectAll('yaml', section), ({ payload }) => payload)));
 }
 
-function split({ content }) {
+export default function split({ content }) {
   const { mdast } = content;
 
   // filter all children that are either yaml or break blocks
@@ -52,5 +51,3 @@ function split({ content }) {
     content.mdast.children = content.mdast.children[0].children;
   }
 }
-
-module.exports = split;

@@ -9,10 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const map = require('unist-util-map');
-const URI = require('uri-js');
-const mm = require('micromatch');
-const p = require('path');
+import { visit, SKIP, CONTINUE } from 'unist-util-visit';
+import URI from 'uri-js';
+import mm from 'micromatch';
+import p from 'path';
 
 /**
  * Finds embeds like `video: https://www.youtube.com/embed/2Xc9gXyf2G4`
@@ -26,7 +26,7 @@ function gatsbyEmbed(text) {
   return false;
 }
 
-function internalGatsbyEmbed(text, base, contentext, resourceext) {
+export function internalGatsbyEmbed(text, base, contentext, resourceext) {
   const matches = new RegExp(`^(markdown|html|embed): ?(.*(${contentext}|${resourceext}))$`)
     .exec(text);
   if (matches && matches[2]) {
@@ -53,7 +53,7 @@ function iaEmbed({ type, children }, parent) {
   return false;
 }
 
-function internalIaEmbed({ type, children }, base, contentext, resourceext) {
+export function internalIaEmbed({ type, children }, base, contentext, resourceext) {
   if (type === 'paragraph'
     && children.length === 1
     && children[0].type === 'text'
@@ -79,7 +79,7 @@ function imgEmbed({ type, children }) {
   return false;
 }
 
-function internalImgEmbed({ type, children }, base, contentext, resourceext) {
+export function internalImgEmbed({ type, children }, base, contentext, resourceext) {
   if (type === 'paragraph'
     && children.length === 1
     && children[0].type === 'image'
@@ -99,17 +99,20 @@ function embed(uri, node, allowlist = [], dataAllowlist = [], logger) {
     node.children = children;
     node.url = URI.serialize(uri);
     delete node.value;
-  } else if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, allowlist)) {
+    return SKIP;
+  }
+
+  if ((uri.scheme === 'http' || uri.scheme === 'https') && mm.some(uri.host, allowlist)) {
     const children = [{ ...node }];
     node.type = 'embed';
     node.children = children;
     node.url = URI.serialize(uri);
-    if (node.value) {
-      delete node.value;
-    }
-  } else {
-    logger.debug(`Allowlist forbids embedding of URL: ${URI.serialize(uri)}`);
+    delete node.value;
+    return SKIP;
   }
+
+  logger.debug(`Allowlist forbids embedding of URL: ${URI.serialize(uri)}`);
+  return CONTINUE;
 }
 
 function internalembed(uri, node, extension) {
@@ -117,12 +120,11 @@ function internalembed(uri, node, extension) {
   node.type = 'embed';
   node.children = children;
   node.url = p.resolve(p.dirname(uri.path), p.basename(uri.path, p.extname(uri.path)) + extension);
-  if (node.value) {
-    delete node.value;
-  }
+  delete node.value;
+  return SKIP;
 }
 
-function find(
+export default function find(
   { content: { mdast }, request: { extension, url } },
   {
     logger, secrets: {
@@ -137,27 +139,25 @@ function find(
   const embedAllowlist = EMBED_ALLOWLIST.split(',').map((s) => s.trim());
   const dataEmbedAllowlist = DATA_EMBED_ALLOWLIST.split(',').map((s) => s.trim());
   const contentext = p.extname(path);
-  map(mdast, (node, _, parent) => {
+  visit(mdast, (node, _, parent) => {
     if (node.type === 'inlineCode' && gatsbyEmbed(node.value)) {
-      embed(gatsbyEmbed(node.value), node, embedAllowlist, dataEmbedAllowlist, logger);
-    } else if (node.type === 'paragraph' && iaEmbed(node, parent)) {
-      embed(iaEmbed(node, parent), node, embedAllowlist, dataEmbedAllowlist, logger);
-    } else if (node.type === 'paragraph' && imgEmbed(node)) {
-      embed(imgEmbed(node), node, embedAllowlist, dataEmbedAllowlist, logger);
-    } else if (node.type === 'inlineCode'
-      && internalGatsbyEmbed(node.value, url, contentext, resourceext)) {
-      internalembed(internalGatsbyEmbed(node.value, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
-    } else if (node.type === 'paragraph'
-    && internalIaEmbed(node, url, contentext, resourceext)) {
-      internalembed(internalIaEmbed(node, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
-    } else if (node.type === 'paragraph'
-  && internalImgEmbed(node, url, contentext, resourceext)) {
-      internalembed(internalImgEmbed(node, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
+      return embed(gatsbyEmbed(node.value), node, embedAllowlist, dataEmbedAllowlist, logger);
     }
+    if (node.type === 'paragraph' && iaEmbed(node, parent)) {
+      return embed(iaEmbed(node, parent), node, embedAllowlist, dataEmbedAllowlist, logger);
+    }
+    if (node.type === 'paragraph' && imgEmbed(node)) {
+      return embed(imgEmbed(node), node, embedAllowlist, dataEmbedAllowlist, logger);
+    }
+    if (node.type === 'inlineCode' && internalGatsbyEmbed(node.value, url, contentext, resourceext)) {
+      return internalembed(internalGatsbyEmbed(node.value, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
+    }
+    if (node.type === 'paragraph' && internalIaEmbed(node, url, contentext, resourceext)) {
+      return internalembed(internalIaEmbed(node, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
+    }
+    if (node.type === 'paragraph' && internalImgEmbed(node, url, contentext, resourceext)) {
+      return internalembed(internalImgEmbed(node, url, contentext, resourceext), node, `.${EMBED_SELECTOR}.${extension}`);
+    }
+    return CONTINUE;
   });
 }
-
-module.exports = find;
-module.exports.internalGatsbyEmbed = internalGatsbyEmbed;
-module.exports.internalIaEmbed = internalIaEmbed;
-module.exports.internalImgEmbed = internalImgEmbed;

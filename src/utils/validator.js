@@ -10,13 +10,14 @@
  * governing permissions and limitations under the License.
  */
 /* eslint-disable no-underscore-dangle */
-const Ajv = require('ajv').default;
-const hash = require('object-hash');
-const util = require('util');
+import { createRequire } from 'module';
+import Ajv from 'ajv';
+import hash from 'object-hash';
+import util from 'util';
 
 const _ajv = {};
 
-function ajv(logger, options = {}) {
+export default function ajv(logger, options = {}) {
   const key = hash(options);
   if (!_ajv[key]) {
     logger.debug(`initializing ajv ${JSON.stringify(options)}`);
@@ -32,6 +33,7 @@ function ajv(logger, options = {}) {
     // (which would complicate pipeline implementation considerably)
     // we're using static file names and synchronous reads/requires (#134)
     // using constants in the require functions allows packagers to include the schemas.
+    const require = createRequire(import.meta.url);
     [
       /* eslint-disable global-require */
       require('../schemas/action.schema.json'),
@@ -87,5 +89,3 @@ function ajv(logger, options = {}) {
   }
   return _ajv[key];
 }
-
-module.exports = ajv;

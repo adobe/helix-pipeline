@@ -10,12 +10,12 @@
  * governing permissions and limitations under the License.
  */
 
-/* eslint-disable camelcase,no-underscore-dangle */
-const querystring = require('querystring');
-const { Response } = require('@adobe/helix-fetch');
-const wrap = require('@adobe/helix-shared-wrap');
-const { logger } = require('@adobe/helix-universal-logger');
-const { wrap: statusCheck } = require('@adobe/helix-status');
+/* eslint-disable camelcase */
+import querystring from 'querystring';
+import { Response } from '@adobe/helix-fetch';
+import wrap from '@adobe/helix-shared-wrap';
+import { logger } from '@adobe/helix-universal-logger';
+import { wrap as statusCheck } from '@adobe/helix-status';
 
 /**
  * Builds the request path from path, selector, extension and params
@@ -48,7 +48,7 @@ function buildPath(req) {
  * @param {Object} action The pipeline action context
  * @return {Object} an express style request object.
  */
-function extractClientRequest(action) {
+export function extractClientRequest(action) {
   const { request } = action;
   if (!request || !request.params) {
     return {};
@@ -80,7 +80,7 @@ function extractClientRequest(action) {
  * @param {object} action Action context.
  * @returns {Object} OpenWhisk response
  */
-async function createActionResponse(context, action) {
+export async function createActionResponse(context, action) {
   const {
     response: {
       status,
@@ -121,7 +121,7 @@ async function createActionResponse(context, action) {
  * @param {Object} params The action params.
  * @returns {Object} The pipeline action context.
  */
-function extractActionContext(req, context, params) {
+export function extractActionContext(req, context, params) {
   const secrets = {
     ...context.env,
   };
@@ -155,7 +155,7 @@ function extractActionContext(req, context, params) {
  * @param {Context} univContext The Context
  * @returns {Promise<Response>} The action response.
  */
-async function runPipeline(cont, pipe, request, univContext) {
+export async function runPipeline(cont, pipe, request, univContext) {
   async function runner(req, ctx) {
     const { searchParams } = new URL(req.url);
     const params = Array.from(searchParams.entries()).reduce((p, [key, value]) => {
@@ -185,7 +185,7 @@ async function runPipeline(cont, pipe, request, univContext) {
     .with(logger)(request, univContext);
 }
 
-module.exports = {
+export default {
   runPipeline,
   extractActionContext,
   extractClientRequest,

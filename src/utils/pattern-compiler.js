@@ -17,7 +17,7 @@
  * @returns {RegExp} a regular expression that matches strings following
  * the high-level pattern.
  */
-function compile(pattern) {
+export function compile(pattern) {
   const expression = new RegExp(pattern
     .replace(/(\w+)/g, '($1·)') // always match whole words
     .replace(/ /g, '') // remove spaces
@@ -33,15 +33,10 @@ function compile(pattern) {
  * @param {string} pattern a content-expression like "heading? (paragraph|image)+"
  * @returns true if the list matches the pattern
  */
-function match(list, pattern) {
+export function match(list, pattern) {
   const str = `${list.join('·')}·`;
   // console.log('-> ' + str);
   const matches = !!compile(pattern).test(str);
   // console.log(matches);
   return matches;
 }
-
-module.exports = {
-  compile,
-  match,
-};

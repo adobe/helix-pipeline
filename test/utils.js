@@ -10,21 +10,21 @@
  * governing permissions and limitations under the License.
  */
 
-const path = require('path');
-const querystring = require('querystring');
-const { Request } = require('@adobe/helix-fetch');
-const NodeHttpAdapter = require('@pollyjs/adapter-node-http');
-const FSPersister = require('@pollyjs/persister-fs');
-const { setupMocha } = require('@pollyjs/core');
-const { pipe: htmlPipe } = require('../src/defaults/html.pipe.js');
-const { pipe: jsonPipe } = require('../src/defaults/json.pipe.js');
-const { pipe: xmlPipe } = require('../src/defaults/xml.pipe.js');
-const Downloader = require('../src/utils/Downloader.js');
+import path from 'path';
+import querystring from 'querystring';
+import { Request } from '@adobe/helix-fetch';
+import NodeHttpAdapter from '@pollyjs/adapter-node-http';
+import FSPersister from '@pollyjs/persister-fs';
+import { setupMocha } from '@pollyjs/core';
+import { pipe as rawHtmlPipe } from '../src/defaults/html.pipe.js';
+import { pipe as rawJsonPipe } from '../src/defaults/json.pipe.js';
+import { pipe as rawXmlPipe } from '../src/defaults/xml.pipe.js';
+import Downloader from '../src/utils/Downloader.js';
 
-const resolver = {
-  createURL({ package, name, version }) {
+export const resolver = {
+  createURL({ package: pkg, name, version }) {
     const namespace = process.env.__OW_NAMESPACE || 'helix';
-    return new URL(`https://adobeioruntime.net/api/v1/web/${namespace}/${package}/${name}@${version}`);
+    return new URL(`https://adobeioruntime.net/api/v1/web/${namespace}/${pkg}/${name}@${version}`);
   },
 };
 
@@ -36,7 +36,7 @@ function piper(pipe) {
   };
 }
 
-function setupPolly(opts) {
+export function setupPolly(opts) {
   setupMocha({
     logging: false,
     recordFailedRequests: true,
@@ -50,14 +50,14 @@ function setupPolly(opts) {
     persister: FSPersister,
     persisterOptions: {
       fs: {
-        recordingsDir: path.resolve(__dirname, 'fixtures'),
+        recordingsDir: path.resolve(__testdir, 'fixtures'),
       },
     },
     ...opts,
   });
 }
 
-async function retrofitResponse(resp) {
+export async function retrofitResponse(resp) {
   let body;
   if (resp.body === null) {
     body = null;
@@ -87,7 +87,7 @@ async function retrofitResponse(resp) {
   return ret;
 }
 
-function universalRequest(params) {
+export function universalRequest(params) {
   const {
     __ow_headers: headers = {},
     __ow_method: method = 'get',
@@ -103,7 +103,7 @@ function universalRequest(params) {
   });
 }
 
-function retrofit(fn) {
+export function retrofit(fn) {
   return async (cont, p, params = {}, env = {}) => {
     const req = universalRequest(params);
     const suffix = params.__ow_path || '';
@@ -129,13 +129,6 @@ function retrofit(fn) {
   };
 }
 
-module.exports = {
-  retrofit,
-  retrofitResponse,
-  universalRequest,
-  pipe: piper(htmlPipe),
-  jsonPipe: piper(jsonPipe),
-  xmlPipe: piper(xmlPipe),
-  resolver,
-  setupPolly,
-};
+export const pipe = piper(rawHtmlPipe);
+export const jsonPipe = piper(rawJsonPipe);
+export const xmlPipe = piper(rawXmlPipe);

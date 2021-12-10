@@ -9,14 +9,14 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { selectAll } = require('unist-util-select');
-const {
-  pipe, map, uniq, list,
-} = require('ferrum');
+import { selectAll } from 'unist-util-select';
+import {
+  list, map, pipe, uniq,
+} from 'ferrum';
 
 const DATA_EMBED_TIMEOUT = 20000;
 
-function fetch({ content: { mdast } }, {
+export default function fetch({ content: { mdast } }, {
   downloader, logger, resolver,
 }) {
   const fetches = pipe(
@@ -43,5 +43,3 @@ function fetch({ content: { mdast } }, {
   );
   list(fetches);
 }
-
-module.exports = fetch;

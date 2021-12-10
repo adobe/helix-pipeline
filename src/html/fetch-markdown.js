@@ -9,9 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { setdefault } = require('ferrum');
+import { setdefault } from 'ferrum';
 
-async function fetchMarkdown(context, { request, downloader }) {
+export default async function fetchMarkdown(context, { request, downloader }) {
   setdefault(context, 'content', {});
   if (!request || !request.params) {
     throw new Error('Request parameters missing');
@@ -41,5 +41,3 @@ async function fetchMarkdown(context, { request, downloader }) {
     // ignore
   }
 }
-
-module.exports = fetchMarkdown;

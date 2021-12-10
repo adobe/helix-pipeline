@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-function directives(expression = '') {
+export function directives(expression = '') {
   const retval = expression.split(',')
     .map((s) => s.trim())
     .filter((s) => !!s)
@@ -26,13 +26,13 @@ function directives(expression = '') {
   return retval;
 }
 
-function format(dirs = {}) {
+export function format(dirs = {}) {
   return Object.entries(dirs)
     .map(([directive, value]) => ((value === true || value === 1) ? directive : `${directive}=${value}`))
     .join(', ');
 }
 
-function merge(in1 = '', in2 = '') {
+export function merge(in1 = '', in2 = '') {
   const dirs1 = typeof in1 === 'string' ? directives(in1) : in1;
   const dirs2 = typeof in2 === 'string' ? directives(in2) : in2;
 
@@ -48,5 +48,3 @@ function merge(in1 = '', in2 = '') {
 
   return typeof in1 === 'string' ? format(mergeval) : mergeval;
 }
-
-module.exports = { directives, format, merge };

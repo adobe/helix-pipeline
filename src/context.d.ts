@@ -77,7 +77,15 @@ export interface Request {
   queryString?: string;
 }
 /**
- * The content as retrieved from the repository and enriched in the pipeline.
+ * The `content` object represents the content that is being processed in the pipeline.
+ *
+ * With each step of the pipeline, the `content` will be enriched and gain additional properties.
+ *
+ * In a typical processing, `content` will start empty, and then gain a [`body`](#body) as the resource is fetched from the content repository.
+ *
+ * In the second step, the `body` will be parsed using a Markdown parser, resulting in the populated [`mdast`](#mdast) property, which is a representation of the Markdown.
+ *
+ * After that, the Markdown AST is processed furthermore to extract [`sections`](#meta), [`title`](#title), [`intro`](#intro), and [`meta`](#meta).
  */
 export interface Content {
   /**
@@ -154,7 +162,9 @@ export interface Content {
   };
 }
 /**
- * A node in the Markdown AST
+ * The Markdown AST is 100% API compatible with the [UnifiedJS MDAST](https://github.com/syntax-tree/mdast) data structure.
+ *
+ * All [MDAST Utilities](https://github.com/syntax-tree/mdast#list-of-utilities) are compatible and can be used for easy processing of MDAST trees.
  */
 export interface MDAST {
   /**
@@ -279,7 +289,7 @@ export interface MDAST {
   /**
    * For tables, an align field can be present. If present, it must be a list of alignTypes. It represents how cells in columns are aligned.
    */
-  align?: ("left" | "right" | "center" | null)[];
+  align?: ("left" | "right" | "center" | "none" | null)[];
   /**
    * For code, a lang field can be present. It represents the language of computer code being marked up.
    */

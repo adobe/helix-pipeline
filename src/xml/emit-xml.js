@@ -9,11 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import builder from 'xmlbuilder';
+import { setdefault } from 'ferrum';
 
-const builder = require('xmlbuilder');
-const { setdefault } = require('ferrum');
-
-function emit(context, { secrets, logger }) {
+export default function emit(context, { secrets, logger }) {
   const cont = setdefault(context, 'content', {});
   const res = setdefault(context, 'response', {});
 
@@ -31,5 +30,3 @@ function emit(context, { secrets, logger }) {
   const xml = builder.create(cont.xml, { encoding: 'utf-8' });
   res.body = xml.end({ pretty: !!secrets.XML_PRETTY });
 }
-
-module.exports = emit;

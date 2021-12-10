@@ -9,10 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const crypto = require('crypto');
-const { setdefault } = require('ferrum');
+import crypto from 'crypto';
+import { setdefault } from 'ferrum';
 
-async function fetchContent(context, {
+export default async function fetchContent(context, {
   request, downloader, secrets, logger,
 }) {
   setdefault(context, 'content', {});
@@ -103,5 +103,3 @@ async function fetchContent(context, {
     // ignore
   }
 }
-
-module.exports = fetchContent;

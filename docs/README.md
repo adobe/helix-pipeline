@@ -4,11 +4,11 @@
 
 *   [Action](./action.md "Tracks the OpenWhisk action invocation") – `https://ns.adobe.com/helix/pipeline/action`
 
-*   [Content](./content.md "The content as retrieved from the repository and enriched in the pipeline") – `https://ns.adobe.com/helix/pipeline/content`
+*   [Content](./content.md "The content object represents the content that is being processed in the pipeline") – `https://ns.adobe.com/helix/pipeline/content`
 
 *   [Context](./context.md "The context thingie") – `https://ns.adobe.com/helix/pipeline/context`
 
-*   [MDAST](./mdast.md "A node in the Markdown AST") – `https://ns.adobe.com/helix/pipeline/mdast`
+*   [MDAST](./mdast.md "The Markdown AST is 100% API compatible with the UnifiedJS MDAST data structure") – `https://ns.adobe.com/helix/pipeline/mdast`
 
 *   [Meta](./meta.md "Content and Section Metadata Properties") – `https://ns.adobe.com/helix/pipeline/meta`
 

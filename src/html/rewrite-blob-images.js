@@ -27,10 +27,8 @@ function images(document) {
   });
 }
 
-function rewrite({ content }) {
+export default function rewrite({ content }) {
   if (content.document) {
     images(content.document);
   }
 }
-
-module.exports = rewrite;

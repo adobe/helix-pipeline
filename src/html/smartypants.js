@@ -9,21 +9,19 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const retext = require('retext');
-const map = require('unist-util-visit');
-const smartypants = require('retext-smartypants');
+import { retext } from 'retext';
+import { visit } from 'unist-util-visit';
+import smartypants from 'retext-smartypants';
 
 const smart = retext().use(smartypants);
 
-function reformat({ content }) {
+export default function reformat({ content }) {
   if (!content.mdast) {
     return;
   }
-  map(content.mdast, (node) => {
+  visit(content.mdast, (node) => {
     if (node.type === 'text' && node.value.match(/(--)|(\.\.\.)|(['"`])/)) {
-      node.value = smart.processSync(node.value).contents;
+      node.value = smart.processSync(node.value).value;
     }
   });
 }
-
-module.exports = reformat;

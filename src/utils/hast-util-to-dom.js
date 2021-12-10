@@ -21,8 +21,7 @@
 // TODO: contribute back to original
 
 /* eslint-disable header/header */
-
-const info = require('property-information');
+import info from 'property-information';
 
 const ns = {
   html: 'http://www.w3.org/1999/xhtml',
@@ -183,6 +182,6 @@ const wrap = (document) => {
   return transform;
 };
 
-module.exports = function toDOM(document, hast, options = {}) {
+export default function toDOM(document, hast, options = {}) {
   return wrap(document)(hast, options);
-};
+}

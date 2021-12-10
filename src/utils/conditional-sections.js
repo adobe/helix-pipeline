@@ -9,11 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import hash from 'object-hash';
+import { each, setdefault, type } from 'ferrum';
 
-const hash = require('object-hash');
-const { setdefault, type, each } = require('ferrum');
-
-function selectstrain(context, { request, logger }) {
+export function selectstrain(context, { request, logger }) {
   const cont = setdefault(context, 'content', { mdast: {} });
   const params = request.params || {};
   const { strain } = params;
@@ -31,7 +30,7 @@ function selectstrain(context, { request, logger }) {
   });
 }
 
-function testgroups(sections = []) {
+export function testgroups(sections = []) {
   return sections
     .filter(({ meta = {} } = {}) => !!meta.test)
     .reduce((groups, section) => {
@@ -56,7 +55,7 @@ function strainhashsort(strain = 'default') {
   };
 }
 
-function pick(groups = {}, strain = 'default') {
+export function pick(groups = {}, strain = 'default') {
   return Object.keys(groups)
     .reduce((selected, group) => {
       const candidates = groups[group];
@@ -68,7 +67,7 @@ function pick(groups = {}, strain = 'default') {
     }, {});
 }
 
-function selecttest(context, { request }) {
+export function selecttest(context, { request }) {
   const cont = setdefault(context, 'content', { mdast: {} });
   const params = request.params || {};
   const { strain } = params;
@@ -87,10 +86,3 @@ function selecttest(context, { request }) {
     section.meta.hidden = !(section === selected[section.meta.test]);
   });
 }
-
-module.exports = {
-  selectstrain,
-  testgroups,
-  selecttest,
-  pick,
-};

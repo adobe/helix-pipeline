@@ -9,9 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const ajv = require('./validator');
+import ajv from './validator.js';
 
-function coerce(action) {
+export default function coerce(action) {
   const defaultsetter = ajv(action.logger, { useDefaults: true, coerceTypes: true });
   if (!action.secrets) {
     action.secrets = {};
@@ -20,5 +20,3 @@ function coerce(action) {
   defaultsetter.validate('https://ns.adobe.com/helix/pipeline/secrets', action.secrets);
   return action;
 }
-
-module.exports = coerce;
