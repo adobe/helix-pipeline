@@ -1,3 +1,15 @@
+# [16.0.0](https://github.com/adobe/helix-pipeline/compare/v15.0.15...v16.0.0) (2021-12-16)
+
+
+### Features
+
+* ESM Support ([2068e51](https://github.com/adobe/helix-pipeline/commit/2068e5133b86697439555dc717ae3bbd84cd6219))
+
+
+### BREAKING CHANGES
+
+* only supports ESM
+
 ## [15.0.15](https://github.com/adobe/helix-pipeline/compare/v15.0.14...v15.0.15) (2021-12-16)
 
 
