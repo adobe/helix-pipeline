@@ -9,11 +9,12 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { type } = require('ferrum');
-const { map, join, setdefault } = require('ferrum');
-const { computeSurrogateKey } = require('@adobe/helix-shared-utils');
+import {
+  join, map, setdefault, type,
+} from 'ferrum';
+import { computeSurrogateKey } from '@adobe/helix-shared-utils';
 
-function key(context, { logger }) {
+export default function key(context, { logger }) {
   const cont = setdefault(context, 'content', {});
   const res = setdefault(context, 'response', {});
   const headers = setdefault(res, 'headers', {});
@@ -27,5 +28,3 @@ function key(context, { logger }) {
   logger.debug('Setting Surrogate-Key header');
   headers['Surrogate-Key'] = join(' ')(map(cont.sources, computeSurrogateKey));
 }
-
-module.exports = key;

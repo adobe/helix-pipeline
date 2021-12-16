@@ -9,26 +9,25 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { Pipeline } = require('../../index.js');
-const { log } = require('./default.js');
-
-const fetch = require('../html/fetch-markdown.js');
-const fetchContent = require('../html/fetch-content.js');
-const parse = require('../html/parse-markdown.js');
-const meta = require('../html/get-metadata.js');
-const { esi, flag } = require('../html/flag-esi');
-const smartypants = require('../html/smartypants');
-const sections = require('../html/split-sections');
-const { cache, uncached } = require('../html/shared-cache');
-const key = require('../html/set-surrogate-key');
-const production = require('../utils/is-production');
-const dump = require('../utils/dump-context.js');
-const validate = require('../utils/validate');
-const type = require('../utils/set-content-type.js');
-const emit = require('../xml/emit-xml.js');
-const selectStatus = require('../xml/set-xml-status.js');
-const check = require('../xml/check-xml');
-const timing = require('../utils/timing');
+import { Pipeline } from '../../index.js';
+import { log } from './default.js';
+import fetch from '../html/fetch-markdown.js';
+import fetchContent from '../html/fetch-content.js';
+import parse from '../html/parse-markdown.js';
+import meta from '../html/get-metadata.js';
+import { esi, flag } from '../html/flag-esi.js';
+import smartypants from '../html/smartypants.js';
+import sections from '../html/split-sections.js';
+import { cache, uncached } from '../html/shared-cache.js';
+import timing from '../utils/timing.js';
+import check from '../xml/check-xml.js';
+import selectStatus from '../xml/set-xml-status.js';
+import emit from '../xml/emit-xml.js';
+import type from '../utils/set-content-type.js';
+import validate from '../utils/validate.js';
+import { record, report } from '../utils/dump-context.js';
+import production from '../utils/is-production.js';
+import key from '../html/set-surrogate-key.js';
 
 /* eslint newline-per-chained-call: off */
 
@@ -36,13 +35,13 @@ function hasNoContent({ content }) {
   return !(content !== undefined && content.body !== undefined);
 }
 
-const xmlpipe = (cont, context, action) => {
+export function pipe(cont, context, action) {
   action.logger = action.logger || log;
   action.logger.debug('Constructing XML Pipeline');
-  const pipe = new Pipeline(action);
+  const pipeline = new Pipeline(action);
   const timer = timing();
-  pipe
-    .every(dump.record)
+  pipeline
+    .every(record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
     .use(fetchContent).expose('content').when(hasNoContent)
@@ -59,11 +58,9 @@ const xmlpipe = (cont, context, action) => {
     .use(key)
     .use(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .use(timer.report)
-    .error(dump.report)
+    .error(report)
     .error(selectStatus);
 
   action.logger.debug('Running XML pipeline');
-  return pipe.run(context);
-};
-
-module.exports.pipe = xmlpipe;
+  return pipeline.run(context);
+}

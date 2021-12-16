@@ -9,17 +9,25 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { selectAll } = require('unist-util-select');
-const remove = require('unist-util-remove');
-const visit = require('unist-util-visit-parents');
-const {
-  deepclone, trySlidingWindow, map, list, reject, contains, is, pipe, setdefault,
-} = require('ferrum');
-const removePosition = require('unist-util-remove-position');
-const dotprop = require('dot-prop');
-const nodePath = require('path');
-const URI = require('uri-js');
-const { merge } = require('../utils/cache-helper');
+import { selectAll } from 'unist-util-select';
+import { remove } from 'unist-util-remove';
+import { visitParents } from 'unist-util-visit-parents';
+import URI from 'uri-js';
+import nodePath from 'path';
+import dotprop from 'dot-prop';
+import { removePosition } from 'unist-util-remove-position';
+import {
+  contains,
+  deepclone,
+  is,
+  list,
+  map,
+  pipe,
+  reject,
+  setdefault,
+  trySlidingWindow,
+} from 'ferrum';
+import { merge } from '../utils/cache-helper.js';
 
 const pattern = /{{([^{}]+)}}/g;
 /**
@@ -51,7 +59,7 @@ async function pmap(tree, iteratee) {
  * @param {*} handlefn a callback function to handle the placeholder
  */
 function findPlaceholders(section, handlefn) {
-  visit(section, (node, ancestors) => {
+  visitParents(section, (node, ancestors) => {
     if (node.value && pattern.test(node.value)) {
       handlefn(node, 'value', ancestors);
     }
@@ -82,7 +90,7 @@ function hasPlaceholders(section) {
   }
 }
 
-function paginate(limit, page = 1) {
+export function paginate(limit, page = 1) {
   const upper = limit * page;
   const lower = limit * (page - 1);
   return (_, index) => !limit || (upper > index && lower <= index);
@@ -172,7 +180,7 @@ function normalizeLists(section) {
   );
 }
 
-async function fillDataSections(context, {
+export default async function fillDataSections(context, {
   downloader,
   logger,
   secrets: { EMBED_SELECTOR },
@@ -249,6 +257,3 @@ async function fillDataSections(context, {
 
   remove(mdast, 'dataEmbed');
 }
-
-module.exports = fillDataSections;
-module.exports.testable = { paginate };

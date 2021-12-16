@@ -9,11 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import { setdefault } from 'ferrum';
+import isProduction from '../utils/is-production.js';
 
-const { setdefault } = require('ferrum');
-const isProduction = require('../utils/is-production');
-
-function setStatus(context, { logger, request = {} }) {
+export default function setStatus(context, { logger, request = {} }) {
   const res = setdefault(context, 'response', {});
   const headers = setdefault(res, 'headers', {});
   const err = context.error;
@@ -37,5 +36,3 @@ function setStatus(context, { logger, request = {} }) {
     headers['Content-Type'] = 'application/xml';
   }
 }
-
-module.exports = setStatus;

@@ -9,11 +9,11 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { select, selectAll } = require('unist-util-select');
-const plain = require('mdast-util-to-string');
-const {
-  flat, obj, map, each,
-} = require('ferrum');
+import { select, selectAll } from 'unist-util-select';
+import { toString as plain } from 'mdast-util-to-string';
+import {
+  each, flat, map, obj,
+} from 'ferrum';
 
 function yaml(section) {
   const yamls = selectAll('yaml', section);
@@ -145,7 +145,7 @@ function fallback(section) {
   }
 }
 
-function getmetadata({ content }, { logger }) {
+export default function getmetadata({ content }, { logger }) {
   const { mdast: { children = [] } } = content;
   let sections = children.filter((node) => node.type === 'section');
   if (!sections.length) {
@@ -166,5 +166,3 @@ function getmetadata({ content }, { logger }) {
   content.intro = sections[0].intro;
   content.image = img ? img.image : undefined;
 }
-
-module.exports = getmetadata;

@@ -9,10 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { inspect } = require('util');
-const URI = require('uri-js');
-const { setdefault } = require('ferrum');
-const fetchAPI = require('@adobe/helix-fetch');
+import { inspect } from 'util';
+import URI from 'uri-js';
+import { setdefault } from 'ferrum';
+import { context as fetchContext, h1, Response } from '@adobe/helix-fetch';
 
 const DEFAULT_FORWARD_HEADERS = [
   'x-request-id',
@@ -21,7 +21,7 @@ const DEFAULT_FORWARD_HEADERS = [
   'x-ow-version-lock',
 ];
 
-class Downloader {
+export default class Downloader {
   constructor(context, action, options = {}) {
     this._context = context;
     this._action = action;
@@ -33,13 +33,14 @@ class Downloader {
       logger.warn('No HTTP timeout set, risk of denial-of-service');
     }
     if (options.forceHttp1 || process.env.HELIX_PIPELINE_FORCE_HTTP1) {
-      this._fetchContext = fetchAPI.context({
+      this._fetchContext = h1({
         userAgent: 'helix-fetch', // static user-agent for recorded tests
-        alpnProtocols: [fetchAPI.ALPN_HTTP1_1],
       });
     } else {
       /* istanbul ignore next */
-      this._fetchContext = fetchAPI;
+      this._fetchContext = fetchContext({
+        userAgent: 'helix-fetch', // static user-agent for recorded tests
+      });
     }
     this._client = this._fetchContext.fetch;
   }
@@ -168,7 +169,7 @@ class Downloader {
         if (!opts.errorOn404) {
           logger.info(`Could not find file at ${uri}`);
           // res.body = 'not found';
-          return new fetchAPI.Response('not found', { status: res.status, headers: res.headers });
+          return new Response('not found', { status: res.status, headers: res.headers });
         }
         logger.info(`Could not find file at ${uri}`);
         setdefault(context, 'response', {}).status = 404;
@@ -278,5 +279,3 @@ class Downloader {
     this._fetchContext.reset();
   }
 }
-
-module.exports = Downloader;

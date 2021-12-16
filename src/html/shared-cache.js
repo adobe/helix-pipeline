@@ -9,14 +9,13 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import { foldl, pairs, setdefault } from 'ferrum';
 
-const { setdefault, pairs, foldl } = require('ferrum');
-
-function uncached({ response }) {
+export function uncached({ response }) {
   return !(response && response.headers && response.headers['Cache-Control']);
 }
 
-function cache(context) {
+export function cache(context) {
   const res = setdefault(context, 'response', {});
   const headers = setdefault(res, 'headers', {});
   const directives = {
@@ -30,5 +29,3 @@ function cache(context) {
     (a, [key, value]) => `${a + (a ? ', ' : '') + key}=${value}`,
   );
 }
-
-module.exports = { uncached, cache };

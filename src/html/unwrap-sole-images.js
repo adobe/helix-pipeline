@@ -9,14 +9,14 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const map = require('unist-util-map');
+import { map } from 'unist-util-map';
 
 /**
  * Unwraps hero images to avoid the unnecessary paragraph.
  *
  * @param {object} request The content request
  */
-function unwrap({ content }) {
+export default function unwrap({ content }) {
   let sections = content.mdast.children.filter((node) => node.type === 'section');
   if (!sections.length) {
     sections = [content.mdast];
@@ -36,5 +36,3 @@ function unwrap({ content }) {
     });
   });
 }
-
-module.exports = unwrap;

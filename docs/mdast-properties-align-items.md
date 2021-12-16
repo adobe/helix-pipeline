@@ -23,4 +23,5 @@ https://ns.adobe.com/helix/pipeline/mdast#/properties/align/items
 | `"left"`   |             |
 | `"right"`  |             |
 | `"center"` |             |
+| `"none"`   |             |
 | `null`     |             |

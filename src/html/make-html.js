@@ -9,13 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-function html({ content }, { logger, transformer }) {
+export default function html({ content }, { logger, transformer }) {
   const { mdast } = content;
   logger.debug(`Turning Markdown into HTML from ${typeof mdast}`);
   content.document = transformer
     .withMdast(mdast)
     .getDocument();
 }
-
-module.exports = html;

@@ -26,7 +26,7 @@ function delta(t0, t1) {
  * Creates a timing object that records the timestamps using process.hrtime() and can set the
  * 'Server-Timing' response header accordingly.
  */
-function create() {
+export default function create() {
   const startTime = process.hrtime();
   const times = [];
 
@@ -69,5 +69,3 @@ function create() {
     report,
   };
 }
-
-module.exports = create;

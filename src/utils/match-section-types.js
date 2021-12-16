@@ -10,13 +10,14 @@
  * governing permissions and limitations under the License.
  */
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
-const { match } = require('./pattern-compiler');
+import { match } from './pattern-compiler.js';
+
 /**
  * This utility class allows the registration of type matchers. Type matchers
  * are either content-expressions like `header? (image|paragraph)+` or predicate
  * functions that operate on a list of child node types.
  */
-class TypeMatcher {
+export default class TypeMatcher {
   /**
    * Creates a new type matcher for an MDAST node or list of MDAST nodes
    * @param {(Node|Node[])} section the section node or list of section nodes to evaluate
@@ -106,5 +107,3 @@ class TypeMatcher {
     return mapped;
   }
 }
-
-module.exports = TypeMatcher;

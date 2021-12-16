@@ -9,41 +9,41 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { Pipeline } = require('../../index.js');
-const { log } = require('./default.js');
+import { Pipeline } from '../../index.js';
+import { log } from './default.js';
 
-const fetch = require('../html/fetch-markdown.js');
-const fetchContent = require('../html/fetch-content.js');
-const fetchMarkupConfig = require('../html/fetch-markupconfig.js');
-const parse = require('../html/parse-markdown.js');
-const rewriteBlobImages = require('../html/rewrite-blob-images');
-const rewriteIcons = require('../html/rewrite-icons.js');
-const meta = require('../html/get-metadata.js');
-const html = require('../html/make-html.js');
-const type = require('../utils/set-content-type.js');
-const selectStatus = require('../html/set-status.js');
-const smartypants = require('../html/smartypants');
-const sections = require('../html/split-sections');
-const { selectstrain, selecttest } = require('../utils/conditional-sections');
-const debug = require('../html/output-debug.js');
-const { esi, flag } = require('../html/flag-esi');
-const key = require('../html/set-surrogate-key');
-const lastModified = require('../html/set-last-modified');
-const production = require('../utils/is-production');
-const dump = require('../utils/dump-context.js');
-const validate = require('../utils/validate');
-const { cache, uncached } = require('../html/shared-cache');
-const embeds = require('../html/find-embeds');
-const unwrapSoleImages = require('../html/unwrap-sole-images');
-const rewriteLinks = require('../html/static-asset-links');
-const tovdom = require('../html/html-to-vdom');
-const tohtml = require('../html/stringify-response');
-const timing = require('../utils/timing');
-const sanitize = require('../html/sanitize');
-const removeHlxProps = require('../html/removeHlxProps');
-const dataEmbeds = require('../html/fetch-data');
-const dataSections = require('../html/data-sections');
-const { adjustMDAST, adjustHTML } = require('../utils/adjust-markup');
+import fetch from '../html/fetch-markdown.js';
+import fetchContent from '../html/fetch-content.js';
+import fetchMarkupConfig from '../html/fetch-markupconfig.js';
+import parse from '../html/parse-markdown.js';
+import rewriteBlobImages from '../html/rewrite-blob-images.js';
+import rewriteIcons from '../html/rewrite-icons.js';
+import meta from '../html/get-metadata.js';
+import html from '../html/make-html.js';
+import type from '../utils/set-content-type.js';
+import selectStatus from '../html/set-status.js';
+import smartypants from '../html/smartypants.js';
+import sections from '../html/split-sections.js';
+import { selectstrain, selecttest } from '../utils/conditional-sections.js';
+import debug from '../html/output-debug.js';
+import { esi, flag } from '../html/flag-esi.js';
+import { adjustHTML, adjustMDAST } from '../utils/adjust-markup.js';
+import dataSections from '../html/data-sections.js';
+import dataEmbeds from '../html/fetch-data.js';
+import removeHlxProps from '../html/removeHlxProps.js';
+import sanitize from '../html/sanitize.js';
+import timing from '../utils/timing.js';
+import tohtml from '../html/stringify-response.js';
+import tovdom from '../html/html-to-vdom.js';
+import rewriteLinks from '../html/static-asset-links.js';
+import unwrapSoleImages from '../html/unwrap-sole-images.js';
+import embeds from '../html/find-embeds.js';
+import { cache, uncached } from '../html/shared-cache.js';
+import validate from '../utils/validate.js';
+import { record, report } from '../utils/dump-context.js';
+import production from '../utils/is-production.js';
+import lastModified from '../html/set-last-modified.js';
+import key from '../html/set-surrogate-key.js';
 
 /* eslint newline-per-chained-call: off */
 
@@ -55,13 +55,13 @@ function paranoid(context, action) {
   return action && action.secrets && !!action.secrets.SANITIZE_DOM;
 }
 
-const htmlpipe = (cont, context, action) => {
+export function pipe(cont, context, action) {
   action.logger = action.logger || log;
   action.logger.debug('Constructing HTML Pipeline');
-  const pipe = new Pipeline(action);
+  const pipeline = new Pipeline(action);
   const timer = timing();
-  pipe
-    .every(dump.record)
+  pipeline
+    .every(record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
     .use(fetchMarkupConfig)
@@ -95,11 +95,9 @@ const htmlpipe = (cont, context, action) => {
     .use(flag).expose('esi').when(esi) // flag ESI when there is ESI in the response
     .use(debug)
     .use(timer.report)
-    .error(dump.report)
+    .error(report)
     .error(selectStatus);
 
   action.logger.debug('Running HTML pipeline');
-  return pipe.run(context);
-};
-
-module.exports.pipe = htmlpipe;
+  return pipeline.run(context);
+}

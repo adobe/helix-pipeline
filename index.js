@@ -10,10 +10,13 @@
  * governing permissions and limitations under the License.
  */
 
-const defaults = require('./src/defaults/default.js');
-const Pipeline = require('./src/pipeline.js');
-const UniversalAction = require('./src/universal.js');
-const utils = require('./src/utils');
+import { pipe, pre, log } from './src/defaults/default.js';
+
+import vdom from './src/utils/mdast-to-vdom.js';
+import types from './src/utils/match-section-types.js';
+
+export { default as Pipeline } from './src/pipeline.js';
+export { default as UniversalAction } from './src/universal.js';
 
 /**
  * @module pipeline
@@ -21,9 +24,13 @@ const utils = require('./src/utils');
  * @typedef {import("./src/context").Context} Context
  */
 
-module.exports = {
-  Pipeline,
-  defaults,
-  utils,
-  UniversalAction,
+export const utils = {
+  vdom,
+  types,
+};
+
+export const defaults = {
+  pipe,
+  pre,
+  log,
 };

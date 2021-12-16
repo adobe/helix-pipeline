@@ -9,22 +9,21 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { Pipeline } = require('../../index.js');
-const { log } = require('./default.js');
-
-const fetch = require('../html/fetch-markdown.js');
-const fetchContent = require('../html/fetch-content.js');
-const parse = require('../html/parse-markdown.js');
-const meta = require('../html/get-metadata.js');
-const type = require('../utils/set-content-type.js');
-const smartypants = require('../html/smartypants.js');
-const sections = require('../html/split-sections.js');
-const production = require('../utils/is-production.js');
-const dump = require('../utils/dump-context.js');
-const validate = require('../utils/validate.js');
-const emit = require('../json/emit-json.js');
-const { selectStatus } = require('../json/set-json-status.js');
-const timing = require('../utils/timing');
+import { Pipeline } from '../../index.js';
+import timing from '../utils/timing.js';
+import { selectStatus } from '../json/set-json-status.js';
+import emit from '../json/emit-json.js';
+import validate from '../utils/validate.js';
+import { record, report } from '../utils/dump-context.js';
+import production from '../utils/is-production.js';
+import sections from '../html/split-sections.js';
+import smartypants from '../html/smartypants.js';
+import type from '../utils/set-content-type.js';
+import meta from '../html/get-metadata.js';
+import parse from '../html/parse-markdown.js';
+import fetchContent from '../html/fetch-content.js';
+import fetch from '../html/fetch-markdown.js';
+import { log } from './default.js';
 
 /* eslint newline-per-chained-call: off */
 
@@ -32,13 +31,13 @@ function hasNoContent({ content }) {
   return !(content !== undefined && content.body !== undefined);
 }
 
-const jsonpipe = (cont, context, action) => {
+export function pipe(cont, context, action) {
   action.logger = action.logger || log;
   action.logger.debug('Constructing JSON Pipeline');
-  const pipe = new Pipeline(action);
+  const pipeline = new Pipeline(action);
   const timer = timing();
-  pipe
-    .every(dump.record)
+  pipeline
+    .every(record)
     .every(validate).when((ctx) => !production() && !ctx.error)
     .every(timer.update)
     .use(fetchContent).expose('content').when(hasNoContent)
@@ -51,11 +50,9 @@ const jsonpipe = (cont, context, action) => {
     .use(emit).expose('json')
     .use(type('application/json'))
     .use(timer.report)
-    .error(dump.report)
+    .error(report)
     .error(selectStatus(production()));
 
   action.logger.debug('Running JSON pipeline');
-  return pipe.run(context);
-};
-
-module.exports.pipe = jsonpipe;
+  return pipeline.run(context);
+}

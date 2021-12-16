@@ -4,3 +4,4 @@ logs/pipeline.log
 .nyc_output
 logs/debug
 coverage
+junit/

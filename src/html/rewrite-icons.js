@@ -80,10 +80,8 @@ function rewriteIcons(document) {
   }
 }
 
-function rewrite({ content }) {
+export default function rewrite({ content }) {
   if (content.document) {
     rewriteIcons(content.document);
   }
 }
-
-module.exports = rewrite;

@@ -13,9 +13,9 @@
  * Handles `embed` MDAST nodes by converting them into `<esi:include>` tags
  * @param {string} EMBED_SERVICE the URL of an embedding service compatible with https://github.com/adobe/helix-embed that returns HTML
  */
-const URI = require('uri-js');
+import URI from 'uri-js';
 
-function embed({ EMBED_SERVICE } = {}) {
+export default function embed({ EMBED_SERVICE } = {}) {
   return function handler(h, node, _, handlechild) {
     const { url } = node;
     let src = url;
@@ -37,5 +37,3 @@ function embed({ EMBED_SERVICE } = {}) {
     return retval;
   };
 }
-
-module.exports = embed;

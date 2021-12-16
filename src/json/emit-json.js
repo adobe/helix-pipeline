@@ -9,10 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import { setdefault } from 'ferrum';
 
-const { setdefault } = require('ferrum');
-
-function emit(context, { logger }) {
+export default function emit(context, { logger }) {
   const content = setdefault(context, 'content', {});
   const response = setdefault(context, 'response', {});
 
@@ -28,5 +27,3 @@ function emit(context, { logger }) {
   logger.debug(`Emitting JSON from ${typeof content.json}`);
   response.body = JSON.parse(JSON.stringify(content.json));
 }
-
-module.exports = emit;

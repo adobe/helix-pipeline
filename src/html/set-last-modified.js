@@ -9,9 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { setdefault } = require('ferrum');
+import { setdefault } from 'ferrum';
 
-function lastModified(context, { logger }) {
+export default function lastModified(context, { logger }) {
   const content = setdefault(context, 'content', {});
   const res = setdefault(context, 'response', {});
   const headers = setdefault(res, 'headers', {});
@@ -29,5 +29,3 @@ function lastModified(context, { logger }) {
     }
   }
 }
-
-module.exports = lastModified;

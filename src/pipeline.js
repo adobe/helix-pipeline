@@ -11,12 +11,11 @@
  */
 
 /* eslint-disable no-await-in-loop */
-
-const _ = require('lodash/fp');
-const callsites = require('callsites');
-const { enumerate, iter } = require('ferrum');
-const coerce = require('./utils/coerce-secrets');
-const Downloader = require('./utils/Downloader.js');
+import _ from 'lodash/fp.js';
+import callsites from 'callsites';
+import { enumerate, iter } from 'ferrum';
+import coerce from './utils/coerce-secrets.js';
+import Downloader from './utils/Downloader.js';
 
 const noOp = () => {};
 const nopLogger = {
@@ -73,7 +72,7 @@ function errorWrapper(fn) {
  * Using `when` and `unless` allows to conditionally execute the previously defined function.
  * @class
  */
-class Pipeline {
+export default class Pipeline {
   /**
    * Creates a new pipeline.
    * @param {Action} action Action properties that are available to all pipeline functions.
@@ -412,5 +411,3 @@ class Pipeline {
     return context;
   }
 }
-
-module.exports = Pipeline;

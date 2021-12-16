@@ -11,18 +11,24 @@
  */
 
 /* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
-const { selectAll } = require('unist-util-select');
-const defaultHandlers = require('mdast-util-to-hast/lib/handlers');
-const mdast2hast = require('mdast-util-to-hast');
-const hast2html = require('hast-util-to-html');
-const { JSDOM } = require('jsdom');
-const toDOM = require('./hast-util-to-dom');
-const HeadingHandler = require('./heading-handler');
-const embed = require('./embed-handler');
-const link = require('./link-handler');
-const icon = require('./icon-handler');
-const section = require('./section-handler');
-const types = require('../schemas/mdast.schema.json').properties.type.enum;
+import { createRequire } from 'module';
+import { selectAll } from 'unist-util-select';
+import { toHast as mdast2hast, defaultHandlers } from 'mdast-util-to-hast';
+import { toHtml as hast2html } from 'hast-util-to-html';
+import { JSDOM } from 'jsdom';
+
+import toDOM from './hast-util-to-dom.js';
+import HeadingHandler from './heading-handler.js';
+import embed from './embed-handler.js';
+import link from './link-handler.js';
+import table from './table-handler.js';
+import icon from './icon-handler.js';
+import section from './section-handler.js';
+
+const require = createRequire(import.meta.url);
+const { properties } = require('../schemas/mdast.schema.json');
+
+const types = properties.type.enum;
 
 /**
  * @typedef {function(parent, tagName, attributes, children)} handlerFunction
@@ -36,7 +42,7 @@ const types = require('../schemas/mdast.schema.json').properties.type.enum;
  * Utility class that transforms an MDAST (Markdown) node into a (virtual) DOM
  * representation of the same content.
  */
-class VDOMTransformer {
+export default class VDOMTransformer {
   /**
    * Initializes the transformer with a Markdown document or fragment of a document
    * @param {Node} mdast the markdown AST node to start the transformation from.
@@ -65,12 +71,13 @@ class VDOMTransformer {
   withOptions(options = {}) {
     this._options = Object.assign(this._options, options);
 
-    this._headingHandler = new HeadingHandler(this._options);
+    this._headingHandler = new HeadingHandler();
     this.match('heading', this._headingHandler.handler());
     this.match('embed', embed(this._options));
     this.match('link', link(this._options));
-    this.match('icon', icon(this._options));
-    this.match('section', section(this._options));
+    this.match('icon', icon());
+    this.match('table', table());
+    this.match('section', section());
     this.match('html', (h, node) => {
       if (node.value.startsWith('<!--')) {
         return h.augment(node, {
@@ -326,5 +333,3 @@ class VDOMTransformer {
     return doc;
   }
 }
-
-module.exports = VDOMTransformer;

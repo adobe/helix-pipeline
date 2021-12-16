@@ -9,7 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const createDOMPurify = require('dompurify');
+import createDOMPurify from 'dompurify';
 
 const helixSanitizationConfig = {
   // Allowing all ESI tags, see: https://www.w3.org/TR/esi-lang
@@ -60,7 +60,7 @@ function allowCustomAttributes(DOMPurify) {
   });
 }
 
-function sanitize({ content }, { logger }) {
+export default function sanitize({ content }, { logger }) {
   logger.debug('Sanitizing content body to avoid XSS injections.');
 
   const { window, body } = content.document;
@@ -70,5 +70,3 @@ function sanitize({ content }, { logger }) {
   const sanitizedBody = DOMPurify.sanitize(body, helixSanitizationConfig);
   content.document.body = sanitizedBody;
 }
-
-module.exports = sanitize;

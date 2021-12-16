@@ -9,9 +9,9 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const DEBUG_TEMPLATE = '<script>console.group(\'context\');console.log(CONTEXT_JSON);console.groupEnd();</script>';
+export const DEBUG_TEMPLATE = '<script>console.group(\'context\');console.log(CONTEXT_JSON);console.groupEnd();</script>';
 
-function debug(context, { logger }) {
+export default function debug(context, { logger }) {
   const isDebug = context.request && context.request.params && (context.request.params.debug === true || context.request.params.debug === 'true');
   const hasBody = context.response && context.response.body;
 
@@ -31,5 +31,3 @@ function debug(context, { logger }) {
   // inject debug script before the closing body tag
   context.response.body = body.replace(/<\/body>/i, `${debugScript}</body>`);
 }
-module.exports = debug;
-module.exports.DEBUG_TEMPLATE = DEBUG_TEMPLATE;

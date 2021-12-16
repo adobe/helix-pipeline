@@ -9,11 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-const path = require('path');
-const fs = require('fs-extra');
-const { setdefault } = require('ferrum');
-const isProduction = require('./is-production.js');
+import path from 'path';
+import fs from 'fs-extra';
+import { setdefault } from 'ferrum';
+import isProduction from './is-production.js';
 
 /**
  * Returns {@code true} if context dumps should never be written to disk.
@@ -89,7 +88,7 @@ async function writeDump(context, action, info) {
  * @param {number} index The index of the current pipeline step
  * @param {string} name The name of the current pipeline step
  */
-async function record(context, action, index, name) {
+export async function record(context, action, index, name) {
   const debug = setdefault(action, 'debug', { contextDumps: [] });
   const info = {
     index,
@@ -110,15 +109,10 @@ async function record(context, action, index, name) {
  * @param {*} context Pipeline context
  * @param {*} action Pipeline action
  */
-async function report(context, action) {
+export async function report(context, action) {
   if (action.logger.level === 'silly' || disableDisk()) {
     return;
   }
   await ensureDumpDir(context, action);
   await Promise.all(action.debug.contextDumps.map((info) => writeDump(context, action, info)));
 }
-
-module.exports = {
-  record,
-  report,
-};

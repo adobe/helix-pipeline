@@ -9,8 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const { SimpleInterface, ConsoleLogger } = require('@adobe/helix-log');
-const Pipeline = require('../pipeline.js');
+import { ConsoleLogger, SimpleInterface } from '@adobe/helix-log';
+import Pipeline from '../pipeline.js';
 
 /**
  * Constructs a pipeline function that is capable of
@@ -21,7 +21,7 @@ const Pipeline = require('../pipeline.js');
  * @param {Object} action the action
  * @returns {Function} a function to execute.
  */
-function pipe(next, context, action) {
+export function pipe(next, context, action) {
   const mypipeline = new Pipeline(action);
   mypipeline.use(next);
   return mypipeline.run(context);
@@ -32,19 +32,12 @@ function pipe(next, context, action) {
  * @param {Function} cont the continuation function
  * @returns {Function} the wrapped main function
  */
-const pre = (cont) => cont;
+export const pre = (cont) => cont;
 
-const log = new SimpleInterface({
+export const log = new SimpleInterface({
   level: 'debug',
   logger: new ConsoleLogger(),
 });
+
 // keep backward compatible with winston logger
 log.log = (level, ...msg) => log._logImpl(level, ...msg, {});
-
-const defaults = {
-  pipe,
-  pre,
-  log,
-};
-
-module.exports = defaults;

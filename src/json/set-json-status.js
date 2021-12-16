@@ -9,8 +9,7 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-
-const { setdefault } = require('ferrum');
+import { setdefault } from 'ferrum';
 
 function setVerboseError(error) {
   const res = {
@@ -28,7 +27,7 @@ function setVerboseError(error) {
   return res;
 }
 
-function selectStatus(prod) {
+export function selectStatus(prod) {
   return ({ response = {}, error }, { logger, request = {} }) => {
     // if a status is already default, keep it.
     if (response.status) {
@@ -55,9 +54,6 @@ function selectStatus(prod) {
   };
 }
 
-function setStatus({ response = {}, error }, { logger }) {
+export default function setStatus({ response = {}, error }, { logger }) {
   return selectStatus(false)({ response, error }, { logger });
 }
-
-module.exports = setStatus;
-module.exports.selectStatus = selectStatus;

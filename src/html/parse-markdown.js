@@ -9,34 +9,36 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const unified = require('unified');
-const remark = require('remark-parse');
-const gfm = require('remark-gfm');
-const visit = require('unist-util-visit');
-const { setdefault } = require('ferrum');
-const { remarkMatter } = require('@adobe/helix-markdown-support');
-const { numericLogLevel } = require('@adobe/helix-log');
-const VDOMTransformer = require('../utils/mdast-to-vdom');
+import { unified } from 'unified';
+import remark from 'remark-parse';
+import { visit } from 'unist-util-visit';
+import { setdefault } from 'ferrum';
+import { remarkMatter } from '@adobe/helix-markdown-support';
+import { numericLogLevel } from '@adobe/helix-log';
+import VDOMTransformer from '../utils/mdast-to-vdom.js';
+// eslint-disable-next-line import/no-named-as-default
+import gfm from '../utils/remark-gfm-nolink.js';
+import autolink from '../utils/mdast-gfm-autolinks.js';
 
-class FrontmatterParsingError extends Error {
+export class FrontmatterParsingError extends Error {
 }
 
-function removePositions(tree) {
+export function removePositions(tree) {
   visit(tree, (node) => {
-    // eslint-disable-next-line no-param-reassign
     delete node.position;
-    return visit.CONTINUE;
   });
   return tree;
 }
 
-function parseMarkdown(context, action) {
+export default function parseMarkdown(context, action) {
   const { logger } = action;
   const content = setdefault(context, 'content', {});
   const body = setdefault(content, 'body', '');
 
   const request = setdefault(context, 'request', {});
-  if (!request.extension) request.extension = 'html';
+  if (!request.extension) {
+    request.extension = 'html';
+  }
   const { extension } = request;
 
   // convert linebreaks
@@ -58,10 +60,10 @@ function parseMarkdown(context, action) {
     removePositions(content.mdast);
   }
 
+  // apply our own logic for GFM autolinks due to backward compatibility issues
+  autolink(content.mdast);
+
   // initialize transformer
   action.transformer = new VDOMTransformer()
     .withOptions({ extension, ...action.secrets });
 }
-
-module.exports = parseMarkdown;
-module.exports.FrontmatterParsingError = FrontmatterParsingError;

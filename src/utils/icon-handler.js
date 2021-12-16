@@ -16,7 +16,7 @@
  * `<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-smile"><use href="/icons.svg#smile"></use></svg>`
  * @param {string} id the identifier of the icon
  */
-function icon() {
+export default function icon() {
   return function handler(h, node) {
     let { value } = node;
     value = encodeURIComponent(value);
@@ -38,5 +38,3 @@ function icon() {
     }
   };
 }
-
-module.exports = icon;

@@ -12,7 +12,7 @@
 /**
  * Returns true when run inside an OpenWhisk action or Lambda Function, false otherwise.
  */
-function production() {
+export default function production() {
   try {
     // eslint-disable-next-line no-underscore-dangle
     return Boolean(process.env.__OW_ACTIVATION_ID) || Boolean(process.env.AWS_LAMBDA_FUNCTION_NAME);
@@ -21,5 +21,3 @@ function production() {
     return true;
   }
 }
-
-module.exports = production;

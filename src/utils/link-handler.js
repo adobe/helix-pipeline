@@ -9,11 +9,10 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
+import { link as fallback } from 'mdast-util-to-hast/lib/handlers/link.js';
+import uri from 'uri-js';
 
-const fallback = require('mdast-util-to-hast/lib/handlers/link');
-const uri = require('uri-js');
-
-function link({ extension = 'html' } = {}) {
+export default function link({ extension = 'html' } = {}) {
   return function handler(h, node) {
     const n = { ...node };
     const uriParts = uri.parse(n.url);
@@ -24,5 +23,3 @@ function link({ extension = 'html' } = {}) {
     return fallback(h, n);
   };
 }
-
-module.exports = link;

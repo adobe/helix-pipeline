@@ -9,8 +9,8 @@
  * OF ANY KIND, either express or implied. See the License for the specific language
  * governing permissions and limitations under the License.
  */
-const all = require('mdast-util-to-hast/lib/all');
-const wrap = require('mdast-util-to-hast/lib/wrap');
+import { all } from 'mdast-util-to-hast';
+import { wrap } from 'mdast-util-to-hast/lib/wrap.js';
 
 const HELIX_NAMESPACE = 'hlx-';
 const DEFAULT_SECTION_TAG = 'div';
@@ -55,7 +55,7 @@ function getAttributes(section) {
     }, attributes);
 }
 
-function sectionHandler() {
+export default function sectionHandler() {
   return function handler(h, node) {
     const n = { ...node };
 
@@ -67,5 +67,3 @@ function sectionHandler() {
     return h(node, tagName, props, children);
   };
 }
-
-module.exports = sectionHandler;
