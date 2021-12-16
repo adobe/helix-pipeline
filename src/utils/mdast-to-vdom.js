@@ -71,13 +71,13 @@ export default class VDOMTransformer {
   withOptions(options = {}) {
     this._options = Object.assign(this._options, options);
 
-    this._headingHandler = new HeadingHandler(this._options);
+    this._headingHandler = new HeadingHandler();
     this.match('heading', this._headingHandler.handler());
     this.match('embed', embed(this._options));
     this.match('link', link(this._options));
-    this.match('icon', icon(this._options));
-    this.match('table', table(this._options));
-    this.match('section', section(this._options));
+    this.match('icon', icon());
+    this.match('table', table());
+    this.match('section', section());
     this.match('html', (h, node) => {
       if (node.value.startsWith('<!--')) {
         return h.augment(node, {
