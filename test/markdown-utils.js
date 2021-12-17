@@ -14,7 +14,7 @@ import path from 'path';
 import assert from 'assert';
 import fs from 'fs-extra';
 import { removePosition } from 'unist-util-remove-position';
-import validate from '../src/utils/validate.js';
+import validate from '../src/html/validate.js';
 
 function cleanUp(json) {
   if (json) {

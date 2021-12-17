@@ -15,7 +15,7 @@ import assert from 'assert';
 import { logging } from '@adobe/helix-testutils';
 import { visit } from 'unist-util-visit';
 import { setdefault } from 'ferrum';
-import { selectstrain, testgroups, pick } from '../src/utils/conditional-sections.js';
+import { selectstrain, testgroups, pick } from '../src/html/conditional-sections.js';
 import { pipe, setupPolly } from './utils.js';
 
 const logger = logging.createTestLogger({

@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 import { logging } from '@adobe/helix-testutils';
-import coerce from '../src/utils/coerce-secrets.js';
+import coerce from '../src/html/coerce-secrets.js';
 import Downloader from '../src/utils/Downloader.js';
 import fetch from '../src/html/fetch-markdown.js';
 import { setupPolly } from './utils.js';

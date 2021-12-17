@@ -13,7 +13,7 @@
 
 import assert from 'assert';
 import { logging } from '@adobe/helix-testutils';
-import coerce from '../src/utils/coerce-secrets.js';
+import coerce from '../src/html/coerce-secrets.js';
 
 const logger = logging.createTestLogger({
   // tune this for debugging

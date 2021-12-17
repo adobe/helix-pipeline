@@ -14,7 +14,7 @@
 import _ from 'lodash/fp.js';
 import callsites from 'callsites';
 import { enumerate, iter } from 'ferrum';
-import coerce from './utils/coerce-secrets.js';
+import coerce from './html/coerce-secrets.js';
 import Downloader from './utils/Downloader.js';
 
 const noOp = () => {};

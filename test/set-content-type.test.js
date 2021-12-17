@@ -12,7 +12,7 @@
 /* eslint-env mocha */
 import assert from 'assert';
 import { logging } from '@adobe/helix-testutils';
-import type from '../src/utils/set-content-type.js';
+import type from '../src/html/set-content-type.js';
 
 const logger = logging.createTestLogger({
   // tune this for debugging

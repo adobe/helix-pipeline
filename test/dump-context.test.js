@@ -13,7 +13,7 @@
 import fs from 'fs-extra';
 import assert from 'assert';
 import { logging } from '@adobe/helix-testutils';
-import { record, report } from '../src/utils/dump-context.js';
+import { record, report } from '../src/html/dump-context.js';
 
 describe('Test Temp Context Dumper', () => {
   it('Writes context dump on loglevel silly', async () => {

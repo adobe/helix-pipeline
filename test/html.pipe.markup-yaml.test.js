@@ -15,7 +15,7 @@ import { logging } from '@adobe/helix-testutils';
 import nock from 'nock';
 import { pipe } from '../src/defaults/html.pipe.js';
 import { resolver } from './utils.js';
-import coerce from '../src/utils/coerce-secrets.js';
+import coerce from '../src/html/coerce-secrets.js';
 import Downloader from '../src/utils/Downloader.js';
 
 const TEST_MARKUP_CONFIG_URL = `
