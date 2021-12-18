@@ -15,7 +15,7 @@ import assert from 'assert';
 import { u } from 'unist-builder';
 import { inspect } from 'unist-util-inspect';
 import { assertMatch, assertValid } from './markdown-utils.js';
-import coerce from '../src/utils/coerce-secrets.js';
+import coerce from '../src/html/coerce-secrets.js';
 
 import parse from '../src/html/parse-markdown.js';
 import {

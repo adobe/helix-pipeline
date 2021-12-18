@@ -22,7 +22,7 @@ import { JSDOM } from 'jsdom';
 import { unified } from 'unified';
 import parser from 'remark-parse';
 import { utils } from '../index.js';
-import coerce from '../src/utils/coerce-secrets.js';
+import coerce from '../src/html/coerce-secrets.js';
 
 const VDOM = utils.vdom;
 const logger = logging.createTestLogger({

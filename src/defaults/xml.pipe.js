@@ -23,9 +23,9 @@ import timing from '../utils/timing.js';
 import check from '../xml/check-xml.js';
 import selectStatus from '../xml/set-xml-status.js';
 import emit from '../xml/emit-xml.js';
-import type from '../utils/set-content-type.js';
-import validate from '../utils/validate.js';
-import { record, report } from '../utils/dump-context.js';
+import type from '../html/set-content-type.js';
+import validate from '../html/validate.js';
+import { record, report } from '../html/dump-context.js';
 import production from '../utils/is-production.js';
 import key from '../html/set-surrogate-key.js';
 

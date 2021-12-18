@@ -1,5 +1,5 @@
 /*
- * Copyright 2019 Adobe. All rights reserved.
+ * Copyright 2021 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License. You may obtain a copy
  * of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -17,9 +17,9 @@ import { match as matchUrlBuilder } from 'path-to-regexp';
 import { MarkupConfig } from '@adobe/helix-shared-config';
 import { visit } from 'unist-util-visit';
 import { get } from 'dot-prop';
-import { match } from './pattern-compiler.js';
-import section from './section-handler.js';
-import VDOMTransformer from './mdast-to-vdom.js';
+import { match } from '../utils/pattern-compiler.js';
+import section from '../utils/section-handler.js';
+import VDOMTransformer from '../utils/mdast-to-vdom.js';
 
 /** Placeholder variable for the generate template. */
 const PLACEHOLDER_TEMPLATE = /\$\{\d+\}/g;

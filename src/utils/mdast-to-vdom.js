@@ -10,8 +10,6 @@
  * governing permissions and limitations under the License.
  */
 
-/* eslint no-unused-vars: ["error", { "argsIgnorePattern": "^_" }] */
-import { createRequire } from 'module';
 import { selectAll } from 'unist-util-select';
 import { toHast as mdast2hast, defaultHandlers } from 'mdast-util-to-hast';
 import { toHtml as hast2html } from 'hast-util-to-html';
@@ -24,11 +22,9 @@ import link from './link-handler.js';
 import table from './table-handler.js';
 import icon from './icon-handler.js';
 import section from './section-handler.js';
+import mdastSchema from '../schemas/mdast.schema.cjs';
 
-const require = createRequire(import.meta.url);
-const { properties } = require('../schemas/mdast.schema.json');
-
-const types = properties.type.enum;
+const types = mdastSchema.properties.type.enum;
 
 /**
  * @typedef {function(parent, tagName, attributes, children)} handlerFunction

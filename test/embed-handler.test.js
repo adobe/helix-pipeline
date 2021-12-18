@@ -15,7 +15,7 @@ import { assertEquivalentNode } from '@adobe/helix-shared-dom';
 import { logging } from '@adobe/helix-testutils';
 import { JSDOM } from 'jsdom';
 import { pipe } from '../src/defaults/html.pipe.js';
-import coerce from '../src/utils/coerce-secrets.js';
+import coerce from '../src/html/coerce-secrets.js';
 import embed from '../src/utils/embed-handler.js';
 
 const params = {
