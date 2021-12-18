@@ -1,3 +1,10 @@
+## [16.0.1](https://github.com/adobe/helix-pipeline/compare/v16.0.0...v16.0.1) (2021-12-18)
+
+
+### Bug Fixes
+
+* better schema imports ([#1198](https://github.com/adobe/helix-pipeline/issues/1198)) ([65f2a97](https://github.com/adobe/helix-pipeline/commit/65f2a97ac4f3efe01f580559504836876f2abd0e))
+
 # [16.0.0](https://github.com/adobe/helix-pipeline/compare/v15.0.15...v16.0.0) (2021-12-16)
 
 
