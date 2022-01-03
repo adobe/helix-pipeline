@@ -10,15 +10,15 @@
  * governing permissions and limitations under the License.
  */
 import { link as fallback } from 'mdast-util-to-hast/lib/handlers/link.js';
-import uri from 'uri-js';
+import * as URI from 'uri-js';
 
 export default function link({ extension = 'html' } = {}) {
   return function handler(h, node) {
     const n = { ...node };
-    const uriParts = uri.parse(n.url);
+    const uriParts = URI.parse(n.url);
     if (!uriParts.scheme && uriParts.path) {
       uriParts.path = uriParts.path.replace(/\.md$/, `.${extension}`);
-      n.url = uri.serialize(uriParts, { absolutePath: true });
+      n.url = URI.serialize(uriParts, { absolutePath: true });
     }
     return fallback(h, n);
   };

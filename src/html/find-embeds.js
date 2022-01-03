@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import { visit, SKIP, CONTINUE } from 'unist-util-visit';
-import URI from 'uri-js';
+import * as URI from 'uri-js';
 import mm from 'micromatch';
 import p from 'path';
 

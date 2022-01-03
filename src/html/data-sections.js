@@ -12,7 +12,7 @@
 import { selectAll } from 'unist-util-select';
 import { remove } from 'unist-util-remove';
 import { visitParents } from 'unist-util-visit-parents';
-import URI from 'uri-js';
+import * as URI from 'uri-js';
 import nodePath from 'path';
 import dotprop from 'dot-prop';
 import { removePosition } from 'unist-util-remove-position';

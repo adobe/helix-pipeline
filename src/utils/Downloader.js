@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import { inspect } from 'util';
-import URI from 'uri-js';
+import * as URI from 'uri-js';
 import { setdefault } from 'ferrum';
 import { context as fetchContext, h1, Response } from '@adobe/helix-fetch';
 
