@@ -1,3 +1,10 @@
+## [16.0.3](https://github.com/adobe/helix-pipeline/compare/v16.0.2...v16.0.3) (2022-01-04)
+
+
+### Bug Fixes
+
+* address some issues with ESM bundles and webpack ([39f70c9](https://github.com/adobe/helix-pipeline/commit/39f70c9b8087b274adf24831d7eb593c9195fee5))
+
 ## [16.0.2](https://github.com/adobe/helix-pipeline/compare/v16.0.1...v16.0.2) (2022-01-03)
 
 
