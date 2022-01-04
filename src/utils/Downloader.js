@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import { inspect } from 'util';
-import * as URI from 'uri-js';
+import { parse, serialize } from 'uri-js';
 import { setdefault } from 'ferrum';
 import { context as fetchContext, h1, Response } from '@adobe/helix-fetch';
 
@@ -70,7 +70,7 @@ export default class Downloader {
       return url.href;
     }
 
-    const rootURI = URI.parse(this.githubRootPath);
+    const rootURI = parse(this.githubRootPath);
     const rootPath = rootURI.path;
     // remove double slashes
     const fullPath = `${rootPath}/${owner}/${repo}/${ref}/${path}`.replace(
@@ -78,7 +78,7 @@ export default class Downloader {
       '/',
     );
 
-    return URI.serialize({
+    return serialize({
       scheme: rootURI.scheme,
       host: rootURI.host,
       port: rootURI.port,

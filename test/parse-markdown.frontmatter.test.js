@@ -14,7 +14,6 @@ import assert from 'assert';
 import yaml from 'js-yaml';
 import { multiline } from '@adobe/helix-shared-string';
 import { ConsoleLogger, SimpleInterface } from '@adobe/helix-log';
-import { concat, each, flattenTree } from 'ferrum';
 import { unified } from 'unified';
 import remark from 'remark-parse';
 import gfm from 'remark-gfm';
@@ -44,14 +43,6 @@ const procMd = (md) => {
 const ck = (wat, md, ast) => {
   it(wat, () => {
     const { proc } = procMd(md);
-    // Discard position info
-    const nodes = flattenTree(
-      proc,
-      (node, recurse) => concat([node], recurse(node.children || [])),
-    );
-    each(nodes, (node) => {
-      delete node.position;
-    });
     assert.deepStrictEqual(proc.children, yaml.load(ast));
   });
 };
