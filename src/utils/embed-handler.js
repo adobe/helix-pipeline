@@ -13,14 +13,14 @@
  * Handles `embed` MDAST nodes by converting them into `<esi:include>` tags
  * @param {string} EMBED_SERVICE the URL of an embedding service compatible with https://github.com/adobe/helix-embed that returns HTML
  */
-import URI from 'uri-js';
+import { parse, normalize } from 'uri-js';
 
 export default function embed({ EMBED_SERVICE } = {}) {
   return function handler(h, node, _, handlechild) {
     const { url } = node;
     let src = url;
-    if (URI.parse(url).reference === 'absolute') {
-      src = URI.normalize([EMBED_SERVICE, EMBED_SERVICE.slice(-1) !== '/' ? '/' : '', url].join(''));
+    if (parse(url).reference === 'absolute') {
+      src = normalize([EMBED_SERVICE, EMBED_SERVICE.slice(-1) !== '/' ? '/' : '', url].join(''));
     }
     const props = {
       // prepend the embed service for absolute URLs

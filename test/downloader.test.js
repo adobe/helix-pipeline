@@ -196,7 +196,7 @@ describe('Test input validation', () => {
       secrets: {},
       logger: testLogger,
     });
-    assert.equal(testLogger.getOutput(), 'warn: No HTTP timeout set, risk of denial-of-service\n');
+    assert.strictEqual(testLogger.getOutput(), 'warn: No HTTP timeout set, risk of denial-of-service\n');
   });
 });
 

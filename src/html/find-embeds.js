@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 import { visit, SKIP, CONTINUE } from 'unist-util-visit';
-import URI from 'uri-js';
+import { parse, resolve, serialize } from 'uri-js';
 import mm from 'micromatch';
 import p from 'path';
 
@@ -20,8 +20,8 @@ import p from 'path';
  */
 function gatsbyEmbed(text) {
   const matches = /^[a-z]+: +(http.*)$/.exec(text);
-  if (matches && URI.parse(matches[1]).reference === 'absolute') {
-    return URI.parse(matches[1]);
+  if (matches && parse(matches[1]).reference === 'absolute') {
+    return parse(matches[1]);
   }
   return false;
 }
@@ -30,7 +30,7 @@ export function internalGatsbyEmbed(text, base, contentext, resourceext) {
   const matches = new RegExp(`^(markdown|html|embed): ?(.*(${contentext}|${resourceext}))$`)
     .exec(text);
   if (matches && matches[2]) {
-    const uri = URI.parse(URI.resolve(base, matches[2]));
+    const uri = parse(resolve(base, matches[2]));
     return uri.reference === 'relative' && uri.path ? uri : false;
   }
   return false;
@@ -47,8 +47,8 @@ function iaEmbed({ type, children }, parent) {
     && (parent.type === 'root' || parent.type === 'section') // only direct children
     && children[0].children.length === 1
     && (children[0].children[0].type === 'image' || children[0].children[0].value === children[0].url) // no other link text
-    && URI.parse(children[0].url).reference === 'absolute') {
-    return URI.parse(children[0].url);
+    && parse(children[0].url).reference === 'absolute') {
+    return parse(children[0].url);
   }
   return false;
 }
@@ -62,7 +62,7 @@ export function internalIaEmbed({ type, children }, base, contentext, resourceex
     && !children[0].value.match(/ /)
     && (children[0].value.endsWith(contentext) || (children[0].value.endsWith(resourceext)))
   ) {
-    const uri = URI.parse(URI.resolve(base, children[0].value));
+    const uri = parse(resolve(base, children[0].value));
     return uri.reference === 'relative' && uri.path ? uri : false;
   }
   return false;
@@ -72,9 +72,9 @@ function imgEmbed({ type, children }) {
   if (type === 'paragraph'
     && children.length === 1
     && children[0].type === 'image'
-    && URI.parse(children[0].url).reference === 'absolute'
-    && !URI.parse(children[0].url).path.match(/(jpe?g)|png|gif|webm$/i)) {
-    return URI.parse(children[0].url);
+    && parse(children[0].url).reference === 'absolute'
+    && !parse(children[0].url).path.match(/(jpe?g)|png|gif|webm$/i)) {
+    return parse(children[0].url);
   }
   return false;
 }
@@ -83,9 +83,9 @@ export function internalImgEmbed({ type, children }, base, contentext, resourcee
   if (type === 'paragraph'
     && children.length === 1
     && children[0].type === 'image'
-    && URI.parse(children[0].url).reference === 'relative'
+    && parse(children[0].url).reference === 'relative'
     && (children[0].url.endsWith(contentext) || (children[0].url.endsWith(resourceext)))) {
-    const uri = URI.parse(URI.resolve(base, children[0].url));
+    const uri = parse(resolve(base, children[0].url));
     return uri.reference === 'relative' && uri.path ? uri : false;
   }
   return false;
@@ -97,7 +97,7 @@ function embed(uri, node, allowlist = [], dataAllowlist = [], logger) {
     const children = [{ ...node }];
     node.type = 'dataEmbed';
     node.children = children;
-    node.url = URI.serialize(uri);
+    node.url = serialize(uri);
     delete node.value;
     return SKIP;
   }
@@ -106,12 +106,12 @@ function embed(uri, node, allowlist = [], dataAllowlist = [], logger) {
     const children = [{ ...node }];
     node.type = 'embed';
     node.children = children;
-    node.url = URI.serialize(uri);
+    node.url = serialize(uri);
     delete node.value;
     return SKIP;
   }
 
-  logger.debug(`Allowlist forbids embedding of URL: ${URI.serialize(uri)}`);
+  logger.debug(`Allowlist forbids embedding of URL: ${serialize(uri)}`);
   return CONTINUE;
 }
 

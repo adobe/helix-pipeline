@@ -12,7 +12,7 @@
 import { selectAll } from 'unist-util-select';
 import { remove } from 'unist-util-remove';
 import { visitParents } from 'unist-util-visit-parents';
-import URI from 'uri-js';
+import { parse, resolve } from 'uri-js';
 import nodePath from 'path';
 import dotprop from 'dot-prop';
 import { removePosition } from 'unist-util-remove-position';
@@ -129,7 +129,7 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector, h
         )) {
           const parent = ancestors[1];
           // construct an embed node
-          const uri = URI.parse(URI.resolve(baseurl, node[prop]
+          const uri = parse(resolve(baseurl, node[prop]
             .replace(pattern, (_, expr) => dotprop.get(value, expr))));
           node[prop] = node[prop]
             .replace(pattern, (_, expr) => dotprop.get(value, expr));
