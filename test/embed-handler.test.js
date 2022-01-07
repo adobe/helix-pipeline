@@ -136,7 +136,7 @@ describe('Integration Test with Embeds', () => {
       {
         request: crequest,
         content: {
-          body: `https://www.youtube.com/watch?balakaka
+          body: `<https://www.youtube.com/watch?balakaka>
 
 [https://www.youtube.com/watch?balakaka](https://www.youtube.com/watch?balakaka)
 
@@ -169,7 +169,7 @@ describe('Integration Test with Embeds', () => {
           body: `Hello World
 Here comes an embed.
 
-https://www.youtube.com/watch?v=KOxbO0EI4MA
+<https://www.youtube.com/watch?v=KOxbO0EI4MA>
 
 ![Easy!](easy.png)
 `,

@@ -227,11 +227,11 @@ markup:
       .get('/hello.md')
       .reply(() => [200, `# Hi\nfrom github.
 
-https://www.youtube.com/watch?v=dQw4w9WgXcQ
+<https://www.youtube.com/watch?v=dQw4w9WgXcQ>
 
 And here is something from Soundcloud
 
-https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe
+<https://soundcloud.com/mariamamermounib/el-ghasala?in=mariamamermounib/sets/mariam-amer-mounib-amel-eh-fe>
 
 `]);
 

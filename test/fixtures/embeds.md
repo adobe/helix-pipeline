@@ -30,9 +30,9 @@ is on a paragraph of its own.
 
 ## IA Writer-Style Embeds
 
-https://www.youtube.com/watch?v=KOxbO0EI4MA
+<https://www.youtube.com/watch?v=KOxbO0EI4MA>
 
-is an embed, but https://www.youtube.com/watch?v=KOxbO0EI4MA is just a link.
+is an embed, but <https://www.youtube.com/watch?v=KOxbO0EI4MA> is just a link.
 
 # Allowing URLs
 
@@ -44,7 +44,7 @@ All embed hostnames must be allowed. Therefore, the following are not embeds:
 
 ![](https://www.example.com/watch?v=KOxbO0EI4MA)
 
-https://www.example.com/watch?v=KOxbO0EI4MA
+<https://www.example.com/watch?v=KOxbO0EI4MA>
 
 # Internal Embeds
 

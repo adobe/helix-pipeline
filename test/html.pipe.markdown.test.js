@@ -602,7 +602,7 @@ describe('Testing Markdown conversion', () => {
     );
   });
 
-  it('translates html in tables with self link', async () => {
+  it('translates html in tables with autolink (disabled)', async () => {
     await assertMd(
       `
             |Links|
@@ -620,11 +620,10 @@ describe('Testing Markdown conversion', () => {
       
       https://www.adobe.com
       
-      |Links|
-      |-----|
-      |https://www.adobe.com|
+      https\\://www\\.adobe.com
+      
     `,
-      '<body><h1 id="hello">Hello</h1><p><a href="https://www.adobe.com">https://www.adobe.com</a></p><table><thead><tr><th>Links</th></tr></thead><tbody><tr><td><a href="https://www.adobe.com">https://www.adobe.com</a></td></tr></tbody></table></body>',
+      '<body><h1 id="hello">Hello</h1><p>https://www.adobe.com</p><p>https://www.adobe.com</p></body>',
     );
   });
 
