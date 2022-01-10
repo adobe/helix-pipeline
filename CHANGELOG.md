@@ -1,3 +1,15 @@
+# [17.0.0](https://github.com/adobe/helix-pipeline/compare/v16.0.3...v17.0.0) (2022-01-10)
+
+
+### Bug Fixes
+
+* disable gfm autolinking ([#1205](https://github.com/adobe/helix-pipeline/issues/1205)) ([1d379b4](https://github.com/adobe/helix-pipeline/commit/1d379b4bfc34b2f4718a3d30b755f3ea0bfdf66a))
+
+
+### BREAKING CHANGES
+
+* urls and email addresses in markdown are not turned into links anymore.
+
 ## [16.0.3](https://github.com/adobe/helix-pipeline/compare/v16.0.2...v16.0.3) (2022-01-04)
 
 
