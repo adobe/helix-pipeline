@@ -64,5 +64,5 @@ Another example of a project with its respective description. These sections wor
 ---
 
 * Address: 4923 Market Street, Orlando FL
-* Email: hello@yourdomain.com
+* Email: <hello@yourdomain.com>
 * Phone: +1 (555) 902-8832

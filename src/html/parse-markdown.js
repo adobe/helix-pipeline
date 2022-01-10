@@ -16,9 +16,7 @@ import { setdefault } from 'ferrum';
 import { remarkMatter } from '@adobe/helix-markdown-support';
 import { numericLogLevel } from '@adobe/helix-log';
 import VDOMTransformer from '../utils/mdast-to-vdom.js';
-// eslint-disable-next-line import/no-named-as-default
-import gfm from '../utils/remark-gfm-nolink.js';
-import autolink from '../utils/mdast-gfm-autolinks.js';
+import remarkGfm from '../utils/remark-gfm-nolink.js';
 
 export class FrontmatterParsingError extends Error {
 }
@@ -48,7 +46,7 @@ export default function parseMarkdown(context, action) {
 
   content.mdast = unified()
     .use(remark)
-    .use(gfm)
+    .use(remarkGfm)
     .use(remarkMatter, {
       errorHandler: (e) => {
         action.logger.warn(new FrontmatterParsingError(e));
@@ -59,9 +57,6 @@ export default function parseMarkdown(context, action) {
   if (numericLogLevel(logger.level) < numericLogLevel('debug')) {
     removePositions(content.mdast);
   }
-
-  // apply our own logic for GFM autolinks due to backward compatibility issues
-  autolink(content.mdast);
 
   // initialize transformer
   action.transformer = new VDOMTransformer()
