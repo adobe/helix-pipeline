@@ -1,3 +1,10 @@
+## [17.0.1](https://github.com/adobe/helix-pipeline/compare/v17.0.0...v17.0.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-markdown-support to v3.1.0 ([#1207](https://github.com/adobe/helix-pipeline/issues/1207)) ([7eeceb1](https://github.com/adobe/helix-pipeline/commit/7eeceb19f7eb3eeb6452b34caf80d92e18cd1cf9))
+
 # [17.0.0](https://github.com/adobe/helix-pipeline/compare/v16.0.3...v17.0.0) (2022-01-10)
 
 
