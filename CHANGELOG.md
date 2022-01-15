@@ -1,3 +1,10 @@
+## [17.0.4](https://github.com/adobe/helix-pipeline/compare/v17.0.3...v17.0.4) (2022-01-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-config to v1.7.4 ([#1210](https://github.com/adobe/helix-pipeline/issues/1210)) ([a31f2d0](https://github.com/adobe/helix-pipeline/commit/a31f2d02fbe85077c7b20e15bd5764bac7451194))
+
 ## [17.0.3](https://github.com/adobe/helix-pipeline/compare/v17.0.2...v17.0.3) (2022-01-15)
 
 
