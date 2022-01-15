@@ -1,3 +1,10 @@
+## [17.0.3](https://github.com/adobe/helix-pipeline/compare/v17.0.2...v17.0.3) (2022-01-15)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#1209](https://github.com/adobe/helix-pipeline/issues/1209)) ([7a80a4f](https://github.com/adobe/helix-pipeline/commit/7a80a4f09ad67b9c18981fa639001bb5f7df2177))
+
 ## [17.0.2](https://github.com/adobe/helix-pipeline/compare/v17.0.1...v17.0.2) (2022-01-15)
 
 
