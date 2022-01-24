@@ -14,7 +14,7 @@ import { remove } from 'unist-util-remove';
 import { visitParents } from 'unist-util-visit-parents';
 import { parse, resolve } from 'uri-js';
 import nodePath from 'path';
-import dotprop from 'dot-prop';
+import { getProperty } from 'dot-prop';
 import { removePosition } from 'unist-util-remove-position';
 import {
   contains,
@@ -123,23 +123,23 @@ function fillPlaceholders(section, contentext, resourceext, baseurl, selector, h
         if (node.type === 'text'
           && ancestors.length === 2
           && ancestors[1].type === 'paragraph'
-          && node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).match('^[/.].*') && (
-          node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(resourceext)
-        || node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr)).endsWith(contentext)
+          && node[prop].replace(pattern, (_, expr) => getProperty(value, expr)).match('^[/.].*') && (
+          node[prop].replace(pattern, (_, expr) => getProperty(value, expr)).endsWith(resourceext)
+        || node[prop].replace(pattern, (_, expr) => getProperty(value, expr)).endsWith(contentext)
         )) {
           const parent = ancestors[1];
           // construct an embed node
           const uri = parse(resolve(baseurl, node[prop]
-            .replace(pattern, (_, expr) => dotprop.get(value, expr))));
+            .replace(pattern, (_, expr) => getProperty(value, expr))));
           node[prop] = node[prop]
-            .replace(pattern, (_, expr) => dotprop.get(value, expr));
+            .replace(pattern, (_, expr) => getProperty(value, expr));
           const childNodes = [{ ...parent }];
           parent.type = 'embed';
           parent.children = childNodes;
           parent.url = nodePath.resolve(nodePath.dirname(uri.path), `${nodePath.basename(uri.path, nodePath.extname(uri.path))}.${selector}${resourceext}`);
           delete parent.value;
         } else if (typeof node[prop] === 'string') {
-          node[prop] = node[prop].replace(pattern, (_, expr) => dotprop.get(value, expr));
+          node[prop] = node[prop].replace(pattern, (_, expr) => getProperty(value, expr));
         }
       });
       return [...p, ...workingcopy.children];
