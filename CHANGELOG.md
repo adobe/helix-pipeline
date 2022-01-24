@@ -1,3 +1,10 @@
+## [17.0.5](https://github.com/adobe/helix-pipeline/compare/v17.0.4...v17.0.5) (2022-01-24)
+
+
+### Bug Fixes
+
+* **deps:** update external major (major) ([#1212](https://github.com/adobe/helix-pipeline/issues/1212)) ([d3e3953](https://github.com/adobe/helix-pipeline/commit/d3e3953ed0c179981c59e2c133cabaa2a4ad9b66))
+
 ## [17.0.4](https://github.com/adobe/helix-pipeline/compare/v17.0.3...v17.0.4) (2022-01-15)
 
 
