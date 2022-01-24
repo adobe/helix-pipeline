@@ -16,7 +16,7 @@ import { JSDOM } from 'jsdom';
 import { match as matchUrlBuilder } from 'path-to-regexp';
 import { MarkupConfig } from '@adobe/helix-shared-config';
 import { visit } from 'unist-util-visit';
-import { get } from 'dot-prop';
+import { getProperty as get } from 'dot-prop';
 import { match } from '../utils/pattern-compiler.js';
 import section from '../utils/section-handler.js';
 import VDOMTransformer from '../utils/mdast-to-vdom.js';
