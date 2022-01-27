@@ -1,3 +1,15 @@
+# [18.0.0](https://github.com/adobe/helix-pipeline/compare/v17.0.7...v18.0.0) (2022-01-27)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-shared-utils to v2 ([928fc7b](https://github.com/adobe/helix-pipeline/commit/928fc7b75aece3088a6b937347ed45c73a58fdeb))
+
+
+### BREAKING CHANGES
+
+* **deps:** the surrogate key computation now uses base64url
+
 ## [17.0.7](https://github.com/adobe/helix-pipeline/compare/v17.0.6...v17.0.7) (2022-01-27)
 
 
