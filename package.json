@@ -61,7 +61,7 @@
     "@adobe/helix-log": "6.0.0",
     "@adobe/helix-shared-config": "1.7.5",
     "@adobe/helix-markdown-support": "3.1.2",
-    "@adobe/helix-shared-utils": "1.0.4",
+    "@adobe/helix-shared-utils": "2.0.0",
     "@adobe/helix-shared-wrap": "1.0.0",
     "@adobe/helix-status": "9.2.4",
     "@adobe/helix-universal-logger": "2.0.0",
