@@ -226,7 +226,7 @@ describe('Integration Test with Data Embeds', () => {
     );
 
     assert.equal(res1.response.headers['Surrogate-Key'], 'PbTcuh0tIarmUOZM');
-    assert.equal(res2.response.headers['Surrogate-Key'], 'IkqgcxcG5+q8/cOT');
+    assert.equal(res2.response.headers['Surrogate-Key'], 'IkqgcxcG5-q8_cOT');
 
     assert.equal(res1.response.headers['Cache-Control'], 'max-age=3600');
   });

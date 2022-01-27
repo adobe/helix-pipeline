@@ -591,7 +591,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.status, 201);
     assert.equal(res.headers['Content-Type'], 'text/html');
     assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
-    assert.equal(res.headers['Surrogate-Key'], 'yt+7rF5AO4Kmk0aF');
+    assert.equal(res.headers['Surrogate-Key'], 'yt-7rF5AO4Kmk0aF');
     assert.equal(res.body[0], '<');
     assert.ok(res.body.match(/<img/));
   });
@@ -698,7 +698,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.status, 201);
     assert.equal(res.headers['Content-Type'], 'text/html');
     assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
-    assert.equal(res.headers['Surrogate-Key'], 'yt+7rF5AO4Kmk0aF');
+    assert.equal(res.headers['Surrogate-Key'], 'yt-7rF5AO4Kmk0aF');
     assert.equal(res.body[0], '<');
     assert.ok(res.body.match(/<img/));
   });
@@ -754,7 +754,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.status, 200);
     assert.equal(res.headers['Content-Type'], 'text/html');
     assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
-    assert.equal(res.headers['Surrogate-Key'], 'j9X85KMLk+w8y2/g');
+    assert.equal(res.headers['Surrogate-Key'], 'j9X85KMLk-w8y2_g');
     assert.equal(res.body[0], '<');
   });
 
@@ -809,7 +809,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.status, 200);
     assert.equal(res.headers['Content-Type'], 'text/html');
     assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
-    assert.equal(res.headers['Surrogate-Key'], 'X5ZE3V5p+o//pVNa');
+    assert.equal(res.headers['Surrogate-Key'], 'X5ZE3V5p-o__pVNa');
     assert.equal(res.body[0], '<');
   });
 
