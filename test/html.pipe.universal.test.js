@@ -592,7 +592,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.status, 201);
     assert.equal(res.headers['Content-Type'], 'text/html');
     assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
-    assert.equal(res.headers['Surrogate-Key'], 'yt+7rF5AO4Kmk0aF');
+    assert.equal(res.headers['Surrogate-Key'], 'yt-7rF5AO4Kmk0aF');
     assert.equal(res.body[0], '<');
     assert.ok(res.body.match(/<img/));
   });
@@ -699,7 +699,7 @@ ${context.content.document.body.innerHTML}`,
     assert.equal(res.status, 201);
     assert.equal(res.headers['Content-Type'], 'text/html');
     assert.equal(res.headers['Cache-Control'], 's-maxage=2592000, stale-while-revalidate=31536000');
-    assert.equal(res.headers['Surrogate-Key'], 'yt+7rF5AO4Kmk0aF');
+    assert.equal(res.headers['Surrogate-Key'], 'yt-7rF5AO4Kmk0aF');
     assert.equal(res.body[0], '<');
     assert.ok(res.body.match(/<img/));
   });
