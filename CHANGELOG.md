@@ -1,3 +1,10 @@
+## [18.0.2](https://github.com/adobe/helix-pipeline/compare/v18.0.1...v18.0.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update adobe fixes ([#1219](https://github.com/adobe/helix-pipeline/issues/1219)) ([7e395cb](https://github.com/adobe/helix-pipeline/commit/7e395cb73806fd4b816dd5ac4a24730bec2fee19))
+
 ## [18.0.1](https://github.com/adobe/helix-pipeline/compare/v18.0.0...v18.0.1) (2022-01-29)
 
 
