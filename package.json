@@ -25,7 +25,7 @@
     "@adobe/helix-shared-dom": "1.1.8",
     "@adobe/helix-shared-string": "1.0.6",
     "@adobe/helix-testutils": "0.4.12",
-    "@adobe/jsonschema2md": "6.1.4",
+    "@adobe/jsonschema2md": "7.0.0",
     "@pollyjs/adapter-fetch": "6.0.4",
     "@pollyjs/adapter-node-http": "6.0.4",
     "@pollyjs/core": "6.0.4",
