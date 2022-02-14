@@ -6,10 +6,10 @@ https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/propertie
 
 Deprecated: The original OpenWhisk request headers
 
-| Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                               |
-| :------------------ | :--------- | :------------- | :---------------------- | :---------------- | :-------------------- | :------------------ | :----------------------------------------------------------------------- |
-| Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [rawrequest.schema.json*](rawrequest.schema.json "open original schema") |
+| Abstract            | Extensible | Status         | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                                |
+| :------------------ | :--------- | :------------- | :---------------------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------------ |
+| Can be instantiated | No         | Unknown status | Unknown identifiability | Forbidden         | Allowed               | none                | [rawrequest.schema.json\*](rawrequest.schema.json "open original schema") |
 
-## \__ow_headers Type
+## \_\_ow\_headers Type
 
-`object` ([Details](rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md))
+`object` ([Details](rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md))

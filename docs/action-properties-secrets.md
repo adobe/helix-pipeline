@@ -6,9 +6,9 @@ https://ns.adobe.com/helix/pipeline/secrets#/properties/secrets
 
 Secrets passed into the pipeline such as API Keys or configuration settings.
 
-| Abstract            | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                       |
-| :------------------ | :--------- | :----- | :----------- | :---------------- | :-------------------- | :------------------ | :--------------------------------------------------------------- |
-| Can be instantiated | No         | Stable | No           | Forbidden         | Forbidden             | none                | [action.schema.json*](action.schema.json "open original schema") |
+| Abstract            | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                        |
+| :------------------ | :--------- | :----- | :----------- | :---------------- | :-------------------- | :------------------ | :---------------------------------------------------------------- |
+| Can be instantiated | No         | Stable | No           | Forbidden         | Forbidden             | none                | [action.schema.json\*](action.schema.json "open original schema") |
 
 ## secrets Type
 
@@ -16,27 +16,27 @@ Secrets passed into the pipeline such as API Keys or configuration settings.
 
 # secrets Properties
 
-| Property                                          | Type      | Required | Nullable       | Defined by                                                                                                                               |
-| :------------------------------------------------ | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
-| [REPO_RAW_ROOT](#repo_raw_root)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-repo_raw_root.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/REPO_RAW_ROOT")                   |
-| [REPO_API_ROOT](#repo_api_root)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-repo_api_root.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/REPO_API_ROOT")                   |
-| [EMBED_ALLOWLIST](#embed_allowlist)               | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_allowlist.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_ALLOWLIST")               |
-| [DATA_EMBED_ALLOWLIST](#data_embed_allowlist)     | `string`  | Optional | cannot be null | [Secrets](secrets-properties-data_embed_allowlist.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_ALLOWLIST")     |
-| [EMBED_SERVICE](#embed_service)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SERVICE")                   |
-| [DATA_EMBED_SERVICE](#data_embed_service)         | `string`  | Optional | cannot be null | [Secrets](secrets-properties-data_embed_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_SERVICE")         |
-| [EMBED_SELECTOR](#embed_selector)                 | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_selector.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")                 |
-| [IMAGES_MIN_SIZE](#images_min_size)               | `integer` | Optional | cannot be null | [Secrets](secrets-properties-images_min_size.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/IMAGES_MIN_SIZE")               |
-| [HTTP_TIMEOUT](#http_timeout)                     | `integer` | Optional | cannot be null | [Secrets](secrets-properties-http_timeout.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT")                     |
-| [HTTP_TIMEOUT_EXTERNAL](#http_timeout_external)   | `integer` | Optional | cannot be null | [Secrets](secrets-properties-http_timeout_external.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT_EXTERNAL")   |
-| [TEST_BOOLEAN](#test_boolean)                     | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-test_boolean.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/TEST_BOOLEAN")                     |
-| [XML_PRETTY](#xml_pretty)                         | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-xml_pretty.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/XML_PRETTY")                         |
-| [SANITIZE_DOM](#sanitize_dom)                     | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-sanitize_dom.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/SANITIZE_DOM")                     |
-| [RESOLVE_GITREF_SERVICE](#resolve_gitref_service) | `string`  | Optional | cannot be null | [Secrets](secrets-properties-resolve_gitref_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/RESOLVE_GITREF_SERVICE") |
-| [GITHUB_TOKEN](#github_token)                     | `string`  | Optional | cannot be null | [Secrets](secrets-properties-github_token.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/GITHUB_TOKEN")                     |
-| [CONTENT_PROXY_URL](#content_proxy_url)           | `string`  | Optional | cannot be null | [Secrets](secrets-properties-content_proxy_url.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/CONTENT_PROXY_URL")           |
-| `[A-Z0-9_]+`                                      | Multiple  | Optional | cannot be null | [Secrets](secrets-patternproperties-a-z0-9_.md "https://ns.adobe.com/helix/pipeline/secrets#/patternProperties/[A-Z0-9_]+")              |
+| Property                                            | Type      | Required | Nullable       | Defined by                                                                                                                               |
+| :-------------------------------------------------- | :-------- | :------- | :------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+| [REPO\_RAW\_ROOT](#repo_raw_root)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-repo_raw_root.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/REPO_RAW_ROOT")                   |
+| [REPO\_API\_ROOT](#repo_api_root)                   | `string`  | Optional | cannot be null | [Secrets](secrets-properties-repo_api_root.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/REPO_API_ROOT")                   |
+| [EMBED\_ALLOWLIST](#embed_allowlist)                | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_allowlist.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_ALLOWLIST")               |
+| [DATA\_EMBED\_ALLOWLIST](#data_embed_allowlist)     | `string`  | Optional | cannot be null | [Secrets](secrets-properties-data_embed_allowlist.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_ALLOWLIST")     |
+| [EMBED\_SERVICE](#embed_service)                    | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SERVICE")                   |
+| [DATA\_EMBED\_SERVICE](#data_embed_service)         | `string`  | Optional | cannot be null | [Secrets](secrets-properties-data_embed_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_SERVICE")         |
+| [EMBED\_SELECTOR](#embed_selector)                  | `string`  | Optional | cannot be null | [Secrets](secrets-properties-embed_selector.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")                 |
+| [IMAGES\_MIN\_SIZE](#images_min_size)               | `integer` | Optional | cannot be null | [Secrets](secrets-properties-images_min_size.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/IMAGES_MIN_SIZE")               |
+| [HTTP\_TIMEOUT](#http_timeout)                      | `integer` | Optional | cannot be null | [Secrets](secrets-properties-http_timeout.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT")                     |
+| [HTTP\_TIMEOUT\_EXTERNAL](#http_timeout_external)   | `integer` | Optional | cannot be null | [Secrets](secrets-properties-http_timeout_external.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT_EXTERNAL")   |
+| [TEST\_BOOLEAN](#test_boolean)                      | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-test_boolean.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/TEST_BOOLEAN")                     |
+| [XML\_PRETTY](#xml_pretty)                          | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-xml_pretty.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/XML_PRETTY")                         |
+| [SANITIZE\_DOM](#sanitize_dom)                      | `boolean` | Optional | cannot be null | [Secrets](secrets-properties-sanitize_dom.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/SANITIZE_DOM")                     |
+| [RESOLVE\_GITREF\_SERVICE](#resolve_gitref_service) | `string`  | Optional | cannot be null | [Secrets](secrets-properties-resolve_gitref_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/RESOLVE_GITREF_SERVICE") |
+| [GITHUB\_TOKEN](#github_token)                      | `string`  | Optional | cannot be null | [Secrets](secrets-properties-github_token.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/GITHUB_TOKEN")                     |
+| [CONTENT\_PROXY\_URL](#content_proxy_url)           | `string`  | Optional | cannot be null | [Secrets](secrets-properties-content_proxy_url.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/CONTENT_PROXY_URL")           |
+| `[A-Z0-9_]+`                                        | Multiple  | Optional | cannot be null | [Secrets](secrets-patternproperties-a-z0-9_.md "https://ns.adobe.com/helix/pipeline/secrets#/patternProperties/\[A-Z0-9_]+")             |
 
-## REPO_RAW_ROOT
+## REPO\_RAW\_ROOT
 
 The Base URL for retrieving raw text files from GitHub
 
@@ -50,15 +50,15 @@ The Base URL for retrieving raw text files from GitHub
 
 *   defined in: [Secrets](secrets-properties-repo_raw_root.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/REPO_RAW_ROOT")
 
-### REPO_RAW_ROOT Type
+### REPO\_RAW\_ROOT Type
 
 `string`
 
-### REPO_RAW_ROOT Constraints
+### REPO\_RAW\_ROOT Constraints
 
 **URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
-### REPO_RAW_ROOT Default Value
+### REPO\_RAW\_ROOT Default Value
 
 The default value is:
 
@@ -66,7 +66,7 @@ The default value is:
 "https://raw.githubusercontent.com/"
 ```
 
-## REPO_API_ROOT
+## REPO\_API\_ROOT
 
 The base URL for all GitHub API operations
 
@@ -80,15 +80,15 @@ The base URL for all GitHub API operations
 
 *   defined in: [Secrets](secrets-properties-repo_api_root.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/REPO_API_ROOT")
 
-### REPO_API_ROOT Type
+### REPO\_API\_ROOT Type
 
 `string`
 
-### REPO_API_ROOT Constraints
+### REPO\_API\_ROOT Constraints
 
 **URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
-### REPO_API_ROOT Default Value
+### REPO\_API\_ROOT Default Value
 
 The default value is:
 
@@ -96,7 +96,7 @@ The default value is:
 "https://api.github.com/"
 ```
 
-## EMBED_ALLOWLIST
+## EMBED\_ALLOWLIST
 
 Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `DATA_EMBED_ALLOWLIST`)
 
@@ -110,11 +110,11 @@ Comma-separated list of allowed hostnames for embeds. Supports `*.example.com` a
 
 *   defined in: [Secrets](secrets-properties-embed_allowlist.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_ALLOWLIST")
 
-### EMBED_ALLOWLIST Type
+### EMBED\_ALLOWLIST Type
 
 `string`
 
-### EMBED_ALLOWLIST Default Value
+### EMBED\_ALLOWLIST Default Value
 
 The default value is:
 
@@ -122,7 +122,7 @@ The default value is:
 "www.youtube.com, unsplash.com, soundcloud.com, lottiefiles.com, www.slideshare.net, vimeo.com, www.instagram.com, twitter.com, open.spotify.com, web.spotify.com, player.vimeo.com, www.linkedin.com, w.soundcloud.com, www.slideshare.net, youtu.be, media.giphy.com, video.tv.adobe.com, api.soundcloud.com, xd.adobe.com"
 ```
 
-## DATA_EMBED_ALLOWLIST
+## DATA\_EMBED\_ALLOWLIST
 
 Comma-separated list of allowed hostnames for data embeds. Supports `*.example.com` as a subdomain wildcard. Use `*` to allow all embeds (potentially insecure and conflicting with `EMBED_ALLOWLIST`)
 
@@ -136,11 +136,11 @@ Comma-separated list of allowed hostnames for data embeds. Supports `*.example.c
 
 *   defined in: [Secrets](secrets-properties-data_embed_allowlist.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_ALLOWLIST")
 
-### DATA_EMBED_ALLOWLIST Type
+### DATA\_EMBED\_ALLOWLIST Type
 
 `string`
 
-### DATA_EMBED_ALLOWLIST Default Value
+### DATA\_EMBED\_ALLOWLIST Default Value
 
 The default value is:
 
@@ -148,7 +148,7 @@ The default value is:
 "docs.google.com, *.sharepoint.com"
 ```
 
-## EMBED_SERVICE
+## EMBED\_SERVICE
 
 URL of an Embed Service that takes the appended URL and returns an embeddable HTML representation.
 
@@ -162,11 +162,11 @@ URL of an Embed Service that takes the appended URL and returns an embeddable HT
 
 *   defined in: [Secrets](secrets-properties-embed_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SERVICE")
 
-### EMBED_SERVICE Type
+### EMBED\_SERVICE Type
 
 `string`
 
-### EMBED_SERVICE Default Value
+### EMBED\_SERVICE Default Value
 
 The default value is:
 
@@ -174,7 +174,7 @@ The default value is:
 "https://helix-pages.anywhere.run/helix-services/embed@v1"
 ```
 
-## DATA_EMBED_SERVICE
+## DATA\_EMBED\_SERVICE
 
 URL of a DataEmbed Service that takes the appended URL and returns an iterable JSON representation.
 
@@ -188,11 +188,11 @@ URL of a DataEmbed Service that takes the appended URL and returns an iterable J
 
 *   defined in: [Secrets](secrets-properties-data_embed_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/DATA_EMBED_SERVICE")
 
-### DATA_EMBED_SERVICE Type
+### DATA\_EMBED\_SERVICE Type
 
 `string`
 
-### DATA_EMBED_SERVICE Default Value
+### DATA\_EMBED\_SERVICE Default Value
 
 The default value is:
 
@@ -200,7 +200,7 @@ The default value is:
 "https://adobeioruntime.net/api/v1/web/helix/helix-services/data-embed@v2"
 ```
 
-## EMBED_SELECTOR
+## EMBED\_SELECTOR
 
 Selector to be used when resolving internal embeds.
 
@@ -214,11 +214,11 @@ Selector to be used when resolving internal embeds.
 
 *   defined in: [Secrets](secrets-properties-embed_selector.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/EMBED_SELECTOR")
 
-### EMBED_SELECTOR Type
+### EMBED\_SELECTOR Type
 
 `string`
 
-### EMBED_SELECTOR Default Value
+### EMBED\_SELECTOR Default Value
 
 The default value is:
 
@@ -226,7 +226,7 @@ The default value is:
 "embed"
 ```
 
-## IMAGES_MIN_SIZE
+## IMAGES\_MIN\_SIZE
 
 Minimum physical width of responsive images to generate
 
@@ -240,11 +240,11 @@ Minimum physical width of responsive images to generate
 
 *   defined in: [Secrets](secrets-properties-images_min_size.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/IMAGES_MIN_SIZE")
 
-### IMAGES_MIN_SIZE Type
+### IMAGES\_MIN\_SIZE Type
 
 `integer`
 
-### IMAGES_MIN_SIZE Default Value
+### IMAGES\_MIN\_SIZE Default Value
 
 The default value is:
 
@@ -252,7 +252,7 @@ The default value is:
 480
 ```
 
-## HTTP_TIMEOUT
+## HTTP\_TIMEOUT
 
 Timeout for outgoing HTTP requests in milliseconds
 
@@ -266,11 +266,11 @@ Timeout for outgoing HTTP requests in milliseconds
 
 *   defined in: [Secrets](secrets-properties-http_timeout.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT")
 
-### HTTP_TIMEOUT Type
+### HTTP\_TIMEOUT Type
 
 `integer`
 
-### HTTP_TIMEOUT Default Value
+### HTTP\_TIMEOUT Default Value
 
 The default value is:
 
@@ -278,7 +278,7 @@ The default value is:
 1000
 ```
 
-## HTTP_TIMEOUT_EXTERNAL
+## HTTP\_TIMEOUT\_EXTERNAL
 
 Timeout for outgoing HTTP requests to external services in milliseconds
 
@@ -292,11 +292,11 @@ Timeout for outgoing HTTP requests to external services in milliseconds
 
 *   defined in: [Secrets](secrets-properties-http_timeout_external.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/HTTP_TIMEOUT_EXTERNAL")
 
-### HTTP_TIMEOUT_EXTERNAL Type
+### HTTP\_TIMEOUT\_EXTERNAL Type
 
 `integer`
 
-### HTTP_TIMEOUT_EXTERNAL Default Value
+### HTTP\_TIMEOUT\_EXTERNAL Default Value
 
 The default value is:
 
@@ -304,7 +304,7 @@ The default value is:
 20000
 ```
 
-## TEST_BOOLEAN
+## TEST\_BOOLEAN
 
 
 
@@ -318,11 +318,11 @@ The default value is:
 
 *   defined in: [Secrets](secrets-properties-test_boolean.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/TEST_BOOLEAN")
 
-### TEST_BOOLEAN Type
+### TEST\_BOOLEAN Type
 
 `boolean`
 
-### TEST_BOOLEAN Default Value
+### TEST\_BOOLEAN Default Value
 
 The default value is:
 
@@ -330,7 +330,7 @@ The default value is:
 true
 ```
 
-## XML_PRETTY
+## XML\_PRETTY
 
 Print XML with line breaks and indentation
 
@@ -344,11 +344,11 @@ Print XML with line breaks and indentation
 
 *   defined in: [Secrets](secrets-properties-xml_pretty.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/XML_PRETTY")
 
-### XML_PRETTY Type
+### XML\_PRETTY Type
 
 `boolean`
 
-### XML_PRETTY Default Value
+### XML\_PRETTY Default Value
 
 The default value is:
 
@@ -356,7 +356,7 @@ The default value is:
 true
 ```
 
-## SANITIZE_DOM
+## SANITIZE\_DOM
 
 Sanitize the HTML output to guard against XSS attacks.
 
@@ -372,11 +372,11 @@ Sanitize the HTML output to guard against XSS attacks.
 
 *   defined in: [Secrets](secrets-properties-sanitize_dom.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/SANITIZE_DOM")
 
-### SANITIZE_DOM Type
+### SANITIZE\_DOM Type
 
 `boolean`
 
-## RESOLVE_GITREF_SERVICE
+## RESOLVE\_GITREF\_SERVICE
 
 API endpoint or action name to the service that resolves github refs to commit SHAs.
 
@@ -390,11 +390,11 @@ API endpoint or action name to the service that resolves github refs to commit S
 
 *   defined in: [Secrets](secrets-properties-resolve_gitref_service.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/RESOLVE_GITREF_SERVICE")
 
-### RESOLVE_GITREF_SERVICE Type
+### RESOLVE\_GITREF\_SERVICE Type
 
 `string`
 
-## GITHUB_TOKEN
+## GITHUB\_TOKEN
 
 GitHub access token to use while fetching markdown. See <https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line>.
 
@@ -408,11 +408,11 @@ GitHub access token to use while fetching markdown. See <https://help.github.com
 
 *   defined in: [Secrets](secrets-properties-github_token.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/GITHUB_TOKEN")
 
-### GITHUB_TOKEN Type
+### GITHUB\_TOKEN Type
 
 `string`
 
-## CONTENT_PROXY_URL
+## CONTENT\_PROXY\_URL
 
 URL of the content proxy service.
 
@@ -426,11 +426,11 @@ URL of the content proxy service.
 
 *   defined in: [Secrets](secrets-properties-content_proxy_url.md "https://ns.adobe.com/helix/pipeline/secrets#/properties/CONTENT_PROXY_URL")
 
-### CONTENT_PROXY_URL Type
+### CONTENT\_PROXY\_URL Type
 
 `string`
 
-### CONTENT_PROXY_URL Constraints
+### CONTENT\_PROXY\_URL Constraints
 
 **URI**: the string must be a URI, according to [RFC 3986](https://tools.ietf.org/html/rfc3986 "check the specification")
 
@@ -442,12 +442,12 @@ URL of the content proxy service.
 
 *   is optional
 
-*   Type: any of the folllowing: `boolean` or `integer` or `number` or `string` ([Details](secrets-patternproperties-a-z0-9\_.md))
+*   Type: any of the folllowing: `boolean` or `integer` or `number` or `string` ([Details](secrets-patternproperties-a-z0-9_.md))
 
 *   cannot be null
 
-*   defined in: [Secrets](secrets-patternproperties-a-z0-9\_.md "https://ns.adobe.com/helix/pipeline/secrets#/patternProperties/\[A-Z0-9\_]+")
+*   defined in: [Secrets](secrets-patternproperties-a-z0-9_.md "https://ns.adobe.com/helix/pipeline/secrets#/patternProperties/\[A-Z0-9_]+")
 
 ### \[A-Z0-9\_]+ Type
 
-any of the folllowing: `boolean` or `integer` or `number` or `string` ([Details](secrets-patternproperties-a-z0-9\_.md))
+any of the folllowing: `boolean` or `integer` or `number` or `string` ([Details](secrets-patternproperties-a-z0-9_.md))
