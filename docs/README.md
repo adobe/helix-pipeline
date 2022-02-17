@@ -72,25 +72,25 @@
 
 *   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params.md "Parameters used to invoke the OpenWhisk action") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params`
 
-*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
+*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
 
 *   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-headers.md "The headers of the request made to OpenWhisk (or Simulator)") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers`
 
 *   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params.md "Parameters used to invoke the OpenWhisk action") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params`
 
-*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
+*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
 
 *   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-headers.md "The headers of the request made to OpenWhisk (or Simulator)") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers`
 
 *   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params.md "Parameters used to invoke the OpenWhisk action") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params`
 
-*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
+*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
 
 *   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-headers.md "The headers of the request made to OpenWhisk (or Simulator)") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/headers`
 
 *   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params.md "Parameters used to invoke the OpenWhisk action") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params`
 
-*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-\__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
+*   [Untitled object in Raw Request](./rawrequest-definitions-rawrequest-properties-params-properties-__ow_headers.md "Deprecated: The original OpenWhisk request headers") – `https://ns.adobe.com/helix/pipeline/rawrequest#/definitions/rawrequest/properties/params/properties/__ow_headers`
 
 *   [Untitled object in Request](./request-properties-params.md "The passed through (and filtered) URL parameters of the request") – `https://ns.adobe.com/helix/pipeline/request#/properties/params`
 
