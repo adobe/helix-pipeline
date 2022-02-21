@@ -6,9 +6,9 @@ https://ns.adobe.com/helix/pipeline/rawrequest#/properties/request
 
 The Request Object used for Invoking OpenWhisk
 
-| Abstract               | Extensible | Status       | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                       |
-| :--------------------- | :--------- | :----------- | :---------------------- | :---------------- | :-------------------- | :------------------ | :--------------------------------------------------------------- |
-| Cannot be instantiated | Yes        | Experimental | Unknown identifiability | Forbidden         | Allowed               | none                | [action.schema.json*](action.schema.json "open original schema") |
+| Abstract               | Extensible | Status       | Identifiable            | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                        |
+| :--------------------- | :--------- | :----------- | :---------------------- | :---------------- | :-------------------- | :------------------ | :---------------------------------------------------------------- |
+| Cannot be instantiated | Yes        | Experimental | Unknown identifiability | Forbidden         | Allowed               | none                | [action.schema.json\*](action.schema.json "open original schema") |
 
 ## request Type
 

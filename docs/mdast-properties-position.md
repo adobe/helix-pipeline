@@ -6,9 +6,9 @@ https://ns.adobe.com/helix/pipeline/position#/definitions/section/properties/pos
 
 Marks the position of an AST node in the original text flow
 
-| Abstract            | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                         |
-| :------------------ | :--------- | :----- | :----------- | :---------------- | :-------------------- | :------------------ | :----------------------------------------------------------------- |
-| Can be instantiated | No         | Stable | No           | Forbidden         | Forbidden             | none                | [section.schema.json*](section.schema.json "open original schema") |
+| Abstract            | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
+| :------------------ | :--------- | :----- | :----------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------ |
+| Can be instantiated | No         | Stable | No           | Forbidden         | Forbidden             | none                | [section.schema.json\*](section.schema.json "open original schema") |
 
 ## position Type
 

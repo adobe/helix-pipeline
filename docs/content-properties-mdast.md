@@ -6,9 +6,9 @@ https://ns.adobe.com/helix/pipeline/mdast#/properties/mdast
 
 A node in the Markdown AST
 
-| Abstract            | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                         |
-| :------------------ | :--------- | :----- | :----------- | :---------------- | :-------------------- | :------------------ | :----------------------------------------------------------------- |
-| Can be instantiated | No         | Stable | No           | Forbidden         | Forbidden             | none                | [content.schema.json*](content.schema.json "open original schema") |
+| Abstract            | Extensible | Status | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
+| :------------------ | :--------- | :----- | :----------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------ |
+| Can be instantiated | No         | Stable | No           | Forbidden         | Forbidden             | none                | [content.schema.json\*](content.schema.json "open original schema") |
 
 ## mdast Type
 
@@ -68,7 +68,7 @@ unknown
 | Value                  | Explanation                                                                                                                                                          |
 | :--------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `"root"`               | The root node, representing a document or section                                                                                                                    |
-| `"paragraph"`          | A paragraph. Note: standalone `image` blocks are often wrapped in a `paragraph`                                                                                      |
+| `"paragraph"`          | A paragraph. Note: standalone \`image\` blocks are often wrapped in a \`paragraph\`                                                                                  |
 | `"text"`               | Plain text                                                                                                                                                           |
 | `"heading"`            | A heading with heading level                                                                                                                                         |
 | `"thematicBreak"`      | A section break                                                                                                                                                      |
@@ -94,10 +94,10 @@ unknown
 | `"imageReference"`     | A pointer to an image                                                                                                                                                |
 | `"footnote"`           | A footnote                                                                                                                                                           |
 | `"footnoteReference"`  | A reference to a footnote                                                                                                                                            |
-| `"embed"`              | Content embedded from another page, identified by the `url` attribute.                                                                                               |
-| `"dataEmbed"`          | Data embedded from another data source (API), identified by the `url` attribute.                                                                                     |
+| `"embed"`              | Content embedded from another page, identified by the \`url\` attribute.                                                                                             |
+| `"dataEmbed"`          | Data embedded from another data source (API), identified by the \`url\` attribute.                                                                                   |
 | `"section"`            | A section within the document. Sections serve as a high-level structure of a single markdown document and can have their own section-specific front matter metadata. |
-| `"icon"`               | An SVG icon, identified by the syntax `:foo:`                                                                                                                        |
+| `"icon"`               | An SVG icon, identified by the syntax \`:foo:\`                                                                                                                      |
 
 ## children
 
@@ -417,13 +417,13 @@ Icon code
 
 ### code Constraints
 
-**pattern**: the string must match the following regular expression: 
+**pattern**: the string must match the following regular expression:&#x20;
 
 ```regexp
 :#*[a-zA-Z_-]+[a-zA-Z0-9]*:
 ```
 
-[try pattern](https://regexr.com/?expression=%3A%23\*%5Ba-zA-Z\_-%5D%2B%5Ba-zA-Z0-9%5D\*%3A "try regular expression with regexr.com")
+[try pattern](https://regexr.com/?expression=%3A%23*%5Ba-zA-Z_-%5D%2B%5Ba-zA-Z0-9%5D*%3A "try regular expression with regexr.com")
 
 ## intro
 

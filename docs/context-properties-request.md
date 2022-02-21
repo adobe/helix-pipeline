@@ -6,9 +6,9 @@ https://ns.adobe.com/helix/pipeline/request#/properties/request
 
 The HTTP Request
 
-| Abstract            | Extensible | Status      | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                         |
-| :------------------ | :--------- | :---------- | :----------- | :---------------- | :-------------------- | :------------------ | :----------------------------------------------------------------- |
-| Can be instantiated | No         | Stabilizing | No           | Forbidden         | Forbidden             | none                | [context.schema.json*](context.schema.json "open original schema") |
+| Abstract            | Extensible | Status      | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                          |
+| :------------------ | :--------- | :---------- | :----------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------ |
+| Can be instantiated | No         | Stabilizing | No           | Forbidden         | Forbidden             | none                | [context.schema.json\*](context.schema.json "open original schema") |
 
 ## request Type
 
