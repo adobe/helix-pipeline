@@ -1,3 +1,17 @@
+## [18.0.12](https://github.com/adobe/helix-pipeline/compare/v18.0.11...v18.0.12) (2022-02-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @adobe/helix-status to v9.2.7 ([#1238](https://github.com/adobe/helix-pipeline/issues/1238)) ([7aa2b3a](https://github.com/adobe/helix-pipeline/commit/7aa2b3aaef9fd29b8630a0e36bba4e52e61b4e29))
+
+## [18.0.11](https://github.com/adobe/helix-pipeline/compare/v18.0.10...v18.0.11) (2022-02-21)
+
+
+### Bug Fixes
+
+* **deps:** update external fixes ([#1236](https://github.com/adobe/helix-pipeline/issues/1236)) ([0c09973](https://github.com/adobe/helix-pipeline/commit/0c099732cfae93972f99306f5bde7e34b1172941))
+
 ## [18.0.10](https://github.com/adobe/helix-pipeline/compare/v18.0.9...v18.0.10) (2022-02-21)
 
 
