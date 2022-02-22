@@ -6,9 +6,9 @@ https://ns.adobe.com/helix/pipeline/textcoordinates#/properties/start
 
 A position in a text document
 
-| Abstract            | Extensible | Status      | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                           |
-| :------------------ | :--------- | :---------- | :----------- | :---------------- | :-------------------- | :------------------ | :------------------------------------------------------------------- |
-| Can be instantiated | No         | Stabilizing | No           | Forbidden         | Forbidden             | none                | [position.schema.json*](position.schema.json "open original schema") |
+| Abstract            | Extensible | Status      | Identifiable | Custom Properties | Additional Properties | Access Restrictions | Defined In                                                            |
+| :------------------ | :--------- | :---------- | :----------- | :---------------- | :-------------------- | :------------------ | :-------------------------------------------------------------------- |
+| Can be instantiated | No         | Stabilizing | No           | Forbidden         | Forbidden             | none                | [position.schema.json\*](position.schema.json "open original schema") |
 
 ## start Type
 
