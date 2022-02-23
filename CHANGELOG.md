@@ -1,3 +1,10 @@
+## [18.0.13](https://github.com/adobe/helix-pipeline/compare/v18.0.12...v18.0.13) (2022-02-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency object-hash to v3 ([e4b7f60](https://github.com/adobe/helix-pipeline/commit/e4b7f60bd01b112bb0615685259b624446ec3dcd))
+
 ## [18.0.12](https://github.com/adobe/helix-pipeline/compare/v18.0.11...v18.0.12) (2022-02-21)
 
 
